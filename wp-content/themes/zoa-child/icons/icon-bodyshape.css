@@ -1,0 +1,172 @@
+/*--------------------------------
+
+bodyshape Web Font
+Generated using nucleoapp.com
+
+-------------------------------- */
+@font-face {
+  font-family: 'bodyshape';
+  src: url('fonts/bodyshape.eot');
+  src: url('fonts/bodyshape.eot') format('embedded-opentype'), url('fonts/bodyshape.woff2') format('woff2'), url('fonts/bodyshape.woff') format('woff'), url('fonts/bodyshape.ttf') format('truetype'), url('fonts/bodyshape.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/*------------------------
+	base class definition
+-------------------------*/
+.bsicon {
+  display: inline-block;
+  font: normal normal normal 1em/1 'bodyshape';
+  speak: none;
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*------------------------
+  change icon size
+-------------------------*/
+/* relative units */
+.bsicon-sm {
+  font-size: 0.8em;
+}
+.bsicon-lg {
+  font-size: 1.2em;
+}
+/* absolute units */
+.bsicon-16 {
+  font-size: 16px;
+}
+.bsicon-32 {
+  font-size: 32px;
+}
+/*----------------------------------
+  add a square/circle background
+-----------------------------------*/
+.bsicon-bg-square,
+.bsicon-bg-circle {
+  padding: 0.35em;
+  background-color: #eee;
+}
+.bsicon-bg-circle {
+  border-radius: 50%;
+}
+/*------------------------------------
+  use icons as list item markers
+-------------------------------------*/
+.bsicon-ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.bsicon-ul > li {
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+.bsicon-ul > li > .bsicon {
+  margin-right: 0.4em;
+  line-height: inherit;
+}
+/*------------------------
+  spinning icons
+-------------------------*/
+.bsicon-is-spinning {
+  -webkit-animation: bsicon-spin 2s infinite linear;
+  -moz-animation: bsicon-spin 2s infinite linear;
+  animation: bsicon-spin 2s infinite linear;
+}
+@-webkit-keyframes bsicon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes bsicon-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@keyframes bsicon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*------------------------
+  rotated/flipped icons
+-------------------------*/
+.bsicon-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.bsicon-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.bsicon-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.bsicon-flip-y {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.bsicon-flip-x {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -moz-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  -o-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+/*------------------------
+	icons
+-------------------------*/
+
+.bsicon-body-apple::before {
+  content: "\ea01";
+}
+
+.bsicon-body-hourglass::before {
+  content: "\ea02";
+}
+
+.bsicon-body-pear::before {
+  content: "\ea04";
+}
+
+.bsicon-body-slendar::before {
+  content: "\ea03";
+}
+

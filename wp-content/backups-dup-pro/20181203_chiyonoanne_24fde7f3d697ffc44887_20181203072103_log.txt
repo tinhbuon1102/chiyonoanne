@@ -1,0 +1,65 @@
+********************************************************************************
+DUPLICATOR PRO PACKAGE-LOG: 2018-12-03 07:21:19
+NOTICE: Do NOT post to public sites or forums 
+********************************************************************************
+VERSION:	3.7.9
+WORDPRESS:	4.9.8
+PHP INFO:	7.2.6 | SAPI: cgi-fcgi
+SERVER:		Apache 
+ARCHITECTURE:	64-bit 
+PHP TIME LIMIT: [7200] not allowed 
+PHP MAX MEMORY: 5000M (256M default) 
+RUN TYPE: Manual
+MEMORY STACK: 2MB 
+
+********************************************************************************
+DATABASE:
+********************************************************************************
+BUILD MODE:   PHP + CHUNKING (chunk size - 500 rows)
+ 
+TABLES: total:92 | filtered:0 | create:92 
+FILTERED: [] 
+SCHEMA SIZE: [58834944] 
+SQL CREATED: 20181203_chiyonoanne_24fde7f3d697ffc44887_20181203072103_database.sql 
+SQL FILE SIZE: 23.2MB 
+SQL FILE TIME: 2018-12-03 07:21:26 
+SQL RUNTIME: 6.918 sec. 
+MEMORY STACK: 4MB 
+
+******************************************************************************** 
+ARCHIVE  Type=ZIP Mode=Shell 
+******************************************************************************** 
+ARCHIVE DIR:  /home/chiyonoanne/chiyono-anne.com/public_html/chiyono 
+ARCHIVE FILE: 20181203_chiyonoanne_24fde7f3d697ffc44887_20181203072103_archive.zip 
+FILTERS: *ON* 
+DIRS:  /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/cache 
+EXTS:  zip;rar;tar;gz;bz2;7z;avi;mov;mp4;mpeg;mpg;swf;wmv;aac;m3u;mp3;mpa;wav;wma; 
+FILES:  not set 
+---------------------------------------- 
+COMPRESSING 
+SIZE:	0B 
+STATS:	Dirs 0 | Files 0 | Total 0 
+COMPRESSED SIZE: 0B 
+ARCHIVE RUNTIME: 0.002 sec. 
+MEMORY STACK: 2MB 
+
+******************************************************************************** 
+STORAGE: 
+******************************************************************************** 
+LOCAL: Default, /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/backups-dup-pro 
+
+******************************************************************************** 
+INTEGRITY CHECKS: 
+******************************************************************************** 
+SQL FILE: 23.2MB 
+INSTALLER FILE: 35.06KB 
+ARCHIVE FILE: 4.71MB  
+EXPECTED FILE/DIRECTORY COUNT: 0 
+ACTUAL FILE/DIRECTORY COUNT: 2 
+
+********************************************************************************
+RECORD ID:[9]
+TOTAL PROCESS RUNTIME: 8.396 sec.
+PEAK PHP MEMORY USED: 2MB
+DONE PROCESSING => 20181203_chiyonoanne 2018-12-03 07:21:27
+ 

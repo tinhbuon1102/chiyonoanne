@@ -1,0 +1,66 @@
+.mb-contentelement-wgm{
+    .mb-content-preview{
+        opacity: 0.6;
+        padding:30px;
+    }
+}
+
+
+#mb_wgm{
+    display: none;
+    position: fixed;
+    z-index: 20;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    margin:auto;
+    background: $light-gray;
+    padding:20px;
+    max-width: 800px;
+    height: 430px;
+
+
+    .handlediv{
+        display: none;
+    }
+
+    .mb-popup-buttons{
+        margin: 20px;
+        text-align: center;
+        .dashicons{
+            vertical-align: -5px;
+        }
+    }
+
+    .wp-picker-container{
+        position: relative;
+        vertical-align: -9px;
+        width: auto;
+        display: inline;
+
+        .wp-picker-input-wrap{
+            
+        }
+
+        .wp-picker-holder{
+            position: absolute;
+            left:0;
+            top:20px;
+            z-index: 10;
+        }
+    }
+
+    .form-table{
+        th{
+            width: 130px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        td{
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+#meilbuilder .mb-contentelement-relatedproducts{
+    .mb-title-bar{
+        margin-bottom: 10px;
+    }
+
+    p.description,
+    label[for="mb-relatedproducts-source"]{
+        margin-left: 20px;    
+    }
+
+
+}
+
+
+#mailbuilder .mb-edit-related-products-table{
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 30px;
+    border-collapse: separate;
+
+    .mb-content-preview{
+        text-decoration: none;
+    }
+}

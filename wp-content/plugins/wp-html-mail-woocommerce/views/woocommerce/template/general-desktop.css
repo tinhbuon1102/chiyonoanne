@@ -1,0 +1,121 @@
+.plugin-woocommerce .body-text .products-table{
+    width:100%;
+    border-collapse:collapse; 
+}
+
+.plugin-woocommerce  .body-text .products-table p,
+.plugin-woocommerce  .body-text .totals-table p{
+    margin:0;
+}
+
+.plugin-woocommerce  .body-text .products-table td,
+.plugin-woocommerce  .body-text .products-table h1,
+.plugin-woocommerce  .body-text .products-table h2,
+.plugin-woocommerce  .body-text .products-table h3,
+.plugin-woocommerce  .body-text .products-table h4,
+.plugin-woocommerce  .body-text .totals-table td,
+.plugin-woocommerce  .body-text .totals-table h1,
+.plugin-woocommerce  .body-text .totals-table h2,
+.plugin-woocommerce  .body-text .totals-table h3,
+.plugin-woocommerce  .body-text .totals-table h4{
+    text-align: left; /* reset general align from email body */
+}
+
+.plugin-woocommerce  .body-text .totals-table .wgm-tax{
+    display: block;
+    font-weight: normal;
+    font-size: 85%;
+}
+
+.plugin-woocommerce  .body-text .totals-table .wgm-tax span{
+    font-size: inherit;
+}
+
+.plugin-woocommerce  .body-text .totals-table td{
+    vertical-align: top;
+}
+
+
+.plugin-woocommerce  .body-text .products-table tbody td img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.plugin-woocommerce  .body-text .relatedproducts-table a{
+    text-decoration: none;
+}
+
+.plugin-woocommerce  .body-text .relatedproducts-table img{
+    width: 100%;
+    height:auto;
+}
+
+.plugin-woocommerce  .body-text .products-table .delivery-time{
+    font-size: 85%;
+    font-weight: normal;
+}
+
+.plugin-woocommerce  .body-text .products-table .delivery-time span{
+    font-size: 100%;
+}
+
+.plugin-woocommerce  .body-text .products-table .includes_tax{
+    font-size: 85%;
+}
+
+/*********************************************
+ADDITIONAL TABLES
+downloads table, subscriptions table, ...
+*********************************************/
+.plugin-woocommerce  .body-text table.td{
+    border:none;
+    width:100%;
+    border-collapse:collapse; 
+}
+
+/* ITEMS */
+.plugin-woocommerce  .body-text table.td td{
+    font-family:      ###woocommerce_additional_contentfont###;
+    font-size:        ###woocommerce_additional_contentfontsize###px;
+    color:            ###woocommerce_additional_contentcolor###;
+    font-weight:      ###woocommerce_additional_contentbold###;
+    font-style:       ###woocommerce_additional_contentitalic###;
+    border-top:       ###woocommerce_additional_products_border_top### ###woocommerce_additional_products_bordercolor###;
+    border-bottom:    ###woocommerce_additional_products_border_bottom### ###woocommerce_additional_products_bordercolor###;
+    border-left:      ###woocommerce_additional_products_border_inner_v### ###woocommerce_additional_products_bordercolor###;
+    border-right:     ###woocommerce_additional_products_border_inner_v### ###woocommerce_additional_products_bordercolor###;
+    padding:10px;
+}
+
+.plugin-woocommerce  .body-text table.td td:first-child{
+    border-left: ###woocommerce_additional_products_border_outer_v### ###woocommerce_additional_products_bordercolor###;
+}
+
+.plugin-woocommerce  .body-text table.td td:last-child{
+    border-right: ###woocommerce_additional_products_border_outer_v### ###woocommerce_additional_products_bordercolor###;
+}
+
+
+/* TABLE HEADER */
+.plugin-woocommerce  .body-text table.td thead th{
+    font-family:      ###woocommerce_additional_headlinefont###;
+    font-size:        ###woocommerce_additional_headlinefontsize###px;
+    color:            ###woocommerce_additional_headlinecolor###;
+    font-weight:      ###woocommerce_additional_headlinebold###;
+    font-style:       ###woocommerce_additional_headlineitalic###;
+    border-top:       ###woocommerce_additional_header_border_top### ###woocommerce_additional_header_bordercolor###;
+    border-bottom:    ###woocommerce_additional_header_border_bottom### ###woocommerce_additional_header_bordercolor###;
+    border-left:      ###woocommerce_additional_header_border_inner_v### ###woocommerce_additional_header_bordercolor###;
+    border-right:     ###woocommerce_additional_header_border_inner_v### ###woocommerce_additional_header_bordercolor###;
+}
+
+
+
+.plugin-woocommerce  .body-text table.td thead th:first-child{
+    border-left:      ###woocommerce_additional_header_border_outer_v### ###woocommerce_additional_header_bordercolor###;
+}
+
+.plugin-woocommerce  .body-text table.td thead th:last-child{
+    border-right:      ###woocommerce_additional_header_border_outer_v### ###woocommerce_additional_header_bordercolor###;
+}

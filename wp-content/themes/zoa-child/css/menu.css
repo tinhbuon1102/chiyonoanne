@@ -1,0 +1,10 @@
+/* CSS Document */
+@media screen and (min-width: 992px) {
+	#quadmenu.quadmenu-custom_theme_1 .quadmenu-navbar-nav .quadmenu-dropdown-menu li.quadmenu-item.view_all_link > a {
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    letter-spacing: .1em;
+    font-size: .75rem;
+	}
+}

@@ -1,0 +1,22 @@
+@media screen and (max-width: 400px) {
+    .woocommerce-global-template .plugin-woocommerce div[class="body-text"] .image-wrap {
+        display:none!important;
+    }
+
+    .woocommerce-global-template .plugin-woocommerce div[class="body-text"] table.customer-address {
+        display:block!important;
+    }
+
+    .woocommerce-global-template .plugin-woocommerce div[class="body-text"] .customer-address tbody{
+        display:block!important;
+    }
+
+    .woocommerce-global-template .plugin-woocommerce div[class="body-text"] .customer-address tr{
+        display:block!important;
+    }
+
+    .woocommerce-global-template .plugin-woocommerce div[class="body-text"] .customer-address td{
+        display:block!important;
+        width: 90%!important;
+    }
+}

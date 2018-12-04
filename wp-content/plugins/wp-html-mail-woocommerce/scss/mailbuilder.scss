@@ -1,0 +1,23 @@
+
+
+
+$black:         #000;
+$dark-gray:     #23282d;
+$light-gray:    #eee;
+$white:         #FFF;
+
+@import "contenttype-productstable";
+@import "contenttype-relatedproducts";
+@import "contenttype-wgm";
+
+
+/*************************************
+*   SUBJECT
+* ***********************************/
+
+.mb-restore-defaults,
+.mb-back-to-overview{
+    .dashicons{
+        vertical-align: -5px;
+    }
+}

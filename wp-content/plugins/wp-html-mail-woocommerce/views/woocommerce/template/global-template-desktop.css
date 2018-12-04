@@ -1,0 +1,156 @@
+/* TABLE HEADER */
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table thead th{
+    font-family:      ###woocommerce_headlinefont###;
+    font-size:        ###woocommerce_headlinefontsize###px;
+    color:            ###woocommerce_headlinecolor###;
+    font-weight:      ###woocommerce_headlinebold###;
+    font-style:       ###woocommerce_headlineitalic###;
+    border-top:       ###woocommerce_header_border_top### ###woocommerce_header_bordercolor###;
+    border-bottom:    ###woocommerce_header_border_bottom### ###woocommerce_header_bordercolor###;
+    border-left:      ###woocommerce_header_border_inner_v### ###woocommerce_header_bordercolor###;
+    border-right:     ###woocommerce_header_border_inner_v### ###woocommerce_header_bordercolor###;
+}
+
+
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table thead th:first-child{
+    border-left:      ###woocommerce_header_border_outer_v### ###woocommerce_header_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table thead th:last-child{
+    border-right:      ###woocommerce_header_border_outer_v### ###woocommerce_header_bordercolor###;
+}
+
+/* ITEMS */
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody tr td,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody tr.order_item,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody tr td span{
+    font-family:      ###woocommerce_contentfont###;
+    font-size:        ###woocommerce_contentfontsize###px;
+    color:            ###woocommerce_contentcolor###;
+    font-weight:      ###woocommerce_contentbold###;
+    font-style:       ###woocommerce_contentitalic###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody .col-product,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody .col-quantity,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody .col-price{
+    border-top:       ###woocommerce_products_border_inner_h### ###woocommerce_products_bordercolor###;
+    border-bottom:    ###woocommerce_products_border_inner_h### ###woocommerce_products_bordercolor###;
+    border-left:      ###woocommerce_products_border_inner_v### ###woocommerce_products_bordercolor###;
+    border-right:     ###woocommerce_products_border_inner_v### ###woocommerce_products_bordercolor###;
+    padding:10px;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table td.col-product{
+    border-left: ###woocommerce_products_border_outer_v### ###woocommerce_products_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table td.col-price{
+    border-right: ###woocommerce_products_border_outer_v### ###woocommerce_products_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody td .variation{
+    font-family:      ###woocommerce_variationfont###;
+    font-size:        ###woocommerce_variationfontsize###px;
+    color:            ###woocommerce_variationcolor###;
+    font-weight:      ###woocommerce_variationbold###;
+    font-style:       ###woocommerce_variationitalic###;
+}
+
+
+
+/* TOTALS */
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot th{
+    font-family:      ###woocommerce_totalfont###;
+    font-size:        ###woocommerce_totalfontsize###px;
+    color:            ###woocommerce_totalcolor###;
+    font-weight:      ###woocommerce_totalbold###;
+    font-style:       ###woocommerce_totalitalic###;
+    text-align:       ###woocommerce_totalalign###!important;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr td,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr td span{
+    font-family:      ###woocommerce_contentfont###;
+    font-size:        ###woocommerce_contentfontsize###px;
+    color:            ###woocommerce_contentcolor###;
+    font-weight:      ###woocommerce_contentbold###;
+    font-style:       ###woocommerce_contentitalic###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr th,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr td{
+    border-top:       ###woocommerce_total_border_inner_h### ###woocommerce_total_bordercolor###;
+    border-bottom:    ###woocommerce_total_border_inner_h### ###woocommerce_total_bordercolor###;
+}
+
+    
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr th{
+    border-left:      ###woocommerce_total_border_outer_v### ###woocommerce_total_bordercolor###!important;
+    border-right:     ###woocommerce_total_border_inner_v### ###woocommerce_total_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr td{
+    border-right:     ###woocommerce_total_border_outer_v### ###woocommerce_total_bordercolor###!important;
+    border-left:      ###woocommerce_total_border_inner_v### ###woocommerce_total_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr:first-child th,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr:first-child td{
+    border-top:      ###woocommerce_total_border_top### ###woocommerce_total_bordercolor###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr:last-child th,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tfoot tr:last-child td{
+    border-bottom: ###woocommerce_total_border_bottom### ###woocommerce_total_bordercolor###;
+}
+
+
+
+
+
+.woocommerce-global-template .plugin-woocommerce  .col-quantity{
+    text-align: ###woocommerce_quantity_align###;
+}
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table .col-price{
+    text-align: ###woocommerce_price_align###;
+}
+
+
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody td table.product-left-col td.image-wrap,
+.woocommerce-global-template .plugin-woocommerce  .body-text .products-table tbody td table.product-left-col td.product-name{
+    padding-bottom:0!important;
+    text-align:left;
+}
+
+.woocommerce-global-template .plugin-woocommerce .customer-address td{
+    padding-bottom:20px;
+    text-align: ###woocommerce_address_align###;
+}
+
+.woocommerce-global-template .plugin-woocommerce .customer-address h3{
+    text-align: ###woocommerce_address_align###;    
+}
+
+
+.woocommerce-global-template .plugin-woocommerce .customer-details{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* WooCommerce German Market – Legal Texts */
+.woocommerce-global-template .plugin-woocommerce .wgm-wrap-email-appendixes{
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.woocommerce-global-template .plugin-woocommerce .wgm-wrap-email-appendixes h1,
+.woocommerce-global-template .plugin-woocommerce .wgm-wrap-email-appendixes h2,
+.woocommerce-global-template .plugin-woocommerce .wgm-wrap-email-appendixes h3,
+.woocommerce-global-template .plugin-woocommerce .wgm-wrap-email-appendixes h4{
+    font-size: 14px;
+}
