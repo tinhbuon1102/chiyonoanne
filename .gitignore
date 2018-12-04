@@ -3,6 +3,7 @@ robots.txt
 *.wpress
 wp-config.php
 wp-content/advanced-cache.php
+wp-content/backups-dup-pro
 wp-content/backup-db/
 wp-content/backups/
 wp-content/blogs.dir/
