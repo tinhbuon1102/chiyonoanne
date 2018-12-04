@@ -4478,3 +4478,10 @@ function zoa_haet_mail_use_template ($use_template, $mail_data)
 	}
 	return $use_template;
 }
+
+add_filter( 'body_class', 'zoa_body_class', 10, 2 );
+function zoa_body_class ($classes, $class)
+{
+	$classes[] = get_locale();
+	return $classes;
+}
