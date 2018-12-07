@@ -2070,6 +2070,9 @@ msgstr "BODY SHAPEについて"
 msgid "About Size"
 msgstr "サイズについて"
 
+msgid "About Chiyono Anne's Size"
+msgstr "Chiyono Anneサイズについて"
+
 msgid "Ship together"
 msgstr "まとめて配送"
 
@@ -2105,3 +2108,33 @@ msgstr "カップサイズ"
 
 msgid "Under Bust"
 msgstr "アンダーバスト"
+
+msgid "Sign in / Register"
+msgstr "ログイン / 会員登録"
+
+msgid "my account"
+msgstr "マイアカウント"
+
+msgid "Shipping fee will be shown after you input your shipping address."
+msgstr "送料はご住所を入力した時点で表示されます。"
+
+msgid "Model size info"
+msgstr "モデルサイズ情報"
+
+msgid "Measurement"
+msgstr "モデル寸法"
+
+msgid "Wearing Size"
+msgstr "着用サイズ"
+
+msgid " size"
+msgstr "サイズ"
+
+msgid "Item description"
+msgstr "商品説明"
+
+msgid "Feature"
+msgstr "特徴"
+
+msgid "Recommend to who"
+msgstr "こんな方にオススメ"

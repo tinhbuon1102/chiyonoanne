@@ -152,6 +152,44 @@
 #aside-con .elementor-text-editor p:last-child {
     margin-bottom: 0;
 }
+/*Form Row Lauout*/
+.mw_wp_form form .form-row {
+    float: none;
+}
+span.mwform-tel-field {
+    display: block;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+span.mwform-tel-field input {
+    margin-right: 5px;
+}
+
+span.mwform-tel-field input:not(:first-child) {
+    margin-left: 5px;
+}
+div#error-tel ul.parsley-errors-list+ul.parsley-errors-list {
+    display: none;
+}
+/*Complete Page*/
+.mw_wp_form.mw_wp_form_complete {
+    max-width: 480px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: .95rem;
+}
+@media only screen and (min-width: 48em) {
+
+}
 @media only screen and (max-width: 47.99em) {
 	#contact-contain-box .justwrap {
     width: 100%;

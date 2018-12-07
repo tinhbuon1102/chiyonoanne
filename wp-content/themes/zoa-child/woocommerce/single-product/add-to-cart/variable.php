@@ -31,9 +31,41 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	<?php else : ?>
 		<div class="variations pdp__attribute--group">
 			
-				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
+				<?php 
+				global $post;
+				$current_post = $post;
+				$post = get_post($product->get_id());
+				foreach ( $attributes as $attribute_name => $options ) : ?>
 					<div class="pdp__attribute variations__attribute">
-						<label class="pdp__attribute__label variations__attribute__label" for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label>
+						<label class="pdp__attribute__label variations__attribute__label" for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?>
+							<?php if ($attribute_name == 'pa_size' && class_exists('productsize_chart_Public')) {
+								$chart = new productsize_chart_Public('productsize-chart-for-woocommerce', 123);
+								$chart_id=$chart->productsize_chart_id($product->get_id());
+								if ($chart_id) { ?>
+									<div class="info_show_wrap about_size_wraper">
+										<div class="bodyshape_info size_info"><span class="cta about_size pop-up-button"><?php echo __('About Size', 'zoa')?></span></div>
+										<div class="pop-up tooltip-pop pop-size">
+											<div class="pop-head">
+												<h2 class="pop-title">
+													<i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Chiyono Anne's Size", 'zoa' ); ?></h2>
+												<button class="pop-up-close" type="button">
+													<i class="oecicon oecicon-simple-remove"></i>
+												</button>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="prod-detail-content" id="size_chart_content_popup">
+														<?php $chart->productsize_chart_new_product_tab_content();?>
+													</div>
+												</div>
+											</div>
+											<!--/.row-->
+										</div>
+										<!--/.pop-up-->
+										</div>
+								<?php }?>
+							<?php }?>
+						</label>
 						<div class="value variations__attribute__value">
 							<?php
 								wc_dropdown_variation_attribute_options( array(
@@ -46,6 +78,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 						</div>
 					</div>
 				<?php endforeach; ?>
+				
+				<?php $post = $current_post;?>
 			
 		</div>
 

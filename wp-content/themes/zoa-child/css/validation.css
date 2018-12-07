@@ -1,0 +1,25 @@
+/* CSS Document */
+.form-row .field-wrapper input.parsley-error, .form-row .field-wrapper textarea.parsley-error, input.inputError {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033 !important;
+    outline: none;
+}
+.form-row > .field-wrapper.has-error > label {
+    color: #cc0033;
+}
+.parsley-errors-list {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0px;
+    font-size: .75rem;
+}
+.parsley-errors-list >li {
+	color: #cc0033;
+	line-height: 1.15;
+}
+.mw_wp_form_input .form-row input[type="submit"].button:disabled, .mw_wp_form_input .form-row input[type="submit"].button:disabled:hover {
+    border-color: #CCC;
+    color: #CCC;
+    background: #FFF;
+    cursor: not-allowed;
+}

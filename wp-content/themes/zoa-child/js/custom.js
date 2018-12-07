@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){	
+	console.info("$jQuery = " + $.fn.jquery);
 	$(window).load(function () { //全ての読み込みが完了したら実行
 		$('body').removeClass('fade-out');
 	});
@@ -15,7 +16,7 @@ jQuery(document).ready(function($){
 			.appendTo('.banner-ad-promo');
 	},  6000);
 	//remove empty p tag
-	$( 'p' ).each( function() {
+	$( 'p:not(.keep-p)' ).each( function() {
 		var $this = $( this );
 		if ( $this.html().replace( /\s|&nbsp;/g, '' ).length === 0 ) {
 			$this.remove();
@@ -172,6 +173,8 @@ jQuery(document).ready(function($){
 		var headH = $(".menu-layout-custom .header-container").height();
 		var wH = $(window).height();
 		var pbH = $(".banner-ad-promo").innerHeight();
+		pbH = $(".sticky_header.is-scroll").length ? 0 : pbH;
+		
 		$(this).toggleClass('toggle--active');
 		$('.menu-layout-custom').toggleClass('toggle--active');
 		$('.nav-container').toggleClass('nav--active');
@@ -380,7 +383,12 @@ $('[data-toggle]').on('click', function(e) {
 	$("footer #reg_email").attr("placeholder", "EMAIL ADDRESS");
 	$("footer #reg_password").attr("placeholder", "PASSWORD");
 	
-	
+	if ($('form').find('.name-field-wrapper, .kana-field-wrapper')) {
+		var NameInput = $(this).find('.name-field-wrapper').find('input');
+		var KanaInput = $(this).find('.kana-field-wrapper').find('input');
+		$(NameInput).addClass('name-field');
+		$(KanaInput).addClass('kana-field');
+	}
   $.fn.autoKana('#billing_first_name', '#billing_first_name_kana', {katakana : true});
   $.fn.autoKana('#billing_last_name', '#billing_last_name_kana', {katakana : true});
   
@@ -389,8 +397,12 @@ $('[data-toggle]').on('click', function(e) {
   
   $.fn.autoKana('#account_first_name', '#account_first_name_kana', {katakana : true});
   $.fn.autoKana('#account_last_name', '#account_last_name_kana', {katakana : true});
+	$('.mw_wp_form').each(function() {
+		var $NameCon =$('input#name');
+		var $KanaCon =$('input#name-kana');
+		$.fn.autoKana($NameCon, $KanaCon, {katakana : true});
+	});
 	
-	$.fn.autoKana('.contact-name > input', '.contact-namekana > input', {katakana : true});
 	
 	//auto zip input
 	

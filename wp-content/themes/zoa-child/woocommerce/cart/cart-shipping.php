@@ -73,7 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php else : ?>
 </span><span class="value no-value">-</span>
 </div><!--/.order-shipping-->
-<p class="order__summary__row__descr p6"><?php _e( 'Shipping fee will be shown after you input your shipping address.', 'woocommerce' ); ?></p>
+<p class="order__summary__row__descr p6"><?php _e( 'Shipping fee will be shown after you input your shipping address.', 'zoa' ); ?></p>
 		<?php endif; ?>
 
 	<?php if ( $show_package_details ) : ?>

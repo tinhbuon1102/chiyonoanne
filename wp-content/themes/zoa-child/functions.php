@@ -10,11 +10,11 @@ define('PAGE_PRIVACY_ID', 2732);
  * Replaces previous method using @import
  * <http://codex.wordpress.org/Child_Themes>
  */
-remove_filter ('wp_mail', 'wpautop');
+//remove_filter ('wp_mail', 'wpautop');
 function elsey_change_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-		$src = add_query_arg( array('ver' => '2.7'), $src );
+		$src = add_query_arg( array('ver' => '2.8'), $src );
 		return $src;
 }
 add_filter( 'style_loader_src', 'elsey_change_cssjs_ver', 1000 );
@@ -34,13 +34,13 @@ add_action( 'wp_enqueue_scripts', 'zoa_enqueue_parent_theme_style', 99 );
 function zoa_enqueue_parent_theme_style() {
 	wp_enqueue_style( 'zoa-theme-style', get_template_directory_uri().'/style.css' );
 	//wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css', array('zoa-theme-style'));
-	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css?201812040443', array('zoa-theme-style'));
+	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css?201812071012', array('zoa-theme-style'));
 	/*wp_enqueue_style( 'zoa-child-style',
 					 get_stylesheet_directory_uri() . '/style.css',
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812040546', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812071224', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -48,6 +48,24 @@ function zoa_enqueue_parent_theme_style() {
 add_theme_support( 'post-thumbnails' );
 add_image_size('portfolio',600,600, true);
 
+//add another jquery version only for validation page
+/*if (!function_exists('modify_jquery')) {
+    function modify_jquery() {
+        if (is_page('contact')) {
+			wp_deregister_script( 'jquery' ); // https://codex.wordpress.org/Function_Reference/wp_deregister_script
+			wp_deregister_script( 'jquery-migrate.min' );  
+			wp_register_script('jquery2_2_4', 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',array(),false,true);
+			wp_register_script( 'jquery', '/wp-includes/js/jquery/jquery.js', array('jquery2_2_4'), false, true );
+			wp_register_script( 'jquery-migrate.min', '/wp-includes/js/jquery/jquery-migrate.min.js', array('jquery'), false, true );  
+			wp_enqueue_script('jquery2_2_4');
+			  
+			wp_enqueue_script( 'jquery');
+			wp_enqueue_script( 'jquery-migrate.min');
+        }
+    }
+}
+// add_action('init', 'modify_jquery');
+add_action('wp_enqueue_scripts', 'modify_jquery');*/
 //add custom css for elementor
 
 //change post number for porfolo archive
@@ -117,15 +135,15 @@ function custom_styles() {
 	wp_enqueue_style( 'cal-style', get_stylesheet_directory_uri() . '/js/calendar/pignose.calendar.css', array(), '' );
 	wp_enqueue_style( 'font-style', get_stylesheet_directory_uri() . '/fonts/font.css', array(), '' );
 	wp_enqueue_style( 'gfont-style', 'https://fonts.googleapis.com/css?family=Lato:300,400|Noto+Sans+JP:300,400,500|Crimson+Text:400,400i', array(), '' );
-	wp_enqueue_style( 'oicon-style', get_stylesheet_directory_uri() . '/icons/icon-outline.css', array(), '' );
+	wp_enqueue_style( 'oicon-style', get_stylesheet_directory_uri() . '/icons/icon-outline.css?201812071241', array(), '' );
 	wp_enqueue_style( 'gicon-style', get_stylesheet_directory_uri() . '/icons/icon-glyph.css', array(), '' );
-	wp_enqueue_style( 'wicon-style', get_stylesheet_directory_uri() . '/icons/icon-woo.css', array(), '' );
+	wp_enqueue_style( 'wicon-style', get_stylesheet_directory_uri() . '/icons/icon-woo.css?201812071224', array(), '' );
 	wp_enqueue_style( 'bsicon-style', get_stylesheet_directory_uri() . '/icons/icon-bodyshape.css', array(), '' );
 	wp_enqueue_style( 'select-style', get_stylesheet_directory_uri() . '/js/selectbox/selectbox.min.css', array(), '' );
 	wp_enqueue_style( 'bootstrap-grid', get_stylesheet_directory_uri() . '/css/bootstrap-grid.css', array(), '' );
 	wp_enqueue_style( 'remoda_theme', get_stylesheet_directory_uri() . '/js/remodal/remodal-default-theme.css', array(), '' );
 	wp_enqueue_style( 'remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.css', array(), '' );
-	wp_enqueue_style( 'menu-style', get_stylesheet_directory_uri() . '/css/menu.css', array(), '' );
+	wp_enqueue_style( 'menu-style', get_stylesheet_directory_uri() . '/css/menu.css?201812061205', array(), '' );
 }
 add_action( 'wp_enqueue_scripts', 'custom_styles' );
 
@@ -133,8 +151,8 @@ function add_scripts() {
 	wp_register_style( 'slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '' );
 	wp_register_style( 'slicktheme-style', get_stylesheet_directory_uri() . '/js/slick/slick-theme.css', array(), '' );
 	wp_register_style( 'labelauty-style', get_stylesheet_directory_uri() . '/js/labelauty/jquery-labelauty.css', array(), '' );
-	wp_register_style( 'form-style', get_stylesheet_directory_uri() . '/css/form.css?201811301438', array(), '' );
-	wp_register_style( 'contact-style', get_stylesheet_directory_uri() . '/css/contact.css?201812040653', array(), '' );
+	wp_register_style( 'form-style', get_stylesheet_directory_uri() . '/css/form.css?201812070708', array(), '' );
+	wp_register_style( 'contact-style', get_stylesheet_directory_uri() . '/css/contact.css?201812060242', array(), '' );
 	wp_register_style( 'portani-style', get_stylesheet_directory_uri() . '/css/port-animation.css', array(), '' );
 	wp_register_style( 'portfolio-style', get_stylesheet_directory_uri() . '/css/portfolio.css?201811211607', array(), '' );
 	wp_register_script( 'moment-js', get_stylesheet_directory_uri() . '/js/calendar/moment.min.js', array(), false, true);
@@ -147,7 +165,7 @@ function add_scripts() {
 	wp_register_script( 'less-js', 'http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js', array(), false, true);
 	wp_register_script( 'checkout-js', get_stylesheet_directory_uri() . '/js/checkout.js', array(), false, true);
 	wp_register_script( 'labelauty-js', get_stylesheet_directory_uri() . '/js/labelauty/jquery-labelauty.js', array(), false, true);
-	wp_register_script( 'reservation-js', get_stylesheet_directory_uri() . '/js/reservation.js', array(), false, true);
+	wp_register_script( 'reservation-js', get_stylesheet_directory_uri() . '/js/reservation.js?201812070712', array(), false, true);
 	wp_register_script( 'gp-js', get_stylesheet_directory_uri() . '/js/grid-parallax.js', array(), false, true);
 	wp_register_script( 'rellax-js', get_stylesheet_directory_uri() . '/js/rellax.min.js', array(), false, true);
 	wp_register_script( 'masonry-js', get_stylesheet_directory_uri() . '/js/masonry.pkgd.min.js', array(), false, true);
@@ -202,8 +220,9 @@ function add_scripts() {
 		wp_enqueue_style('slick-style');
 		wp_enqueue_style('slicktheme-style');
 		wp_enqueue_script('slick-js');
+		wp_enqueue_script('popup-js');
 		wp_enqueue_script('shopsingle-js');
-	} elseif (is_page('contact')) {
+	} elseif (is_page('contact') || is_page('contact-confirm') || is_page('press-contact-confirm') || is_page('contact-thanks')) {
 		wp_enqueue_style('contact-style');
 	}/* elseif (is_singular('post') || is_post_type_archive('post')) {
         //wp_enqueue_script('blog');
@@ -235,9 +254,83 @@ function custom_scripts() {
 	wp_enqueue_script('quadmenu_new');
 	
 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
-	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812040502', array('custom-parent'), false, true );
+	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812070731', array('custom-parent'), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+
+
+//validation script
+function validation_scripts() {
+	wp_register_script( 'parsley-js', get_stylesheet_directory_uri() . '/js/parsley.min.js', array(), false, true);
+	wp_register_script( 'parsley-lang-en', get_stylesheet_directory_uri() . '/js/i18n/en.js', array(), false, true);
+	wp_register_script( 'parsley-lang-ja', get_stylesheet_directory_uri() . '/js/i18n/ja.js?201812042322', array(), false, true);
+	wp_register_script( 'parsley-script', get_stylesheet_directory_uri() . '/js/parsley-script.js?201812070748', array('parsley-js'), false, true);
+	wp_register_style( 'validation-style', get_stylesheet_directory_uri() . '/css/validation.css?201812042324');
+	if (is_page('contact') || is_checkout()) {
+		wp_enqueue_script('parsley-js');
+		if (get_locale() == 'ja') {
+			wp_enqueue_script('parsley-lang-ja');
+		} else {
+			wp_enqueue_script('parsley-lang-en');
+		}
+		
+		
+		if ( function_exists( 'validation_scripts' ) ) {
+			if (get_locale() == 'ja') {
+				$tag = "window.Parsley.setLocale('ja');";
+				wp_add_inline_script('parsley-lang-ja', $tag, 'after');
+			} else {
+				$tag = "window.Parsley.setLocale('en');";
+				wp_add_inline_script('parsley-lang-en', $tag, 'after');
+			}
+			
+		}
+		wp_enqueue_script('parsley-script');
+		wp_enqueue_style('validation-style');
+	}
+}
+add_action('wp_enqueue_scripts', 'validation_scripts');
+
+/*MW Form Validation*/
+
+/*if ($('.error')[0]) {
+    $('.mw_wp_form').addClass('mw_wp_form_error');
+ }
+add_filter( 'mwform_error_message_mw-wp-form-email', 'custom_mwform_error_message', 10, 3 );
+function custom_mwform_error_message( $error, $key, $rule ) {
+  if ( $key === 'email' && $rule === 'noempty' ) {
+    return __( 'Email is required', 'zoa' );
+  }
+  return $error;
+}
+add_filter( 'mwform_error_message_mw-wp-form-name', 'custom_mwform_error_message', 10, 3 );
+function custom_mwform_error_message( $error, $key, $rule ) {
+  if ( $key === 'email' && $rule === 'noempty' ) {
+    return __( 'Name is required', 'zoa' );
+  }
+  return $error;
+}
+add_filter( 'mwform_error_message_mw-wp-form-namekana', 'custom_mwform_error_message', 10, 3 );
+function custom_mwform_error_message( $error, $key, $rule ) {
+  if ( $key === 'name-kana' && $rule === 'noempty' ) {
+    return 'フリガナが未入力です';
+  }
+  return $error;
+}
+add_filter( 'mwform_error_message_mw-wp-form-tel', 'custom_mwform_error_message', 10, 3 );
+function custom_mwform_error_message( $error, $key, $rule ) {
+  if ( $key === 'tel' && $rule === 'noempty' ) {
+    return __( 'Phone number is required', 'zoa' );
+  }
+  return $error;
+}
+add_filter( 'mwform_error_message_mw-wp-form-company', 'custom_mwform_error_message', 10, 3 );
+function custom_mwform_error_message( $error, $key, $rule ) {
+  if ( $key === 'tel' && $rule === 'noempty' ) {
+    return __( 'Phone number is required', 'zoa' );
+  }
+  return $error;
+}*/
 /*Filter WOOF*/
 if (function_exists('woof_print_tax')) {
 //if (!function_exists('woof_print_tax')) {
@@ -1577,6 +1670,32 @@ if ( ! function_exists( 'zoa_wc_header_action' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'zoa_wc_header_action_mobile' ) ) :
+	function zoa_wc_header_action_mobile() {
+		global $woocommerce;
+		$page_account = get_option( 'woocommerce_myaccount_page_id' );
+		$page_logout  = wp_logout_url( get_permalink( $page_account ) );
+
+		if ( 'yes' == get_option( 'woocommerce_force_ssl_checkout' ) ) {
+			$logout_url = str_replace( 'http:', 'https:', $logout_url );
+		}
+
+		$count = $woocommerce->cart->cart_contents_count;
+		//$wishlist_url   = get_permalink(get_option('yith_wcwl_wishlist_page_id'));
+		$wishlist_url   = tinv_url_wishlist_default();
+		?>
+		<a href="<?php echo get_permalink( $page_account ); ?>" id="headerAccountLink" class="header__user__item header__user__link header__user__link--account">
+				<?php if ( ! is_user_logged_in() ) : ?>
+				<?php esc_html_e( 'Sign in / Register', 'zoa' ); ?>
+				<?php else : ?>
+				<?php esc_html_e( 'my account', 'zoa' ); ?>
+				<?php endif; ?>
+		</a>
+		<?php if( function_exists( 'activation_tinv_wishlist' ) ){ ?>
+		<a href="<?php echo esc_url($wishlist_url); ?>" id="headerWishlistLink" class="header__user__item header__user__link header__user__link--wishlist"><?php esc_html_e( 'My Wishlist', 'zoa' ); ?></a><?php } ?>
+		<?php
+	} endif;
+
 /*Shortcode for custom post*/
 add_shortcode( 'custom_posts', 'tcb_sc_custom_posts' );
 function tcb_sc_custom_posts( $atts ){
@@ -1909,7 +2028,7 @@ function custom_woocommerce_billing_fields($fields) {
     $fields['billing_phone']['class'] = array('form-row-last');
 
     $fields['billing_postcode']['class'] = array('form-row-first');
-	$fields['billing_postcode']['maxlength'] = 8;
+	$fields['billing_postcode']['maxlength'] = 7;
     $fields['billing_state']['class'] = array('form-row-last');
 	
     $fields['billing_city']['class'] = array('form-row-first');
@@ -1985,7 +2104,7 @@ function custom_woocommerce_shipping_fields( $fields ) {
 	$fields['shipping_last_name']['class'] = array('form-row-first');
 	$fields['shipping_first_name']['class'] = array('form-row-last');
 	$fields['shipping_postcode']['class'] = array('form-row-first', 'address-field');
-	$fields['shipping_postcode']['maxlength'] = 8;
+	$fields['shipping_postcode']['maxlength'] = 7;
 	$fields['shipping_state']['class'] = array('form-row-last', 'address-field');
 	$fields['shipping_city']['class'] = array('form-row-first');
     $fields['shipping_address_1']['class'] = array('form-row-last');
@@ -3795,7 +3914,8 @@ function zoa_wp_title($title_parts)
 
 
 add_action('woocommerce_after_single_product_summary', 'zoa_woocommerce_before_shop_loop');
-add_action('woocommerce_before_shop_loop', 'zoa_woocommerce_before_shop_loop');
+// add_action('woocommerce_before_shop_loop', 'zoa_woocommerce_before_shop_loop');
+add_action('woocommerce_before_shop_loop_item', 'zoa_woocommerce_before_shop_loop');
 function zoa_woocommerce_before_shop_loop() {
 	# die(current_filter());
 	// hide parent theme panel
@@ -4485,3 +4605,28 @@ function zoa_body_class ($classes, $class)
 	$classes[] = get_locale();
 	return $classes;
 }
+
+function zoa_pre_get_product_make_filter_or( $query ) {
+	if (
+			$query->query['post_type'] == 'product' && 
+			!isset($query->query['ignore_sticky_posts']) && 
+			count($query->query_vars['tax_query']) > 1 &&
+			(isset($_GET['swoof']) && $_GET['swoof'] == 1)
+			|| (isset($_REQUEST['action']) && $_REQUEST['action'] == 'woof_draw_products')
+	)
+	{
+// 		$query->query['tax_query']['relation'] = 'OR';
+// 		$query->tax_query->queries['relation'] = 'OR';
+// 		$query->tax_query->relation = 'OR';
+		$query->query_vars['tax_query']['relation'] = 'OR';
+		foreach($query->query_vars['tax_query'] as $tax_index => $tax_query)
+		{
+			if(isset($tax_query['taxonomy']) && $tax_query['taxonomy'] == 'product_visibility')
+			{
+				unset($query->query_vars['tax_query'][$tax_index]);
+			}
+		}
+	}
+	return $query;
+}
+add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );

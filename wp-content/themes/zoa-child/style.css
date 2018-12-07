@@ -106,6 +106,9 @@ a.view_all, #getin a.link_underline {
 .txt--normal {
     font-weight: 400;
 }
+.has_icon_left i {
+    padding-right: 8px;
+}
 .product-search-filter-terms .nav-back {
     display: none;
 }
@@ -181,6 +184,25 @@ form#checkout #step-3.is-active {
     opacity: 1;
     position: static;
     left: 0;
+}
+
+.about_size_wraper {
+	display: inline-block;
+}
+.about_size_wraper .bodyshape_info{
+	padding: 0;
+}
+.about_size_wraper .bodyshape_info > .pop-up-button {
+	line-height: inherit;
+	cursor: pointer;
+}
+.product-type-variable .variations #size_chart_content_popup tr {
+	display: table-row;
+	float: none;
+}
+
+.product-type-variable .variations #size_chart_content_popup td {
+	float: none;
 }
 
 @media (min-width: 1200px) {
@@ -507,9 +529,9 @@ body.parent-reservation-thanks .entry-title {
 	.toggle_act.toggle_sp + [data-toggle-target]:not(.toggle--active) {
 	display: none;
 	}
-	#main:not(.fluid) {
+	body:not(.home) #main:not(.fluid) {
     min-height: 320px;
-	padding-top: 45px;
+	padding-top: 0px;
     padding-bottom: 45px;
 	}
 	.short_content {
@@ -1479,7 +1501,7 @@ div#theme-bread .crums-item a:hover {
     display: none;
 	}
 	.menu-layout-custom .header-container .header-logo {
-    padding: 5px 0;
+    padding: 10px 0;
 	}
 	.menu-layout-custom .header-container .header-logo {
     width: 100%;
@@ -1516,6 +1538,7 @@ div#theme-bread .crums-item a:hover {
 	}
 	.header-logo > .theme-logo {
     margin: 0 auto;
+	width: 100px;
 	}
 	.header-box > .max-width--site {
 	position: relative;
@@ -1527,11 +1550,16 @@ div#theme-bread .crums-item a:hover {
     left: 0;
     width: 100%;
     background-color: #f6f6f6;
-    overflow-y: auto;
     -webkit-transition: all 400ms cubic-bezier(0.4, 0.9, 0.3, 1);
     transition: all 400ms cubic-bezier(0.4, 0.9, 0.3, 1);
 	}
-	.menu-layout-custom .nav-container:not(.nav--active) {
+	.menu-layout-custom .nav-container.nav--active .header__secondary__content {
+    height: 100%;
+    padding-bottom: 24px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+	}
+	.menu-layout-custom .nav-container:not(.nav--active), .menu-layout-custom .nav-container:not(.nav--active) * {
     height: 0;
     visibility: hidden;
 	}
@@ -1856,10 +1884,10 @@ section#itemlist-home > .elementor-container {
 }
 /*Contact Section*/
 #getin .sec-title {
-	font-size: 24px;
+	font-size: 48px;
     margin: 0 0 60px;
-	font-family: Courier, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 500;
+	font-family: beloved-script, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
 }
 .con-item {
     text-transform: uppercase;
@@ -1906,7 +1934,7 @@ li.no_link > a {
     padding: 0;
     width: 100%;
 }
-.header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .no_link > a {
+.header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .no_link > a, .header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .link_all_item > a {
 	font-family: "proxima-nova",sans-serif !important;
     font-size: .75rem !important;
 	text-transform: uppercase !important;
@@ -2044,9 +2072,12 @@ li.no_link > a {
 	}
 }
 @media only screen and (max-width: 991px) {
-	.header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .no_link > a {
+	.header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .no_link > a, .header-box .nav-container .theme-primary-menu:not(.theme-sidebar-menu) .link_all_item > a {
     font-weight: 300 !important;
     letter-spacing: 1px !important;
+	}
+	.header-scroll-logo {
+    display: none;
 	}
 }
 /*Form*/
@@ -2261,6 +2292,11 @@ section#about-intro {
 section#about-intro .elementor-element .elementor-widget-heading {
     font-size: 2.125rem;
 }
+#about-intro h2.elementor-heading-title {
+    font-family: beloved-script;
+    letter-spacing: 0;
+    font-size: 72px !important;
+}
 section#about-designer h2.heading {
     font-size: 3.75rem;
     font-family: beloved-script, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2317,6 +2353,9 @@ ul.grid_post {
 @media only screen and (max-width: 47.9em) {
 	body:not(.home) .page-content .elementor-text-editor {
     font-size: .75rem;
+	}
+	#about-intro h2.elementor-heading-title {
+    font-size: 58px !important;
 	}
 }
 /*Bespoke*/

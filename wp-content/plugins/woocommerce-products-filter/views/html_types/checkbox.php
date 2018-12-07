@@ -229,10 +229,10 @@ if (!function_exists('woof_draw_checkbox_childs'))
 <!--start added code-->
 <?php if ($tax_slug == 'pa_size') { ?>
 <div class="info_show_wrap">
-	<div class="bodyshape_info size_info"><button class="cta pop-up-button js-actives"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Size", 'zoa' ); ?></button></div>
+	<div class="bodyshape_info size_info"><button class="cta pop-up-button js-actives"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Chiyono Anne's Size", 'zoa' ); ?></button></div>
 	<div class="pop-up tooltip-pop pop-size">
 		<div class="pop-head">
-				<h2 class="pop-title"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Size", 'zoa' ); ?></h2>
+				<h2 class="pop-title"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Chiyono Anne's Size", 'zoa' ); ?></h2>
 				<button class="pop-up-close"><i class="oecicon oecicon-simple-remove"></i></button>
 			</div>
 		<?php if (!empty($terms)): ?>

@@ -803,8 +803,11 @@ $step02 = get_field('step02');
                     {
                     ?>	
                     <div class="birs_field_register">
-                    	<input type="checkbox"  name="is_register" id="is_register" value="1"/>
-                    	<label for="is_register"><?php _e('Do you want to register as client?', 'zoa')?></label>
+                    	
+                    	<label for="is_register" class="check-label register_check">
+							<input type="checkbox"  name="is_register" id="is_register" value="1"/>
+							<?php _e('Do you want to register as client?', 'zoa')?>
+						</label>
                     	 <div class="birs_error" id="is_register_error"></div>
                     </div>
                     <?php

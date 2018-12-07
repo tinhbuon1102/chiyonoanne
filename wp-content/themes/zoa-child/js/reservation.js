@@ -103,6 +103,15 @@ jQuery(document).ready(function($){
 			$(this).closest('label.check-label').removeClass('checked');
 		}
 	});
+	$('body').on('change', '#is_register', function(e){
+		if ($(this).prop('checked'))
+		{
+			$(this).closest('label.check-label').addClass('checked');
+		}
+		else {
+			$(this).closest('label.check-label').removeClass('checked');
+		}
+	});
 	
 	$('body').on('click', 'span.delete_photo', function(e){
 		e.preventDefault();
