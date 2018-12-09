@@ -148,6 +148,7 @@ function custom_styles() {
 add_action( 'wp_enqueue_scripts', 'custom_styles' );
 
 function add_scripts() {
+	wp_register_style( 'giftcard-style', get_stylesheet_directory_uri() . '/css/giftcard.css', array(), '' );
 	wp_register_style( 'slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '' );
 	wp_register_style( 'slicktheme-style', get_stylesheet_directory_uri() . '/js/slick/slick-theme.css', array(), '' );
 	wp_register_style( 'labelauty-style', get_stylesheet_directory_uri() . '/js/labelauty/jquery-labelauty.css', array(), '' );
@@ -219,6 +220,7 @@ function add_scripts() {
 	} elseif (is_product()) {
 		wp_enqueue_style('slick-style');
 		wp_enqueue_style('slicktheme-style');
+		wp_enqueue_style('giftcard-style');
 		wp_enqueue_script('slick-js');
 		wp_enqueue_script('popup-js');
 		wp_enqueue_script('shopsingle-js');
