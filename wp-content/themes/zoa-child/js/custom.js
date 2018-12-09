@@ -174,6 +174,7 @@ jQuery(document).ready(function($){
 		var wH = $(window).height();
 		var pbH = $(".banner-ad-promo").innerHeight();
 		pbH = $(".sticky_header.is-scroll").length ? 0 : pbH;
+		pbH = 0;
 		
 		$(this).toggleClass('toggle--active');
 		$('.menu-layout-custom').toggleClass('toggle--active');
