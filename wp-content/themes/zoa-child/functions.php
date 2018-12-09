@@ -4610,6 +4610,7 @@ function zoa_pre_get_product_make_filter_or( $query ) {
 	if (
 			$query->query['post_type'] == 'product' && 
 			!isset($query->query['ignore_sticky_posts']) && 
+			isset($query->query_vars['tax_query']) && 
 			count($query->query_vars['tax_query']) > 1 &&
 			(isset($_GET['swoof']) && $_GET['swoof'] == 1)
 			|| (isset($_REQUEST['action']) && $_REQUEST['action'] == 'woof_draw_products')
