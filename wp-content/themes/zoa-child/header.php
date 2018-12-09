@@ -190,8 +190,8 @@ if( $bannerPosts ): ?>
                              </div><!-- .header-action -->
 						</div>
 						<div class="nav-container">
+							<div class="header__secondary__content">
 							<div class="theme-menu-box header-menu">
-								<span class="screen-reader-text"><?php esc_html_e( 'Primary Menu', 'zoa' ); ?></span>
                                 <?php
                                     if( has_nav_menu( 'primary' ) ):
                                         quadmenu(array("theme_location" => "primary", "menu_class" => "theme-primary-menu", "theme" => "custom_theme_1"));
@@ -200,6 +200,14 @@ if( $bannerPosts ): ?>
                                     <a class="add-menu" href="<?php echo esc_url( get_admin_url() . 'nav-menus.php' ); ?>"><?php esc_html_e( 'Add Menu', 'zoa' ); ?></a>
                                 <?php endif; ?>
 							</div>
+							<div class="header__user display--mid-only">
+								<?php
+                                        if ( class_exists( 'woocommerce' ) ) {
+                                            zoa_wc_header_action_mobile();
+                                        }
+                                 ?>
+							</div>
+							</div><!--/header__secondary__content-->
 						</div>
 					</div>
 				</header>
