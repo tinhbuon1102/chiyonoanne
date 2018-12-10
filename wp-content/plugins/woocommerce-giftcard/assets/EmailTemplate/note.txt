@@ -1,0 +1,14 @@
+Ma mau
+
+"Happy Valentine!" : 	#8B0017
+			#D7D6D1
+			#CF2E2C
+"Merry Christmas!" :	#8B0017
+			#8A2E28
+			#51565A
+"Happy Birthday!" :	#8B6A5A
+			#D6D7E2
+			#CFC5BD
+"Happy Thanksgiving!":	#EC8B3A
+			#E5D6C1
+			#EC8B3A

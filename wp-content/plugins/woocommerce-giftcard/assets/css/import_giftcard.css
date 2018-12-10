@@ -1,0 +1,9 @@
+#save_to_database_progress {
+    width: 100%;
+    background-color: grey;
+}
+#save_to_database_bar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}

@@ -1,0 +1,365 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Spanish\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+
+msgid "Gift Card"
+msgstr "Tarjeta de regalo"
+
+msgid "Gift card code removed successfully."
+msgstr "Código de tarjeta de regalo eliminado con éxito."
+
+msgid "Send Mail"
+msgstr "Enviar correo"
+
+msgid "Resend Mail"
+msgstr "Reenviar correo"
+
+msgid "Add Giftcard"
+msgstr "Agregar tarjeta de regalo"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Giftcard"
+msgstr "Editar tarjeta de regalo"
+
+msgid "View Giftcard"
+msgstr "Ver tarjeta de regalo"
+
+msgid "Search Giftcard"
+msgstr "Buscar tarjeta de regalo"
+
+msgid "No Giftcard found"
+msgstr "No se encontró ninguna tarjeta de regalo"
+
+msgid "No Giftcard found in trash"
+msgstr "No se encontró ninguna tarjeta de regalo en la papelera"
+
+msgid "Parent Giftcard"
+msgstr "Tarjeta de regalo para padres"
+
+msgid "Email template"
+msgstr "No se encontró ninguna tarjeta de regalo"
+
+msgid "Add Email template"
+msgstr "No se encontró ninguna tarjeta de regalo"
+
+msgid "Edit Email template"
+msgstr "Editar plantilla de correo electrónico"
+
+msgid "View Email template"
+msgstr "Ver plantilla de correo electrónico"
+
+msgid "Search Email template"
+msgstr "Plantilla de correo electrónico de búsqueda"
+
+msgid "No Email template found"
+msgstr "No se encontró una plantilla de correo electrónico"
+
+msgid "No Email template found in trash"
+msgstr "No se encontró una plantilla de correo electrónico en la papelera"
+
+msgid "Parent Email template"
+msgstr "Plantilla de correo electrónico principal"
+
+msgid "From"
+msgstr "De"
+
+msgid "Enter an amount between"
+msgstr "Ingrese un monto entre"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "To"
+msgstr "A"
+
+msgid "Send To Email"
+msgstr "Enviar al correo electrónico"
+
+msgid "Message"
+msgstr "Mensaje"
+
+msgid "Scheduled send"
+msgstr "Envío programado"
+
+msgid "Email template ID"
+msgstr "ID de plantilla de correo electrónico"
+
+msgid "PDF template ID"
+msgstr "ID de plantilla PDF"
+
+msgid "To Name"
+msgstr "Nombrar"
+
+msgid "To Email"
+msgstr "Al correo electrónico"
+
+msgid "Scheduled send date"
+msgstr "Fecha programada de envío"
+
+msgid "Select Options"
+msgstr "Seleccione opciones"
+
+msgid "Gift Card Payment"
+msgstr "Pago con tarjeta de regalo"
+
+msgid "Remove"
+msgstr "retirar"
+
+msgid "A gift card can not be used to buy other gift card"
+msgstr ""
+"Una tarjeta de regalo no se puede usar para comprar otra tarjeta de regalo"
+
+msgid "Gift card applied successfully."
+msgstr "Tarjeta de regalo aplicada con éxito."
+
+msgid "Gift card is not valid."
+msgstr "La tarjeta de regalo no es válida."
+
+msgid "Something error!"
+msgstr "Algo error!"
+
+msgid "Gift card code is not existed"
+msgstr "Código de tarjeta de regalo no existe"
+
+msgid "Gift card code is  not active"
+msgstr "El código de la tarjeta de regalo no está activo"
+
+msgid "Gift card code is expired"
+msgstr "El código de la tarjeta de regalo ha expirado"
+
+msgid "Gift card balance is zero"
+msgstr "El saldo de la tarjeta de regalo es cero"
+
+msgid "Gift card is virtual product"
+msgstr "La tarjeta de regalo es un producto virtual"
+
+msgid "PDF SETTINGS"
+msgstr "CONFIGURACIÓN DE PDF"
+
+msgid "Pdf Templates"
+msgstr "Plantillas en PDF"
+
+msgid "Add PDF template"
+msgstr "Agregar plantilla PDF"
+
+msgid "Edit PDF template"
+msgstr "Editar plantilla PDF"
+
+msgid "View PDF template"
+msgstr "Ver plantilla en PDF"
+
+msgid "Search PDF template"
+msgstr "Plantilla de búsqueda en PDF"
+
+msgid "No PDF template found"
+msgstr "No se encontró una plantilla en PDF"
+
+msgid "No PDF template found in trash"
+msgstr "No se encontró una plantilla PDF en la papelera"
+
+msgid "Parent PDF template"
+msgstr "Plantilla PDF principal"
+
+msgid "PDF View"
+msgstr "Vista de PDF"
+
+msgid "PDF Config"
+msgstr "PDF Config"
+
+msgid "Text settings"
+msgstr "Configuraciones de texto"
+
+msgid "ShortCode"
+msgstr "Código corto"
+
+msgid "Image settings"
+msgstr "Configuración de imagen"
+
+msgid "Qrcode"
+msgstr "Código QR"
+
+msgid "Processing Gift card"
+msgstr "Tarjeta de regalo de procesamiento"
+
+msgid "Default Email Setting"
+msgstr "Configuración predeterminada de correo electrónico"
+
+msgid "Apply gift card for shipping fee"
+msgstr "Aplicar tarjeta de regalo para la tarifa de envío"
+
+msgid "Allow customers to pay shipping fee with  gift card."
+msgstr ""
+"Permita que los clientes paguen la tarifa de envío con la tarjeta de regalo."
+
+msgid "Apply gift card for tax"
+msgstr "Aplicar tarjeta de regalo para impuestos"
+
+msgid "Allow customers to pay for tax with their gift card."
+msgstr "Permita que los clientes paguen impuestos con su tarjeta de regalo."
+
+msgid "Apply gift card for fee"
+msgstr "Aplicar una tarjeta de regalo por una tarifa"
+
+msgid "Allow customers to pay for fees with their gift card."
+msgstr "Permita que los clientes paguen tarifas con su tarjeta de regalo."
+
+msgid "Enable use gift card to buy other gift card"
+msgstr "Habilitar uso de tarjeta de regalo para comprar otra tarjeta de regalo"
+
+msgid "Active giftcard and send notification email when status of order"
+msgstr ""
+"Tarjeta de regalo activa y enviar un correo electrónico de notificación "
+"cuando el estado de la orden"
+
+msgid "Default expire time span"
+msgstr "Tiempo de expiración predeterminado"
+
+msgid ""
+"If you set this to 30 , the gift card will expire after 30 day from created "
+"time. Leave blank or 0 if you do not want to use it"
+msgstr ""
+"Si establece esto en 30, la tarjeta de regalo caducará después de 30 días a "
+"partir de la hora de creación. Déjelo en blanco o 0 si no desea usarlo"
+
+msgid "Default Gift card code pattern"
+msgstr "Patrón de código de tarjeta de regalo predeterminado"
+
+msgid ""
+"You can use [A4] for 4 random characters, use [N5] for 5 random digit and so "
+"on"
+msgstr ""
+"Puede usar [A4] para 4 caracteres aleatorios, use [N5] para 5 dígitos "
+"aleatorios, etc."
+
+msgid "Default Email Template"
+msgstr "Plantilla de correo electrónico predeterminada"
+
+msgid "Subject"
+msgstr "Tema"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Attach pdf gift card"
+msgstr "Adjunte una tarjeta de regalo en pdf"
+
+msgid "Purchase Information"
+msgstr "informacion de compra"
+
+msgid "Send friend"
+msgstr "Enviar amigo"
+
+msgid "GiftCard History"
+msgstr "Historial de tarjetas de regalo"
+
+msgid "Balance"
+msgstr "Equilibrar"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Sent"
+msgstr "Expedido"
+
+msgid "Pending send"
+msgstr "Pendiente de enviar"
+
+msgid "In stock"
+msgstr "En stock"
+
+msgid "Expiry date"
+msgstr "Fecha de caducidad"
+
+msgid "Product Name"
+msgstr "nombre del producto"
+
+msgid "To Mail"
+msgstr "Enviar por correo"
+
+msgid "To name"
+msgstr "Nombrar"
+
+msgid "To message"
+msgstr "Mensajear"
+
+msgid "Scheduled send time"
+msgstr "Hora programada de envío"
+
+msgid "Giftcard Code"
+msgstr "Código de tarjeta de regalo"
+
+msgid "Transaction Amount"
+msgstr "cantidad de transacción"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "Create At"
+msgstr "Crear en"
+
+msgid "Gift Card Status"
+msgstr "Estado de la tarjeta de regalo"
+
+msgid "Import Gift Card"
+msgstr "Importar tarjeta de regalo"
+
+msgid "Upload File"
+msgstr "Subir archivo"
+
+msgid "Price model"
+msgstr "Modelo de precio"
+
+msgid "Fixed price"
+msgstr "Precio fijo"
+
+msgid "Selected price"
+msgstr "Precio seleccionado"
+
+msgid "Custom price"
+msgstr "Precio personalizado"
+
+msgid "Price Options"
+msgstr "Opciones de precio"
+
+msgid "Price range"
+msgstr "Rango de precios"
+
+msgid "Min price"
+msgstr "Precio mínimo"
+
+msgid "Max price"
+msgstr "Precio máximo"
+
+msgid "Expiry model"
+msgstr "Modelo de vencimiento"
+
+msgid "Expiry time"
+msgstr "Tiempo de expiración"
+
+msgid "Serveral days"
+msgstr "Varios dias"
+
+msgid "Email Template"
+msgstr "Plantilla de correo electrónico"
+
+msgid "Pdf Template"
+msgstr "Plantilla en PDF"
+
+msgid "Exclude Products"
+msgstr "Excluir productos"
+
+msgid "Name of PDF file"
+msgstr "Nombre del archivo PDF"
