@@ -192,7 +192,7 @@ jQuery(document).ready(function($){
 	});
 	
 	//add class for variable product select
-	$('.pdp__attribute--group .pdp__attribute variations__attribute').each(function(){
+	$('.pdp__attribute--group .pdp__attribute.variations__attribute').each(function(){
 		var select = $(this).find('select');
 		if (!$(select).hasClass('hide')) {
 			$(select).addClass('input-select justselect').wrapAll('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
