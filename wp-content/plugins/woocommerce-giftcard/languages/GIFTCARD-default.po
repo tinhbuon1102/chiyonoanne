@@ -1,0 +1,380 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-04-03 12:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Luu Thanh Thuy <luuthuy205@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: /var/www/html/wordpress/wp-content/plugins/woocommerce-"
+"giftcard\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: /var/www/html/wordpress/wp-"
+"content/plugins/woocommerce-giftcard\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
+
+msgid "Gift Card"
+msgstr ""
+
+msgid "Gift card code removed successfully."
+msgstr ""
+
+msgid "Send Mail"
+msgstr ""
+
+msgid "Resend Mail"
+msgstr ""
+
+msgid "Giftcard"
+msgstr ""
+
+msgid "Add Giftcard"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit Giftcard"
+msgstr ""
+
+msgid "View Giftcard"
+msgstr ""
+
+msgid "Search Giftcard"
+msgstr ""
+
+msgid "No Giftcard found"
+msgstr ""
+
+msgid "No Giftcard found in trash"
+msgstr ""
+
+msgid "Parent Giftcard"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "Email template"
+msgstr ""
+
+msgid "Add Email template"
+msgstr ""
+
+msgid "Edit Email template"
+msgstr ""
+
+msgid "View Email template"
+msgstr ""
+
+msgid "Search Email template"
+msgstr ""
+
+msgid "No Email template found"
+msgstr ""
+
+msgid "No Email template found in trash"
+msgstr ""
+
+msgid "Parent Email template"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "Enter an amount between"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Send To Email"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Scheduled send"
+msgstr ""
+
+msgid "Email template ID"
+msgstr ""
+
+msgid "PDF template ID"
+msgstr ""
+
+msgid "To Name"
+msgstr ""
+
+msgid "To Email"
+msgstr ""
+
+msgid "Scheduled send date"
+msgstr ""
+
+msgid "Select Options"
+msgstr ""
+
+msgid "Gift Card Payment"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "A gift card can not be used to buy other gift card"
+msgstr ""
+
+msgid "Gift card applied successfully."
+msgstr ""
+
+msgid "A gift card can not be used to buy other gift card"
+msgstr ""
+
+msgid "Gift card is not valid."
+msgstr ""
+
+msgid "Something error!"
+msgstr ""
+
+msgid "Gift card code is not existed"
+msgstr ""
+
+msgid "Gift card code is  not active"
+msgstr ""
+
+msgid "Gift card code is expired"
+msgstr ""
+
+msgid "Gift card balance is zero"
+msgstr ""
+
+msgid "Gift card applied successfully."
+msgstr ""
+
+msgid "Gift card is virtual product"
+msgstr ""
+
+msgid "PDF SETTINGS"
+msgstr ""
+
+msgid "Pdf Templates"
+msgstr ""
+
+msgid "Add PDF template"
+msgstr ""
+
+msgid "Edit PDF template"
+msgstr ""
+
+msgid "View PDF template"
+msgstr ""
+
+msgid "Search PDF template"
+msgstr ""
+
+msgid "No PDF template found"
+msgstr ""
+
+msgid "No PDF template found in trash"
+msgstr ""
+
+msgid "Parent PDF template"
+msgstr ""
+
+msgid "PDF View"
+msgstr ""
+
+msgid "PDF Config"
+msgstr ""
+
+msgid "Text settings"
+msgstr ""
+
+msgid "ShortCode"
+msgstr ""
+
+msgid "Image settings"
+msgstr ""
+
+msgid "Qrcode"
+msgstr ""
+
+msgid "Processing Gift card"
+msgstr ""
+
+msgid "Default Email Setting"
+msgstr ""
+
+msgid "Apply gift card for shipping fee"
+msgstr ""
+
+msgid "Allow customers to pay shipping fee with  gift card."
+msgstr ""
+
+msgid "Apply gift card for tax"
+msgstr ""
+
+msgid "Allow customers to pay for tax with their gift card."
+msgstr ""
+
+msgid "Apply gift card for fee"
+msgstr ""
+
+msgid "Allow customers to pay for fees with their gift card."
+msgstr ""
+
+msgid "Enable use gift card to buy other gift card"
+msgstr ""
+
+msgid "Active giftcard and send notification email when status of order"
+msgstr ""
+
+msgid "Default expire time span"
+msgstr ""
+
+msgid "If you set this to 30 , the gift card will expire after 30 day from created time. Leave blank or 0 if you do not want to use it"
+msgstr ""
+
+msgid "Default Gift card code pattern"
+msgstr ""
+
+msgid "You can use [A4] for 4 random characters, use [N5] for 5 random digit and so on"
+msgstr ""
+
+msgid "Default Email Template"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Attach pdf gift card"
+msgstr ""
+
+msgid "Purchase Information"
+msgstr ""
+
+msgid "Send friend"
+msgstr ""
+
+msgid "GiftCard History"
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Pending send"
+msgstr ""
+
+msgid "In stock"
+msgstr ""
+
+msgid "Expiry date"
+msgstr ""
+
+msgid "Product Name"
+msgstr ""
+
+msgid "To Mail"
+msgstr ""
+
+msgid "To name"
+msgstr ""
+
+msgid "To message"
+msgstr ""
+
+msgid "Scheduled send time"
+msgstr ""
+
+msgid "Giftcard Code"
+msgstr ""
+
+msgid "Transaction Amount"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Create At"
+msgstr ""
+
+msgid "Gift Card Status"
+msgstr ""
+
+msgid "ShortCode"
+msgstr ""
+
+msgid "Import Gift Card"
+msgstr ""
+
+msgid "Upload File"
+msgstr ""
+
+msgid "Price model"
+msgstr ""
+
+msgid "Fixed price"
+msgstr ""
+
+msgid "Selected price"
+msgstr ""
+
+msgid "Custom price"
+msgstr ""
+
+msgid "Price Options"
+msgstr ""
+
+msgid "Price range"
+msgstr ""
+
+msgid "Min price"
+msgstr ""
+
+msgid "Max price"
+msgstr ""
+
+msgid "Expiry model"
+msgstr ""
+
+msgid "Expiry date"
+msgstr ""
+
+msgid "Expiry time"
+msgstr ""
+
+msgid "Serveral days"
+msgstr ""
+
+msgid "Email Template"
+msgstr ""
+
+msgid "Pdf Template"
+msgstr ""
+
+msgid "Exclude Products"
+msgstr ""
+
+msgid "Name of PDF file"
+msgstr ""

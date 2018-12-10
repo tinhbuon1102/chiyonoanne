@@ -1,0 +1,9 @@
+http://programming-review.com/zend-framework-in-wordpress/
+http://stackoverflow.com/questions/17554143/create-wordpress-plugin-with-zend-framework-2
+http://www.leftjoin.net/2011/03/integrating-zend-framework-with-wordpress/
+
+ WOOG-2
+
+giftcard-amount
+
+sudo cp -r /var/www/html/woomodule/giftcardpro/wp-content/plugins/woocommerce-giftcard/* /home/luuthanhthuy/work2/Job/woo/giftcard/woogiftcard/woocommerce-giftcard

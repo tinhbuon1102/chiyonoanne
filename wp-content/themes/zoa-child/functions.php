@@ -256,7 +256,7 @@ function custom_scripts() {
 	wp_enqueue_script('quadmenu_new');
 	
 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
-	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812070731', array('custom-parent'), false, true );
+	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812100732', array('custom-parent'), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
@@ -1458,7 +1458,7 @@ function new_zoa_product_sharing() {
 	<?php
 }
 
-	add_action('woocommerce_after_add_to_cart_button', 'ws_closing_div', 51 );
+	add_action('woocommerce_after_add_to_cart_form', 'ws_closing_div', 51 );
 	//add accordion tabs
 	function output_accordion_tabs() {
         

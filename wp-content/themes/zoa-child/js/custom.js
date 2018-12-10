@@ -191,6 +191,14 @@ jQuery(document).ready(function($){
 		$(this).addClass('input-select justselect').wrapAll('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
 	});
 	
+	//add class for variable product select
+	$('.pdp__attribute--group .pdp__attribute variations__attribute').each(function(){
+		var select = $(this).find('select');
+		if (!$(select).hasClass('hide')) {
+			$(select).addClass('input-select justselect').wrapAll('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
+		}
+	});
+	
 	$('select.orderby').addClass('input-select justselect').wrapAll('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
 	//change form field style
 	$('.order--checkout--row p.form-row').each(function() {

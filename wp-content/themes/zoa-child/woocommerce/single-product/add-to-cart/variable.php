@@ -67,7 +67,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 							<?php }?>
 						</label>
 						<div class="value variations__attribute__value">
-							<?php
+								<?php
 								wc_dropdown_variation_attribute_options( array(
 									'options'   => $options,
 									'attribute' => $attribute_name,

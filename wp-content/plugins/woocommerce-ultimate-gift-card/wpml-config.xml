@@ -1,0 +1,10 @@
+<wpml-config>
+	<admin-texts>
+		<key name="mwb_wgm_mail_to_recipient_text" />
+		<key name="mwb_wgm_shipping_text" />
+		<key name="mwb_wgm_downloadable_text" />
+		<key name="mwb_wgm_mail_to_recipient_desc" />
+		<key name="mwb_wgm_downloadable_desc" />
+		<key name="mwb_wgm_shipping_desc" />
+	</admin-texts>
+</wpml-config>

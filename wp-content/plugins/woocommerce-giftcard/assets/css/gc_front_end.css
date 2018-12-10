@@ -1,0 +1,60 @@
+.gc_span {
+    border: 1px solid #f1f1f1;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.12);
+    margin-bottom: 25px;
+    padding: 20px;
+}
+
+.gc_input {
+    margin-bottom:5px; width: 100%
+}
+
+.bootstrap-datetimepicker-widget table th, .bootstrap-datetimepicker-widget table td {
+    padding: 8px;
+}
+
+.choose-template .ui-selecting { background: #FECA40;  }
+.choose-template .ui-selected {
+    background: #e6e5e5; opacity: 1;
+    border: 2px solid #333333;
+    -webkit-box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.choose-template {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 450px;
+}
+
+.choose-template li {
+    opacity: 0.7;
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    -o-transition: transform .2s;
+    transition: transform .2s;
+    transition: transform .2s, -webkit-transform .2s;
+    margin: 6px;
+    padding: 1px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.choose-template li:hover {
+    opacity: 1;
+    /*transform: scale(5);*/
+    -webkit-box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.preview_email_template {
+    max-height: calc(100% - 300px);
+    overflow: scroll;
+    top: 50% !important;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: fixed !important;
+}
