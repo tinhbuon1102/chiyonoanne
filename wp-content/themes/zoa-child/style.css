@@ -1546,6 +1546,7 @@ div#theme-bread .crums-item a:hover {
 	}
 	.menu-layout-custom .nav-container {
     position: absolute;
+    z-index: 99999;
     top: calc(100% + 1px);
     left: 0;
     width: 100%;

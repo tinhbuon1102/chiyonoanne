@@ -171,7 +171,7 @@ jQuery(document).ready(function($){
 	$('#menu-toggle-btn').on('click', function (e) {
 		e.preventDefault();
 		var headH = $(".menu-layout-custom .header-container").height();
-		var wH = $(window).height();
+		var wH = $(window).height() + 110;
 		var pbH = $(".banner-ad-promo").innerHeight();
 		pbH = $(".sticky_header.is-scroll").length ? 0 : pbH;
 		
