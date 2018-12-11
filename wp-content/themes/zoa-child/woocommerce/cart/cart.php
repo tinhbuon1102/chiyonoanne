@@ -1,5 +1,4 @@
 <?php
-pr(WC()->cart->get_cart());die;
 /**
  * Cart Page
  *
