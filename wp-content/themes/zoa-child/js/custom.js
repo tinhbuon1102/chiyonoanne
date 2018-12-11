@@ -40,15 +40,27 @@ jQuery(document).ready(function($){
 		}
 		
 	});
-	$('.radio_label').each(function () {
-		$(this).find('input[type=radio]').change(function() {
-		if($(this).is(':checked')) {
-			$(this).parent().addClass('checked');
-		} else {
-			$(this).parent().removeClass('checked');
-		}
+	
+	function checkRadioCustom(){
+		$('.radio-label').each(function () {
+			$(this).find('input[type=radio]').each(function() {
+				if($(this).is(':checked')) {
+					var optionName = $(this).attr('name');
+					$('input[name="'+ optionName +'"]').closest('.radio-label').removeClass('checked');
+					$(this).parent().addClass('checked');
+				} 
+			});
 		});
+	}
+	
+	$('.radio-label').find('input[type=radio]').change(function() {
+		if($(this).is(':checked')) {
+			var optionName = $(this).attr('name');
+			$('input[name="'+ optionName +'"]').closest('.radio-label').removeClass('checked');
+			$(this).parent().addClass('checked');
+		}
 	});
+	checkRadioCustom();
 	
 	if($('.banner-ad-promo').length){
 		/***********/
