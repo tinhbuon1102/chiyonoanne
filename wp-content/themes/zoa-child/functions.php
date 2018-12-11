@@ -256,7 +256,7 @@ function custom_scripts() {
 	wp_enqueue_script('quadmenu_new');
 	
 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
-	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812110831', array('custom-parent'), false, true );
+	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812111441', array('custom-parent'), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
@@ -266,7 +266,7 @@ function validation_scripts() {
 	wp_register_script( 'parsley-js', get_stylesheet_directory_uri() . '/js/parsley.min.js', array(), false, true);
 	wp_register_script( 'parsley-lang-en', get_stylesheet_directory_uri() . '/js/i18n/en.js', array(), false, true);
 	wp_register_script( 'parsley-lang-ja', get_stylesheet_directory_uri() . '/js/i18n/ja.js?201812042322', array(), false, true);
-	wp_register_script( 'parsley-script', get_stylesheet_directory_uri() . '/js/parsley-script.js?201812111045', array('parsley-js'), false, true);
+	wp_register_script( 'parsley-script', get_stylesheet_directory_uri() . '/js/parsley-script.js?201812111441', array('parsley-js'), false, true);
 	wp_register_style( 'validation-style', get_stylesheet_directory_uri() . '/css/validation.css?201812042324');
 	if (is_page('contact') || is_checkout() || is_product()) {
 		wp_enqueue_script('parsley-js');
