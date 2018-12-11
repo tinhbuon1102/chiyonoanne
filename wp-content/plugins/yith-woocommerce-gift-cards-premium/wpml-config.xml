@@ -1,8 +1,0 @@
-<wpml-config>
-    <admin-texts>
-        <key name="ywgc_email_button_label"/>
-    </admin-texts>
-    <admin-texts>
-        <key name="ywgc_gift_this_product_email_button_label"/>
-    </admin-texts>
-</wpml-config>

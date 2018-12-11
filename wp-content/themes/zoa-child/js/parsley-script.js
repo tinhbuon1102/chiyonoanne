@@ -41,6 +41,9 @@ jQuery(document).ready(function($) {
 	}
 	$('.tel-field').attr("data-parsley-errors-container","#error-tel");
 	$('.message-field').attr("minlength","6").attr("data-parsley-minlength","6");
+	//gift card product
+	$('input#mwb_wgm_from_name').attr("data-parsley-required","true").attr("data-parsley-trigger","focusout").attr("pattern","^[a-zA-Z]+$");
+	$('form.cart').parsley(); //Single Product
 	$('#form01').parsley(); //Customer Contact
 	$('#form02').parsley(); //Press Contact
 	$('form#checkout').parsley(); //Woo Checkout

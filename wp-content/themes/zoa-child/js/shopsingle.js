@@ -11,6 +11,19 @@ jQuery(document).ready(function($){
 		$('.single-gallery-slider.single-gallery-vertical .single-product-gallery.pro-single-image .pro-carousel-image #gallery-image .pro-img-item').css('height', (SImageW*4/3) + 'px');
 		
 	});
+	//change class for woocommerce ultimate gift card plugin
+	$( 'form.cart .mwb_wgm_added_wrapper p.mwb_wgm_section' ).each( function() {
+		$(this).addClass('field-wrapper').removeClass('mwb_wgm_section').wrap('<div class="form-row"></div>');
+	});
+	$( '.mwb_wgm_delivery_method_wrap > .mwb_wgm_delivery_method > div' ).each( function() {
+		$(this).find('input[type="text"]').wrap(function(i) {
+			return '<div class="form-row" />';
+		});
+		$(this).find('.form-row').wrapInner(function(i) {
+			return '<div class="field-wrapper" />';
+		});
+		//$(this).wrapAll('<div class="field-wrapper"></div>').wrapAll('<div class="form-row"></div>');
+	});
 	//remove cta class from related items
 	if($('.c-product-item .yith-wcwl-add-to-wishlist > div > a').hasClass('cta')){
 		$('.c-product-item .yith-wcwl-add-to-wishlist > div > a').removeClass('cta');
