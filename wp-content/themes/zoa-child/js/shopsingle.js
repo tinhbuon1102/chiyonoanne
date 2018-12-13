@@ -61,11 +61,12 @@ jQuery(document).ready(function($){
 			}
 		}
 		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
+			var isValid = true;
 			if (!$('form.cart .inputError').length)
 			{
-				var isValid = isAddToCartValid();
-				showHideAddCartBtn(isValid);
+				isValid = isAddToCartValid();
 			}
+			showHideAddCartBtn(isValid);
 		});
 		
 		$('body').on('click', 'button[name="add-to-cart-clone"]', function(){
