@@ -4632,7 +4632,7 @@ function zoa_pre_get_product_make_filter_or( $query ) {
 	}
 	return $query;
 }
-// add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );
+add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );
 
 function getCartGiftCardData()
 {
