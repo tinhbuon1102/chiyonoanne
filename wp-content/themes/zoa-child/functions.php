@@ -854,7 +854,8 @@ add_filter('woof_main_query_tax_relations', 'my_woof_main_query_tax_relations');
 function my_woof_main_query_tax_relations()
 {
     return array(
-    'product_cat' => 'AND'
+    //'product_cat' => 'AND'
+		'pa_color' => 'AND'
     );
 }
 
