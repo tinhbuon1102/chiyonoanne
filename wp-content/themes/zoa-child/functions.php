@@ -14,7 +14,7 @@ define('PAGE_PRIVACY_ID', 2732);
 function elsey_change_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-		$src = add_query_arg( array('ver' => '3.4'), $src );
+		$src = add_query_arg( array('ver' => '3.5'), $src );
 		return $src;
 }
 add_filter( 'style_loader_src', 'elsey_change_cssjs_ver', 1000 );
