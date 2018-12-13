@@ -28,7 +28,7 @@ $current_value = isset( $_POST[ $addon_key ] ) && isset( $_POST[ $addon_key ][0]
 		$price_prefix = 0 < $price ? '+' : '';
 		$price_type   = ! empty( $option['price_type'] ) ? $option['price_type'] : '';
 		$price_raw    = apply_filters( 'woocommerce_product_addons_option_price_raw', $price, $option );
-		$label        = ! empty( $option['label'] ) ? $option['label'] : '';
+		$label        = ( '0' === $option['label'] ) || ! empty( $option['label'] ) ? $option['label'] : '';
 
 		if ( 'percentage_based' === $price_type ) {
 			$price_for_display = apply_filters( 'woocommerce_product_addons_option_price',

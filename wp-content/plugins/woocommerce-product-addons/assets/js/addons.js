@@ -113,6 +113,10 @@ jQuery( function( $ ) {
 					}
 				} )
 
+				.on( 'keyup', '.wc-pao-addon-custom-textarea, .wc-pao-addon-custom-text, .wc-pao-addon-custom-price', function() {
+					$( this ).trigger( 'woocommerce-product-addons-update' );
+				} )
+
 				.on( 'change', '.wc-pao-addon input, .wc-pao-addon textarea, .wc-pao-addon select, input.qty', function() {
 					$( this ).trigger( 'woocommerce-product-addons-update' );
 				} )
@@ -173,7 +177,9 @@ jQuery( function( $ ) {
 							addon_cost_raw = 0,
 							price_type = $( this ).data( 'price-type' ),
 							is_custom_price = false,
-							addon_data = {};
+							addon_data = {},
+							has_per_person_pricing = parentContainer.find( '.wc-pao-addon-name' ).length ? parentContainer.find( '.wc-pao-addon-name' ).data( 'has-per-person-pricing' ) : false,
+							has_per_block_pricing = parentContainer.find( '.wc-pao-addon-name' ).length ? parentContainer.find( '.wc-pao-addon-name' ).data( 'has-per-block-pricing' ) : false;
 
 						if ( $( this ).is( '.wc-pao-addon-custom-price' ) ) {
 							if ( ! $( this ).val() ) {
@@ -240,24 +246,43 @@ jQuery( function( $ ) {
 
 						// Bookings compat.
 						if ( woocommerce_addons_params.is_bookings ) {
-							if ( $( '.wc-bookings-booking-cost' ).length ) {
+							qty = 0;
+
+							// Duration field.
+							var block_qty = 0;
+							if ( 'undefined' !== typeof $( '#wc_bookings_field_duration' ) && 0 < $( '#wc_bookings_field_duration' ).val() ) {
+								block_qty = $( '#wc_bookings_field_duration' ).val();
+							}
+
+							// Persons field(s).
+							var single_persons_input = $( '#wc_bookings_field_persons' );
+							var person_qty = 0;
+							if ( 1 === single_persons_input.length ) {
+								// Persons field when there's not persons types enabled.
+								person_qty = parseInt( person_qty, 10 ) + parseInt( single_persons_input.val(), 10 );
+							} else {
+								// Persons fields for multiple person types.
+								$('.wc-bookings-booking-form').find('input').each(function () {
+									// There could be more than one persons field.
+									var field = this.id.match(/wc_bookings_field_persons_(\d+)/);
+
+									if ( null !== field && 'undefined' !== typeof field && $( '#' + field[0] ).length ) {
+										person_qty = parseInt( person_qty, 10 ) + parseInt( $( '#' + field[0] ).val(), 10 );
+									}
+								});
+							}
+
+							if ( 0 === qty && $( '.wc-bookings-booking-cost' ).length ) {
 								qty = 1;
 							}
 
-							// Duration field.
-							if ( 'undefined' !== typeof $( '#wc_bookings_field_duration' ) && 0 < $( '#wc_bookings_field_duration' ).val() ) {
-								qty = $( '#wc_bookings_field_duration' ).val();
+							// Apply person/block quantities.
+							if ( has_per_person_pricing ) {
+								qty *= person_qty;
 							}
-
-							// Persons field.
-							$( '.wc-bookings-booking-form' ).find( 'input' ).each( function() {
-								// There could be more than one persons field.
-								var field = this.id.match( /wc_bookings_field_persons_(\d+)/ );
-
-								if ( null !== field && 'undefined' !== typeof field && $( '#' + field[0] ).length ) {
-									qty = parseInt( qty, 10 ) + parseInt( $( '#' + field[0] ).val(), 10 );
-								}
-							} );
+							if ( has_per_block_pricing ) {
+								qty *= block_qty;
+							}
 						}
 
 						switch ( price_type ) {
@@ -283,7 +308,7 @@ jQuery( function( $ ) {
 						total_raw  += addon_data.cost_raw;
 
 						if ( 'undefined' !== typeof value_label ) {
-							if ( value_label.length ) {
+							if ( 'number' === typeof value_label || value_label.length ) {
 								addon_data.name = name + ( value_label ? ( ' - ' + value_label ) : '' );
 							} else {
 								var userInput = $( this ).val(),

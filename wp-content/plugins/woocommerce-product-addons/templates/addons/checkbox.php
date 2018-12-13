@@ -12,7 +12,7 @@ foreach ( $addon['options'] as $i => $option ) {
 	$price_type        = $option_price_type;
 	$price_raw         = apply_filters( 'woocommerce_product_addons_option_price_raw', $option_price, $option );
 	$field_name        = ! empty( $addon['field_name'] ) ? $addon['field_name'] : '';
-	$option_label      = ! empty( $option['label'] ) ? $option['label'] : '';
+	$option_label      = ( '0' === $option['label'] ) || ! empty( $option['label'] ) ? $option['label'] : '';
 	$price_display     = WC_Product_Addons_Helper::get_product_addon_price_for_display( $price_raw );
 
 	if ( 'percentage_based' === $price_type ) {

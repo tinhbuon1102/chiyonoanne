@@ -1,5 +1,12 @@
 *** Product Addons Changelog ***
 
+2018-12-11 - version 3.0.5
+* Fix - Decode currency character correctly to support all WooCommerce currencies.
+* Fix - Product page displaying incorrect price for per-person and per-block addons with WooCommerce Bookings.
+* Fix - Handle option descriptions with value '0'.
+* Fix - Numeric option descriptions are displaying incorrectly.
+* Fix - Price update pushes "Add to Cart" button out of the way.
+
 2018-11-21 - version 3.0.4
 * Fix - Ensure prices are displayed correctly on the frontend when using a comma as decimal separator.
 

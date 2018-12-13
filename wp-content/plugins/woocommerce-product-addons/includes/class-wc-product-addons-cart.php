@@ -220,7 +220,7 @@ class WC_Product_Addons_Cart {
 				$price_type    = $addon['price_type'];
 				$product       = $item->get_product();
 				$product_price = $product->get_price();
-				$price         = wp_kses_decode_entities( strip_tags( wc_price( WC_Product_Addons_Helper::get_product_addon_price_for_display( $addon['price'], $values['data'], true ) ) ) );
+				$price         = html_entity_decode( strip_tags( wc_price( WC_Product_Addons_Helper::get_product_addon_price_for_display( $addon['price'], $values['data'], true ) ) ) );
 
 				/*
 				 * For percentage based price type we want
@@ -232,7 +232,7 @@ class WC_Product_Addons_Cart {
 				 * don't show any price.
 				 */
 				if ( $addon['price'] && 'percentage_based' === $price_type && 0 != $product_price ) {
-					$price = wp_kses_decode_entities( strip_tags( wc_price( WC_Product_Addons_Helper::get_product_addon_price_for_display( ( $product_price * ( $addon['price'] / 100 ) ) ) ) ) );
+					$price = html_entity_decode( strip_tags( wc_price( WC_Product_Addons_Helper::get_product_addon_price_for_display( ( $product_price * ( $addon['price'] / 100 ) ) ) ) ) );
 				}
 
 				/*

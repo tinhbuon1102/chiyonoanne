@@ -5,13 +5,16 @@
  * @version 3.0.0
  */
 
-$price_display    = '';
-$title_format     = ! empty( $addon['title_format'] ) ? $addon['title_format'] : '';
-$addon_type       = ! empty( $addon['type'] ) ? $addon['type'] : '';
-$addon_price      = ! empty( $addon['price'] ) ? $addon['price'] : '';
-$addon_price_type = ! empty( $addon['price_type'] ) ? $addon['price_type'] : '';
-$adjust_price     = ! empty( $addon['adjust_price'] ) ? $addon['adjust_price'] : '';
-$required         = ! empty( $addon['required'] ) ? $addon['required'] : '';
+$price_display          = '';
+$title_format           = ! empty( $addon['title_format'] ) ? $addon['title_format'] : '';
+$addon_type             = ! empty( $addon['type'] ) ? $addon['type'] : '';
+$addon_price            = ! empty( $addon['price'] ) ? $addon['price'] : '';
+$addon_price_type       = ! empty( $addon['price_type'] ) ? $addon['price_type'] : '';
+$adjust_price           = ! empty( $addon['adjust_price'] ) ? $addon['adjust_price'] : '';
+$required               = ! empty( $addon['required'] ) ? $addon['required'] : '';
+$has_per_person_pricing = ( isset( $addon['wc_booking_person_qty_multiplier'] ) && 1 === $addon['wc_booking_person_qty_multiplier'] ) ? true : false;
+$has_per_block_pricing  = ( isset( $addon['wc_booking_block_qty_multiplier'] ) && 1 === $addon['wc_booking_block_qty_multiplier'] ) ? true : false;
+
 
 if ( 'checkbox' !== $addon_type && 'multiple_choice' !== $addon_type && 'custom_price' !== $addon_type ) {
 	$price_prefix = 0 < $addon_price ? '+' : '';
@@ -52,18 +55,18 @@ if ( 'checkbox' !== $addon_type && 'multiple_choice' !== $addon_type && 'custom_
 			switch ( $title_format ) {
 				case 'heading':
 					?>
-					<h3 class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>"><?php echo wptexturize( $name ); ?> <?php echo $required ? '<em class="required" title="' . __( 'Required field', 'woocommerce-product-addons' ) . '">*</em>&nbsp;' : ''; ?><?php echo wp_kses_post( $price_display ); ?></h3>
+					<h3 class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>" data-has-per-person-pricing="<?php echo esc_attr( $has_per_person_pricing ); ?>" data-has-per-block-pricing="<?php echo esc_attr( $has_per_block_pricing ); ?>"><?php echo wptexturize( $name ); ?> <?php echo $required ? '<em class="required" title="' . __( 'Required field', 'woocommerce-product-addons' ) . '">*</em>&nbsp;' : ''; ?><?php echo wp_kses_post( $price_display ); ?></h3>
 					<?php
 					break;
 				case 'hide':
 					?>
-					<label class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>" style="display:none;"></label>
+					<label class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>" data-has-per-person-pricing="<?php echo esc_attr( $has_per_person_pricing ); ?>" data-has-per-block-pricing="<?php echo esc_attr( $has_per_block_pricing ); ?>" style="display:none;"></label>
 					<?php
 					break;
 				case 'label':
 				default:
 					?>
-					<label class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>"><?php echo wptexturize( $name ); ?> <?php echo $required ? '<em class="required" title="' . __( 'Required field', 'woocommerce-product-addons' ) . '">*</em>&nbsp;' : ''; ?><?php echo wp_kses_post( $price_display ); ?></label>
+					<label class="wc-pao-addon-name" data-addon-name="<?php echo esc_attr( wptexturize( $name ) ); ?>" data-has-per-person-pricing="<?php echo esc_attr( $has_per_person_pricing ); ?>" data-has-per-block-pricing="<?php echo esc_attr( $has_per_block_pricing ); ?>"><?php echo wptexturize( $name ); ?> <?php echo $required ? '<em class="required" title="' . __( 'Required field', 'woocommerce-product-addons' ) . '">*</em>&nbsp;' : ''; ?><?php echo wp_kses_post( $price_display ); ?></label>
 					<?php
 					break;
 			}
