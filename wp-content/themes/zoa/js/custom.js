@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if ($stickyHeader.length && $headerDOM) {
     var $headerOffsetTop = $headerDOM.offset().top;
-    var $headerHeight = $headerDOM.height();
+    var $headerHeight = $headerDOM.height();	
     var $stickyHeaderOffset = $headerOffsetTop + $headerHeight;
 
     jQuery(window).on('scroll', function () {
@@ -267,8 +267,8 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     };
 
-    /*RE-INIT EASY ZOOM*/
-    var reinit_easy_zoom = function reinit_easy_zoom() {
+    /*RE-INIT EASY ZOOM */
+      var reinit_easy_zoom = function reinit_easy_zoom() {
 
       if (window.matchMedia('( max-width: 991px )').matches) {
         return;
@@ -277,13 +277,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var product_image = jQuery(_body).find('.pro-img-item:eq(0)');
 
       if (!product_image.length || _body.classList.contains('quick-view-open')) return;
+	  else return; 	
+       //var easy_zoom = product_image.easyZoom(),
+       //api = easy_zoom.data('easyZoom');
 
-      var easy_zoom = product_image.easyZoom(),
-          api = easy_zoom.data('easyZoom');
-
-      api.teardown();
-      api._init();
-    };
+      //api.teardown();
+      //api._init();
+    }; 
 
     /*MINUS && PLUS BUTTON FOR QUANTITY INPUT*/
     var quantity = function quantity() {
@@ -338,13 +338,13 @@ document.addEventListener('DOMContentLoaded', function () {
           _thumb_src = _thumb.find('img').prop('src'),
 
 
-      /*EASY ZOOM ATTR*/
-      _zoom = _image.data('zoom');
+      /*EASY ZOOM ATTR */
+      _zoom = _image.data('zoom'); 
 
-     // reinit_easy_zoom();
+        reinit_easy_zoom();
 
       /*event when variation changed=========*/
-      jQuery(_body).on('found_variation', 'form.variations_form', function (event, variation) {
+      jQuery( _body ).on('found_variation', 'form.variations_form', function (event, variation) {
         /*get image url form `variation`*/
         var img_url = variation.image.full_src,
             thumb_url = variation.image.thumb_src;
@@ -352,14 +352,14 @@ document.addEventListener('DOMContentLoaded', function () {
         /*change `src` image*/
         _image.find('img').prop('src', img_url);
         _thumb.find('img').prop('src', thumb_url);
-        _image.attr('data-zoom', img_url);
+        // _image.attr('data-zoom', img_url);
 
         _image.addClass('image-is-loading');
         _image.find('img').prop('src', img_url).one('load', function () {
           return _image.removeClass('image-is-loading');
         });
 
-        //reinit_easy_zoom();
+         // reinit_easy_zoom();
       });
 
       /*reset variation========*/
@@ -369,9 +369,9 @@ document.addEventListener('DOMContentLoaded', function () {
         /*change `src` image*/
         _image.find('img').prop('src', _image_src);
         _thumb.prop('src', _thumb_src);
-        _image.attr('data-zoom', _zoom);
+        // _image.attr('data-zoom', _zoom);
 
-//        reinit_easy_zoom();
+        // reinit_easy_zoom();
       });
     };
     product_variation();
@@ -488,7 +488,10 @@ document.addEventListener('DOMContentLoaded', function () {
           event_cart_sidebar_close();
         });
 
-        xhr.send('action=single_add_to_cart&nonce=' + zoa_ajax.nonce + '&product_id=' + single_atc_id + '&product_qty=' + _qty + '&variation_id=' + variation_id + '&variations=' + JSON.stringify(items));
+        if (!jQuery('.mwb_wgm_added_wrapper').length)
+        {
+        	xhr.send('action=single_add_to_cart&nonce=' + zoa_ajax.nonce + '&product_id=' + single_atc_id + '&product_qty=' + _qty + '&variation_id=' + variation_id + '&variations=' + JSON.stringify(items));
+        }
       });
     };
     single_add_to_cart();

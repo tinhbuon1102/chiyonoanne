@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** @global WC_Checkout $checkout */
 
 ?>
+<?php if (!isHideShippingByMailGiftCard()) {?>
 <div class="form-row  label-inline form-indent">
 	<div class="field-wrapper">
 		<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
@@ -30,6 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</label>
 	</div>
 </div>
+<?php }?>
 <div class="woocommerce-billing-fields">
 	<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 

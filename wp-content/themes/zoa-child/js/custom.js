@@ -45,6 +45,8 @@ jQuery(document).ready(function($){
 		$('.radio-label').each(function () {
 			$(this).find('input[type=radio]').each(function() {
 				if($(this).is(':checked')) {
+					$(this).trigger('click');
+					$(this).trigger('change');
 					var optionName = $(this).attr('name');
 					$('input[name="'+ optionName +'"]').closest('.radio-label').removeClass('checked');
 					$(this).parent().addClass('checked');
@@ -239,8 +241,8 @@ jQuery(document).ready(function($){
 	//copy shipping address to billing address in checkout page
 	$("#copy_to_billing").on("click", function(){
     if (this.checked) {
-      $("[name='first_name']").val($("[name='shipping_first_name']").val());
-      $("[name='last_name']").val($("[name='shipping_last_name']").val());
+      $("[name='billing_first_name']").val($("[name='shipping_first_name']").val());
+      $("[name='billing_last_name']").val($("[name='shipping_last_name']").val());
       $("[name='billing_address_1']").val($("[name='shipping_address_1']").val());
       $("[name='billing_address_2']").val($("[name='shipping_address_2']").val());
       $("[name='billing_city']").val($("[name='shipping_city']").val());
@@ -249,6 +251,17 @@ jQuery(document).ready(function($){
       $("[name='billing_country']").val($("[name='shipping_country']").val());
     }
   });
+	
+	$('body').on('click', '#step-2 .js-next', function(){
+		$("[name='shipping_first_name']").val($("[name='billing_first_name']").val());
+	      $("[name='shipping_last_name']").val($("[name='billing_last_name']").val());
+	      $("[name='shipping_address_1']").val($("[name='billing_address_1']").val());
+	      $("[name='shipping_address_2']").val($("[name='billing_address_2']").val());
+	      $("[name='shipping_city']").val($("[name='billing_city']").val());
+	      $("[name='shipping_state']").val($("[name='billing_state']").val());
+	      $("[name='shipping_zip']").val($("[name='billing_zip']").val());
+	      $("[name='shipping_country']").val($("[name='billing_country']").val());
+	});
 	
 	/***
 	*

@@ -255,8 +255,8 @@ function custom_scripts() {
 	wp_register_script('quadmenu_new', get_stylesheet_directory_uri() . '/js/quadmenu/quadmenu.js', array('hoverIntent'), false, true);
 	wp_enqueue_script('quadmenu_new');
 	
-	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
-	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812111441', array('custom-parent'), false, true );
+// 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
+	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812111441', array(), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
@@ -4633,3 +4633,31 @@ function zoa_pre_get_product_make_filter_or( $query ) {
 	return $query;
 }
 add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );
+
+function getCartGiftCardData()
+{
+	$giftCardData = array();
+	foreach (WC()->cart->get_cart() as $cart)
+	{
+		if (isset($cart['tinvwl_formdata']))
+		{
+			$giftCardData = $cart['tinvwl_formdata'];
+		}
+	}
+	return $giftCardData;
+}
+function isHideShippingByMailGiftCard()
+{
+	$giftCardData = array();
+	foreach (WC()->cart->get_cart() as $cart)
+	{
+		if (isset($cart['tinvwl_formdata']))
+		{
+			$giftCardData[$cart['tinvwl_formdata']['mwb_wgm_send_giftcard']] = $cart['tinvwl_formdata']['mwb_wgm_send_giftcard'];
+		}
+		else {
+			return false;
+		}
+	}
+	return count($giftCardData) == 1 && end($giftCardData) == 'Mail to recipient';
+}
