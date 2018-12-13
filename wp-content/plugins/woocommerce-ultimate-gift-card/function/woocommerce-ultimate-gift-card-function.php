@@ -2645,7 +2645,7 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 										 (<span id="mwb_box_char">0</span>/<?php _e($giftcard_message_length); ?>)
 									</p>
 
-									<p>
+									<div class="mwb_wgm_delivery_method_wrap">
 
 										<label class = "mwb_gm_method"><?php _e('Delivery Method','woocommerce-ultimate-gift-card');?>:</label>
 
@@ -2653,7 +2653,7 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 											if(isset($mwb_wgm_method_enable) && $mwb_wgm_method_enable == 'normal_mail'){
 										?>
 										<div class="mwb_wgm_delivery_method">
-											<input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_to_email_send" ><span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?></span>
+											<label class="check-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_to_email_send" ><span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?></span></label>
 											<div class="mwb_wgm_delivery_via_email">
 											<input type="text"  name="mwb_wgm_to_email" id="mwb_wgm_to_email" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Email (Required)','woocommerce-ultimate-gift-card'); ?>">
 											<input type="text"  name="mwb_wgm_to_name_optional" id="mwb_wgm_to_name_optional" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Name (Optional)','woocommerce-ultimate-gift-card'); ?>"><span class= "mwb_wgm_msg_info"><?php echo $mwb_wgm_mail_to_recipient_desc;?></span></div>
@@ -2666,7 +2666,7 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 											if(isset($mwb_wgm_method_enable) && $mwb_wgm_method_enable == 'download'){
 										?>
 										<div class="mwb_wgm_delivery_method">
-											<input type="radio" name="mwb_wgm_send_giftcard" value="Downloadable" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_send_giftcard_download"><span class="mwb_wgm_method"><?php echo $mwb_wgm_downloadable_text; ?></span>
+											<label class="radio-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Downloadable" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_send_giftcard_download"><span class="mwb_wgm_method"><?php echo $mwb_wgm_downloadable_text; ?></span></label>
 											<div class="mwb_wgm_delivery_via_buyer">
 											<input type="text"  name="mwb_wgm_to_email_name" id="mwb_wgm_to_download" class="mwb_wgm_to_email" placeholder="<?php _e('Enter the Recipient Name','woocommerce-ultimate-gift-card'); ?>"><span class= "mwb_wgm_msg_info"><?php echo $mwb_wgm_downloadable_desc;?></span></div>
 										</div>
@@ -2735,8 +2735,8 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 													?>
 													<div class="mwb_wgm_delivery_method">
 
-														<input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" id="mwb_wgm_to_email_send" checked="checked">
-														<span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?>
+														<label class="radio-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" id="mwb_wgm_to_email_send" checked="checked">
+															<span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?></span></label>
 														<div class="mwb_wgm_delivery_via_email">
 														<input type="text"  name="mwb_wgm_to_email" id="mwb_wgm_to_email" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Email','woocommerce-ultimate-gift-card'); ?>">
 														<input type="text"  name="mwb_wgm_to_name_optional" id="mwb_wgm_to_name_optional" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Name (Optional)','woocommerce-ultimate-gift-card'); ?>">
@@ -2749,8 +2749,8 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 													?>
 													<div class="mwb_wgm_delivery_method">	
 
-														<input type="radio" name="mwb_wgm_send_giftcard" value="Downloadable" class="mwb_wgm_send_giftcard" id="mwb_wgm_send_giftcard_download">
-														<span class="mwb_wgm_method"><?php echo $mwb_wgm_downloadable_text;?></span>
+														<label class="radio-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Downloadable" class="mwb_wgm_send_giftcard" id="mwb_wgm_send_giftcard_download">
+														<span class="mwb_wgm_method"><?php echo $mwb_wgm_downloadable_text;?></span></label>
 														<div class="mwb_wgm_delivery_via_buyer">
 														<input type="text"  name="mwb_wgm_to_email_name" id="mwb_wgm_to_download" class="mwb_wgm_to_email mwb_wgm_disable" placeholder="<?php _e('Enter the Recipient Name','woocommerce-ultimate-gift-card'); ?>" readonly><span class= "mwb_wgm_msg_info"><?php echo $mwb_wgm_downloadable_desc;?></span></div>
 													</div>
@@ -2760,7 +2760,7 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 													{
 													?>
 													<div class="mwb_wgm_delivery_method">
-														<input type="radio" name="mwb_wgm_send_giftcard" value="Shipping" class="mwb_wgm_send_giftcard" id="mwb_wgm_send_giftcard_ship"><span class="mwb_wgm_method"><?php echo $mwb_wgm_shipping_text;?></span>
+														<label class="radio-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Shipping" class="mwb_wgm_send_giftcard" id="mwb_wgm_send_giftcard_ship"><span class="mwb_wgm_method"><?php echo $mwb_wgm_shipping_text;?></span></label>
 														<div class="mwb_wgm_delivery_via_admin">
 														<input type="text"  name="mwb_wgm_to_email_ship" id="mwb_wgm_to_ship" class="mwb_wgm_to_email mwb_wgm_disable" placeholder="<?php _e('Enter the Recipient Name','woocommerce-ultimate-gift-card'); ?>" readonly><span class= "mwb_wgm_msg_info"><?php echo $mwb_wgm_shipping_desc;?></span></div>
 													</div>		
@@ -2786,12 +2786,13 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 											}
 
 										 ?>
-									</p>
+									</div>
 									<?php $mwb_wgm_pricing = get_post_meta( $product_id, 'mwb_wgm_pricing', true );
 									$templateid = $mwb_wgm_pricing['template'];
 									$assigned_temp = '';
 									$default_selected = isset($mwb_wgm_pricing['by_default_tem'])?$mwb_wgm_pricing['by_default_tem']:false;
 									$mwb_wgm_hide_giftcard_thumbnail = get_option('mwb_wgm_hide_giftcard_thumbnail','off');
+									echo '<div id="previewBox" class="preview_wrap">';
 									if(is_array($templateid) && !empty($templateid))
 									{
 										foreach($templateid as $key => $temp_id)
@@ -2836,8 +2837,8 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 									}
 									if($mwb_wgm_preview_disable == 'off'){
 									?>
-									<br/><span class="mwg_wgm_preview_email" ><a id="mwg_wgm_preview_email" href="javascript:void(0);"><?php _e('Preview','woocommerce-ultimate-gift-card');?></a> </span><?php }?>
-									</p>
+									<br/><span class="mwg_wgm_preview_email" ><a class="cta" id="mwg_wgm_preview_email" href="javascript:void(0);"><?php _e('Preview','woocommerce-ultimate-gift-card');?></a> </span><?php }?>
+									</div><!--.preview_wrap-->
 									</div>
 									<?php
 									do_action('mwb_wgm_custom_product_field');

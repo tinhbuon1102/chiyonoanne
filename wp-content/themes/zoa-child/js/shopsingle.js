@@ -15,6 +15,18 @@ jQuery(document).ready(function($){
 	$( 'form.cart .mwb_wgm_added_wrapper p.mwb_wgm_section' ).each( function() {
 		$(this).addClass('field-wrapper').removeClass('mwb_wgm_section').wrap('<div class="form-row"></div>');
 	});
+	$('.mwb_wgm_delivery_via_email > input').each( function() {
+		$(this).wrap('<div class="form-row" />').wrap('<div class="field-wrapper" />');
+	});
+	
+	$('#previewBox').hide();
+	$('.woocommerce form .form-row .required').focusout(function(e) {
+		if($(this).hasClass('inputError')) {
+			$('#previewBox').hide();
+		} else {
+			$('#previewBox').show();
+		}
+	});
 	$( '.mwb_wgm_delivery_method_wrap > .mwb_wgm_delivery_method > div' ).each( function() {
 		$(this).find('input[type="text"]').wrap(function(i) {
 			return '<div class="form-row" />';

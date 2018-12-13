@@ -40,7 +40,7 @@ function zoa_enqueue_parent_theme_style() {
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css??2018120914', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812131716', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -176,7 +176,7 @@ function add_scripts() {
 	wp_localize_script( 'home-js', 'get_url', $get_url );
 	wp_register_script( 'remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.js', array(), false, true);
 	wp_register_script( 'slick-js', get_stylesheet_directory_uri() . '/js/slick/slick.js', array(), false, true);
-	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812110307', array(), false, true);//single shop
+	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812131716', array(), false, true);//single shop
 	wp_register_script( 'popup-js', get_stylesheet_directory_uri() . '/js/popup.js?201812012300', array(), false, true);//popup tooltip
 	wp_enqueue_script('remodal');
 	
@@ -267,7 +267,7 @@ function validation_scripts() {
 	wp_register_script( 'parsley-lang-en', get_stylesheet_directory_uri() . '/js/i18n/en.js', array(), false, true);
 	wp_register_script( 'parsley-lang-ja', get_stylesheet_directory_uri() . '/js/i18n/ja.js?201812042322', array(), false, true);
 	wp_register_script( 'parsley-script', get_stylesheet_directory_uri() . '/js/parsley-script.js?201812111441', array('parsley-js'), false, true);
-	wp_register_style( 'validation-style', get_stylesheet_directory_uri() . '/css/validation.css?201812042324');
+	wp_register_style( 'validation-style', get_stylesheet_directory_uri() . '/css/validation.css?201812131628');
 	if (is_page('contact') || is_checkout() || is_product()) {
 		wp_enqueue_script('parsley-js');
 		if (get_locale() == 'ja') {

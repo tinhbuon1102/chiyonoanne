@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Ultimate Gift Card 2.4.9\n"
 "POT-Creation-Date: 2018-12-11 04:36+0900\n"
-"PO-Revision-Date: 2018-12-13 17:30+0900\n"
+"PO-Revision-Date: 2018-12-13 17:12+0900\n"
 "Language-Team: makewebbetter <webmaster@makewebbetter.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -483,7 +483,7 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:3148
 #: function/woocommerce-ultimate-gift-card-function.php:5160
 msgid "To"
-msgstr "受取人"
+msgstr ""
 
 #: includes/woocommerce-ultimate-gift-card-class.php:956
 #: includes/woocommerce-ultimate-gift-card-class.php:986
@@ -499,7 +499,7 @@ msgstr "差出人"
 #: admin/template/offline-gift.php:628
 #: function/woocommerce-ultimate-gift-card-function.php:5166
 msgid "Message"
-msgstr "メッセージ"
+msgstr ""
 
 #: includes/woocommerce-ultimate-gift-card-class.php:958
 msgid "Usage Count"
@@ -2326,7 +2326,7 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:392
 #: function/woocommerce-ultimate-gift-card-function.php:484
 msgid "Gift card  is Sent Successfully"
-msgstr ""
+msgstr "ギフトカードの送信に成功しました"
 
 #: function/woocommerce-ultimate-gift-card-function.php:550
 #: function/woocommerce-ultimate-gift-card-function.php:576
@@ -2335,71 +2335,73 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:609
 msgid "Processing"
-msgstr ""
+msgstr "処理中"
 
 #: function/woocommerce-ultimate-gift-card-function.php:610
 msgid "Completed"
-msgstr ""
+msgstr "完了"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1226
 msgid "Delivery Method: Please Select One Method"
-msgstr ""
+msgstr "送る方法: 1つお選びください。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1238
 msgid "Recipient Email: Field is empty."
-msgstr ""
+msgstr "受取人メールアドレス: メールアドレスが入力されていません。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1243
 msgid "Recipient Email: Invalid email format"
-msgstr ""
+msgstr "受取人メールアドレス: メールアドレス形式が不正です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1251
 #: function/woocommerce-ultimate-gift-card-function.php:1259
 msgid "To: Name Field is empty."
-msgstr ""
+msgstr "受取人: 名前が入力されていません。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1269
 msgid "Message: Field is empty."
-msgstr ""
+msgstr "メッセージ: 入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1274
 #, php-format
 msgid "%sMessage: %sMessage length cannot exceed %s characters."
-msgstr ""
+msgstr "%sメッセージ: %sメッセージは%s文字以内です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1283
 msgid "From: Field is empty."
-msgstr ""
+msgstr "差出人: 入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1784
 #: function/woocommerce-ultimate-gift-card-function.php:1795
 #: function/woocommerce-ultimate-gift-card-function.php:1804
 msgid "Giftcard Notice"
-msgstr ""
+msgstr "ギフトカード注意事項"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1785
 #, php-format
 msgid "This gift card will expire  %s days after purchase."
-msgstr ""
+msgstr "このギフトカードは購入後の%s日後に期限切れとなります。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1796
 #, php-format
 msgid "This gift card will expire %s days after purchase."
-msgstr ""
+msgstr "このギフトカードは購入後の%s日後に期限切れとなります。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1805
 msgid "Giftcard has no expiration."
-msgstr ""
+msgstr "このギフトカードは無期限です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1942
 msgid "Resend Giftcard Email"
-msgstr ""
+msgstr "ギフトカードをメールで再送信する"
 
 #: function/woocommerce-ultimate-gift-card-function.php:1946
 msgid ""
 "If the recipient has not received your giftcard email then you can resend "
 "the email."
 msgstr ""
+"受け取りにがギフトカードメールを受け取らなかった場合、あなたのメールに再送信"
+"されます。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2009
 #, php-format
@@ -2414,32 +2416,32 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:2011
 #, php-format
 msgid "Recipient Email: %sField is empty."
-msgstr ""
+msgstr "受取人メールアドレス: %s入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2012
 #, php-format
 msgid "Recipient Name: %sField is empty."
-msgstr ""
+msgstr "受取人名: %sの入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2013
 #, php-format
 msgid "Recipient Email: %sInvalid email format."
-msgstr ""
+msgstr "受取人メールアドレス: %sのメールアドレス形式が不正です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2014
 #, php-format
 msgid "From: %sField is empty."
-msgstr ""
+msgstr "差出人: %sの入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2015
 #, php-format
 msgid "Delivery Method: %sPlease Select One Method"
-msgstr ""
+msgstr "送る方法: %s1つお選びください。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2017
 #, php-format
 msgid "Message: %sField is empty."
-msgstr ""
+msgstr "メッセージ: %sの入力欄が空欄です。"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2018
 #, php-format
@@ -2463,28 +2465,28 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:2485
 #: function/woocommerce-ultimate-gift-card-function.php:2595
 msgid "Giftcard Value: "
-msgstr ""
+msgstr "ギフトカート金額:"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2124
 #: function/woocommerce-ultimate-gift-card-function.php:5485
 msgid "Fields cannot be empty!"
-msgstr ""
+msgstr "入力項目は空欄にできません"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2125
 msgid "Entered Code is not Valid"
-msgstr ""
+msgstr "入力されたコードが不正です"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2126
 msgid "Entered Email is not Valid"
-msgstr ""
+msgstr "入力されたメールアドレスが正しくありません"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2329
 msgid "Enter Giftcard Value:"
-msgstr ""
+msgstr "ギフトカードの金額を入力:"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2371
 msgid "VIEW CARD"
-msgstr ""
+msgstr "カードを見る"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2484
 #: function/woocommerce-ultimate-gift-card-function.php:2594
@@ -2505,11 +2507,11 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:2603
 msgid "Enter Gift Card Price"
-msgstr ""
+msgstr "ギフトカードの金額を入力"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2617
 msgid "Select Date"
-msgstr ""
+msgstr "日付を選択"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2619
 msgid "(Recipient will receive the gift card on selected date)"
@@ -2517,7 +2519,7 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:2629
 msgid "Enter the sender name"
-msgstr "差出人のお名前を入力"
+msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:2642
 msgid "Characters:"
@@ -2525,7 +2527,7 @@ msgstr "文字数:"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2658
 msgid "Enter the Recipient Email (Required)"
-msgstr ""
+msgstr "受取人のメールアドレスを入力(必須)"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2659
 #: function/woocommerce-ultimate-gift-card-function.php:2705
@@ -2559,7 +2561,7 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:3141
 #: function/woocommerce-ultimate-gift-card-function.php:5157
 msgid "To Name"
-msgstr "受取人名"
+msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:3273
 #: function/woocommerce-ultimate-gift-card-function.php:4747
@@ -2578,7 +2580,7 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:4917
 msgid "No Expiartion"
-msgstr ""
+msgstr "無期限"
 
 #: function/woocommerce-ultimate-gift-card-function.php:5175
 msgid "Original Price"
@@ -2586,15 +2588,15 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:5178
 msgid "Selected Template"
-msgstr ""
+msgstr "テンプレートを選択"
 
 #: function/woocommerce-ultimate-gift-card-function.php:5181
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 #: function/woocommerce-ultimate-gift-card-function.php:5196
 msgid "Mail to recipient"
-msgstr ""
+msgstr "受取人にメール"
 
 #: function/woocommerce-ultimate-gift-card-function.php:5448
 msgid "Balance cannot be checked yet, Please Try again later!"
@@ -2602,7 +2604,7 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:5464
 msgid "Amount Left is: "
-msgstr ""
+msgstr "残高金額:"
 
 #: function/woocommerce-ultimate-gift-card-function.php:5467
 msgid "Data Match Successfully!!"
@@ -2614,4 +2616,4 @@ msgstr ""
 
 #: function/woocommerce-ultimate-gift-card-function.php:5480
 msgid "Coupon is Invalid!"
-msgstr ""
+msgstr "クーポンが不正です"

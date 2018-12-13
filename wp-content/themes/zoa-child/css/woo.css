@@ -3098,10 +3098,22 @@ label.radio-label:before {
 }
 
 label.radio-label {
+	cursor: pointer;
     position: relative;
     padding-left: 18px;
-    vertical-align: middle;
-    display: inline-block;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 label.radio-label input {
@@ -4409,11 +4421,14 @@ body.ja #shipping_country_field {
     float: none;
 }
 form.cart .mwb_wgm_delivery_method {
-    padding: 0;
+    padding: 15px;
     box-shadow: none;
-    border: none;
+    border: 1px solid #f1f1f1;
+    margin: 0;
 }
-
+form.cart .mwb_wgm_delivery_method_wrap > label + .mwb_wgm_delivery_method {
+    border-bottom: none;
+}
 form.cart .mwb_wgm_added_wrapper .mwb_gm_method {
 	display: block;
 	margin-bottom: 12px;
@@ -4430,7 +4445,7 @@ form.cart .mwb_wgm_added_wrapper .mwb_gm_method {
 }
 
 span.mwb_wgm_method {
-    margin-bottom: 12px;
+    margin-bottom: 0px;
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;
@@ -4445,7 +4460,6 @@ span.mwb_wgm_method {
 }
 
 .mwb_wgm_added_wrapper .mwb_wgm_delivery_method_wrap label.radio-label {
-    margin-bottom: 12px;
 }
 .mwb_wgm_delivery_via_email .form-row:not(:last-child), .mwb_wgm_delivery_via_admin .form-row:not(:last-child) {
     margin-bottom: 12px;
@@ -4460,6 +4474,9 @@ span.mwb_wgm_method {
 .cart .mwb_wgm_added_wrapper .mwb_wgm_msg_info {
     font-size: 12px;
     color: #888;
+}
+.cart .mwb_wgm_added_wrapper label.radio-label + div {
+    margin-top: 12px;
 }
 .modal-open #TB_window {
     height: 96%;
@@ -4527,4 +4544,35 @@ button#TB_closeWindowButton {}
 }
 .preview_wrap a#mwg_wgm_preview_email {
     font-size: .75rem;
+}
+.mwb_wgm_added_wrapper {
+    margin-bottom: 24px;
+}
+.cart .mwb_wgm_added_wrapper + .quantity + button.single_add_to_cart_button, .cart .mwb_wgm_added_wrapper + .quantity + button.single_add_to_cart_button + button.single_add_to_cart_button {
+    margin-left: 0px;
+}
+label.no-shipping-text {
+    margin-bottom: 24px;
+    display: block;
+}
+@media (min-width: 768px) {
+	.preview_wrap {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+	}
 }

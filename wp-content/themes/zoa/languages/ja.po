@@ -2138,3 +2138,6 @@ msgstr "特徴"
 
 msgid "Recommend to who"
 msgstr "こんな方にオススメ"
+
+msgid "Just go to next step because your item doesn't need shipping info."
+msgstr "カートに入っている商品は配送が必要ありません。次のステップへお進みください。"
