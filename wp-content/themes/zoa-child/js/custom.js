@@ -275,59 +275,6 @@ jQuery(document).ready(function($){
 		}
 	});
 	
-	function isAddToCartValid()
-	{
-		var validateForm = $("form.cart");
-  		validateForm.validationEngine({
-  			promptPosition : 'inline',
-  			addFailureCssClassToField : "inputError",
-  			bindMethod : "live"
-  		});
-  		var isValid = validateForm.validationEngine('validate');
-  		return isValid;
-	}
-	
-	if ($('.mwb_wgm_added_wrapper').length)
-	{
-		$('#mwb_wgm_from_name').addClass('validate[required] required');
-		$('#mwb_wgm_message').addClass('validate[required] required');
-		$('#mwb_wgm_to_email').addClass('validate[required,custom[email]] required');
-		$('#mwb_wgm_to_ship').addClass('validate[required] required');
-		
-		var cloneAddCartBtn = $('button[name="add-to-cart"]').clone();
-		cloneAddCartBtn.attr('name', 'add-to-cart-clone');
-		cloneAddCartBtn.attr('type', 'button');
-		
-		$('button[name="add-to-cart"]').hide();
-		$('button[name="add-to-cart"]').after(cloneAddCartBtn);
-		
-		function showHideAddCartBtn(isValid)
-		{
-			if (isValid)
-			{
-				$('button[name="add-to-cart"]').show();
-				$('button[name="add-to-cart-clone"]').hide();
-			}
-			else {
-				$('button[name="add-to-cart"]').hide();
-				$('button[name="add-to-cart-clone"]').show();
-			}
-		}
-		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
-			if (!$('form.cart .inputError').length)
-			{
-				var isValid = isAddToCartValid();
-				showHideAddCartBtn(isValid);
-			}
-		});
-		
-		$('body').on('click', 'button[name="add-to-cart-clone"]', function(){
-			var isValid = isAddToCartValid()
-			showHideAddCartBtn(isValid);
-		});
-	}
-	
-	
 	/***
 	*
 	* Product filter clear button *

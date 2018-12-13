@@ -20,13 +20,60 @@ jQuery(document).ready(function($){
 	});
 	
 	$('#previewBox').hide();
-	$('.woocommerce form .form-row .required').focusout(function(e) {
-		if($(this).hasClass('inputError')) {
-			$('#previewBox').hide();
-		} else {
-			$('#previewBox').show();
+	function isAddToCartValid()
+	{
+		var validateForm = $("form.cart");
+  		validateForm.validationEngine({
+  			promptPosition : 'inline',
+  			addFailureCssClassToField : "inputError",
+  			bindMethod : "live"
+  		});
+  		var isValid = validateForm.validationEngine('validate');
+  		return isValid;
+	}
+	
+	if ($('.mwb_wgm_added_wrapper').length)
+	{
+		$('#mwb_wgm_from_name').addClass('validate[required] required');
+		$('#mwb_wgm_message').addClass('validate[required] required');
+		$('#mwb_wgm_to_email').addClass('validate[required,custom[email]] required');
+		$('#mwb_wgm_to_ship').addClass('validate[required] required');
+		
+		var cloneAddCartBtn = $('button[name="add-to-cart"]').clone();
+		cloneAddCartBtn.attr('name', 'add-to-cart-clone');
+		cloneAddCartBtn.attr('type', 'button');
+		
+		$('button[name="add-to-cart"]').hide();
+		$('button[name="add-to-cart"]').after(cloneAddCartBtn);
+		
+		function showHideAddCartBtn(isValid)
+		{
+			if (isValid)
+			{
+				$('#previewBox').show();
+				$('button[name="add-to-cart"]').show();
+				$('button[name="add-to-cart-clone"]').hide();
+			}
+			else {
+				$('#previewBox').hide();
+				$('button[name="add-to-cart"]').hide();
+				$('button[name="add-to-cart-clone"]').show();
+			}
 		}
-	});
+		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
+			if (!$('form.cart .inputError').length)
+			{
+				var isValid = isAddToCartValid();
+				showHideAddCartBtn(isValid);
+			}
+		});
+		
+		$('body').on('click', 'button[name="add-to-cart-clone"]', function(){
+			var isValid = isAddToCartValid()
+			showHideAddCartBtn(isValid);
+		});
+	}
+	
 	$( '.mwb_wgm_delivery_method_wrap > .mwb_wgm_delivery_method > div' ).each( function() {
 		$(this).find('input[type="text"]').wrap(function(i) {
 			return '<div class="form-row" />';

@@ -4,7 +4,7 @@
  * Plugin Name:  WooCommerce Ultimate Gift Card
  * Plugin URI: https://makewebbetter.com
  * Description: This woocommerce extension allow merchants to create and sell multiple Gift Card Product having multiple price variation.
- * Version: 2.4.10
+ * Version: 11112.4.10
  * Author: makewebbetter <webmaster@makewebbetter.com>
  * Author URI: https://makewebbetter.com
  * Requires at least: 3.5
