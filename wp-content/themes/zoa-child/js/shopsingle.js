@@ -61,12 +61,14 @@ jQuery(document).ready(function($){
 			}
 		}
 		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
-			var isValid = false;
-			if (!$('form.cart .inputError').length)
-			{
-				isValid = isAddToCartValid();
-			}
-			showHideAddCartBtn(isValid);
+			setTimeout(function(){
+				var isValid = false;
+				if (!$('form.cart .inputError').length)
+				{
+					isValid = isAddToCartValid();
+				}
+				showHideAddCartBtn(isValid);
+			}, 100);
 		});
 		
 		$('body').on('click', 'button[name="add-to-cart-clone"]', function(){
