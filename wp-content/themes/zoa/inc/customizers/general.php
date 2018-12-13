@@ -1,5 +1,5 @@
 <?php
-
+// @codingStandardsIgnoreStart
 /* ADD GENERAL SECTION
 ***************************************************/
 zoa_Kirki::add_section(
@@ -24,6 +24,8 @@ zoa_Kirki::add_field(
 			'layout-3' => esc_attr__( 'Layout 3', 'zoa' ),
 			'layout-4' => esc_attr__( 'Layout 4', 'zoa' ),
 			'layout-5' => esc_attr__( 'Layout 5', 'zoa' ),
+			'layout-6' => esc_attr__( 'Layout 6', 'zoa' ),
+			'layout-7' => esc_attr__( 'Layout 7', 'zoa' ),
 		),
 	)
 );
@@ -89,5 +91,27 @@ zoa_Kirki::add_field(
 			'off' => esc_attr__( 'Off', 'zoa' ),
 			'on'  => esc_attr__( 'On', 'zoa' ),
 		),
+	)
+);
+
+// Sticky on mobile?
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'settings' => 'mobile_sticky_header',
+		'label'    => esc_attr__( 'Sticky On Mobile', 'zoa' ),
+		'section'  => 'c_general',
+		'default'  => false,
+		'choices'  => array(
+			'off' => esc_attr__( 'Off', 'zoa' ),
+			'on'  => esc_attr__( 'On', 'zoa' ),
+		),
+		'active_callback' => array(
+            array(
+                'setting'  => 'sticky_header',
+                'operator' => '==',
+                'value'    => '1',
+            ),
+        )
 	)
 );

@@ -33,6 +33,10 @@ if ($show_toggle === 2 AND empty($woof_value)) {
     $block_is_closed = false;
 }
 
+$tooltip_text = "";
+if (isset($meta_settings['tooltip_text'])) {
+    $tooltip_text = $meta_settings['tooltip_text'];
+}
 if (in_array($show_toggle, array(1, 2))) {
     $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
     if($block_is_closed){
@@ -41,13 +45,25 @@ if (in_array($show_toggle, array(1, 2))) {
         $css_classes = str_replace('woof_closed_block', '', $css_classes);
     }
 }
+//***
+if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+    if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+        $_REQUEST['hide_terms_count_txt']=1;
+    }else{
+        $_REQUEST['hide_terms_count_txt']=0;
+    }
+}
+//***
 ?>
-<div data-css-class="woof_meta_select_container" class="woof_meta_select_container woof_container woof_container_<?php echo $meta_key ?>">
+<div data-css-class="woof_meta_select_container" class="woof_meta_select_container woof_container woof_container_<?php echo $meta_key ?>  woof_container_<?php echo "select_".$meta_key ?>">
         <div class="woof_container_inner">
         <div class="woof_container_inner woof_container_inner_meta_select">
             <?php if ($show_title_label) {
                 ?>
-            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>><?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+                <?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?>
+                <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null,$options['title']),$tooltip_text) ?>
+                <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
                 <?php
             }?>
             <div class="<?php echo $css_classes ?>">

@@ -40,14 +40,23 @@ final class WOOF_EXT_COLOR extends WOOF_EXT
 
 	$this->taxonomy_type_additional_options = array(
 	    'show_tooltip' => array(
-		'title' => __('Show tooltip', 'woocommerce-products-filter'),
-		'tip' => __('Show tooltip on hover', 'woocommerce-products-filter'),
+		'title' => __('Tooltip text', 'woocommerce-products-filter'),
+		'tip' => __('Enter tooltip text if necessary', 'woocommerce-products-filter'),
 		'type' => 'select',
 		'options' => array(
 		    1 => __('Yes', 'woocommerce-products-filter'),
 		    0 => __('No', 'woocommerce-products-filter')		    
 		)
-	    )
+	    ),
+            'show_title' => array(
+		'title' => __('Show in one column', 'woocommerce-products-filter'),
+		'tip' => __('Show in one column with title', 'woocommerce-products-filter'),
+		'type' => 'select',
+		'options' => array(		   
+		    0 => __('No', 'woocommerce-products-filter'),
+                    1 => __('Yes', 'woocommerce-products-filter'),
+		)
+	    ),
 	);
     }
 

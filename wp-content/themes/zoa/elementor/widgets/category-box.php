@@ -506,10 +506,9 @@ class Zoa_Category_Box extends Widget_Base {
 		}
 		?>
 	<div class="zoa-category-box-wrapper">
+		<a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?> class="zoa-category-box-link"></a>
 		<div class="zoa-category-box-image">
-			<a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?>>
-				<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
-			</a>
+			<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
 		</div>
 
 		<?php if ( ! empty( $title_text ) ) : ?>

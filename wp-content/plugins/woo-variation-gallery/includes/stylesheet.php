@@ -11,7 +11,7 @@
 
     /* Default Width */
     .woo-variation-product-gallery {
-        max-width : <?php echo $gallery_width ?>%;
+        max-width : <?php echo $gallery_width ?>% !important;
         }
 
     /* Medium Devices, Desktops */

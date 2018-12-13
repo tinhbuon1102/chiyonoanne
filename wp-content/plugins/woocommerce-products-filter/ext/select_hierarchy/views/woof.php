@@ -5,7 +5,15 @@ $collector = array();
 $_REQUEST['additional_taxes'] = $additional_taxes;
 $_REQUEST['hide_terms_count_txt'] = isset($this->settings['hide_terms_count_txt']) ? $this->settings['hide_terms_count_txt'] : 0;
 $woof_hide_dynamic_empty_pos = get_option('woof_hide_dynamic_empty_pos');
-
+//***
+if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+    if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+        $_REQUEST['hide_terms_count_txt']=1;
+    }else{
+        $_REQUEST['hide_terms_count_txt']=0;
+    }
+}
+//***
 //get all terms from parent relative to the current selected term
 $selected_chain = array();
 

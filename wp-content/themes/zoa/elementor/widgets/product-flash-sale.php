@@ -2,6 +2,10 @@
 
 namespace Elementor;
 
+if ( ! class_exists( 'woocommerce' ) ) {
+	return;
+}
+
 class zoa_widget_product_flash_sale extends Widget_Base {
 
     public function get_categories() {

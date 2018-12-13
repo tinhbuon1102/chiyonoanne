@@ -53,11 +53,16 @@ function woof_init_sliders() {
                     if (woof_autosubmit) {
                         woof_submit_link(woof_get_submit_link());
                     }
+
                     woof_update_tax_slider(titles, input, ui.from, ui.to);
+                    //jQuery(this).drawLabels();
+                    
                     return false;
                 },
                 onChange: function (ui) {
                     woof_update_tax_slider(titles, input, ui.from, ui.to);
+                    
+                    
                 }
 
             });
@@ -97,6 +102,27 @@ function woof_update_tax_slider(titles, input, from, to) {
     var single_from=jQuery(input).prev('span').find('.irs-from').text();
     var single_to=jQuery(input).prev('span').find('.irs-to').text();
     jQuery(input).prev('span').find('.irs-single').text(single_from+'-'+single_to);
+    var step=1;
+
+    if(jQuery(input).data('grid_step')!=undefined){
+        step= parseInt(jQuery(input).data('grid_step'));
+        if(step==0){
+            step=1;
+        }
+    }
+    
+    var lbls=jQuery(input).prev('span').find(".irs-grid-text");
+    var i=0;
+    for(i=1;i<jQuery(lbls).length-1;i++){
+        
+        if(i%step==0 && step!=-1){
+            jQuery(lbls[i]).css('visibility','visible');
+        }else{
+            jQuery(lbls[i]).css('visibility','hidden');
+        }
+
+    }
+
 }
 
 

@@ -33,7 +33,7 @@ class QuadMenu_Nav_Menu_Tabs extends QuadMenu_Nav_Menu_Tab {
 
   public function tabs($tabs_obj, $menu_id = 0) {
 
-    $tabs = $this->get_children_nav_menu_items($tabs_obj->ID, $menu_id);
+    $tabs = $this->get_children_nav_menu_items($menu_id, $tabs_obj->ID);
 
     ob_start();
     ?>

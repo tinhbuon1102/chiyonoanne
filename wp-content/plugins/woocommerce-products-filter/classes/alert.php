@@ -5,6 +5,22 @@ class WOOF_ADV {
     public $notices_list = array();
 
     public function __construct($alert_list = array()) {
+
+        //fix to avoid disabling of 'Upload Theme' button action on /wp-admin/theme-install.php
+        if (isset($_SERVER['REQUEST_URI'])) {
+            if (substr_count($_SERVER['REQUEST_URI'], 'theme-install.php')) {
+                return;
+            }
+        } else {
+            if (isset($_SERVER['PHP_SELF'])) {
+                if (substr_count($_SERVER['PHP_SELF'], 'theme-install.php')) {
+                    return;
+                }
+            }
+        }
+
+        //***
+
         $this->notices_list = array(
             'woocommerce_currency_switcher' => 'woocommerce-currency-switcher',
             'woocommerce_bulk_editor' => 'woo-bulk-editor',
@@ -90,8 +106,7 @@ class WOOF_ADV {
                 alert_w.on('click', '.notice-dismiss', function (e) {
                     //e.preventDefault 
 
-                    $.post(ajaxurl, {
-                        action: 'woof_dismiss_alert',
+                    $.post(ajaxurl, {action: 'woof_dismiss_alert',
                         alert: 'woocommerce_currency_switcher',
                         sec: <?php echo json_encode(wp_create_nonce('woof_dissmiss_alert')) ?>
                     });

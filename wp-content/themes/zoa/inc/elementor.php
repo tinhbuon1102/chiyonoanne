@@ -4,7 +4,9 @@ namespace Elementor;
 
 /*! RETURN IF ELEMENTOR IS NOT ACTIVE
 ------------------------------------------------->*/
-if( ! zoa_is_elementor() ) return;
+if( ! zoa_is_elementor() ) {
+	return;
+}
 
 
 /*! ADD PAGE SETTINGS

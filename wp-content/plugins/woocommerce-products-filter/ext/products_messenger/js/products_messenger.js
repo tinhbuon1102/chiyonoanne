@@ -50,7 +50,7 @@ function woof_init_products_messenger() {
     }
 
     function woof_check_count_subscr() {
-	var count_li = jQuery('.woof_subscr_list ul:first').find('li').size();
+	var count_li = jQuery('.woof_subscr_list ul:first').find('li').length;
 	var max_count = jQuery('.woof_add_subscr_cont input').attr('data-count');
 
 	if (count_li >= max_count) {

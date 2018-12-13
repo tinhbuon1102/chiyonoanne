@@ -44,7 +44,7 @@ if (!defined('ABSPATH'))
         $data['meta_key']=$this->meta_key;
         $data['options']=$this->type_options;
         $data['meta_options']= (isset($this->type_options["options"]))?$this->type_options["options"]:"";
-     
+        $data['meta_settings']=(isset($this->woof_settings[$this->meta_key]))?$this->woof_settings[$this->meta_key]:"";
         if($this->woof_settings[$this->meta_key]["show"]){
             echo  $this->render_html($this->get_meta_filter_path().'/views/woof.php', $data);
         }

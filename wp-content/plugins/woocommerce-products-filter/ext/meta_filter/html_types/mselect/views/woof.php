@@ -19,6 +19,11 @@ $shown_options_tags=0;
 if (isset($meta_settings['show_toggle_button'])) {
     $show_toggle = (int) $meta_settings['show_toggle_button'];
 }
+
+$tooltip_text = "";
+if (isset($meta_settings['tooltip_text'])) {
+    $tooltip_text = $meta_settings['tooltip_text'];
+}
 //***
 $block_is_closed = true;
 if (!empty($woof_value)) {
@@ -41,13 +46,25 @@ if (in_array($show_toggle, array(1, 2))) {
     }
 }
 
+//***
+if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+    if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+        $_REQUEST['hide_terms_count_txt']=1;
+    }else{
+        $_REQUEST['hide_terms_count_txt']=0;
+    }
+}
+//***
 ?>
-<div data-css-class="woof_meta_mselect_container" class="woof_meta_mselect_container woof_container woof_container_<?php echo $meta_key ?>">
+<div data-css-class="woof_meta_mselect_container" class="woof_meta_mselect_container woof_container woof_container_<?php echo $meta_key ?> woof_container woof_container_<?php echo $meta_key ?>  woof_container_<?php echo "mselect_".$meta_key ?>">
         <div class="woof_container_inner">
         <div class="woof_container_inner woof_container_inner_meta_mselect">
             <?php if ($show_title_label) {
                 ?>
-            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>><?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+                <?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?>
+                <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null,$options['title']),$tooltip_text) ?>
+                <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
                 <?php
             }?>
             <div class="<?php echo $css_classes ?>">

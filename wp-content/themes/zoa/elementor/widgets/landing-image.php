@@ -191,17 +191,22 @@ class Zoa_Landing_Image extends Widget_Base {
 				$attr .= ' rel="nofollow"';
 			}
 		}
-	?>
+		?>
 		<div class="zoa-landing-image">
-			<div class="zoa-landing-image-rollover" style="background-image: url('<?php echo esc_url( $image_url ); ?>');">
-				<a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?> class="zoa-landing-image-link"></a>
-			</div>
+            <div class="zoa-landing-image-wrapper" tabindex="0">
+                <a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?> class="zoa-landing-image-link">
+                    <span class="zoa-landing-image-text"><?php echo esc_html( 'View Demo', 'zoa' ); ?></span>
+                </a>
+                <img src="<?php echo esc_url( $image_url ); ?>" alt="">
+            </div>
 
-			<h4 class="zoa-landing-image-title">
-				<a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?>><?php echo esc_html( $settings['title_text'] ); ?></a>
-			</h4>
-		</div>
-	<?php
+            <div class="zoa-landing-image-content">
+                <h3 class="zoa-landing-image-title">
+                    <a href="<?php echo esc_url( $href ); ?>" <?php echo wp_kses_post( $attr ); ?>><?php echo esc_html( $settings['title_text'] ); ?></a>
+                </h3>
+            </div>
+		</div><!-- .zoa-landing-image -->
+		<?php
 	}
 }
 

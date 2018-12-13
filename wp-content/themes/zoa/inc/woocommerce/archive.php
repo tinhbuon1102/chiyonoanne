@@ -20,7 +20,7 @@ function zoa_catalog_ordering(){
 }
 
 /* ADD SWATCHES LIST */
-add_filter( 'woocommerce_loop_add_to_cart_link', 'zoa_loop_add_to_cart' );
+add_filter( 'woocommerce_after_shop_loop_item_title', 'zoa_loop_add_to_cart', 20 );
 function zoa_loop_add_to_cart() {
     echo zoa_swatches_list();
 }

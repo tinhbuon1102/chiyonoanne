@@ -14,7 +14,7 @@ global $WOOF;
 
             <section>
 
-                <a href="https://www.woocommerce-filter.com/extencion/quick-search/" target="_blank" class="button-primary"><?php echo __('About extension', 'woocommerce-products-filter') ?></a><br />
+                <a href="https://products-filter.com/extencion/quick-search/" target="_blank" class="button-primary"><?php echo __('About extension', 'woocommerce-products-filter') ?></a><br />
                 <br />
 
                 <div class="woof-control-section" style="display:none;"  >
@@ -49,7 +49,7 @@ global $WOOF;
                         </div>
                         <div class="woof-description">
                             <p class="description">
-                                <!-- <?php _e(' External cron is more predictable with time of execution, but additional knowledge how to set it correctly is required (<i style="color: orange;">External cron will be ready in the next version of the extension</i>)', 'woocommerce-products-filter') ?> -->
+                                <!-- <?php _e('External cron is more predictable with time of execution, but additional knowledge how to set it correctly is required (<i style="color: orange;">External cron will be ready in the next version of the extension</i>)', 'woocommerce-products-filter') ?> -->
                                 <?php _e('Products assembling period in data file for quick search.', 'woocommerce-products-filter') ?>
                             </p>
                         </div>
@@ -167,7 +167,7 @@ global $WOOF;
                             $items_for_stat = (array) $woof_settings['woof_quick_search']['items_for_text_search'];
                             ?>
                             <br />
-                            <h5><?php _e(' Additional search data for text search', 'woocommerce-products-filter') ?></h5>
+                            <h5><?php _e('Additional search data for text search', 'woocommerce-products-filter') ?></h5>
                             <div class="select-wrap">
 
                                 <select multiple="" name="woof_settings[woof_quick_search][items_for_text_search][]" class="chosen_select">

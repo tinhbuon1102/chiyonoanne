@@ -34,10 +34,17 @@
 			}
 			
 			public function taxonomy_columns( $columns ) {
-				$new_columns                       = array();
-				$new_columns[ 'cb' ]               = $columns[ 'cb' ];
+				$new_columns = array();
+				
+				if ( isset( $columns[ 'cb' ] ) ) {
+					$new_columns[ 'cb' ] = $columns[ 'cb' ];
+				}
+				
 				$new_columns[ 'wvs-meta-preview' ] = '';
-				unset( $columns[ 'cb' ] );
+				
+				if ( isset( $columns[ 'cb' ] ) ) {
+					unset( $columns[ 'cb' ] );
+				}
 				
 				return array_merge( $new_columns, $columns );
 			}

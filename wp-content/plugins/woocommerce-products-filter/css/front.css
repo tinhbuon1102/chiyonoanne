@@ -132,7 +132,12 @@ p:hover.woof_tooltip span.woof_tooltip_data {
     margin-left: -74px;
     z-index: 999;
 }
-
+.woof_tooltip_title{
+    display: none;
+}
+.woof_step .price_slider_amount .button{
+    display: none;
+}
 
 .woof_products_top_panel{
     overflow: hidden;
@@ -633,6 +638,10 @@ a.woof_start_filtering_btn2{
     width: 75px !important;
 }
 
+a.chosen-single{
+    text-decoration: none !important;
+}
+
 .chosen-container-single .chosen-single span{
     font-size:15px;
 }
@@ -937,7 +946,7 @@ a.woof_start_filtering_btn2{
 .woof_auto_3_columns .woof_container {
     display: inline-block;
     vertical-align: top;
-    width: 33%;
+    width: 32%;
     /*float: left;*/
     /*width: 33%;*/
     padding: 5px;
@@ -1004,6 +1013,21 @@ a.woof_start_filtering_btn2{
 
 .easy-autocomplete-container ul{
     margin: 0 !important;
+}
+
+.woof_tooltip_templates{
+    display: none;
+}
+.woof_container_inner .woof_tooltip_header{
+    display: inline-block;
+    height: 15px;
+    width: auto;
+    vertical-align: middle;
+}
+.woof_tooltip_title{
+font-size: 18px;
+font-weight: bold;
+color: #2c2c2c;
 }
 
 /* Small Devices, Tablets */

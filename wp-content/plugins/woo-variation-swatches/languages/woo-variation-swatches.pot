@@ -36,11 +36,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../includes/class-wvs-term-meta.php:216
+#: ../includes/class-wvs-term-meta.php:223
 msgid "Upload / Add image"
 msgstr ""
 
-#: ../includes/class-wvs-term-meta.php:217
+#: ../includes/class-wvs-term-meta.php:224
 msgid "Remove image"
 msgstr ""
 

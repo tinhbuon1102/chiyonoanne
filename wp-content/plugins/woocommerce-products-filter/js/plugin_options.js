@@ -97,7 +97,8 @@
 	    base.support = {
 		touch: Modernizr.touch
 	    };
-	    base.eventtype = base.support.touch ? 'touchstart' : 'click';
+	   // base.eventtype = base.support.touch ? 'touchstart' : 'click';
+            base.eventtype='click';
 	    base.loadPopup();
 	},
 	loadPopup: function () {

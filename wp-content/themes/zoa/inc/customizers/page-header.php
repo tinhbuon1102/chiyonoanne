@@ -120,17 +120,3 @@ zoa_Kirki::add_field( 'zoa', array(
         )
     ),
 ));
-
-/*SHOP SINGLE NAVIGATION*/
-zoa_Kirki::add_field( 'zoa', array(
-    'type'        => 'switch',
-    'settings'    => 'shop_single_nav',
-    'label'       => esc_attr__( 'Shop single navigation', 'zoa' ),
-    'section'     => 'page_header_2',
-    'default'     => true,
-    'description' => esc_attr__( 'This option available only on product page', 'zoa' ),
-    'choices'     => array(
-        'off' => esc_attr__( 'Off', 'zoa' ),
-        'on'  => esc_attr__( 'On', 'zoa' ),
-    )
-) );

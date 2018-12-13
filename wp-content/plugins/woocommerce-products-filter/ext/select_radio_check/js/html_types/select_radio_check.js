@@ -33,7 +33,7 @@ function woof_init_select_radio_check() {
     if (Object.keys(woof_current_values).length > 0) {
         jQuery.each(woof_current_values, function (index, value) {
 
-            if (!jQuery('.woof_hida_' + index).size()) {
+            if (!jQuery('.woof_hida_' + index).length) {
                 return;
             }
 

@@ -2,43 +2,26 @@
 	
 	defined( 'ABSPATH' ) or die( 'Keep Quit' );
 	
-	// Kalium Theme Support
 	add_action( 'init', function () {
+		
+		// Kalium Theme Support
 		if ( function_exists( 'kalium_woocommerce_init' ) ) {
+			
 			remove_action( 'kalium_woocommerce_single_product_images', 'kalium_woocommerce_show_product_images_custom_layout', 20 );
 			remove_filter( 'woocommerce_available_variation', 'kalium_woocommerce_variation_image_handler', 10 );
+			
+			wvg_remove_default_template();
+			
+			add_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images' );
 		}
 		
-		// woo_variation_gallery_default_width
+		// Avada Theme Support
+		if ( class_exists( 'Avada' ) ) {
+			wvg_remove_default_template();
+			add_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 50 );
+		}
 		
 	}, 20 );
-	
-	// Re Attach Hooks
-	add_action( 'wp_loaded', function () {
-		
-		$position = 22;
-		
-		// Avada Theme
-		if ( class_exists( 'Avada' ) ) {
-			$position = 50;
-		}
-		
-		// Enfold Theme
-		if ( defined( 'AV_FRAMEWORK_VERSION' ) ) {
-			$position = 5;
-		}
-		
-		// Attach Product Image
-		if ( apply_filters( 'wvg_re_attach_template', true ) ) {
-			
-			add_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', $position );
-			
-			if ( function_exists( 'Customify' ) ) {
-				remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 22 );
-			}
-		}
-		
-	}, 9 );
 	
 	add_filter( 'woo_variation_product_gallery_inline_style', function ( $styles ) {
 		
@@ -198,6 +181,11 @@
 			$width = 95;
 		}
 		
+		// Customizr Theme
+		if ( class_exists( 'CZR_BASE' ) ) {
+			$width = 50;
+		}
+		
 		// Suave Theme
 		if ( function_exists( 'cg_setup' ) ) {
 			$width = 100;
@@ -206,11 +194,3 @@
 		return $width;
 	}, 8 );
 	
-	add_filter( 'wvg_remove_default_template', function ( $default ) {
-		
-		if ( function_exists( 'saha_theme_setup' ) ) {
-			return false;
-		}
-		
-		return $default;
-	} );

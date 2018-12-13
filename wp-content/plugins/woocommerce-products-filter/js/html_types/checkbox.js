@@ -24,6 +24,9 @@ function woof_init_checkboxes() {
         //this script should be, because another way wrong way of working if to click on the label
         jQuery('.woof_checkbox_label').unbind();
         jQuery('label.woof_checkbox_label').click(function () {
+            if(jQuery(this).prev().find('.woof_checkbox_term').is(':disabled')){
+                return false;
+            }
             if (jQuery(this).prev().find('.woof_checkbox_term').is(':checked')) {
                 jQuery(this).prev().find('.woof_checkbox_term').trigger('ifUnchecked');
                 jQuery(this).prev().removeClass('checked');
@@ -32,7 +35,7 @@ function woof_init_checkboxes() {
                 jQuery(this).prev().addClass('checked');
             }
             
-            return false;
+            
         });
         //***
 
@@ -87,6 +90,7 @@ function woof_checkbox_direct_search(term_id, name, tax, is_checked) {
     if (woof_autosubmit) {
         woof_submit_link(woof_get_submit_link());
     }
+
 }
 
 

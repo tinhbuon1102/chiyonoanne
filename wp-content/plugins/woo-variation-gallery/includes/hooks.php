@@ -27,7 +27,7 @@
 	// Enfold Theme Support
 	add_action( 'after_setup_theme', 'wvg_enable_theme_support', 200 );
 	
-	add_action( 'init', 'wvg_remove_default_template', 200 );
+	// add_action( 'init', 'wvg_remove_default_template', 200 );
 	
 	add_filter( 'woo_variation_product_gallery_inline_style', function ( $styles ) {
 		

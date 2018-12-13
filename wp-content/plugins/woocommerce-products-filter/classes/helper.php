@@ -29,7 +29,9 @@ final class WOOF_HELPER {
     }
 
     public static function escape($value) {
-        return sanitize_text_field(esc_html($value));
+        if(is_string($value)){
+            return sanitize_text_field(esc_html($value));
+        }
     }
 
     public static function parse_ext_data($file_path) {
@@ -702,7 +704,25 @@ final class WOOF_HELPER {
             update_option('woof_notices', $notices);
         }
     }
-
+    public static function draw_tooltipe($title,$tooltip_text) {
+        if(!$tooltip_text OR empty($tooltip_text) OR $tooltip_text=='none'){
+            return"";
+        }
+        global $WOOF;
+        $tooltip_text=self::wpml_translate(null,stripcslashes(wp_strip_all_tags($tooltip_text)));
+        $toggle_image = ((isset($WOOF->settings['woof_tooltip_img']) AND ! empty($WOOF->settings['woof_tooltip_img'])) ? $WOOF->settings['woof_tooltip_img'] : WOOF_LINK . 'img/woof_info_icon.png');
+        $current_id=uniqid("woof_tooltip_content");
+        ?>
+            <img src="<?php echo $toggle_image ?>" class="woof_tooltip_header" data-tooltip-content="#<?php echo $current_id ?>">
+            <div class="woof_tooltip_templates">
+                <span id="<?php echo $current_id ?>">
+                    <span class="woof_tooltip_title"><?php echo $title ?></span>
+                    <span class="woof_tooltip_text"><?php echo $tooltip_text ?></span>
+                </span>
+            </div>          
+        <?php
+        
+    }
     public static function draw_title_toggle($show, $block_is_closed) {
         if (!$show) {
             return "";
@@ -711,7 +731,6 @@ final class WOOF_HELPER {
         global $WOOF;
         $condition = 'closed';
         $toggle_type = ((isset($WOOF->settings['toggle_type']) AND ! empty($WOOF->settings['toggle_type'])) ? $WOOF->settings['toggle_type'] : 'text');
-
 
         if ($block_is_closed) {
             $toggle_text = ((isset($WOOF->settings['toggle_closed_text']) AND ! empty($WOOF->settings['toggle_closed_text'])) ? self::wpml_translate(null, $WOOF->settings['toggle_closed_text']) : '-');

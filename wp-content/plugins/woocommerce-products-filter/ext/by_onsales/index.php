@@ -52,7 +52,7 @@ final class WOOF_EXT_BY_ONSALES extends WOOF_EXT {
             if (typeof woof_lang_custom == 'undefined') {
                 var woof_lang_custom = {};/*!!important*/
             }
-            woof_lang_custom.<?php echo $this->index ?> = "<?php _e('On sales', 'woocommerce-products-filter') ?>";
+            woof_lang_custom.<?php echo $this->index ?> = "<?php _e('On sale', 'woocommerce-products-filter') ?>";
         </script>
         <?php
     }

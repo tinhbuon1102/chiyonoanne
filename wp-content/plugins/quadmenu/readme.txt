@@ -99,6 +99,11 @@ QuadMenu has been designed by developers for developers. For them, we have inclu
 
 == Changelog ==
 
+= 1.7.1 =
+
+* Fixed. persistent cache issues
+* Fixed. menu class replaced with quadmenu
+
 = 1.7.0 =
 
 * Fixed. fixed large subtitle

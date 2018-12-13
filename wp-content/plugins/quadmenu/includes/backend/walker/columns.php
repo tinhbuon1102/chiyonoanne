@@ -52,7 +52,7 @@ class QuadMenu_Nav_Menu_Column extends QuadMenu_Settings {
         </div>
         <ul id="quadmenu-column-items-<?php echo esc_attr($column_obj->ID); ?>" class="items add-quadmenu-column-item sortable-area" data-sortable-items=".quadmenu-column-item" data-sortable-handle=".action-top" data-sortable-connect=".items" data-menu_item_parent_id="<?php echo esc_attr($column_obj->ID); ?>">     
           <?php
-          $items = $this->get_children_nav_menu_items($column_obj->ID, $menu_id);
+          $items = $this->get_children_nav_menu_items($menu_id, $column_obj->ID);
 
           if (is_array($items) && count($items)) :
             foreach ($items as $item):
@@ -89,7 +89,7 @@ class QuadMenu_Nav_Menu_Column extends QuadMenu_Settings {
 
   public function columns($menu_obj, $menu_id = 0) {
 
-    $columns = $this->get_children_nav_menu_items($menu_obj->ID, $menu_id);
+    $columns = $this->get_children_nav_menu_items($menu_id, $menu_obj->ID);
 
     ob_start();
 

@@ -528,6 +528,27 @@
 
                         </div><!--/ .woof-control-section-->                        
                     <?php endif; ?>
+                    
+                    <?php
+                    if (!isset($woof_settings['woof_tooltip_img'])) {
+                        $woof_settings['woof_tooltip_img'] = '';
+                    }
+                    ?>
+                    <div class="woof-control-section">
+
+                        <h4><?php _e('Tooltip icon', 'woocommerce-products-filter') ?></h4>
+
+                        <div class="woof-control-container">
+                            <div class="woof-control woof-upload-style-wrap">
+                                <input type="text" name="woof_settings[woof_tooltip_img]" value="<?php echo $woof_settings['woof_tooltip_img'] ?>" />
+                                <a href="#" class="woof-button woof_select_image"><?php _e('Select Image', 'woocommerce-products-filter') ?></a>
+                            </div>
+                            <div class="woof-description">
+                                <p class="description"><?php _e('Image which displayed for tooltip', 'woocommerce-products-filter') ?></p>
+                            </div>
+                        </div>
+
+                    </div><!--/ .woof-control-section-->
 
                     <?php
                     if (!isset($woof_settings['woof_auto_hide_button_img'])) {
@@ -1694,9 +1715,9 @@
                                     <ul>
 
                                         <li>
-                                            <a class="button" href="https://woocommerce-filter.com/documentation/" target="_blank">WOOF documentation</a>
-                                            <a class="button" href="https://www.woocommerce-filter.com/category/faq/" target="_blank">FAQ</a>
-                                            <a class="button" href="https://www.woocommerce-filter.com/video-tutorials/" target="_blank" style="border: solid 1px greenyellow;">Video tutorials</a>
+                                            <a class="button" href="https://products-filter.com/documentation/" target="_blank">WOOF documentation</a>
+                                            <a class="button" href="https://products-filter.com/category/faq/" target="_blank">FAQ</a>
+                                            <a class="button" href="https://products-filter.com/video-tutorials/" target="_blank" style="border: solid 1px greenyellow;">Video tutorials</a>
                                         </li>
 
                                     </ul>
@@ -1711,10 +1732,10 @@
                                     <ul>
 
                                         <li>
-                                            <a href="http://www.demo.woocommerce-filter.com/" target="_blank">WOOF - WooCommerce Products Filter</a>
+                                            <a href="http://demo.products-filter.com/" target="_blank">WOOF - WooCommerce Products Filter</a>
                                         </li>
                                         <li>
-                                            <a href="https://www.woocommerce-filter.com/styles-codes-applied-on-demo-site/" target="_blank"><?php _e("Styles and codes which are applied on the demo site", 'woocommerce-products-filter') ?></a>
+                                            <a href="https://products-filter.com/styles-codes-applied-on-demo-site/" target="_blank"><?php _e("Styles and codes which are applied on the demo site", 'woocommerce-products-filter') ?></a>
                                         </li>
 
                                     </ul>
@@ -1746,7 +1767,7 @@
                                     <ul>
 
                                         <li>
-                                            <a href="https://www.woocommerce-filter.com/video-tutorials/" target="_blank"><?php _e("Video tutorials", 'woocommerce-products-filter') ?></a>
+                                            <a href="https://products-filter.com/video-tutorials/" target="_blank"><?php _e("Video tutorials", 'woocommerce-products-filter') ?></a>
                                         </li>
 
                                     </ul>
@@ -1763,7 +1784,7 @@
                                     <ul>
 
                                         <li>
-                                            <a href="https://www.woocommerce-filter.com/gdpr/" target="_blank"><?php _e("GDPR info", 'woocommerce-products-filter') ?></a>
+                                            <a href="https://products-filter.com/gdpr/" target="_blank"><?php _e("GDPR info", 'woocommerce-products-filter') ?></a>
                                         </li>
 
                                     </ul>
@@ -1814,7 +1835,6 @@
                                         <li>
                                             <a href="https://wordpress.org/plugins/inpost-gallery/" target="_blank">InPost Gallery - flexible photo gallery</a>
                                             <p class="description"><?php _e("Insert Gallery in post, page and custom post types just in two clicks. You can create great galleries for your products.", 'woocommerce-products-filter') ?></p>
-                                            <p class="description"><a href="http://www.demo.woocommerce-filter.com/shop/music/woo-single-2/" target="_blank" class="button"><?php _e("Example", 'woocommerce-products-filter') ?></a></p>
                                         </li>
 
 
@@ -1938,6 +1958,22 @@
                 </div>
 
             </div>
+            <div class="woof-form-element-container">
+
+                <div class="woof-name-description">
+                    <strong><?php _e('Tooltip', 'woocommerce-products-filter') ?></strong>
+                    <span><?php _e('Show tooltip', 'woocommerce-products-filter') ?></span>
+                </div>
+
+                <div class="woof-form-element">
+
+                    <div class="select-wrap">
+                        <textarea class="woof_popup_option" data-option="tooltip_text" ></textarea>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -1949,7 +1985,7 @@
                 <div class="woof-name-description">
                     <strong><?php _e('Not toggled terms count', 'woocommerce-products-filter') ?></strong>
                     <span><?php _e('Enter count of terms which should be visible to make all other collapsible. "Show more" button will be appeared. This feature is works with: radio, checkboxes, labels, colors.', 'woocommerce-products-filter') ?></span>
-                    <span><?php printf(__('Advanced info is <a href="%s" target="_blank">here</a>', 'woocommerce-products-filter'), 'https://www.woocommerce-filter.com/hook/woof_get_more_less_button_xxxx/') ?></span>
+                    <span><?php printf(__('Advanced info is <a href="%s" target="_blank">here</a>', 'woocommerce-products-filter'), 'https://products-filter.com/hook/woof_get_more_less_button_xxxx/') ?></span>
                 </div>
 
                 <div class="woof-form-element">
@@ -2017,7 +2053,79 @@
             </div>
 
         </div>
+        
+        <div class="woof_option_container  woof_option_all">
 
+            <div class="woof-form-element-container">
+
+                <div class="woof-name-description">
+                    <strong><?php _e('Sort terms', 'woocommerce-products-filter') ?></strong>
+                    <span><?php _e('How to sort terms inside of filter block', 'woocommerce-products-filter') ?></span>
+                </div>
+
+                <div class="woof-form-element">
+
+                    <div class="select-wrap">
+                        <select class="woof_popup_option" data-option="orderby">
+                            <option value="-1"><?php _e('Default', 'woocommerce-products-filter') ?></option>
+                            <option value="id"><?php _e('Id', 'woocommerce-products-filter') ?></option>
+                            <option value="name"><?php _e('Title', 'woocommerce-products-filter') ?></option>
+                            <option value="numeric"><?php _e('Numeric.', 'woocommerce-products-filter') ?></option>
+                         
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="woof_option_container  woof_option_all">
+
+            <div class="woof-form-element-container">
+
+                <div class="woof-name-description">
+                    <strong><?php _e('Sort terms', 'woocommerce-products-filter') ?></strong>
+                    <span><?php _e('Direction of terms sorted inside of filter block', 'woocommerce-products-filter') ?></span>
+                </div>
+
+                <div class="woof-form-element">
+
+                    <div class="select-wrap">
+                        <select class="woof_popup_option" data-option="order">
+                            <option value="ASC"><?php _e('ASC', 'woocommerce-products-filter') ?></option>
+                            <option value="DESC"><?php _e('DESC', 'woocommerce-products-filter') ?></option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="woof_option_container  woof_option_checkbox woof_option_mselect woof_option_image woof_option_color woof_option_label woof_option_select_radio_check">
+
+            <div class="woof-form-element-container">
+
+                <div class="woof-name-description">
+                    <strong><?php _e('Logic of filtering', 'woocommerce-products-filter') ?></strong>
+                    <span><?php _e('AND or OR: if to select AND and on the site front select 2 terms - will be found products which contains both terms on the same time.', 'woocommerce-products-filter') ?></span>
+                </div>
+
+                <div class="woof-form-element">
+
+                    <div class="select-wrap">
+                        <select class="woof_popup_option" data-option="comparison_logic">
+                            <option value="OR"><?php _e('OR', 'woocommerce-products-filter') ?></option>
+                            <option value="AND"><?php _e('AND', 'woocommerce-products-filter') ?></option>      
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
         <!------------- options for extensions ------------------------>
 
         <?php
@@ -2067,7 +2175,7 @@
                                         </div>
 
                                         <div class="woof-form-element">
-                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php echo $key ?>" placeholder="<?php echo(isset($option['placeholder']) ? $option['placeholder'] : '') ?>" value="" />px
+                                            <input type="text" class="woof_popup_option regular-text code" data-option="<?php echo $key ?>" placeholder="<?php echo(isset($option['placeholder']) ? $option['placeholder'] : '') ?>" value="" />
                                         </div>
 
                                     </div>
@@ -2180,10 +2288,28 @@
         <div class="woof-form-element-container">
 
             <div class="woof-name-description">
+                <strong><?php _e('Tooltip', 'woocommerce-products-filter') ?></strong>
+                <span><?php _e('Show tooltip', 'woocommerce-products-filter') ?></span>
+            </div>
+
+            <div class="woof-form-element">
+
+                <div class="select-wrap">
+                    <textarea class="woof_popup_option" data-option="tooltip_text" ></textarea>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="woof-form-element-container">
+
+            <div class="woof-name-description">
                 <h3><?php _e('Drop-down OR radio', 'woocommerce-products-filter') ?></h3>
                 <strong><?php _e('Drop-down OR radio price filter ranges', 'woocommerce-products-filter') ?></strong>
                 <span><?php _e('Ranges for price filter.', 'woocommerce-products-filter') ?></span>
-                <span><?php printf(__('Example: 0-50,51-100,101-i. Where "i" is infinity. Max price is %s.', 'woocommerce-products-filter'), WOOF_HELPER::get_max_price()) ?></span>
+                <!-- <span><?php //printf(__('Example: 0-50,51-100,101-i. Where "i" is infinity. Max price is %s.', 'woocommerce-products-filter'), WOOF_HELPER::get_max_price()) ?></span> -->
+                <span><?php echo __('Example: 0-50,51-100,101-i. Where "i" is infinity.', 'woocommerce-products-filter') ?></span>
             </div>
 
             <div class="woof-form-element">
@@ -2360,7 +2486,15 @@ function woof_print_tax($key, $tax, $woof_settings) {
             }
             ?>
             <input type="text" name="woof_settings[show_toggle_button][<?php echo $key ?>]" placeholder="" value="<?php echo $show_toggle_button ?>" />
-
+            
+            
+            <?php
+            $tooltip_text = "";
+            if (isset($woof_settings['tooltip_text'][$key])) {
+                $tooltip_text = stripcslashes($woof_settings['tooltip_text'][$key]);
+            }
+            ?>
+            <input type="text" name="woof_settings[tooltip_text][<?php echo $key ?>]" placeholder="" value="<?php echo $tooltip_text ?>" />
 
             <?php
             $dispay_in_row = 0;
@@ -2370,6 +2504,29 @@ function woof_print_tax($key, $tax, $woof_settings) {
             ?>
             <input type="text" name="woof_settings[dispay_in_row][<?php echo $key ?>]" placeholder="" value="<?php echo $dispay_in_row ?>" />
 
+            
+             <?php
+            $orderby = '-1';
+            if (isset($woof_settings['orderby'][$key])) {
+                $orderby = $woof_settings['orderby'][$key];
+            }
+            ?>
+            <input type="text" name="woof_settings[orderby][<?php echo $key ?>]" placeholder="" value="<?php echo $orderby ?>" />
+            
+            <?php
+            $order = 'ASC';
+            if (isset($woof_settings['order'][$key])) {
+                $order = $woof_settings['order'][$key];
+            }
+            ?>
+             <input type="text" name="woof_settings[order][<?php echo $key ?>]" placeholder="" value="<?php echo $order ?>" />
+            <?php
+            $comparison_logic = 'OR';
+            if (isset($woof_settings['comparison_logic'][$key])) {
+                $comparison_logic = $woof_settings['comparison_logic'][$key];
+            }
+            ?>
+            <input type="text" name="woof_settings[comparison_logic][<?php echo $key ?>]" placeholder="" value="<?php echo $comparison_logic ?>" />
 
             <?php
             $custom_tax_label = '';
@@ -2485,8 +2642,12 @@ function woof_print_item_by_key($key, $woof_settings) {
                 if (!isset($woof_settings[$key]['price_tax'])) {
                     $woof_settings[$key]['price_tax'] = 0;
                 }
-                ?>
 
+                if (!isset($woof_settings[$key]['tooltip_text'])) {
+                    $woof_settings[$key]['tooltip_text'] = "";
+                }
+            ?>
+                <input type="hidden" name="woof_settings[<?php echo $key ?>][tooltip_text]" placeholder="" value="<?php echo stripcslashes($woof_settings[$key]['tooltip_text'])?>" />
                 <input type="hidden" name="woof_settings[<?php echo $key ?>][show_button]" value="<?php echo $woof_settings[$key]['show_button'] ?>" />
                 <input type="hidden" name="woof_settings[<?php echo $key ?>][title_text]" value="<?php echo $woof_settings[$key]['title_text'] ?>" />
                 <input type="hidden" name="woof_settings[<?php echo $key ?>][ranges]" value="<?php echo $woof_settings[$key]['ranges'] ?>" />
@@ -2499,6 +2660,7 @@ function woof_print_item_by_key($key, $woof_settings) {
 
         default:
             //options for extensions
+
             do_action('woof_print_html_type_options_' . $key);
             break;
     }

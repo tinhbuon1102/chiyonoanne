@@ -73,3 +73,78 @@ zoa_Kirki::add_field(
 		),
 	)
 );
+
+/*SHOP SINGLE NAVIGATION*/
+zoa_Kirki::add_field( 'zoa', array(
+    'type'        => 'switch',
+    'settings'    => 'shop_single_nav',
+    'label'       => esc_attr__( 'Shop single navigation', 'zoa' ),
+    'section'     => 'shop_single',
+    'default'     => true,
+    'description' => esc_attr__( 'This option available only on product page', 'zoa' ),
+    'choices'     => array(
+        'off' => esc_attr__( 'Off', 'zoa' ),
+        'on'  => esc_attr__( 'On', 'zoa' ),
+    )
+) );
+
+/*LIGHTBOX*/
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'label'    => esc_html__( 'Gallery lightbox', 'zoa' ),
+		'settings' => 'gallery_lightbox',
+		'section'  => 'shop_single',
+		'default'  => 0,
+		'choices'  => array(
+			'on'  => esc_attr__( 'Yes', 'zoa' ),
+			'off' => esc_attr__( 'No', 'zoa' ),
+		),
+	)
+);
+
+/*SHOW CATEGORY*/
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'label'    => esc_html__( 'Show Category', 'zoa' ),
+		'settings' => 'show_product_category',
+		'section'  => 'shop_single',
+		'default'  => 1,
+		'choices'  => array(
+			'on'  => esc_attr__( 'Yes', 'zoa' ),
+			'off' => esc_attr__( 'No', 'zoa' ),
+		),
+	)
+);
+
+/*SHOW TAG*/
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'label'    => esc_html__( 'Show Tag', 'zoa' ),
+		'settings' => 'show_product_tag',
+		'section'  => 'shop_single',
+		'default'  => 1,
+		'choices'  => array(
+			'on'  => esc_attr__( 'Yes', 'zoa' ),
+			'off' => esc_attr__( 'No', 'zoa' ),
+		),
+	)
+);
+
+/*SHOW SOCIAL SHARE*/
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'label'    => esc_html__( 'Show Social Share', 'zoa' ),
+		'settings' => 'show_social_share',
+		'section'  => 'shop_single',
+		'default'  => 1,
+		'choices'  => array(
+			'on'  => esc_attr__( 'Yes', 'zoa' ),
+			'off' => esc_attr__( 'No', 'zoa' ),
+		),
+		'transport' => 'auto',
+	)
+);

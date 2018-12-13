@@ -16,7 +16,15 @@ $woof_autosubmit = get_option('woof_autosubmit', 0);
     $request = $WOOF->get_request_data();
     $_REQUEST['additional_taxes'] = $additional_taxes;
     $_REQUEST['hide_terms_count_txt'] = isset($WOOF->settings['hide_terms_count_txt']) ? $WOOF->settings['hide_terms_count_txt'] : 0;
-
+    //***
+    if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+        if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+            $_REQUEST['hide_terms_count_txt']=1;
+        }else{
+            $_REQUEST['hide_terms_count_txt']=0;
+        }
+    }
+    //***
     if ($WOOF->is_isset_in_request_data($tax_slug))
     {
         $current_request = $request[$tax_slug];

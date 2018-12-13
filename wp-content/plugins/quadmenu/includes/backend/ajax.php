@@ -269,14 +269,11 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
 
   public function ajax_create_nav_menu_items($menu_id = 0, $menu_data = array()) {
 
-    $items_saved = $this->ajax_save_nav_menu_items((int) $menu_id, $menu_data);
-
-    return $items_saved;
-  }
-
-  public function ajax_save_nav_menu_items($menu_id = 0, $menu_data = array(), $items_saved = array()) {
+    $items_saved = array();
 
     if (0 == $menu_id || is_nav_menu($menu_id)) {
+
+      wp_cache_delete("wp_get_nav_menu_items_{$menu_id}", 'quadmenu');
 
       // Loop through all the menu items' POST values.
       foreach ((array) $menu_data as $_possible_db_id => $_item_object_data) {
@@ -321,8 +318,6 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
 
     if (isset($items->{$args['menu-item-quadmenu']}->parent)) {
 
-
-
       if ($parent_obj = QuadMenu::wp_setup_nav_menu_item($args['menu-item-parent-id'])) {
 
         if ($items->{$args['menu-item-quadmenu']}->parent === 'main') {
@@ -346,15 +341,45 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
       QuadMenu::send_json_error(esc_html__('Please reload page.', 'quadmenu'));
     }
 
-    $menu_item_id = absint($_GET['menu_item_id']);
-
     $menu_id = absint($_GET['menu_id']);
 
-    $deleted = $this->delete_children_nav_menu_items($menu_item_id, $menu_id);
+    $menu_item_id = absint($_GET['menu_item_id']);
+
+    $deleted = $this->delete_children_nav_menu_items($menu_id, $menu_item_id);
 
     QuadMenu::send_json_success(sprintf(esc_html__('Removed items %s.', 'quadmenu'), join(' ', (array) $deleted)));
 
     wp_die();
+  }
+
+  public function delete_children_nav_menu_items($menu_id = 0, $menu_item_id) {
+
+    $deleted = array();
+
+    if ($menu_item_id > 0 && is_nav_menu_item($menu_item_id)) {
+
+      wp_cache_delete("wp_get_nav_menu_items_{$menu_id}", 'quadmenu');
+
+      $delete_menu_items_id = $this->get_children_nav_menu_items($menu_id, $menu_item_id);
+
+      $delete_menu_items_id[] = array('id' => $menu_item_id);
+
+      if (is_array($delete_menu_items_id) && count($delete_menu_items_id)) {
+        foreach ($delete_menu_items_id as $item) {
+
+          $id = absint($item['id']);
+
+          do_action('quadmenu_delete_nav_menu_item', $id, $menu_id);
+
+          if (wp_delete_post($id, true)) {
+
+            $deleted[] = $id;
+          }
+        }
+      }
+    }
+
+    return $deleted;
   }
 
   public function ajax_update_nav_menu_item_order() {
@@ -363,14 +388,11 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
       QuadMenu::send_json_error(esc_html__('Please reload page.', 'quadmenu'));
     }
 
-    if (empty($_GET['menu-item'])) {
-      QuadMenu::send_json_error(esc_html__('Undefined menu-item var.', 'quadmenu'));
-      wp_die();
-    }
+    $menu_id = absint($_GET['menu_id']);
 
-    $updated = array();
+    if (isset($_GET['menu-item']) && is_array($_GET['menu-item'])) {
 
-    if (is_array($_GET['menu-item'])) {
+      $updated = array();
 
       foreach ($_GET['menu-item'] as $menu_item_id => $menu_item_data) {
 
@@ -385,7 +407,12 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
         }
       }
 
+      wp_cache_delete("wp_get_nav_menu_items_{$menu_id}", 'quadmenu');
+
       QuadMenu::send_json_success(sprintf(esc_html__('Updated items %s.', 'quadmenu'), join(' ', (array) $updated)));
+    } else {
+
+      QuadMenu::send_json_error(esc_html__('Undefined menu-item var.', 'quadmenu'));
     }
 
     wp_die();
@@ -414,7 +441,7 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
         <h3 id="quadmenu-title-<?php echo esc_attr($menu_obj->ID); ?>" class="quadmenu-title"><i class="<?php echo esc_attr($menu_obj->icon); ?>"></i><span><?php esc_html_e($menu_obj->title); ?></span></h3>
       </div>
       <div class="quadmenu-settings-body clearfix">
-        <?php do_action('quadmenu_modal_panels', $menu_item_depth, $menu_obj, $menu_id); ?>
+    <?php do_action('quadmenu_modal_panels', $menu_item_depth, $menu_obj, $menu_id); ?>
       </div>
       <div class="clearfix"></div>
       <div class="quadmenu-settings-modal-footer">
@@ -437,7 +464,9 @@ class QuadMenu_Ajax extends QuadMenu_Settings {
       QuadMenu::send_json_error(esc_html__('Please reload page.', 'quadmenu'));
     }
 
-    $menu_item_id = absint($_GET['menu_item_id']);
+    if ($menu_item_id = absint($_GET['menu_item_id'])) {
+      wp_cache_delete("wp_setup_nav_menu_item_{$menu_item_id}", 'quadmenu');
+    }
 
     $menu_id = absint($_GET['menu_id']);
 

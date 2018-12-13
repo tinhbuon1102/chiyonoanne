@@ -2,7 +2,7 @@
 if (!defined('ABSPATH'))
     die('No direct access allowed');
 
-//29-11-2016
+//20-06-2018
 final class WOOF_EXT_STAT extends WOOF_EXT {
 
     private $table_stat_buffer = 'woof_stat_buffer';

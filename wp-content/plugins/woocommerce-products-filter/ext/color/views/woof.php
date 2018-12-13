@@ -10,17 +10,36 @@ $show_count_dynamic = get_option('woof_show_count_dynamic', 0);
 $hide_dynamic_empty_pos = get_option('woof_hide_dynamic_empty_pos', 0);
 $woof_autosubmit = get_option('woof_autosubmit', 0);
 //********************
-$show_tooltip = (int) $this->settings['show_tooltip'][$tax_slug];
+$show_tooltip =  $this->settings['show_tooltip'][$tax_slug];
+
+$show_title=0;
+if(isset($this->settings['show_title'][$tax_slug])){
+    $show_title=(int)$this->settings['show_title'][$tax_slug];
+}
+
+$show_title_class="";
+if($show_title){
+   $show_title_class="woof_color_title_col";
+}
+
 ?>
 
-<ul class = "woof_list woof_list_color">
+<ul class = "woof_list woof_list_color <?php echo $show_title_class ?>">
     <?php
     $woof_tax_values = array();
     $current_request = array();
     $request = $WOOF->get_request_data();
     $_REQUEST['additional_taxes'] = $additional_taxes;
     $_REQUEST['hide_terms_count_txt'] = isset($WOOF->settings['hide_terms_count_txt']) ? $WOOF->settings['hide_terms_count_txt'] : 0;
-
+    //***
+    if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+        if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+            $_REQUEST['hide_terms_count_txt']=1;
+        }else{
+            $_REQUEST['hide_terms_count_txt']=0;
+        }
+    }
+    //***
     if ($WOOF->is_isset_in_request_data($tax_slug))
     {
         $current_request = $request[$tax_slug];
@@ -113,10 +132,23 @@ $show_tooltip = (int) $this->settings['show_tooltip'][$tax_slug];
             <li class="woof_color_term_<?php echo sanitize_title($color) ?> woof_color_term_<?php echo $term['term_id'] ?> <?php if ($hide_next_term_li): ?>woof_hidden_term<?php endif; ?>">
 
 
-                <p class="woof_tooltip"><?php if ($show_tooltip): ?><span class="woof_tooltip_data"><?php echo $term['name'] ?> <?php echo $count_string ?><?php echo(!empty($term_desc) ? '<br /><i>' . $term_desc . '</i>' : '') ?></span><?php endif; ?><input type="checkbox" <?php checked(in_array($term['slug'], $current_request)) ?> id="<?php echo 'woof_' . $term['term_id'] . '_' . $inique_id ?>" class="woof_color_term woof_color_term_<?php echo $term['term_id'] ?> <?php if (in_array($term['slug'], $current_request)): ?>checked<?php endif; ?>" data-color="<?php echo $color ?>" data-img="<?php echo $color_img ?>" data-tax="<?php echo $tax_slug ?>" name="<?php echo $term['slug'] ?>" data-term-id="<?php echo $term['term_id'] ?>" value="<?php echo $term['term_id'] ?>" <?php echo checked(in_array($term['slug'], $current_request)) ?> /></p>
-
+                <p class="woof_tooltip">
+                    <?php if ($show_tooltip): ?>
+                    <span class="woof_tooltip_data"><?php echo $term['name'] ?> 
+                        <?php echo $count_string ?><?php echo(!empty($term_desc) ? '<br /><i>' . $term_desc . '</i>' : '') ?>
+                    </span>
+                    <?php endif; ?>
+                    <input type="checkbox" <?php checked(in_array($term['slug'], $current_request)) ?> id="<?php echo 'woof_' . $term['term_id'] . '_' . $inique_id ?>" class="woof_color_term woof_color_term_<?php echo $term['term_id'] ?> <?php if (in_array($term['slug'], $current_request)): ?>checked<?php endif; ?>" data-color="<?php echo $color ?>" data-img="<?php echo $color_img ?>" data-tax="<?php echo $tax_slug ?>" name="<?php echo $term['slug'] ?>" data-term-id="<?php echo $term['term_id'] ?>" value="<?php echo $term['term_id'] ?>" <?php echo checked(in_array($term['slug'], $current_request)) ?> /></p>
 
                 <input type="hidden" value="<?php echo $term['name'] ?>" data-anchor="woof_n_<?php echo $tax_slug ?>_<?php echo $term['slug'] ?>" />
+            
+                <?php
+                if($show_title){
+                    ?>
+                <span class="woof_color_title"><?php echo $term['name'] ?><?php echo $count_string ?></span>
+                        <?php
+                }
+                ?>
             </li>
             <?php
             $terms_count_printed++;

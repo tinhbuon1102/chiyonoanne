@@ -1,6 +1,6 @@
 <?php if (!defined('ABSPATH')) die('No direct access allowed'); ?>
 <?php global $WOOF; ?>
-<div data-css-class="woof_author_search_container" class="woof_author_search_container woof_container">
+<div data-css-class="woof_author_search_container" class="woof_author_search_container woof_container woof_container_woof_author">
     <div class="woof_container_overlay_item"></div>
     <div class="woof_container_inner">
 

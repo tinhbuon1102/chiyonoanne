@@ -17,7 +17,7 @@ class Zoa_Theme_Includes{
 		/**
 		 * Include a file isolated, to not have access to current context variables
 		 */
-		// self::$include_isolated_callable = create_function('$path', 'include $path;'); Fix issue PHP 7.2
+		// Fix issue PHP 7.2
 		self::$include_isolated_callable = function($path)  {
 		    include $path;
 		};
@@ -166,7 +166,7 @@ class Zoa_Theme_Includes{
 
 				self::include_isolated($dir .'/class-widget-'. $dirname .'.php');
 
-				$widget_class = 'minera_Widget_' . self::dirname_to_classname( $dirname );
+				$widget_class = 'zoa_Widget_' . self::dirname_to_classname( $dirname );
 				if ( class_exists( $widget_class ) ) {
 					register_widget( $widget_class );
 				}

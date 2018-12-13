@@ -1,4 +1,5 @@
 <?php
+// @codingStandardsIgnoreStart
 
 /*SALE FLASH*/
 add_filter( 'woocommerce_sale_flash', 'zoa_sale_flash' );
@@ -77,13 +78,13 @@ function zoa_get_variation_attribute_options_html( $html, $args ) {
 }
 
 add_filter( 'tawcvs_swatch_html', 'zoa_swatch_html', 5, 4 );
-function zoa_swatch_html( $html, $term, $attr, $args ) {
+function zoa_swatch_html( $html, $term, $type, $args ) {
     if( ! function_exists( 'TA_WCVS' ) ) return $html;
 
     $selected = sanitize_title( $args['selected'] ) == $term->slug ? 'selected' : '';
     $name     = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name ) );
 
-    switch ( $attr->attribute_type ) {
+    switch ( $type ) {
         case 'color':
             $color = get_term_meta( $term->term_id, 'color', true );
             list( $r, $g, $b ) = sscanf( $color, "#%02x%02x%02x" );
@@ -134,106 +135,108 @@ function zoa_swatch_html( $html, $term, $attr, $args ) {
 
 add_action( 'wp_ajax_quick_view', 'zoa_quick_view' );
 add_action( 'wp_ajax_nopriv_quick_view', 'zoa_quick_view' );
-function zoa_quick_view(){
-    $response = array(
-        'status'  => 500,
-        'message' => esc_html__( 'Something is wrong, please try again later...', 'zoa' ),
-        'content' => false,
-    );
+if ( ! function_exists( 'zoa_quick_view' ) ) {
+    function zoa_quick_view(){
+        $response = array(
+            'status'  => 500,
+            'message' => esc_html__( 'Something is wrong, please try again later...', 'zoa' ),
+            'content' => false,
+        );
 
-    if( ! isset( $_POST['product_id'] ) ||
-        ! isset( $_POST['nonce'] ) ||
-        ! wp_verify_nonce( $_POST['nonce'], 'zoa_product_nonce' ) ):
+        if( ! isset( $_POST['product_id'] ) ||
+            ! isset( $_POST['nonce'] ) ||
+            ! wp_verify_nonce( $_POST['nonce'], 'zoa_product_nonce' ) ):
 
-        echo json_encode( $response );
-        exit();
-    endif;
+            echo json_encode( $response );
+            exit();
+        endif;
 
-    $product_id  = intval( $_POST['product_id'] );
+        $product_id  = intval( $_POST['product_id'] );
 
-    /*FOR `cross-sells` CART PAGE*/
-    $get_product = wc_get_product( $product_id );
-    $parent_id   = $get_product->get_parent_id();
-    if( $parent_id ){
-        $product_id  = $parent_id;
-    }
+        /*FOR `cross-sells` CART PAGE*/
+        $get_product = wc_get_product( $product_id );
+        $parent_id   = $get_product->get_parent_id();
+        if( $parent_id ){
+            $product_id  = $parent_id;
+        }
 
-    wp( 'p=' . $product_id . '&post_type=product' );
+        wp( 'p=' . $product_id . '&post_type=product' );
 
-    ob_start();
+        ob_start();
 
-        if( have_posts() ){
-            while ( have_posts() ):
-                the_post();
-                ?>
-                <div <?php wc_product_class() ?>>
-                    <?php
-                        $product   = wc_get_product( $product_id );
-                        $image_id  = $product->get_image_id();
-                        $image_alt = zoa_img_alt( $image_id, esc_attr__( 'Product image', 'zoa' ) );
-
-                        if( $image_id ){
-                            $image_medium_src    = wp_get_attachment_image_src( $image_id, 'woocommerce_single' );
-                        }else{
-                            $image_medium_src[0] = wc_placeholder_img_src();
-                        }
-
-                        $gallery_id       = $product->get_gallery_image_ids();
-                        $attr             = '';
-
-                        if( ! empty( $gallery_id ) ){
-                            $attr = 'class="quick-view-slider"';
-                        }
+            if( have_posts() ){
+                while ( have_posts() ):
+                    the_post();
                     ?>
-                    <div class="quick-view-images">
-                        <div id="quick-view-gallery" <?php echo wp_kses_post( $attr ); ?>>
-                            <div class="pro-img-item">
-                                <img src="<?php echo esc_url( $image_medium_src[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
+                    <div <?php wc_product_class() ?>>
+                        <?php
+                            $product   = wc_get_product( $product_id );
+                            $image_id  = $product->get_image_id();
+                            $image_alt = zoa_img_alt( $image_id, esc_attr__( 'Product image', 'zoa' ) );
+
+                            if( $image_id ){
+                                $image_medium_src    = wp_get_attachment_image_src( $image_id, 'woocommerce_single' );
+                            }else{
+                                $image_medium_src[0] = wc_placeholder_img_src();
+                            }
+
+                            $gallery_id       = $product->get_gallery_image_ids();
+                            $attr             = '';
+
+                            if( ! empty( $gallery_id ) ){
+                                $attr = 'class="quick-view-slider"';
+                            }
+                        ?>
+                        <div class="quick-view-images">
+                            <div id="quick-view-gallery" <?php echo wp_kses_post( $attr ); ?>>
+                                <div class="pro-img-item">
+                                    <img src="<?php echo esc_url( $image_medium_src[0] ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
+                                </div>
+
+                                <?php
+                                    if( ! empty( $gallery_id ) ):
+                                        foreach( $gallery_id as $key ):
+                                            $g_full_img_src   = wp_get_attachment_image_src( $key, 'full' );
+                                            $g_medium_img_src = wp_get_attachment_image_src( $key, 'medium_large' );
+                                            $g_img_alt        = zoa_img_alt( $key, esc_attr__( 'Product image', 'zoa' ) );
+                                        ?>
+                                        <div class="pro-img-item">
+                                            <img src="<?php echo esc_url( $g_medium_img_src[0] ); ?>" alt="<?php echo esc_attr( $g_img_alt ); ?>">
+                                        </div>
+                                <?php
+                                        endforeach;
+                                    endif;
+                                ?>
                             </div>
 
+                            <?php /* PRODUCT LABEL */ ?>
                             <?php
-                                if( ! empty( $gallery_id ) ):
-                                    foreach( $gallery_id as $key ):
-                                        $g_full_img_src   = wp_get_attachment_image_src( $key, 'full' );
-                                        $g_medium_img_src = wp_get_attachment_image_src( $key, 'medium_large' );
-                                        $g_img_alt        = zoa_img_alt( $key, esc_attr__( 'Product image', 'zoa' ) );
-                                    ?>
-                                    <div class="pro-img-item">
-                                        <img src="<?php echo esc_url( $g_medium_img_src[0] ); ?>" alt="<?php echo esc_attr( $g_img_alt ); ?>">
-                                    </div>
-                            <?php
-                                    endforeach;
-                                endif;
+                                echo zoa_product_label( $product );
                             ?>
                         </div>
 
-                        <?php /* PRODUCT LABEL */ ?>
-                        <?php
-                            echo zoa_product_label( $product );
-                        ?>
+                        <div class="summary entry-summary">
+                            <?php do_action( 'woocommerce_single_product_summary' ); ?>
+                        </div>
                     </div>
 
-                    <div class="summary entry-summary">
-                        <?php do_action( 'woocommerce_single_product_summary' ); ?>
-                    </div>
-                </div>
-
-                <?php
+                    <?php
+                    $response = array(
+                        'status' => 200
+                    );
+                endwhile;
+            }else{
                 $response = array(
-                    'status' => 200
+                    'status'  => 201,
+                    'message' => esc_html__( 'Sorry, nothing found', 'zoa' ),
                 );
-            endwhile;
-        }else{
-            $response = array(
-                'status'  => 201,
-                'message' => esc_html__( 'Sorry, nothing found', 'zoa' ),
-            );
-        }
+            }
 
-    $response['content'] = ob_get_clean();
+        $response['content'] = ob_get_clean();
 
-    echo json_encode( $response );
-    exit();
+        echo json_encode( $response );
+        exit();
+    }
 }
 
 /* GET PRODUCT THUMBNAIL */

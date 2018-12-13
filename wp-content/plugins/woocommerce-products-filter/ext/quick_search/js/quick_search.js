@@ -190,7 +190,7 @@ function woof_do_quick_search_search(type,page,per_page){
     if(woof_qt_group_text_logic){
         text_group_logic=woof_qt_group_text_logic;
     }    
-    /*Text serch*/
+    /*Text search*/
      var searchField =woof_qt_current_values.text_search;
     if(searchField!="" && searchField!=undefined && searchField){
         searchField=searchField.replace(/\s{2,}|\.|\,|\:|\;|\"/g, ' ');
@@ -258,7 +258,7 @@ function woof_do_quick_search_search(type,page,per_page){
         
     }  
     /*console.log(sql_query)*/
-   /*If  serch is not going*/
+   /*If  search is not going*/
    if(sql_query==""){
        woof_qt_reset_btn_state(false);//hide reset btn
 
@@ -1132,11 +1132,11 @@ function woof_qt_reset_select(){
 
 /*
  * 
- * text serch
+ * text search
  * 
  */
 
-/* init text serch */
+/* init text search */
 function woof_init_text_search(){
        jQuery('#woof_quick_search_form').keyup(function(){
            var text=jQuery(this).val();

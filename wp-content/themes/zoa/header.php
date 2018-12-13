@@ -1,3 +1,7 @@
+<?php
+// @codingStandardsIgnoreStart
+
+?>
 <!DOCTYPE html>
 
 <html <?php language_attributes(); ?>>
@@ -16,7 +20,7 @@
 	<?php zoa_before_content(); ?>
 
 	<?php
-	if ( function_exists( 'hfe_render_header' ) ) :
+	if ( function_exists( 'hfe_render_header' ) && hfe_header_enabled() ) :
 
 		hfe_render_header();
 

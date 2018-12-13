@@ -2,8 +2,10 @@
 if ( ! defined( 'FW' ) ) {
 	die( 'Forbidden' );
 }
+
 add_action( 'woocommerce_product_meta_end', 'zoa_product_sharing', 5 );
 function zoa_product_sharing() {
+	if ( ! get_theme_mod( 'show_social_share', true ) ) return;
 	global $product;
 	$id       = $product->get_id();
 	$url      = get_permalink( $id );

@@ -4,6 +4,7 @@ if (!defined('ABSPATH'))
 ?>
 <input type="hidden" name="woof_settings[<?php echo $key ?>][show_title_label]" value="<?php echo (isset($settings[$key]['show_title_label'])? $settings[$key]['show_title_label']:1) ?>" /> 
 <input type="hidden" name="woof_settings[<?php echo $key ?>][show_toggle_button]" value="<?php echo (isset($settings[$key]['show_toggle_button'])? $settings[$key]['show_toggle_button']:0) ?>" /> 
+<input type="hidden" name="woof_settings[<?php echo $key ?>][tooltip_text]" value="<?php echo (isset($settings[$key]['tooltip_text'])? stripcslashes($settings[$key]['tooltip_text']):"") ?>" />
 <input type="hidden" name="woof_settings[<?php echo $key ?>][step]" value="<?php echo (isset($settings[$key]['step'])? $settings[$key]['step']:1) ?>" /> 
 <input type="hidden" name="woof_settings[<?php echo $key ?>][range]" value="<?php echo (isset($settings[$key]['range'])? $settings[$key]['range']:"1-100") ?>" /> 
 <input type="hidden" name="woof_settings[<?php echo $key ?>][prefix]" value="<?php echo (isset($settings[$key]['prefix'])? $settings[$key]['prefix']:"") ?>" /> 
@@ -60,6 +61,22 @@ if (!defined('ABSPATH'))
             </div>
 
         </div>    
+        <div class="woof-form-element-container">
+
+            <div class="woof-name-description">
+                <strong><?php _e('Tooltip', 'woocommerce-products-filter') ?></strong>
+                <span><?php _e('Show tooltip', 'woocommerce-products-filter') ?></span>
+            </div>
+
+            <div class="woof-form-element">
+
+                <div class="select-wrap">
+                    <textarea class="woof_popup_option" data-option="tooltip_text" ></textarea>
+                </div>
+
+            </div>
+
+        </div>
 	<div class="woof-form-element-container">
 
 	    <div class="woof-name-description">

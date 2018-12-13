@@ -35,6 +35,7 @@ $titles_js = array();
 $max = 0;
 $all = array();
 $sum_count = 0;
+$grid_step=1;
 if (!empty($terms))
 {
     foreach ($terms as $term)
@@ -54,6 +55,7 @@ if (!empty($terms))
                 continue;
             }
         }
+
         $sum_count++;
         //***
         $values_js[] = $term['slug'];
@@ -62,6 +64,9 @@ if (!empty($terms))
         <input type="hidden" value="<?php echo $term['name'] ?>" data-anchor="woof_n_<?php echo $tax_slug ?>_<?php echo $term['slug'] ?>" />
         <?php
     }
+}
+if(isset($this->settings['slider_grid_step'][$tax_slug]) AND !empty($this->settings['slider_grid_step'][$tax_slug])){
+    $grid_step=$this->settings['slider_grid_step'][$tax_slug];
 }
 //***
 $max = count($values_js);
@@ -74,7 +79,7 @@ $current = isset($request[$tax_slug]) ? $request[$tax_slug] : '';
 ?>
 
 <?php if ($sum_count > 1): ?>
-    <input class="woof_taxrange_slider" value='' data-current="<?php echo $current ?>" data-max='<?php echo $max ?>' data-titles='<?php echo $titles_js ?>' data-values='<?php echo $values_js ?>' data-tax="<?php echo $tax_slug ?>" />
+    <input class="woof_taxrange_slider" value='' data-grid_step="<?php echo $grid_step ?>" data-current="<?php echo $current ?>" data-max='<?php echo $max ?>' data-titles='<?php echo $titles_js ?>' data-values='<?php echo $values_js ?>' data-tax="<?php echo $tax_slug ?>" />
 <?php else: ?>
     <div class="woof_hide_slider"></div>
 <?php endif; ?>

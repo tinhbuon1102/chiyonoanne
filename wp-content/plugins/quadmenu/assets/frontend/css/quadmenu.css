@@ -922,6 +922,9 @@
 #quadmenu .quadmenu-navbar-nav li.quadmenu-item-object-product > a > .quadmenu-item-content > .quadmenu-product-cart .button + a {
   display: none;
 }
+#quadmenu:not(.quadmenu-is-horizontal) {
+  clear: both;
+}
 #quadmenu:not(.quadmenu-is-horizontal).quadmenu-mobile-shadow-show {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }

@@ -15,35 +15,7 @@ class QuadMenu_Settings extends QuadMenu_Configuration {
     add_action('wp_ajax_quadmenu_add_nav_menu_item_panel', array($this, 'ajax_add_nav_menu_item_panel'));
   }
 
-  public function delete_children_nav_menu_items($menu_item_id, $menu_id = 0) {
-
-    $deleted = array();
-
-    if ($menu_item_id > 0 && is_nav_menu_item($menu_item_id)) {
-
-      $delete_menu_items_id = $this->get_children_nav_menu_items($menu_item_id, $menu_id);
-
-      $delete_menu_items_id[] = array('id' => $menu_item_id);
-
-      if (is_array($delete_menu_items_id) && count($delete_menu_items_id)) {
-        foreach ($delete_menu_items_id as $item) {
-
-          $id = absint($item['id']);
-
-          do_action('quadmenu_delete_nav_menu_item', $id, $menu_id);
-
-          if (wp_delete_post($id, true)) {
-
-            $deleted[] = $id;
-          }
-        }
-      }
-    }
-
-    return $deleted;
-  }
-
-  public function get_children_nav_menu_items($parent_menu_item_id, $menu_id) {
+  public function get_children_nav_menu_items($menu_id, $parent_menu_item_id) {
 
     $childrens = array();
 
@@ -72,14 +44,16 @@ class QuadMenu_Settings extends QuadMenu_Configuration {
 
   function wp_get_nav_menu_items($menu_id) {
 
-    if (!$data = wp_cache_get('quadmenu', 'wp_get_nav_menu_items')) {
+    $quadmenu_menu_items = wp_cache_get("wp_get_nav_menu_items_{$menu_id}", 'quadmenu');
 
-      $data = wp_get_nav_menu_items($menu_id);
+    if ($quadmenu_menu_items === false) {
 
-      wp_cache_add('quadmenu', $data, 'wp_get_nav_menu_items');
+      $quadmenu_menu_items = wp_get_nav_menu_items($menu_id);
+
+      wp_cache_set("wp_get_nav_menu_items_{$menu_id}", $quadmenu_menu_items, 'quadmenu');
     }
 
-    return $data;
+    return $quadmenu_menu_items;
   }
 
   public function nav_menu_item_settings($setting, $item) {
@@ -530,7 +504,7 @@ class QuadMenu_Settings extends QuadMenu_Configuration {
       <?php endforeach; ?>
       <?php do_action('quadmenu_modal_panels_tab', $menu_item_depth, $menu_obj, $menu_id); ?>
     </ul>
-    <div class="quadmenu-tabs-content<?php //echo join(' ', array_map('sanitize_html_class', $classes));   ?>">
+    <div class="quadmenu-tabs-content<?php //echo join(' ', array_map('sanitize_html_class', $classes));           ?>">
       <div role="tabpanel" class="quadmenu-tab-pane quadmenu-tab-pane-default active" id="setting_default_<?php echo esc_attr($menu_obj->ID); ?>">
         <?php echo $this->form($menu_obj, 0, array('url', 'target', 'title', 'attr-title', 'classes', 'xfn', 'description')); ?>
       </div>

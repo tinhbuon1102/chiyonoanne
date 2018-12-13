@@ -28,7 +28,7 @@ function zoa_register_required_plugins() {
             'required' => true,
         ),
         array(
-            'name' => esc_html__('Envato Market', 'minera'),
+            'name' => esc_html__('Envato Market', 'zoa'),
             'slug' => 'envato-market',
             'source' => 'https://envato.github.io/wp-envato-market/dist/envato-market.zip',
             'recommended' => true,
@@ -50,15 +50,20 @@ function zoa_register_required_plugins() {
         ),
         array(
             'name' => esc_html__( 'Variation Swatches for WooCommerce', 'zoa' ),
-            'slug' => 'variation-swatches-for-woocommerce'
+            'slug' => 'variation-swatches-for-woocommerce',
+            'source' => 'https://github.com/duongancol/variation-swatches-for-woocommerce-fixed-/archive/1.0.3.1.zip'
         ),
         array(
             'name' => esc_html__( 'YITH WooCommerce Wishlist', 'zoa' ),
             'slug' => 'yith-woocommerce-wishlist'
         ),
 	    array(
-		    'name'      => esc_html__('Contact Form 7', 'minera'),
+		    'name'      => esc_html__('Contact Form 7', 'zoa'),
 		    'slug'      => 'contact-form-7'
+        ),
+        array(
+		    'name'      => esc_html__('Instagram Feed', 'zoa'),
+		    'slug'      => 'instagram-feed'
 	    ),
     );
 

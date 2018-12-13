@@ -45,12 +45,18 @@ final class WOOF_EXT_SLIDER extends WOOF_EXT {
         $this->taxonomy_type_additional_options = array(
             'slider_dynamic_recount' => array(
                 'title' => __('Enable dynamic recount', 'woocommerce-products-filter'),
-                'tip' => __('Activates dynamic recount for each term in the range. If you have very long range (a lot of terms) this feature will generate additional MySQL queries which will create additional loading on the server!', 'woocommerce-products-filter'),
+                'tip' => __('Activates dynamic recount for each term in the the range. If you have very long range (a lot of terms) this feature will generate additional MySQL queries which will create additional loading on the server!', 'woocommerce-products-filter'),
                 'type' => 'select',
                 'options' => array(
                     0 => __('No', 'woocommerce-products-filter'),
                     1 => __('Yes', 'woocommerce-products-filter')
                 )
+            ),
+            'slider_grid_step' => array(
+                'title' => __('Grig step', 'woocommerce-products-filter'),
+                'tip' => __('Hide each Nth grid label. -1 hide all labels, 1 show all labels, 2n show each second label, 3n show each third label, etc...', 'woocommerce-products-filter'),
+                'type' => 'text',
+
             )
         );
     }

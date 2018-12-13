@@ -14,7 +14,7 @@ global $WOOF;
 
             <section>
 
-                <a href="https://www.woocommerce-filter.com/extencion/woocommerce-filter-by-meta-fields/" target="_blank" class="button-primary"><?php echo __('About extension', 'woocommerce-products-filter') ?></a><br />
+                <a href="https://products-filter.com/extencion/woocommerce-filter-by-meta-fields/" target="_blank" class="button-primary"><?php echo __('About extension', 'woocommerce-products-filter') ?></a><br />
                 <br />
 
                 <h4><?php _e('Meta Fields', 'woocommerce-products-filter') ?></h4>

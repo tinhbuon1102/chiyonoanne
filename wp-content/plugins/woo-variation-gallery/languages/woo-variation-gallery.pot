@@ -144,15 +144,15 @@ msgstr ""
 msgid "Skip &amp; Deactivate"
 msgstr ""
 
-#: ../includes/functions.php:196
+#: ../includes/functions.php:211
 msgid "Variation Image Gallery"
 msgstr ""
 
-#: ../includes/functions.php:207
+#: ../includes/functions.php:222
 msgid "Add Gallery Images"
 msgstr ""
 
-#: ../includes/functions.php:209
+#: ../includes/functions.php:224
 msgid "Upgrade to pro to add more images and videos"
 msgstr ""
 

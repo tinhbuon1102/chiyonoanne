@@ -1,5 +1,5 @@
 <?php
-if ( function_exists( 'hfe_render_header' ) ) :
+if ( function_exists( 'hfe_render_header' ) && hfe_footer_enabled()  ) :
 	hfe_render_footer();
 else:
 ?>

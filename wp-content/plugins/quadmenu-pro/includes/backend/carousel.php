@@ -35,7 +35,7 @@ class QuadMenu_Nav_Menu_Carousel extends QuadMenu_Nav_Menu_Panel {
 
   public function carousel($panels_obj, $menu_id = 0) {
 
-    $panels = $this->get_children_nav_menu_items($panels_obj->ID, $menu_id);
+    $panels = $this->get_children_nav_menu_items($menu_id, $panels_obj->ID);
 
     ob_start();
     ?>

@@ -12,6 +12,9 @@ wp_enqueue_style('ion.range-slider-skin', WOOF_LINK . 'js/ion.range-slider/css/i
 //***
 $request = $this->get_request_data();
 $uniqid = uniqid();
+if(!isset($additional_taxes)){
+	$additional_taxes="";
+}
 $preset_min =WOOF_HELPER::get_min_price($additional_taxes);
 $preset_max = WOOF_HELPER::get_max_price($additional_taxes);
 if ( wc_tax_enabled() && 'incl' === get_option( 'woocommerce_tax_display_shop' ) && ! wc_prices_include_tax() ) {

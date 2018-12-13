@@ -12,6 +12,10 @@ zoa_Kirki::add_config( 'zoa', array(
 ------------------------------------------------->*/
 get_template_part( 'inc/customizers/general' );
 
+/* TOPBAR
+------------------------------------------------->*/
+get_template_part( 'inc/customizers/topbar' );
+
 /* MENU
 ------------------------------------------------->*/
 get_template_part( 'inc/customizers/menu-layout' );

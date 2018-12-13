@@ -133,7 +133,9 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 	global $wp_query;
 	global $WOOF;
 	$request = $WOOF->get_request_data();
-
+//        if (!$wp_query->is_main_query()) {
+//            return $where;
+//        }
 	//***
 
 	if (isset($request['s'])) {
@@ -154,70 +156,129 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 	{
 	    if ($WOOF->is_isset_in_request_data('woof_text')) {
                 
-		$woof_text = wp_specialchars_decode(trim(urldecode($request['woof_text'])));
-		$woof_text = trim(WOOF_HELPER::strtolower($woof_text));
-		$woof_text = preg_replace('/\s+/', ' ', $woof_text);
-		$woof_text = preg_quote($woof_text, '&');
-		$woof_text = str_replace(' ', '?(.*)', $woof_text);
-                //$woof_text = str_replace(' ', '?(.*)', $woof_text);
-                $woof_text = str_replace("\&#039;", "\'", $woof_text);
-                $woof_text =str_replace("\&quot;","\"", $woof_text);
-                $woof_text =str_replace("\(","\\\(", $woof_text);
-                $woof_text =str_replace("\)","\\\)", $woof_text);
-		//http://dev.mysql.com/doc/refman/5.7/en/regexp.html
-		$search_by_full_word = false;
+                $woof_text = wp_specialchars_decode(trim(urldecode($request['woof_text'])));
+                $woof_text = trim(WOOF_HELPER::strtolower($woof_text));
+                $woof_text = preg_replace('/\s+/', ' ', $woof_text);
 
-		if (isset($WOOF->settings['by_text']['search_by_full_word'])) {
-		    $search_by_full_word = (int) $WOOF->settings['by_text']['search_by_full_word'];
-		}
+                if (!apply_filters('woof_text_search_like_option', false)) {
+                    $woof_text = preg_quote($woof_text, '&');
+                    $woof_text = str_replace(' ', '?(.*)', $woof_text);
+                    //$woof_text = str_replace(' ', '?(.*)', $woof_text);
+                    $woof_text = str_replace("\&#039;", "\'", $woof_text);
+                    $woof_text = str_replace("\&quot;", "\"", $woof_text);
+                    $woof_text = str_replace("\(", "\\\(", $woof_text);
+                    $woof_text = str_replace("\)", "\\\)", $woof_text);
+                    //http://dev.mysql.com/doc/refman/5.7/en/regexp.html
+                    $search_by_full_word = false;
 
-		if ($search_by_full_word) {
-		    $woof_text = '[[:<:]]' . $woof_text . '[[:>:]]';
-		}
+                    if (isset($WOOF->settings['by_text']['search_by_full_word'])) {
+                        $search_by_full_word = (int) $WOOF->settings['by_text']['search_by_full_word'];
+                    }
 
-		//***
+                    if ($search_by_full_word) {
+                        $woof_text = '[[:<:]]' . $woof_text . '[[:>:]]';
+                    }
 
-		$behavior = 'title';
-		if (isset($WOOF->settings['by_text']['behavior'])) {
-		    $behavior = $WOOF->settings['by_text']['behavior'];
-		}
+                    //***
 
-		if (isset($_REQUEST['auto_search_by_behavior']) AND ! empty($_REQUEST['auto_search_by_behavior'])) {
-		    $behavior = $_REQUEST['auto_search_by_behavior'];
-		}
+                    $behavior = 'title';
+                    if (isset($WOOF->settings['by_text']['behavior'])) {
+                        $behavior = $WOOF->settings['by_text']['behavior'];
+                    }
 
-		$text_where = "";
-		//***
-		switch ($behavior) {
-		    case 'content':
-			$text_where .= " LOWER(post_content) REGEXP '{$woof_text}'";
-			break;
+                    if (isset($_REQUEST['auto_search_by_behavior']) AND ! empty($_REQUEST['auto_search_by_behavior'])) {
+                        $behavior = $_REQUEST['auto_search_by_behavior'];
+                    }
 
-		    case 'title_or_content':
-			$text_where .= " ( LOWER(post_title) REGEXP '{$woof_text}' OR LOWER(post_content) REGEXP '{$woof_text}')";
-			break;
+                    $text_where = "";
+                    //***
+                    switch ($behavior) {
+                        case 'content':
+                            $text_where .= " LOWER(post_content) REGEXP '{$woof_text}'";
+                            break;
 
-		    case 'title_and_content':
-			$text_where .= " ( LOWER(post_title) REGEXP '{$woof_text}' AND LOWER(post_content) REGEXP '{$woof_text}')";
-			break;
+                        case 'title_or_content':
+                            $text_where .= " ( LOWER(post_title) REGEXP '{$woof_text}' OR LOWER(post_content) REGEXP '{$woof_text}')";
+                            break;
 
-		    case 'excerpt':
-			$text_where .= " LOWER(post_excerpt) REGEXP '{$woof_text}'";
-			break;
+                        case 'title_and_content':
+                            $text_where .= " ( LOWER(post_title) REGEXP '{$woof_text}' AND LOWER(post_content) REGEXP '{$woof_text}')";
+                            break;
 
-		    case 'content_or_excerpt':
-			$text_where .= " ( LOWER(post_excerpt) REGEXP '{$woof_text}' OR LOWER(post_content) REGEXP '{$woof_text}')";
-			break;
+                        case 'excerpt':
+                            $text_where .= " LOWER(post_excerpt) REGEXP '{$woof_text}'";
+                            break;
 
-		    case 'title_or_content_or_excerpt':
-			$text_where .= "  (( LOWER(post_title) REGEXP '{$woof_text}') OR ( LOWER(post_excerpt) REGEXP '{$woof_text}') OR ( LOWER(post_content) REGEXP '{$woof_text}'))";
-			break;
+                        case 'content_or_excerpt':
+                            $text_where .= " ( LOWER(post_excerpt) REGEXP '{$woof_text}' OR LOWER(post_content) REGEXP '{$woof_text}')";
+                            break;
 
-		    default:
-			//only by title
-			$text_where .= "  LOWER(post_title) REGEXP '{$woof_text}'";
-			break;
-                 
+                        case 'title_or_content_or_excerpt':
+                            $text_where .= "  (( LOWER(post_title) REGEXP '{$woof_text}') OR ( LOWER(post_excerpt) REGEXP '{$woof_text}') OR ( LOWER(post_content) REGEXP '{$woof_text}'))";
+                            break;
+
+                        default:
+                            //only by title
+                            $text_where .= "  LOWER(post_title) REGEXP '{$woof_text}'";
+                            break;
+                    }
+                }else{
+			$woof_text = str_replace("\&#039;", "\'", $woof_text);
+			$woof_text =str_replace("\&quot;","\"", $woof_text);
+			$woof_text =str_replace("\(","\\\(", $woof_text);
+			$woof_text =str_replace("\)","\\\)", $woof_text);	
+			
+			$search_by_full_word = false;
+
+			if (isset($WOOF->settings['by_text']['search_by_full_word'])) {
+				$search_by_full_word = (int) $WOOF->settings['by_text']['search_by_full_word'];
+			}
+
+			if (!$search_by_full_word) {
+				$woof_text = '%' . $woof_text . '%';
+			}
+
+			$behavior = 'title';
+			if (isset($WOOF->settings['by_text']['behavior'])) {
+				$behavior = $WOOF->settings['by_text']['behavior'];
+			}
+
+			if (isset($_REQUEST['auto_search_by_behavior']) AND ! empty($_REQUEST['auto_search_by_behavior'])) {
+				$behavior = $_REQUEST['auto_search_by_behavior'];
+			}
+
+			$text_where = "";
+			//***
+			switch ($behavior) {
+				case 'content':
+				$text_where .= " LOWER(post_content) LIKE '{$woof_text}'";
+				break;
+
+				case 'title_or_content':
+				$text_where .= " ( LOWER(post_title) LIKE '{$woof_text}' OR LOWER(post_content) LIKE '{$woof_text}')";
+				break;
+
+				case 'title_and_content':
+				$text_where .= " ( LOWER(post_title) LIKE '{$woof_text}' AND LOWER(post_content) LIKE '{$woof_text}')";
+				break;
+
+				case 'excerpt':
+				$text_where .= " LOWER(post_excerpt) LIKE '{$woof_text}'";
+				break;
+
+				case 'content_or_excerpt':
+				$text_where .= " ( LOWER(post_excerpt) LIKE '{$woof_text}' OR LOWER(post_content) LIKE '{$woof_text}')";
+				break;
+
+				case 'title_or_content_or_excerpt':
+				$text_where .= "  (( LOWER(post_title) LIKE '{$woof_text}') OR ( LOWER(post_excerpt) LIKE '{$woof_text}') OR ( LOWER(post_content) LIKE '{$woof_text}'))";
+				break;
+
+				default:
+				//only by title
+				$text_where .= "  LOWER(post_title) LIKE '{$woof_text}' ";
+				break;		
+			}
 		}
 		//by SKU  *******************
 		global $wpdb;
@@ -286,8 +347,9 @@ final class WOOF_EXT_BY_TEXT extends WOOF_EXT {
 		    }
 		}
 		//by SKU  *******************
-
-		$where .= " AND ( " . $text_where . $sku_where . " )";
+     
+                    $where .= " AND ( " . $text_where . $sku_where . " )   ";
+                
 	    }
 	}
 	//***

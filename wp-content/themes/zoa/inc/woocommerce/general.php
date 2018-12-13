@@ -38,41 +38,6 @@ if ( ! function_exists( 'zoa_wc_header_action' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'zoa_wc_sidebar_action' ) ) :
-	function zoa_wc_sidebar_action() {
-		global $woocommerce;
-		$page_account = get_option( 'woocommerce_myaccount_page_id' );
-
-		if ( 'yes' == get_option( 'woocommerce_force_ssl_checkout' ) ) {
-			$logout_url = str_replace( 'http:', 'https:', $logout_url );
-		}
-
-		$count = $woocommerce->cart->cart_contents_count;
-		?>
-		<ul class="sidebar-actions">
-			<li class="sidebar-action">
-				<a href="<?php echo get_permalink( $page_account ); ?>" class="sidebar-action-link">
-					<span class="zoa-icon-user sidebar-action-icon"></span>
-					<?php if ( ! is_user_logged_in() ) : ?>
-						<span class="sidebar-action-text"><?php esc_html_e( 'Login', 'zoa' ); ?></span>
-					<?php else : ?>
-						<span class="sidebar-action-text"><?php esc_html_e( 'Logout', 'zoa' ); ?></span>
-					<?php endif; ?>
-				</a>
-			</li>
-
-			<li class="sidebar-action">
-				<a href="<?php echo wc_get_cart_url(); ?>" id="shopping-cart-btn" class="sidebar-action-link js-cart-button">
-					<span class="zoa-icon-cart sidebar-action-icon"></span>
-					<span class="sidebar-action-text"><?php esc_html_e( 'Shopping Cart', 'zoa' ); ?></span>
-					<span class="sidebar-action-cart"><?php echo esc_html( $count ); ?></span>
-				</a>
-			</li>
-		</ul>
-		<?php
-	}
-endif;
-
 /*REMOVE BREADCRUMBS*/
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 
@@ -140,7 +105,7 @@ function zoa_cart_item( $fragments ) {
 }
 
 /*CART LIST ITEM - AJAX UPDATE*/
-add_filter( 'add_to_cart_fragments', 'zoa_cart_list' );
+add_filter( 'woocommerce_add_to_cart_fragments', 'zoa_cart_list' );
 function zoa_cart_list( $fragments ) {
 	global $woocommerce;
 	$total_item = $woocommerce->cart->cart_contents_count;

@@ -2,6 +2,10 @@
 
 namespace Elementor;
 
+if ( ! class_exists( 'woocommerce' ) ) {
+	return;
+}
+
 class zoa_widget_products extends Widget_Base {
 
 	public function get_categories() {
@@ -218,16 +222,19 @@ class zoa_widget_products extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$cat_id   = $settings['product_cat'];
-		$paged    = get_query_var( 'paged' ) ? intval( get_query_var( 'paged' ) ) : 1;
+		$paged    = get_query_var( 'page' ) ? intval( get_query_var( 'page' ) ) : 1;
 		$args     = array(
 			'post_type'      => 'product',
 			'post_status'    => 'publish',
-			'post__not_in'   => $settings['pro_exclude'],
 			'posts_per_page' => $settings['count'],
 			'orderby'        => $settings['order_by'],
 			'order'          => $settings['order'],
 			'paged'          => $paged,
 		);
+
+		if ( ! empty( $settings['pro_exclude'] ) ) {
+			$args['post__not_in'] = $settings['pro_exclude'];
+		}
 
 		if ( ! empty( $cat_id ) ) :
 			$args['tax_query'] = array(
@@ -241,34 +248,36 @@ class zoa_widget_products extends Widget_Base {
 
 		$products_query = new \WP_Query( $args );
 		if ( ! $products_query->have_posts() ) {
-			return;        }
+			return;
+		}
 
 		?>
-		<div class="zoa-widget-products">			
+		<div class="zoa-widget-products">
+			
 		<?php
-				global $woocommerce_loop;
 
-				$woocommerce_loop['columns'] = (int) $settings['col'];
+		global $woocommerce_loop;
 
-				woocommerce_product_loop_start();
+		$woocommerce_loop['columns'] = (int) $settings['col'];
+
+		woocommerce_product_loop_start();
 
 		while ( $products_query->have_posts() ) :
 			$products_query->the_post();
-			//fw_print( get_the_title() );
 			wc_get_template_part( 'content', 'product' );
-				endwhile;
+		endwhile;
 
-				woocommerce_product_loop_end();
+		woocommerce_product_loop_end();
 
-				woocommerce_reset_loop();
+		woocommerce_reset_loop();
 
 		if ( 'yes' == $settings['pro_pagi'] ) {
-			zoa_paging( $products_query );
+			zoa_paging( $products_query, $paged );
 		}
-
 				wp_reset_postdata();
-			?>
-		</div>		
+		?>
+		</div>
+		
 		<?php
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-
+// @codingStandardsIgnoreStart
 defined( 'ABSPATH' ) || exit;
 
 
@@ -54,6 +54,10 @@ function zoa_body_classes( $classes ) {
 		$classes[] = 'is-page-loading';
 	}
 
+	if ( true === get_theme_mod( 'sticky_add_to_cart_and_checkout', false ) ) {
+	    $classes[] = 'shop-buttons-is-sticky';
+    }
+
 	/*! BROWSER DETECT
 	------------------------------------------------->*/
 	global $is_IE, $is_edge, $is_safari, $is_iphone;
@@ -78,6 +82,11 @@ function zoa_body_classes( $classes ) {
 	------------------------------------------------->*/
 	if ( zoa_blog() ) {
 		$classes[] = 'group-blog';
+
+		$sidebar   = is_active_sidebar( 'blog-widget' ) ? get_theme_mod( 'blog_sidebar', 'full' ) : 'full';
+		if ( 'full' != $sidebar ) {
+			$classes[] = 'group-blog-sidebar-' . $sidebar;
+		}
 	}
 
 	/*! SINGLE PRODUCT GALLERY
@@ -109,6 +118,18 @@ function zoa_body_classes( $classes ) {
 	if ( true === get_theme_mod( 'ajax_single_atc', true ) ) {
 		$classes[] = 'ajax-single-add-to-cart';
 	}
+
+	// Theme version.
+	$theme     = wp_get_theme();
+	$classes[] = 'zoa-' . $theme->get( 'Version' );
+
+	// Mobile sticky header menu.
+	if ( true == get_theme_mod( 'sticky_header', false ) && true == get_theme_mod( 'mobile_sticky_header', false ) ) {
+		$classes[] = 'mobile-header-menu-sticky';
+	}
+
+	// Menu layout.
+	$classes[] = 'has-menu-' . zoa_menu_slug();
 
 	return $classes;
 }
@@ -288,7 +309,7 @@ if ( ! function_exists( 'zoa_open_content_container' ) ) {
 			}
 			?>
 
-			<div id="sidebar-menu-content" class="menu-layout menu-layout-5 <?php echo esc_attr( $sidebar_menu ); ?>">
+			<div id="sidebar-menu-content" class="menu-layout menu-<?php echo esc_attr( $menu_layout ); ?> <?php echo esc_attr( $sidebar_menu ); ?>">
 				<div class="sidebar-menu-top">
 					<?php
 					if ( 'layout-5' === $menu_layout ) :
@@ -322,8 +343,6 @@ if ( ! function_exists( 'zoa_open_content_container' ) ) {
 								'container'      => '',
 							) );
 						}
-						?>
-						<?php
 					} else {
 
 						if ( has_nav_menu( 'primary' ) ) :
@@ -341,6 +360,15 @@ if ( ! function_exists( 'zoa_open_content_container' ) ) {
 						<?php
 						endif;
 
+						if ( 'layout-6' == $menu_layout ) {
+							if ( has_nav_menu( 'tertiary' ) ) {
+								wp_nav_menu( array(
+									'theme_location' => 'tertiary',
+									'menu_class'     => 'theme-primary-menu theme-sidebar-menu layout-6-sidebar-menu',
+									'container'      => '',
+								) );
+							}
+						}
 					}
 					?>
 				</div><!-- .sidebar-menu-middle -->
@@ -465,3 +493,13 @@ if ( ! function_exists( 'zoa_header_footer_elementor_support' ) ) {
 	}
 	add_action( 'after_setup_theme', 'zoa_header_footer_elementor_support' );
 }
+
+// display custom admin notice
+function zoa_custom_admin_notice() { ?>
+	
+	<div class="notice notice-info is-dismissible">
+		<p style="font-size: 14px;"><?php _e('Introduce official Zoa Facebook community group for all users. <a href="https://www.facebook.com/groups/413663839168030/">Say Hi Now!</a> '); ?></p>
+	</div>
+	
+<?php }
+add_action('admin_notices', 'zoa_custom_admin_notice');

@@ -15,7 +15,7 @@
             <?php get_sidebar(); ?>
         </div>
 
-        <main id="main" lass="col-md-9 col-lg-9">
+        <main id="main" class="col-md-9 col-lg-9">
             <?php
             if ( have_posts() ):
                 while ( have_posts() ): the_post();

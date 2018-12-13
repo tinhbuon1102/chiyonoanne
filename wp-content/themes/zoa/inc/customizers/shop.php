@@ -90,6 +90,20 @@ zoa_Kirki::add_field(
 	)
 );
 
+/* ONLY SEARCH PRODUCT */
+zoa_Kirki::add_field( 'zoa', array(
+	'type'        => 'switch',
+	'settings'    => 'product_search',
+	'label'       => esc_attr__( 'Search only product', 'zoa' ),
+	'description' => esc_attr__( 'Show only products in search results', 'zoa' ),
+	'section'     => 'shop',
+	'default'     => 0,
+	'choices'     => array(
+		'off' => esc_attr__( 'Off', 'zoa' ),
+		'on'  => esc_attr__( 'On', 'zoa' ),
+	),
+));
+
 /* AJAX SEARCH FOR SHOP PRODUCTS */
 zoa_Kirki::add_field(
 	'zoa', array(
@@ -111,6 +125,21 @@ zoa_Kirki::add_field(
 		'type'     => 'switch',
 		'settings' => 'quick_action',
 		'label'    => esc_attr__( 'Quick Actions on Mobile', 'zoa' ),
+		'section'  => 'shop',
+		'default'  => false,
+		'choices'  => array(
+			'off' => esc_attr__( 'Off', 'zoa' ),
+			'on'  => esc_attr__( 'On', 'zoa' ),
+		),
+	)
+);
+
+/* STICKY ADD TO CART AND CHECKOUT BUTTON */
+zoa_Kirki::add_field(
+	'zoa', array(
+		'type'     => 'switch',
+		'settings' => 'sticky_add_to_cart_and_checkout',
+		'label'    => esc_attr__( 'Sticky Add to Cart and Checkout Button', 'zoa' ),
 		'section'  => 'shop',
 		'default'  => false,
 		'choices'  => array(

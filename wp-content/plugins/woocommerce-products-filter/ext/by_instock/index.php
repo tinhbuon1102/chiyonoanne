@@ -268,7 +268,7 @@ final class WOOF_EXT_BY_INSTOCK extends WOOF_EXT {
                 }
             }
         }
-        //http://www.dev.woocommerce-filter.com/shop/?swoof=1&pa_size=xl&stock=instock&min_price=15&max_price=80&pa_color=green
+
         return $where;
     }
 

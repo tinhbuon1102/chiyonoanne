@@ -3,6 +3,10 @@ License: Copyright
 
 == Changelog ==
 
+= 1.7.0 =
+
+* Fix. issue with tabs and panels
+
 = 1.6.9 =
 
 * New. divi layout options moved to customizer

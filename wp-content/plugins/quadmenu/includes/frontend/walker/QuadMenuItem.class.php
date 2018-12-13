@@ -161,8 +161,8 @@ abstract class QuadMenuItem {
 
       if (!in_array(sanitize_key($class), array('open', 'active'))) {
 
-        if (substr($class, 0, 4) == 'menu') {
-          $this->item_classes[$i] = str_replace('menu', 'quadmenu', $class);
+        if (substr($class, 0, 9) == 'menu-item') {
+          $this->item_classes[$i] = str_replace('menu-item', 'quadmenu-item', $class);
         }
 
         //if ($class == 'current-menu-ancestor') {

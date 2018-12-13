@@ -22,6 +22,22 @@ ul.woof_list_color li {
     margin: 3px 3px 0 0 !important;
     padding: 0 !important;
 }
+ul.woof_list_color.woof_color_title_col li {
+    display: block;
+}
+.woof_color_title_col li .woof_color_term {
+    display: inline-block;
+}
+ ul.woof_list_color.woof_color_title_col li .woof_color_title{
+    display: inline-block;
+    height: 30px;
+    padding: 5px;
+    vertical-align: top;
+    font-size: 14px;
+}
+.woof_color_title_col p:hover.woof_tooltip span.woof_tooltip_data {
+    bottom: 40px;
+}
 
 .woof_color_term {
     display: block;

@@ -50,6 +50,7 @@ jQuery(function ($) {
                     product_id: id
                 },
                 success: function (keys) {
+                    console.log(keys);
                     if (keys.length > 0) {
                         keys = JSON.parse(keys);
                         var html = $('#woof_meta_li_tpl').html();

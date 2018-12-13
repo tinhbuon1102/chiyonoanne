@@ -52,12 +52,11 @@
 	
 	if ( ! function_exists( 'wvg_remove_default_template' ) ) {
 		function wvg_remove_default_template() {
-			if ( apply_filters( 'wvg_remove_default_template', true ) ) {
-				remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 10 );
-				remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
-				remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );
-				remove_action( 'woocommerce_before_single_product_summary_product_images', 'woocommerce_show_product_thumbnails', 20 );
-			}
+			remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 10 );
+			remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
+			
+			// remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );
+			// remove_action( 'woocommerce_before_single_product_summary_product_images', 'woocommerce_show_product_thumbnails', 20 );
 		}
 	}
 	
@@ -65,16 +64,27 @@
 	// Add Gallery Template MAIN WooCommerce Override
 	//-------------------------------------------------------------------------------
 	
-	function woocommerce_show_product_images() {
-		wc_get_template( 'product-images.php', array(), '', woo_variation_gallery()->template_path() );
+	function __woocommerce_show_product_images() {
+		
+		if ( apply_filters( 'wvg_product_images_template_include_once', false ) ) {
+			include_once woo_variation_gallery()->template_path( 'product-images.php' );
+		} else {
+			wc_get_template( 'product-images.php', array(), '', woo_variation_gallery()->template_path() );
+		}
 	}
 	
 	// Override
-	function woocommerce_show_product_thumbnails() {
+	function __woocommerce_show_product_thumbnails() {
+	
 	}
 	
 	if ( ! function_exists( 'wvg_gallery_template_override' ) ) {
 		function wvg_gallery_template_override( $located, $template_name ) {
+			
+			// Disable for Bundle Product
+			if ( function_exists( 'wc_pb_is_product_bundle' ) && wc_pb_is_product_bundle() ) {
+				return $located;
+			}
 			
 			if ( $template_name == 'single-product/product-image.php' ) {
 				$located = woo_variation_gallery()->template_path( 'product-images.php' );
@@ -90,6 +100,11 @@
 	
 	if ( ! function_exists( 'wvg_gallery_template_part_override' ) ) {
 		function wvg_gallery_template_part_override( $template, $slug ) {
+		 
+			// Disable for Bundle Product
+			if ( function_exists( 'wc_pb_is_product_bundle' ) && wc_pb_is_product_bundle() ) {
+				return $template;
+			}
 			
 			if ( $slug == 'single-product/product-image' ) {
 				$template = woo_variation_gallery()->template_path( 'product-images.php' );

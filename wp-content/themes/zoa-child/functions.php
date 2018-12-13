@@ -40,32 +40,13 @@ function zoa_enqueue_parent_theme_style() {
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812132130', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812140815', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
 //crop portfolio image
 add_theme_support( 'post-thumbnails' );
 add_image_size('portfolio',600,600, true);
-
-//add another jquery version only for validation page
-/*if (!function_exists('modify_jquery')) {
-    function modify_jquery() {
-        if (is_page('contact')) {
-			wp_deregister_script( 'jquery' ); // https://codex.wordpress.org/Function_Reference/wp_deregister_script
-			wp_deregister_script( 'jquery-migrate.min' );  
-			wp_register_script('jquery2_2_4', 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',array(),false,true);
-			wp_register_script( 'jquery', '/wp-includes/js/jquery/jquery.js', array('jquery2_2_4'), false, true );
-			wp_register_script( 'jquery-migrate.min', '/wp-includes/js/jquery/jquery-migrate.min.js', array('jquery'), false, true );  
-			wp_enqueue_script('jquery2_2_4');
-			  
-			wp_enqueue_script( 'jquery');
-			wp_enqueue_script( 'jquery-migrate.min');
-        }
-    }
-}
-// add_action('init', 'modify_jquery');
-add_action('wp_enqueue_scripts', 'modify_jquery');*/
 //add custom css for elementor
 
 //change post number for porfolo archive
@@ -94,14 +75,6 @@ remove_action('wvs_pro_variation_show_archive_variation_after_cart_button', 'wvs
 add_filter('show_admin_bar', '__return_false');
 // Remove the product rating display on product loops
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
-
-
-//typekit
-/*add_action( 'wp_enqueue_scripts', 'prefix_enqueue_scripts' );
-function prefix_enqueue_scripts() {
-	wp_enqueue_script( 'typekit', '//use.typekit.net/kcx8iwf.js', array(), '1.0.0' );
-}
-add_action( 'wp_head', 'prefix_typekit_inline' );*/
 
 //Add TypeKit Font Set
 function chiyono_font_typekit() {
@@ -148,6 +121,7 @@ function custom_styles() {
 add_action( 'wp_enqueue_scripts', 'custom_styles' );
 
 function add_scripts() {
+	wp_register_style( 'woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '' );
 	wp_register_style( 'giftcard-style', get_stylesheet_directory_uri() . '/css/giftcard.css', array(), '' );
 	wp_register_style( 'slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '' );
 	wp_register_style( 'slicktheme-style', get_stylesheet_directory_uri() . '/js/slick/slick-theme.css', array(), '' );
@@ -178,6 +152,7 @@ function add_scripts() {
 	wp_register_script( 'slick-js', get_stylesheet_directory_uri() . '/js/slick/slick.js', array(), false, true);
 	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812131716', array(), false, true);//single shop
 	wp_register_script( 'popup-js', get_stylesheet_directory_uri() . '/js/popup.js?201812012300', array(), false, true);//popup tooltip
+	wp_register_script( 'woof-js', get_stylesheet_directory_uri() . '/js/woof.js?201812140822', array(), false, true);
 	wp_enqueue_script('remodal');
 	
     if ( is_home() || is_front_page() ) {
@@ -216,6 +191,8 @@ function add_scripts() {
 		wp_enqueue_script('formstep-js');
 		wp_enqueue_script('checkout-js');
 	} elseif (is_shop() || is_product_category()){
+		wp_enqueue_style('woof-style');
+		wp_enqueue_script('woof-js');
 		wp_enqueue_script('popup-js');
 	} elseif (is_product()) {
 		wp_enqueue_style('slick-style');
@@ -256,7 +233,7 @@ function custom_scripts() {
 	wp_enqueue_script('quadmenu_new');
 	
 // 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
-	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812111441', array(), false, true );
+	wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812140713', array(), false, true );
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
@@ -293,223 +270,6 @@ function validation_scripts() {
 }
 add_action('wp_enqueue_scripts', 'validation_scripts');
 
-/*MW Form Validation*/
-
-/*if ($('.error')[0]) {
-    $('.mw_wp_form').addClass('mw_wp_form_error');
- }
-add_filter( 'mwform_error_message_mw-wp-form-email', 'custom_mwform_error_message', 10, 3 );
-function custom_mwform_error_message( $error, $key, $rule ) {
-  if ( $key === 'email' && $rule === 'noempty' ) {
-    return __( 'Email is required', 'zoa' );
-  }
-  return $error;
-}
-add_filter( 'mwform_error_message_mw-wp-form-name', 'custom_mwform_error_message', 10, 3 );
-function custom_mwform_error_message( $error, $key, $rule ) {
-  if ( $key === 'email' && $rule === 'noempty' ) {
-    return __( 'Name is required', 'zoa' );
-  }
-  return $error;
-}
-add_filter( 'mwform_error_message_mw-wp-form-namekana', 'custom_mwform_error_message', 10, 3 );
-function custom_mwform_error_message( $error, $key, $rule ) {
-  if ( $key === 'name-kana' && $rule === 'noempty' ) {
-    return 'フリガナが未入力です';
-  }
-  return $error;
-}
-add_filter( 'mwform_error_message_mw-wp-form-tel', 'custom_mwform_error_message', 10, 3 );
-function custom_mwform_error_message( $error, $key, $rule ) {
-  if ( $key === 'tel' && $rule === 'noempty' ) {
-    return __( 'Phone number is required', 'zoa' );
-  }
-  return $error;
-}
-add_filter( 'mwform_error_message_mw-wp-form-company', 'custom_mwform_error_message', 10, 3 );
-function custom_mwform_error_message( $error, $key, $rule ) {
-  if ( $key === 'tel' && $rule === 'noempty' ) {
-    return __( 'Phone number is required', 'zoa' );
-  }
-  return $error;
-}*/
-/*Filter WOOF*/
-if (function_exists('woof_print_tax')) {
-//if (!function_exists('woof_print_tax')) {
-
-    function woof_print_tax($taxonomies, $tax_slug, $terms, $exclude_tax_key, $taxonomies_info, $additional_taxes, $woof_settings, $args, $counter) {
-
-	global $WOOF;
-
-	if ($exclude_tax_key == $tax_slug) {
-	    //$terms = apply_filters('woof_exclude_tax_key', $terms);
-	    if (empty($terms)) {
-		return;
-	    }
-	}
-
-	//***
-
-	if (!woof_only($tax_slug, 'taxonomy')) {
-	    return;
-	}
-
-	//***
-
-
-	$args['taxonomy_info'] = $taxonomies_info[$tax_slug];
-	$args['tax_slug'] = $tax_slug;
-	$args['terms'] = $terms;
-	$args['all_terms_hierarchy'] = $taxonomies[$tax_slug];
-	$args['additional_taxes'] = $additional_taxes;
-
-	//***
-	$woof_container_styles = "";
-	if ($woof_settings['tax_type'][$tax_slug] == 'radio' OR $woof_settings['tax_type'][$tax_slug] == 'checkbox') {
-	    if ($WOOF->settings['tax_block_height'][$tax_slug] > 0) {
-		$woof_container_styles = "max-height:{$WOOF->settings['tax_block_height'][$tax_slug]}px; overflow-y: auto;";
-	    }
-	}
-	//***
-	//https://wordpress.org/support/topic/adding-classes-woof_container-div
-	$primax_class = sanitize_key(WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]));
-	?>
-	<div data-css-class="woof_container_<?php echo $tax_slug ?>" class="woof_container woof_container_<?php echo $woof_settings['tax_type'][$tax_slug] ?> woof_container_<?php echo $tax_slug ?> woof_container_<?php echo $counter ?> woof_container_<?php echo $primax_class ?>">
-	    <div class="woof_container_overlay_item"></div>
-	    <div class="woof_container_inner woof_container_inner_<?php echo $primax_class ?> toggle-wrap">
-	<?php
-	$css_classes = "woof_block_html_items toggle__content";
-	$show_toggle = 0;
-	if (isset($WOOF->settings['show_toggle_button'][$tax_slug])) {
-	    $show_toggle = (int) $WOOF->settings['show_toggle_button'][$tax_slug];
-	}
-	//***
-	$search_query = $WOOF->get_request_data();
-	$block_is_closed = true;
-	if (in_array($tax_slug, array_keys($search_query))) {
-	    $block_is_closed = false;
-	}
-	if ($show_toggle === 1 AND ! in_array($tax_slug, array_keys($search_query))) {
-	    $css_classes .= " woof_closed_block";
-	}
-
-	if ($show_toggle === 2 AND ! in_array($tax_slug, array_keys($search_query))) {
-	    $block_is_closed = false;
-	}
-
-	if (in_array($show_toggle, array(1, 2))) {
-	    $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
-	    if($block_is_closed){
-		$css_classes .= " woof_closed_block";
-	    }else{
-		$css_classes = str_replace('woof_closed_block', '', $css_classes);
-	    }
-	}
-	//***
-	switch ($woof_settings['tax_type'][$tax_slug]) {
-	    case 'checkbox':
-		if ($WOOF->settings['show_title_label'][$tax_slug]) {
-		    ?>
-		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-			    <?php
-			}
-
-			if (!empty($woof_container_styles)) {
-			    $css_classes .= " woof_section_scrolled";
-			}
-			?>
-			<div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
-			<?php
-			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/checkbox.php', $args);
-			?>
-			</div>
-			<?php
-			break;
-		    case 'select':
-			if ($WOOF->settings['show_title_label'][$tax_slug]) {
-			    ?>
-		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-			    <?php
-			}
-			?>
-			<div class="<?php echo $css_classes ?>">
-			<?php
-			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/select.php', $args);
-			?>
-			</div>
-			<?php
-			break;
-		    case 'mselect':
-			if ($WOOF->settings['show_title_label'][$tax_slug]) {
-			    ?>
-		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-				<?php
-			    }
-			    ?>
-			<div class="<?php echo $css_classes ?>">
-			<?php
-			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/mselect.php', $args);
-			?>
-			</div>
-			<?php
-			break;
-
-		    default:
-			if ($WOOF->settings['show_title_label'][$tax_slug]) {
-			    $title = WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]);
-			    $title = explode('^', $title); //for hierarchy drop-down and any future manipulations
-			    if (isset($title[1])) {
-				$title = $title[1];
-			    } else {
-				$title = $title[0];
-			    }
-			    ?>
-		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo $title ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-			    <?php
-			}
-
-			if (!empty($woof_container_styles)) {
-			    $css_classes .= " woof_section_scrolled";
-			}
-			?>
-
-			<div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
-			    <?php
-			    if (!empty(WOOF_EXT::$includes['taxonomy_type_objects'])) {
-				$is_custom = false;
-				foreach (WOOF_EXT::$includes['taxonomy_type_objects'] as $obj) {
-				    if ($obj->html_type == $woof_settings['tax_type'][$tax_slug]) {
-					$is_custom = true;
-					$args['woof_settings'] = $woof_settings;
-					$args['taxonomies_info'] = $taxonomies_info;
-					echo $WOOF->render_html($obj->get_html_type_view(), $args);
-					break;
-				    }
-				}
-
-
-				if (!$is_custom) {
-				    echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
-				}
-			    } else {
-				echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
-			    }
-			    ?>
-
-			</div>
-			<?php
-			break;
-		}
-		?>
-
-		<input type="hidden" name="woof_t_<?php echo $tax_slug ?>" value="<?php echo $taxonomies_info[$tax_slug]->labels->name ?>" /><!-- for red button search nav panel -->
-
-	    </div>
-	</div>
-		    <?php
-		}
-
-	    }
 /**
  * Change the strength requirement on the woocommerce password
  *
@@ -847,17 +607,6 @@ function wpb_woo_my_account_order() {
 	return $myorder;
 }
 add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_order' );
-
-//WOOF filter logic AND
-add_filter('woof_main_query_tax_relations', 'my_woof_main_query_tax_relations');
- 
-function my_woof_main_query_tax_relations()
-{
-    return array(
-    //'product_cat' => 'AND'
-		'pa_color' => 'AND'
-    );
-}
 
 // Remove CSS and/or JS for Select2 used by WooCommerce
 add_action( 'wp_enqueue_scripts', 'wsis_dequeue_stylesandscripts_select2', 100 );
@@ -1538,52 +1287,6 @@ return $query;
 }
 
 add_filter( 'pre_get_posts', 'exclude_category_home' );
-
-//Change Woocommerce product filter
-if (!function_exists('woof_show_btn')) {
-    function woof_show_btn($autosubmit=1,$ajax_redraw=0){
-        ?>
-        <div class="woof_container woof_submit_search_form_container">
-			<div class="toggle-wrap">
-				<div class="toggle__link flex-justify-between toggle__link--no-indicator">
-				<h3 class="toggle__name"><?php esc_html_e( 'Filter by', 'zoa' ); ?></h3>
-            <?php
-            global $WOOF;
-            if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())  ): global $woof_link; ?>
-
-                <?php
-                $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
-                if (empty($woof_reset_btn_txt)) {
-                    $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
-                }
-                $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
-                ?>
-
-                <?php if ($woof_reset_btn_txt != 'none'): ?>
-                    <button class="woof_reset_search_form refinement__clear" data-link="<?php echo $woof_link ?>"><?php echo $woof_reset_btn_txt ?></button>
-                <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if (!$autosubmit OR $ajax_redraw): ?>
-                <?php
-                $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
-                if (empty($woof_filter_btn_txt)) {
-                    $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
-                }
-
-                $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
-                ?>
-                    <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
-            <?php endif; ?>
-					</div><!--/.toggle__link-->
-				</div><!--/.togggle-wrap-->
-        
-        
-		</div>
-		<button id="closeRefinement" class="display--mid-only button"><?php esc_html_e( 'Close Filter', 'zoa' ); ?></button>
-            <?php
-    }
-}
 
 /*! FOOTER
     ------------------------------------------------->*/
@@ -3313,8 +3016,6 @@ function my_jquery_dequeue(){
 	//wp_deregister_script('zoa-custom');	
 }
 
-//add_action('wp_footer','woof_scriptsv2',10000);
-
 /***
 *  Woocommerce customizations
 */
@@ -4128,62 +3829,6 @@ function zoa_wishlist_item_add_to_cart( $text, $wl_product, $_product ) {
 	return $text;
 }
 
-
-add_filter( 'woof_sort_terms_before_out' , 'woof_sort_terms_before_out_call_back' , 10 , 2 );
-
-function woof_sort_terms_before_out_call_back($terms , $type){
-	
-	if ($type != 'color')
-		return $terms;
-	
-	global $woof_settings;
-	
-	foreach ($terms as $term) :
-		$term_vals = get_term_meta($term['term_id'],'product_attribute_color',true);
-		
-			//echo   $term_vals . '<br/>';
-	endforeach;
-	return $terms;
-	echo "<pre>";
-	print_r($woof_settings);
-	echo "</pre>";
-	exit;
-}
-
-add_action('woof_print_html_type_options_color' , 'woof_print_html_type_options_callback', 10, 1);
-
-//settings page hook
-function woof_print_html_type_options_callback()
-{
-	global $WOOF;
-	$all_woof_settings = get_option('woof_settings', array());
-	echo "<pre>";
-	print_r($all_woof_settings);
-	echo "</pre>";
-	echo $WOOF->render_html($this->get_ext_path() . 'views/options.php', array(
-		'key' => $this->html_type,
-		"woof_settings" => get_option('woof_settings', array())
-			)
-	);
-}
-
-function preloader_before_filter() {
-?>
-<!--<script type="text/javascript">
-  jQuery(window).load(function() {
-	 if (jQuery(window).width() < 992) {
-		 jQuery('.lds-dual-ring').hide();
-	 } else {
-		 jQuery('.lds-dual-ring').hide();
-		 jQuery('aside.widget.shop.WOOF_Widget').show();
-	 }
-     
-  });
-</script>-->
-<?php
-}
-add_action( 'wp_footer', 'preloader_before_filter' );
-
 #add_filter( 'woocommerce_product_add_to_cart_text' , 'zoa_woocommerce_product_add_to_cart_text' );
 function zoa_woocommerce_product_add_to_cart_text() {
 	global $product;
@@ -4611,32 +4256,6 @@ function zoa_body_class ($classes, $class)
 	return $classes;
 }
 
-function zoa_pre_get_product_make_filter_or( $query ) {
-	if (
-			$query->query['post_type'] == 'product' && 
-			!isset($query->query['ignore_sticky_posts']) && 
-			isset($query->query_vars['tax_query']) && 
-			count($query->query_vars['tax_query']) > 1 &&
-			(isset($_GET['swoof']) && $_GET['swoof'] == 1)
-			|| (isset($_REQUEST['action']) && $_REQUEST['action'] == 'woof_draw_products')
-	)
-	{
-// 		$query->query['tax_query']['relation'] = 'OR';
-// 		$query->tax_query->queries['relation'] = 'OR';
-// 		$query->tax_query->relation = 'OR';
-		$query->query_vars['tax_query']['relation'] = 'OR';
-		foreach($query->query_vars['tax_query'] as $tax_index => $tax_query)
-		{
-			if(isset($tax_query['taxonomy']) && $tax_query['taxonomy'] == 'product_visibility')
-			{
-				unset($query->query_vars['tax_query'][$tax_index]);
-			}
-		}
-	}
-	return $query;
-}
-add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );
-
 function getCartGiftCardData()
 {
 	$giftCardData = array();
@@ -4664,3 +4283,361 @@ function isHideShippingByMailGiftCard()
 	}
 	return count($giftCardData) == 1 && end($giftCardData) == 'Mail to recipient';
 }
+
+/*WOOF OVERWRITE FUNCTION*/
+/*Filter WOOF*/
+/*if (function_exists('woof_print_tax')) {
+//if (!function_exists('woof_print_tax')) {
+
+    function woof_print_tax($taxonomies, $tax_slug, $terms, $exclude_tax_key, $taxonomies_info, $additional_taxes, $woof_settings, $args, $counter) {
+
+	global $WOOF;
+
+	if ($exclude_tax_key == $tax_slug) {
+	    //$terms = apply_filters('woof_exclude_tax_key', $terms);
+	    if (empty($terms)) {
+		return;
+	    }
+	}
+
+	//***
+
+	if (!woof_only($tax_slug, 'taxonomy')) {
+	    return;
+	}
+
+	//***
+
+
+	$args['taxonomy_info'] = $taxonomies_info[$tax_slug];
+	$args['tax_slug'] = $tax_slug;
+	$args['terms'] = $terms;
+	$args['all_terms_hierarchy'] = $taxonomies[$tax_slug];
+	$args['additional_taxes'] = $additional_taxes;
+
+	//***
+	$woof_container_styles = "";
+	if ($woof_settings['tax_type'][$tax_slug] == 'radio' OR $woof_settings['tax_type'][$tax_slug] == 'checkbox') {
+	    if ($WOOF->settings['tax_block_height'][$tax_slug] > 0) {
+		$woof_container_styles = "max-height:{$WOOF->settings['tax_block_height'][$tax_slug]}px; overflow-y: auto;";
+	    }
+	}
+	//***
+	//https://wordpress.org/support/topic/adding-classes-woof_container-div
+	$primax_class = sanitize_key(WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]));
+	?>
+	<div data-css-class="woof_container_<?php echo $tax_slug ?>" class="woof_container woof_container_<?php echo $woof_settings['tax_type'][$tax_slug] ?> woof_container_<?php echo $tax_slug ?> woof_container_<?php echo $counter ?> woof_container_<?php echo $primax_class ?>">
+	    <div class="woof_container_overlay_item"></div>
+	    <div class="woof_container_inner woof_container_inner_<?php echo $primax_class ?> toggle-wrap">
+	<?php
+	$css_classes = "woof_block_html_items toggle__content";
+	$show_toggle = 0;
+	if (isset($WOOF->settings['show_toggle_button'][$tax_slug])) {
+	    $show_toggle = (int) $WOOF->settings['show_toggle_button'][$tax_slug];
+	}
+	//***
+	$search_query = $WOOF->get_request_data();
+	$block_is_closed = true;
+	if (in_array($tax_slug, array_keys($search_query))) {
+	    $block_is_closed = false;
+	}
+	if ($show_toggle === 1 AND ! in_array($tax_slug, array_keys($search_query))) {
+	    $css_classes .= " woof_closed_block";
+	}
+
+	if ($show_toggle === 2 AND ! in_array($tax_slug, array_keys($search_query))) {
+	    $block_is_closed = false;
+	}
+
+	if (in_array($show_toggle, array(1, 2))) {
+	    $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
+	    if($block_is_closed){
+		$css_classes .= " woof_closed_block";
+	    }else{
+		$css_classes = str_replace('woof_closed_block', '', $css_classes);
+	    }
+	}
+	//***
+	switch ($woof_settings['tax_type'][$tax_slug]) {
+	    case 'checkbox':
+		if ($WOOF->settings['show_title_label'][$tax_slug]) {
+		    ?>
+		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+			    <?php
+			}
+
+			if (!empty($woof_container_styles)) {
+			    $css_classes .= " woof_section_scrolled";
+			}
+			?>
+			<div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
+			<?php
+			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/checkbox.php', $args);
+			?>
+			</div>
+			<?php
+			break;
+		    case 'select':
+			if ($WOOF->settings['show_title_label'][$tax_slug]) {
+			    ?>
+		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+			    <?php
+			}
+			?>
+			<div class="<?php echo $css_classes ?>">
+			<?php
+			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/select.php', $args);
+			?>
+			</div>
+			<?php
+			break;
+		    case 'mselect':
+			if ($WOOF->settings['show_title_label'][$tax_slug]) {
+			    ?>
+		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+				<?php
+			    }
+			    ?>
+			<div class="<?php echo $css_classes ?>">
+			<?php
+			echo $WOOF->render_html(WOOF_PATH . 'views/html_types/mselect.php', $args);
+			?>
+			</div>
+			<?php
+			break;
+
+		    default:
+			if ($WOOF->settings['show_title_label'][$tax_slug]) {
+			    $title = WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]);
+			    $title = explode('^', $title); //for hierarchy drop-down and any future manipulations
+			    if (isset($title[1])) {
+				$title = $title[1];
+			    } else {
+				$title = $title[0];
+			    }
+			    ?>
+		    	<div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo $title ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+			    <?php
+			}
+
+			if (!empty($woof_container_styles)) {
+			    $css_classes .= " woof_section_scrolled";
+			}
+			?>
+
+			<div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
+			    <?php
+			    if (!empty(WOOF_EXT::$includes['taxonomy_type_objects'])) {
+				$is_custom = false;
+				foreach (WOOF_EXT::$includes['taxonomy_type_objects'] as $obj) {
+				    if ($obj->html_type == $woof_settings['tax_type'][$tax_slug]) {
+					$is_custom = true;
+					$args['woof_settings'] = $woof_settings;
+					$args['taxonomies_info'] = $taxonomies_info;
+					echo $WOOF->render_html($obj->get_html_type_view(), $args);
+					break;
+				    }
+				}
+
+
+				if (!$is_custom) {
+				    echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
+				}
+			    } else {
+				echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
+			    }
+			    ?>
+
+			</div>
+			<?php
+			break;
+		}
+		?>
+
+		<input type="hidden" name="woof_t_<?php echo $tax_slug ?>" value="<?php echo $taxonomies_info[$tax_slug]->labels->name ?>" /><!-- for red button search nav panel -->
+
+	    </div>
+	</div>
+		    <?php
+		}
+
+	    }//function_exists('woof_print_tax')*/
+//WOOF filter logic AND
+/*add_filter('woof_main_query_tax_relations', 'my_woof_main_query_tax_relations');
+ 
+function my_woof_main_query_tax_relations()
+{
+    return array(
+    //'product_cat' => 'AND'
+		//'pa_color' => 'AND'
+    );
+}*/
+if (!function_exists('woof_show_btn')) {
+    function woof_show_btn($autosubmit=1,$ajax_redraw=0){
+        ?>
+        <div class="woof_container woof_submit_search_form_container">
+			<div class="toggle-wrap">
+				<div class="toggle__link flex-justify-between toggle__link--no-indicator">
+				<h3 class="toggle__name"><?php esc_html_e( 'Filter by', 'zoa' ); ?></h3>
+            <?php
+            global $WOOF;
+            if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())  ): global $woof_link; ?>
+
+                <?php
+                $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
+                if (empty($woof_reset_btn_txt)) {
+                    $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
+                }
+                $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
+                ?>
+
+                <?php if ($woof_reset_btn_txt != 'none'): ?>
+                    <button class="woof_reset_search_form refinement__clear" data-link="<?php echo $woof_link ?>"><?php echo $woof_reset_btn_txt ?></button>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php if (!$autosubmit OR $ajax_redraw): ?>
+                <?php
+                $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
+                if (empty($woof_filter_btn_txt)) {
+                    $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
+                }
+
+                $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
+                ?>
+                    <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
+            <?php endif; ?>
+					</div><!--/.toggle__link-->
+				</div><!--/.togggle-wrap-->
+        
+        
+		</div>
+		<button id="closeRefinement" class="display--mid-only button"><?php esc_html_e( 'Close Filter', 'zoa' ); ?></button>
+            <?php
+    }
+}//!function_exists('woof_show_btn')
+//Change Woocommerce product filter
+/*if (!function_exists('woof_show_btn')) {
+    function woof_show_btn($autosubmit=1,$ajax_redraw=0){
+        ?>
+        <div class="woof_container woof_submit_search_form_container">
+			<div class="toggle-wrap">
+				<div class="toggle__link flex-justify-between toggle__link--no-indicator">
+				<h3 class="toggle__name"><?php esc_html_e( 'Filter by', 'zoa' ); ?></h3>
+            <?php
+            global $WOOF;
+            if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())  ): global $woof_link; ?>
+
+                <?php
+                $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
+                if (empty($woof_reset_btn_txt)) {
+                    $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
+                }
+                $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
+                ?>
+
+                <?php if ($woof_reset_btn_txt != 'none'): ?>
+                    <button class="woof_reset_search_form refinement__clear" data-link="<?php echo $woof_link ?>"><?php echo $woof_reset_btn_txt ?></button>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php if (!$autosubmit OR $ajax_redraw): ?>
+                <?php
+                $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
+                if (empty($woof_filter_btn_txt)) {
+                    $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
+                }
+
+                $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
+                ?>
+                    <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
+            <?php endif; ?>
+					</div><!--/.toggle__link-->
+				</div><!--/.togggle-wrap-->
+        
+        
+		</div>
+		<button id="closeRefinement" class="display--mid-only button"><?php esc_html_e( 'Close Filter', 'zoa' ); ?></button>
+            <?php
+    }
+}//!function_exists('woof_show_btn')*/
+//add_action('wp_footer','woof_scriptsv2',10000);
+/*add_filter( 'woof_sort_terms_before_out' , 'woof_sort_terms_before_out_call_back' , 10 , 2 );
+
+function woof_sort_terms_before_out_call_back($terms , $type){
+	
+	if ($type != 'color')
+		return $terms;
+	
+	global $woof_settings;
+	
+	foreach ($terms as $term) :
+		$term_vals = get_term_meta($term['term_id'],'product_attribute_color',true);
+		
+			//echo   $term_vals . '<br/>';
+	endforeach;
+	return $terms;
+	echo "<pre>";
+	print_r($woof_settings);
+	echo "</pre>";
+	exit;
+}
+
+add_action('woof_print_html_type_options_color' , 'woof_print_html_type_options_callback', 10, 1);
+
+//settings page hook
+function woof_print_html_type_options_callback()
+{
+	global $WOOF;
+	$all_woof_settings = get_option('woof_settings', array());
+	echo "<pre>";
+	print_r($all_woof_settings);
+	echo "</pre>";
+	echo $WOOF->render_html($this->get_ext_path() . 'views/options.php', array(
+		'key' => $this->html_type,
+		"woof_settings" => get_option('woof_settings', array())
+			)
+	);
+}*/
+
+/*function preloader_before_filter() {
+?>
+<!--<script type="text/javascript">
+  jQuery(window).load(function() {
+	 if (jQuery(window).width() < 992) {
+		 jQuery('.lds-dual-ring').hide();
+	 } else {
+		 jQuery('.lds-dual-ring').hide();
+		 jQuery('aside.widget.shop.WOOF_Widget').show();
+	 }
+     
+  });
+</script>-->
+<?php
+}
+add_action( 'wp_footer', 'preloader_before_filter' );*/
+/*function zoa_pre_get_product_make_filter_or( $query ) {
+	if (
+			$query->query['post_type'] == 'product' && 
+			!isset($query->query['ignore_sticky_posts']) && 
+			isset($query->query_vars['tax_query']) && 
+			count($query->query_vars['tax_query']) > 1 &&
+			(isset($_GET['swoof']) && $_GET['swoof'] == 1)
+			|| (isset($_REQUEST['action']) && $_REQUEST['action'] == 'woof_draw_products')
+	)
+	{
+// 		$query->query['tax_query']['relation'] = 'OR';
+// 		$query->tax_query->queries['relation'] = 'OR';
+// 		$query->tax_query->relation = 'OR';
+		$query->query_vars['tax_query']['relation'] = 'OR';
+		foreach($query->query_vars['tax_query'] as $tax_index => $tax_query)
+		{
+			if(isset($tax_query['taxonomy']) && $tax_query['taxonomy'] == 'product_visibility')
+			{
+				unset($query->query_vars['tax_query'][$tax_index]);
+			}
+		}
+	}
+	return $query;
+}
+add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );*/

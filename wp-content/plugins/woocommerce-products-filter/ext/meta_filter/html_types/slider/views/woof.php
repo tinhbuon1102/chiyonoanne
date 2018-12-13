@@ -75,7 +75,10 @@ if ($show_toggle === 1 AND empty($current_request)) {
 if ($show_toggle === 2 AND empty($current_request)) {
     $block_is_closed = false;
 }
-
+$tooltip_text = "";
+if (isset($meta_settings['tooltip_text'])) {
+    $tooltip_text = $meta_settings['tooltip_text'];
+}
 if (in_array($show_toggle, array(1, 2))) {
     $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
     if($block_is_closed){
@@ -90,12 +93,15 @@ $top_panel_txt="";
 $top_panel_txt= WOOF_HELPER::wpml_translate(null,$options['title']);
 $top_panel_txt.=sprintf(":%s %s %s",$meta_settings['prefix'],$current_request_txt,$meta_settings['postfix'])
 ?>
-<div data-css-class="woof_meta_slider_container" class="woof_meta_slider_container woof_container">
+<div data-css-class="woof_meta_slider_container" class="woof_meta_slider_container woof_container woof_container_<?php echo "slider_".$meta_key ?>">
     <div class="woof_container_inner">
         <div class="woof_container_inner woof_container_inner_meta_slider">
             <?php if ($show_title_label) {
                 ?>
-            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>><?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+            <<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
+            <?php echo WOOF_HELPER::wpml_translate(null,$options['title']) ?>
+            <?php echo WOOF_HELPER::draw_tooltipe(WOOF_HELPER::wpml_translate(null,$options['title']),$tooltip_text) ?>    
+            <?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></<?php echo apply_filters('woof_title_tag', 'h4'); ?>>
                 <?php
             }?>
             <div class="<?php echo $css_classes ?>">

@@ -48,7 +48,7 @@ if (!defined('ABSPATH'))
         $data['options']=$this->type_options;
         $data['relation']=(isset($this->woof_settings[$this->meta_key]["search_logic"]))?$this->woof_settings[$this->meta_key]["search_logic"]:"OR";
         $data['meta_options']= (isset($this->type_options["options"]))?$this->type_options["options"]:"";
-     
+        $data['meta_settings']=(isset($this->woof_settings[$this->meta_key]))?$this->woof_settings[$this->meta_key]:"";
         if($this->woof_settings[$this->meta_key]["show"]){
             echo  $this->render_html($this->get_meta_filter_path().'/views/woof.php', $data);
         }

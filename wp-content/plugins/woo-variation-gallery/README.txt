@@ -105,6 +105,16 @@ Yes, it is.
 
 == Changelog ==
 
+= 1.1.16 =
+
+* Fix: Bundle product disable
+* Add: Customizr theme support
+
+= 1.1.15 =
+
+* Fix Shopkeeper and Saha theme template duplication issue.
+* Add `wvg_product_images_template_include_once` filter added.
+
 = 1.1.14 =
 
 * Fix backend JS Issue

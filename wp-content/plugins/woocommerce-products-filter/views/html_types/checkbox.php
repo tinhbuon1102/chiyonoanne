@@ -3,7 +3,14 @@
 global $WOOF;
 $_REQUEST['additional_taxes'] = $additional_taxes;
 $_REQUEST['hide_terms_count_txt'] = isset($this->settings['hide_terms_count_txt']) ? $this->settings['hide_terms_count_txt'] : 0;
-
+//***
+if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
+    if((int)$_REQUEST['hide_terms_count_txt_short']==1){
+        $_REQUEST['hide_terms_count_txt']=1;
+    }else{
+        $_REQUEST['hide_terms_count_txt']=0;
+    }
+}
 //***
 
 if (!function_exists('woof_draw_checkbox_childs'))

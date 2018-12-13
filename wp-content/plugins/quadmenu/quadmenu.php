@@ -4,7 +4,7 @@
  * Plugin Name: QuadMenu
  * Plugin URI:  https://www.quadmenu.com
  * Description: The best drag & drop WordPress Mega Menu plugin which allow you to create Tabs Menus & Carousel Menus.
- * Version:     1.7.0
+ * Version:     1.7.1
  * Author:      Mega Menu
  * Author URI:  https://www.quadmenu.com
  * Copyright:   2018 QuadMenu (https://www.quadmenu.com)
@@ -138,7 +138,7 @@ if (!class_exists('QuadMenu')) :
 
       define('QUADMENU_NAME', 'QuadMenu');
 
-      define('QUADMENU_VERSION', '1.7.0');
+      define('QUADMENU_VERSION', '1.7.1');
 
       define('QUADMENU_OPTIONS', "quadmenu_{$this->theme()}");
 
@@ -441,7 +441,9 @@ if (!class_exists('QuadMenu')) :
 
     static function wp_setup_nav_menu_item($ID) {
 
-      if (!$item_obj = wp_cache_get('quadmenu', "wp_setup_nav_menu_item_{$ID}")) {
+      $item_obj = wp_cache_get("wp_setup_nav_menu_item_{$ID}", 'quadmenu');
+
+      if ($item_obj === false) {
 
         $item_obj = get_post($ID);
 
@@ -449,7 +451,7 @@ if (!class_exists('QuadMenu')) :
           $item_obj = wp_setup_nav_menu_item($item_obj);
         }
 
-        wp_cache_add('quadmenu', $item_obj, "wp_setup_nav_menu_item_{$ID}");
+        wp_cache_set("wp_setup_nav_menu_item_{$ID}", $item_obj, 'quadmenu');
       }
 
       return $item_obj;
@@ -466,9 +468,9 @@ if (!class_exists('QuadMenu')) :
       }
 
       if (isset($item->columns)) {
-        
+
         //var_dump($item->columns);
-        
+
         $item->columns = array_diff(array_filter((array) $item->columns), array('off'));
       }
 

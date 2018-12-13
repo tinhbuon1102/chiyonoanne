@@ -265,10 +265,6 @@ In the free WooCommerce attribute variation plugin, besides creating size, brand
 <ul>
 <li><a target="_blank" href="http://bit.ly/getwoopluginsgroup">Join Our Facebook Group</a></li>
 </ul>
-<h4>For contribution</h4>
-<ul>
-<li><a target="_blank" href="https://github.com/EmranAhmed/woo-variation-swatches/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-swatches">Github Repo</a></li>
-</ul>
 <h4>For more information</h4>
 <ul>
 <li><a target="_blank" href="https://getwooplugins.com/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-swatches">Visit Our Official Website</a></li>
@@ -359,6 +355,11 @@ And your are ready to go.
 12. Global Variation Color Swatches Attribute List Preview
 
 == Changelog ==
+
+= 1.0.50 =
+
+* Fix: Archive more click issue.
+* Add: Adiva Theme support.
 
 = 1.0.49 =
 

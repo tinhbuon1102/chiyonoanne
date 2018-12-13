@@ -13,4 +13,5 @@ $manifest['supported_extensions'] = array(
 	'backups'      => array(),
 	'megamenu'     => array(),
 	'social-share' => array(),
+	'size-guide'   => array(),
 );
