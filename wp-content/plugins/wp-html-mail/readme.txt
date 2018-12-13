@@ -3,7 +3,7 @@ Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, wp-e-commerce, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 3.9
 Tested up to: 5.0
-Stable tag: 2.8.3.1
+Stable tag: 2.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,33 @@ All in one email template solution for Ninja Forms, Caldera Forms, Gravity Forms
 == Description ==
 Beautiful responsive HTML mails, fully customizable without any coding knowledge 
 Create your own professional email template within a few minutes. 
-Easily change texts, colors, fonts, pictures, alignment and see all your changes immediately in the live preview.
+
+= Features = 
+
+* **Responsive & Device independent:**
+Our e-mail template has been tested in all major desktop, web and mobile mailclients. 
+* **Text or image header:** 
+Either style your email header with colors and text, use your logo or design a banner.
+* **Customize colors and fonts:**
+Differnt plugins send different emails but you can define global color and font settings for headlines, text, links and more to give all your emails a common professional look.
+* **Add your companies legal information to the footer:** 
+The email footer can contain links to your legal pages, your contact data or whatever you want. 
+* **Inline CSS:** 
+Webclients do not override your styles, because we move all style definitions to inline styles.
+* **Email test mode:** 
+Redirect all emails to your own email address for testing or for your staging system.
+* **Live Preview:**
+See all your changes immediately in the live preview.
+* **WooCommerce AddOn (PRO):**
+Customize design, text, products table, simply everything with our Drag & Drop MailBuilder [WooCommerce email templates](https://etzelstorfer.com/en/downloads/wp-html-mail-woocommerce/)
+* **Easy Digital Downloads AddOn (PRO):**
+Read more about the [Easy Digital Downloads Email template](https://etzelstorfer.com/en/downloads/wp-html-mail-easy-digital-downloads/)
+
+
+= Tutorial: Create your WordPress email template in 2 minutes =
+
+https://youtu.be/FwtG9NqoeJA
+
 
 Turn email formatting on/off for specific plugins.
 Currently supported are
@@ -22,6 +48,7 @@ Currently supported are
 * Contact Form 7
 * Gravity Forms
 * Gravity Flow
+* HappyForms
 * WP Support Plus Responsive Ticket System
 * Birthday Emails
 * [WPForms and WPForms Lite](http://etzelstorfer.com/en/downloads/wp-html-mail-wpforms/)
@@ -31,32 +58,14 @@ Currently supported are
 * WP E-Commerce
 
 
+[more about WP HTML Mail](http://wp-html-mail.com)
 
 
 https://youtu.be/RV8vUNCWOZw
 
-[more about WP HTML Mail](http://wp-html-mail.com)
-
-= Tutorial: Create your WordPress email template in 2 minutes =
-
-https://youtu.be/FwtG9NqoeJA
-
-= Create your own email template for WooCommerce =
-Customize design, text, products table, simply everything with our Drag & Drop MailBuilder [WooCommerce AddOn](http://etzelstorfer.com/en/downloads/wp-html-mail-woocommerce/)
-
-
-= Your own email template for Easy Digital Downloads =
-Read more about the [Easy Digital Downloads AddOn](http://etzelstorfer.com/en/downloads/wp-html-mail-easy-digital-downloads/)
-
-= Responsive & Device independent =
-Our e-mail template has been tested in all major desktop, web and mobile mailclients. 
-
-= Inline CSS =
-Webclients do not override your styles, because we move all style definitions to inline styles.
-
 
 = Works with most email delivery plugins =
-* [Postman SMTP Mailer](https://wordpress.org/plugins/postman-smtp/)
+* [Post SMTP Mailer/Email Log](https://wordpress.org/plugins/post-smtp/)
 * [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/)
 * [wpMandrill](https://wordpress.org/plugins/wpmandrill/)
 * ...
@@ -93,6 +102,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 
 == Changelog ==
+
+
+= 2.8.4  =
+* Happy Forms support
+* Added email test mode to redirect all messages to your own mailbox
 
 
 = 2.8.3.1 = 
@@ -262,7 +276,7 @@ add_filter('haet_mail_footer', function( $header ){
 });
 `
 
-= Can I add ustom CSS code to my WordPress emails? =
+= Can I add custom CSS code to my WordPress emails? =
 
 You can add your own CSS code for desktop and mobile. Just add this example to your (child-)themes functions.php and customize it:
 

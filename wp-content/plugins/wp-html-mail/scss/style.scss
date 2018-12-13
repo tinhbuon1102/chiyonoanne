@@ -91,6 +91,14 @@
     input[type="number"]{
         width:50px;
     }
+
+    #haet_mail_testmode_recipient{
+        display: none;
+    }
+
+    #haet_mail_testmode:checked+label+#haet_mail_testmode_recipient{
+        display: block;
+    }
 }
 
 .haet-font-toolbar{

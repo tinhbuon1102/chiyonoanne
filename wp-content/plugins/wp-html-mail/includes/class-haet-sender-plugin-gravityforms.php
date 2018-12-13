@@ -53,7 +53,6 @@ class Haet_Sender_Plugin_GravityForms extends Haet_Sender_Plugin {
             else
                 $email['message'] .= '<!-- [IS GRAVITY EMAIL] -->';
 
-            error_log( $email['message'] );
             return $email;
         });
     }

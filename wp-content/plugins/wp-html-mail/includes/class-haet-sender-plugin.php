@@ -8,6 +8,7 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-contact-form-7.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wp-support-plus-responsive-ticket-system.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-birthday-emails.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-gravityforms.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-happyforms.php';
 
 class Haet_Different_Plugin_Exception extends Exception {}
 
@@ -64,7 +65,13 @@ class Haet_Sender_Plugin {
                 'class'     =>  'Haet_Sender_Plugin_GravityForms',
                 'display_name' => 'GravityForms',
                 'image_url' =>  HAET_MAIL_URL . '/images/gravityforms.png'
-            )
+            ),
+            'happyforms'   =>  array(
+                'name'      =>  'happyforms',
+                'file'      =>  'happyforms/happyforms.php',
+                'class'     =>  'Haet_Sender_Plugin_Happyforms',
+                'display_name' => 'HappyForms'
+            ),
         );
 
         return apply_filters( 'haet_mail_available_plugins', $plugins );

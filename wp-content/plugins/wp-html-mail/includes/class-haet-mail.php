@@ -15,6 +15,8 @@ final class Haet_Mail {
 
 	function __construct(){
 		add_action( 'plugins_loaded', 'Haet_Sender_Plugin::hook_plugins', 30 );
+
+		add_action( 'admin_notices', array( $this, 'maybe_show_testmode_warning' ) );
 	}
 	
 	
@@ -359,7 +361,8 @@ final class Haet_Mail {
 			// drop <style> blocks in content
 			$email['message'] = preg_replace('/\<style(.*)\<\/style\>/simU', '', $email['message']);
 			
-			$pre_header_text = substr( strip_tags( $email['message'] ), 0, 200 );
+			// mb_substr instead of substr suggested here: https://wordpress.org/support/topic/encoding-problem-on-woocommerce/
+			$pre_header_text = mb_substr( strip_tags( $email['message'] ), 0, 200 );
 			
 
 			if( $this->is_mailbuilder_message( $email['message'] ) )
@@ -403,6 +406,10 @@ final class Haet_Mail {
 		$email['subject'] = html_entity_decode( $email['subject'] );
 
 		$email = $this->add_attachments( $email );
+
+
+		if( $options['testmode'] && is_email( trim( $options['testmode_recipient'] ) ) )
+			$email['to'] = trim( $options['testmode_recipient'] );
 
 		return $email;
 	}
@@ -669,6 +676,20 @@ final class Haet_Mail {
 		return array_merge( array(
 			'<a href="' . get_admin_url(null,'options-general.php?page=wp-html-mail') . '">' . __( 'Settings' ) . '</a>'
 		), $links );
+	}
+
+
+	public function maybe_show_testmode_warning(){
+		$options = $this->get_options();
+		if( is_array( $options ) && isset( $options['testmode'] ) && isset( $options['testmode_recipient'] ) ){
+			if( $options['testmode'] && is_email( trim( $options['testmode_recipient'] ) ) ){
+				?>
+				<div class="notice notice-warning">
+				    <p><?php echo sprintf( __( '<strong>Warning:</strong> WP HTML Mail – Email test mode is enabled. All emails are redirected to <strong>%1$s</strong>.', 'wp-html-mail' ), $options['testmode_recipient'] ); ?></p>
+				</div>
+				<?php
+			}
+		}
 	}
 }
 

@@ -635,12 +635,14 @@ function woo_custom_cart_button_text() { return __('Add to cart', ''); }
 //auto email text shortcode
 // Function to add text shortcode to posts and pages
 function email_process_shortcode(){
-    return "<p style='text-align: center;'>Your order has been received and is now being processed.</p>
-<p style='text-align: center;'>We'll drop another email when your order ships.</p>
-<p style='text-align: center;'>Your order details are shown below for your reference:</p>";
+    return '<p style="text-align: center;">'. __( 'Your order has been received and is now being processed.', 'zoa' ) . '<p style="text-align: center;">'. __( "We'll drop another email when your order ships.", "zoa" ) . '</p><p style="text-align: center;">'. __( 'Your order details are shown below for your reference:', 'zoa' ) . '</p>';
 }
+add_shortcode('order-process-text', 'email_process_shortcode');
 
-add_shortcode('order-processing-text', 'email_process_shortcode');
+function email_onhold_shortcode(){
+	return '<p style="text-align: center;">'. __( 'Your order has been received and is now on hold.', 'zoa' ) . '<p style="text-align: center;">'. __( "We'll drop another email after you purchase for this order.", "zoa" ) . '</p><p style="text-align: center;">'. __( 'Your order details are shown below for your reference:', 'zoa' ) . '</p>';
+}
+add_shortcode('order-onhold-text', 'email_onhold_shortcode');
 
 //user login shortcode
 function check_user ($params, $content = null){

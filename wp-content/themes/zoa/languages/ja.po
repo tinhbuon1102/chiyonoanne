@@ -2141,3 +2141,18 @@ msgstr "こんな方にオススメ"
 
 msgid "Just go to next step because your item doesn't need shipping info."
 msgstr "カートに入っている商品は配送が必要ありません。次のステップへお進みください。"
+
+msgid "Your order has been received and is now being processed."
+msgstr "お客様のご注文を受けつけました。<br/>現在ご注文は「処理中」となります。"
+
+msgid "We'll drop another email when your order ships."
+msgstr "配送時に別途自動メールが配信されますので、<br/>お届けまで今しばらくお待ちください。"
+
+msgid "Your order has been received and is now on hold."
+msgstr "お客様のご注文を受けつけました。<br/>現在ご注文は「保留中」となります。<br/>振込期限内に以下の振込先までご入金をお願い致します。<br/>ご入金確認後、注文は「処理中」となります。"
+
+msgid "We'll drop another email after you purchase for this order."
+msgstr "ご入金後に別途自動メールが配信されます。"
+
+msgid "Your order details are shown below for your reference:"
+msgstr "ご注文詳細は以下です。"
