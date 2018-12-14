@@ -50,7 +50,13 @@ jQuery(document).ready(function($){
 		{
 			if (isValid)
 			{
-				$('#previewBox').show();
+				var radioval = $('input[name="mwb_wgm_send_giftcard"]:checked').val();
+				if(radioval === "Shipping") {
+					$('#previewBox').hide();
+				}else{
+					$('#previewBox').show();
+				}
+				
 				$('button[name="add-to-cart"]').show();
 				$('button[name="add-to-cart-clone"]').hide();
 			}
@@ -61,12 +67,12 @@ jQuery(document).ready(function($){
 			}
 		}
 		$('input[name="mwb_wgm_send_giftcard"]:radio').change( function() {
-			var radioval = $(this).val();
-			if(radioval === "Shipping") {
-				$('#previewBox').hide();
-			}else{
-				$('#previewBox').show();
+			var isValid = false;
+			if (!$('form.cart .inputError').length)
+			{
+				isValid = isAddToCartValid();
 			}
+			showHideAddCartBtn(isValid);
 		});
 		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
 			setTimeout(function(){
