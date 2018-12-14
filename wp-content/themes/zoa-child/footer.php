@@ -12,7 +12,8 @@ else:
 endif;
 // close tag content container `</div>`
 zoa_after_content();
-
+echo '<div class="site-hider"><div class="site-hider__logo"></div></div>';
+echo '<div class="site-overlay"></div>';
 // quick view markup
 if ( class_exists( 'woocommerce' ) ) {
 	zoa_product_action();
