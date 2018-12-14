@@ -2,14 +2,17 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-11-14 09:54:09+0000\n"
+"PO-Revision-Date: 2018-12-14 18:23+0900\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/2.4.0-alpha\n"
+"X-Generator: Poedit 1.8.12\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #: includes/emails/class-wc-email-customer-invoice.php:72
 msgid "Invoice for order #{order_number}"
@@ -5232,7 +5235,7 @@ msgstr "%s が共有"
 
 #: includes/admin/helper/views/html-main.php:92
 msgid "Subscription: Unlimited"
-msgstr "定期購入: 無制限"
+msgstr "定期購入\b: 無制限"
 
 #. translators: %1$d: sites active, %2$d max sites active
 #: includes/admin/helper/views/html-main.php:90
@@ -21793,7 +21796,6 @@ msgstr "カード番号"
 msgid "Order status changed from %1$s to %2$s."
 msgstr "注文状況を %1$s から %2$s に変更しました。"
 
-#. #-#-#-#-#  woocommerce-code.pot (WooCommerce 3.5.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/admin/class-wc-admin-assets.php:84
 #: includes/admin/class-wc-admin-menus.php:59
@@ -26210,3 +26212,6 @@ msgstr "オーランド諸島"
 #: i18n/countries.php:14
 msgid "Afghanistan"
 msgstr "アフガニスタン"
+
+msgid "Enter your full address to see shipping costs."
+msgstr "送料はチェックアウトページにてお届け先住所をご入力ご確認いただけます。"

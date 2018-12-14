@@ -2653,7 +2653,7 @@ if( !class_exists( 'MWB_WGM_Card_Product_Function' ) )
 											if(isset($mwb_wgm_method_enable) && $mwb_wgm_method_enable == 'normal_mail'){
 										?>
 										<div class="mwb_wgm_delivery_method">
-											<label class="check-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_to_email_send" ><span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?></span></label>
+											<label class="radio-label"><input type="radio" name="mwb_wgm_send_giftcard" value="Mail to recipient" class="mwb_wgm_send_giftcard" checked="checked" id="mwb_wgm_to_email_send" ><span class="mwb_wgm_method"><?php echo $mwb_wgm_mail_to_recipient_text;?></span></label>
 											<div class="mwb_wgm_delivery_via_email">
 											<input type="text"  name="mwb_wgm_to_email" id="mwb_wgm_to_email" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Email (Required)','woocommerce-ultimate-gift-card'); ?>">
 											<input type="text"  name="mwb_wgm_to_name_optional" id="mwb_wgm_to_name_optional" class="mwb_wgm_to_email"placeholder="<?php _e('Enter the Recipient Name (Optional)','woocommerce-ultimate-gift-card'); ?>"><span class= "mwb_wgm_msg_info"><?php echo $mwb_wgm_mail_to_recipient_desc;?></span></div>
