@@ -244,8 +244,8 @@ if (!function_exists('woof_draw_checkbox_childs'))
 			</div>
 		<?php if (!empty($terms)): ?>
         
-			<?php echo '<div class="row">'; ?>
-			<?php echo '<div class="col-12">'; ?>
+			<?php //echo '<div class="row">'; ?>
+			<?php //echo '<div class="col-12">'; ?>
 		<h4 class="size-title"><?php esc_html_e( "Bra Size", 'zoa' ); ?></h4>
 		<table class="size-chart">
 			<tbody>
