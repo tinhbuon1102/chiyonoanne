@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
 		$(this).wrap('<div class="form-row" />').wrap('<div class="field-wrapper" />');
 	});
 	
-	$('#previewBox').hide();
+	
 	function isAddToCartValid()
 	{
 		var validateForm = $("form.cart");
@@ -45,7 +45,7 @@ jQuery(document).ready(function($){
 		
 		$('button[name="add-to-cart"]').hide();
 		$('button[name="add-to-cart"]').after(cloneAddCartBtn);
-		
+		$('#previewBox').hide();
 		function showHideAddCartBtn(isValid)
 		{
 			if (isValid)
@@ -60,6 +60,14 @@ jQuery(document).ready(function($){
 				$('button[name="add-to-cart-clone"]').show();
 			}
 		}
+		$('input[name="mwb_wgm_send_giftcard"]:radio').change( function() {
+			var radioval = $(this).val();
+			if(radioval === "Shipping") {
+				$('#previewBox').hide();
+			}else{
+				$('#previewBox').show();
+			}
+		});
 		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
 			setTimeout(function(){
 				var isValid = false;
