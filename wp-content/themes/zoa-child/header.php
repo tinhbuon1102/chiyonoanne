@@ -22,15 +22,6 @@ if ($user->ID)
 <head itemscope="itemscope" itemtype="https://schema.org/WebSite">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="apple-touch-icon" sizes="180x180" href="https://chiyono-anne.com/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://chiyono-anne.com/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://chiyono-anne.com/favicons/favicon-16x16.png">
-<link rel="manifest" href="https://chiyono-anne.com/favicons/site.webmanifest">
-<link rel="mask-icon" href="https://chiyono-anne.com/favicons/safari-pinned-tab.svg" color="#4c4c4c">
-<link rel="shortcut icon" href="https://chiyono-anne.com/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-config" content="https://chiyono-anne.com/favicons/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 	<script type="text/javascript">
