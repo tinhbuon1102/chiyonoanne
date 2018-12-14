@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Ultimate Gift Card 2.4.9\n"
 "POT-Creation-Date: 2018-12-11 04:36+0900\n"
-"PO-Revision-Date: 2018-12-14 00:30+0900\n"
+"PO-Revision-Date: 2018-12-14 18:31+0900\n"
 "Language-Team: makewebbetter <webmaster@makewebbetter.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -889,11 +889,11 @@ msgstr ""
 
 #: includes/woocommerce-ultimate-gift-card-class.php:2969
 msgid "Enter the new Email"
-msgstr ""
+msgstr "新しいメールアドレスを入力"
 
 #: includes/woocommerce-ultimate-gift-card-class.php:2979
 msgid "Update Email"
-msgstr ""
+msgstr "メールアドレスを更新"
 
 #: includes/woocommerce-ultimate-gift-card-class.php:3015
 msgid "Email Id has been updated, now you may Resend your Email"
@@ -905,7 +905,7 @@ msgstr ""
 
 #: includes/woocommerce-ultimate-gift-card-class.php:3025
 msgid "Email field should not be empty"
-msgstr ""
+msgstr "メール項目は空欄にできません"
 
 #: includes/woocommerce-ultimate-gift-card-class.php:3044
 msgid "Process successfully completed!!"
@@ -2525,7 +2525,7 @@ msgstr "文字数:"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2658
 msgid "Enter the Recipient Email (Required)"
-msgstr ""
+msgstr "受取人メールアドレスを入力(必須)"
 
 #: function/woocommerce-ultimate-gift-card-function.php:2659
 #: function/woocommerce-ultimate-gift-card-function.php:2705
@@ -2615,3 +2615,6 @@ msgstr ""
 #: function/woocommerce-ultimate-gift-card-function.php:5480
 msgid "Coupon is Invalid!"
 msgstr ""
+
+msgid "Enter your full address to see shipping costs."
+msgstr "送料はチェックアウトページにてお届け先住所をご入力ご確認いただけます。"
