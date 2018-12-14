@@ -133,11 +133,6 @@ ul.products {
     max-width: 20%;
 	}
 }
-@media only screen and (max-width: 47.99em) {
-	.c-product-item {
-    background: #f4f2f4;
-	}
-}
 .woocommerce-password-strength {
     font-size: .75rem;
     padding: 10px 0;
@@ -2589,6 +2584,19 @@ section.related.products ul.products .product {
     font-size: 15px;
 	}
 }
+@media only screen and (max-width: 47.99em) {
+	.c-product-item {
+    background: #f4f2f4;
+	height: 100%;
+	}
+	.c-product-item .c-scroll-fade-in-block .product-image-wrapper {
+    height: auto;
+	}
+	.c-product-item .c-scroll-fade-in-block {
+    height: 100%;
+    box-sizing: border-box;
+	}
+}
 /*Size Chart Table*/
 table#size-chart {
     margin: 0;
@@ -4165,7 +4173,7 @@ button#TB_closeWindowButton {}
     padding-bottom: 24px;
 }
 .preview_wrap {
-    margin-bottom: 24px;
+    margin-bottom: 0;
     padding: 12px 0;
     border-top: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
@@ -4232,4 +4240,66 @@ label.no-shipping-text {
 /*Disable Coupon Field in CHeckout page*/
 .woocommerce-form-coupon-toggle {
     display: none;
+}
+/*Gift Card Form Fields*/
+.mwb_wgm_added_wrapper .form-row p.field-wrapper {
+    margin-bottom: 0;
+}
+.mwb_wgm_added_wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column wrap;
+    flex-flow: column wrap;
+}
+.mwb_wgm_added_wrapper .mwb_wgm_delivery_method_wrap {
+    -webkit-box-ordinal-group: 0;
+    -moz-box-ordinal-group: 0;
+    -ms-flex-order: 0;
+    -webkit-order: 0;
+    order: 0;
+    margin-bottom: 24px;
+}
+
+.mwb_wgm_added_wrapper .form-row {
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -ms-flex-order: 1;
+    -webkit-order: 1;
+    order: 1;
+}
+
+div#previewBox {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+}
+/*Gift Preview*/
+#TB_closeWindowButton:hover .tb-close-icon, #TB_closeWindowButton:focus .tb-close-icon {
+    color: #888;
+}
+@media only screen and (max-width: 47.99em) {
+	.product-type-wgm_gift_card .c-product-item .c-scroll-fade-in-block {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	-webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    justify-content: space-between;
+	-webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 0;
+	}
+	.product-type-wgm_gift_card .c-product-item .c-scroll-fade-in-block .c-product-item_wrap_info {
+    margin: 0;
+    width: 100%;
+    padding: 0 20px 0;
+	}
 }

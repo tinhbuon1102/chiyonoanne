@@ -40,7 +40,7 @@ function zoa_enqueue_parent_theme_style() {
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812140815', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812141138', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -150,7 +150,7 @@ function add_scripts() {
 	wp_localize_script( 'home-js', 'get_url', $get_url );
 	wp_register_script( 'remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.js', array(), false, true);
 	wp_register_script( 'slick-js', get_stylesheet_directory_uri() . '/js/slick/slick.js', array(), false, true);
-	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812131716', array(), false, true);//single shop
+	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812141150', array(), false, true);//single shop
 	wp_register_script( 'popup-js', get_stylesheet_directory_uri() . '/js/popup.js?201812012300', array(), false, true);//popup tooltip
 	wp_register_script( 'woof-js', get_stylesheet_directory_uri() . '/js/woof.js?201812140822', array(), false, true);
 	wp_enqueue_script('remodal');
