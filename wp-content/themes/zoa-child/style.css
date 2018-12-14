@@ -1644,7 +1644,12 @@ div#theme-bread {
 	border: none;
 	background-position: center;
 	background-size:cover;
-	background-attachment: fixed;
+	-webkit-background-size:cover;
+}
+@media (min-width: 48em) {
+	#theme-page-header .page-header.has-bg {
+		background-attachment: fixed;
+	}
 }
 .container-bridal-order #theme-page-header .page-header.has-bg {
 	height: 95vh;
