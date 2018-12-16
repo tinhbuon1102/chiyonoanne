@@ -45,7 +45,6 @@ jQuery(document).ready(function($){
 		
 		$('button[name="add-to-cart"]').hide();
 		$('button[name="add-to-cart"]').after(cloneAddCartBtn);
-		$('#previewBox').hide();
 		function showHideAddCartBtn(isValid)
 		{
 			if (isValid)
