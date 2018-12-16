@@ -14,7 +14,7 @@ define('PAGE_PRIVACY_ID', 2732);
 function elsey_change_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-		$src = add_query_arg( array('ver' => '3.6'), $src );
+		$src = add_query_arg( array('ver' => '3.7'), $src );
 		return $src;
 }
 add_filter( 'style_loader_src', 'elsey_change_cssjs_ver', 1000 );
@@ -4515,129 +4515,11 @@ if (!function_exists('woof_show_btn')) {
 		<button id="closeRefinement" class="display--mid-only button"><?php esc_html_e( 'Close Filter', 'zoa' ); ?></button>
             <?php
     }
-}//!function_exists('woof_show_btn')
-//Change Woocommerce product filter
-/*if (!function_exists('woof_show_btn')) {
-    function woof_show_btn($autosubmit=1,$ajax_redraw=0){
-        ?>
-        <div class="woof_container woof_submit_search_form_container">
-			<div class="toggle-wrap">
-				<div class="toggle__link flex-justify-between toggle__link--no-indicator">
-				<h3 class="toggle__name"><?php esc_html_e( 'Filter by', 'zoa' ); ?></h3>
-            <?php
-            global $WOOF;
-            if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())  ): global $woof_link; ?>
-
-                <?php
-                $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
-                if (empty($woof_reset_btn_txt)) {
-                    $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
-                }
-                $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
-                ?>
-
-                <?php if ($woof_reset_btn_txt != 'none'): ?>
-                    <button class="woof_reset_search_form refinement__clear" data-link="<?php echo $woof_link ?>"><?php echo $woof_reset_btn_txt ?></button>
-                <?php endif; ?>
-            <?php endif; ?>
-
-            <?php if (!$autosubmit OR $ajax_redraw): ?>
-                <?php
-                $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
-                if (empty($woof_filter_btn_txt)) {
-                    $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
-                }
-
-                $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
-                ?>
-                    <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
-            <?php endif; ?>
-					</div><!--/.toggle__link-->
-				</div><!--/.togggle-wrap-->
-        
-        
-		</div>
-		<button id="closeRefinement" class="display--mid-only button"><?php esc_html_e( 'Close Filter', 'zoa' ); ?></button>
-            <?php
-    }
-}//!function_exists('woof_show_btn')*/
-//add_action('wp_footer','woof_scriptsv2',10000);
-/*add_filter( 'woof_sort_terms_before_out' , 'woof_sort_terms_before_out_call_back' , 10 , 2 );
-
-function woof_sort_terms_before_out_call_back($terms , $type){
-	
-	if ($type != 'color')
-		return $terms;
-	
-	global $woof_settings;
-	
-	foreach ($terms as $term) :
-		$term_vals = get_term_meta($term['term_id'],'product_attribute_color',true);
-		
-			//echo   $term_vals . '<br/>';
-	endforeach;
-	return $terms;
-	echo "<pre>";
-	print_r($woof_settings);
-	echo "</pre>";
-	exit;
 }
 
-add_action('woof_print_html_type_options_color' , 'woof_print_html_type_options_callback', 10, 1);
-
-//settings page hook
-function woof_print_html_type_options_callback()
+add_filter( 'woocommerce_mail_content', 'zoa_woocommerce_mail_content', 1000, 1 );
+function zoa_woocommerce_mail_content($message)
 {
-	global $WOOF;
-	$all_woof_settings = get_option('woof_settings', array());
-	echo "<pre>";
-	print_r($all_woof_settings);
-	echo "</pre>";
-	echo $WOOF->render_html($this->get_ext_path() . 'views/options.php', array(
-		'key' => $this->html_type,
-		"woof_settings" => get_option('woof_settings', array())
-			)
-	);
-}*/
-
-/*function preloader_before_filter() {
-?>
-<!--<script type="text/javascript">
-  jQuery(window).load(function() {
-	 if (jQuery(window).width() < 992) {
-		 jQuery('.lds-dual-ring').hide();
-	 } else {
-		 jQuery('.lds-dual-ring').hide();
-		 jQuery('aside.widget.shop.WOOF_Widget').show();
-	 }
-     
-  });
-</script>-->
-<?php
+	$message = str_replace('<ul class="wc-bacs-bank-details order_details bacs_details">', '<ul class="wc-bacs-bank-details order_details bacs_details" style="text-align: center">', $message);
+	return $message;
 }
-add_action( 'wp_footer', 'preloader_before_filter' );*/
-/*function zoa_pre_get_product_make_filter_or( $query ) {
-	if (
-			$query->query['post_type'] == 'product' && 
-			!isset($query->query['ignore_sticky_posts']) && 
-			isset($query->query_vars['tax_query']) && 
-			count($query->query_vars['tax_query']) > 1 &&
-			(isset($_GET['swoof']) && $_GET['swoof'] == 1)
-			|| (isset($_REQUEST['action']) && $_REQUEST['action'] == 'woof_draw_products')
-	)
-	{
-// 		$query->query['tax_query']['relation'] = 'OR';
-// 		$query->tax_query->queries['relation'] = 'OR';
-// 		$query->tax_query->relation = 'OR';
-		$query->query_vars['tax_query']['relation'] = 'OR';
-		foreach($query->query_vars['tax_query'] as $tax_index => $tax_query)
-		{
-			if(isset($tax_query['taxonomy']) && $tax_query['taxonomy'] == 'product_visibility')
-			{
-				unset($query->query_vars['tax_query'][$tax_index]);
-			}
-		}
-	}
-	return $query;
-}
-add_filter( 'pre_get_posts', 'zoa_pre_get_product_make_filter_or', 10000, 1 );*/
