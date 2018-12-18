@@ -2,8 +2,8 @@
 Contributors: haet
 Tags: email template, html mail, email design, mail, email templates, ninja-forms, wp-e-commerce, caldera-forms, wp-e-commerce, easy-digital-downloads, woocommerce, contact-form-7, mandrill, postman, gravityforms
 Requires at least: 3.9
-Tested up to: 5.0
-Stable tag: 2.8.4.1
+Tested up to: 5.0.1
+Stable tag: 2.8.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,8 +103,13 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 2.8.4.2 =
+* removed a notice during login
+
+
 = 2.8.4.1 =
 * fixed a missing file during commit
+
 
 = 2.8.4  =
 * Happy Forms support

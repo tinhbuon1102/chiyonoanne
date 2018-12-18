@@ -249,7 +249,7 @@ function zoa_static(){
 	/*CUSTOM SCRIPT*/
 	wp_enqueue_script(
 		'zoa-custom',
-		get_template_directory_uri() . '/js/custom.js',
+		get_template_directory_uri() . '/js/custom.js?2018190208',
 		array( 'jquery' ),
 		null,
 		true

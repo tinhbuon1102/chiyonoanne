@@ -40,7 +40,7 @@ jQuery(document).ready(function (jQuery) {
                     jQuery('.wpep-loader').hide();
                 } else {
                     //submit form
-                    var amount = parseInt(jQuery('.wpep-field.amount .wpep-amount').val());
+                    var amount = parseFloat(jQuery('.wpep-field.amount .wpep-amount').val());
                     var data = {
                         action: 'wpep_submit_payment',
                         nonce: nonce,
@@ -52,6 +52,7 @@ jQuery(document).ready(function (jQuery) {
                         type: 'post',
                         success: function (msg) {
                             msg = jQuery.parseJSON(msg);
+							
                             if (msg.status == 'error') {
                                 var error = '<ul><li class="wpep-error">' + msg.message + '</li></ul>';
                                 jQuery('.wpep_container .messages').html(error);
@@ -61,6 +62,9 @@ jQuery(document).ready(function (jQuery) {
                                 
                                 jQuery('.wpep-field').hide();
                                 paymentForm.destroy();
+								if(msg.redirect){
+									window.location.href = msg.redirect;
+								}
                             }
                         }, complete: function () {
                             jQuery('.wpep-button-submit').removeAttr('disabled');

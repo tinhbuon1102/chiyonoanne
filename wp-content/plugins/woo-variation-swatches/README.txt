@@ -2,7 +2,7 @@
 Contributors: EmranAhmed, wpeshaan, getwooplugins
 Tags: woocommerce variation, woocommerce, variation swatches, woocommerce attributes, product attributes, product color, product size, variable product attributes, variation product swatches, color variation swatch, image variation swatch, printful color swatches
 Requires at least: 4.8
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.6
 Stable tag: trunk
 WC requires at least: 3.2
@@ -355,6 +355,11 @@ And your are ready to go.
 12. Global Variation Color Swatches Attribute List Preview
 
 == Changelog ==
+
+= 1.0.51 =
+
+* Add: Flatsome theme Infinite Scroll Support
+* Fix: Massive Dynamic theme CSS Issue
 
 = 1.0.50 =
 

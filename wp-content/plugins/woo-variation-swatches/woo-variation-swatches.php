@@ -4,10 +4,10 @@
 	 * Plugin URI: https://wordpress.org/plugins/woo-variation-swatches/
 	 * Description: Beautiful colors, images and buttons variation swatches for woocommerce product attributes. Requires WooCommerce 3.2+
 	 * Author: Emran Ahmed
-	 * Version: 1.0.50
+	 * Version: 1.0.51
 	 * Domain Path: /languages
 	 * Requires at least: 4.8
-	 * Tested up to: 4.9
+	 * Tested up to: 5.0
 	 * WC requires at least: 3.2
 	 * WC tested up to: 3.5
 	 * Text Domain: woo-variation-swatches
@@ -20,7 +20,7 @@
 		
 		final class Woo_Variation_Swatches {
 			
-			protected $_version = '1.0.50';
+			protected $_version = '1.0.51';
 			
 			protected static $_instance = null;
 			private          $_settings_api;
@@ -95,7 +95,7 @@
 					add_action( 'admin_notices', array( $this, 'feed' ) );
 					add_action( 'init', array( $this, 'settings_api' ), 5 );
 					add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-					add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+					add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 15 );
 					add_filter( 'body_class', array( $this, 'body_class' ) );
 					add_filter( 'wp_ajax_gwp_live_feed_close', array( $this, 'feed_close' ) );
 					add_filter( 'wp_ajax_gwp_deactivate_feedback', array( $this, 'deactivate_feedback' ) );
@@ -732,6 +732,11 @@
 				
 				$api_url = 'https://getwooplugins.com/wp-json/getwooplugins/v1/fetch-feed';
 				
+				// For Dev Mode
+				if ( $feed_api_uri = apply_filters( 'gwp_feed_api_uri', false ) ) {
+					$api_url = $feed_api_uri;
+				}
+				
 				if ( apply_filters( 'stop_gwp_live_feed', false ) ) {
 					return;
 				}
@@ -840,6 +845,11 @@
 				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 				
 				$api_url = "https://api.github.com/repos/EmranAhmed/gwp-admin-notice/commits/master";
+				
+				// For Dev Mode
+				if ( $feed_css_uri = apply_filters( 'gwp_feed_css_uri', false ) ) {
+					return $feed_css_uri;
+				}
 				
 				if ( isset( $_GET[ 'raw_gwp_feed_css' ] ) ) {
 					delete_transient( "gwp_feed_css" );

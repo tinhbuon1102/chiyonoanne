@@ -41,12 +41,14 @@ if (!class_exists('WPEP_Settings')) {
             register_setting('wpep-button-settings-group', 'wpep_button_text');
             register_setting('wpep-button-settings-group', 'wpep_amount');
             register_setting('wpep-button-settings-group', 'wpep_donation_organization_name');
+            register_setting('wpep-button-settings-group', 'wpep_pay_suc_url');
             register_setting('wpep-button-settings-group', 'wpep_donation_user_amount');
             register_setting('wpep-button-settings-group', 'wpep_notification_email');
         }
         public function wpep_settings_html() {
             ?>            
             <div class="wrap">
+                <div class="welcome-panel extwelcome">
                 <h1><?php _e('WP Easy Pay Square Settings', 'wp-easy-pay') ?></h1><br>
                 <a href="http://apiexperts.io/link/square-partners/" target="_blank"><img src="<?php echo WPEP_PLUGIN_URL.'assets/img/signup.png'; ?>"/></a>
                 <p><?php echo sprintf(__('Get Square API keys from <a href="%s" target="_blank">here</a>.', 'wp-easy-pay'), 'https://connect.squareup.com/apps'); ?></p>
@@ -136,11 +138,14 @@ if (!class_exists('WPEP_Settings')) {
                     <?php submit_button(); ?>
                 </form>
             </div>
+            </div>
+            
             <?php
         }
         public function wpep_button_html() {
             ?>            
             <div class="wrap">
+            <div class="welcome-panel extwelcome">
                 <h1><?php _e('WP Easy Pay Button', 'wp-easy-pay') ?></h1><br>
                 <a href="http://apiexperts.io/link/square-partners/" target="_blank"><img src="<?php echo WPEP_PLUGIN_URL.'assets/img/signup.png'; ?>"/></a>
                 <form method="post" action="options.php">     
@@ -197,6 +202,12 @@ if (!class_exists('WPEP_Settings')) {
                                 <input type="text" value="<?php echo get_option('wpep_donation_organization_name'); ?>" name="wpep_donation_organization_name">
                             </td>
                         </tr>
+						<tr>
+							<th><label for="wpep_pay_suc_url"><?php _e('Payment Success URL', 'wp-easy-pay'); ?></label></th>
+							<td>
+								<input type="text" value="<?php echo get_option('wpep_pay_suc_url'); ?>" name="wpep_pay_suc_url" id="wpep_pay_suc_url">                            
+							</td>
+						</tr>
                         <tr valign="top" class="wpep-donation">
                             <th>
                                 <?php _e('User set donation amount', 'wp-easy-pay') ?>
@@ -208,6 +219,7 @@ if (!class_exists('WPEP_Settings')) {
                     </table>
                     <?php submit_button(); ?>
                 </form>
+            </div>
             </div>
             <?php
         }

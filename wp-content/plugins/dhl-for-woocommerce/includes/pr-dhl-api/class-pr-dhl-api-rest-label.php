@@ -261,13 +261,13 @@ class PR_DHL_API_REST_Label extends PR_DHL_API_REST implements PR_DHL_API_Label 
 
 			$package_desc = $package_id;
 			if( ! empty( $this->args['order_details']['description'] ) ) {
-				$package_desc = substr( $this->args['order_details']['description'], 0, 50 );
+				$package_desc = mb_substr( $this->args['order_details']['description'], 0, 50, 'UTF-8' );
 			}
 
 			if( strlen( $this->args['shipping_address']['address_1'] ) > 50 ) {
-				$consignee_address_1 = substr( $this->args['shipping_address']['address_1'], 0, 50);
+				$consignee_address_1 = mb_substr( $this->args['shipping_address']['address_1'], 0, 50, 'UTF-8');
 
-				$this->args['shipping_address']['address_2'] = substr( $this->args['shipping_address']['address_1'], 50) . ' ' . $this->args['shipping_address']['address_2'];
+				$this->args['shipping_address']['address_2'] = mb_substr( $this->args['shipping_address']['address_1'], 50, 'UTF-8') . ' ' . $this->args['shipping_address']['address_2'];
 
 			} else {
 				$consignee_address_1 = $this->args['shipping_address']['address_1'];
@@ -275,9 +275,9 @@ class PR_DHL_API_REST_Label extends PR_DHL_API_REST implements PR_DHL_API_Label 
 
 			$consignee_address_3 = '';
 			if( strlen( $this->args['shipping_address']['address_2'] ) > 50 ) {
-				$consignee_address_2 = substr( $this->args['shipping_address']['address_2'], 0, 50);
+				$consignee_address_2 = mb_substr( $this->args['shipping_address']['address_2'], 0, 50, 'UTF-8');
 
-				$consignee_address_3 = substr( $this->args['shipping_address']['address_2'], 50, 50);
+				$consignee_address_3 = mb_substr( $this->args['shipping_address']['address_2'], 50, 50, 'UTF-8');
 			} else {
 				$consignee_address_2 = $this->args['shipping_address']['address_2'];
 			}
@@ -296,7 +296,7 @@ class PR_DHL_API_REST_Label extends PR_DHL_API_REST implements PR_DHL_API_Label 
 					}
 				}
 				
-				$shipping_state = substr( $this->args['shipping_address']['state'], 0, 20 );
+				$shipping_state = mb_substr( $this->args['shipping_address']['state'], 0, 20, 'UTF-8' );
 			}
 
 			$cod_value = 0;
@@ -336,8 +336,8 @@ class PR_DHL_API_REST_Label extends PR_DHL_API_REST implements PR_DHL_API_Label 
 														'packageId' => $package_id,
 														'weight' => round( floatval( $this->args['order_details']['weight'] ), 2), 
 														'weightUom' => strtoupper( $this->args['order_details']['weightUom'] ),
-														'billingRef1' => substr( $this->args['order_details']['order_note'], 0, 50),
-														'billingRef2' => substr( $this->args['order_details']['order_note'], 50, 25)
+														'billingRef1' => mb_substr( $this->args['order_details']['order_note'], 0, 50, 'UTF-8'),
+														'billingRef2' => mb_substr( $this->args['order_details']['order_note'], 50, 25, 'UTF-8')
 														),
 											// 'customsDetails' => $customsDetails
 										) 
@@ -352,8 +352,8 @@ class PR_DHL_API_REST_Label extends PR_DHL_API_REST implements PR_DHL_API_Label 
 				$customsDetails = array();
 				foreach ($this->args['items'] as $key => $item) {
 					
-					$json_item = array( 'itemDescription' 	=>	substr( $item['item_description'], 0, 200 ),
-										'descriptionExport' =>	substr( $item['item_export'], 0, 200 ),
+					$json_item = array( 'itemDescription' 	=>	mb_substr( $item['item_description'], 0, 200, 'UTF-8' ),
+										'descriptionExport' =>	mb_substr( $item['item_export'], 0, 200, 'UTF-8' ),
 										// 'descriptionImport' =>	substr( $item['item_description'], 0, 200 ),
 										'countryOfOrigin' 	=> 	$item['country_origin'],
 										'hsCode'			=> 	$item['hs_code'],

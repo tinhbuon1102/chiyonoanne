@@ -100,7 +100,7 @@
 	
 	if ( ! function_exists( 'wvg_gallery_template_part_override' ) ) {
 		function wvg_gallery_template_part_override( $template, $slug ) {
-		 
+			
 			// Disable for Bundle Product
 			if ( function_exists( 'wc_pb_is_product_bundle' ) && wc_pb_is_product_bundle() ) {
 				return $template;
@@ -367,8 +367,13 @@
 			$available_variations = array_values( $product->get_available_variations() );
 			
 			foreach ( $available_variations as $i => $variation ) {
-				
 				array_push( $variation[ 'variation_gallery_images' ], $variation[ 'image' ] );
+			}
+			
+			
+			foreach ( $available_variations as $i => $variation ) {
+				
+				// array_push( $variation[ 'variation_gallery_images' ], $variation[ 'image' ] );
 				// array_unshift( $variation[ 'variation_gallery_images' ], $variation[ 'image' ] );
 				
 				foreach ( $variation[ 'variation_gallery_images' ] as $image ) {

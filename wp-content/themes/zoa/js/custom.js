@@ -6,7 +6,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 document.addEventListener('DOMContentLoaded', function () {
   var _body = document.body;
 
-  /*! BEFORE LOAD	------------------------------------------------->*/
+  /*! BEFORE LOAD
+	------------------------------------------------->*/
   window.addEventListener('beforeunload', function () {
     if (document.getElementsByClassName('is-page-loading')[0]) {
       var themeContainer = document.getElementById('theme-container');
@@ -18,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  /*! PRELOADER `start()`	------------------------------------------------->*/
+  /*! PRELOADER `start()`
+	------------------------------------------------->*/
   if (document.getElementsByClassName('is-page-loading')[0]) {
     NProgress.configure({
       template: '<div class="bar" role="bar"></div>',
@@ -31,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
     NProgress.start();
   }
 
-  /*! SIDEBAR MENU	------------------------------------------------->*/
+  /*! SIDEBAR MENU
+	------------------------------------------------->*/
   var theme_menu = function () {
     /*TOGGLE SIDEBAR MENU*/
     var container = document.getElementById('theme-container'),
@@ -42,10 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!btn) {
       return;
     }
-
-    btn.addEventListener('click', function () {
-      container.classList.add('menu-open');
-    });
+	document.addEventListener("DOMContentLoaded", function() {
+		btn.addEventListener('click', function () {
+			container.classList.add('menu-open');
+		});
 
     menuOverlay.addEventListener('click', function () {
       container.classList.remove('menu-open');
@@ -53,9 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     _body.addEventListener('keyup', function (e) {
       if (27 === e.keyCode) {
-        container.classList.remove('menu-open');
-      }
-    });
+		  container.classList.remove('menu-open');
+	  }
+	});
+	}, false);
+    
 
     /*MENU ACCORDION*/
     jQuery('.theme-sidebar-menu a').on('click', function (e) {
@@ -82,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }();
 
-  /*! SCROLL TO TOP	------------------------------------------------->*/
+  /*! SCROLL TO TOP
+	------------------------------------------------->*/
   var $scrollTop = jQuery('.js-to-top');
 
   jQuery(window).on('scroll', function () {
@@ -98,7 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
     jQuery('html, body').animate({ scrollTop: 0 }, 500);
   });
 
-  /*! SIZE GUIDE    ------------------------------------------------->*/
+  /*! SIZE GUIDE
+    ------------------------------------------------->*/
   var sizeGuideWrapper = document.querySelector('.js-size-guide-wrapper');
   var openSizeGuide = function openSizeGuide() {
     document.body.classList.add('size-guide--is-visible');
@@ -126,7 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  /*! FLEXIBLE SIDEBAR	------------------------------------------------->*/
+  /*! FLEXIBLE SIDEBAR
+	------------------------------------------------->*/
   var sidebarToggle = document.querySelector('.js-sidebar-toggle');
   var toggleIcon = document.querySelector('.toggle-icon');
   var shopSidebar = document.querySelector('.shop-sidebar');
@@ -157,7 +165,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /*! STICKY HEADER	------------------------------------------------->*/
+  /*! STICKY HEADER
+	------------------------------------------------->*/
   var $stickyHeader = jQuery('.js-sticky-header');
   var $headerDOM = jQuery('#theme-menu-layout');
 
@@ -175,7 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /*! MEGA MENU	------------------------------------------------->*/
+  /*! MEGA MENU
+	------------------------------------------------->*/
   var mega_menu = function () {
     if (window.width < 992) {
       return;
@@ -215,7 +225,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }();
-  /*! PRODUCT SWATCH LIST	------------------------------------------------->*/
+  /*! PRODUCT SWATCH LIST
+	------------------------------------------------->*/
   var swatchList = function () {
 
     jQuery(_body).on('click', '.p-attr-swatch', function () {
@@ -249,7 +260,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }();
 
-  /*! PRODUCT ACTION	------------------------------------------------->*/
+  /*! PRODUCT ACTION
+	------------------------------------------------->*/
   var product_action = function () {
     var wc = _body.classList.contains('woocommerce-js'),
         _overlay = document.getElementById('shop-overlay');
@@ -726,7 +738,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }();
 
-  /**	 * Ajax search form	 */
+  /**
+	 * Ajax search form
+	 */
   (function () {
     var $searchForm = jQuery('.js-search-form');
     var $searchButton = jQuery('.js-search-button');
@@ -792,10 +806,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  /* LOAD	 ***************************************************/
+  /* LOAD
+	 ***************************************************/
   window.addEventListener('load', function () {
 
-    /*! PRELOADER `done()`		------------------------------------------------->*/
+    /*! PRELOADER `done()`
+		------------------------------------------------->*/
     if (document.getElementsByClassName('is-page-loading')[0]) {
       var themeContainer = document.getElementById('theme-container');
 

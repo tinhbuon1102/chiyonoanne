@@ -1,0 +1,517 @@
+# Translation of Plugins - NC Size Chart for Woocommerce - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - NC Size Chart for Woocommerce - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-12-18 13:29+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"Language: ja\n"
+"Project-Id-Version: Plugins - NC Size Chart for Woocommerce - Stable (latest "
+"release)\n"
+"POT-Creation-Date: 2018-12-18 13:25+0000\n"
+"Last-Translator: admin <admin@heart-hunger.com>\n"
+"Language-Team: Japanese\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.2.0; wp-5.0.1"
+
+#: public/class-productsize-chart-for-woocommerce-public.php:229
+msgid "Size Chart"
+msgstr "サイズチャート"
+
+#: includes/meta-option/config/config.php:69
+msgid "Additional Charts"
+msgstr ""
+
+#: includes/meta-option/config/config.php:27
+msgid "Modal pop up"
+msgstr ""
+
+#: includes/meta-option/config/config.php:27
+msgid "(Select if the chart will display as a popup or as a additional tab)"
+msgstr ""
+
+#: includes/meta-option/config/config.php:25
+msgid "(Pick overlay background color for modal)"
+msgstr ""
+
+#: includes/meta-option/config/config.php:23
+#: includes/meta-option/config/config.php:24
+msgid "(Pick text color for the chart text)"
+msgstr ""
+
+#: admin/includes/productsize-chart-select-chart-form.php:42
+msgid "No charts found.click <a href=\"%s\">here</a> to create you first chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:114
+msgctxt "chart"
+msgid "Add Chart"
+msgstr "サイズ表追加"
+
+#: admin/class-productsize-chart-admin.php:112
+msgctxt "admin menu"
+msgid "Size Chart"
+msgstr "サイズチャート"
+
+#: admin/class-productsize-chart-admin.php:94
+msgid "Settings"
+msgstr "設定"
+
+#: admin/class-productsize-chart-admin.php:94
+msgid "NC Plugins"
+msgstr "NC Plugins"
+
+#. Author URI of the plugin/theme
+msgid "http://ncplugins.com"
+msgstr "http://ncplugins.com"
+
+#: admin/includes/productsize-chart-settings-form.php:162
+msgid "Save Changes"
+msgstr "変更の保存"
+
+#: admin/includes/productsize-chart-settings-form.php:152
+msgid "Button Label"
+msgstr "ボタンのラベル"
+
+#: admin/includes/productsize-chart-settings-form.php:144
+msgid "Button Class"
+msgstr "ボタンのクラス"
+
+#: admin/includes/productsize-chart-settings-form.php:136
+msgid "Overlay Opacity"
+msgstr "オーバーレイ不透明度"
+
+#: admin/includes/productsize-chart-settings-form.php:120
+msgid "Button Text Color"
+msgstr "ボタンテキストカラー"
+
+#: admin/includes/productsize-chart-settings-form.php:112
+msgid "Button Hover Background Color"
+msgstr "ボタンのホバー背景色"
+
+#: admin/includes/productsize-chart-settings-form.php:104
+msgid "Button Background Color"
+msgstr "ボタンの背景色"
+
+#: admin/includes/productsize-chart-settings-form.php:100
+msgid "Pop Up Settings"
+msgstr "ポップアップ設定"
+
+#: admin/includes/productsize-chart-settings-form.php:87
+msgid "Default Table Style"
+msgstr ""
+
+#: admin/includes/productsize-chart-settings-form.php:56
+msgid "Additional Chart Heading"
+msgstr ""
+
+#: admin/includes/productsize-chart-settings-form.php:49
+msgid "Enable Additional Chart"
+msgstr ""
+
+#: admin/includes/productsize-chart-settings-form.php:34
+msgid "Chart Heading"
+msgstr "サイズ表タイトル"
+
+#: admin/includes/productsize-chart-settings-form.php:25
+msgid "Default Settings"
+msgstr "デフォルト設定"
+
+#: admin/includes/productsize-chart-settings-form.php:22
+msgid "Size Chart Settings"
+msgstr "サイズチャート設定"
+
+#: admin/includes/productsize-chart-meta-form.php:121
+msgid "Select categories for chart to appear on."
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:120
+msgid "Chart Categories"
+msgstr "サイズ表カテゴリ"
+
+#: admin/includes/productsize-chart-meta-form.php:116
+msgid "After Product Meta"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:115
+msgid "Before Add to Cart"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:114
+msgid "After Add to Cart"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:113
+msgid "Before Summary Text"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:110
+msgid "Select where the pop up button displays"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:109
+msgid "Chart Popup Button Position"
+msgstr "サイズ表ポップアップ位置"
+
+#: admin/includes/productsize-chart-meta-form.php:87
+#: admin/includes/productsize-chart-settings-form.php:91
+msgid "Style 2"
+msgstr "スタイル2"
+
+#: admin/includes/productsize-chart-meta-form.php:86
+#: admin/includes/productsize-chart-settings-form.php:90
+msgid "Style 1"
+msgstr "スタイル1"
+
+#: admin/includes/productsize-chart-meta-form.php:83
+msgid "Chart Table Styles (Default Style 1)"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:82
+msgid "Chart Table Style"
+msgstr "サイズ表テーブルスタイル"
+
+#: admin/includes/productsize-chart-meta-form.php:76
+msgid "Overlay Color"
+msgstr "オーバーレイの色"
+
+#: admin/includes/productsize-chart-meta-form.php:45
+msgid "Add/Edit primary chart image below"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:39
+msgid "Label"
+msgstr "表示ラベル"
+
+#: admin/includes/productsize-chart-add-meta-form.php:122
+msgid "Chart 2 content"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:75
+msgid "Chart 1 content"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:67
+#: admin/includes/productsize-chart-add-meta-form.php:116
+#: admin/includes/productsize-chart-meta-form.php:61
+msgid "Right"
+msgstr "右"
+
+#: admin/includes/productsize-chart-add-meta-form.php:66
+#: admin/includes/productsize-chart-add-meta-form.php:115
+#: admin/includes/productsize-chart-meta-form.php:60
+msgid "Left"
+msgstr "左"
+
+#: admin/includes/productsize-chart-add-meta-form.php:63
+#: admin/includes/productsize-chart-add-meta-form.php:112
+msgid "Primary chart image position"
+msgstr "サイズ表画像位置"
+
+#: admin/includes/productsize-chart-add-meta-form.php:57
+#: admin/includes/productsize-chart-add-meta-form.php:108
+#: admin/includes/productsize-chart-meta-form.php:53
+msgid "Upload"
+msgstr "アップロード"
+
+#: admin/includes/productsize-chart-add-meta-form.php:49
+#: admin/includes/productsize-chart-add-meta-form.php:100
+msgid "Add/Edit chart image below"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:48
+#: admin/includes/productsize-chart-add-meta-form.php:99
+msgid "Chart Image"
+msgstr "チャート画像"
+
+#: admin/includes/productsize-chart-add-meta-form.php:43
+#: admin/includes/productsize-chart-add-meta-form.php:94
+msgid "Add/Edit chart title below"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:42
+#: admin/includes/productsize-chart-add-meta-form.php:93
+msgid "Chart Title"
+msgstr "チャートタイトル"
+
+#: admin/class-productsize-chart-admin.php:370
+msgid "Use this image"
+msgstr "この画像を使用する"
+
+#: admin/class-productsize-chart-admin.php:369
+msgid "Upload an Image"
+msgstr "画像をアップロード"
+
+#: admin/includes/productsize-chart-meta-form.php:57
+#: includes/meta-option/config/config.php:22
+msgid "Primary chart mage position"
+msgstr ""
+
+#: includes/meta-option/config/config.php:21
+#: includes/meta-option/config/config.php:47
+#: includes/meta-option/config/config.php:56
+msgid "Add/Edit image below"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:44
+#: includes/meta-option/config/config.php:21
+msgid "Primary Chart Image"
+msgstr "サイズ表画像"
+
+#. Author of the plugin/theme
+msgid "Nabaraj Chapagain"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "This plugin allow you to use size charts to products on woocommerce."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "NC Size Chart for Woocommerce"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:119
+msgid "Size Charts"
+msgstr "サイズ表一覧"
+
+#: admin/class-productsize-chart-admin.php:170
+#: admin/includes/productsize-chart-select-chart-form.php:50
+#: includes/meta-option/config/config.php:83
+msgid "Select Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:165
+msgid "Additional Chart"
+msgstr ""
+
+#: includes/meta-option/config/config.php:53
+msgid "Chart 2"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:74
+#: admin/includes/productsize-chart-add-meta-form.php:121
+#: includes/meta-option/config/config.php:49
+#: includes/meta-option/config/config.php:58
+msgid "Content"
+msgstr "コンテンツ"
+
+#: includes/meta-option/config/config.php:22
+#: includes/meta-option/config/config.php:48
+#: includes/meta-option/config/config.php:57
+msgid "Float Right"
+msgstr "右フロート"
+
+#: includes/meta-option/config/config.php:22
+#: includes/meta-option/config/config.php:48
+#: includes/meta-option/config/config.php:57
+msgid "Float Left"
+msgstr ""
+
+#: includes/meta-option/config/config.php:48
+msgid "image position"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:62
+#: admin/includes/productsize-chart-add-meta-form.php:111
+#: admin/includes/productsize-chart-meta-form.php:56
+#: includes/meta-option/config/config.php:22
+#: includes/meta-option/config/config.php:48
+#: includes/meta-option/config/config.php:57
+msgid "Image Position"
+msgstr "画像位置"
+
+#: includes/meta-option/config/config.php:47
+#: includes/meta-option/config/config.php:56
+msgid "Image"
+msgstr "画像"
+
+#: includes/meta-option/config/config.php:46
+#: includes/meta-option/config/config.php:55
+msgid "Title"
+msgstr "タイトル"
+
+#: includes/meta-option/config/config.php:44
+msgid "Chart 1"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:159
+#: includes/meta-option/config/config.php:35
+msgid "Chart Settings"
+msgstr ""
+
+#: admin/includes/productsize-chart-add-meta-form.php:84
+#: admin/includes/productsize-chart-add-meta-form.php:131
+#: admin/includes/productsize-chart-meta-form.php:133
+#: includes/meta-option/config/config.php:28
+#: includes/meta-option/config/config.php:46
+#: includes/meta-option/config/config.php:49
+#: includes/meta-option/config/config.php:50
+#: includes/meta-option/config/config.php:55
+#: includes/meta-option/config/config.php:58
+#: includes/meta-option/config/config.php:59
+msgid "Add/Edit chart below"
+msgstr "サイズ表 追加/編集"
+
+#: admin/includes/productsize-chart-add-meta-form.php:83
+#: admin/includes/productsize-chart-add-meta-form.php:130
+#: admin/includes/productsize-chart-meta-form.php:132
+#: includes/meta-option/config/config.php:28
+#: includes/meta-option/config/config.php:50
+#: includes/meta-option/config/config.php:59
+msgid "Chart Table"
+msgstr "サイズ表テーブル"
+
+#: admin/includes/productsize-chart-meta-form.php:103
+msgid "Modal Pop Up"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:102
+#: includes/meta-option/config/config.php:27
+msgid "Additional Tab"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:99
+msgid "Select if the chart will display as a popup or as a additional tab"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:98
+#: includes/meta-option/config/config.php:27
+msgid "Chart Position"
+msgstr ""
+
+#: includes/meta-option/config/config.php:26
+msgid "(Padding for chart)"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:92
+#: includes/meta-option/config/config.php:26
+msgid "Padding (e.g. 10px)"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:77
+#: admin/includes/productsize-chart-meta-form.php:93
+msgid "Pick overlay background color for modal"
+msgstr ""
+
+#: admin/includes/productsize-chart-settings-form.php:128
+#: includes/meta-option/config/config.php:25
+msgid "Modal Overlay Color"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:71
+#: admin/includes/productsize-chart-settings-form.php:80
+#: includes/meta-option/config/config.php:24
+msgid "Text Color"
+msgstr "テキストの色"
+
+#: admin/includes/productsize-chart-meta-form.php:67
+#: admin/includes/productsize-chart-meta-form.php:72
+msgid "Pick text color for the chart text"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:66
+#: admin/includes/productsize-chart-settings-form.php:72
+#: includes/meta-option/config/config.php:23
+msgid "Title Color"
+msgstr "タイトルの色"
+
+#: includes/meta-option/config/config.php:20
+msgid "(label for tab or  modal popup box)"
+msgstr ""
+
+#: admin/includes/productsize-chart-meta-form.php:40
+#: includes/meta-option/config/config.php:20
+msgid "Chart Label"
+msgstr ""
+
+#: includes/meta-option/classes.fields.php:1382
+msgid "Add New Group"
+msgstr "新規グループを追加"
+
+#: includes/meta-option/classes.fields.php:1023
+msgid "Type to search"
+msgstr ""
+
+#: includes/meta-option/classes.fields.php:1002
+msgctxt "select field"
+msgid "None"
+msgstr ""
+
+#: includes/meta-option/classes.fields.php:504
+msgid "Add Image"
+msgstr "画像追加"
+
+#: includes/meta-option/classes.fields.php:452
+#: includes/meta-option/classes.fields.php:516
+msgid "Remove"
+msgstr "削除"
+
+#: includes/meta-option/classes.fields.php:434
+msgid "Add File"
+msgstr "ファイル追加"
+
+#: includes/meta-option/classes.fields.php:353
+msgid "Add New"
+msgstr "新規作成"
+
+#: includes/meta-option/classes.fields.php:346
+msgid "Remove Group"
+msgstr ""
+
+#: includes/meta-option/class.cmb-meta-box.php:116
+msgid "Are you sure you want to delete this field?"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:128
+msgid "Description."
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:123
+msgid "No charts found in Trash."
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:122
+msgid "No chart found."
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:121
+msgid "Parent Charts:"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:120
+msgid "Search Charts"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:118
+msgid "View Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:117
+msgid "Edit Chart"
+msgstr "サイズ表編集"
+
+#: admin/class-productsize-chart-admin.php:116
+msgid "New Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:115
+msgid "Add New Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:113
+msgctxt "add new on admin bar"
+msgid "Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:111
+msgctxt "post type singular name"
+msgid "Chart"
+msgstr ""
+
+#: admin/class-productsize-chart-admin.php:110
+msgctxt "post type general name"
+msgid "Charts"
+msgstr ""

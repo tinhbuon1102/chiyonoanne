@@ -37,6 +37,15 @@
     width: 100%;
 	}
 }
+/*Qty*/
+.qty {
+    font-family: "proxima-nova",sans-serif;
+}
+/*Purchase Note*/
+.mini-product__item.product-purchase-note {
+    font-size: .75rem;
+    line-height: 1.4;
+}
 /*Order Status Icon*/
 .order-status > [class*="icon-"]:before {
 	font-family: 'wooicons';

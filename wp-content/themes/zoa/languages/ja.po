@@ -2156,3 +2156,6 @@ msgstr "ご入金後に別途自動メールが配信されます。"
 
 msgid "Your order details are shown below for your reference:"
 msgstr "ご注文詳細は以下です。"
+
+msgid "Store Setting"
+msgstr "ストア設定"

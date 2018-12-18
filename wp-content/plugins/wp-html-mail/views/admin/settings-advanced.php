@@ -55,9 +55,9 @@
                     <th scope="row"><label><?php _e('E-Mail test mode','wp-html-mail') ?></label></th>
                     <td>
                         <input type="hidden" name="haet_mail[testmode]" value="0">
-                        <input type="checkbox" id="haet_mail_testmode" name="haet_mail[testmode]" value="1" <?php echo ($options['testmode']==1 ?'checked':''); ?>>
+                        <input type="checkbox" id="haet_mail_testmode" name="haet_mail[testmode]" value="1" <?php echo ( isset( $options['testmode'] ) && $options['testmode']==1 ?'checked':''); ?>>
                         <label for="haet_mail_testmode"><?php _e('enable test mode','wp-html-mail'); ?></label>
-                        <input type="text" id="haet_mail_testmode_recipient" name="haet_mail[testmode_recipient]" placeholder="you@example.org" value="<?php echo $options['testmode_recipient']; ?>">
+                        <input type="text" id="haet_mail_testmode_recipient" name="haet_mail[testmode_recipient]" placeholder="you@example.org" value="<?php echo ( isset( $options['testmode_recipient'] ) ? $options['testmode_recipient'] : '' ); ?>">
                         <p class="description">
                             <?php _e('Enable email test mode to redirect all messages to your own email address.','wp-html-mail'); ?>
                        </p>

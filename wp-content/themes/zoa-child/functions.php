@@ -57,7 +57,7 @@ function zoa_enqueue_parent_theme_style() {
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812141834', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812190232', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -75,6 +75,68 @@ function change_posts_per_page($query) {
     }
 }
 add_action( 'pre_get_posts', 'change_posts_per_page' );
+//remove MW FORM MENU
+function remove_menus() {
+  if (!current_user_can('level_10')) {
+    remove_menu_page('edit.php?post_type=mw-wp-form');
+	remove_menu_page('edit.php?post_type=giftcard');
+	remove_menu_page('edit.php?post_type=rl_gallery');
+	remove_menu_page( 'edit.php?post_type=elementor_library' );
+	  remove_menu_page( 'elementor' );
+  }
+	remove_menu_page('edit.php?post_type=size_guide');
+}
+add_action('admin_menu', 'remove_menus', 9999999);
+
+//remove status woo menu
+add_action( 'admin_menu', 'remove_menu_pages', 999);
+function remove_menu_pages() {
+  //global $current_user;
+   
+  //$user_roles = $current_user->roles;
+  //$user_role = array_shift($user_roles);
+  if (!current_user_can('level_10')) {
+    $remove_submenu = remove_submenu_page('woocommerce', 'wc-status');
+  }
+}
+// Rename WooCommerce to Shop
+ if (!current_user_can('level_10')) {
+		
+	
+add_action( 'admin_menu', 'rename_woocoomerce', 999 );
+ 
+function rename_woocoomerce()
+{
+    global $menu;
+ 
+    // Pinpoint menu item
+    $woo = rename_woocommerce( 'WooCommerce', $menu );
+ 
+    // Validate
+    if( !$woo )
+        return;
+    $menu[$woo][0] = __( 'Store Setting', 'zoa' );
+}
+ 
+function rename_woocommerce( $needle, $haystack )
+{
+    foreach( $haystack as $key => $value )
+    {
+        $current_key = $key;
+        if(
+            $needle === $value
+            OR (
+                is_array( $value )
+                && rename_woocommerce( $needle, $value ) !== false
+            )
+        )
+        {
+            return $current_key;
+        }
+    }
+    return false;
+}
+}//if (!current_user_can('level_10'))
 
 /*Remove Add to cart option from woo variation swatch pro*/
 remove_action('wvs_pro_variation_show_archive_variation_after_cart_button', 'wvs_pro_archive_variation_template',5);
@@ -4266,12 +4328,12 @@ function zoa_haet_mail_use_template ($use_template, $mail_data)
 	return $use_template;
 }
 
-/*add_filter( 'body_class', 'zoa_body_class', 10, 2 );
-function zoa_body_class ($classes, $class)
+add_filter( 'body_class', 'zoa_body_class', 10, 1 );
+function zoa_body_class ($classes)
 {
 	$classes[] = get_locale();
 	return $classes;
-}*/
+}
 
 function getCartGiftCardData()
 {

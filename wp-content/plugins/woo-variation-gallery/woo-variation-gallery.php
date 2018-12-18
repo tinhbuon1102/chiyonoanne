@@ -4,12 +4,12 @@
 	 * Plugin URI: https://wordpress.org/plugins/woo-variation-gallery/
 	 * Description: Allows to insert multiple images for per variation to let visitors to see a different images when WooCommerce product variations are switched. Requires WooCommerce 3.2+
 	 * Author: Emran Ahmed
-	 * Version: 1.1.16
+	 * Version: 1.1.17
 	 * Domain Path: /languages
 	 * Requires at least: 4.8
-	 * Tested up to: 4.9
+	 * Tested up to: 5.0
 	 * WC requires at least: 3.2
-	 * WC tested up to: 3.4
+	 * WC tested up to: 3.5
 	 * Text Domain: woo-variation-gallery
 	 * Author URI: https://getwooplugins.com/
 	 */
@@ -20,7 +20,7 @@
 		
 		final class Woo_Variation_Gallery {
 			
-			protected        $_version  = '1.1.16';
+			protected        $_version  = '1.1.17';
 			protected static $_instance = null;
 			
 			public static function instance() {
@@ -589,6 +589,11 @@
 				
 				$api_url = 'https://getwooplugins.com/wp-json/getwooplugins/v1/fetch-feed';
 				
+				// For Dev Mode
+				if ( $feed_api_uri = apply_filters( 'gwp_feed_api_uri', false ) ) {
+					$api_url = $feed_api_uri;
+				}
+				
 				if ( apply_filters( 'stop_gwp_live_feed', false ) ) {
 					return;
 				}
@@ -695,6 +700,11 @@
 			public function feed_css_uri() {
 				
 				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+				
+				// For Dev Mode
+				if ( $feed_css_uri = apply_filters( 'gwp_feed_css_uri', false ) ) {
+					return $feed_css_uri;
+				}
 				
 				$api_url = "https://api.github.com/repos/EmranAhmed/gwp-admin-notice/commits/master";
 				

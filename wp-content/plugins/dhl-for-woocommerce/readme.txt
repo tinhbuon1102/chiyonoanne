@@ -5,7 +5,7 @@ Tags: DPDHL, original DHL, DHL, DHL eCommerce, DHL express, DHL Parcel NL, DHL P
 Requires at least: 4.1
 Requires PHP: 5.6
 Tested up to: 5.0
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 WC requires at least: 2.6.0
 WC tested up to: 3.5
 License: GPLv2 or later
@@ -79,6 +79,10 @@ For individual support please use our support form [here](https://www.logistics.
 
 
 == Changelog ==
+
+= 1.3.8 =
+* DHL eCommerce: Fix sub string to use 'UTF-8' for Asian chars
+* DHL Paket: Fix delete meta data before API call
 
 = 1.3.7 =
 * DHL Parcel: Fixed an issue with delivery times not always loading in the right order

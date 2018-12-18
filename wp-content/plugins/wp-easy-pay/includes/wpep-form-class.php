@@ -65,7 +65,7 @@ if (!class_exists('WPEP_Form')) {
                         'placeholder_card_cvv' => __('CVV', 'wp-easy-pay'),
                         'placeholder_card_postal_code' => __('Card Postal Code', 'wp-easy-pay'),
                         'payment_form_input_styles' => esc_js($this->get_input_styles()),
-                        'amount_error_message' => __('Amount must be at least 1.', 'wp-easy-pay'),
+                        'amount_error_message' => __('Amount must be at least 1 or above.', 'wp-easy-pay'),
                         'ajaxurl' => admin_url('admin-ajax.php')
                     ));
 
@@ -149,6 +149,7 @@ if (!class_exists('WPEP_Form')) {
                         $transactionData = json_decode($transaction, true);
                         if (isset($transactionData['transaction']['id'])) {
                             $transactionId = $transactionData['transaction']['id'];
+							do_action('wp_easy_payment_success', $transactionData, '');
                             //send email to admin
                             $to = get_option('wpep_notification_email');
                             if ($to) {
@@ -161,11 +162,11 @@ if (!class_exists('WPEP_Form')) {
                                     'Content-Type: text/html; charset=UTF-8',
                                     'From: ' . get_option('blogname') . ' <' . get_option('admin_email') . '>'
                                 );
-
+								
                                 wp_mail($to, $subject, $body, $headers);
                             }
-
-                            $result = array('status' => 'success', 'message' => __('PAYMENT SUCCESSFUL', 'wp-easy-pay'));
+							$redirection  = get_option('wpep_pay_suc_url');
+                            $result = array('status' => 'success', 'message' => __('PAYMENT SUCCESSFUL', 'wp-easy-pay'), 'redirect' => $redirection);
                         }
                     } catch (Exception $ex) {
                         $errors = $ex->getResponseBody()->errors;
@@ -177,9 +178,11 @@ if (!class_exists('WPEP_Form')) {
                                 $message = $error->field . ' - ' . $error->detail;
                         }
                         $result = array('status' => 'error', 'message' => $message);
+						do_action('wp_easy_payment_failed', $result, '');
                     }
                 } else {
                     $result = array('status' => 'error', 'message' => __('Invalid square token or location id.', 'wp-easy-pay'));
+					do_action('wp_easy_payment_failed', $result, '');
                 }
             }
             echo json_encode($result);

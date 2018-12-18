@@ -1,13 +1,13 @@
-﻿=== WP Easy Pay - With Square ===
+=== WP Easy Pay - With Square ===
 Plugin URI: https://wpexperts.io/
 Contributors: wpexpertsio
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=pay@objects.ws&item_name=DonationForPlugin
 Tags: square,squareup, wordpress pay,Square for wordpress, square payments,square checkout
 Requires at least: 4.5.0
-Tested up to: 4.9.8
-Stable tag: 1.8
+Tested up to: 5.0.1
+Stable tag: 2.2
 License: GPLv2 or later
-Requires PHP: 5.2
+Requires PHP: 5.5
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 In a few simple steps you can start accepting credit card payments with Square Checkout on your WordPress site.
@@ -110,3 +110,20 @@ WPExperts offer solutions as a third party service provider, we are NOT affiliat
 * Add - Admin as well notification email templates for pro feature.
 * Update - Popup issues for pro feature.
 * Add - Multi Currency support in free version tested upto Version 4.9.8.
+
+= 2.0 2018-10-26 =
+* Added - Multiple payment buttons support on same page.
+* Fixed - Form fields issue.
+* Added - Subscription activation by default.
+* Update - Email body template labelling.
+* Update - Decimal amount support according to square API.
+* Added - Amount field added inside all field tag.
+* Added -  Card fields mandatory on subscription button form.
+
+= 2.2 - 18/12/2018 =
+
+* Enhancement – Added compatibility for Wordpress 5.0.1 
+* Enhancement – Added compatibility for WooCommerce 3.5.2
+* Added - Action hook for wp_easy_payment_success and wp_easy_payment_failed.
+* Added - Redirect page after payment success.
+* Added - code quality.

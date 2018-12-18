@@ -23,7 +23,9 @@ final class Haet_Mail {
 	function get_default_options() {
 		return array(
 			'fromname' 				=> 	get_bloginfo('name'),
-			'fromaddress'			=> 	get_bloginfo('admin_email')
+			'fromaddress'			=> 	get_bloginfo('admin_email'),
+			'testmode'				=>	false,
+			'testmode_recipient'	=>	''
 		);
 	}
 
@@ -408,7 +410,10 @@ final class Haet_Mail {
 		$email = $this->add_attachments( $email );
 
 
-		if( $options['testmode'] && is_email( trim( $options['testmode_recipient'] ) ) )
+		if(	isset( $options['testmode'] ) 
+			&& isset( $options['testmode_recipient'] ) 
+			&& $options['testmode'] 
+			&& is_email( trim( $options['testmode_recipient'] ) ) )
 			$email['to'] = trim( $options['testmode_recipient'] );
 
 		return $email;
