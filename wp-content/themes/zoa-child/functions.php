@@ -4,7 +4,17 @@ define('PAGE_PRIVACY_ID', 2732);
 /**
  * Theme functions file
  */
-
+/***Remove Admin Notification except super admin***/
+add_action( 'admin_head', 'get_user_role' );
+function get_user_role() {
+	global $current_user;
+	$user_roles = $current_user->roles;
+	$user_role = array_shift($user_roles);
+	if ($user_role != "administrator"){
+	    add_action( 'init', create_function( '$a', "remove_action( 'init', 'wp_version_check' );" ), 2 );
+	    add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
+	};
+};
 /**
  * Enqueue parent theme styles first
  * Replaces previous method using @import
