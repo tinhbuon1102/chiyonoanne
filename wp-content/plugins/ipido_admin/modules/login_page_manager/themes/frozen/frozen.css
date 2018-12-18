@@ -1,0 +1,749 @@
+#cs-ipido-admin-login-page-wrapper {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  background: var(--cs-ipido-theme_login-background);
+  background-size: var(--cs-ipido-theme_login-background-size);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#cs-ipido-admin-login-page-wrapper,
+#cs-ipido-admin-login-page-wrapper * {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style .cs-ipido-admin-content-wrapper {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style.cs-video-bg .cs-ipido-admin-content-wrapper {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style.cs-video-bg .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style.cs-video-bg .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content {
+  background: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper.cs-frozen-style.cs-video-bg .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper {
+  background-color: var(--cs-ipido-theme_login-loginbox-background) !important;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-background-wrapper #cs-ipido-admin-video-background-player {
+  background: #eee;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-background-wrapper #cs-ipido-admin-video-background-player iframe {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 56.25vw;
+  left: 50%;
+  min-height: 100%;
+  min-width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  width: 177.77777778vh;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper {
+  margin: 0 auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper {
+  background-color: var(--cs-ipido-theme_login-loginbox-background);
+  /*  Login form Title, Form and Buttons
+                        ========================================================================== */
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper a {
+  color: var(--cs-ipido-theme_login-theme-primary);
+  text-decoration: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login {
+  background: inherit;
+  width: 350px;
+  padding: 0px;
+  overflow: hidden;
+  padding: 25px;
+  background: inherit;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+  border-radius: 2px;
+  /*  Logo
+                            ========================================================================== */
+  /*  Login Form
+                            ========================================================================== */
+  /*  Other Elements out of the Login Form
+                            ========================================================================== */
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login::before {
+  content: '';
+  top: -25px;
+  left: -25px;
+  right: -25px;
+  bottom: -25px;
+  position: absolute;
+  background: inherit;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  -webkit-box-shadow: inset 0 0 0 3000px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 0 0 3000px rgba(255, 255, 255, 0.1);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login * {
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-glass-message {
+  overflow: hidden;
+  padding: 25px;
+  background: inherit;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+  border-radius: 2px;
+  margin-bottom: 25px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-glass-message::before {
+  content: '';
+  top: -25px;
+  left: -25px;
+  right: -25px;
+  bottom: -25px;
+  position: absolute;
+  background: inherit;
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+  -webkit-box-shadow: inset 0 0 0 3000px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 0 0 3000px rgba(255, 255, 255, 0.1);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-glass-message * {
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-glass-message .cs-glass-message-inner {
+  color: var(--cs-ipido-theme_login-message-color);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-glass-message .cs-glass-message-inner * {
+  color: currentColor;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-normal-message {
+  margin-bottom: 25px;
+  color: var(--cs-ipido-theme_login-message-color);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-normal-message * {
+  color: currentColor;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p.message,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login #login_error {
+  display: var(--cs-ipido-theme_login-alert-message-display, block);
+  background: var(--cs-ipido-loginbox-background);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 60px;
+  position: relative;
+  min-height: 50px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p.message::after,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login #login_error::after {
+  content: '\e931';
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 40px;
+  height: 100%;
+  font-size: 32px;
+  line-height: 1;
+  font-family: 'castor-line-icons';
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p.message *,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login #login_error * {
+  color: currentColor;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login #login_error {
+  display: block;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login #login_error::after {
+  content: '\ea0d';
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login h1 {
+  width: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login h1 a {
+  background-image: var(--cs-ipido-theme_login-logo);
+  background-size: inherit;
+  background-position: center center;
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0px 0px 30px 0px;
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-ipido-admin-login-title {
+  margin-bottom: 20px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login .cs-ipido-admin-login-title h2 {
+  margin: 0px;
+  padding: 0;
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform {
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0;
+  padding: 0;
+  line-height: initial;
+  position: relative;
+  overflow: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p {
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p + p,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p + p,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p + p {
+  margin-top: 25px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p.forgetmenot,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p.forgetmenot,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p.forgetmenot {
+  float: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p.submit,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p.submit,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p.submit {
+  margin: 25px 0px;
+  float: none;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p.submit input.button#wp-submit,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p.submit input.button#wp-submit,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p.submit input.button#wp-submit {
+  float: none;
+  line-height: 1;
+  height: initial;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  position: relative;
+  border: none;
+  border-radius: 2px;
+  padding: 0 30px;
+  min-width: 73px;
+  width: 100%;
+  height: 43px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  color: var(--cs-ipido-theme_login-button-color);
+  background-color: var(--cs-ipido-theme_login-button-bg);
+  font-size: 17px;
+  font-weight: 100;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p.submit input.button#wp-submit:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p.submit input.button#wp-submit:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p.submit input.button#wp-submit:hover {
+  color: var(--cs-ipido-theme_login-button-color-hover);
+  background: var(--cs-ipido-theme_login-button-bg-hover);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform p.submit input.button#wp-submit:active,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform p.submit input.button#wp-submit:active,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform p.submit input.button#wp-submit:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transform: initial;
+          transform: initial;
+  color: var(--cs-ipido-theme_login-button-color-active);
+  background: var(--cs-ipido-theme_login-button-bg-active);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  height: 44px;
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30px;
+  height: 44px;
+  font-size: 20px;
+  line-height: 1;
+  font-family: 'castor-line-icons';
+  text-decoration: inherit;
+  font-weight: 300;
+  font-style: normal;
+  vertical-align: top;
+  text-align: center;
+  -webkit-transition: color .1s ease-in 0;
+  transition: color .1s ease-in 0;
+  -webkit-font-smoothing: antialiased;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label[for=user_login]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label[for=user_login]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label[for=user_login]::before {
+  content: '\e9fb';
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label[for=user_pass]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label[for=user_pass]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label[for=user_pass]::before {
+  content: '\e98f';
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label[for=rememberme],
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label[for=rememberme],
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label[for=rememberme] {
+  width: 100%;
+  font-size: 14px;
+  font-weight: lighter;
+  color: white;
+  line-height: 23px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label[for=user_email]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label[for=user_email]::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label[for=user_email]::before {
+  content: '\ea32';
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label br,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label br,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label br {
+  display: none;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input {
+  margin: 0px;
+  border: none;
+  background: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+  --input-color: rgba(233, 233, 233, 0.938);
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 9px 9px 9px 38px;
+  width: 100%;
+  font-size: 16px;
+  color: var(--input-color);
+  line-height: 25px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input::-webkit-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input::-webkit-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input:-ms-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input:-ms-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input::-ms-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input::-ms-input-placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input::placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input::placeholder,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform label input.input:-webkit-autofill,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform label input.input:-webkit-autofill,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform label input.input:-webkit-autofill {
+  -webkit-transition: background-color 50000s ease-in-out 0s !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  color: var(--input-color);
+  -webkit-text-fill-color: var(--input-color);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .g-recaptcha,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .g-recaptcha,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .g-recaptcha {
+  margin: 0px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-links,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-links,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-links {
+  margin-top: 15px;
+  font-family: 'Arial', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-links .cs-ipido-admin-forgetmenot label,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-links .cs-ipido-admin-forgetmenot label,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-links .cs-ipido-admin-forgetmenot label {
+  line-height: initial;
+  height: initial;
+  font-size: inherit;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-links .cs-ipido-admin-login-link-lostpw,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-links .cs-ipido-admin-login-link-lostpw,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-links .cs-ipido-admin-login-link-lostpw {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-links a,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-links a,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-links a {
+  color: var(--cs-ipido-theme_login-theme-gray-light);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-links a:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-links a:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-links a:hover {
+  color: var(--cs-ipido-theme_login-theme-primary);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: var(--cs-ipido-theme_login-theme-gray-lighter);
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register .or-signup,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register .or-signup,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register .or-signup {
+  position: relative;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register .or-signup::before, #cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register .or-signup::after,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register .or-signup::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register .or-signup::after,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register .or-signup::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register .or-signup::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 25%;
+  height: 1px;
+  background: white;
+  opacity: 0.3;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register .or-signup::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register .or-signup::before,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register .or-signup::before {
+  left: 0px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register .or-signup::after,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register .or-signup::after,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register .or-signup::after {
+  right: 0px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register a,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register a,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register a {
+  padding: 5px;
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#loginform .cs-ipido-admin-login-link-register a:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#lostpasswordform .cs-ipido-admin-login-link-register a:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login form#registerform .cs-ipido-admin-login-link-register a:hover {
+  color: var(--cs-ipido-theme_login-theme-primary);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#nav,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#backtoblog {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0px;
+  margin: 20px 0px 0px 0px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#nav a,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#backtoblog a {
+  color: inherit;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#nav a:hover,
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper #login p#backtoblog a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-content .cs-ipido-admin-login-wrapper .cs-ipido-admin-login-form-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-content-inner-wrapper .cs-ipido-admin-links {
+  border: 1px solid blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-login-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-login-footer p {
+  color: inherit;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-login-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#cs-ipido-admin-login-page-wrapper .cs-ipido-admin-content-wrapper .cs-ipido-admin-login-footer a:hover {
+  color: white;
+}
+
+.cs_ipido_checkbox {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  *display: inline-flex;
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cs_ipido_checkbox::before {
+  content: '\e930';
+  font-family: 'castor-line-icons';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  font-size: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cs_ipido_checkbox.checked::before {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+/*# sourceMappingURL=frozen.css.map */
