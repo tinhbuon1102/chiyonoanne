@@ -1,5 +1,0 @@
-Version 1.0.0
-- Inital release of a plugin
-
-Version 1.0.1
-- RTL design integrated
