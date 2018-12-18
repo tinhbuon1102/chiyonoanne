@@ -15,6 +15,13 @@ function get_user_role() {
 	    add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
 	};
 };
+function hide_update_noticee_to_all_but_admin_users()
+{
+if (!is_super_admin()) {
+remove_all_actions( 'admin_notices' );
+}
+}
+add_action( 'admin_head', 'hide_update_noticee_to_all_but_admin_users', 1 );
 /**
  * Enqueue parent theme styles first
  * Replaces previous method using @import
