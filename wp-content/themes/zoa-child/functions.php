@@ -4648,3 +4648,49 @@ function zoa_woocommerce_email_order_details($order, $sent_to_admin = false, $pl
 		}
 	}
 }
+
+add_filter('woocommerce_customer_meta_fields', 'zoa_woocommerce_customer_meta_fields', 10000, 1);
+function zoa_woocommerce_customer_meta_fields ($show_fields)
+{
+	$order_fields = array(
+		"last_name",
+		"first_name",
+		"last_name_kana",
+		"first_name_kana",
+		"email",
+		"phone",
+		"country",
+		"postcode",
+		"state",
+		"city",
+		"address_1",
+		"address_2"
+	);
+	$show_fields['billing']['fields']['billing_last_name_kana'] = 
+	$show_fields['shipping']['fields']['shipping_last_name_kana'] = array(
+		'label'     => __('姓(フリガナ)', 'woocommerce'),
+		'required'  => true,
+		'class'     => array('form-row-first')
+	);
+	$show_fields['billing']['fields']['billing_first_name_kana'] =
+	$show_fields['shipping']['fields']['shipping_first_name_kana'] = array(
+		'label'     => __('名(フリガナ)', 'woocommerce'),
+	);
+	$billing_fields = $show_fields['billing']['fields'];
+	$shipping_fields = $show_fields['shipping']['fields'];
+	$show_fields['billing']['fields'] = $show_fields['shipping']['fields'] = array();
+	foreach ($order_fields as $order_field)
+	{
+		if (isset($billing_fields['billing_' . $order_field]))
+		{
+			$show_fields['billing']['fields']['billing_' . $order_field] = $billing_fields['billing_' . $order_field];
+		}
+		
+		if (isset($shipping_fields['shipping_' . $order_field]))
+		{
+			$show_fields['shipping']['fields']['shipping_' . $order_field] = $shipping_fields['shipping_' . $order_field];
+		}
+	}
+	
+	return $show_fields;
+}
