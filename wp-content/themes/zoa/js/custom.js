@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
             _btn.classList.remove('loading');
           });
 
-          if (!$('.mwb_wgm_added_wrapper').length)
+          if (!jQuery('.mwb_wgm_added_wrapper').length)
           {
         	  xhr.send('action=single_add_to_cart&nonce=' + zoa_ajax.nonce + '&product_id=' + single_atc_id + '&product_qty=' + _qty + '&variation_id=' + variation_id + '&variations=' + JSON.stringify(items));
           }

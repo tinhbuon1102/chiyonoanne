@@ -262,6 +262,7 @@ if( $bannerPosts ): ?>
 				</header>
 			</div>
 			<?php } ?>
+			<span id="menu-overlay"></span>
 		</div>
 
 	<?php endif; ?>

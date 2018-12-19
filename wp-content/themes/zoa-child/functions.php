@@ -4608,6 +4608,24 @@ function zoa_woocommerce_mail_content($message)
 	$message = str_replace('<h2 class="wc-bacs-bank-details-heading">', '<h2 class="wc-bacs-bank-details-heading" style="text-align: center; font-style: normal;">', $message);
 	$message = str_replace('<h3 class="wc-bacs-bank-details-account-name">', '<h3 class="wc-bacs-bank-details-account-name" style="text-align: center; font-style: normal; display: none;">', $message);
 	$message = str_replace('<ul class="wc-bacs-bank-details order_details bacs_details">', '<ul class="wc-bacs-bank-details order_details bacs_details" style="text-align: center; list-style-type: none; padding-left: 0;">', $message);
+	
+	// check is order invoice email content
+	if (strpos($message, 'checkout/order-pay') !== false)
+	{
+		$message .= '<div>order invoice page</div>';
+		// Get order id by order pay url
+		$matches = array();
+		preg_match('/checkout\/order-pay\/([0-9]+)\//', $message, $matches);
+		if (!empty($matches))
+		{
+			$order_id = $matches[1];
+			$order = new WC_Order($order_id);
+			if ('bacs' == $order->get_payment_method())
+			{
+				$message = str_replace('href="'. site_url() .'/checkout/order-pay', ' style="display: none;" href="'. site_url() .'/checkout/order-pay', $message);
+			}
+		}
+	}
 	return $message;
 }
 
