@@ -4611,22 +4611,22 @@ function zoa_woocommerce_mail_content($message)
 	return $message;
 }
 
-add_action( 'woocommerce_email_order_details', 'zoa_woocommerce_email_order_details', 1, 2 );
-function zoa_woocommerce_email_order_details($order, $sent_to_admin = false)
+add_action( 'woocommerce_email_order_details', 'zoa_woocommerce_email_order_details', 1, 4 );
+function zoa_woocommerce_email_order_details($order, $sent_to_admin = false, $plain_text = false, $email = '')
 {
 	// Add tracking in complete email
-	if ('completed' == $order->status)
+	if ('completed' == $order->status && $email->template_html == 'emails/customer-completed-order.php')
 	{
 		$tracking_number = get_post_meta($order->id, '_aftership_tracking_number', true);
 		$tracking_provider = get_post_meta($order->id, '_aftership_tracking_provider_name', true);
 		
 		if ($tracking_provider)
 		{
-			echo '<div style="margin: 10px 0;">'. __('Tracking Provider: ','zoa') .  $tracking_provider . '</div>';
+			echo '<div style="margin: 10px 0;">'. __('Your order was shipped via ', 'wc_aftership') .  $tracking_provider . '</div>';
 		}
 		if ($tracking_number)
 		{
-			echo '<div style="margin: 10px 0;">'. __('Tracking Number: ','zoa') .  $tracking_number . '</div>';
+			echo '<div style="margin: 10px 0;">'. __('Tracking number is ', 'wc_aftership') .  $tracking_number . '</div>';
 		}
 	}
 }
