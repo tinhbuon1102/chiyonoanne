@@ -1,0 +1,352 @@
+# Translation of Plugins - AfterShip &#8211; WooCommerce Tracking - Stable Readme (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - AfterShip &#8211; WooCommerce Tracking - Stable Readme (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-12-19 13:20+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.12\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - AfterShip &#8211; WooCommerce Tracking - Stable Readme (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#. Short description.
+msgid "Auto import tracking of all your shipments in one place to WooCommerce (Free), branded tracking page to view order status in one click and ensure grea &hellip;"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add new couriers supported by Aftership"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add couriers - Ninja Van Thailand, EFS (E-commerce Fulfillment Service)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated couriers to latest"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added custom fields import from order"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add couriers - ninjavan-philippines, omniva"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove deprecated warning on Woocommerce 3"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "AfterShip automatically generates a tracking page for each shipment. Customize tracking page by adding your brand logo, store URL and Instagram pictures to improve SEO and generate more sales. You can also embed the <a href=\"http://support.aftership.com/article/111-how-can-i-add-track-button-to-wordpress-or-woocommerce\">AfterShip Track Button</a> to allow tracking at your store. Improve your customer experience on tracking."
+msgstr ""
+
+#. Found in description header.
+msgid "Branded Tracking Page (Free)"
+msgstr ""
+
+#. Found in description header.
+msgid "Top Shipment Tracking Plugin (Free)"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "4-72 Entregando • Mexico AeroFlash • Brazil Correios • Correo Argentino • Correos Chile • Correos de Mexico • Cosmetics Now • Courier Plus • Courier IT • Dawn Wing • DPE South Africa • Emirates Post • Estafeta • Fastway South Africa • Israel Post • Israel Post Domestic • Mexico Redpack • Mexico Senda Express • NiPost • OCA Argentina • Post Serbia • RAM • South African Post Office • Saudi Post • SMSA Express • Specialised Freight • Speedex Courier"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "ADSOne • Australia Post • Bonds Couriers • CourierPost • Couriers Please • Fastway Australia • Fastway New Zealand • New Zealand Post • StarTrack • Star Track Express • TNT Australia • Toll IPEC • Toll Priority • UBI Logistics Australia"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "2GO • ABX Express • AIR21 • Airpak Express • Airspeed International Corporation • Bluedart • Cambodia Post • City-Link Express • CJ GLS • Delcart • Delhivery • Delivree King • Detrack • DHL Global Mail Asia • Dotzot • DPEX • DTDC India • Dynamic Logistics • Ecargo • Ecom Express • Fastrak Services • First Flight Couriers • First Logistics • Gati-KWE • GDEX • Giao hÃ ng nhanh • GoJavas • India Post Domestic • India Post International • Jam Express • Japan Post • Jayon Express (JEX) • Jet-Ship Worldwide • JNE • Kangaroo Worldwide Express • Kerry Express Thailand • Kerry TTC Express • KGM Hub • Korea Post • Lao Post • LBC Express • Lion Parcel • Malaysia Post EMS / Poslaju • Malaysia Post - Registered • Maxcellents Pte Ltd • Mypostonline • Nationwide Express • Nhans Solutions • Ninja Van • Ninja Van Malaysia • NuvoEx • Omni Parcel • Pandu Logistics • Parcel Express • Parcelled.in • Parcel Post Singapore • Pos Indonesia Domestic • Pos Indonesia Int'l • Professional Couriers • Quantium • Qxpress • RAF Philippines • Red Express • Red Express Waybill • RPX Indonesia • RPX Online • RZY Express • Safexpress • Sagawa • Singapore Post • Singapore Speedpost • SingParcel Service • SkyNet Malaysia • Spreadel • SRE Korea • Taiwan Post • Yamato Japan • TAQBIN Malaysia • TAQBIN Singapore • Thailand Thai Post • Tiki • ViettelPost • Vietnam Post • Vietnam Post EMS • Wahana • Xend Express • XpressBees • Zalora 7-Eleven • 17 Post Service • 4PX • Best Express • AuPost China • BOXC • China EMS • China Post • CNE Express • Cuckoo Express • DHL Hong Kong • EC-Firstclass • EC Express • EMPS Express • Equick China • Flyt Express • GoFly • Hua Han Logistics • Hong Kong Post • JCEX • Logistic Worldwide Express • Nanjing Woyuan • One World Express • Post56 • PayPal Package • SEKO Logistics • S.F. Express • S.F International • STO Express • DPEX China • TAQBIN Hong Kong • TGX • WeDo Logistics • WishPost • Yanwen • Yunda Express • Yun Express • ZJS International"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"<strong>③. Europe Tracking (93)</strong>\n"
+"ACS Courier • Asendia Germany • ASM • Austrian Post (Express) • Austrian Post (Registered) • Belpost • Bert Transport • Bulgarian Posts • JP BH Pošta • Belgium Post • bpost international • BRT Bartolini • CBL Logistics • Česká Pošta • Chronopost France • Chronopost Portugal • Colis Privé • Colissimo • Correos Express • Cyprus Post • Post Danmark • DB Schenker Sweden • Deutsche Post Mail • DHL Benelux • DHL 2-Mann-Handling • DHL Spain Domestic • Deutsche Post DHL • DHL Netherlands • DHL Poland Domestic • DHL Parcel NL • Direct Link • DMM Network • DPD Germany • DPD Poland • Easy Mail • ELTA Hellenic Post • Envialia • Exapaq • FERCAM Logistics &amp; Transport • Geodis Calberson France • GLS • GLS Italy • GLS Netherlands • Hermes Germany • Hrvatska Pošta • IMX Mail • InPost Paczkomaty • International Seur • Italy SDA • Kuehne + Nagel • La Poste • Lietuvos Paštas • Magyar Posta • Matkahuolto • Mondial Relay • MRW • NACEX Spain • Nova Poshta • FedEx Poland Domestic • Packlink • Poczta Polska • Portugal CTT • Portugal Seur • Poșta Română • Poste Italiane • Poste Italiane Paccocelere • Posten Norge / Bring • Itella Posti • PostNL Domestic • PostNL International 3S • PostNL International • PostNord Logistics • Iceland Post • PTT Posta • Raben Group • Redur Spain • Russian Post • SGT Corriere Espresso • Teliway SIC Express • Siodemka • Correos de España • Spanish Seur • Speed Couriers • Sweden Posten • Swiss Post • Geniki Taxydromiki • TNT-Click Italy • TNT France • TNT Italy • Nexive (TNT Post Italy) • TrakPak • TransMission • UkrPoshta"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"<strong>②. UK &amp; Ireland Tracking (30)</strong>\n"
+"4Square Group • An Post • APC Overnight • Arrow XL • Asendia UK • Collect+ • Deltec Courier • DPD Ireland • DPD UK • Fastway Ireland • FedEx UK • Hermesworld • Homedirect Logistics • Interlink Express • myHermes UK • Nightline • Norsk Global • Panther • Parcel Force • Royal Mail • SkyNet Worldwide Express • Skynet Worldwide Express UK • TNT UK • TNT UK Reference • Tuffnells Parcels Express • UK Mail • XDP Express • XDP Express Reference • Yodel Domestic • Yodel International"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"<strong>①. US, Canada &amp; Global Tracking (35)</strong>\n"
+"ABF Freight • APC Postal Logistics • Aramex • Asendia USA • Canada Post • Canpar Courier • Con-way Freight • DACHSER • DHL Express • DHL eCommerce • DHL Express (Piece ID) • DPD • DSV • Echo • Ensenda • Estes • FedEx • FedEx Freight • Globegistics Inc. • Greyhound • i-parcel • LaserShip • Newgistics • Old Dominion Freight Line • OnTrac • Purolator • RL Carriers • RR Donnelley • TNT • TNT Reference • UPS • UPS Freight • UPS Mail Innovations • USPS • YRC"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "You'll find the FAQ on <a href=\"https://aftership.uservoice.com/knowledgebase\">AfterShip.com</a>"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid ""
+"*** This plugin requires at least PHP 5.2.4\n"
+"*** This plugin requires at least WooCommerce 2.1"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://aftership.uservoice.com/knowledgebase/articles/169634-isn-t-my-store-or-courier-sending-notifications-al\">Isn’t my store or courier sending notifications already?</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://www.aftership.com/pricing\">SMS Charges</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://www.aftership.com/pricing\">Free vs Premium</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://www.aftership.com/courier\">List of supported couriers</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://www.aftership.com/pricing\">Premium account pricing</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://aftership.uservoice.com/knowledgebase/articles/268665\">How to insert AfterShip Track Button to WordPress or WooCommerce</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Input <code>Store URL</code> and <code>AfterShip's WordPress API Key</code> at <a href=\"https://www.aftership.com/apps/woocommerce\">AfterShip WooCommerce page</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Generate <a href=\"http://aftership.uservoice.com/knowledgebase/articles/405909\">AfterShip's WordPress API Key</a> under <code>Users</code> &gt; <code>Your Profile</code>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Check <code>Use Track Button</code> for displaying tracking info at order history page"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Select AfterShip Plugin or <a href=\"http://www.woothemes.com/products/shipment-tracking/\">WooCommerce Shipment Tracking Plugin</a> for entering tracking number"
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"http://downloads.wordpress.org/plugin/aftership-woocommerce-tracking.zip\">Download AfterShip plugin</a>, then install and activate at wordpress."
+msgstr ""
+
+#. Found in installation list item.
+msgid "<a href=\"https://secure.aftership.com/signup\">Sign up AfterShip account for FREE</a>"
+msgstr ""
+
+#. Found in installation header.
+msgid "Further Reading"
+msgstr "参考文献"
+
+#. Found in description paragraph.
+msgid "<strong>⑥. Latin America, Middle East &amp; Other Tracking (27)</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>⑤. Australia &amp; New Zealand Tracking (14)</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>④. Asia &amp; China Tracking (125)</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "[youtube http://www.youtube.com/watch?v=1zCCx8Ap9ms]"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Upgrade to <a href=\"https://www.aftership.com/pricing\">Premium</a> to automatically send out delivery notifications to customers or yourself. Your choice of notification triggers - In transit, Out for delivery, Delivered, Failed delivery attempt or Exceptions. Use your own email to send out notifications, and customize messages to add store logo, URL, a tracking link to get more returned customers after shipping!"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "By setting up an auto import of tracking numbers to AfterShip, you can get the latest tracking info of all your shipments in one place. Each free account comes with a Dashboard to monitor current statuses of all shipments. You can also filter your shipments by dates, statuses, couriers and destination. Find out if all your shipments are delivered on time and discover any exceptions. Support <a href=\"http://www.woothemes.com/products/shipment-tracking/\">WooCommerce Shipment Tracking Plugin</a> as well."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "AfterShip supports UPS tracking, FedEx tracking, USPS tracking, DHL tracking and shipment tracking of over 360+ carriers worldwide. Please scroll down to see the full list of our supported carriers."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "The plugin allows you to insert the AfterShip Track Button to order history page, so that your customers can track the latest order status in one click."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "By installing AfterShip plugin, you can automatically add Tracking Number and Courier fields to your admin panel. After you fulfill an order, simply enter the tracking number and select a courier at WooCommerce, the same info will be displayed at customer's order history page. AfterShip supports over 360+ carriers worldwide, you can select couriers by <a href=\"https://secure.aftership.com/signup\">signing up a free AfterShip account</a>."
+msgstr ""
+
+#. Found in description header.
+msgid "Full list of supported carriers (360+):"
+msgstr ""
+
+#. Found in description header.
+msgid "Notify customers of delivery updates (Premium)"
+msgstr ""
+
+#. Found in description header.
+msgid "Track all shipments in one place (Free)"
+msgstr ""
+
+#. Found in description header.
+msgid "Support 450+ International Courier (Free)"
+msgstr ""
+
+#. Found in description header.
+msgid "Display tracking info at order history page (Free)"
+msgstr ""
+
+#. Screenshot description.
+msgid "Automatically send out delivery notifications"
+msgstr ""
+
+#. Screenshot description.
+msgid "View exception, and filter by status"
+msgstr ""
+
+#. Screenshot description.
+msgid "Track all shipments in one place"
+msgstr ""
+
+#. Screenshot description.
+msgid "AfterShip dashboard"
+msgstr ""
+
+#. Screenshot description.
+msgid "Support tracking of UPS, DHL, FedEx, USPS and 360+ carriers"
+msgstr ""
+
+#. Screenshot description.
+msgid "Display tracking info at order history page"
+msgstr ""
+
+#. Screenshot description.
+msgid "Add tracking number and carrier to WooCommerce"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix compatibility issue with Sendcloud plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add support for more couriers"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix courier list is sometimes empty"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support new version of Woocommerce Shipment Tracking plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved compatibility with PHP7"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Handling API key in more reliable way"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed Woocommerce Tracking plugin provider error"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Custom tracking URL support"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enable importing note from customer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add credentials verification"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix the redeclare class issues"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support 231 couriers, please check out supported couriers in https://www.aftership.com/courier"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support custom track message on order history page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support new required field, <code>tracking key</code> and <code>tracking destination country</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support new couriers, please check out supported couriers in https://www.aftership.com/courier"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add the fields config"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix the custom track message tailing space problem"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix carrier list data, to support new dropdown menu in Wordpress 4.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix the display problem of required fields in order history page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add new courier"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Force load the script to display the plugin if the script didn't execute normally after 2 seconds while the page loaded."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Disable get_cart_discount() and get_order_discount() as it's deprecated in WooCommerce 2.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove courier url and telephone no."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add order by filter option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix carrier list data in setting page, to support new dropdown menu in Wordpress 4.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Disable unused field for import orders to AfterShip system"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Compatible up to WordPress 4.2.2"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add new couriers"
+msgstr ""
+
+msgid "Please Select"
+msgstr "選択してください"
+
+msgid "Carrier:"
+msgstr "配送会社:"
+
+msgid "Tracking number"
+msgstr "追跡番号"

@@ -4250,6 +4250,46 @@ label.no-shipping-text {
 .woocommerce-form-coupon-toggle {
     display: none;
 }
+/*Added Message*/
+.woocommerce-message.woo-notice-box {
+    margin-top: 24px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.woocommerce-message .view_cart_link:after {
+    content: "\ea3e";
+    display: inline-block;
+    font-weight: normal;
+    font-family: 'oecicon';
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-left: 5px;
+}
+
+.woocommerce-message .added_msg {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-right: 10px;
+    border-right: 1px solid #CCC;
+}
 /*Gift Card Form Fields*/
 .mwb_wgm_added_wrapper .form-row p.field-wrapper {
     margin-bottom: 0;
@@ -4285,6 +4325,7 @@ div#previewBox {
     -ms-flex-order: 2;
     -webkit-order: 2;
     order: 2;
+    display: none;
 }
 /*Gift Preview*/
 #TB_closeWindowButton:hover .tb-close-icon, #TB_closeWindowButton:focus .tb-close-icon {

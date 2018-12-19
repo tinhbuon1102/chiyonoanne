@@ -13,7 +13,7 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.1.1\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -2082,6 +2082,9 @@ msgstr "準備ができた商品から順に発送"
 msgid "%s pkg."
 msgstr "%s回"
 
+msgid "%1s pkg."
+msgstr "%1s回"
+
 msgid "Too short"
 msgstr "短すぎます"
 
@@ -2159,3 +2162,18 @@ msgstr "ご注文詳細は以下です。"
 
 msgid "Store Setting"
 msgstr "ストア設定"
+
+msgid "Deliver Option"
+msgstr "配送オプション"
+
+msgid "Your order was shipped via "
+msgstr "配送会社: "
+
+msgid "Tracking number is "
+msgstr "追跡番号: "
+
+msgid "Products successfully added to cart!"
+msgstr "製品がカートに追加されました！"
+
+msgid "View cart"
+msgstr "かごの中身を見る"

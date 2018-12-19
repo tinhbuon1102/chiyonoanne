@@ -31,7 +31,7 @@ add_action( 'admin_head', 'hide_update_noticee_to_all_but_admin_users', 1 );
 function elsey_change_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-		$src = add_query_arg( array('ver' => '3.7'), $src );
+		$src = add_query_arg( array('ver' => '3.8'), $src );
 		return $src;
 }
 add_filter( 'style_loader_src', 'elsey_change_cssjs_ver', 1000 );
@@ -51,13 +51,13 @@ add_action( 'wp_enqueue_scripts', 'zoa_enqueue_parent_theme_style', 99 );
 function zoa_enqueue_parent_theme_style() {
 	wp_enqueue_style( 'zoa-theme-style', get_template_directory_uri().'/style.css' );
 	//wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css', array('zoa-theme-style'));
-	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css?2018121141944', array('zoa-theme-style'));
+	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css', array('zoa-theme-style'));
 	/*wp_enqueue_style( 'zoa-child-style',
 					 get_stylesheet_directory_uri() . '/style.css',
 					 array('zoa-theme-style'),
 					 date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
 					);*/
-	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812190232', array('zoa-child-style'));
+	wp_enqueue_style( 'ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201812190904', array('zoa-child-style'));
 	wp_enqueue_style( 'loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -391,7 +391,13 @@ function misha_password_messages() {
 	) );
  
 }
+//change added cart message
+add_filter ( 'wc_add_to_cart_message_html', 'custom_add_to_cart_message', 10, 2 );
+function custom_add_to_cart_message( $message, $products ) {
+	$message = sprintf( '<span class="added_msg">'. __('Products successfully added to cart!', 'zoa') .'</span><a href="%s" class="cta view_cart_link">'. __('View cart', 'zoa') .'</a>',wc_get_cart_url() );
 
+    return $message;
+}
 //add WPML lang class to body
 if ( function_exists('icl_object_id') ) {
 add_filter('body_class', 'append_language_class');
@@ -4303,8 +4309,8 @@ function meta_box_deliver_option_markup($post)
 		$num_cart_product = count(getShippingPackageByDeliverDate($order));
 		wp_nonce_field(basename(__FILE__), "meta-box-nonce");
 		echo '<div class="deliver_option_wraper">';
-		echo '<div><input type="radio" id="shipping_delivery_option_1" name="shipping_delivery_option" value="1" '. $selected_option_1 .'/><label for="shipping_delivery_option_1" class="label">'. __('Shipping Once', 'zoa') .'</label></div>
-			  <div><input id="shipping_delivery_option_2" type="radio" name="shipping_delivery_option" value="2" '. $selected_option_2 .'/><label for="shipping_delivery_option_2" class="label">'. vsprintf(__('Shipping %1s Times'), $num_cart_product) .'</label></div>';
+		echo '<div><input type="radio" id="shipping_delivery_option_1" name="shipping_delivery_option" value="1" '. $selected_option_1 .'/><label for="shipping_delivery_option_1" class="label">'. __('Ship together', 'zoa') .'</label></div>
+			  <div><input id="shipping_delivery_option_2" type="radio" name="shipping_delivery_option" value="2" '. $selected_option_2 .'/><label for="shipping_delivery_option_2" class="label">'. __('Ship according to completion date', 'zoa'). '(' . vsprintf(__('%1s pkg.'), $num_cart_product) .')</label></div>';
 		echo '</div>';
 	}
 }
@@ -4599,6 +4605,28 @@ if (!function_exists('woof_show_btn')) {
 add_filter( 'woocommerce_mail_content', 'zoa_woocommerce_mail_content', 1000, 1 );
 function zoa_woocommerce_mail_content($message)
 {
-	$message = str_replace('<ul class="wc-bacs-bank-details order_details bacs_details">', '<ul class="wc-bacs-bank-details order_details bacs_details" style="text-align: center">', $message);
+	$message = str_replace('<h2 class="wc-bacs-bank-details-heading">', '<h2 class="wc-bacs-bank-details-heading" style="text-align: center; font-style: normal;">', $message);
+	$message = str_replace('<h3 class="wc-bacs-bank-details-account-name">', '<h3 class="wc-bacs-bank-details-account-name" style="text-align: center; font-style: normal; display: none;">', $message);
+	$message = str_replace('<ul class="wc-bacs-bank-details order_details bacs_details">', '<ul class="wc-bacs-bank-details order_details bacs_details" style="text-align: center; list-style-type: none; padding-left: 0;">', $message);
 	return $message;
+}
+
+add_action( 'woocommerce_email_order_details', 'zoa_woocommerce_email_order_details', 1, 2 );
+function zoa_woocommerce_email_order_details($order, $sent_to_admin = false)
+{
+	// Add tracking in complete email
+	if ('completed' == $order->status)
+	{
+		$tracking_number = get_post_meta($order->id, '_aftership_tracking_number', true);
+		$tracking_provider = get_post_meta($order->id, '_aftership_tracking_provider_name', true);
+		
+		if ($tracking_provider)
+		{
+			echo '<div style="margin: 10px 0;">'. __('Tracking Provider: ','zoa') .  $tracking_provider . '</div>';
+		}
+		if ($tracking_number)
+		{
+			echo '<div style="margin: 10px 0;">'. __('Tracking Number: ','zoa') .  $tracking_number . '</div>';
+		}
+	}
 }

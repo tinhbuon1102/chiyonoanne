@@ -3,7 +3,7 @@
 	Plugin Name: AfterShip - WooCommerce Tracking
 	Plugin URI: http://aftership.com/
 	Description: Add tracking number and carrier name to WooCommerce, display tracking info at order history page, auto import tracking numbers to AfterShip.
-	Version: 1.9.2
+	Version: 3331.9.2
 	Author: AfterShip
 	Author URI: http://aftership.com
 
@@ -133,7 +133,7 @@ if (is_woocommerce_active()) {
              */
             public function load_plugin_textdomain()
             {
-                load_plugin_textdomain('aftership', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+                load_plugin_textdomain('wc_aftership', false, dirname(plugin_basename(__FILE__)) . '/languages/');
             }
 
             public function admin_styles()
@@ -425,7 +425,7 @@ if (is_woocommerce_active()) {
                 foreach ($this->aftership_fields as $field) {
                     $values[$field['id']] = get_post_meta($order_id, '_' . $field['id'], true);
                     if ($field['type'] == 'date' && $values[$field['id']]) {
-                        $values[$field['id']] = date_i18n(__('l jS F Y', 'wc_shipment_tracking'), $values[$field['id']]);
+                        $values[$field['id']] = date_i18n(__('l jS F Y', 'wc_aftership'), $values[$field['id']]);
                     }
                 }
                 $values['aftership_tracking_provider'] = get_post_meta($order_id, '_aftership_tracking_provider', true);
@@ -439,11 +439,11 @@ if (is_woocommerce_active()) {
 
                 $options = get_option('aftership_option_name');
                 if (array_key_exists('track_message_1', $options) && array_key_exists('track_message_2', $options)) {
-                    $track_message_1 = $options['track_message_1'];
-                    $track_message_2 = $options['track_message_2'];
+                	$track_message_1 = __($options['track_message_1'], 'wc_aftership');
+                	$track_message_2 = __($options['track_message_2'], 'wc_aftership');
                 } else {
-                    $track_message_1 = 'Your order was shipped via ';
-                    $track_message_2 = 'Tracking number is ';
+                	$track_message_1 = __('Your order was shipped via ', 'wc_aftership');
+                	$track_message_2 = __('Tracking number is ', 'wc_aftership');
                 }
 
                 $required_fields_values = array();

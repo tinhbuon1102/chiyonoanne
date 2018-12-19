@@ -320,7 +320,7 @@ function get_couriers() {
 		},
 		{
 			"slug": "sagawa",
-			"name": "Sagawa",
+			"name": "佐川急便",
 			"other_name": "佐川急便",
 			"required_fields": []
 		},

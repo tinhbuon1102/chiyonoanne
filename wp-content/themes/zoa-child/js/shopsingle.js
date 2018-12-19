@@ -66,8 +66,8 @@ jQuery(document).ready(function($){
 			}
 		}
 		$('input[name="mwb_wgm_send_giftcard"]:radio').change( function() {
-			var isValid = $('form.cart .inputError').length ? false : true;
-			showHideAddCartBtn(isValid);
+			//var isValid = $('form.cart .inputError').length ? false : true;
+			//showHideAddCartBtn(isValid);
 		});
 		$('body').on('blur', 'form.cart input, form.cart textarea', function(){
 			setTimeout(function(){
