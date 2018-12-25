@@ -11,7 +11,19 @@
 		</header>
 	<?php
 		endif;
+	if (is_page('reservation-test')) {
+		echo '<div id="bookedForm" class="custom-steps form form--stepped">';
 		the_content();
-		zoa_wp_link_pages(); /*break page*/
+		get_template_part( 'template-parts/booked', 'confirm' );
+		echo'<div class="btn-group">
+            <input type="button" class="btn btn--1 btn--prev js-prev" value="Previous" /> 
+            <input type="button" class="btn btn--next js-next" value="Next" />
+            <input type="submit" class="btn btn--2" value="Submit form" />
+         </div>';
+		echo '</div>';
+	} else {
+		the_content();
+	}
+	zoa_wp_link_pages(); /*break page*/
 	?>
 </div>

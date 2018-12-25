@@ -51,7 +51,7 @@ add_action( 'wp_enqueue_scripts', 'zoa_enqueue_parent_theme_style', 99 );
 function zoa_enqueue_parent_theme_style() {
 	wp_enqueue_style( 'zoa-theme-style', get_template_directory_uri().'/style.css' );
 	//wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css', array('zoa-theme-style'));
-	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css', array('zoa-theme-style'));
+	wp_enqueue_style( 'zoa-child-style', get_stylesheet_directory_uri() . '/style.css?201812251720', array('zoa-theme-style'));
 	/*wp_enqueue_style( 'zoa-child-style',
 					 get_stylesheet_directory_uri() . '/style.css',
 					 array('zoa-theme-style'),
@@ -138,6 +138,7 @@ function rename_woocommerce( $needle, $haystack )
 }
 }//if (!current_user_can('level_10'))
 
+
 /*Remove Add to cart option from woo variation swatch pro*/
 remove_action('wvs_pro_variation_show_archive_variation_after_cart_button', 'wvs_pro_archive_variation_template',5);
 /*function from parent inc/woocomerce/content-product.php */
@@ -187,28 +188,31 @@ function custom_styles() {
 	wp_enqueue_style( 'cal-style', get_stylesheet_directory_uri() . '/js/calendar/pignose.calendar.css', array(), '' );
 	wp_enqueue_style( 'font-style', get_stylesheet_directory_uri() . '/fonts/font.css', array(), '' );
 	wp_enqueue_style( 'gfont-style', 'https://fonts.googleapis.com/css?family=Lato:300,400|Noto+Sans+JP:300,400,500|Crimson+Text:400,400i', array(), '' );
-	wp_enqueue_style( 'oicon-style', get_stylesheet_directory_uri() . '/icons/icon-outline.css?201812071241', array(), '' );
+	wp_enqueue_style( 'oicon-style', get_stylesheet_directory_uri() . '/icons/icon-outline.css', array(), '' );
 	wp_enqueue_style( 'gicon-style', get_stylesheet_directory_uri() . '/icons/icon-glyph.css', array(), '' );
-	wp_enqueue_style( 'wicon-style', get_stylesheet_directory_uri() . '/icons/icon-woo.css?201812071224', array(), '' );
+	wp_enqueue_style( 'wicon-style', get_stylesheet_directory_uri() . '/icons/icon-woo.css', array(), '' );
 	wp_enqueue_style( 'bsicon-style', get_stylesheet_directory_uri() . '/icons/icon-bodyshape.css', array(), '' );
 	wp_enqueue_style( 'select-style', get_stylesheet_directory_uri() . '/js/selectbox/selectbox.min.css', array(), '' );
 	wp_enqueue_style( 'bootstrap-grid', get_stylesheet_directory_uri() . '/css/bootstrap-grid.css', array(), '' );
 	wp_enqueue_style( 'remoda_theme', get_stylesheet_directory_uri() . '/js/remodal/remodal-default-theme.css', array(), '' );
 	wp_enqueue_style( 'remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.css', array(), '' );
-	wp_enqueue_style( 'menu-style', get_stylesheet_directory_uri() . '/css/menu.css?201812061205', array(), '' );
+	wp_enqueue_style( 'menu-style', get_stylesheet_directory_uri() . '/css/menu.css', array(), '' );
+	wp_enqueue_style( 'booked-calendar', get_stylesheet_directory_uri() . '/css/booked-calendar.css', array(), '' );
 }
 add_action( 'wp_enqueue_scripts', 'custom_styles' );
 
 function add_scripts() {
+	wp_register_style( 'snow-style', get_stylesheet_directory_uri() . '/css/snowfall.css', array(), '' );
+	wp_register_script( 'snow-js', get_stylesheet_directory_uri() . '/js/snowfall.js', array(), false, true);
 	wp_register_style( 'woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '' );
 	wp_register_style( 'giftcard-style', get_stylesheet_directory_uri() . '/css/giftcard.css', array(), '' );
 	wp_register_style( 'slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '' );
 	wp_register_style( 'slicktheme-style', get_stylesheet_directory_uri() . '/js/slick/slick-theme.css', array(), '' );
 	wp_register_style( 'labelauty-style', get_stylesheet_directory_uri() . '/js/labelauty/jquery-labelauty.css', array(), '' );
-	wp_register_style( 'form-style', get_stylesheet_directory_uri() . '/css/form.css?201812070708', array(), '' );
-	wp_register_style( 'contact-style', get_stylesheet_directory_uri() . '/css/contact.css?201812060242', array(), '' );
+	wp_register_style( 'form-style', get_stylesheet_directory_uri() . '/css/form.css', array(), '' );
+	wp_register_style( 'contact-style', get_stylesheet_directory_uri() . '/css/contact.css', array(), '' );
 	wp_register_style( 'portani-style', get_stylesheet_directory_uri() . '/css/port-animation.css', array(), '' );
-	wp_register_style( 'portfolio-style', get_stylesheet_directory_uri() . '/css/portfolio.css?201811211607', array(), '' );
+	wp_register_style( 'portfolio-style', get_stylesheet_directory_uri() . '/css/portfolio.css', array(), '' );
 	wp_register_script( 'moment-js', get_stylesheet_directory_uri() . '/js/calendar/moment.min.js', array(), false, true);
 	//wp_register_script( 'calmain-js', get_stylesheet_directory_uri() . '/js/calendar/main.js');
 	wp_register_script( 'formstep-js', get_stylesheet_directory_uri() . '/js/form-steps.js', array(), false, true);
@@ -219,7 +223,7 @@ function add_scripts() {
 	wp_register_script( 'less-js', 'http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js', array(), false, true);
 	wp_register_script( 'checkout-js', get_stylesheet_directory_uri() . '/js/checkout.js', array(), false, true);
 	wp_register_script( 'labelauty-js', get_stylesheet_directory_uri() . '/js/labelauty/jquery-labelauty.js', array(), false, true);
-	wp_register_script( 'reservation-js', get_stylesheet_directory_uri() . '/js/reservation.js?201812070712', array(), false, true);
+	wp_register_script( 'reservation-js', get_stylesheet_directory_uri() . '/js/reservation.js', array(), false, true);
 	wp_register_script( 'gp-js', get_stylesheet_directory_uri() . '/js/grid-parallax.js', array(), false, true);
 	wp_register_script( 'rellax-js', get_stylesheet_directory_uri() . '/js/rellax.min.js', array(), false, true);
 	wp_register_script( 'masonry-js', get_stylesheet_directory_uri() . '/js/masonry.pkgd.min.js', array(), false, true);
@@ -229,15 +233,21 @@ function add_scripts() {
 	wp_localize_script( 'home-js', 'get_url', $get_url );
 	wp_register_script( 'remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.js', array(), false, true);
 	wp_register_script( 'slick-js', get_stylesheet_directory_uri() . '/js/slick/slick.js', array(), false, true);
-	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201812141150', array(), false, true);//single shop
-	wp_register_script( 'popup-js', get_stylesheet_directory_uri() . '/js/popup.js?201812012300', array(), false, true);//popup tooltip
-	wp_register_script( 'woof-js', get_stylesheet_directory_uri() . '/js/woof.js?201812140822', array(), false, true);
+	wp_register_script( 'shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js', array(), false, true);//single shop
+	wp_register_script( 'popup-js', get_stylesheet_directory_uri() . '/js/popup.js', array(), false, true);//popup tooltip
+	wp_register_script( 'woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
+	wp_register_script( 'booked-js', get_stylesheet_directory_uri() . '/js/booked-custom.js', array(), false, true);
+	wp_register_script( 'booked-steps', get_stylesheet_directory_uri() . '/js/booked-formsteps.js', array(), false, true);
+	wp_register_script( 'ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
 	wp_enqueue_script('remodal');
 	
     if ( is_home() || is_front_page() ) {
+		wp_enqueue_style('snow-style');
         wp_enqueue_script('gp-js'); //wp_enqueue_style(wp_register_scriptで登録したスタイルの名称)
 		wp_enqueue_script('rellax-js');
+		wp_enqueue_script('snow-js');
 		wp_enqueue_script('home-js');
+		
     } elseif (is_page('reservation')) {
 		wp_enqueue_style('labelauty-style');
 		wp_enqueue_style('form-style');
@@ -247,8 +257,14 @@ function add_scripts() {
 		wp_enqueue_script('reservation-js');
     } elseif (is_page('reservation-confirm')) {
 		wp_enqueue_style('form-style');
-    }
-    elseif (is_page('about')) {
+    }elseif (is_page('reservation-test')) {
+		wp_enqueue_style('labelauty-style');
+		wp_enqueue_style('form-style');
+		wp_enqueue_script('labelauty-js');
+		wp_enqueue_script('booked-js');
+		wp_enqueue_script('booked-steps');
+		wp_enqueue_script('ajax-con');
+    }elseif (is_page('about')) {
 		wp_enqueue_style('portani-style');
 		wp_enqueue_style('portfolio-style');
     	wp_enqueue_script('masonry-js');
@@ -349,6 +365,17 @@ function validation_scripts() {
 }
 add_action('wp_enqueue_scripts', 'validation_scripts');
 
+/****************
+Booked Form Step Button
+*****************/
+function booked_button() {
+	echo '<div class="btn-group">
+            <input type="button" class="btn btn--inverse btn--1 btn--prev js-prev" value="Previous" /> 
+            <input type="button" class="btn btn--next js-next" value="Next" />
+            <input type="submit" class="btn btn--2" value="Submit form" />
+         </div>';
+}
+add_action('booked_btn_hook', 'booked_button', 7);
 /**
  * Change the strength requirement on the woocommerce password
  *
@@ -477,8 +504,8 @@ add_action( 'after_setup_theme', 'lab_setup' );
 add_filter('woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text');
 function woo_custom_cart_button_text() { return __('Add to cart', ''); }
 
-//auto email text shortcode
 // Function to add text shortcode to posts and pages
+//auto email text shortcode
 function email_process_shortcode(){
     return '<p style="text-align: center;">'. __( 'Your order has been received and is now being processed.', 'zoa' ) . '<p style="text-align: center;">'. __( "We'll drop another email when your order ships.", "zoa" ) . '</p><p style="text-align: center;">'. __( 'Your order details are shown below for your reference:', 'zoa' ) . '</p>';
 }
@@ -1802,12 +1829,12 @@ add_filter('woocommerce_billing_fields','custom_woocommerce_billing_fields');
 function custom_woocommerce_billing_fields($fields) {
 	
 	$fields['billing_last_name_kana'] = array(
-		'label'     => __('姓(フリガナ)', 'woocommerce'),
+		'label'     => __('Last Name Kana', 'zoa'),
 		'required'  => true,
 		'class'     => array('form-row-first')
 	);
 	$fields['billing_first_name_kana'] = array(
-		'label'     => __('名(フリガナ)', 'woocommerce'),
+		'label'     => __('First Name Kana', 'zoa'),
 		'required'  => true,
 		'class'     => array('form-row-last'),
 		'clear'     => true
@@ -1870,12 +1897,12 @@ function custom_woocommerce_shipping_fields( $fields ) {
 //     unset($fields['shipping_country']);
 
 	$fields['shipping_last_name_kana'] = array(
-		'label'     => __('姓(フリガナ)', 'woocommerce'),
+		'label'     => __('Last Name Kana', 'zoa'),
 		'required'  => true,
 		'class'     => array('form-row-first')
 	);
 	$fields['shipping_first_name_kana'] = array(
-		'label'     => __('名(フリガナ)', 'woocommerce'),
+		'label'     => __('First Name Kana', 'zoa'),
 		'required'  => true,
 		'class'     => array('form-row-last'),
 		'clear'     => true
@@ -4668,13 +4695,13 @@ function zoa_woocommerce_customer_meta_fields ($show_fields)
 	);
 	$show_fields['billing']['fields']['billing_last_name_kana'] = 
 	$show_fields['shipping']['fields']['shipping_last_name_kana'] = array(
-		'label'     => __('姓(フリガナ)', 'woocommerce'),
+		'label'     => __('Last Name Kana', 'zoa'),
 		'required'  => true,
 		'class'     => array('form-row-first')
 	);
 	$show_fields['billing']['fields']['billing_first_name_kana'] =
 	$show_fields['shipping']['fields']['shipping_first_name_kana'] = array(
-		'label'     => __('名(フリガナ)', 'woocommerce'),
+		'label'     => __('First Name Kana', 'zoa'),
 	);
 	$billing_fields = $show_fields['billing']['fields'];
 	$shipping_fields = $show_fields['shipping']['fields'];

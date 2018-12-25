@@ -40,6 +40,9 @@ if ($user->ID)
 </head>
 
 <body <?php body_class(); ?>>
+<?php if ( is_home() || is_front_page() ) {?>
+<canvas id="canv"></canvas>
+<?php } ?>
 <?php do_action('after_body_open_tag'); ?>
 <!--<script>
   document.body.classList.add('fade-out');
@@ -99,6 +102,71 @@ if( $bannerPosts ): ?>
 <?php endif; ?>
 
 <div id="theme-container" class="<?php echo 'container-'.$lastslug; ?>">
+			<!--snowing-->
+	<!--<div class="snow_bg">
+		<svg class="svg-snowscene" xmlns="http://www.w3.org/2000/svg">
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+  <circle class="snow" />
+</svg>
+	</div>-->
 	
 	<?php //zoa_before_content(); ?>
 
