@@ -368,3 +368,13 @@ body .booked-form #newAppointmentForm p.status{
 .ch-active-time .button-text{
     color: #fff !important;
 }
+body .booked-form .condition-block{
+    display: block;
+}
+.ch-step2 div.status{
+    color: red;
+}
+.ch-step2 .required-asterisk {
+    color: #E35656;
+    margin: -1px 0 0 7px;
+}

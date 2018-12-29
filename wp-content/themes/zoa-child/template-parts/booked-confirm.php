@@ -1,7 +1,3 @@
-<?php
-global $current_user;
-get_currentuserinfo();
-?>
 <div id="reservationFormConfirm" class="form_entry">
     <div class="confirm-box">
         <div class="row flex-justify-center pad_row">
@@ -33,7 +29,7 @@ get_currentuserinfo();
                     <div class="field-wrapper">
                         <label class="form-row__label light-copy"><?php _e('Name', 'zoa'); ?></label>
                         <div class="text_output">
-                            <span class="confirm-text-value"><?php echo $current_user->user_lastname ; ?> <?php echo $current_user->user_firstname ; ?></span>
+                            <span class="confirm-text-value ch-name-info"></span>
                         </div>
                     </div>
                 </div>
@@ -41,7 +37,7 @@ get_currentuserinfo();
                     <div class="field-wrapper">
                         <label class="form-row__label light-copy"><?php _e('Name Kana', 'zoa'); ?></label>
                         <div class="text_output">
-                            <span class="confirm-text-value"><?php echo $current_user->shipping_last_name_kana ; ?> <?php echo $current_user->shipping_first_name_kana ; ?></span>
+                            <span class="confirm-text-value ch-kananame-info"></span>
                         </div>
                     </div>
                 </div>
@@ -49,7 +45,7 @@ get_currentuserinfo();
                     <div class="field-wrapper">
                         <label class="form-row__label light-copy"><?php _e('Email', 'zoa'); ?></label>
                         <div class="text_output">
-                            <span class="confirm-text-value"><?php echo $current_user->user_email; ?></span>
+                            <span class="confirm-text-value ch-email-info"></span>
                         </div>
                     </div>
                 </div>
@@ -57,7 +53,7 @@ get_currentuserinfo();
                     <div class="field-wrapper">
                         <label class="form-row__label light-copy"><?php _e('Phone', 'zoa'); ?></label>
                         <div class="text_output">
-                            <span class="confirm-text-value"><?php echo $current_user->billing_phone; ?></span>
+                            <span class="confirm-text-value ch-phone-info"></span>
                         </div>
                     </div>
                 </div>
@@ -78,6 +74,6 @@ get_currentuserinfo();
                 </fieldset>
             </div>
         </div>
-        <div class="cancel_term_text">このご予約のキャンセルは2018年12月18日の10:30までとなります。</div>
+        <div class="cancel_term_text ch-term-text"></div>
     </div>
 </div><!--/reservationFormConfirm-->

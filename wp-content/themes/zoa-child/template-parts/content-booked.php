@@ -15,7 +15,7 @@
 	<?php 
 	
 	if (! is_user_logged_in()) : 
-	woocommerce_get_template( 'myaccount/form-register.php' );
+	//woocommerce_get_template( 'myaccount/form-register.php' );
 	else:
 	$current_user = wp_get_current_user();
 	$fname = get_user_meta( $current_user->ID, 'first_name', true );
@@ -48,7 +48,7 @@
 	?>
 	<div id="bookedForm" class="custom-steps form form--stepped">
 		<?php
-		//step01
+		//step01 Calendar
 		echo $fieldOpen;
 		echo '<div id="calendarForm" class="form_entry">';
 		echo $rowOpen;
@@ -61,7 +61,22 @@
 		echo $rowClose;
 		echo '</div>';//end form_entry
 		echo $fieldClose;
-		//step02
+		//step02 Customer Fields
+		echo $fieldOpen;
+		echo '<div id="customerInfoForm" class="form_entry">';
+		echo $rowOpen;
+		echo '<div class="col-lg-6 col-md-5 col-xs-12 form_sideimg" style="background-image: url('.$sideImgStep2.');">'.$showTxtConStep2.'</div>';
+		echo '<div class="col-lg-6 col-md-7 col-xs-12 form_sidecon">';
+		echo '<legend class="booked__form__section"><h2 class="heading heading--xlarge">'.__( 'Your Info', 'zoa' ).'</h2></legend>';
+		echo '<div id="customer-form">';//content wrapper
+		get_template_part( 'template-parts/booked', 'customer' );
+		echo '</div>';
+		do_action('booked_btn_hook');
+		echo '</div>';//end sidecon
+		echo $rowClose;
+		echo '</div>';//end form_entry
+		echo $fieldClose;
+		//step03 Inquiry
 		echo $fieldOpen;
 		echo '<div id="extraForm" class="form_entry">';
 		echo $rowOpen;
@@ -74,7 +89,7 @@
 		echo $rowClose;
 		echo '</div>';//end form_entry
 		echo $fieldClose;
-		//step03
+		//step04 Confirm
 		echo $fieldOpen;
 		echo '<div class="container">';
 		echo '<legend class="booked__form__section confirm--booking__form__section"><h2 class="heading heading--xlarge">'.__('Confirm your appointment', 'zoa').'</h2></legend>';

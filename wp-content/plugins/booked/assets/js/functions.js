@@ -386,6 +386,7 @@ var booked_load_calendar_date_booking_options,
                             $("#bookedForm .js-next").removeClass('ch-hidden');
                             $('.timeslot-people button').removeClass('ch-active-time');
                             $button.addClass('ch-active-time');
+                            $('.ch-term-text').html('このご予約のキャンセルは' + arr_date[0] + '年' + arr_date[1] + '月' + arr_date[2] + '日' + 'の' + format_time + 'までとなります。');
                         } else {
                             $('.bm-window').html(html);
                             var bookedModal = $('.booked-modal');
@@ -681,97 +682,93 @@ var booked_load_calendar_date_booking_options,
         // Submit the "Request Appointment" Form
         $('body').on('click', '.booked-form input#submit-request-appointment', function (e) {
 
-            $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-spinner-clock booked-icon-spin"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_please_wait);
-            resize_booked_modal();
+//            $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-spinner-clock booked-icon-spin"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_please_wait);
+//            resize_booked_modal();
+//
+//            e.preventDefault();
+//
+            var customerType = $('#newAppointmentForm input[name=customer_type]').val();
+//                    customerID = $('#newAppointmentForm input[name=user_id]').val(),
+//                    name = $('#newAppointmentForm input[name=booked_appt_name]').val(),
+//                    surname = $('#newAppointmentForm input[name=booked_appt_surname]').val(),
+//                    surnameActive = $('#newAppointmentForm input[name=booked_appt_surname]').length,
+//                    guest_name = $('#newAppointmentForm input[name=guest_name]').val(),
+//                    guest_surname = $('#newAppointmentForm input[name=guest_surname]').val(),
+//                    guest_surnameActive = $('#newAppointmentForm input[name=guest_surname]').length,
+//                    guest_email = $('#newAppointmentForm input[name=guest_email]').val(),
+//                    guest_emailActive = $('#newAppointmentForm input[name=guest_email]').length,
+//                    email = $('#newAppointmentForm input[name=booked_appt_email]').val(),
+//                    password = $('#newAppointmentForm input[name=booked_appt_password]').val(),
+//                    showRequiredError = false,
+//                    ajaxRequests = [];
 
-            e.preventDefault();
+//            $(this).parents('.booked-form').find('input,textarea,select').each(function (i, field) {
+//
+//                var required = $(this).attr('required');
+//
+//                if (required && $(field).attr('type') == 'hidden') {
+//                    var fieldParts = $(field).attr('name');
+//                    fieldParts = fieldParts.split('---');
+//                    fieldName = fieldParts[0];
+//                    fieldNumber = fieldParts[1].split('___');
+//                    fieldNumber = fieldNumber[0];
+//
+//                    if (fieldName == 'radio-buttons-label') {
+//                        var radioValue = false;
+//                        $('input:radio[name="single-radio-button---' + fieldNumber + '[]"]:checked').each(function () {
+//                            if ($(this).val()) {
+//                                radioValue = $(this).val();
+//                            }
+//                        });
+//                        if (!radioValue) {
+//                            showRequiredError = true;
+//                        }
+//                    } else if (fieldName == 'checkboxes-label') {
+//                        var checkboxValue = false;
+//                        $('input:checkbox[name="single-checkbox---' + fieldNumber + '[]"]:checked').each(function () {
+//                            if ($(this).val()) {
+//                                checkboxValue = $(this).val();
+//                            }
+//                        });
+//                        if (!checkboxValue) {
+//                            showRequiredError = true;
+//                        }
+//                    }
+//
+//                } else if (required && $(field).attr('type') != 'hidden' && $(field).val() == '') {
+//                    showRequiredError = true;
+//                }
+//
+//            });
 
-            var customerType = $('#newAppointmentForm input[name=customer_type]').val(),
-                    customerID = $('#newAppointmentForm input[name=user_id]').val(),
-                    name = $('#newAppointmentForm input[name=booked_appt_name]').val(),
-                    surname = $('#newAppointmentForm input[name=booked_appt_surname]').val(),
-                    surnameActive = $('#newAppointmentForm input[name=booked_appt_surname]').length,
-                    guest_name = $('#newAppointmentForm input[name=guest_name]').val(),
-                    guest_surname = $('#newAppointmentForm input[name=guest_surname]').val(),
-                    guest_surnameActive = $('#newAppointmentForm input[name=guest_surname]').length,
-                    guest_email = $('#newAppointmentForm input[name=guest_email]').val(),
-                    guest_emailActive = $('#newAppointmentForm input[name=guest_email]').length,
-                    email = $('#newAppointmentForm input[name=booked_appt_email]').val(),
-                    password = $('#newAppointmentForm input[name=booked_appt_password]').val(),
-                    showRequiredError = false,
-                    ajaxRequests = [];
+//            if (showRequiredError) {
+//                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_fill_out_required_fields);
+//                resize_booked_modal();
+//                return false;
+//            }
+//
+//            if (customerType == 'new' && !name || customerType == 'new' && surnameActive && !surname || customerType == 'new' && !email || customerType == 'new' && !password) {
+//                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_appt_required_fields);
+//                resize_booked_modal();
+//                return false;
+//            }
+//
+//            if (customerType == 'guest' && !guest_name || customerType == 'guest' && guest_emailActive && !guest_email || customerType == 'guest' && guest_surnameActive && !guest_surname) {
+//                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_appt_required_fields_guest);
+//                resize_booked_modal();
+//                return false;
+//            }
 
-            $(this).parents('.booked-form').find('input,textarea,select').each(function (i, field) {
-
-                var required = $(this).attr('required');
-
-                if (required && $(field).attr('type') == 'hidden') {
-                    var fieldParts = $(field).attr('name');
-                    fieldParts = fieldParts.split('---');
-                    fieldName = fieldParts[0];
-                    fieldNumber = fieldParts[1].split('___');
-                    fieldNumber = fieldNumber[0];
-
-                    if (fieldName == 'radio-buttons-label') {
-                        var radioValue = false;
-                        $('input:radio[name="single-radio-button---' + fieldNumber + '[]"]:checked').each(function () {
-                            if ($(this).val()) {
-                                radioValue = $(this).val();
-                            }
-                        });
-                        if (!radioValue) {
-                            showRequiredError = true;
-                        }
-                    } else if (fieldName == 'checkboxes-label') {
-                        var checkboxValue = false;
-                        $('input:checkbox[name="single-checkbox---' + fieldNumber + '[]"]:checked').each(function () {
-                            if ($(this).val()) {
-                                checkboxValue = $(this).val();
-                            }
-                        });
-                        if (!checkboxValue) {
-                            showRequiredError = true;
-                        }
-                    }
-
-                } else if (required && $(field).attr('type') != 'hidden' && $(field).val() == '') {
-                    showRequiredError = true;
-                }
-
-            });
-
-            if (showRequiredError) {
-                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_fill_out_required_fields);
-                resize_booked_modal();
-                return false;
-            }
-
-            if (customerType == 'new' && !name || customerType == 'new' && surnameActive && !surname || customerType == 'new' && !email || customerType == 'new' && !password) {
-                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_appt_required_fields);
-                resize_booked_modal();
-                return false;
-            }
-
-            if (customerType == 'guest' && !guest_name || customerType == 'guest' && guest_emailActive && !guest_email || customerType == 'guest' && guest_surnameActive && !guest_surname) {
-                $('form#newAppointmentForm p.status').show().html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_appt_required_fields_guest);
-                resize_booked_modal();
-                return false;
-            }
-
-            if (customerType == 'current' && customerID ||
-                    customerType == 'guest' && guest_name && !guest_surnameActive && !guest_emailActive ||
-                    customerType == 'guest' && guest_name && guest_surnameActive && guest_surname && !guest_emailActive ||
-                    customerType == 'guest' && guest_name && guest_emailActive && guest_email && !guest_surnameActive ||
-                    customerType == 'guest' && guest_name && guest_emailActive && guest_email && guest_surnameActive && guest_surname) {
+            if (customerType == 'current') {
 
                 SubmitRequestAppointment.currentUserOrGuest();
 
             }
 
-            if (customerType == 'new' && name && email && password) {
-                if (!surnameActive || surnameActive && surname) {
+            if (customerType == 'new') {
+               // if (!surnameActive || surnameActive && surname) {
                     SubmitRequestAppointment.newUser();
-                }
+               // }
             }
 
         });

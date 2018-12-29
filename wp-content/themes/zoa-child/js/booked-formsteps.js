@@ -227,6 +227,56 @@ jQuery(function ($) {
          }*/
         if ($('#step2').hasClass('is-active')) {
             var showRequiredError = false;
+            $('.confirm-box').find('input').each(function (i, field) {
+                var required = $(this).attr('required');
+                if (required && $(field).attr('type') != 'hidden' && $(field).val() == '') {
+                    showRequiredError = true;
+                }
+            });
+
+            if (showRequiredError) {
+                $(".ch-step2 div.msg2").css("display", "block");
+                $('.ch-step2 div.msg2').html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + booked_js_vars.i18n_fill_out_required_fields);
+                scrollToFormTop(formId);
+                return false;
+            }
+
+            var re = new RegExp();
+            re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            if (re.test($("#email").val())) {
+                //true
+            } else {
+                $(".ch-step2 div.msg2").css("display", "block");
+                $('.ch-step2 div.msg2').html('<i class="booked-icon booked-icon-alert" style="color:#E35656"></i>&nbsp;&nbsp;&nbsp;' + 'Please enter a valid email address.');
+                scrollToFormTop(formId);
+                return false;
+            }
+            //get data input
+            var user_lastname = $("#user_lastname").val();
+            var user_firstname = $("#user_firstname").val();
+            var billing_last_name_kana = $("#billing_last_name_kana").val();
+            var billing_first_name_kana = $("#billing_first_name_kana").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var n = $("#is_register:checked").length;
+            var is_register = n;
+            var dataString = '&user_lastname=' + user_lastname + '&user_firstname=' + user_firstname + '&billing_last_name_kana=' + billing_last_name_kana + '&billing_first_name_kana=' + billing_first_name_kana + '&email=' + email + '&phone=' + phone + '&is_register=' + is_register;
+            $.ajax({
+                action: 'booked_fill_yourinfo_form_steps',
+                url: booked_js_vars.ajax_url + '?action=booked_fill_yourinfo_form_steps',
+                type: 'post',
+                dataType: "json",
+                data: dataString
+            }).done(function (response) { //
+                $('.ch-name-info').html(response.user_lastname + ' ' + response.user_firstname);
+                $('.ch-kananame-info').html(response.billing_last_name_kana + ' ' + response.billing_first_name_kana);
+                $('.ch-email-info').html(response.email);
+                $('.ch-phone-info').html(response.phone);
+                $(".ch-step2 div.msg2").css("display", "none");
+            });
+        }
+        if ($('#step3').hasClass('is-active')) {
+            var showRequiredError = false;
             $('.booked-form').find('input,textarea,select').each(function (i, field) {
 
                 var required = $(this).attr('required');

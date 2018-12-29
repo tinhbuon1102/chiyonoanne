@@ -19,6 +19,8 @@ if (!class_exists('Booked_AJAX')) {
             add_action('wp_ajax_nopriv_booked_add_appt', array(&$this, 'booked_add_appt'));
             add_action('wp_ajax_booked_fill_form_steps', array(&$this, 'booked_fill_form_steps'));
             add_action('wp_ajax_nopriv_booked_fill_form_steps', array(&$this, 'booked_fill_form_steps'));
+            add_action('wp_ajax_booked_fill_yourinfo_form_steps', array(&$this, 'booked_fill_yourinfo_form_steps'));
+            add_action('wp_ajax_nopriv_booked_fill_yourinfo_form_steps', array(&$this, 'booked_fill_yourinfo_form_steps'));
             // Loaders
 
             add_action('wp_ajax_booked_calendar_month', array(&$this, 'booked_calendar_month'));
@@ -201,6 +203,13 @@ if (!class_exists('Booked_AJAX')) {
 
             booked_wpml_ajax();
             include(BOOKED_AJAX_INCLUDES_DIR . 'front/booked_fill_form_steps.php');
+            wp_die();
+        }
+
+        public function booked_fill_yourinfo_form_steps() {
+
+            booked_wpml_ajax();
+            include(BOOKED_AJAX_INCLUDES_DIR . 'front/booked_fill_yourinfo_form_steps.php');
             wp_die();
         }
 
