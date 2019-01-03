@@ -4630,3 +4630,14 @@ function zoa_woocommerce_customer_meta_fields($show_fields) {
 
     return $show_fields;
 }
+
+add_filter( 'woocommerce_validate_postcode', 'zoa_woocommerce_validate_postcode', 1000, 3);
+function zoa_woocommerce_validate_postcode ($valid, $postcode, $country )
+{
+	switch ( $country ) {
+		case 'JP':
+			$valid = (bool) preg_match( '/^([0-9]{7})$/', $postcode );
+			break;
+	}
+	return $valid;
+}

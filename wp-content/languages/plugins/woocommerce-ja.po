@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-12-14 18:23+0900\n"
+"PO-Revision-Date: 2019-01-03 08:42+0700\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.1.1\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - WooCommerce - Stable (latest release)\n"
 "POT-Creation-Date: \n"
@@ -15677,7 +15677,7 @@ msgstr "%s は電話番号として正しくありません"
 #: includes/class-wc-form-handler.php:127
 #: includes/shortcodes/class-wc-shortcode-cart.php:37
 msgid "Please enter a valid postcode / ZIP."
-msgstr "正しい郵便番号を入力してください"
+msgstr "有効な郵便番号を入力してください。 郵便番号は7桁の数字で、ハイフンは含まれません。"
 
 #. translators: %s: field name
 #: includes/class-wc-checkout.php:745 includes/class-wc-form-handler.php:114
