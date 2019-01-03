@@ -252,6 +252,7 @@ function add_scripts() {
     wp_register_script('woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
     wp_register_script('booked-js', get_stylesheet_directory_uri() . '/js/booked-custom.js', array(), false, true);
     wp_register_script('booked-steps', get_stylesheet_directory_uri() . '/js/booked-formsteps.js', array(), false, true);
+	wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_enqueue_script('remodal');
 
@@ -276,6 +277,7 @@ function add_scripts() {
         wp_enqueue_script('labelauty-js');
         wp_enqueue_script('booked-js');
         wp_enqueue_script('booked-steps');
+		wp_enqueue_script('tabs-js');
         wp_enqueue_script('ajax-con');
     } elseif (is_page('about')) {
         wp_enqueue_style('portani-style');
@@ -4646,14 +4648,14 @@ add_action('admin_init', 'post_limit_general_section');
 function post_limit_general_section() {
 	add_settings_section(
 			'post_limit_settings_section', // Section ID
-			__('Header Latest Post Limit'), // Section Title
+			__('Header Latest Banner Limit'), // Section Title
 			'post_limit_section_options_callback', // Callback
 			'general' // What Page?  This makes the section show up on the General Settings Page
 			);
 	
 	add_settings_field( // Option 1
 			'post_limit_banner_header', // Option ID
-			__('Limit Posts Number', 'zoa'),
+			__('Limit Banner Number', 'zoa'),
 			'post_limit_textbox_callback', // !important - This is where the args go!
 			'general', // Page it will be displayed (General Settings)
 			'post_limit_settings_section', // Name of our section
