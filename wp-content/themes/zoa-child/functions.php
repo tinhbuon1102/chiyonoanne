@@ -4648,14 +4648,14 @@ add_action('admin_init', 'post_limit_general_section');
 function post_limit_general_section() {
 	add_settings_section(
 			'post_limit_settings_section', // Section ID
-			__('Header Latest Post Limit'), // Section Title
+			__('Header Latest Banner Limit'), // Section Title
 			'post_limit_section_options_callback', // Callback
 			'general' // What Page?  This makes the section show up on the General Settings Page
 			);
 	
 	add_settings_field( // Option 1
 			'post_limit_banner_header', // Option ID
-			__('Limit Posts Number', 'zoa'),
+			__('Limit Banner Number', 'zoa'),
 			'post_limit_textbox_callback', // !important - This is where the args go!
 			'general', // Page it will be displayed (General Settings)
 			'post_limit_settings_section', // Name of our section
