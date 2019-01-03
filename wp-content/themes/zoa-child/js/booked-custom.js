@@ -7,4 +7,5 @@ jQuery(document).ready(function($) {
 		$(this).attr('id','step' + (i+1));
 	});
 	$("#bookedForm .js-next").addClass('ch-hidden').attr('disabled');
+	$('.booked-calendarSwitcher select').addClass('input-select justselect').wrap('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
 });

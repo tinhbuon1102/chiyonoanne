@@ -455,7 +455,7 @@ class BookedShortcodes {
 							<form method="post" action="<?php echo site_url('wp-login.php?action=lostpassword', 'login_post') ?>" class="wp-user-form">
 								<p class="username">
 									<label for="user_login"><?php esc_html_e('What is your email address?','booked'); ?></label>
-									<input type="text" name="user_login" value="" size="20" id="user_login" tabindex="1001" />
+									<input type="text" name="user_login" value="" size="20" id="user_login_lostpassword" tabindex="1001" />
 								</p>
 
 								<?php do_action('login_form', 'resetpass'); ?>

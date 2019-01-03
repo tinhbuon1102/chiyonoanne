@@ -2,7 +2,7 @@
 global $current_user;
 get_currentuserinfo();
 ?>
-<div id="reservationFormConfirm" class="form_entry">
+<div id="reservationFormCustomer" class="form_entry">
     <div class="confirm-box ch-step2">
         <div class="row flex-justify-center pad_row">
             <fieldset class="confirm_info col-md-12 col-xs-12">

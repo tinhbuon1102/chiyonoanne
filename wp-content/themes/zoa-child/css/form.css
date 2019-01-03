@@ -1,3 +1,6 @@
+.form_sidecon > .btn-group {
+    margin-top: 40px;
+}
 .btn-group .btn:not(:last-child) {
     margin-right: 5px;
 }
