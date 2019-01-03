@@ -63,7 +63,7 @@ if ($user->ID)
 </svg>
 <?php zoa_preloader(); ?>
 <?php 
-
+$banner_limit = get_option('post_limit_banner_header', -1);
 $bannerPosts = get_posts(array(
 	'posts_per_page'	=> -1,
 	'post_type'			=> 'post',
@@ -81,7 +81,9 @@ $bannerPosts = get_posts(array(
 			'terms' => array( 'info', 'events' ),
 			'operator' => 'IN',
 		)
-	)
+	),
+	'orderby' => 'date',
+	'order' => 'DESC'
 ));
 
 if( $bannerPosts ): ?>	
