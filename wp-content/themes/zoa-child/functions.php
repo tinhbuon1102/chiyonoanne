@@ -4645,6 +4645,16 @@ function zoa_woocommerce_validate_postcode ($valid, $postcode, $country )
 	}
 	return $valid;
 }
+add_filter( 'woocommerce_format_postcode', 'zoa_woocommerce_format_postcode', 1000, 2);
+function zoa_woocommerce_format_postcode ($postcode, $country)
+{
+	switch ( $country ) {
+		case 'JP':
+			$postcode = str_replace('-', '', $postcode );
+			break;
+	}
+	return $postcode;
+}
 
 add_action('admin_init', 'post_limit_general_section');
 function post_limit_general_section() {
