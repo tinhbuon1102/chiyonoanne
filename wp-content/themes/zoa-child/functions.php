@@ -252,6 +252,7 @@ function add_scripts() {
     wp_register_script('woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
     wp_register_script('booked-js', get_stylesheet_directory_uri() . '/js/booked-custom.js', array(), false, true);
     wp_register_script('booked-steps', get_stylesheet_directory_uri() . '/js/booked-formsteps.js', array(), false, true);
+	wp_register_style('tabs-style', get_stylesheet_directory_uri() . '/css/tabs.css', array(), '');
 	wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_enqueue_script('remodal');
@@ -274,6 +275,7 @@ function add_scripts() {
     } elseif (is_page('reservation-test')) {
         wp_enqueue_style('labelauty-style');
         wp_enqueue_style('form-style');
+		wp_enqueue_style('tabs-style');
         wp_enqueue_script('labelauty-js');
         wp_enqueue_script('booked-js');
         wp_enqueue_script('booked-steps');

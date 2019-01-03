@@ -320,7 +320,8 @@ if ($appt_is_available):
                     'user_email' => $email,
                     'user_pass' => $password,
                     'first_name' => $name,
-                    'last_name' => $surname
+                    'last_name' => $surname,
+                    'role'=>'customer'
                 );
                 $user_id = wp_insert_user($userdata);
 

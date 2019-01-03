@@ -2,13 +2,19 @@
 global $current_user;
 get_currentuserinfo();
 ?>
-<div id="reservationFormCustomer" class="form_entry">
-    <div class="confirm-box ch-step2">
+<?php if(!is_user_logged_in()){?>
+<ul class="tabs">
+	<li><a href="#login-info"><?php _e('Guest', 'zoa'); ?></a></li>
+	<li><a href="#signin-info"><?php _e('Login', 'zoa'); ?></a></li>
+</ul>
+<?php }?>
+<div id="reservationFormCustomer" class="form_entry<?php if(!is_user_logged_in()){?> tab_container<?php }?>">
+    <div id="login-info" class="confirm-box ch-step2<?php if(!is_user_logged_in()){?> tab_content<?php }?>">
         <div class="row flex-justify-center pad_row">
             <fieldset class="confirm_info col-md-12 col-xs-12">
                 <div class="form-row">
                     <div class="field-wrapper">
-                        <div class="flex-row">
+                        <div class="flex-row pad_row">
                             <div class="col-md-6 col-xs-12">
                                 <label class="form-row__label light-copy"><?php _e('Last Name', 'zoa'); ?><i class="required-asterisk booked-icon booked-icon-required"></i></label>
                                 <input type="text" required="required" id="user_lastname" name="user_lastname" value="<?php echo $current_user->user_lastname; ?>"/>
@@ -22,7 +28,7 @@ get_currentuserinfo();
                 </div>
                 <div class="form-row">
                     <div class="field-wrapper">
-                        <div class="flex-row">
+                        <div class="flex-row pad_row">
                             <div class="col-md-6 col-xs-12">
                                 <label class="form-row__label light-copy"><?php _e('Last Name Kana', 'zoa'); ?></label>
                                 <input type="text" id="billing_last_name_kana" name="billing_last_name_kana" value="<?php echo $current_user->billing_last_name_kana; ?>"/>
@@ -36,7 +42,7 @@ get_currentuserinfo();
                 </div>
                 <div class="form-row">
                     <div class="field-wrapper">
-                        <div class="flex-row">
+                        <div class="flex-row pad_row">
                             <div class="col-md-12 col-xs-12">
                                 <label class="form-row__label light-copy"><?php _e('Email', 'zoa'); ?><i class="required-asterisk booked-icon booked-icon-required"></i></label>
                                 <input type="email" required="required" id="email" name="email" value="<?php echo $current_user->user_email; ?>"/>
@@ -46,7 +52,7 @@ get_currentuserinfo();
                 </div>
                 <div class="form-row">
                     <div class="field-wrapper">
-                        <div class="flex-row">
+                        <div class="flex-row pad_row">
                             <div class="col-md-12 col-xs-12">
 
                                 <label class="form-row__label light-copy"><?php _e('Phone', 'zoa'); ?></label>
@@ -68,5 +74,9 @@ get_currentuserinfo();
         </div>
         <div class="status msg2">&nbsp;</div>
     </div>
-    <?php echo do_shortcode('[booked-login]'); ?>
+	<div id="signin-info" class="booked-login<?php if(!is_user_logged_in()){?> tab_content<?php }?>">
+		<div class="row flex-justify-center pad_row">
+			<fieldset class="sign_info col-md-12 col-xs-12"><?php echo do_shortcode('[booked-login]'); ?></fieldset>
+		</div>
+	</div>
 </div>

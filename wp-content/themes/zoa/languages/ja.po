@@ -2178,8 +2178,20 @@ msgstr "商品がカートに追加されました！"
 msgid "View cart"
 msgstr "かごの中身を見る"
 
+msgid "Last Name"
+msgstr "姓"
+
+msgid "First Name"
+msgstr "名"
+
 msgid "Last Name Kana"
 msgstr "姓(フリガナ)"
 
 msgid "First Name Kana"
 msgstr "名(フリガナ)"
+
+msgid "Email"
+msgstr "メールアドレス"
+
+msgid "Phone"
+msgstr "電話番号"

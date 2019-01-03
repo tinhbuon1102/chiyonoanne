@@ -1,3 +1,6 @@
+.row fieldset {
+    border: none;
+}
 .form_sidecon > .btn-group {
     margin-top: 40px;
 }
