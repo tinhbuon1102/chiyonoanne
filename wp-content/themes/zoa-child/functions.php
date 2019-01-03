@@ -4638,8 +4638,8 @@ function zoa_woocommerce_validate_postcode ($valid, $postcode, $country )
 {
 	switch ( $country ) {
 		case 'JP':
-			$valid = (bool) preg_match( '/^([0-9]{7})$/', $postcode );
-			break;
+// 			$valid = (bool) preg_match( '/^([0-9]{7})$/', $postcode );
+// 			break;
 	}
 	return $valid;
 }
