@@ -623,6 +623,9 @@ ul.acf-radio-list li input.labelauty + label, ul.acf-checkbox-list li input.labe
 #reservationFormCustomer .row fieldset {
     border: none;
 }
+#customer-form fieldset {
+    border: none;
+}
 /*Guest Step2*/
 #customer-form ul.tabs > li > a {
 	font-family: "proxima-nova",sans-serif;

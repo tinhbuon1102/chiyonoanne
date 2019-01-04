@@ -80,7 +80,7 @@ if (!empty($custom_fields)):
 
     if (!empty($custom_field_data)):
         foreach ($custom_field_data as $key => $data):
-            $cf_meta_value .= '<p class="cf-meta-value"><strong>' . $data['label'] . '</strong><br>' . $data['value'] . '</p>';
+            $cf_meta_value .= '<div class="form-row"><div class="cf-meta-value field-wrapper"><label class="form-row__label light-copy">' . $data['label'] . '</label><div class="text_output"><span confirm-text-value>' . $data['value'] . '</span></div></div></div>';//changed
         endforeach;
     endif;
 

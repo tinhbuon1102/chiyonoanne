@@ -3133,7 +3133,16 @@ function general_settings_shop_phone($settings) {
     }
     return $new_settings;
 }
+/* * *
+ * Appointment Cancel Email Text shortcode
+ */
 
+function booking_cancel_text() {
+	
+    $html = __('cancel_appointment_email_text','zoa');
+	return $html;
+}
+add_shortcode('booking_cancel_text', 'booking_cancel_text');
 /* * *
  * Store Phone no shortcode
  */

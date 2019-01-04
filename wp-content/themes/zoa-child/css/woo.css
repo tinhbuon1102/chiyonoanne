@@ -4391,3 +4391,15 @@ body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.bo
 body #booked-profile-page .appt-block .booked-cal-buttons .google-cal-button .addeventatc_icon {
     display: none;
 }
+body #booked-profile-page .cf-meta-values-hidden p.cf-meta-value strong {
+    line-height: 1.15;
+    font-weight: 400;
+    font-size: .75rem;
+    color: #888;
+    font-family: 'Noto Sans JP', 游ゴシック, "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+}
+
+body #booked-profile-page .cf-meta-values-hidden {
+    padding: 0;
+    border-left: 0px;
+}
