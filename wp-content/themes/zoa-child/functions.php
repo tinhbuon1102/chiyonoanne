@@ -4684,3 +4684,28 @@ function post_limit_textbox_callback($args) {  // Textbox Callback
 	$option = get_option($args[0]);
 	echo '<input type="text" id="'. $args[0] .'" name="'. $args[0] .'" value="' . $option . '" />';
 }
+
+function get_google_map_url_by_address()
+{
+	$countries_obj   = new WC_Countries();
+	$country_state = get_option('woocommerce_default_country');
+	$aCountry_state = explode(':', $country_state);
+	$country_code = $aCountry_state[0];
+	$country_name = WC()->countries->countries[ $country_code ];
+	$states_list = $countries_obj->get_states( $country_code );
+	$state = $states_list[$aCountry_state[1]];
+	$city = get_option('woocommerce_store_city');
+	$postcode = get_option('woocommerce_store_postcode');
+	$address1 = get_option('woocommerce_store_address');
+	$address2 = get_option('woocommerce_store_address_2');
+	
+	$full_address = $country_name . '+' . $postcode . '+' . $state . '+' . $city .'+ '.  $address1 . $address2;
+	$google_map_url = 'https://www.google.co.jp/maps/place/?hl=ja&q=' . $full_address;
+	return $google_map_url;
+}
+
+function zoa_get_store_map( $atts = array()) {
+	return get_google_map_url_by_address();
+}
+add_shortcode( 'get_store_map', 'zoa_get_store_map' );
+
