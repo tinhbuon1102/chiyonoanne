@@ -315,21 +315,36 @@ class BookedShortcodes {
 							endif;
 							$atc_date_startend_end = $atc_date_startend;
 						endif;
-
-						echo '<span class="appt-block bookedClearFix '.(!$historic ? $status_class : 'approved').'" data-appt-id="'.$appt['post_id'].'">';
+//changed
+						echo '<div class="box appointment appointment_item appt-block bookedClearFix '.(!$historic ? $status_class : 'approved').'" data-appt-id="'.$appt['post_id'].'"><div class="box__main">';
+						echo '<div class="box__main__details">';
 							if (!$historic):
 								if ($appointment_default_status !== 'publish' && $appt['status'] !== 'future' || $appointment_default_status == 'publish' && $status_class == 'pending'):
 									echo '<span class="status-block">'.($status_class == 'pending' ? '<i class="booked-icon booked-icon-radio-unchecked"></i>' : '<i class="booked-icon booked-icon-radio-checked"></i>').'&nbsp;&nbsp;'.$status.'</span>';
 								endif;
 							endif;
-							echo (!empty($appt['calendar_id']) ? '<i class="booked-icon booked-icon-calendar"></i><strong>'.esc_html__('Calendar','booked').':</strong> '.$appt['calendar_id'][0]->name.'<br>' : '');
+		echo '<h3 class="appointment__number heading heading--xsmall"><span class="label">予約番号:</span><span class="value">#'.$appt['post_id'].'</span></h3>';
+		echo '<p class="booked__date">'.($ts_title ? '<span class="label">'.$ts_title.':</span>' : '<span class="label">'.esc_html__('Appointment Date/Time', 'zoa').':</span><span class="value">').$day_name.$date_display.'&nbsp;&nbsp;' . $timeslotText . '</span></p>';
+		
+							echo (!empty($appt['calendar_id']) ? '<p class="service__type"><span class="label">'.esc_html__('Service Type', 'zoa').':</span><span class="value">'.$appt['calendar_id'][0]->name.'</span></p>' : '');
+		
+						    //new display name, name kana, phone, email
+							echo '<div class="booked-customer-info">'.esc_html__('Customer Info', 'zoa').'';
+							echo '<div class="hidden-customer-info">';
+							echo '<span class="label">Name</span><span class="value">'.$LastName.$FirstName.$LastNameKana.$FirstNameKana.'</span>';
+						    echo '<span class="label">Phone</span><span class="value">'.$phone.'</span>';
+							echo '<span class="label">Email</span><span class="value">'.$email.'</span>';
+				            echo '</div>';//hidden-customer-info
+							echo '</div>';//booked-customer-info
 
-							echo '<i class="booked-icon booked-icon-clock"></i>'.($ts_title ? '<strong>'.$ts_title.':</strong>&nbsp;&nbsp;' : '').$day_name.$date_display.'&nbsp;&nbsp;' . $timeslotText;
+							
 
 							do_action('booked_shortcode_appointments_additional_information', $appt['post_id']);
 
-							echo ($cf_meta_value ? '<br><i class="booked-icon booked-icon-info"></i><a href="#" class="booked-show-cf">'.esc_html__('Additional information','booked').'</a><div class="cf-meta-values-hidden">'.$cf_meta_value.'</div>' : '');
-
+							echo ($cf_meta_value ? '<div class="booked__info"><a href="#" class="booked-show-cf"><i class="booked-icon booked-icon-info"></i>'.esc_html__('Additional information','booked').'</a><div class="cf-meta-values-hidden">'.$cf_meta_value.'</div></div>' : '');
+		
+							
+							echo '</div>';//box__main__details
 							if (!$historic):
 
 								$calendar_button_array = array(
@@ -346,14 +361,14 @@ class BookedShortcodes {
 								$buttons_content = ob_get_clean();
 
 								if ($buttons_content):
-									echo '<div class="booked-cal-buttons">';
+									echo '<div class="box__actions booked-cal-buttons">';
 										echo $buttons_content;
 									echo '</div>';
 								endif;
 
 							endif;
-
-						echo '</span>';
+						
+						echo '</div></div>';//appt-block
 
 					endforeach;
 

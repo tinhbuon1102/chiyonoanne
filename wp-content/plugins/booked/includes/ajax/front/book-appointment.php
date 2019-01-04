@@ -398,9 +398,12 @@ if ($appt_is_available):
                 $email_content = get_option('booked_registration_email_content');
                 $email_subject = get_option('booked_registration_email_subject');
                 if ($email_content && $email_subject):
-
+                    $r_phone=$arr_your_info['phone'];
+                    $fullkananame = $arr_your_info['billing_last_name_kana'] . ' ' . $arr_your_info['billing_first_name_kana'];
                     $registration_token_replacements = array(
                         'name' => $fullname,
+                        'kananame' => $fullkananame,
+                        'phone' => $r_phone,
                         'email' => $email,
                         'username' => $email,
                         'password' => $password
@@ -472,7 +475,9 @@ if ($appt_is_available):
                 update_post_meta($post_id, '_appointment_guest_email', $email);
                 update_post_meta($post_id, '_appointment_timestamp', $timestamp);
                 update_post_meta($post_id, '_appointment_timeslot', $timeslot);
-
+                update_post_meta($post_id, 'billing_guest_last_name_kana', $arr_your_info['billing_last_name_kana']);
+                update_post_meta($post_id, 'billing_guest_first_name_kana', $arr_your_info['billing_first_name_kana']);
+                update_post_meta($post_id, 'billing_guest_phone', $arr_your_info['phone']);
                 if ($appointment_default_status == 'publish'): wp_publish_post($post_id);
                 endif;
 

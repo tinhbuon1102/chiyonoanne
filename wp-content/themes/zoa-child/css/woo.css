@@ -463,7 +463,7 @@ body:not(.en) .form_tips {
 .account__content .sub-text {
 	margin-bottom: 24px;
 }
-.account__content .box-list .box {
+.account__content .box-list .box, body #booked-profile-page .booked-profile-appt-list .appt-block.box.appointment_item {
     border: 1px solid #e8e8e8;
     padding: 24px;
     margin-bottom: 24px;
@@ -4352,4 +4352,42 @@ div#previewBox {
     width: 100%;
     padding: 0 20px 0;
 	}
+}
+/*Booked History*/
+body #booked-profile-page .booked-show-cf {
+    font-weight: normal;
+}
+
+body #booked-profile-page .booked-show-cf i {
+    margin-right: 5px;
+}
+body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons {
+    padding: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons > div, body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons > .cancel {
+    float: none;
+    margin: 0;
+    text-align: center;
+    display: inline-block;
+    padding: .75rem 1.15rem;
+    font-size: 12px;
+	-webkit-border-radius: 0;
+    border-radius: 0;
+}
+body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons > .addeventatc {
+    background-image: none;
+	border-color: #000;
+}
+body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons > .addeventatc:hover, body #booked-profile-page .booked-profile-appt-list .appt-block .box__actions.booked-cal-buttons > .addeventatc:focus {
+	background: #000;
+	color: #FFF !important;
+    font-weight: bold;
+}
+body #booked-profile-page .appt-block .booked-cal-buttons .google-cal-button .addeventatc_icon {
+    display: none;
 }

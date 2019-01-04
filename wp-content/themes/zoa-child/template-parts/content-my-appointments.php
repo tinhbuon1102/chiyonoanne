@@ -55,6 +55,7 @@ if (!empty($clients))
 		<?php //echo __('To request changing booked date and time, call us on {phone number} or write to us at hello@chiyono-anne.com', 'zoa')?></p>
 	</div>
 	<div class="box-list">
+		<?php echo do_shortcode("[booked-appointments]"); //test ?>
 		<?php //start loop
 		foreach($appointmentInfos as $appointmentInfo) {
 			$is_allow_cancel = zoa_is_allow_cancel_appointment($appointmentInfo['ID']);

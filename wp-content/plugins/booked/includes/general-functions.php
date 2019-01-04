@@ -102,7 +102,7 @@ function booked_home_url(){
 function booked_get_name( $user_id, $part = 'full' ){
 	switch ($part):
 		case 'full':
-			$username = get_user_meta( $user_id, 'first_name', true ) ? get_user_meta( $user_id, 'first_name', true ).(get_user_meta( $user_id, 'last_name', true ) ? ' '.get_user_meta( $user_id, 'last_name', true ) : '') : false;
+			$username = get_user_meta( $user_id, 'last_name', true ) ? get_user_meta( $user_id, 'last_name', true ).(get_user_meta( $user_id, 'first_name', true ) ? ' '.get_user_meta( $user_id, 'first_name', true ) : '') : false;
 			if (!$username):
 				$user_info = get_userdata($user_id);
 				if (!empty($user_info)): $username = $user_info->display_name; else: return false; endif;

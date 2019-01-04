@@ -619,6 +619,63 @@ ul.acf-radio-list li input.labelauty + label, ul.acf-checkbox-list li input.labe
     height: 100%;
     z-index: 0;
 }
+/*Customer Info Step2*/
+#reservationFormCustomer .row fieldset {
+    border: none;
+}
+/*Guest Step2*/
+#customer-form ul.tabs > li > a {
+	font-family: "proxima-nova",sans-serif;
+}
+div#customer-form .tab_content fieldset {
+    padding-top: 32px;
+}
+body #profile-login label, #profile-register label, #profile-forgot label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    line-height: 1.15;
+    color: #0a0a0a;
+}
+
+body #profile-login label + input, #profile-register label, #profile-forgot label + input {
+    margin-top: 0 !important;
+}
+
+#loginform p.login-username, #loginform p.login-password {
+    margin-bottom: 24px;
+}
+body #booked-profile-page .booked-tabs {
+    background: none !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+}
+
+body #booked-profile-page .booked-tabs li a {
+    background: none;
+    color: #b2b2b2;
+}
+
+body #booked-profile-page .booked-tabs li.active a, body #booked-profile-page .booked-tabs li.active a:hover, body #booked-profile-page .booked-tabs li a:hover {
+    background: none !important;
+    color: #000 !important;
+}
+
+body #booked-profile-page .booked-tabs li.active a {
+    border: 1px solid #e8e8e8;
+    border-bottom-color: #FFF;
+    border-top: 3px solid #000;
+}
+
+body #booked-profile-page .booked-tab-content {
+    border-top: 1px solid #e8e8e8 !important;
+    margin-top: -1px;
+    border-radius: 0px !important;
+    border-color: #e8e8e8;
+}
 @media only screen and (min-width: 48em) {
 	.order--checkout__footer .button-submit {
     width: 48%;
