@@ -105,6 +105,15 @@ Yes, it is.
 
 == Changelog ==
 
+= 1.1.19 =
+
+* Fix: ROYAL Theme Issue
+* Fix: Non image `srcset` issue
+
+= 1.1.18 =
+
+* Fix: Known JS Issue and Duplication
+
 = 1.1.17 =
 
 * Fix: Gallery Image loading ajax

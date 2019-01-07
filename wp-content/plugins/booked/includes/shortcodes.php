@@ -135,7 +135,7 @@ class BookedShortcodes {
     public function booked_cancellable_date($atts, $content = null) {
         $cancel_buffer = get_option('booked_cancellation_buffer', 0);
         $datetime_booked = $atts['datetime_booked'];
-        $date = date("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
+        $date = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
         return $date;
     }
 

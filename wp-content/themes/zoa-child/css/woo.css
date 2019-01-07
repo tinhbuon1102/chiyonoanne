@@ -150,6 +150,9 @@ ul.products {
     float: none;
     max-width: 100%;
 }
+.woocommerce .auth__container .woocommerce-form-login {
+    width: 100%;
+}
 .woocommerce-privacy-policy-text {
 	font-size: .75rem;
 	letter-spacing: 1px;

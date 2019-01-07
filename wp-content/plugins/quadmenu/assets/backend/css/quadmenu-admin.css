@@ -1632,7 +1632,7 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
     display: inline-block;
   }
   #quadmenu-settings > .quadmenu-settings-body > .quadmenu-tabs-content {
-    margin-left: 160px;
+    padding-left: 160px;
   }
 }
 #quadmenu-settings .quadmenu-tabs {
@@ -1748,7 +1748,7 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
 #quadmenu-settings .quadmenu-tabs-content {
   position: relative;
   height: 100%;
-  margin-left: 50px;
+  padding-left: 50px;
   overflow-y: auto;
   overflow-x: hidden;
   height: 400px;
@@ -2175,63 +2175,72 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
   min-width: 200px;
   width: auto;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label {
+  display: flex;
+}
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden {
+  flex: auto;
+}
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div {
   padding: 0 20px;
   line-height: 70px;
   height: 70px;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div:not(:last-child),
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div:not(:last-child),
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div:not(:last-child),
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div:not(:last-child) {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div:not(:last-child),
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div:not(:last-child),
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div:not(:last-child),
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div:not(:last-child) {
   border-bottom: 1px solid #efefef;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div > i,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div > i,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div > i,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div > i,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div > input,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div > input,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div > input,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div > input {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div > i,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div > i,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div > i,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div > i,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div > input,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div > input,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div > input,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div > input {
   margin: 0;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset > div > select,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden > div > select {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset > div > select,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden > div > select {
   margin: 0 0 3px 0;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div > i {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset,
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden {
+  max-width: 60px;
+}
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden {
+  text-align: center;
+}
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div > i {
   background: transparent url('../../backend/images/offset.png') -21px 0 no-repeat;
   width: 21px;
   height: 21px;
   display: inline-block;
   vertical-align: middle;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div.md > i {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div.md > i {
   background-position: -21px -21px;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div.sm > i {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div.sm > i {
   background-position: -21px -42px;
 }
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons > div.xs > i {
+#quadmenu-settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div.xs > i {
   background-position: -21px -84px;
-}
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-columns,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-offset {
-  padding: 0;
-}
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-icons,
-#quadmenu-settings .quadmenu-setting.quadmenu-setting-width .quadmenu-setting-width-hidden {
-  text-align: center;
 }
 #quadmenu-settings ul > li:first-of-type > a.submit-add-to-quadmenu-column,
 #quadmenu-settings ul > li:first-of-type > a.submit-add-to-quadmenu-panel,
@@ -2528,6 +2537,28 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
   position: relative;
   border: 1px dashed #DFDFDF;
 }
+#quadmenu-settings .quadmenu-carousel.open > .inner,
+#quadmenu-settings .quadmenu-panel.open > .inner,
+#quadmenu-settings .quadmenu-tabs.open > .inner,
+#quadmenu-settings .quadmenu-tab.open > .inner,
+#quadmenu-settings .quadmenu-columns.open > .inner,
+#quadmenu-settings .quadmenu-column.open > .inner,
+#quadmenu-settings .quadmenu-column-item.open > .inner {
+  z-index: 999;
+  min-width: 220px;
+  width: 100%;
+}
+#quadmenu-settings .quadmenu-carousel.open .settings,
+#quadmenu-settings .quadmenu-panel.open .settings,
+#quadmenu-settings .quadmenu-tabs.open .settings,
+#quadmenu-settings .quadmenu-tab.open .settings,
+#quadmenu-settings .quadmenu-columns.open .settings,
+#quadmenu-settings .quadmenu-column.open .settings,
+#quadmenu-settings .quadmenu-column-item.open .settings {
+  visibility: visible;
+  opacity: 1;
+  max-height: 900px;
+}
 #quadmenu-settings .quadmenu-carousel .settings,
 #quadmenu-settings .quadmenu-panel .settings,
 #quadmenu-settings .quadmenu-tabs .settings,
@@ -2546,31 +2577,15 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
   -o-transition: all 0.4s cubic-bezier(0.18, 0.74, 0.72, 1);
   transition: all 0.4s cubic-bezier(0.18, 0.74, 0.72, 1);
 }
-#quadmenu-settings .quadmenu-carousel.open > .inner,
-#quadmenu-settings .quadmenu-panel.open > .inner,
-#quadmenu-settings .quadmenu-tabs.open > .inner,
-#quadmenu-settings .quadmenu-tab.open > .inner,
-#quadmenu-settings .quadmenu-columns.open > .inner,
 #quadmenu-settings .quadmenu-column.open > .inner,
-#quadmenu-settings .quadmenu-column-item.open > .inner {
-  z-index: 999;
-  min-width: 220px;
+#quadmenu-settings .quadmenu-column.open > .inner > .settings {
+  box-shadow: 0 3px 12px -4px rgba(0, 0, 0, 0.1);
+}
+#quadmenu-settings .quadmenu-column:last-of-type.open > .inner {
   float: right;
-  width: calc(100% - 30px);
 }
-#quadmenu-settings .quadmenu-carousel.open .settings,
-#quadmenu-settings .quadmenu-panel.open .settings,
-#quadmenu-settings .quadmenu-tabs.open .settings,
-#quadmenu-settings .quadmenu-tab.open .settings,
-#quadmenu-settings .quadmenu-columns.open .settings,
-#quadmenu-settings .quadmenu-column.open .settings,
-#quadmenu-settings .quadmenu-column-item.open .settings {
-  visibility: visible;
-  opacity: 1;
-  max-height: 900px;
-}
-#quadmenu-settings .quadmenu-column.open > .inner {
-  box-shadow: -3px 3px 12px -4px rgba(0, 0, 0, 0.075);
+#quadmenu-settings .quadmenu-column:last-of-type .quadmenu-column-item.open > .inner {
+  float: right;
 }
 #quadmenu-settings .quadmenu-column {
   padding: 15px;
@@ -2595,28 +2610,15 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
   background: #FAFAFA;
 }
 #quadmenu-settings .quadmenu-column > .inner > .settings {
-  padding: 0 15px;
   background: #FAFAFA;
 }
 #quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width {
-  position: absolute;
-  right: 0;
-  left: auto;
-  z-index: 1;
   min-width: 220px;
   background: #FAFAFA;
   width: 100%;
-  box-shadow: -3px 3px 12px -4px rgba(0, 0, 0, 0.075);
 }
 #quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label {
-  display: flex;
   padding: 0 15px;
-}
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons,
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns,
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset,
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden {
-  flex: auto;
 }
 #quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons > div,
 #quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-columns > div,
@@ -2625,11 +2627,6 @@ body.wp-customizer #customize-controls .wp-picker-container .wp-color-result {
   padding: 0 5px;
   line-height: 40px;
   height: 40px;
-}
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-icons,
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-offset,
-#quadmenu-settings .quadmenu-column > .inner > .settings .quadmenu-setting.quadmenu-setting-width > label > .quadmenu-setting-width-hidden {
-  max-width: 60px;
 }
 #quadmenu-settings .quadmenu-column .items {
   margin: 0;

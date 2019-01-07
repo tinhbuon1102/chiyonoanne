@@ -164,67 +164,6 @@ jQuery(function ($) {
         var errors = [];
         var formId = 'bookedForm';// $(this).closest("form").attr("id");
 
-        /*if ($("form#birs_appointment_form").length){
-         $('#birs_appointment_date_error').hide();
-         $('#birs_appointment_time_error').hide();  
-         
-         if ($('#step-1').hasClass('is-active'))
-         {
-         if (!$('#birs_appointment_date').val())
-         {
-         errors.push({element: '#birs_appointment_date', message: gl_date_is_tempty_text, scrollto: '#birs_appointment_datepicker'});
-         }
-         else if (!$('#birs_appointment_time').val())
-         {
-         errors.push({element: '#birs_appointment_time', message: gl_time_is_tempty_text, scrollto: '.birs_appointment_time'});
-         }
-         }
-         
-         var validateForm = $("form#birs_appointment_form");
-         validateForm.validationEngine({
-         promptPosition : 'inline',
-         addFailureCssClassToField : "inputError",
-         bindMethod : "live"
-         });
-         var isValid = validateForm.validationEngine('validate');
-         if (!isValid) {
-         return '';
-         }
-         }*/
-
-        /*,
-         isValid = $("#" + formId).valid();
-         
-         
-         if ( isValid ) {
-         nextStep(formId);
-         setVisibilityButtons(formId);         
-         }*/
-        /*$(".validate").validation ({
-         onValidationComplete: function(form, status){ 
-         alert(status);
-         if (status === true) {
-         nextStep(formId);
-         setVisibilityButtons(formId); 
-         }
-         }}
-         );*/
-        /*if (errors.length == 0)
-         {
-         nextStep(formId);
-         setVisibilityButtons(formId); 
-         
-         scrollToFormTop(formId);
-         
-         }
-         else {
-         // Animate and show error
-         $.each(errors, function(index, error){
-         $("html, body").animate({ scrollTop: $(error.scrollto).offset().top - $('.sticky_header').outerHeight() }, 1000);
-         $(error.element + '_error').html(error.message);
-         $(error.element + '_error').show();
-         })
-         }*/
         if ($('#step2').hasClass('is-active')) {
             var showRequiredError = false;
             $('.confirm-box').find('input').each(function (i, field) {
@@ -258,12 +197,19 @@ jQuery(function ($) {
             var billing_first_name_kana = $("#billing_first_name_kana").val();
             var email = $("#email").val();
             var phone = $("#phone").val();
+            var cancel_datetime = $(".ch-term-text").attr('cancel-datetime');
             var n = $("#is_register:checked").length;
             var is_register = n;
-            var dataString = '&user_lastname=' + user_lastname + '&user_firstname=' + user_firstname + '&billing_last_name_kana=' + billing_last_name_kana + '&billing_first_name_kana=' + billing_first_name_kana + '&email=' + email + '&phone=' + phone + '&is_register=' + is_register;
+            var dataString = '&user_lastname=' + user_lastname + '&user_firstname=' + user_firstname + '&billing_last_name_kana=' + billing_last_name_kana + '&billing_first_name_kana=' + billing_first_name_kana + '&email=' + email + '&phone=' + phone + '&is_register=' + is_register + '&cancel_datetime=' + cancel_datetime;
+            var n = booked_js_vars.ajax_url.indexOf('?');
+            if (n > 0) {
+                var url_call = booked_js_vars.ajax_url + '&action=booked_fill_yourinfo_form_steps';
+            } else {
+                var url_call = booked_js_vars.ajax_url + '?action=booked_fill_yourinfo_form_steps';
+            }
             $.ajax({
                 action: 'booked_fill_yourinfo_form_steps',
-                url: booked_js_vars.ajax_url + '?action=booked_fill_yourinfo_form_steps',
+                url: url_call,
                 type: 'post',
                 dataType: "json",
                 data: dataString
@@ -272,6 +218,7 @@ jQuery(function ($) {
                 $('.ch-kananame-info').html(response.billing_last_name_kana + ' ' + response.billing_first_name_kana);
                 $('.ch-email-info').html(response.email);
                 $('.ch-phone-info').html(response.phone);
+                $('.ch-term-text').html(response.cancel_datetime);
                 $(".ch-step2 div.msg2").css("display", "none");
             });
         }

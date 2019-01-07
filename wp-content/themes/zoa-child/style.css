@@ -1802,7 +1802,14 @@ section#itemlist-home > .elementor-container {
     margin: 0;
     font-size: 1rem;
 }
-
+#getintouchHome > .elementor-container {
+    max-width: 100%;
+}
+@media (min-width: 768px) {
+	#itemHero-column {
+		width: 80%;
+	}
+}
 /*Pickup Button*/
 .c-btn-arrow::before {
     position: absolute;

@@ -1735,15 +1735,6 @@ Time: %time%
                                             <p><input value="[booked-appointments]" type="text" readonly="readonly" class="field"></p>
 
                                         </div>
-                                        <div class="section-head">
-
-                                            <h3><?php echo esc_html__("Display  cancellable date gonna", 'booked'); ?></h3>
-                                            <p><?php esc_html_e("You can use this shortcode to display  cancellable date gonna appointments.", "booked"); ?></p>
-                                            <p><input value='[booked-cancellable-date datetime_booked="Thursday, January 10, 2019 2:00 PM"]' type="text" readonly="readonly" class="field">
-                                            with datetime_booked is parameter, 'Thursday, January 10, 2019 2:00 PM' is example value of parameter
-                                            </p>
-
-                                        </div>
                                     </div>
 
                                 </div>

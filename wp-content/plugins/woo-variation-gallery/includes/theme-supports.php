@@ -156,6 +156,11 @@
 			$width = 50;
 		}
 		
+		// Twenty Nineteen
+		if ( function_exists( 'twentynineteen_setup' ) ) {
+			$width = 50;
+		}
+		
 		// Sober Theme
 		if ( function_exists( 'sober_setup' ) ) {
 			$width = 40;
@@ -173,6 +178,11 @@
 		
 		// Saha Theme
 		if ( function_exists( 'saha_theme_setup' ) ) {
+			$width = 100;
+		}
+		
+		// ROYAL - 8theme WordPress theme
+		if ( function_exists( 'etheme_theme_setup' ) ) {
 			$width = 100;
 		}
 		

@@ -11,11 +11,14 @@ class QuadMenuItemCart extends QuadMenuItem {
   function init() {
 
     $this->item->url = '';
-    $this->args->has_dropdown = $this->has_children = $this->args->has_caret = true;
     $this->args->has_title = false;
 
     if (empty($this->item->title)) {
       $this->item->title = esc_html__('Your cart', 'quadmenu');
+    }
+
+    if (function_exists('is_woocommerce') && !is_cart() && !is_checkout()) {
+      $this->args->has_dropdown = $this->has_children = $this->args->has_caret = true;
     }
   }
 
@@ -90,7 +93,7 @@ class QuadMenuItemCart extends QuadMenuItem {
     ob_start();
     ?>
     <span class="quadmenu-cart-magic">
-      <span class="quadmenu-icon <?php echo esc_attr($this->item->icon); ?><?php //echo esc_attr($this->item->animation->icon);  ?>"></span>
+      <span class="quadmenu-icon <?php echo esc_attr($this->item->icon); ?><?php //echo esc_attr($this->item->animation->icon);       ?>"></span>
       <span class="quadmenu-cart-qty"><?php echo esc_html($this->count); ?></span>
     </span>
     <span class="quadmenu-cart-total"><?php echo WC()->cart->get_cart_total(); ?></span>

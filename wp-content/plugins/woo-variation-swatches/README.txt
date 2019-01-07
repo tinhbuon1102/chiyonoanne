@@ -356,6 +356,10 @@ And your are ready to go.
 
 == Changelog ==
 
+= 1.0.52 =
+
+* Add: Yith Product filter support
+
 = 1.0.51 =
 
 * Add: Flatsome theme Infinite Scroll Support

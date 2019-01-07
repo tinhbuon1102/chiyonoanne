@@ -232,6 +232,7 @@ if( $bannerPosts ): ?>
 						</div>
 						 <div class="header-container">
 							 <div class="menu-toggle col-lg-3">
+								 <?php language_selector_flags(); ?>
 								 <button id="theme-search-btn" class="zoa-icon-search js-search-button" style="display: none;"></button>
 								 <button id="menu-toggle-btn"><span></span></button>
 							 </div>
@@ -288,6 +289,7 @@ if( $bannerPosts ): ?>
 						</div>
 						 <div class="header-container">
 							 <div class="menu-toggle col-lg-3">
+								 <?php language_selector_flags(); ?>
 								 <button id="theme-search-btn" class="zoa-icon-search js-search-button"></button>
 								 <button id="menu-toggle-btn"><span></span></button>
 							 </div>

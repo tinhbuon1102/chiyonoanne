@@ -19,6 +19,24 @@ function get_user_role() {
 
 ;
 
+/**
+language switcher
+**/
+function language_selector_flags(){
+    $languages = icl_get_languages('skip_missing=0&orderby=code');
+    if(!empty($languages)){
+		echo '<div class="lang_flag_switcher">';
+        foreach($languages as $l){
+            if(!$l['active']) echo '<div class="lang_flag"><a href="'.$l['url'].'">';
+			if($l['active']) echo '<div class="lang_flag active">';
+            echo '<img src="'.$l['country_flag_url'].'" height="12" alt="'.$l['language_code'].'" width="18" />';
+			if($l['active']) echo '</div>';
+            if(!$l['active']) echo '</a></div>';
+        }
+		echo '</div>';
+    }
+}
+
 function hide_update_noticee_to_all_but_admin_users() {
     if (!is_super_admin()) {
         remove_all_actions('admin_notices');
@@ -252,8 +270,8 @@ function add_scripts() {
     wp_register_script('woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
     wp_register_script('booked-js', get_stylesheet_directory_uri() . '/js/booked-custom.js', array(), false, true);
     wp_register_script('booked-steps', get_stylesheet_directory_uri() . '/js/booked-formsteps.js', array(), false, true);
-	wp_register_style('tabs-style', get_stylesheet_directory_uri() . '/css/tabs.css', array(), '');
-	wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
+    wp_register_style('tabs-style', get_stylesheet_directory_uri() . '/css/tabs.css', array(), '');
+    wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_enqueue_script('remodal');
 
@@ -275,11 +293,11 @@ function add_scripts() {
     } elseif (is_page('reservation-test')) {
         wp_enqueue_style('labelauty-style');
         wp_enqueue_style('form-style');
-		wp_enqueue_style('tabs-style');
+        wp_enqueue_style('tabs-style');
         wp_enqueue_script('labelauty-js');
         wp_enqueue_script('booked-js');
         wp_enqueue_script('booked-steps');
-		wp_enqueue_script('tabs-js');
+        wp_enqueue_script('tabs-js');
         wp_enqueue_script('ajax-con');
     } elseif (is_page('about')) {
         wp_enqueue_style('portani-style');
@@ -420,7 +438,7 @@ function misha_strength_meter_settings($params, $handle) {
             'min_password_strength' => 2,
             'i18n_password_error' => __('make it stronger', 'zoa'),
             'i18n_password_hint' => ''
-                ));
+        ));
     }
     return $params;
 }
@@ -783,10 +801,10 @@ add_action('woocommerce_before_shop_loop', 'zoa_child_result_count', 30);
 function zoa_child_result_count() {
     ?>
     <div class="shop-top-bar display--mid-up">
-    <?php
-    woocommerce_result_count();
-    woocommerce_catalog_ordering();
-    ?>
+        <?php
+        woocommerce_result_count();
+        woocommerce_catalog_ordering();
+        ?>
     </div>
     <?php
 }
@@ -827,47 +845,47 @@ if (!function_exists('zoa_product_action')) :
                     <button id="close-cart-sidebar" class="ion-android-close"></button>
                 </div>
                 <div class="cart-sidebar-content">
-        <?php woocommerce_mini_cart(); ?>
+                    <?php woocommerce_mini_cart(); ?>
                 </div><!--/cart-sidebar-content-->
             </div><!--/cart-sidebar-wrap-->
         </div>
 
         <div id="shop-overlay"></div>
-            <?php
-        }
-
-    endif;
-
-//change shop container
-    /* CONTENT WRAPPER */
-
-    function product_category_filter_changes() {
-        remove_action('woocommerce_before_main_content', 'zoa_shop_open_tag', 5);
-        remove_action('woocommerce_after_main_content', 'zoa_shop_close_tag', 5);
+        <?php
     }
 
-    add_action('wp_head', 'product_category_filter_changes');
+endif;
+
+//change shop container
+/* CONTENT WRAPPER */
+
+function product_category_filter_changes() {
+    remove_action('woocommerce_before_main_content', 'zoa_shop_open_tag', 5);
+    remove_action('woocommerce_after_main_content', 'zoa_shop_close_tag', 5);
+}
+
+add_action('wp_head', 'product_category_filter_changes');
 
 
-    add_action('woocommerce_before_main_content', 'zoa_child_shop_open_tag', 1);
+add_action('woocommerce_before_main_content', 'zoa_child_shop_open_tag', 1);
 
-    function zoa_child_shop_open_tag() {
-        $shop_sidebar = !is_active_sidebar('shop-widget') ? 'full' : get_theme_mod('shop_sidebar', 'full');
-        $shop_class = '';
-        $shop_content_class = '';
+function zoa_child_shop_open_tag() {
+    $shop_sidebar = !is_active_sidebar('shop-widget') ? 'full' : get_theme_mod('shop_sidebar', 'full');
+    $shop_class = '';
+    $shop_content_class = '';
 
-        $shop_class .= is_product() ? 'pdp' : 'with-' . $shop_sidebar . '-sidebar';
-        $shop_content_class .= is_product() ? 'shop-content' : 'product-grid-container col-12 col-lg-9';
-        if (get_theme_mod('flexible_sidebar')) {
-            $shop_class .= ' has-flexible-sidebar';
-        }
-        ?>
-    <div class="row results-container max-width--site gutter-padding <?php echo esc_attr($shop_class); ?>">
-    <?php
-    if (!is_singular('product')) :
-        do_action('woocommerce_sidebar');
-    endif;
+    $shop_class .= is_product() ? 'pdp' : 'with-' . $shop_sidebar . '-sidebar';
+    $shop_content_class .= is_product() ? 'shop-content' : 'product-grid-container col-12 col-lg-9';
+    if (get_theme_mod('flexible_sidebar')) {
+        $shop_class .= ' has-flexible-sidebar';
+    }
     ?>
+    <div class="row results-container max-width--site gutter-padding <?php echo esc_attr($shop_class); ?>">
+        <?php
+        if (!is_singular('product')) :
+            do_action('woocommerce_sidebar');
+        endif;
+        ?>
 
         <?php
 // 	if ( ! is_singular( 'product' ) ) :
@@ -878,22 +896,22 @@ if (!function_exists('zoa_product_action')) :
         ?>
 
         <div class="<?php echo esc_attr($shop_content_class); ?>">
-        <?php
-        if (get_theme_mod('flexible_sidebar') && 'full' !== $shop_sidebar && !is_product()) :
-            ?>
+            <?php
+            if (get_theme_mod('flexible_sidebar') && 'full' !== $shop_sidebar && !is_product()) :
+                ?>
                 <div class="sidebar-overlay"></div>
                 <a href="#" class="sidebar-toggle js-sidebar-toggle">
                     <span class="screen-reader-text"><?php esc_html_e('Toggle Shop Sidebar', 'zoa'); ?></span>
                     <i class="ion-android-options toggle-icon"></i>
                 </a>
-            <?php
-        endif;
-    }
+                <?php
+            endif;
+        }
 
-    add_action('woocommerce_after_main_content', 'zoa_child_shop_close_tag', 60);
+        add_action('woocommerce_after_main_content', 'zoa_child_shop_close_tag', 60);
 
-    function zoa_child_shop_close_tag() {
-        ?>
+        function zoa_child_shop_close_tag() {
+            ?>
         </div>
 
 
@@ -919,7 +937,7 @@ if (!function_exists('zoa_product_action')) :
         remove_action('woocommerce_cart_actions', 'zoa_clear_cart_url');
     }
 
-;
+    ;
     add_action('init', 'remove_cart_actions_parent_theme');
 
 // change incl tax total array for format from class-wc-order.php
@@ -1063,47 +1081,47 @@ if (!function_exists('zoa_product_action')) :
 
                                     <select class="input-select justselect" name="account_birth[year]" id="account_birth_year">
                                         <option value=""><?php _e('Year', 'zoa-child'); ?></option>
-    <?php
-    for ($i = 1950; $i <= 2015; $i++) {
-        printf('<option value="%1$s" %2$s>%1$s</option>', $i, selected($birth_date['year'], $i, false));
-    }
-    ?>
+                                        <?php
+                                        for ($i = 1950; $i <= 2015; $i++) {
+                                            printf('<option value="%1$s" %2$s>%1$s</option>', $i, selected($birth_date['year'], $i, false));
+                                        }
+                                        ?>
                                     </select>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-        <?php
-        // Second Field
-        ?>
+                    <?php
+                    // Second Field
+                    ?>
                     <div class="col-4">
                         <div class="selectric-wrapper selectric-input-select selectric-responsive">
 
                             <select class="input-select justselect" name="account_birth[month]" id="account_birth_month">
                                 <option value=""><?php _e('Month'); ?></option>
-        <?php
-        foreach ($months as $month) {
-            printf('<option value="%1$s" %2$s>%1$s</option>', $month, selected($birth_date['month'], $month, false));
-        }
-        ?>
+                                <?php
+                                foreach ($months as $month) {
+                                    printf('<option value="%1$s" %2$s>%1$s</option>', $month, selected($birth_date['month'], $month, false));
+                                }
+                                ?>
                             </select>
 
                         </div>
                     </div>
-        <?php
-        // Third Field
-        ?>
+                    <?php
+                    // Third Field
+                    ?>
                     <div class="col-4">
                         <div class="selectric-wrapper selectric-input-select selectric-responsive">
 
                             <select class="input-select justselect" name="account_birth[day]" id="account_birth_day">
                                 <option value=""><?php _e('Day', 'zoa-child'); ?></option>
-        <?php
-        for ($i = 1; $i <= 31; $i++) {
-            printf('<option value="%1$s" %2$s>%1$s</option>', $i, selected($birth_date['day'], $i, false));
-        }
-        ?>
+                                <?php
+                                for ($i = 1; $i <= 31; $i++) {
+                                    printf('<option value="%1$s" %2$s>%1$s</option>', $i, selected($birth_date['day'], $i, false));
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -1307,50 +1325,50 @@ if (!function_exists('zoa_product_action')) :
                 ?>
                 <script src="<?php echo $op ?>" async></script>
                 <span class="drophint-link" data-product-image="<?= $image[0] ?>"></span>
-            <?php
+                <?php
+            }
         }
-    }
 
-    //remove drophint action
-    function drophint_remove_actions() {
-        remove_action('woocommerce_after_add_to_cart_button', 'dropahint_content_after_addtocart_button');
-        //remove_action( 'admin_menu', 'dropahint_custom_menu_page' );
-    }
-
-    add_action('init', 'drophint_remove_actions');
-
-
-    //remove shortdescription
-    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
-
-    //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 40 );
-    //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 45 );
-    add_action('woocommerce_after_add_to_cart_button', 'ws_opening_div', 20);
-    add_action('woocommerce_after_add_to_cart_button', 'show_ti_addwish_button', 30);
-    add_action('woocommerce_after_add_to_cart_button', 'dropahint_content_after_addtocart_button_child', 40);
-    add_action('woocommerce_after_add_to_cart_button', 'new_zoa_product_sharing', 50);
-
-    function show_ti_addwish_button() {
-        global $product;
-        $id = $product->get_id();
-        $variation_id = get_product($product->variation_id);
-        echo '<div class="add-to-wishlist-button">' . do_shortcode('[ti_wishlists_addtowishlist product_id="' . $id . '" variation_id="' . $variation_id . '"]') . '</div>';
-    }
-
-    function new_zoa_product_sharing() {
-        global $product;
-        $id = $product->get_id();
-        $url = get_permalink($id);
-        $title = get_the_title($id);
-        $img_id = $product->get_image_id();
-        $img = wp_get_attachment_image_src($img_id, 'full');
-        $tags = get_the_terms($id, 'product_tag');
-        $tag_list = '';
-
-        if ($tags && !is_wp_error($tags)) {
-            $tag_list = implode(', ', wp_list_pluck($tags, 'name'));
+        //remove drophint action
+        function drophint_remove_actions() {
+            remove_action('woocommerce_after_add_to_cart_button', 'dropahint_content_after_addtocart_button');
+            //remove_action( 'admin_menu', 'dropahint_custom_menu_page' );
         }
-        ?>
+
+        add_action('init', 'drophint_remove_actions');
+
+
+        //remove shortdescription
+        remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+
+        //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 40 );
+        //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 45 );
+        add_action('woocommerce_after_add_to_cart_button', 'ws_opening_div', 20);
+        add_action('woocommerce_after_add_to_cart_button', 'show_ti_addwish_button', 30);
+        add_action('woocommerce_after_add_to_cart_button', 'dropahint_content_after_addtocart_button_child', 40);
+        add_action('woocommerce_after_add_to_cart_button', 'new_zoa_product_sharing', 50);
+
+        function show_ti_addwish_button() {
+            global $product;
+            $id = $product->get_id();
+            $variation_id = get_product($product->variation_id);
+            echo '<div class="add-to-wishlist-button">' . do_shortcode('[ti_wishlists_addtowishlist product_id="' . $id . '" variation_id="' . $variation_id . '"]') . '</div>';
+        }
+
+        function new_zoa_product_sharing() {
+            global $product;
+            $id = $product->get_id();
+            $url = get_permalink($id);
+            $title = get_the_title($id);
+            $img_id = $product->get_image_id();
+            $img = wp_get_attachment_image_src($img_id, 'full');
+            $tags = get_the_terms($id, 'product_tag');
+            $tag_list = '';
+
+            if ($tags && !is_wp_error($tags)) {
+                $tag_list = implode(', ', wp_list_pluck($tags, 'name'));
+            }
+            ?>
 
             <div class="theme-social-icon p-shared">
                 <span class="sharing-tools">
@@ -1481,13 +1499,13 @@ if (!function_exists('zoa_product_action')) :
                             <a href="<?php echo esc_url(home_url('/')); ?>" class="c-footer_logo_link"><span class="svg-wrapper"><svg class="svg" width="320" height="116" viewBox="0 0 320 116"><use href="#svg-logo" xlink:href="#svg-logo"/></svg></span></a>
                         </div>
                         <div class="row widget-box footer-col-<?php echo esc_attr($column); ?>">
-                <?php dynamic_sidebar('footer-widget'); ?>
+                            <?php dynamic_sidebar('footer-widget'); ?>
                         </div>
                     </div>
                 </div>
-                    <?php endif; ?>
+            <?php endif; ?>
 
-                    <?php /* BASE */ ?>
+            <?php /* BASE */ ?>
             <div class="footer-bot">
                 <div class="container">
                     <div class="footer-logo"></div>
@@ -1538,13 +1556,13 @@ if (!function_exists('zoa_product_action')) :
             ?>
             <div class="menu-woo-action">
                 <a href="<?php echo get_permalink($page_account); ?>" class="menu-woo-user<?php if (!is_user_logged_in()) : ?> signup_icon<?php else : ?> account_icon<?php endif; ?>">
-            <?php if (!is_user_logged_in()) : ?>
-                <?php esc_html_e('Sign up / Login', 'zoa'); ?>
-            <?php else : ?>
-                <?php esc_html_e('My Account', 'zoa'); ?>
-            <?php endif; ?>
+                    <?php if (!is_user_logged_in()) : ?>
+                        <?php esc_html_e('Sign up / Login', 'zoa'); ?>
+                    <?php else : ?>
+                        <?php esc_html_e('My Account', 'zoa'); ?>
+                    <?php endif; ?>
                 </a>
-                <!--<a href="<?php //echo esc_url( $page_logout ); ?>"><?php //esc_html_e( 'Logout', 'zoa' ); ?></a>-->
+                <!--<a href="<?php //echo esc_url( $page_logout );  ?>"><?php //esc_html_e( 'Logout', 'zoa' );  ?></a>-->
             </div>
             <a href="<?php echo wc_get_cart_url(); ?>" id="shopping-cart-btn" class="oecicon oecicon-bag-20 menu-woo-cart js-cart-button"><span
                     class="shop-cart-count"><?php echo esc_html($count); ?></span></a>
@@ -1570,18 +1588,18 @@ if (!function_exists('zoa_product_action')) :
             $wishlist_url = tinv_url_wishlist_default();
             ?>
             <a href="<?php echo get_permalink($page_account); ?>" id="headerAccountLink" class="header__user__item header__user__link header__user__link--account">
-            <?php if (!is_user_logged_in()) : ?>
-                <?php esc_html_e('Sign in / Register', 'zoa'); ?>
-            <?php else : ?>
-                <?php esc_html_e('my account', 'zoa'); ?>
-            <?php endif; ?>
+                <?php if (!is_user_logged_in()) : ?>
+                    <?php esc_html_e('Sign in / Register', 'zoa'); ?>
+                <?php else : ?>
+                    <?php esc_html_e('my account', 'zoa'); ?>
+                <?php endif; ?>
             </a>
             <?php if (function_exists('activation_tinv_wishlist')) { ?>
                 <a href="<?php echo esc_url($wishlist_url); ?>" id="headerWishlistLink" class="header__user__item header__user__link header__user__link--wishlist"><?php esc_html_e('My Wishlist', 'zoa'); ?></a><?php } ?>
             <?php
         }
 
-endif;
+    endif;
 
     /* Shortcode for custom post */
     add_shortcode('custom_posts', 'tcb_sc_custom_posts');
@@ -1743,91 +1761,92 @@ endif;
             ?>
             <span class="if-item if-cat"><?php echo zoa_blog_categories(); ?></span>
             <time class="if-item if-date" itemprop="datePublished" datetime="<?php echo get_the_time('c'); ?>"><?php echo zoa_date_format(); ?></time>
-                    <?php
-                }
+            <?php
+        }
 
-            endif;
+    endif;
 
 //親ページ判別
-            function is_child($slug = "") {
-                if (is_singular())://投稿ページのとき（固定ページ含）
-                    global $post;
-                    if ($post->post_parent) {//現在のページに親がいる場合
-                        $post_data = get_post($post->post_parent); //親ページの取得
-                        if ($slug != "") {//$slugが空じゃないとき
-                            if (is_array($slug)) {//$slugが配列のとき
-                                for ($i = 0; $i <= count($slug); $i++) {
-                                    if ($slug[$i] == $post_data->post_name || $slug[$i] == $post_data->ID || $slug[$i] == $post_data->post_title) {//$slugの中のどれかが親ページのスラッグ、ID、投稿タイトルと同じのとき
-                                        return true;
-                                    }
-                                }
-                            } elseif ($slug == $post_data->post_name || $slug == $post_data->ID || $slug == $post_data->post_title) {//$slugが配列ではなく、$slugが親ページのスラッグ、ID、投稿タイトルと同じのとき
+    function is_child($slug = "") {
+        if (is_singular())://投稿ページのとき（固定ページ含）
+            global $post;
+            if ($post->post_parent) {//現在のページに親がいる場合
+                $post_data = get_post($post->post_parent); //親ページの取得
+                if ($slug != "") {//$slugが空じゃないとき
+                    if (is_array($slug)) {//$slugが配列のとき
+                        for ($i = 0; $i <= count($slug); $i++) {
+                            if ($slug[$i] == $post_data->post_name || $slug[$i] == $post_data->ID || $slug[$i] == $post_data->post_title) {//$slugの中のどれかが親ページのスラッグ、ID、投稿タイトルと同じのとき
                                 return true;
-                            } else {
-                                return false;
                             }
-                        } else {//親ページは存在するけど$slugが空のとき
-                            return true;
                         }
-                    } else {//親ページがいない
+                    } elseif ($slug == $post_data->post_name || $slug == $post_data->ID || $slug == $post_data->post_title) {//$slugが配列ではなく、$slugが親ページのスラッグ、ID、投稿タイトルと同じのとき
+                        return true;
+                    } else {
                         return false;
                     }
-                endif;
+                } else {//親ページは存在するけど$slugが空のとき
+                    return true;
+                }
+            } else {//親ページがいない
+                return false;
             }
+        endif;
+    }
 
 //just check child page nby path
-            function is_subpage() {
-                global $wp;
-                $request = explode('/', $wp->request);
-                if (count($request) >= 1) {
-                    $parentslug = $request[0];
-                }
-            }
+    function is_subpage() {
+        global $wp;
+        $request = explode('/', $wp->request);
+        if (count($request) >= 1) {
+            $parentslug = $request[0];
+        }
+    }
 
-;
-            /* ! PAGE HEADER
-              -------------------------------------------------> */
-            if (!function_exists('zoa_page_header')):
+    ;
+    /* ! PAGE HEADER
+      -------------------------------------------------> */
+    if (!function_exists('zoa_page_header')):
 
-                function zoa_page_header() {
-                    if (is_404())
-                        return;
+        function zoa_page_header() {
+            if (is_404())
+                return;
 
-                    $c_header = zoa_page_header_slug();
+            $c_header = zoa_page_header_slug();
 
-                    if ('disable' == $c_header)
-                        return;
-                    ?>
-                <?php
-                $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                global $wp;
-                $request = explode('/', $wp->request);
-                $is_sub_myaccount = count($request) > 1 && $request[0] == 'my-account';
-                ?>
-                <?php if (!is_singular('post') && !$is_sub_myaccount && !is_singular('product') && !is_checkout() && !is_page('reservation-thanks')) { ?>
+            if ('disable' == $c_header)
+                return;
+            ?>
+            <?php
+            $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+            global $wp;
+            $request = explode('/', $wp->request);
+            $is_sub_myaccount = count($request) > 1 && $request[0] == 'my-account';
+            ?>
+            <?php if (!is_singular('post') && !$is_sub_myaccount && !is_singular('product') && !is_checkout() && !is_page('reservation-thanks')) { ?>
                 <div class="<?php if ((!'layout-1' == $c_header)) { ?>breadcrumb_row<?php } else { ?>page-header phd-<?php echo esc_attr($c_header); ?><?php } ?><?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?> has-bg js-parallax<?php } ?>" <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?>style="background-image:url(<?php echo $featured_img_url; ?>);"<?php } ?>>
                     <div class="max-width--large gutter-padding--full">
-                    <?php /* BREADCRUMBS */ ?>
+                        <?php /* BREADCRUMBS */ ?>
                         <div id="theme-bread" class="<?php if (is_singular('product') || (!'layout-1' == $c_header )) { ?>display--small-up<?php } else { ?>display--mid-up<?php } ?>">
-                    <?php
-                    if (function_exists('fw_ext_breadcrumbs')) {
-                        fw_ext_breadcrumbs();
-                    }
-                    ?>
+                            <?php
+                            if (function_exists('fw_ext_breadcrumbs')) {
+                                fw_ext_breadcrumbs();
+                            }
+                            ?>
                         </div>
-                    <?php
-                    /* PAGE TITLE */
-                    if (( 'layout-1' == $c_header ) && !is_singular('product')):
-                        ?>
-                        <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?><div class="bg_title_cover"><div class="container"><?php } ?>
+                        <?php
+                        /* PAGE TITLE */
+                        if (( 'layout-1' == $c_header ) && !is_singular('product')):
+                            ?>
+                            <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?><div class="bg_title_cover"><div class="container"><?php } ?>
                                     <div id="theme-page-title">
-                        <?php zoa_page_title(); ?>
-                        <?php if (!is_woocommerce() && get_the_subtitle($post_id) != ''): echo '<p class="page-subtitle">' . get_the_subtitle() . '</p>';
-                        endif; ?>
+                                        <?php zoa_page_title(); ?>
+                                        <?php if (!is_woocommerce() && get_the_subtitle($post_id) != ''): echo '<p class="page-subtitle">' . get_the_subtitle() . '</p>';
+                                        endif;
+                                        ?>
                                     </div>
-                        <?php if (get_field('summary')): ?><div class="short_summary"><?php the_field('summary'); ?></div><?php endif; ?>
-                        <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?></div></div><!--/.bg_title_cover---><?php } ?>
-                    <?php endif; ?>
+                                    <?php if (get_field('summary')): ?><div class="short_summary"><?php the_field('summary'); ?></div><?php endif; ?>
+                            <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?></div></div><!--/.bg_title_cover---><?php } ?>
+            <?php endif; ?>
 
 
 
@@ -1835,16 +1854,16 @@ endif;
                 </div>
             <?php } else if (is_singular('product') || is_checkout()) { ?>
                 <!--no breadcrumbs-->
-            <?php } else { ?>
+        <?php } else { ?>
                 <div class="breadcrumb_row">
                     <div class="max-width--large gutter-padding--full">
-                <?php /* PAGE HEADER FOR BLOG POST */ ?>
+                            <?php /* PAGE HEADER FOR BLOG POST */ ?>
                         <div id="theme-bread" class="display--small-up">
-                <?php
-                if (function_exists('fw_ext_breadcrumbs')) {
-                    fw_ext_breadcrumbs();
-                }
-                ?>
+                            <?php
+                            if (function_exists('fw_ext_breadcrumbs')) {
+                                fw_ext_breadcrumbs();
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -1871,40 +1890,40 @@ endif;
             $shop_title = get_theme_mod('shop_title', 'Shop');
             ?>
             <h1 class="page-title entry-title">
-            <?php
-            if (is_day()):
-                printf(esc_html__('Daily Archives: %s', 'zoa'), get_the_date());
-            elseif (is_month()):
-                printf(esc_html__('Monthly Archives: %s', 'zoa'), get_the_date(esc_html_x('F Y', 'monthly archives date format', 'zoa')));
-            elseif (is_home()):
-                echo esc_html($blog_title);
-            elseif (is_author()):
-                $author = ( get_query_var('author_name') ) ? get_user_by('slug', get_query_var('author_name')) : get_userdata(get_query_var('author'));
-                echo esc_html($author->display_name);
-            elseif (is_year()):
-                printf(esc_html__('Yearly Archives: %s', 'zoa'), get_the_date(esc_html_x('Y', 'yearly archives date format', 'zoa')));
-            elseif (class_exists('woocommerce') && is_shop()):
-                echo esc_html($shop_title);
-            elseif (class_exists('woocommerce') && ( is_product_tag() || is_tag() )):
-                esc_html_e('Tags: ', 'zoa');
-                single_tag_title();
-            elseif (is_page() || is_single()):
-                echo!empty($title) ? esc_html($title) : esc_html__('This post has no title', 'zoa');
-            elseif (is_tax()):
-                global $wp_query;
-                $term = $wp_query->get_queried_object();
-                $tex_title = $term->name;
-                echo esc_html($tex_title);
-            elseif (is_search()):
-                esc_html_e('Search results', 'zoa');
-            elseif (is_post_type_archive('portfolio')):
-                esc_html_e('Portfolio', 'zoa');
-            elseif (is_category()):
-                echo single_cat_title();
-            else:
-                esc_html_e('Archives', 'zoa');
-            endif;
-            ?>
+                <?php
+                if (is_day()):
+                    printf(esc_html__('Daily Archives: %s', 'zoa'), get_the_date());
+                elseif (is_month()):
+                    printf(esc_html__('Monthly Archives: %s', 'zoa'), get_the_date(esc_html_x('F Y', 'monthly archives date format', 'zoa')));
+                elseif (is_home()):
+                    echo esc_html($blog_title);
+                elseif (is_author()):
+                    $author = ( get_query_var('author_name') ) ? get_user_by('slug', get_query_var('author_name')) : get_userdata(get_query_var('author'));
+                    echo esc_html($author->display_name);
+                elseif (is_year()):
+                    printf(esc_html__('Yearly Archives: %s', 'zoa'), get_the_date(esc_html_x('Y', 'yearly archives date format', 'zoa')));
+                elseif (class_exists('woocommerce') && is_shop()):
+                    echo esc_html($shop_title);
+                elseif (class_exists('woocommerce') && ( is_product_tag() || is_tag() )):
+                    esc_html_e('Tags: ', 'zoa');
+                    single_tag_title();
+                elseif (is_page() || is_single()):
+                    echo!empty($title) ? esc_html($title) : esc_html__('This post has no title', 'zoa');
+                elseif (is_tax()):
+                    global $wp_query;
+                    $term = $wp_query->get_queried_object();
+                    $tex_title = $term->name;
+                    echo esc_html($tex_title);
+                elseif (is_search()):
+                    esc_html_e('Search results', 'zoa');
+                elseif (is_post_type_archive('portfolio')):
+                    esc_html_e('Portfolio', 'zoa');
+                elseif (is_category()):
+                    echo single_cat_title();
+                else:
+                    esc_html_e('Archives', 'zoa');
+                endif;
+                ?>
             </h1>
             <?php
         }
@@ -2668,7 +2687,7 @@ endif;
         $appointment = $birchschedule->model->get($appointment_id, array(
             'base_keys' => array(),
             'meta_keys' => $birchschedule->model->get_appointment_fields()
-                ));
+        ));
 
         $timestamp = $birchpress->util->get_wp_datetime($appointment['_birs_appointment_timestamp']);
         $appointment_date = $timestamp->format('Y-m-d');
@@ -2853,14 +2872,14 @@ endif;
                             <span class="confirm-text-value"><?php echo $appointment_info['time'] ?></span>
                         </div>
                     </div></div><!--/.form-row-->
-        <?php /* ?>
-          <div class="form-row"><div class="field-wrapper">
-          <label class="form-row__label light-copy"><?php echo __('Provider', 'zoa')?></label>
-          <div class="text_output">
-          <span class="confirm-text-value"><?php echo $appointment_info['staff_name']?></span>
-          </div>
-          </div></div><!--/.form-row-->
-          <?php */ ?>
+                <?php /* ?>
+                  <div class="form-row"><div class="field-wrapper">
+                  <label class="form-row__label light-copy"><?php echo __('Provider', 'zoa')?></label>
+                  <div class="text_output">
+                  <span class="confirm-text-value"><?php echo $appointment_info['staff_name']?></span>
+                  </div>
+                  </div></div><!--/.form-row-->
+                  <?php */ ?>
                 <div class="form-row"><div class="field-wrapper">
                         <label class="form-row__label light-copy"><?php echo __('Service', 'zoa') ?></label>
                         <div class="text_output">
@@ -2869,56 +2888,56 @@ endif;
                     </div></div><!--/.form-row-->
             </fieldset>
 
-    <?php
-    $field_group_fields = acf_get_fields(BOOKING_FORM_ID);
-    $field_group_fields = getBookingStepFields($field_group_fields, 2);
-    $save_fields = array();
-    echo '<fieldset class="confirm_info col-md-4 col-xs-12">';
-    echo '<h3 class="appointment--confirm__form__title heading heading--small">' . __('Your Info', 'zoa') . '</h3>';
-    foreach ($field_group_fields as $field) {
-        loop_to_get_sub_field($field, $save_fields);
-    }
+            <?php
+            $field_group_fields = acf_get_fields(BOOKING_FORM_ID);
+            $field_group_fields = getBookingStepFields($field_group_fields, 2);
+            $save_fields = array();
+            echo '<fieldset class="confirm_info col-md-4 col-xs-12">';
+            echo '<h3 class="appointment--confirm__form__title heading heading--small">' . __('Your Info', 'zoa') . '</h3>';
+            foreach ($field_group_fields as $field) {
+                loop_to_get_sub_field($field, $save_fields);
+            }
 
-    $last_name_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2675']['name_long'] ? $save_fields['2675']['name_long'] : $save_fields['2675']['name']), true);
-    $first_name_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2676']['name_long'] ? $save_fields['2676']['name_long'] : $save_fields['2676']['name']), true);
-    $last_name_kana_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2678']['name_long'] ? $save_fields['2678']['name_long'] : $save_fields['2678']['name']), true);
-    $first_name_kana_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2679']['name_long'] ? $save_fields['2679']['name_long'] : $save_fields['2679']['name']), true);
+            $last_name_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2675']['name_long'] ? $save_fields['2675']['name_long'] : $save_fields['2675']['name']), true);
+            $first_name_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2676']['name_long'] ? $save_fields['2676']['name_long'] : $save_fields['2676']['name']), true);
+            $last_name_kana_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2678']['name_long'] ? $save_fields['2678']['name_long'] : $save_fields['2678']['name']), true);
+            $first_name_kana_value = get_post_meta($_SESSION['appointment_id'], ($save_fields['2679']['name_long'] ? $save_fields['2679']['name_long'] : $save_fields['2679']['name']), true);
 
-    $save_fields['2675']['label'] = __('Name', 'zoa');
-    $save_fields['2675']['full_value'] = $last_name_value . $first_name_value;
+            $save_fields['2675']['label'] = __('Name', 'zoa');
+            $save_fields['2675']['full_value'] = $last_name_value . $first_name_value;
 
-    $save_fields['2678']['label'] = __('Name Kana', 'zoa');
-    $save_fields['2678']['full_value'] = $last_name_kana_value . $first_name_kana_value;
+            $save_fields['2678']['label'] = __('Name Kana', 'zoa');
+            $save_fields['2678']['full_value'] = $last_name_kana_value . $first_name_kana_value;
 
-    unset($save_fields[2676]);
-    unset($save_fields[2679]);
+            unset($save_fields[2676]);
+            unset($save_fields[2679]);
 
-    foreach ($save_fields as $save_field) {
-        $field_value = $save_field['full_value'] ? $save_field['full_value'] : get_post_meta($_SESSION['appointment_id'], ($save_field['name_long'] ? $save_field['name_long'] : $save_field['name']), true);
+            foreach ($save_fields as $save_field) {
+                $field_value = $save_field['full_value'] ? $save_field['full_value'] : get_post_meta($_SESSION['appointment_id'], ($save_field['name_long'] ? $save_field['name_long'] : $save_field['name']), true);
 
-        if (!$field_value)
-            continue;
+                if (!$field_value)
+                    continue;
 
-        echo '<div class="form-row"><div class="field-wrapper">
+                echo '<div class="form-row"><div class="field-wrapper">
 				<label class="form-row__label light-copy">' . $save_field['label'] . '</label>
 			    <div class="text_output">
 			      <span class="confirm-text-value">' . (is_array($field_value) ? implode(', ', $field_value) : $field_value) . '</span>
 			    </div>
 
 			</div></div>';
-    }
-    echo '</fieldset>';
+            }
+            echo '</fieldset>';
 
-    echo '<div class="confirm_info col-md-4 col-xs-12">';
-    echo '<fieldset>';
+            echo '<div class="confirm_info col-md-4 col-xs-12">';
+            echo '<fieldset>';
 
-    $field_group_fields = acf_get_fields(BOOKING_FORM_ID);
-    $field_group_fields = getBookingStepFields($field_group_fields, 3);
-    $save_fields = array();
-    foreach ($field_group_fields as $field) {
-        loop_to_get_sub_field($field, $save_fields);
-    }
-    ?>
+            $field_group_fields = acf_get_fields(BOOKING_FORM_ID);
+            $field_group_fields = getBookingStepFields($field_group_fields, 3);
+            $save_fields = array();
+            foreach ($field_group_fields as $field) {
+                loop_to_get_sub_field($field, $save_fields);
+            }
+            ?>
             <h3 class="appointment--confirm__form__title heading heading--small"><?php _e('Your Inquiry', 'zoa'); ?></h3>
             <?php
             foreach ($save_fields as $save_field) {
@@ -2934,10 +2953,10 @@ endif;
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+    <?php } ?>
             </fieldset>
 
-            <?php if (isset($_SESSION['p_image']) && $_SESSION['p_image']) { ?>
+    <?php if (isset($_SESSION['p_image']) && $_SESSION['p_image']) { ?>
                 <fieldset>
                     <h3 class="appointment--confirm__form__title heading heading--small"><?php echo __('Inspired Photo', 'zoa') ?></h3>
                     <div class="form-row">
@@ -2948,13 +2967,13 @@ endif;
                         </div>
                     </div>
                 </fieldset>
-            <?php } ?>
+    <?php } ?>
         </div>
     </div>
     <div class="cancel_term_text">
-            <?php
-            printf(__('cancel_appointment_confirm_text', 'zoa'), $appointment_info['cancel_before_timestamp']->format('H:i'), $appointment_info['cancel_before_timestamp']->format(get_option('date_format')));
-            ?>
+        <?php
+        printf(__('cancel_appointment_confirm_text', 'zoa'), $appointment_info['cancel_before_timestamp']->format('H:i'), $appointment_info['cancel_before_timestamp']->format(get_option('date_format')));
+        ?>
     </div>
 
 
@@ -2972,7 +2991,7 @@ function get_appointment_info($appointment_id = 0) {
     $appointment = $birchschedule->model->get($appointment_id, array(
         'base_keys' => array(),
         'meta_keys' => $birchschedule->model->get_appointment_fields()
-            ));
+    ));
 
     $appointment_info = array();
     if ($appointment) {
@@ -3133,15 +3152,17 @@ function general_settings_shop_phone($settings) {
     }
     return $new_settings;
 }
+
 /* * *
  * Appointment Cancel Email Text shortcode
  */
 
 function booking_cancel_text() {
-	
-    $html = __('cancel_appointment_email_text','zoa');
-	return $html;
+
+    $html = __('cancel_appointment_email_text', 'zoa');
+    return $html;
 }
+
 add_shortcode('booking_cancel_text', 'booking_cancel_text');
 /* * *
  * Store Phone no shortcode
@@ -3397,7 +3418,7 @@ function zoa_add_html_above_table() {
     $series = get_terms(array(
         'taxonomy' => 'series',
         'hide_empty' => true,
-            ));
+    ));
     ?>
     <span id="series_type_filter_wrap">
         <select name="series_type_filter" id="series_type_filter">
@@ -3488,7 +3509,7 @@ if (!function_exists('wc_display_item_meta')) {
             'separator' => '</div><div class="mini-product__item mini-product__attribute">',
             'echo' => true,
             'autop' => false,
-                ));
+        ));
 
         foreach ($item->get_formatted_meta_data() as $meta_id => $meta) {
             $value = isset($args['autop']) && $args['autop'] ? wp_kses_post($meta->display_value) : wp_kses_post(make_clickable(trim($meta->display_value)));
@@ -3729,272 +3750,272 @@ function zoa_wrap_product_image_override($size = 'woocommerce_thumbnail', $args 
     if ($product) {
         ?>
         <div class="product-image-wrapper">
-        <?php
-        /* PRODUCT IMAGE */
-        // open tag <a>
-        woocommerce_template_loop_product_link_open();
-        echo zoo_get_product_thumbnail();
-
-        /* HOVER IMAHE */
-        if (!empty($gallery)) {
-            $hover = wp_get_attachment_image_src($gallery[0], $image_size);
-            ?>
-                <span class="hover-product-image" style="background-image: url(<?php echo esc_url($hover[0]); ?>);"></span>
             <?php
-        }
-        // close tag </a>
-        woocommerce_template_loop_product_link_close();
-        ?>
+            /* PRODUCT IMAGE */
+            // open tag <a>
+            woocommerce_template_loop_product_link_open();
+            echo zoo_get_product_thumbnail();
 
-        <?php
-        /* LOOP ACTION */
-        $loop_action_classes = 'loop-action';
-        $quick_action = get_theme_mod('quick_action', 'false');
-        if ($quick_action) {
-            $loop_action_classes .= ' loop-action--visible-on-mobile';
-        }
-        ?>
+            /* HOVER IMAHE */
+            if (!empty($gallery)) {
+                $hover = wp_get_attachment_image_src($gallery[0], $image_size);
+                ?>
+                <span class="hover-product-image" style="background-image: url(<?php echo esc_url($hover[0]); ?>);"></span>
+                <?php
+            }
+            // close tag </a>
+            woocommerce_template_loop_product_link_close();
+            ?>
+
+            <?php
+            /* LOOP ACTION */
+            $loop_action_classes = 'loop-action';
+            $quick_action = get_theme_mod('quick_action', 'false');
+            if ($quick_action) {
+                $loop_action_classes .= ' loop-action--visible-on-mobile';
+            }
+            ?>
             <div class="<?php echo esc_attr($loop_action_classes); ?>">
-        <?php /* SHOW IN QUICK VIEW BTN */ ?>
+                <?php /* SHOW IN QUICK VIEW BTN */ ?>
                 <span data-pid="<?php echo esc_attr($product->get_id()); ?>" class="product-quick-view-btn zoa-icon-quick-view"></span>
-        <?php
-        /* ADD TO WISHLIST BUTTON */
-        echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]");
-        # echo class_exists( 'YITH_WCWL' ) ? do_shortcode( '[yith_wcwl_add_to_wishlist]' ) : '';
+                <?php
+                /* ADD TO WISHLIST BUTTON */
+                echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]");
+                # echo class_exists( 'YITH_WCWL' ) ? do_shortcode( '[yith_wcwl_add_to_wishlist]' ) : '';
 
-        /* ADD TO CART BUTTON */
-        if ($product) {
-            $defaults = array(
-                'quantity' => 1,
-                'class' => implode(' ', array_filter(array(
-                    'zoa-add-to-cart-btn',
-                    'button',
-                    'product_type_' . $product->get_type(),
-                    $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
-                    $product->supports('ajax_add_to_cart') ? 'ajax_add_to_cart' : '',
-                ))),
-                'attributes' => array(
-                    'data-product_id' => $product->get_id(),
-                    'data-product_sku' => $product->get_sku(),
-                    'aria-label' => $product->add_to_cart_description()
-                ),
-            );
+                /* ADD TO CART BUTTON */
+                if ($product) {
+                    $defaults = array(
+                        'quantity' => 1,
+                        'class' => implode(' ', array_filter(array(
+                            'zoa-add-to-cart-btn',
+                            'button',
+                            'product_type_' . $product->get_type(),
+                            $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '',
+                            $product->supports('ajax_add_to_cart') ? 'ajax_add_to_cart' : '',
+                        ))),
+                        'attributes' => array(
+                            'data-product_id' => $product->get_id(),
+                            'data-product_sku' => $product->get_sku(),
+                            'aria-label' => $product->add_to_cart_description()
+                        ),
+                    );
 
-            $args = apply_filters('woocommerce_loop_add_to_cart_args', wp_parse_args($args, $defaults), $product);
+                    $args = apply_filters('woocommerce_loop_add_to_cart_args', wp_parse_args($args, $defaults), $product);
 
-            echo sprintf('<a href="%s" data-quantity="%s" class="%s" %s>%s</a>', esc_url($product->add_to_cart_url()), esc_attr(isset($args['quantity']) ? $args['quantity'] : 1 ), esc_attr(isset($args['class']) ? $args['class'] : 'button' ), isset($args['attributes']) ? wc_implode_html_attributes($args['attributes']) : '', esc_html($product->add_to_cart_text()
-            ));
-        }
-        ?>
+                    echo sprintf('<a href="%s" data-quantity="%s" class="%s" %s>%s</a>', esc_url($product->add_to_cart_url()), esc_attr(isset($args['quantity']) ? $args['quantity'] : 1 ), esc_attr(isset($args['class']) ? $args['class'] : 'button' ), isset($args['attributes']) ? wc_implode_html_attributes($args['attributes']) : '', esc_html($product->add_to_cart_text()
+                    ));
+                }
+                ?>
             </div>
 
-            <?php /* PRODUCT LABEL */ ?>
-            <?php echo zoa_product_label($product); ?>
+        <?php /* PRODUCT LABEL */ ?>
+        <?php echo zoa_product_label($product); ?>
         </div>
-            <?php
-        }
+        <?php
     }
+}
 
 //add_filter('woo_variation_gallery_image_inner_html' , 'woo_variation_gallery_image_inner_html_callback',10,2);
 
-    function woo_variation_gallery_image_inner_html_callback($inner_html, $attachment_id) {
+function woo_variation_gallery_image_inner_html_callback($inner_html, $attachment_id) {
 
-        $dom = new DOMDocument;
-        $dom->loadHTML($inner_html);
-        $imgs = $dom->getElementsByTagName('img');
-        foreach ($imgs as $img) {
+    $dom = new DOMDocument;
+    $dom->loadHTML($inner_html);
+    $imgs = $dom->getElementsByTagName('img');
+    foreach ($imgs as $img) {
 
-            if (strpos($img->getAttribute('class'), 'attachment-woocommerce_single') !== false) {
-                $img->setAttribute('class', $img->getAttribute('class') . ' woo-variation-gallery-trigger');
-            } else if (!$img->hasAttribute('class')) {
-                $img->addAttribute('class', 'woo-variation-gallery-trigger');
-            }
+        if (strpos($img->getAttribute('class'), 'attachment-woocommerce_single') !== false) {
+            $img->setAttribute('class', $img->getAttribute('class') . ' woo-variation-gallery-trigger');
+        } else if (!$img->hasAttribute('class')) {
+            $img->addAttribute('class', 'woo-variation-gallery-trigger');
         }
-
-        $inner_html = $dom->saveHTML();
-
-        return $inner_html;
     }
 
-    if (!function_exists('get_field')) {
+    $inner_html = $dom->saveHTML();
 
-        function get_field() {
-            
-        }
+    return $inner_html;
+}
 
+if (!function_exists('get_field')) {
+
+    function get_field() {
+        
     }
 
-    function zoa_wpml_object_id($page_id, $type) {
-        if ('page' == $type && $page_id == tinv_get_option('page', 'wishlist')) {
-            if (!is_page($page_id)) {
-                $page_id = wc_get_page_id('myaccount');
-            }
-        }
+}
 
-        return $page_id;
+function zoa_wpml_object_id($page_id, $type) {
+    if ('page' == $type && $page_id == tinv_get_option('page', 'wishlist')) {
+        if (!is_page($page_id)) {
+            $page_id = wc_get_page_id('myaccount');
+        }
     }
+
+    return $page_id;
+}
 
 // replace wishlist page id with myaccount page id when necessary
-    add_filter('tinvwl_addtowishlist_return_ajax', 'zoa_addtowishlist_return_ajax', 20);
-    add_filter('tinvwl_addtowishlist_dialog_box', 'zoa_addtowishlist_return_ajax', 20);
+add_filter('tinvwl_addtowishlist_return_ajax', 'zoa_addtowishlist_return_ajax', 20);
+add_filter('tinvwl_addtowishlist_dialog_box', 'zoa_addtowishlist_return_ajax', 20);
 #tinvwl_addtowishlist_dialog_box
 
-    function zoa_addtowishlist_return_ajax($data) {
-        #$data['msg'] = str_replace($data['wishlist_url'], tinv_url_wishlist_default(), $data['msg']);
-        $data['wishlist_url'] = tinv_url_wishlist_default();
-        if (!empty($data['redirect'])) {
-            $data['redirect'] = $data['wishlist_url'];
-        }
-
-        return $data;
+function zoa_addtowishlist_return_ajax($data) {
+    #$data['msg'] = str_replace($data['wishlist_url'], tinv_url_wishlist_default(), $data['msg']);
+    $data['wishlist_url'] = tinv_url_wishlist_default();
+    if (!empty($data['redirect'])) {
+        $data['redirect'] = $data['wishlist_url'];
     }
+
+    return $data;
+}
 
 // replace wishlist page id with myaccount page id when necessary
-    add_action('wp_loaded', 'zoa_filter_wpml_object_id', 10);
+add_action('wp_loaded', 'zoa_filter_wpml_object_id', 10);
 
-    function zoa_filter_wpml_object_id() {
-        add_filter('wpml_object_id', 'zoa_wpml_object_id', 10, 2);
-    }
+function zoa_filter_wpml_object_id() {
+    add_filter('wpml_object_id', 'zoa_wpml_object_id', 10, 2);
+}
 
 // reverse the change of wishlist page id with myaccount page id
-    add_action('wp', 'zoa_unfilter_wpml_object_id', 10);
+add_action('wp', 'zoa_unfilter_wpml_object_id', 10);
 
-    function zoa_unfilter_wpml_object_id() {
-        remove_filter('wpml_object_id', 'zoa_wpml_object_id', 10, 2);
-    }
+function zoa_unfilter_wpml_object_id() {
+    remove_filter('wpml_object_id', 'zoa_wpml_object_id', 10, 2);
+}
 
 // add myaccount endpoint for wishlist
-    add_action('init', 'zoa_wishlist_endpoint');
+add_action('init', 'zoa_wishlist_endpoint');
 
-    function zoa_wishlist_endpoint() {
-        add_rewrite_endpoint('wishlist', EP_ROOT | EP_PAGES);
-    }
+function zoa_wishlist_endpoint() {
+    add_rewrite_endpoint('wishlist', EP_ROOT | EP_PAGES);
+}
 
 // add wishlist to myaccount menu
-    add_filter('woocommerce_account_menu_items', 'zoa_woocommerce_wishlist_menu_items');
+add_filter('woocommerce_account_menu_items', 'zoa_woocommerce_wishlist_menu_items');
 
-    function zoa_woocommerce_wishlist_menu_items($items) {
-        $items['wishlist'] = $items['my-wishlist'];
-        unset($items['my-wishlist']);
-        return $items;
-    }
+function zoa_woocommerce_wishlist_menu_items($items) {
+    $items['wishlist'] = $items['my-wishlist'];
+    unset($items['my-wishlist']);
+    return $items;
+}
 
 // render wishlist page content
-    add_action('woocommerce_account_wishlist_endpoint', 'zoa_wishlist_endpoint_content');
+add_action('woocommerce_account_wishlist_endpoint', 'zoa_wishlist_endpoint_content');
 
-    function zoa_wishlist_endpoint_content() {
-        echo do_shortcode('[ti_wishlistsview]');
+function zoa_wishlist_endpoint_content() {
+    echo do_shortcode('[ti_wishlistsview]');
+}
+
+add_filter('tinvwl_wishlist_item_add_to_cart', 'zoa_wishlist_item_add_to_cart', 10, 3);
+
+function zoa_wishlist_item_add_to_cart($text, $wl_product, $_product) {
+    global $product;
+    // store global product data.
+    $_product_tmp = $product;
+    // override global product data.
+    $product = $_product;
+    if (apply_filters('tinvwl_product_add_to_cart_need_redirect', false, $product, $product->get_permalink(), $wl_product) && in_array(( version_compare(WC_VERSION, '3.0.0', '<') ? $product->product_type : $product->get_type()), array(
+                'variable',
+                'variable-subscription'
+            ))) {
+
+        $text = $product->add_to_cart_text();
+        $text = 'Select Options';
     }
 
-    add_filter('tinvwl_wishlist_item_add_to_cart', 'zoa_wishlist_item_add_to_cart', 10, 3);
-
-    function zoa_wishlist_item_add_to_cart($text, $wl_product, $_product) {
-        global $product;
-        // store global product data.
-        $_product_tmp = $product;
-        // override global product data.
-        $product = $_product;
-        if (apply_filters('tinvwl_product_add_to_cart_need_redirect', false, $product, $product->get_permalink(), $wl_product) && in_array(( version_compare(WC_VERSION, '3.0.0', '<') ? $product->product_type : $product->get_type()), array(
-                    'variable',
-                    'variable-subscription'
-                ))) {
-
-            $text = $product->add_to_cart_text();
-            $text = 'Select Options';
-        }
-
-        return $text;
-    }
+    return $text;
+}
 
 #add_filter( 'woocommerce_product_add_to_cart_text' , 'zoa_woocommerce_product_add_to_cart_text' );
 
-    function zoa_woocommerce_product_add_to_cart_text() {
-        global $product;
-        $product_type = $product->product_type;
+function zoa_woocommerce_product_add_to_cart_text() {
+    global $product;
+    $product_type = $product->product_type;
 
-        switch ($product_type) {
-            case 'external':
-                return __('View Item', 'woocommerce');
-                break;
-            case 'grouped':
-                return __('View Group', 'woocommerce');
-                break;
-            case 'simple':
-                return __('Add to Cart', 'woocommerce');
-                break;
-            case 'variable':
-                return __('Select Options', 'woocommerce');
-                break;
-            default:
-                return __('Read more', 'woocommerce');
-        }
+    switch ($product_type) {
+        case 'external':
+            return __('View Item', 'woocommerce');
+            break;
+        case 'grouped':
+            return __('View Group', 'woocommerce');
+            break;
+        case 'simple':
+            return __('Add to Cart', 'woocommerce');
+            break;
+        case 'variable':
+            return __('Select Options', 'woocommerce');
+            break;
+        default:
+            return __('Read more', 'woocommerce');
     }
+}
 
-    add_filter('wp_redirect', 'zoa_modify_specific_wp_redirect', 100, 2);
+add_filter('wp_redirect', 'zoa_modify_specific_wp_redirect', 100, 2);
 
-    function zoa_modify_specific_wp_redirect($location, $status) {
-        if ($_POST['action'] == 'save_account_details') {
-            $location = site_url('my-account/edit-account/');
-        }
-        return $location;
+function zoa_modify_specific_wp_redirect($location, $status) {
+    if ($_POST['action'] == 'save_account_details') {
+        $location = site_url('my-account/edit-account/');
     }
+    return $location;
+}
 
-    function zoa_woocommerce_checkout($atts = array()) {
-        $wraper = array(
-            'class' => 'woocommerce woocommerce_thanks_wrapper row flex-justify-between',
-            'before' => null,
-            'after' => null,
-        );
-        return WC_Shortcodes::shortcode_wrapper(array('WC_Shortcode_Checkout', 'output'), $atts, $wraper);
+function zoa_woocommerce_checkout($atts = array()) {
+    $wraper = array(
+        'class' => 'woocommerce woocommerce_thanks_wrapper row flex-justify-between',
+        'before' => null,
+        'after' => null,
+    );
+    return WC_Shortcodes::shortcode_wrapper(array('WC_Shortcode_Checkout', 'output'), $atts, $wraper);
+}
+
+add_action('wp', 'zoa_change_checkout_shortcode');
+
+function zoa_change_checkout_shortcode() {
+    global $wp;
+
+    if (isset($wp->query_vars['order-received']) && $wp->query_vars['order-received']) {
+        remove_shortcode('woocommerce_checkout');
+        add_shortcode('woocommerce_checkout', 'zoa_woocommerce_checkout');
     }
+}
 
-    add_action('wp', 'zoa_change_checkout_shortcode');
+add_filter('manage_edit-birs_appointment_columns', 'zoa_manage_birs_appointment_columns', 1000, 1);
 
-    function zoa_change_checkout_shortcode() {
-        global $wp;
+function zoa_manage_birs_appointment_columns($columns) {
+    unset($columns['title']);
+    unset($columns['date']);
+    $columns['id'] = __('Appointment Number', 'zoa');
+    $columns['customer_name'] = __('Customer Name', 'zoa');
+    $columns['customer_phone'] = __('Phone', 'zoa');
+    $columns['customer_email'] = __('Email', 'zoa');
+    $columns['booked_date'] = __('Booked Date', 'zoa');
+    $columns['date'] = __('Date', 'zoa');
+    return $columns;
+}
 
-        if (isset($wp->query_vars['order-received']) && $wp->query_vars['order-received']) {
-            remove_shortcode('woocommerce_checkout');
-            add_shortcode('woocommerce_checkout', 'zoa_woocommerce_checkout');
-        }
-    }
+function zoa_modify_birs_appointment_column($column, $postid) {
+    global $birchschedule;
+    $appointment = $birchschedule->model->mergefields->get_appointment_merge_values($postid);
 
-    add_filter('manage_edit-birs_appointment_columns', 'zoa_manage_birs_appointment_columns', 1000, 1);
+    $args = array(
+        'meta_key' => '_birs_appointment_id',
+        'meta_value' => $postid,
+        'post_status' => 'publish',
+        'post_type' => 'birs_appointment1on1',
+        'posts_per_page' => 1
+    );
+    $appointment1on1 = get_posts($args);
+    $client_id = get_post_meta($appointment1on1[0]->ID, '_birs_client_id', true);
 
-    function zoa_manage_birs_appointment_columns($columns) {
-        unset($columns['title']);
-        unset($columns['date']);
-        $columns['id'] = __('Appointment Number', 'zoa');
-        $columns['customer_name'] = __('Customer Name', 'zoa');
-        $columns['customer_phone'] = __('Phone', 'zoa');
-        $columns['customer_email'] = __('Email', 'zoa');
-        $columns['booked_date'] = __('Booked Date', 'zoa');
-        $columns['date'] = __('Date', 'zoa');
-        return $columns;
-    }
+    $appointment = $birchschedule->model->get($postid, array(
+        'base_keys' => array(),
+        'meta_keys' => $birchschedule->model->get_appointment_fields()
+    ));
 
-    function zoa_modify_birs_appointment_column($column, $postid) {
-        global $birchschedule;
-        $appointment = $birchschedule->model->mergefields->get_appointment_merge_values($postid);
-
-        $args = array(
-            'meta_key' => '_birs_appointment_id',
-            'meta_value' => $postid,
-            'post_status' => 'publish',
-            'post_type' => 'birs_appointment1on1',
-            'posts_per_page' => 1
-        );
-        $appointment1on1 = get_posts($args);
-        $client_id = get_post_meta($appointment1on1[0]->ID, '_birs_client_id', true);
-
-        $appointment = $birchschedule->model->get($postid, array(
-            'base_keys' => array(),
-            'meta_keys' => $birchschedule->model->get_appointment_fields()
-                ));
-
-        if ($column == 'id') {
-            echo '<strong><a href="' . get_edit_post_link($postid) . '">' . $postid . '</a></strong>';
-            echo '
+    if ($column == 'id') {
+        echo '<strong><a href="' . get_edit_post_link($postid) . '">' . $postid . '</a></strong>';
+        echo '
 			<div class="row-actions">
 				<span class="edit">
 					<a href="' . get_edit_post_link($postid) . '" >編集</a>
@@ -4006,549 +4027,550 @@ function zoa_wrap_product_image_override($size = 'woocommerce_thumbnail', $args 
 				</span>
 			</div>
 		';
-        } elseif ($column == 'customer_name') {
+    } elseif ($column == 'customer_name') {
 // 		echo '<a target="_blank" href="'. site_url('wp-admin/post.php?post='. $client_id .'&action=edit') .'">';
-            echo get_post_meta($client_id, '_birs_client_name_last', true) . get_post_meta($client_id, '_birs_client_name_first', true);
-            echo ' (' . get_post_meta($client_id, 'name_kana_last_name', true) . get_post_meta($client_id, 'name_kana_first_name', true) . ')';
+        echo get_post_meta($client_id, '_birs_client_name_last', true) . get_post_meta($client_id, '_birs_client_name_first', true);
+        echo ' (' . get_post_meta($client_id, 'name_kana_last_name', true) . get_post_meta($client_id, 'name_kana_first_name', true) . ')';
 // 		echo '</a>';
-        } elseif ($column == 'customer_phone') {
-            echo get_post_meta($client_id, '_birs_client_phone', true);
-        } elseif ($column == 'customer_email') {
-            echo get_post_meta($client_id, '_birs_client_email', true);
-        } elseif ($column == 'booked_date') {
-            echo $appointment['_birs_appointment_datetime'];
-        }
-        return $column;
+    } elseif ($column == 'customer_phone') {
+        echo get_post_meta($client_id, '_birs_client_phone', true);
+    } elseif ($column == 'customer_email') {
+        echo get_post_meta($client_id, '_birs_client_email', true);
+    } elseif ($column == 'booked_date') {
+        echo $appointment['_birs_appointment_datetime'];
     }
+    return $column;
+}
 
-    add_filter('manage_birs_appointment_posts_custom_column', 'zoa_modify_birs_appointment_column', 1000, 2);
+add_filter('manage_birs_appointment_posts_custom_column', 'zoa_modify_birs_appointment_column', 1000, 2);
 
 
-    add_filter('woocommerce_localisation_address_formats', 'elsey_woocommerce_localisation_address_formats', 1000);
+add_filter('woocommerce_localisation_address_formats', 'elsey_woocommerce_localisation_address_formats', 1000);
 
-    function elsey_woocommerce_localisation_address_formats($formats) {
-        $format_string = "{last_name} {first_name}\n{kananame}\n{company}\n〒{postcode}\n{state}{city}{address_1}\n{address_2}";
-        $formats['JP'] = $formats['default'] = $format_string;
-        return $formats;
-    }
+function elsey_woocommerce_localisation_address_formats($formats) {
+    $format_string = "{last_name} {first_name}\n{kananame}\n{company}\n〒{postcode}\n{state}{city}{address_1}\n{address_2}";
+    $formats['JP'] = $formats['default'] = $format_string;
+    return $formats;
+}
 
-    add_filter('woocommerce_formatted_address_replacements', 'look_woocommerce_formatted_address_replacements', 10000, 2);
+add_filter('woocommerce_formatted_address_replacements', 'look_woocommerce_formatted_address_replacements', 10000, 2);
 
-    function look_woocommerce_formatted_address_replacements($fields, $args) {
-        $fields['{kananame}'] = $args['kananame'];
-        return $fields;
-    }
+function look_woocommerce_formatted_address_replacements($fields, $args) {
+    $fields['{kananame}'] = $args['kananame'];
+    return $fields;
+}
 
-    add_filter('woocommerce_order_formatted_shipping_address', 'look_woocommerce_order_formatted_shipping_address', 10000, 2);
+add_filter('woocommerce_order_formatted_shipping_address', 'look_woocommerce_order_formatted_shipping_address', 10000, 2);
 
-    function look_woocommerce_order_formatted_shipping_address($args, $order) {
-        $args['kananame'] = $order->shipping_last_name_kana . $order->shipping_first_name_kana;
-        $args['country'] = $args['country'] ?: 'JP';
-        return $args;
-    }
+function look_woocommerce_order_formatted_shipping_address($args, $order) {
+    $args['kananame'] = $order->shipping_last_name_kana . $order->shipping_first_name_kana;
+    $args['country'] = $args['country'] ?: 'JP';
+    return $args;
+}
 
-    add_filter('woocommerce_order_formatted_billing_address', 'look_woocommerce_order_formatted_billing_address', 10000, 2);
+add_filter('woocommerce_order_formatted_billing_address', 'look_woocommerce_order_formatted_billing_address', 10000, 2);
 
-    function look_woocommerce_order_formatted_billing_address($args, $order) {
-        $args['kananame'] = $order->billing_last_name_kana . $order->billing_first_name_kana;
-        $args['country'] = $args['country'] ?: 'JP';
-        return $args;
-    }
+function look_woocommerce_order_formatted_billing_address($args, $order) {
+    $args['kananame'] = $order->billing_last_name_kana . $order->billing_first_name_kana;
+    $args['country'] = $args['country'] ?: 'JP';
+    return $args;
+}
 
 // change BACS fields
 //original fields from plugins/woocommerce/includes/gateways/bacs/class-wc-gateway-bacs.php
 
-    add_filter('woocommerce_bacs_account_fields', 'custom_bacs_fields');
+add_filter('woocommerce_bacs_account_fields', 'custom_bacs_fields');
 
-    function custom_bacs_fields() {
-        global $wpdb;
-        $account_details = get_option('woocommerce_bacs_accounts', array(
-            array(
-                'account_name' => get_option('account_name'),
-                'account_number' => get_option('account_number'),
-                'sort_code' => get_option('sort_code'),
-                'bank_name' => get_option('bank_name'),
-                'iban' => get_option('iban'),
-                'bic' => get_option('bic')
+function custom_bacs_fields() {
+    global $wpdb;
+    $account_details = get_option('woocommerce_bacs_accounts', array(
+        array(
+            'account_name' => get_option('account_name'),
+            'account_number' => get_option('account_number'),
+            'sort_code' => get_option('sort_code'),
+            'bank_name' => get_option('bank_name'),
+            'iban' => get_option('iban'),
+            'bic' => get_option('bic')
+        )
             )
-                )
-        );
+    );
 
 
-        $account_fields = array(
-            'bank_name' => array(
-                'label' => __('Bank Name', 'zoa'),
-                'value' => $account_details[0]['bank_name']
-            ),
-            'branch_name' => array(
-                'label' => __('Branch name', 'zoa'),
-                'value' => $account_details[0]['sort_code']
-            ),
-            'account_type' => array(
-                'label' => __('Account Type', 'zoa'),
-                'value' => $account_details[0]['iban']
-            ),
-            'account_number' => array(
-                'label' => __('Account Number', 'zoa'),
-                'value' => $account_details[0]['account_number']
-            ),
-            'account_name' => array(
-                'label' => __('Account Name', 'zoa'),
-                'value' => $account_details[0]['account_name']
-            )
-        );
+    $account_fields = array(
+        'bank_name' => array(
+            'label' => __('Bank Name', 'zoa'),
+            'value' => $account_details[0]['bank_name']
+        ),
+        'branch_name' => array(
+            'label' => __('Branch name', 'zoa'),
+            'value' => $account_details[0]['sort_code']
+        ),
+        'account_type' => array(
+            'label' => __('Account Type', 'zoa'),
+            'value' => $account_details[0]['iban']
+        ),
+        'account_number' => array(
+            'label' => __('Account Number', 'zoa'),
+            'value' => $account_details[0]['account_number']
+        ),
+        'account_name' => array(
+            'label' => __('Account Name', 'zoa'),
+            'value' => $account_details[0]['account_name']
+        )
+    );
 
-        return $account_fields;
+    return $account_fields;
+}
+
+add_action('wp_ajax_customer_cancel_order', 'customer_cancel_order');
+add_action('wp_ajax_nopriv_customer_cancel_order', 'customer_cancel_order');
+
+function customer_cancel_order() {
+    $response = array();
+    $order_id = $_POST['order_id'];
+    $order = wc_get_order($order_id);
+    $statuses = wc_get_order_statuses();
+
+    if (isOrderAllowCancel($order)) {
+        // Cancel order
+        $response['success'] = 1;
+        $response['status'] = $statuses['wc-cancelled'];
+        $order->update_status('cancelled');
+    } else {
+        $response['success'] = 0;
     }
+    echo json_encode($response);
+    die;
+}
 
-    add_action('wp_ajax_customer_cancel_order', 'customer_cancel_order');
-    add_action('wp_ajax_nopriv_customer_cancel_order', 'customer_cancel_order');
+function isOrderAllowCancel($order) {
+    if ($order->status == 'cancelled')
+        return false;
 
-    function customer_cancel_order() {
-        $response = array();
-        $order_id = $_POST['order_id'];
-        $order = wc_get_order($order_id);
-        $statuses = wc_get_order_statuses();
+    $today = date('Y-m-d', current_time('timestamp'));
+    $hourNow = date('H', current_time('timestamp'));
+    $date_created = $order->date_created->date('Y-m-d');
 
-        if (isOrderAllowCancel($order)) {
-            // Cancel order
-            $response['success'] = 1;
-            $response['status'] = $statuses['wc-cancelled'];
-            $order->update_status('cancelled');
-        } else {
-            $response['success'] = 0;
-        }
-        echo json_encode($response);
-        die;
-    }
+    $oToday = new DateTime($today);
+    $oDateCreated = new DateTime($date_created);
+    $dateDiff = $oToday->diff($oDateCreated);
+    $nuber_date_diff = $dateDiff->d;
 
-    function isOrderAllowCancel($order) {
-        if ($order->status == 'cancelled')
-            return false;
-
-        $today = date('Y-m-d', current_time('timestamp'));
-        $hourNow = date('H', current_time('timestamp'));
-        $date_created = $order->date_created->date('Y-m-d');
-
-        $oToday = new DateTime($today);
-        $oDateCreated = new DateTime($date_created);
-        $dateDiff = $oToday->diff($oDateCreated);
-        $nuber_date_diff = $dateDiff->d;
-
-        if ($nuber_date_diff > 1) {
-            $isAllow = false;
-        } elseif ($nuber_date_diff == 1) {
-            if ($hourNow <= 12) {
-                // If <= 12 PM, allow
-                $isAllow = true;
-            } else {
-                // If >= 12PM, not allow
-                $isAllow = false;
-            }
-        } else {
+    if ($nuber_date_diff > 1) {
+        $isAllow = false;
+    } elseif ($nuber_date_diff == 1) {
+        if ($hourNow <= 12) {
+            // If <= 12 PM, allow
             $isAllow = true;
+        } else {
+            // If >= 12PM, not allow
+            $isAllow = false;
         }
-        return $isAllow;
+    } else {
+        $isAllow = true;
     }
+    return $isAllow;
+}
 
-    add_action('woocommerce_before_shipping_calculator', 'zoa_woocommerce_before_shipping_calculator');
-    add_action('woocommerce_review_order_after_shipping', 'zoa_woocommerce_before_shipping_calculator');
+add_action('woocommerce_before_shipping_calculator', 'zoa_woocommerce_before_shipping_calculator');
+add_action('woocommerce_review_order_after_shipping', 'zoa_woocommerce_before_shipping_calculator');
 
-    function zoa_woocommerce_before_shipping_calculator() {
-        if (calculateShippingFeeWithDeliveryDate()) {
-            $num_cart_product = count(getShippingPackageByDeliverDate());
-            $shipping_delivery_option = $_SESSION['shipping_delivery_option'];
-            $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
-            $selected_option_2 = $shipping_delivery_option == 2 ? 'checked' : '';
-            echo '<div class="choose_shipping_delivery_option_wraper order__summary__row">
+function zoa_woocommerce_before_shipping_calculator() {
+    if (calculateShippingFeeWithDeliveryDate()) {
+        $num_cart_product = count(getShippingPackageByDeliverDate());
+        $shipping_delivery_option = $_SESSION['shipping_delivery_option'];
+        $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
+        $selected_option_2 = $shipping_delivery_option == 2 ? 'checked' : '';
+        echo '<div class="choose_shipping_delivery_option_wraper order__summary__row">
 			<div><input type="radio" id="shipping_delivery_option_1" name="shipping_delivery_option" value="1" ' . $selected_option_1 . '/><label for="shipping_delivery_option_1" class="label">' . __('Ship together', 'zoa') . '</label></div>
 			<div><input id="shipping_delivery_option_2" type="radio" name="shipping_delivery_option" value="2" ' . $selected_option_2 . '/><label for="shipping_delivery_option_2" class="label">' . __('Ship according to completion date', 'zoa') . '(' . vsprintf(__('%s pkg.', 'zoa'), $num_cart_product) . ')' . '</label></div> 
 		</div>';
-        }
     }
+}
 
-    add_action('wp_ajax_select_shipping_delivery_option', 'ajax_select_shipping_delivery_option');
-    add_action('wp_ajax_nopriv_select_shipping_delivery_option', 'ajax_select_shipping_delivery_option');
+add_action('wp_ajax_select_shipping_delivery_option', 'ajax_select_shipping_delivery_option');
+add_action('wp_ajax_nopriv_select_shipping_delivery_option', 'ajax_select_shipping_delivery_option');
 
-    function ajax_select_shipping_delivery_option() {
-        $shipping_delivery_option = $_POST['shipping_delivery_option'];
-        $_SESSION['shipping_delivery_option'] = $shipping_delivery_option;
+function ajax_select_shipping_delivery_option() {
+    $shipping_delivery_option = $_POST['shipping_delivery_option'];
+    $_SESSION['shipping_delivery_option'] = $shipping_delivery_option;
 
-        $packages = WC()->cart->get_shipping_packages();
-        foreach ($packages as $package_key => $package) {
-            $session_key = 'shipping_for_package_' . $package_key;
-            WC()->session->destroy_session($session_key);
-        }
-        $response = array('success' => 1);
-        echo json_encode($response);
-        die;
+    $packages = WC()->cart->get_shipping_packages();
+    foreach ($packages as $package_key => $package) {
+        $session_key = 'shipping_for_package_' . $package_key;
+        WC()->session->destroy_session($session_key);
     }
+    $response = array('success' => 1);
+    echo json_encode($response);
+    die;
+}
 
-    add_filter('woocommerce_package_rates', 'zoa_calculate_shipping_costs_with_delivery_date', 10, 2);
+add_filter('woocommerce_package_rates', 'zoa_calculate_shipping_costs_with_delivery_date', 10, 2);
 
-    function zoa_calculate_shipping_costs_with_delivery_date($rates, $package) {
-        if (is_admin() && !defined('DOING_AJAX'))
-            return $rates;
-
-        // Calculate to get new shipping cost in rates
-        calculateShippingFeeWithDeliveryDate(true, $rates);
-
+function zoa_calculate_shipping_costs_with_delivery_date($rates, $package) {
+    if (is_admin() && !defined('DOING_AJAX'))
         return $rates;
-    }
 
-    function getShippingPackageByDeliverDate($order = null) {
-        $delivery_dates = array();
-        if ($order) {
-            $line_items = $order->get_items(apply_filters('woocommerce_admin_order_item_types', 'line_item'));
-            foreach ($line_items as $item) {
-                $product_id = $item->get_product_id();
-                $delivery_date = trim(get_post_meta($product_id, 'deliver_date', true));
-                $has_delivery_date = $delivery_date ? $delivery_date : 0;
-                $delivery_dates[$has_delivery_date] = $has_delivery_date;
-            }
-        } else {
-            foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
-                $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
-                $delivery_date = trim(get_post_meta($product_id, 'deliver_date', true));
-                $has_delivery_date = $delivery_date ? 1 : 0;
-                $delivery_dates[$has_delivery_date] = $has_delivery_date;
-            }
+    // Calculate to get new shipping cost in rates
+    calculateShippingFeeWithDeliveryDate(true, $rates);
+
+    return $rates;
+}
+
+function getShippingPackageByDeliverDate($order = null) {
+    $delivery_dates = array();
+    if ($order) {
+        $line_items = $order->get_items(apply_filters('woocommerce_admin_order_item_types', 'line_item'));
+        foreach ($line_items as $item) {
+            $product_id = $item->get_product_id();
+            $delivery_date = trim(get_post_meta($product_id, 'deliver_date', true));
+            $has_delivery_date = $delivery_date ? $delivery_date : 0;
+            $delivery_dates[$has_delivery_date] = $has_delivery_date;
         }
-        return $delivery_dates;
+    } else {
+        foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+            $product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
+            $delivery_date = trim(get_post_meta($product_id, 'deliver_date', true));
+            $has_delivery_date = $delivery_date ? 1 : 0;
+            $delivery_dates[$has_delivery_date] = $has_delivery_date;
+        }
     }
+    return $delivery_dates;
+}
 
-    function calculateShippingFeeWithDeliveryDate($is_calculate = false, &$rates = array(), $order = null) {
-        $delivery_dates = getShippingPackageByDeliverDate($order);
+function calculateShippingFeeWithDeliveryDate($is_calculate = false, &$rates = array(), $order = null) {
+    $delivery_dates = getShippingPackageByDeliverDate($order);
 
-        // If cart has both product with empty delivery date + not empty delivery date
-        // Show options to choose one or separate package, then calculate price
-        if (count($delivery_dates) >= 2) {
-            if (!$is_calculate) {
-                return true;
-            } else {
-                $shipping_delivery_option = $_SESSION['shipping_delivery_option'];
-                if (!$shipping_delivery_option || $shipping_delivery_option == 1) {
-                    return $rates;
-                }
-
-                $num_cart_product = count($delivery_dates);
-                // Make price multiple
-                foreach ($rates as $rate_key => $rate) {
-                    $rates[$rate_key]->cost = $rates[$rate_key]->cost * $num_cart_product;
-                }
+    // If cart has both product with empty delivery date + not empty delivery date
+    // Show options to choose one or separate package, then calculate price
+    if (count($delivery_dates) >= 2) {
+        if (!$is_calculate) {
+            return true;
+        } else {
+            $shipping_delivery_option = $_SESSION['shipping_delivery_option'];
+            if (!$shipping_delivery_option || $shipping_delivery_option == 1) {
                 return $rates;
             }
+
+            $num_cart_product = count($delivery_dates);
+            // Make price multiple
+            foreach ($rates as $rate_key => $rate) {
+                $rates[$rate_key]->cost = $rates[$rate_key]->cost * $num_cart_product;
+            }
+            return $rates;
         }
-        $_SESSION['shipping_delivery_option'] = NULL;
+    }
+    $_SESSION['shipping_delivery_option'] = NULL;
+    unset($_SESSION['shipping_delivery_option']);
+    return false;
+}
+
+add_action('woocommerce_thankyou', 'zoa_thank_you', 10, 1);
+
+function zoa_thank_you($order_id) {
+    if (isset($_SESSION['shipping_delivery_option'])) {
+        update_post_meta($order_id, 'shipping_delivery_option', $_SESSION['shipping_delivery_option']);
         unset($_SESSION['shipping_delivery_option']);
-        return false;
     }
+}
 
-    add_action('woocommerce_thankyou', 'zoa_thank_you', 10, 1);
+add_action("add_meta_boxes", "zoa_add_custom_order_detail_meta_box");
 
-    function zoa_thank_you($order_id) {
-        if (isset($_SESSION['shipping_delivery_option'])) {
-            update_post_meta($order_id, 'shipping_delivery_option', $_SESSION['shipping_delivery_option']);
-            unset($_SESSION['shipping_delivery_option']);
-        }
+function zoa_add_custom_order_detail_meta_box($postType) {
+    if ($postType == 'shop_order') {
+        add_meta_box("order-deliver-option-meta-box", __('Deliver Option', 'zoa'), "meta_box_deliver_option_markup", "shop_order", "side");
     }
+}
 
-    add_action("add_meta_boxes", "zoa_add_custom_order_detail_meta_box");
+function meta_box_deliver_option_markup($post) {
+    $rates = array();
+    $order = wc_get_order($post->ID);
+    if (calculateShippingFeeWithDeliveryDate(false, $rates, $order))
+        ;
+    {
+        $shipping_delivery_option = get_post_meta($order->get_id(), 'shipping_delivery_option', true);
 
-    function zoa_add_custom_order_detail_meta_box($postType) {
-        if ($postType == 'shop_order') {
-            add_meta_box("order-deliver-option-meta-box", __('Deliver Option', 'zoa'), "meta_box_deliver_option_markup", "shop_order", "side");
-        }
-    }
+        $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
+        $selected_option_2 = $shipping_delivery_option == 2 ? 'checked' : '';
 
-    function meta_box_deliver_option_markup($post) {
-        $rates = array();
-        $order = wc_get_order($post->ID);
-        if (calculateShippingFeeWithDeliveryDate(false, $rates, $order))
-            ; {
-            $shipping_delivery_option = get_post_meta($order->get_id(), 'shipping_delivery_option', true);
-
-            $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
-            $selected_option_2 = $shipping_delivery_option == 2 ? 'checked' : '';
-
-            $num_cart_product = count(getShippingPackageByDeliverDate($order));
-            wp_nonce_field(basename(__FILE__), "meta-box-nonce");
-            echo '<div class="deliver_option_wraper">';
-            echo '<div><input type="radio" id="shipping_delivery_option_1" name="shipping_delivery_option" value="1" ' . $selected_option_1 . '/><label for="shipping_delivery_option_1" class="label">' . __('Ship together', 'zoa') . '</label></div>
+        $num_cart_product = count(getShippingPackageByDeliverDate($order));
+        wp_nonce_field(basename(__FILE__), "meta-box-nonce");
+        echo '<div class="deliver_option_wraper">';
+        echo '<div><input type="radio" id="shipping_delivery_option_1" name="shipping_delivery_option" value="1" ' . $selected_option_1 . '/><label for="shipping_delivery_option_1" class="label">' . __('Ship together', 'zoa') . '</label></div>
 			  <div><input id="shipping_delivery_option_2" type="radio" name="shipping_delivery_option" value="2" ' . $selected_option_2 . '/><label for="shipping_delivery_option_2" class="label">' . __('Ship according to completion date', 'zoa') . '(' . vsprintf(__('%1s pkg.'), $num_cart_product) . ')</label></div>';
-            echo '</div>';
+        echo '</div>';
+    }
+}
+
+add_action("save_post", "zoa_save_custom_order_detail_meta_box", 10, 3);
+
+function zoa_save_custom_order_detail_meta_box($post_id, $post, $update) {
+    if (isset($_POST['shipping_delivery_option'])) {
+        update_post_meta($post_id, 'shipping_delivery_option', $_POST['shipping_delivery_option']);
+    }
+}
+
+add_filter('haet_mail_use_template', 'zoa_haet_mail_use_template', 10, 2);
+
+function zoa_haet_mail_use_template($use_template, $mail_data) {
+    if (strpos($mail_data['headers'], 'reservation=true') !== false) {
+        $use_template = false;
+    }
+    return $use_template;
+}
+
+add_filter('body_class', 'zoa_body_class', 10, 1);
+
+function zoa_body_class($classes) {
+    $classes[] = get_locale();
+    return $classes;
+}
+
+function getCartGiftCardData() {
+    $giftCardData = array();
+    foreach (WC()->cart->get_cart() as $cart) {
+        if (isset($cart['tinvwl_formdata'])) {
+            $giftCardData = $cart['tinvwl_formdata'];
         }
     }
+    return $giftCardData;
+}
 
-    add_action("save_post", "zoa_save_custom_order_detail_meta_box", 10, 3);
-
-    function zoa_save_custom_order_detail_meta_box($post_id, $post, $update) {
-        if (isset($_POST['shipping_delivery_option'])) {
-            update_post_meta($post_id, 'shipping_delivery_option', $_POST['shipping_delivery_option']);
+function isHideShippingByMailGiftCard() {
+    $giftCardData = array();
+    foreach (WC()->cart->get_cart() as $cart) {
+        if (isset($cart['tinvwl_formdata'])) {
+            $giftCardData[$cart['tinvwl_formdata']['mwb_wgm_send_giftcard']] = $cart['tinvwl_formdata']['mwb_wgm_send_giftcard'];
+        } else {
+            return false;
         }
     }
+    return count($giftCardData) == 1 && end($giftCardData) == 'Mail to recipient';
+}
 
-    add_filter('haet_mail_use_template', 'zoa_haet_mail_use_template', 10, 2);
+/* WOOF OVERWRITE FUNCTION */
+/* Filter WOOF */
+/* if (function_exists('woof_print_tax')) {
+  //if (!function_exists('woof_print_tax')) {
 
-    function zoa_haet_mail_use_template($use_template, $mail_data) {
-        if (strpos($mail_data['headers'], 'reservation=true') !== false) {
-            $use_template = false;
-        }
-        return $use_template;
-    }
+  function woof_print_tax($taxonomies, $tax_slug, $terms, $exclude_tax_key, $taxonomies_info, $additional_taxes, $woof_settings, $args, $counter) {
 
-    add_filter('body_class', 'zoa_body_class', 10, 1);
+  global $WOOF;
 
-    function zoa_body_class($classes) {
-        $classes[] = get_locale();
-        return $classes;
-    }
+  if ($exclude_tax_key == $tax_slug) {
+  //$terms = apply_filters('woof_exclude_tax_key', $terms);
+  if (empty($terms)) {
+  return;
+  }
+  }
 
-    function getCartGiftCardData() {
-        $giftCardData = array();
-        foreach (WC()->cart->get_cart() as $cart) {
-            if (isset($cart['tinvwl_formdata'])) {
-                $giftCardData = $cart['tinvwl_formdata'];
-            }
-        }
-        return $giftCardData;
-    }
+  //***
 
-    function isHideShippingByMailGiftCard() {
-        $giftCardData = array();
-        foreach (WC()->cart->get_cart() as $cart) {
-            if (isset($cart['tinvwl_formdata'])) {
-                $giftCardData[$cart['tinvwl_formdata']['mwb_wgm_send_giftcard']] = $cart['tinvwl_formdata']['mwb_wgm_send_giftcard'];
-            } else {
-                return false;
-            }
-        }
-        return count($giftCardData) == 1 && end($giftCardData) == 'Mail to recipient';
-    }
+  if (!woof_only($tax_slug, 'taxonomy')) {
+  return;
+  }
 
-    /* WOOF OVERWRITE FUNCTION */
-    /* Filter WOOF */
-    /* if (function_exists('woof_print_tax')) {
-      //if (!function_exists('woof_print_tax')) {
-
-      function woof_print_tax($taxonomies, $tax_slug, $terms, $exclude_tax_key, $taxonomies_info, $additional_taxes, $woof_settings, $args, $counter) {
-
-      global $WOOF;
-
-      if ($exclude_tax_key == $tax_slug) {
-      //$terms = apply_filters('woof_exclude_tax_key', $terms);
-      if (empty($terms)) {
-      return;
-      }
-      }
-
-      //***
-
-      if (!woof_only($tax_slug, 'taxonomy')) {
-      return;
-      }
-
-      //***
+  //***
 
 
-      $args['taxonomy_info'] = $taxonomies_info[$tax_slug];
-      $args['tax_slug'] = $tax_slug;
-      $args['terms'] = $terms;
-      $args['all_terms_hierarchy'] = $taxonomies[$tax_slug];
-      $args['additional_taxes'] = $additional_taxes;
+  $args['taxonomy_info'] = $taxonomies_info[$tax_slug];
+  $args['tax_slug'] = $tax_slug;
+  $args['terms'] = $terms;
+  $args['all_terms_hierarchy'] = $taxonomies[$tax_slug];
+  $args['additional_taxes'] = $additional_taxes;
 
-      //***
-      $woof_container_styles = "";
-      if ($woof_settings['tax_type'][$tax_slug] == 'radio' OR $woof_settings['tax_type'][$tax_slug] == 'checkbox') {
-      if ($WOOF->settings['tax_block_height'][$tax_slug] > 0) {
-      $woof_container_styles = "max-height:{$WOOF->settings['tax_block_height'][$tax_slug]}px; overflow-y: auto;";
-      }
-      }
-      //***
-      //https://wordpress.org/support/topic/adding-classes-woof_container-div
-      $primax_class = sanitize_key(WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]));
-      ?>
-      <div data-css-class="woof_container_<?php echo $tax_slug ?>" class="woof_container woof_container_<?php echo $woof_settings['tax_type'][$tax_slug] ?> woof_container_<?php echo $tax_slug ?> woof_container_<?php echo $counter ?> woof_container_<?php echo $primax_class ?>">
-      <div class="woof_container_overlay_item"></div>
-      <div class="woof_container_inner woof_container_inner_<?php echo $primax_class ?> toggle-wrap">
-      <?php
-      $css_classes = "woof_block_html_items toggle__content";
-      $show_toggle = 0;
-      if (isset($WOOF->settings['show_toggle_button'][$tax_slug])) {
-      $show_toggle = (int) $WOOF->settings['show_toggle_button'][$tax_slug];
-      }
-      //***
-      $search_query = $WOOF->get_request_data();
-      $block_is_closed = true;
-      if (in_array($tax_slug, array_keys($search_query))) {
-      $block_is_closed = false;
-      }
-      if ($show_toggle === 1 AND ! in_array($tax_slug, array_keys($search_query))) {
-      $css_classes .= " woof_closed_block";
-      }
+  //***
+  $woof_container_styles = "";
+  if ($woof_settings['tax_type'][$tax_slug] == 'radio' OR $woof_settings['tax_type'][$tax_slug] == 'checkbox') {
+  if ($WOOF->settings['tax_block_height'][$tax_slug] > 0) {
+  $woof_container_styles = "max-height:{$WOOF->settings['tax_block_height'][$tax_slug]}px; overflow-y: auto;";
+  }
+  }
+  //***
+  //https://wordpress.org/support/topic/adding-classes-woof_container-div
+  $primax_class = sanitize_key(WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]));
+  ?>
+  <div data-css-class="woof_container_<?php echo $tax_slug ?>" class="woof_container woof_container_<?php echo $woof_settings['tax_type'][$tax_slug] ?> woof_container_<?php echo $tax_slug ?> woof_container_<?php echo $counter ?> woof_container_<?php echo $primax_class ?>">
+  <div class="woof_container_overlay_item"></div>
+  <div class="woof_container_inner woof_container_inner_<?php echo $primax_class ?> toggle-wrap">
+  <?php
+  $css_classes = "woof_block_html_items toggle__content";
+  $show_toggle = 0;
+  if (isset($WOOF->settings['show_toggle_button'][$tax_slug])) {
+  $show_toggle = (int) $WOOF->settings['show_toggle_button'][$tax_slug];
+  }
+  //***
+  $search_query = $WOOF->get_request_data();
+  $block_is_closed = true;
+  if (in_array($tax_slug, array_keys($search_query))) {
+  $block_is_closed = false;
+  }
+  if ($show_toggle === 1 AND ! in_array($tax_slug, array_keys($search_query))) {
+  $css_classes .= " woof_closed_block";
+  }
 
-      if ($show_toggle === 2 AND ! in_array($tax_slug, array_keys($search_query))) {
-      $block_is_closed = false;
-      }
+  if ($show_toggle === 2 AND ! in_array($tax_slug, array_keys($search_query))) {
+  $block_is_closed = false;
+  }
 
-      if (in_array($show_toggle, array(1, 2))) {
-      $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
-      if($block_is_closed){
-      $css_classes .= " woof_closed_block";
-      }else{
-      $css_classes = str_replace('woof_closed_block', '', $css_classes);
-      }
-      }
-      //***
-      switch ($woof_settings['tax_type'][$tax_slug]) {
-      case 'checkbox':
-      if ($WOOF->settings['show_title_label'][$tax_slug]) {
-      ?>
-      <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-      <?php
-      }
+  if (in_array($show_toggle, array(1, 2))) {
+  $block_is_closed = apply_filters('woof_block_toggle_state', $block_is_closed);
+  if($block_is_closed){
+  $css_classes .= " woof_closed_block";
+  }else{
+  $css_classes = str_replace('woof_closed_block', '', $css_classes);
+  }
+  }
+  //***
+  switch ($woof_settings['tax_type'][$tax_slug]) {
+  case 'checkbox':
+  if ($WOOF->settings['show_title_label'][$tax_slug]) {
+  ?>
+  <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+  <?php
+  }
 
-      if (!empty($woof_container_styles)) {
-      $css_classes .= " woof_section_scrolled";
-      }
-      ?>
-      <div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
-      <?php
-      echo $WOOF->render_html(WOOF_PATH . 'views/html_types/checkbox.php', $args);
-      ?>
-      </div>
-      <?php
-      break;
-      case 'select':
-      if ($WOOF->settings['show_title_label'][$tax_slug]) {
-      ?>
-      <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-      <?php
-      }
-      ?>
-      <div class="<?php echo $css_classes ?>">
-      <?php
-      echo $WOOF->render_html(WOOF_PATH . 'views/html_types/select.php', $args);
-      ?>
-      </div>
-      <?php
-      break;
-      case 'mselect':
-      if ($WOOF->settings['show_title_label'][$tax_slug]) {
-      ?>
-      <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-      <?php
-      }
-      ?>
-      <div class="<?php echo $css_classes ?>">
-      <?php
-      echo $WOOF->render_html(WOOF_PATH . 'views/html_types/mselect.php', $args);
-      ?>
-      </div>
-      <?php
-      break;
+  if (!empty($woof_container_styles)) {
+  $css_classes .= " woof_section_scrolled";
+  }
+  ?>
+  <div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
+  <?php
+  echo $WOOF->render_html(WOOF_PATH . 'views/html_types/checkbox.php', $args);
+  ?>
+  </div>
+  <?php
+  break;
+  case 'select':
+  if ($WOOF->settings['show_title_label'][$tax_slug]) {
+  ?>
+  <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+  <?php
+  }
+  ?>
+  <div class="<?php echo $css_classes ?>">
+  <?php
+  echo $WOOF->render_html(WOOF_PATH . 'views/html_types/select.php', $args);
+  ?>
+  </div>
+  <?php
+  break;
+  case 'mselect':
+  if ($WOOF->settings['show_title_label'][$tax_slug]) {
+  ?>
+  <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]) ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+  <?php
+  }
+  ?>
+  <div class="<?php echo $css_classes ?>">
+  <?php
+  echo $WOOF->render_html(WOOF_PATH . 'views/html_types/mselect.php', $args);
+  ?>
+  </div>
+  <?php
+  break;
 
-      default:
-      if ($WOOF->settings['show_title_label'][$tax_slug]) {
-      $title = WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]);
-      $title = explode('^', $title); //for hierarchy drop-down and any future manipulations
-      if (isset($title[1])) {
-      $title = $title[1];
-      } else {
-      $title = $title[0];
-      }
-      ?>
-      <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo $title ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
-      <?php
-      }
+  default:
+  if ($WOOF->settings['show_title_label'][$tax_slug]) {
+  $title = WOOF_HELPER::wpml_translate($taxonomies_info[$tax_slug]);
+  $title = explode('^', $title); //for hierarchy drop-down and any future manipulations
+  if (isset($title[1])) {
+  $title = $title[1];
+  } else {
+  $title = $title[0];
+  }
+  ?>
+  <div class="toggle__link flex-justify-between"><h4 class="toggle__name"><?php echo $title ?><?php WOOF_HELPER::draw_title_toggle($show_toggle, $block_is_closed); ?></h4></div>
+  <?php
+  }
 
-      if (!empty($woof_container_styles)) {
-      $css_classes .= " woof_section_scrolled";
-      }
-      ?>
+  if (!empty($woof_container_styles)) {
+  $css_classes .= " woof_section_scrolled";
+  }
+  ?>
 
-      <div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
-      <?php
-      if (!empty(WOOF_EXT::$includes['taxonomy_type_objects'])) {
-      $is_custom = false;
-      foreach (WOOF_EXT::$includes['taxonomy_type_objects'] as $obj) {
-      if ($obj->html_type == $woof_settings['tax_type'][$tax_slug]) {
-      $is_custom = true;
-      $args['woof_settings'] = $woof_settings;
-      $args['taxonomies_info'] = $taxonomies_info;
-      echo $WOOF->render_html($obj->get_html_type_view(), $args);
-      break;
-      }
-      }
+  <div class="<?php echo $css_classes ?>" <?php if (!empty($woof_container_styles)): ?>style="<?php echo $woof_container_styles ?>"<?php endif; ?>>
+  <?php
+  if (!empty(WOOF_EXT::$includes['taxonomy_type_objects'])) {
+  $is_custom = false;
+  foreach (WOOF_EXT::$includes['taxonomy_type_objects'] as $obj) {
+  if ($obj->html_type == $woof_settings['tax_type'][$tax_slug]) {
+  $is_custom = true;
+  $args['woof_settings'] = $woof_settings;
+  $args['taxonomies_info'] = $taxonomies_info;
+  echo $WOOF->render_html($obj->get_html_type_view(), $args);
+  break;
+  }
+  }
 
 
-      if (!$is_custom) {
-      echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
-      }
-      } else {
-      echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
-      }
-      ?>
+  if (!$is_custom) {
+  echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
+  }
+  } else {
+  echo $WOOF->render_html(WOOF_PATH . 'views/html_types/radio.php', $args);
+  }
+  ?>
 
-      </div>
-      <?php
-      break;
-      }
-      ?>
+  </div>
+  <?php
+  break;
+  }
+  ?>
 
-      <input type="hidden" name="woof_t_<?php echo $tax_slug ?>" value="<?php echo $taxonomies_info[$tax_slug]->labels->name ?>" /><!-- for red button search nav panel -->
+  <input type="hidden" name="woof_t_<?php echo $tax_slug ?>" value="<?php echo $taxonomies_info[$tax_slug]->labels->name ?>" /><!-- for red button search nav panel -->
 
-      </div>
-      </div>
-      <?php
-      }
+  </div>
+  </div>
+  <?php
+  }
 
-      }//function_exists('woof_print_tax') */
+  }//function_exists('woof_print_tax') */
 //WOOF filter logic AND
-    /* add_filter('woof_main_query_tax_relations', 'my_woof_main_query_tax_relations');
+/* add_filter('woof_main_query_tax_relations', 'my_woof_main_query_tax_relations');
 
-      function my_woof_main_query_tax_relations()
-      {
-      return array(
-      //'product_cat' => 'AND'
-      //'pa_color' => 'AND'
-      );
-      } */
-    if (!function_exists('woof_show_btn')) {
+  function my_woof_main_query_tax_relations()
+  {
+  return array(
+  //'product_cat' => 'AND'
+  //'pa_color' => 'AND'
+  );
+  } */
+if (!function_exists('woof_show_btn')) {
 
-        function woof_show_btn($autosubmit = 1, $ajax_redraw = 0) {
-            ?>
+    function woof_show_btn($autosubmit = 1, $ajax_redraw = 0) {
+        ?>
         <div class="woof_container woof_submit_search_form_container">
             <div class="toggle-wrap">
                 <div class="toggle__link flex-justify-between toggle__link--no-indicator">
                     <h3 class="toggle__name"><?php esc_html_e('Filter by', 'zoa'); ?></h3>
-        <?php
-        global $WOOF;
-        if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())): global $woof_link;
-            ?>
+                    <?php
+                    global $WOOF;
+                    if ($WOOF->is_isset_in_request_data($WOOF->get_swoof_search_slug())): global $woof_link;
+                        ?>
 
-            <?php
-            $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
-            if (empty($woof_reset_btn_txt)) {
-                $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
-            }
-            $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
-            ?>
+                        <?php
+                        $woof_reset_btn_txt = get_option('woof_reset_btn_txt', '');
+                        if (empty($woof_reset_btn_txt)) {
+                            $woof_reset_btn_txt = __('Reset', 'woocommerce-products-filter');
+                        }
+                        $woof_reset_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_reset_btn_txt);
+                        ?>
 
-            <?php if ($woof_reset_btn_txt != 'none'): ?>
+                        <?php if ($woof_reset_btn_txt != 'none'): ?>
                             <button class="woof_reset_search_form refinement__clear" data-link="<?php echo $woof_link ?>"><?php echo $woof_reset_btn_txt ?></button>
-            <?php endif; ?>
-        <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
-        <?php if (!$autosubmit OR $ajax_redraw): ?>
-            <?php
-            $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
-            if (empty($woof_filter_btn_txt)) {
-                $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
-            }
+                    <?php if (!$autosubmit OR $ajax_redraw): ?>
+                        <?php
+                        $woof_filter_btn_txt = get_option('woof_filter_btn_txt', '');
+                        if (empty($woof_filter_btn_txt)) {
+                            $woof_filter_btn_txt = __('Filter', 'woocommerce-products-filter');
+                        }
 
-            $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
-            ?>
+                        $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
+                        ?>
                         <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
         <?php endif; ?>
                 </div><!--/.toggle__link-->
@@ -4644,79 +4666,98 @@ function zoa_woocommerce_customer_meta_fields($show_fields) {
     return $show_fields;
 }
 
-add_filter( 'woocommerce_validate_postcode', 'zoa_woocommerce_validate_postcode', 1000, 3);
-function zoa_woocommerce_validate_postcode ($valid, $postcode, $country )
-{
-	switch ( $country ) {
-		case 'JP':
-			$valid = (bool) preg_match( '/^([0-9]{7})$/', $postcode );
-			break;
-	}
-	return $valid;
+add_filter('woocommerce_validate_postcode', 'zoa_woocommerce_validate_postcode', 1000, 3);
+
+function zoa_woocommerce_validate_postcode($valid, $postcode, $country) {
+    switch ($country) {
+        case 'JP':
+            $valid = (bool) preg_match('/^([0-9]{7})$/', $postcode);
+            break;
+    }
+    return $valid;
 }
-add_filter( 'woocommerce_format_postcode', 'zoa_woocommerce_format_postcode', 1000, 2);
-function zoa_woocommerce_format_postcode ($postcode, $country)
-{
-	switch ( $country ) {
-		case 'JP':
-			$postcode = str_replace('-', '', $postcode );
-			break;
-	}
-	return $postcode;
+
+add_filter('woocommerce_format_postcode', 'zoa_woocommerce_format_postcode', 1000, 2);
+
+function zoa_woocommerce_format_postcode($postcode, $country) {
+    switch ($country) {
+        case 'JP':
+            $postcode = str_replace('-', '', $postcode);
+            break;
+    }
+    return $postcode;
 }
 
 add_action('admin_init', 'post_limit_general_section');
+
 function post_limit_general_section() {
-	add_settings_section(
-			'post_limit_settings_section', // Section ID
-			__('Header Latest Banner Limit'), // Section Title
-			'post_limit_section_options_callback', // Callback
-			'general' // What Page?  This makes the section show up on the General Settings Page
-			);
-	
-	add_settings_field( // Option 1
-			'post_limit_banner_header', // Option ID
-			__('Limit Banner Number', 'zoa'),
-			'post_limit_textbox_callback', // !important - This is where the args go!
-			'general', // Page it will be displayed (General Settings)
-			'post_limit_settings_section', // Name of our section
-			array( // The $args
-				'post_limit_banner_header' // Should match Option ID
-			)
-			);
-	
-	register_setting('general','post_limit_banner_header', 'esc_attr');
+    add_settings_section(
+            'post_limit_settings_section', // Section ID
+            __('Header Latest Banner Limit'), // Section Title
+            'post_limit_section_options_callback', // Callback
+            'general' // What Page?  This makes the section show up on the General Settings Page
+    );
+
+    add_settings_field(// Option 1
+            'post_limit_banner_header', // Option ID
+            __('Limit Banner Number', 'zoa'), 'post_limit_textbox_callback', // !important - This is where the args go!
+            'general', // Page it will be displayed (General Settings)
+            'post_limit_settings_section', // Name of our section
+            array(// The $args
+        'post_limit_banner_header' // Should match Option ID
+            )
+    );
+
+    register_setting('general', 'post_limit_banner_header', 'esc_attr');
 }
 
 function post_limit_section_options_callback() { // Section Callback
 }
 
 function post_limit_textbox_callback($args) {  // Textbox Callback
-	$option = get_option($args[0]);
-	echo '<input type="text" id="'. $args[0] .'" name="'. $args[0] .'" value="' . $option . '" />';
+    $option = get_option($args[0]);
+    echo '<input type="text" id="' . $args[0] . '" name="' . $args[0] . '" value="' . $option . '" />';
 }
 
-function get_google_map_url_by_address()
-{
-	$countries_obj   = new WC_Countries();
-	$country_state = get_option('woocommerce_default_country');
-	$aCountry_state = explode(':', $country_state);
-	$country_code = $aCountry_state[0];
-	$country_name = WC()->countries->countries[ $country_code ];
-	$states_list = $countries_obj->get_states( $country_code );
-	$state = $states_list[$aCountry_state[1]];
-	$city = get_option('woocommerce_store_city');
-	$postcode = get_option('woocommerce_store_postcode');
-	$address1 = get_option('woocommerce_store_address');
-	$address2 = get_option('woocommerce_store_address_2');
-	
-	$full_address = $country_name . '+' . $postcode . '+' . $state . '+' . $city .'+ '.  $address1 . $address2;
-	$google_map_url = 'https://www.google.co.jp/maps/place/?hl=ja&q=' . $full_address;
-	return $google_map_url;
+function get_google_map_url_by_address() {
+    $countries_obj = new WC_Countries();
+    $country_state = get_option('woocommerce_default_country');
+    $aCountry_state = explode(':', $country_state);
+    $country_code = $aCountry_state[0];
+    $country_name = WC()->countries->countries[$country_code];
+    $states_list = $countries_obj->get_states($country_code);
+    $state = $states_list[$aCountry_state[1]];
+    $city = get_option('woocommerce_store_city');
+    $postcode = get_option('woocommerce_store_postcode');
+    $address1 = get_option('woocommerce_store_address');
+    $address2 = get_option('woocommerce_store_address_2');
+
+    $full_address = $country_name . '+' . $postcode . '+' . $state . '+' . $city . '+ ' . $address1 . $address2;
+    $google_map_url = 'https://www.google.co.jp/maps/place/?hl=ja&q=' . $full_address;
+    return $google_map_url;
 }
 
-function zoa_get_store_map( $atts = array()) {
-	return get_google_map_url_by_address();
+function zoa_get_store_map($atts = array()) {
+    return get_google_map_url_by_address();
 }
-add_shortcode( 'get_store_map', 'zoa_get_store_map' );
 
+add_shortcode('get_store_map', 'zoa_get_store_map');
+
+//add new column for Appointments list in woocommerce-customers-manager plugin
+function ch_manage_customers_columns($columns) {
+    $columns['appointments_list'] = __('Appointments list', 'woocommerce-customers-manager');
+    return $columns;
+}
+
+add_filter('manage_customers_columns', 'ch_manage_customers_columns');
+
+function ch_manage_customers_custom_column($abs=null,$column_name, $item){
+    if($column_name=='appointments_list'){
+        return '<a class="" target="_blank" href="'. admin_url('admin.php?page=appointments-list&user_id='.$item).'"><span class="wp-menu-image dashicons-before dashicons-calendar-alt"></span></a>';
+    }else{
+        return $item[$column_name];
+    }
+}
+
+add_filter('manage_customers_custom_column', 'ch_manage_customers_custom_column',10,3);
+//end

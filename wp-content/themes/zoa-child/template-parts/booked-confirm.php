@@ -74,6 +74,6 @@
                 </fieldset>
             </div>
         </div>
-        <div class="cancel_term_text ch-term-text"></div>
+        <div cancel-datetime='' class="cancel_term_text ch-term-text"></div>
     </div>
 </div><!--/reservationFormConfirm-->

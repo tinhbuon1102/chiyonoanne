@@ -937,6 +937,24 @@
 
       plugin = plugin || this;
 
+      /*this.$quadmenu.on('show.quadmenu.collapse show.quadmenu.dropdown', function (e) {
+
+        $(this).find('img[data-src]').each(function (e) {
+
+          var $img = $(this),
+                  width = $img.innerWidth(),
+                  height = $img.attr('height') || width,
+                  ratio = width / height,
+                  loaded = $img.data('lazyload');
+
+          if (!loaded && ratio != 1) {
+            $img.css({'width': width + 'px', 'height': (width / ratio) + 'px'});
+          }
+
+        });
+
+      });*/
+
       this.$quadmenu.on('init.quadmenu shown.quadmenu.collapse shown.quadmenu.dropdown', function (e) {
 
         $(this).find('img[data-src]:visible').each(function (e) {
@@ -1477,7 +1495,10 @@
         });
 
         $(document).bind('added_to_cart removed_from_cart', function (e, cart) {
-          plugin.handleWooCart(plugin, $li, $(cart['div.widget_shopping_cart_content']), url);
+
+          if (cart !== undefined) {
+            plugin.handleWooCart(plugin, $li, $(cart['div.widget_shopping_cart_content']), url);
+          }
         });
 
         $(document).bind('edd_quantity_updated', function () {
@@ -1546,13 +1567,14 @@
     },
     quadmenuInitItemWidgets: function (plugin) {
 
-      $(document).on('hidden.quadmenu.dropdown', function (e) {
-        $(this).find('.widget_media_video video').each(function () {
-          this.player.pause();
+      $(document).on('show.quadmenu.dropdown', function (e) {
+        $(this).find('.widget_media_audio > video, .widget_media_audio > audio').each(function () {
+          this.player.resize();
         });
       });
+
       $(document).on('hidden.quadmenu.dropdown', function (e) {
-        $(this).find('.widget_media_audio audio').each(function () {
+        $(this).find('.widget_media_video video, .widget_media_video audio').each(function () {
           this.player.pause();
         });
       });

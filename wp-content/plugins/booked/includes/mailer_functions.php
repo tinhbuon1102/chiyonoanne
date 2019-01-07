@@ -27,6 +27,7 @@ function booked_mailer_tokens() {
         'time' => esc_html__("Display the appointment time.", "booked"),
         'customfields' => esc_html__("Display the appointment's custom field data.", "booked"),
         'id' => esc_html__("Display the appointment's unique identification number.", "booked"),
+        'cancellable_datetime' => esc_html__("Display cancellable date time.", "booked"),
     ));
 }
 
@@ -135,7 +136,9 @@ function booked_get_appointment_tokens($appt_id) {
     // Title
     // $title
     $title = get_post_meta($appt_id, '_appointment_title', true);
-
+    $cancel_buffer = get_option('booked_cancellation_buffer', 0);
+    $datetime_booked = date('Y-m-d', $timestamp) . ' ' . $time_text;
+    $cancellable_datetime = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
     return apply_filters('booked_appointment_tokens', array(
         'name' => $customer_name,
         'kananame' => $kananame,
@@ -146,7 +149,8 @@ function booked_get_appointment_tokens($appt_id) {
         'calendar' => $calendar_name,
         'email' => $customer_email,
         'title' => $title,
-        'id' => $appt_id
+        'id' => $appt_id,
+        'cancellable_datetime' => $cancellable_datetime
     ));
 }
 

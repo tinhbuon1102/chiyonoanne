@@ -386,7 +386,7 @@ var booked_load_calendar_date_booking_options,
                             $("#bookedForm .js-next").removeClass('ch-hidden');
                             $('.timeslot-people button').removeClass('ch-active-time');
                             $button.addClass('ch-active-time');
-                            $('.ch-term-text').html('このご予約のキャンセルは' + arr_date[0] + '年' + arr_date[1] + '月' + arr_date[2] + '日' + 'の' + format_time + 'までとなります。');
+                            $('.ch-term-text').attr('cancel-datetime', date + ' ' + format_time);
                         } else {
                             $('.bm-window').html(html);
                             var bookedModal = $('.booked-modal');
@@ -766,9 +766,9 @@ var booked_load_calendar_date_booking_options,
             }
 
             if (customerType == 'new') {
-               // if (!surnameActive || surnameActive && surname) {
-                    SubmitRequestAppointment.newUser();
-               // }
+                // if (!surnameActive || surnameActive && surname) {
+                SubmitRequestAppointment.newUser();
+                // }
             }
 
         });

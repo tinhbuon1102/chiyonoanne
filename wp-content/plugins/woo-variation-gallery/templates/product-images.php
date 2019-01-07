@@ -6,6 +6,8 @@
 	
 	$product_id = $product->get_id();
 	
+	$product_type = $product->get_type();
+	
 	$columns = absint( get_option( 'woo_variation_gallery_thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ) );
 	
 	$post_thumbnail_id = $product->get_image_id();
@@ -57,7 +59,7 @@
 ?>
 
 <div style="<?php echo esc_attr( wvg_generate_inline_style( $inline_style ) ) ?>" class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $wrapper_classes ) ) ) ); ?>">
-    <div class="loading-gallery woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?>">
+    <div class="loading-gallery woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?> woo-variation-gallery-product-type-<?php echo esc_attr( $product_type ) ?>">
 
         <div class="woo-variation-gallery-container preload-style-<?php echo trim( get_option( 'woo_variation_gallery_preload_style', 'blur' ) ) ?>">
 

@@ -422,7 +422,7 @@ class QuadMenu_Configuration {
         'title' => esc_html__('Dropdown Width', 'quadmenu'),
         'desc' => esc_html__('This controls the width of the dropdown and contents.', 'quadmenu'),
         'type' => 'select',
-        'default' => '',
+        'default' => 'boxed',
         'ops' => array(
             'boxed' => esc_html__('Boxed dropdown', 'quadmenu'),
             'dropdown' => esc_html__('Stretch dropdown', 'quadmenu'),

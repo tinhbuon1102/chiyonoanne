@@ -578,84 +578,41 @@ class WCCM_CustomerTable extends WP_List_Table {
 					   
 					 /* shipping_country, shipping_first_name, shipping_last_name, shipping_company, shipping_address_1, shipping_address_2, shipping_city
 					 shipping_state, shipping_postcode, shipping_country*/
-					$customer_country = isset($customer_extra_info['billing_country']) ? $customer_extra_info['billing_country'][0] : (isset($customer_extra_info['shipping_country']) ? $customer_extra_info['shipping_country'] : '') ;
-					if (strtolower($customer_country) == 'jp')
-					{
-						$first_name = $customer_info->first_name;
-						$customer_info->first_name = $customer_info->last_name;
-						$customer_info->last_name = $first_name;
-						
-						$address .= isset($customer_extra_info['billing_last_name']) && $customer_extra_info['billing_last_name'][0] !== "" ? $customer_extra_info['billing_last_name'][0]:'';
-						$address = isset($customer_extra_info['billing_first_name']) && $customer_extra_info['billing_first_name'][0] !== " "? $customer_extra_info['billing_first_name'][0]." ":'';
-						$address .= isset($customer_extra_info['billing_company']) && $customer_extra_info['billing_company'][0] !== "" ? "<br/>".$customer_extra_info['billing_company'][0]:'';
-						$address .= "<br/><br/>";
-						
-						$address .=  $billing_country_full_name ? $billing_country_full_name . ', ':'';
-						$address .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0].", ":'';
-						$address .=  $billing_state_full_name ? $billing_state_full_name.", ":'';
-						$address .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0].", ":'';
-						$address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0].", ":'';
-						
-						
-					}
-					else {
-						$address = isset($customer_extra_info['billing_first_name']) && $customer_extra_info['billing_first_name'][0] !== " "? $customer_extra_info['billing_first_name'][0]." ":'';
-						$address .= isset($customer_extra_info['billing_last_name']) && $customer_extra_info['billing_last_name'][0] !== "" ? $customer_extra_info['billing_last_name'][0]:'';
-						$address .= isset($customer_extra_info['billing_company']) && $customer_extra_info['billing_company'][0] !== "" ? "<br/>".$customer_extra_info['billing_company'][0]:'';
-						$address .= "<br/><br/>";
-						$address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0].", ":'';
-						$address .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0].", ":'';
-						$address .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0].", ":'';
-						//$address .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":'';
-						$address .=  $billing_state_full_name ? $billing_state_full_name.", ":'';
-						//$address .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:'';
-						$address .=  $billing_country_full_name ? $billing_country_full_name:'';
-					}
-					 
+					   
+					 $address = isset($customer_extra_info['billing_first_name']) && $customer_extra_info['billing_first_name'][0] !== " "? $customer_extra_info['billing_first_name'][0]." ":'';
+					 $address .= isset($customer_extra_info['billing_last_name']) && $customer_extra_info['billing_last_name'][0] !== "" ? $customer_extra_info['billing_last_name'][0]:'';
+					 $address .= isset($customer_extra_info['billing_company']) && $customer_extra_info['billing_company'][0] !== "" ? "<br/>".$customer_extra_info['billing_company'][0]:'';
+					 $address .= "<br/><br/>";
+					 $address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0].", ":'';
+					 $address .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0].", ":'';
+					 $address .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0].", ":'';
+					 //$address .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":'';
+					 $address .=  $billing_state_full_name ? $billing_state_full_name.", ":'';
+					 //$address .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:'';
+					 $address .=  $billing_country_full_name ? $billing_country_full_name:'';
 					
 					 if( $vat_number = $wccm_customer_model->get_vat_number($customer->ID))
 						 $address .= "<br/><br/><strong>".__('VAT:','woocommerce-customers-manager')."</strong> ".$vat_number;
 					 
-					 if (strtolower($customer_country) == 'jp')
-					 {
-					 	//For csv export
-					 	$address_billing .=  $billing_country_full_name ? $billing_country_full_name.",":',';
-					 	$address_billing .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null ? $customer_extra_info['billing_postcode'][0].",":' ,';
-					 	$address_billing .=  $billing_state_full_name ? $billing_state_full_name.",":',';
-					 	$address_billing .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null ? $customer_extra_info['billing_city'][0].",":' ,';
-					 	$address_billing = isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null ? $customer_extra_info['billing_address_1'][0].",":' ,';
-					 	$address_billing .= isset($customer_extra_info['billing_address_2']) && $customer_extra_info['billing_address_2'][0] !=null ? $customer_extra_info['billing_address_2'][0].",":' ,';
-					 	
-					 	
-					 	$address_shipping .=  $shipping_country_full_name ? $shipping_country_full_name.",":',';
-					 	$address_shipping .=  isset($customer_extra_info['shipping_postcode']) && $customer_extra_info['shipping_postcode'][0] !=null ? $customer_extra_info['shipping_postcode'][0].",":' ,';
-					 	$address_shipping .=  $shipping_state_full_name ? $shipping_state_full_name.",":',';
-					 	$address_shipping .=  isset($customer_extra_info['shipping_city']) && $customer_extra_info['shipping_city'][0] !=null ? $customer_extra_info['shipping_city'][0].",":' ,';
-					 	$address_shipping = isset($customer_extra_info['shipping_address_1']) && $customer_extra_info['shipping_address_1'][0] !=null ? $customer_extra_info['shipping_address_1'][0].",":' ,';
-					 	$address_shipping .= isset($customer_extra_info['shipping_address_2']) && $customer_extra_info['shipping_address_2'][0] !=null ? $customer_extra_info['shipping_address_2'][0].",":' ,';
-					 	
-					 }
-					 else {
-						 //For csv export
-						 $address_billing = isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null ? $customer_extra_info['billing_address_1'][0].",":' ,';
-						 $address_billing .= isset($customer_extra_info['billing_address_2']) && $customer_extra_info['billing_address_2'][0] !=null ? $customer_extra_info['billing_address_2'][0].",":' ,';
-						 $address_billing .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null ? $customer_extra_info['billing_postcode'][0].",":' ,';
-						 $address_billing .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null ? $customer_extra_info['billing_city'][0].",":' ,';
-						 //$address_billing .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":' ,';
-						 $address_billing .=  $billing_state_full_name ? $billing_state_full_name.",":',';
-						 //$address_billing .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:' ';
-						 $address_billing .=  $billing_country_full_name ? $billing_country_full_name.",":',';
-						
-						 $address_shipping = isset($customer_extra_info['shipping_address_1']) && $customer_extra_info['shipping_address_1'][0] !=null ? $customer_extra_info['shipping_address_1'][0].",":' ,';
-						 $address_shipping .= isset($customer_extra_info['shipping_address_2']) && $customer_extra_info['shipping_address_2'][0] !=null ? $customer_extra_info['shipping_address_2'][0].",":' ,';
-						 $address_shipping .=  isset($customer_extra_info['shipping_postcode']) && $customer_extra_info['shipping_postcode'][0] !=null ? $customer_extra_info['shipping_postcode'][0].",":' ,';
-						 $address_shipping .=  isset($customer_extra_info['shipping_city']) && $customer_extra_info['shipping_city'][0] !=null ? $customer_extra_info['shipping_city'][0].",":' ,';
-						 //$address_shipping .=  isset($customer_extra_info['shipping_state']) && $customer_extra_info['shipping_state'][0] !=null ? $customer_extra_info['shipping_state'][0].",":' ,';
-						 $address_shipping .=  $shipping_state_full_name ? $shipping_state_full_name.",":',';
-						 //$address_shipping .=  isset($customer_extra_info['shipping_country']) && $customer_extra_info['shipping_country'][0] !=null ? $customer_extra_info['shipping_country'][0]:' ';
-						 $address_shipping .=  $shipping_country_full_name ? $shipping_country_full_name.",":',';
-						
-					 }
+					 //For csv export
+					 $address_billing = isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] !=null ? $customer_extra_info['billing_address_1'][0].",":' ,';
+					 $address_billing .= isset($customer_extra_info['billing_address_2']) && $customer_extra_info['billing_address_2'][0] !=null ? $customer_extra_info['billing_address_2'][0].",":' ,';
+					 $address_billing .=  isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] !=null ? $customer_extra_info['billing_postcode'][0].",":' ,';
+					 $address_billing .=  isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] !=null ? $customer_extra_info['billing_city'][0].",":' ,';
+					 //$address_billing .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":' ,';
+					 $address_billing .=  $billing_state_full_name ? $billing_state_full_name.",":',';
+					 //$address_billing .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:' ';
+					 $address_billing .=  $billing_country_full_name ? $billing_country_full_name.",":',';
+					
+					 $address_shipping = isset($customer_extra_info['shipping_address_1']) && $customer_extra_info['shipping_address_1'][0] !=null ? $customer_extra_info['shipping_address_1'][0].",":' ,';
+					 $address_shipping .= isset($customer_extra_info['shipping_address_2']) && $customer_extra_info['shipping_address_2'][0] !=null ? $customer_extra_info['shipping_address_2'][0].",":' ,';
+					 $address_shipping .=  isset($customer_extra_info['shipping_postcode']) && $customer_extra_info['shipping_postcode'][0] !=null ? $customer_extra_info['shipping_postcode'][0].",":' ,';
+					 $address_shipping .=  isset($customer_extra_info['shipping_city']) && $customer_extra_info['shipping_city'][0] !=null ? $customer_extra_info['shipping_city'][0].",":' ,';
+					 //$address_shipping .=  isset($customer_extra_info['shipping_state']) && $customer_extra_info['shipping_state'][0] !=null ? $customer_extra_info['shipping_state'][0].",":' ,';
+					 $address_shipping .=  $shipping_state_full_name ? $shipping_state_full_name.",":',';
+					 //$address_shipping .=  isset($customer_extra_info['shipping_country']) && $customer_extra_info['shipping_country'][0] !=null ? $customer_extra_info['shipping_country'][0]:' ';
+					 $address_shipping .=  $shipping_country_full_name ? $shipping_country_full_name.",":',';
+					
 					//Roles
 					$roles = "";
 					$roles_to_export = "";
