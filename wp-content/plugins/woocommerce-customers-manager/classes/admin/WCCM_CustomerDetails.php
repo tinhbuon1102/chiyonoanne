@@ -96,7 +96,8 @@ class WCCM_CustomerDetails {
 
             $wccm_order_model->assign_users($order_ids, $_GET['customer'], $additional_params);
         }
-
+        $user_info = get_userdata($_REQUEST['customer']);
+        $locale= get_user_locale($_REQUEST['customer']);
         $this->get_user_info();
         try {
             if (isset($this->customer_extra_info['billing_country'][0]) && file_exists(plugin_dir_path(__FILE__) . 'i18n/' . $this->customer_extra_info['billing_country'][0] . '.php'))
@@ -182,8 +183,17 @@ class WCCM_CustomerDetails {
                 <h3><?php _e('General Details', 'woocommerce-customers-manager'); ?></h3>
                 <p>
                     <label><?php _e('Profile Image', 'woocommerce-customers-manager'); ?></label> <?php echo get_avatar($this->current_customer_id, 96, "", false, array('class' => 'wccm_avatar_img')); ?> <br />
-                    <label><?php _e('First Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]     ?> <br />
-                    <label><?php _e('Last Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]    ?> <br/>
+                    <?php
+                    if($locale=='ja'||$locale=='site-default'){
+                        ?>
+                        <label><?php _e('Last Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?> <br/>
+                        <label><?php _e('First Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?> <br />
+                        <?php
+                    } else {
+                        ?>
+                        <label><?php _e('First Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?> <br />
+                        <label><?php _e('Last Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?> <br/>
+                    <?php } ?> 
                     <label><?php _e('Email Address', 'woocommerce-customers-manager'); ?></label><?php if (isset($this->customer_info->user_email)) echo $this->customer_info->user_email ?> <br/>
                     <label><?php _e('Registration Date', 'woocommerce-customers-manager'); ?> </label> <?php if (isset($this->customer_info->user_registered)) echo $this->customer_info->user_registered ?> <br/>
                     <label><?php _e('Roles', 'woocommerce-customers-manager'); ?> </label> 
@@ -332,7 +342,7 @@ class WCCM_CustomerDetails {
                                                     <td> <?php echo get_woocommerce_currency_symbol() . round($product['subtotal'], 2); ?> </td>
                                                     <td> <?php echo get_woocommerce_currency_symbol() . round($product['subtotal_tax'], 2); ?> </td>
                                                     <td> <?php echo get_woocommerce_currency_symbol() . round($discount, 2); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($product['line_total'] + $product['line_tax'], 2)//$wc_product->get_price_html();    ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($product['line_total'] + $product['line_tax'], 2)//$wc_product->get_price_html();                              ?> </td>
                                                     <td> <a class="button-primary" target="_blank" href="<?php echo get_edit_post_link($order_item_id); ?>">  <?php _e('Edit', 'woocommerce-customers-manager'); ?> </a> </td>
                                                 </tr>
 
@@ -429,10 +439,10 @@ class WCCM_CustomerDetails {
                                         ?>
 
                                     <a class="button-primary" style="margin-top:10px;" href="<?php echo get_edit_post_link($order->ID); ?>"> <?php _e('Order details', 'woocommerce-customers-manager'); ?> </a>
-                                <?php endif; //end if(products>0)   ?>
+                                <?php endif; //end if(products>0)     ?>
 
                             </div><!-- order block -->
-                        <?php endforeach; //print_r($orders_amounts_per_date);  ?>
+                        <?php endforeach; //print_r($orders_amounts_per_date);    ?>
                 </div><!-- orders-list -->
                 <div id="order-list-paging"></div>
                 <div class="clear"></div>
@@ -516,7 +526,16 @@ class WCCM_CustomerDetails {
                         $shipping_state_code = isset($this->customer_extra_info['shipping_state']) ? $this->customer_extra_info['shipping_state'][0] : "";
                         $shipping_country_code = isset($this->customer_extra_info['shipping_country']) ? $this->customer_extra_info['shipping_country'][0] : "";
                         ?>
-                        <?php if (isset($this->customer_extra_info['billing_first_name'])) echo $this->customer_extra_info['billing_first_name'][0]; ?> <?php if (isset($this->customer_extra_info['billing_last_name'])) echo $this->customer_extra_info['billing_last_name'][0]; ?>
+                        <?php
+                        if($locale=='ja'||$locale=='site-default'){
+                            ?>
+                            <?php if (isset($this->customer_extra_info['billing_last_name'])) echo $this->customer_extra_info['billing_last_name'][0]; ?> <?php if (isset($this->customer_extra_info['billing_first_name'])) echo $this->customer_extra_info['billing_first_name'][0]; ?>
+                            <?php
+                            echo '<br/>' . $user_info->billing_last_name_kana . ' ' . $user_info->billing_first_name_kana;
+                        } else {
+                            ?>
+                            <?php if (isset($this->customer_extra_info['billing_first_name'])) echo $this->customer_extra_info['billing_first_name'][0]; ?> <?php if (isset($this->customer_extra_info['billing_last_name'])) echo $this->customer_extra_info['billing_last_name'][0]; ?>
+                        <?php } ?>
                         <?php if (isset($this->customer_extra_info['billing_company']) && $this->customer_extra_info['billing_company'][0] != null) : ?>
                             <br/>
                             <?php
@@ -524,31 +543,52 @@ class WCCM_CustomerDetails {
                         endif;
                         ?>
                         <br/>
-                        <?php echo $billing_address_1; ?>
-                        <?php if (isset($this->customer_extra_info['billing_address_2'][0]) && $this->customer_extra_info['billing_address_2'][0] != null) : ?>
+                        <?php
+                        if($locale=='ja'||$locale=='site-default'){
+                            if ($billing_postcode != "")
+                                echo $billing_postcode;
+                            if (isset($billing_state_code) && $billing_state_code != null) {
+                                if ($billing_country_code != '') {
+                                    $billing_states_list = $countries_obj->get_states($billing_country_code);
+                                    if ($billing_states_list && isset($billing_states_list[$billing_state_code]))
+                                        echo '<br/>' . $billing_states_list[$billing_state_code];
+                                    else
+                                        echo '<br/>' . $billing_state_code;
+                                } else
+                                    echo '<br/>' . $billing_state_code;
+                            }
+                            echo ' ' . $billing_city . ' ' . $billing_address_1 . '<br/>';
+                            echo $this->customer_extra_info['billing_address_2'][0] . '<br/>';
+                            if ($billing_country_code != '')
+                                echo country_code_to_country($billing_country_code);
+                        } else {
+                            ?>
+                            <?php echo $billing_address_1; ?>
+                            <?php if (isset($this->customer_extra_info['billing_address_2'][0]) && $this->customer_extra_info['billing_address_2'][0] != null) : ?>
+                                <br/>
+                                <?php
+                                echo $this->customer_extra_info['billing_address_2'][0];
+                            endif;
+                            ?>
+                            <br/>
+                            <?php if ($billing_postcode != "") echo $billing_postcode . ","; ?> <?php echo $billing_city; ?>
+                            <?php
+                            if (isset($billing_state_code) && $billing_state_code != null) {
+                                if ($billing_country_code != '') {
+                                    $billing_states_list = $countries_obj->get_states($billing_country_code);
+                                    if ($billing_states_list && isset($billing_states_list[$billing_state_code]))
+                                        echo '<br/>' . $billing_states_list[$billing_state_code];
+                                    else
+                                        echo '<br/>' . $billing_state_code;
+                                } else
+                                    echo '<br/>' . $billing_state_code;
+                            }
+                            ?>
                             <br/>
                             <?php
-                            echo $this->customer_extra_info['billing_address_2'][0];
-                        endif;
-                        ?>
-                        <br/>
-                        <?php if ($billing_postcode != "") echo $billing_postcode . ","; ?> <?php echo $billing_city; ?>
-                        <?php
-                        if (isset($billing_state_code) && $billing_state_code != null) {
-                            if ($billing_country_code != '') {
-                                $billing_states_list = $countries_obj->get_states($billing_country_code);
-                                if ($billing_states_list && isset($billing_states_list[$billing_state_code]))
-                                    echo '<br/>' . $billing_states_list[$billing_state_code];
-                                else
-                                    echo '<br/>' . $billing_state_code;
-                            } else
-                                echo '<br/>' . $billing_state_code;
+                            if ($billing_country_code != '')
+                                echo country_code_to_country($billing_country_code);
                         }
-                        ?>
-                        <br/>
-                        <?php
-                        if ($billing_country_code != '')
-                            echo country_code_to_country($billing_country_code);
                         if (!$this->is_guest_customer && $vat_number = $wccm_customer_model->get_vat_number($this->current_customer_id)):
                             ?>
                             <br/><br/>
@@ -576,55 +616,89 @@ class WCCM_CustomerDetails {
                     <h3> <?php _e('Shipping Details', 'woocommerce-customers-manager'); ?></h3>
                     <p>
                         <label> <?php _e('Address', 'woocommerce-customers-manager'); ?></label>
-                        <?php if (isset($this->customer_extra_info['shipping_first_name'])) echo $this->customer_extra_info['shipping_first_name'][0] ?> <?php if (isset($this->customer_extra_info['shipping_last_name'])) echo $this->customer_extra_info['shipping_last_name'][0] ?>
+                        <?php
+                        if($locale=='ja'||$locale=='site-default'){
+                            ?>
+                            <?php if (isset($this->customer_extra_info['shipping_last_name'])) echo $this->customer_extra_info['shipping_last_name'][0] ?> <?php if (isset($this->customer_extra_info['shipping_first_name'])) echo $this->customer_extra_info['shipping_first_name'][0] ?>
+                            <?php
+                            echo '<br/>' . $user_info->shipping_last_name_kana . ' ' . $user_info->shipping_first_name_kana;
+                        }else {
+                            ?>
+                            <?php if (isset($this->customer_extra_info['shipping_first_name'])) echo $this->customer_extra_info['shipping_first_name'][0] ?> <?php if (isset($this->customer_extra_info['shipping_last_name'])) echo $this->customer_extra_info['shipping_last_name'][0] ?>
+                        <?php } ?>
                         <?php if (isset($this->customer_extra_info['shipping_company']) && $this->customer_extra_info['shipping_company'][0] != '') : ?>
 
                             <?php
                             echo '<br/>' . $this->customer_extra_info['shipping_company'][0];
                         endif;
                         ?>
-                        <?php if (isset($this->customer_extra_info['shipping_address_1'])) echo "<br/>" . $this->customer_extra_info['shipping_address_1'][0] ?>
-                        <?php if (isset($this->customer_extra_info['shipping_address_2']) && $this->customer_extra_info['billing_address_2'][0] != null) : ?>
+                        <?php
+                        if($locale=='ja'||$locale=='site-default'){
+                            if (isset($this->customer_extra_info['shipping_postcode']) && !empty($this->customer_extra_info['shipping_postcode'][0]) && $this->customer_extra_info['shipping_postcode'][0] != " ")
+                                echo "<br/>" . $this->customer_extra_info['shipping_postcode'][0];
+                            if (isset($shipping_state_code) && $shipping_state_code != null) {
+                                if ($shipping_country_code != '') {
+                                    $shipping_states_list = $countries_obj->get_states($shipping_country_code);
+                                    if ($shipping_states_list && isset($shipping_states_list[$shipping_state_code]))
+                                        echo '<br/>' . $shipping_states_list[$shipping_state_code];
+                                    else
+                                        echo '<br/>' . $shipping_state_code;
+                                } else
+                                    echo '<br/>' . $shipping_state_code;
+                            }
+                            if (isset($this->customer_extra_info['shipping_city']))
+                                echo ' ' . $this->customer_extra_info['shipping_city'][0];
+                            if (isset($this->customer_extra_info['shipping_address_1']))
+                                echo ' ' . $this->customer_extra_info['shipping_address_1'][0];
+                            if (isset($this->customer_extra_info['shipping_address_2']) && $this->customer_extra_info['billing_address_2'][0] != null)
+                                echo '<br/>' . $this->customer_extra_info['shipping_address_2'][0];
+                            if ($shipping_country_code != '')
+                                echo '<br/>' . country_code_to_country($shipping_country_code);
+                        } else {
+                            ?>
+                            <?php if (isset($this->customer_extra_info['shipping_address_1'])) echo "<br/>" . $this->customer_extra_info['shipping_address_1'][0] ?>
+                            <?php if (isset($this->customer_extra_info['shipping_address_2']) && $this->customer_extra_info['billing_address_2'][0] != null) : ?>
+                                <br/>
+                                <?php
+                                echo $this->customer_extra_info['shipping_address_2'][0];
+                            endif;
+                            ?>
+
+                            <?php
+                            if (isset($this->customer_extra_info['shipping_postcode']) && !empty($this->customer_extra_info['shipping_postcode'][0]) && $this->customer_extra_info['shipping_postcode'][0] != " ")
+                                echo "<br/>" . $this->customer_extra_info['shipping_postcode'][0] . ","
+                                ?>
+                            <?php
+                            if (isset($this->customer_extra_info['shipping_city']))
+                                echo $this->customer_extra_info['shipping_city'][0];
+                            ?>
+                            <?php
+                            /* if(isset($shipping_state) && isset($this->customer_extra_info['shipping_state']) && isset($shipping_state[$this->customer_extra_info['shipping_state'][0]])) : ?>
+
+                              <?php echo "<br/>".$shipping_state[$this->customer_extra_info['shipping_state'][0]];
+                              elseif(isset($this->customer_extra_info['shipping_state'])):
+                              echo '<br/>'.$this->customer_extra_info['shipping_state'][0];
+                              endif; */
+                            ?>
+
+                            <?php
+                            if (isset($shipping_state_code) && $shipping_state_code != null) {
+                                if ($shipping_country_code != '') {
+                                    $shipping_states_list = $countries_obj->get_states($shipping_country_code);
+                                    if ($shipping_states_list && isset($shipping_states_list[$shipping_state_code]))
+                                        echo '<br/>' . $shipping_states_list[$shipping_state_code];
+                                    else
+                                        echo '<br/>' . $shipping_state_code;
+                                } else
+                                    echo '<br/>' . $shipping_state_code;
+                            }
+                            ?>
                             <br/>
                             <?php
-                            echo $this->customer_extra_info['shipping_address_2'][0];
-                        endif;
-                        ?>
-
-                        <?php
-                        if (isset($this->customer_extra_info['shipping_postcode']) && !empty($this->customer_extra_info['shipping_postcode'][0]) && $this->customer_extra_info['shipping_postcode'][0] != " ")
-                            echo "<br/>" . $this->customer_extra_info['shipping_postcode'][0] . ","
+                            if ($shipping_country_code != '')
+                                echo country_code_to_country($shipping_country_code);
                             ?>
-                        <?php
-                        if (isset($this->customer_extra_info['shipping_city']))
-                            echo $this->customer_extra_info['shipping_city'][0]
-                            ?>
-                        <?php
-                        /* if(isset($shipping_state) && isset($this->customer_extra_info['shipping_state']) && isset($shipping_state[$this->customer_extra_info['shipping_state'][0]])) : ?>
-
-                          <?php echo "<br/>".$shipping_state[$this->customer_extra_info['shipping_state'][0]];
-                          elseif(isset($this->customer_extra_info['shipping_state'])):
-                          echo '<br/>'.$this->customer_extra_info['shipping_state'][0];
-                          endif; */
-                        ?>
-
-                        <?php
-                        if (isset($shipping_state_code) && $shipping_state_code != null) {
-                            if ($shipping_country_code != '') {
-                                $shipping_states_list = $countries_obj->get_states($shipping_country_code);
-                                if ($shipping_states_list && isset($shipping_states_list[$shipping_state_code]))
-                                    echo '<br/>' . $shipping_states_list[$shipping_state_code];
-                                else
-                                    echo '<br/>' . $shipping_state_code;
-                            } else
-                                echo '<br/>' . $shipping_state_code;
-                        }
-                        ?>
-                        <br/>
-                        <?php
-                        if ($shipping_country_code != '')
-                            echo country_code_to_country($shipping_country_code);
-                        ?>
+                        <?php } ?>
                         <br/><br/>
                         <label> <?php _e('Telephone', 'woocommerce-customers-manager'); ?></label>
                         <?php if (isset($this->customer_extra_info['shipping_phone'])) echo $this->customer_extra_info['shipping_phone'][0]; ?>

@@ -14,7 +14,9 @@ $calendar_id = (isset($_POST['calendar_id']) ? $_POST['calendar_id'] : false);
 
 $_timeslots = explode( '-', $timeslot );
 $_timestamp_time = date( 'H:i:s', strtotime( $_timeslots[0] ) );
-
+$first_name_kana = isset($_POST['billing_first_name_kana']) ? $_POST['billing_first_name_kana'] : '';
+$last_name_kana = isset($_POST['billing_last_name_kana']) ? $_POST['billing_last_name_kana'] : '';
+$billing_phone = isset($_POST['billing_phone']) ? $_POST['billing_phone'] : '';
 if ( $appt_id ):
 
 	if ( $email && !is_email($email) ):
@@ -45,7 +47,9 @@ if ( $appt_id ):
 		update_post_meta( $appt_id, '_appointment_guest_email', $email );
 		update_post_meta( $appt_id, '_appointment_timestamp', $timestamp );
 		update_post_meta( $appt_id, '_appointment_timeslot', $timeslot );
-
+		update_post_meta( $appt_id, 'billing_guest_last_name_kana', $last_name_kana );
+		update_post_meta( $appt_id, 'billing_guest_first_name_kana', $first_name_kana );
+                update_post_meta( $appt_id, 'billing_guest_phone', $billing_phone );
 	else:
 
 		update_post_meta( $appt_id, '_appointment_title', $title );
@@ -54,6 +58,9 @@ if ( $appt_id ):
 		update_post_meta( $appt_id, '_appointment_timeslot', $timeslot );
 
 		update_user_meta( $user_id, 'booked_phone', $phone );
+                update_user_meta( $user_id, 'billing_last_name_kana', $last_name_kana );
+                update_user_meta( $user_id, 'billing_first_name_kana', $first_name_kana );
+                update_user_meta( $user_id, 'billing_phone', $billing_phone );
 		wp_update_user( array( 'ID' => $user_id, 'first_name' => $first_name, 'last_name' => $last_name, 'user_email' => $email, 'user_login' => $email, 'display_name' => $first_name . ( $last_name ? ' ' . $last_name : '' ) ) );
 
 	endif;

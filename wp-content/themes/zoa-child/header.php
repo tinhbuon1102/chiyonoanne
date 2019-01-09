@@ -65,7 +65,7 @@ if ($user->ID)
 <?php 
 $banner_limit = get_option('post_limit_banner_header', -1);
 $bannerPosts = get_posts(array(
-	'posts_per_page'	=> -1,
+	'posts_per_page'	=> $banner_limit,
 	'post_type'			=> 'post',
 // 	 'meta_query' => array(
 //         array(
@@ -85,7 +85,6 @@ $bannerPosts = get_posts(array(
 	'orderby' => 'date',
 	'order' => 'DESC'
 ));
-
 if( $bannerPosts ): ?>	
 	<div class="row-fluid banner-ad-promo text-center">		
 	<?php 
@@ -93,7 +92,7 @@ if( $bannerPosts ): ?>
 		foreach( $bannerPosts as $post ): 		
 		setup_postdata( $post );		
 		?>
-		<div class="item" style="display: none;">
+		<div class="item <?php echo count($bannerPosts) > 1 ? '' : 'unique-item'?>" style="display: none">
 			<a data-id="<?php echo $post->ID; ?>" class="banner-ad-link" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 		</div>	
 	<?php 

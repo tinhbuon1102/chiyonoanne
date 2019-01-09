@@ -208,6 +208,7 @@ form#checkout #step-3.is-active {
 	float: none;
 }
 
+.unique-item {display: block !important;}
 @media (min-width: 1200px) {
   .products .product:hover .view_loop_detail_btn {
     opacity: 1;

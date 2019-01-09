@@ -215,6 +215,16 @@ function custom_content_after_body_open_tag() {
 
 add_action('after_body_open_tag', 'custom_content_after_body_open_tag');
 
+add_action( 'wp_enqueue_scripts', 'load_theme_scripts', 100 );//change woo-variation-swatches-pro add to cart js
+
+    function load_theme_scripts() {
+		// add-to-cart-variation override
+		if ( woo_variation_swatches()->get_option( 'enable_single_variation_preview' ) || woo_variation_swatches()->get_option( 'disable_threshold' ) ):
+		wp_deregister_script( 'wc-add-to-cart-variation' );
+		wp_register_script( 'wc-add-to-cart-variation', get_stylesheet_directory_uri() . '/woocommerce/js/wvs-add-to-cart-variation.js', array(), '');
+		endif;
+    }
+
 function custom_styles() {
     wp_enqueue_style('cal-style', get_stylesheet_directory_uri() . '/js/calendar/pignose.calendar.css', array(), '');
     wp_enqueue_style('font-style', get_stylesheet_directory_uri() . '/fonts/font.css', array(), '');

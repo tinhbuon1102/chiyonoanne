@@ -4406,3 +4406,55 @@ body #booked-profile-page .cf-meta-values-hidden {
     padding: 0;
     border-left: 0px;
 }
+.ch-disable-add-to-cart{
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    background: #e6e6e6 !important;
+    border-color: #e6e6e6 !important;
+}
+/**********
+yith product add-ons option style
+************/
+.shop--single .summary .yith_wapo_groups_container {
+    float: none;
+}
+
+.woocommerce .ywapo_group_container.form-row.form-row-wide {
+    padding: 0;
+}
+
+.variations.pdp__attribute--group + .single_variation_wrap .yith_wapo_groups_container {
+    margin-top: 24px;
+}
+
+.shop--single .summary .ywapo_group_container.form-row.form-row-wide h3 {
+    display: block;
+    margin-bottom: 10px;
+    font-family: Eina03;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000;
+    margin-top: 0;
+}
+.woocommerce form .form-row .ywapo_options_container .ywapo_input_container label > img {
+    width: 25px;
+}
+.ywapo_option_label {
+    font-family: Eina03;
+    font-size: 12px;
+    font-weight: 400;
+}
+.ywapo_options_container .ywapo_input_container.ywapo_input_container_labels {
+	margin-top: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #ddd;
+}
+
+.ywapo_options_container .ywapo_input_container.ywapo_input_container_labels.ywapo_selected {
+    border-color: #000;
+}

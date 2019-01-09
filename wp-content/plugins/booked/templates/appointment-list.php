@@ -48,6 +48,7 @@
         <th><strong><?php esc_html_e('Appointment Date/Time', 'booked'); ?></strong></th>
         <th><strong><?php esc_html_e('User', 'booked'); ?></strong></th>
         <th><strong><?php esc_html_e('Email', 'booked'); ?></strong></th>
+        <th><strong><?php esc_html_e('Phone', 'booked'); ?></strong></th>
         <th><strong><?php esc_html_e('Appointment Information', 'booked'); ?></strong></th>
         </thead>
     </table>
@@ -60,6 +61,7 @@
                 },
                 stateSave: true,
                 "aoColumns": [
+                    {"bSortable": false},
                     {"bSortable": false},
                     {"bSortable": false},
                     {"bSortable": false},

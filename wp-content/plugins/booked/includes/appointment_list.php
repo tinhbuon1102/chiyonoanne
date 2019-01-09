@@ -30,17 +30,27 @@ function getDataForDataTable() {
             $first_name = get_post_meta($value->ID, '_appointment_guest_name', true);
             if ($first_name) {
                 $obj[1] = get_post_meta($value->ID, '_appointment_guest_surname', true) . ' ' . $first_name . ' (User: Guest)';
+                $first_kananame = get_post_meta($value->ID, 'billing_guest_first_name_kana', true);
+                $last_kananame = get_post_meta($value->ID, 'billing_guest_last_name_kana', true);
+                if ($last_kananame || $first_kananame) {
+                    $obj[1] .= '<br/>' . $last_kananame . ' ' . $first_kananame;
+                }
                 $guest_email = get_post_meta($value->ID, '_appointment_guest_email', true);
                 $obj[2] = '<a href="mailto:' . $guest_email . '">' . $guest_email . '</a>';
+                $obj[3] = get_post_meta($value->ID, 'billing_guest_phone', true);
             } else {
                 $user_id = $value->post_author;
                 $user_info = get_userdata($user_id);
                 $url = admin_url("admin.php?page=woocommerce-customers-manager&customer=" . $user_id . "&action=customer_details");
                 $obj[1] = '<a href="' . $url . '">' . get_user_meta($user_id, 'last_name', true) . ' ' . get_user_meta($user_id, 'first_name', true)
                         . '</a>';
+                if ($user_info->billing_last_name_kana || $user_info->billing_first_name_kana) {
+                    $obj[1] .= '<br/>' . $user_info->billing_last_name_kana . ' ' . $user_info->billing_first_name_kana;
+                }
                 $obj[2] = '<a href="mailto:' . $user_info->user_email . '">' . $user_info->user_email . '</a>';
+                $obj[3] = $user_info->billing_phone;
             }
-            $obj[3] = get_post_meta($value->ID, '_cf_meta_value', true);
+            $obj[4] = get_post_meta($value->ID, '_cf_meta_value', true);
             $data[] = $obj;
         }
         $result['data'] = $data;
@@ -60,11 +70,11 @@ function getTotal($keyword, $user_id) {
             $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' )";
             $str_where = '';
             foreach ($arr_keywork as $value_k) {
-                $str_where .= "OR (um.meta_value LIKE '%{$value_k}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname')) OR (pm.meta_value LIKE '%{$value_k}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname'))";
+                $str_where .= "OR (um.meta_value LIKE '%{$value_k}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname' OR um.meta_key='billing_phone')) OR (pm.meta_value LIKE '%{$value_k}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname'  OR pm.meta_key='billing_guest_phone'))";
             }
             $query .= $str_where . ')';
         } else {
-            $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' ) OR (um.meta_value LIKE '%{$keyword}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname')) OR (pm.meta_value LIKE '%{$keyword}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname')))";
+            $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' ) OR (um.meta_value LIKE '%{$keyword}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname' OR um.meta_key='billing_phone')) OR (pm.meta_value LIKE '%{$keyword}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname' OR pm.meta_key='billing_guest_phone')))";
         }
     }
 
@@ -93,11 +103,11 @@ function getDataPaging($keyword, $start, $length, $user_id) {
             $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' )";
             $str_where = '';
             foreach ($arr_keywork as $value_k) {
-                $str_where .= "OR (um.meta_value LIKE '%{$value_k}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname')) OR (pm.meta_value LIKE '%{$value_k}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname'))";
+                $str_where .= "OR (um.meta_value LIKE '%{$value_k}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname' OR um.meta_key='billing_phone')) OR (pm.meta_value LIKE '%{$value_k}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname'  OR pm.meta_key='billing_guest_phone'))";
             }
             $query .= $str_where . ')';
         } else {
-            $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' ) OR (um.meta_value LIKE '%{$keyword}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname')) OR (pm.meta_value LIKE '%{$keyword}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname')))";
+            $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' ) OR (um.meta_value LIKE '%{$keyword}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='_appointment_guest_name' OR um.meta_key='_appointment_guest_surname' OR um.meta_key='billing_phone')) OR (pm.meta_value LIKE '%{$keyword}%' AND (pm.meta_key='_appointment_guest_name' OR pm.meta_key='_appointment_guest_surname' OR pm.meta_key='billing_guest_phone')))";
         }
     }
     if ($user_id > 0) {

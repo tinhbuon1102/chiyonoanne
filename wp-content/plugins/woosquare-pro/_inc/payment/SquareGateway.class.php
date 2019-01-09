@@ -212,23 +212,23 @@ class WooSquare_Gateway extends WC_Payment_Gateway {
 				}
 			?>
 			<p class="form-row form-row-wide">
-				<label for="sq-card-number"><?php esc_html_e( 'Card Number', 'woosquare' ); ?> <span class="required">*</span></label>
+				<label for="sq-card-number"><?php esc_html_e( 'Card Number', 'woosquare-pro' ); ?> <span class="required">*</span></label>
 				<input id="sq-card-number" type="text" maxlength="20" autocomplete="off" placeholder="•••• •••• •••• ••••" name="<?php echo esc_attr( $this->id ); ?>-card-number" />
 			</p>
 			
 			<p class="form-row form-row-first">
-				<label for="sq-expiration-date"><?php esc_html_e( 'Expiry (MM/YY)', 'woosquare' ); ?> <span class="required">*</span></label>
-				<input id="sq-expiration-date" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'MM / YY', 'woosquare' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-expiry" />
+				<label for="sq-expiration-date"><?php esc_html_e( 'Expiry (MM/YY)', 'woosquare-pro' ); ?> <span class="required">*</span></label>
+				<input id="sq-expiration-date" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'MM / YY', 'woosquare-pro' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-expiry" />
 			</p>
 
 			<p class="form-row form-row-last">
-				<label for="sq-cvv"><?php esc_html_e( 'Card Code', 'woosquare' ); ?> <span class="required">*</span></label>
-				<input id="sq-cvv" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'CVV', 'woosquare' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-cvv" />
+				<label for="sq-cvv"><?php esc_html_e( 'Card Code', 'woosquare-pro' ); ?> <span class="required">*</span></label>
+				<input id="sq-cvv" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'CVV', 'woosquare-pro' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-cvv" />
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="sq-postal-code"><?php esc_html_e( 'Card Postal Code', 'woosquare' ); ?> <span class="required">*</span></label>
-				<input id="sq-postal-code" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'Card Postal Code', 'woosquare' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-postal-code" />
+				<label for="sq-postal-code"><?php esc_html_e( 'Card Postal Code', 'woosquare-pro' ); ?> <span class="required">*</span></label>
+				<input id="sq-postal-code" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'Card Postal Code', 'woosquare-pro' ); ?>" name="<?php echo esc_attr( $this->id ); ?>-card-postal-code" />
 			</p>
 		</fieldset>
 			
