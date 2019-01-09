@@ -20,8 +20,8 @@ class WCCM_Email
 		$email_heading = get_bloginfo('name');
 		
 		ob_start();
-		if($use_footer_and_or_header == 'all' || $use_footer_and_or_header == 'header')
-			$mail->email_header($email_heading );
+		//if($use_footer_and_or_header == 'all' || $use_footer_and_or_header == 'header')
+		//	$mail->email_header($email_heading );
         //$message =  ob_get_clean();		
 		$message = str_replace('[message_body]', $content, $template_to_used);
 		if(isset($user_id))

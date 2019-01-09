@@ -27,7 +27,7 @@ jQuery(document).ready(function()
 		cache: true
 	  },
 	  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-	  minimumInputLength: 3,
+	  minimumInputLength: 1,
 	  templateResult: wccm_formatRepo, 
 	  templateSelection: wccm_formatRepoSelection  
 	});

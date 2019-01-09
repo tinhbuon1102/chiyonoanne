@@ -339,10 +339,10 @@ class WCCM_CustomerDetails {
                                                             ?>
                                                         </a></td>
                                                     <td> <?php echo $order_item_quantity; ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($product['subtotal'], 2); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($product['subtotal_tax'], 2); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($discount, 2); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() . round($product['line_total'] + $product['line_tax'], 2)//$wc_product->get_price_html();                              ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format(ceil($product['subtotal'])); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($product['subtotal_tax'])); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($discount)); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($product['line_total'] + $product['line_tax']))//$wc_product->get_price_html();                              ?> </td>
                                                     <td> <a class="button-primary" target="_blank" href="<?php echo get_edit_post_link($order_item_id); ?>">  <?php _e('Edit', 'woocommerce-customers-manager'); ?> </a> </td>
                                                 </tr>
 
@@ -390,22 +390,22 @@ class WCCM_CustomerDetails {
                                             $refounded = isset($refounded) ? floatval($refounded) : 0;
                                             if (method_exists($wc_order, 'get_total_shipping')) {
                                                 $total_shipping_numeric = $wc_order->get_shipping_total() != "" ? $wc_order->get_shipping_total() : 0;
-                                                $total_shipping = get_woocommerce_currency_symbol() . $total_shipping_numeric;
-                                                $total_shipping_tax = get_woocommerce_currency_symbol() . $wc_order->get_shipping_tax();
-                                                $total_order = get_woocommerce_currency_symbol() . (round($order_total + $taxes_total + $total_shipping_numeric + $wc_order->get_shipping_tax() - $wc_order->get_total_discount(false) - $refounded, 2));
+                                                $total_shipping = get_woocommerce_currency_symbol() . number_format($total_shipping_numeric);
+                                                $total_shipping_tax = get_woocommerce_currency_symbol() .number_format( $wc_order->get_shipping_tax());
+                                                $total_order = get_woocommerce_currency_symbol() . number_format((ceil($order_total + $taxes_total + $total_shipping_numeric + $wc_order->get_shipping_tax() - $wc_order->get_total_discount(false) - $refounded)));
                                             } else {
                                                 $total_shipping = "N/A";
                                                 $total_shipping_tax = "N/A";
-                                                $total_order = get_woocommerce_currency_symbol() . (round($order_total + $taxes_total - $wc_order->get_total_discount(false), 1));
+                                                $total_order = get_woocommerce_currency_symbol() . number_format((ceil($order_total + $taxes_total - $wc_order->get_total_discount(false))));
                                             }
                                             ?></span></span>
-                                    <span class="stats"><span class="stats_title"><?php _e('Sub total:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . round($order_total, 2); ?></span></span>
-                                    <span class="stats"><span class="stats_title"><?php _e('Taxes:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . round($taxes_total, 2); ?></span></span>
+                                    <span class="stats"><span class="stats_title"><?php _e('Sub total:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . number_format(ceil($order_total)); ?></span></span>
+                                    <span class="stats"><span class="stats_title"><?php _e('Taxes:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . number_format(ceil($taxes_total)); ?></span></span>
                                     <span class="stats"><span class="stats_title"><?php _e('Shipping:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo $total_shipping; ?></span></span>
                                     <span class="stats"><span class="stats_title"><?php _e('Shipping Taxes:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo $total_shipping_tax; ?></span></span>
-                                    <span class="stats"><span class="stats_title"><?php _e('Discount:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . round($wc_order->get_total_discount(false), 2); ?></span></span>
+                                    <span class="stats"><span class="stats_title"><?php _e('Discount:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . number_format(ceil($wc_order->get_total_discount(false))); ?></span></span>
                                     <span class="stats"><span class="stats_title"><?php _e('Total refounded:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo get_woocommerce_currency_symbol() . ($refounded); ?></span></span>
-                                    <span class="stats"><span class="stats_title"><?php _e('Total:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo $total_order; ?></span></span>
+                                    <span class="stats"><span class="stats_title"><?php _e('Total:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo ($total_order); ?></span></span>
                                     <span class="stats"><span class="stats_title"><?php _e('Payment method:', 'woocommerce-customers-manager'); ?></span> <span class="stats_content"><?php echo $wc_order->get_payment_method_title(); ?></span></span>
                                     <?php
                                     //WCST support

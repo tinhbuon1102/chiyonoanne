@@ -524,22 +524,33 @@ class WCCM_CustomerTable extends WP_List_Table {
 
                     /* shipping_country, shipping_first_name, shipping_last_name, shipping_company, shipping_address_1, shipping_address_2, shipping_city
                       shipping_state, shipping_postcode, shipping_country */
+                    $locale = get_user_locale($customer->ID);
+                    if ($locale == 'ja' || $locale == 'site-default') {
+                        $address = isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] != null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0] : '';
+                        $address .= "<br/>";
+                        $address .= $billing_state_full_name ? $billing_state_full_name . ", " : '';
+                        $address .= isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] != null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0] . ", " : '';
+                        $address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] != null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0] : '';
+                        $address .= "<br/>";
+                        $address .= isset($customer_extra_info['billing_address_2']) && $customer_extra_info['billing_address_2'][0] != null ? $customer_extra_info['billing_address_2'][0] : '';
+                        $address .= "<br/>";
+                        $address .= $billing_country_full_name ? $billing_country_full_name : '';
+                    } else {
+                        $address = isset($customer_extra_info['billing_first_name']) && $customer_extra_info['billing_first_name'][0] !== " " ? $customer_extra_info['billing_first_name'][0] . " " : '';
+                        $address .= isset($customer_extra_info['billing_last_name']) && $customer_extra_info['billing_last_name'][0] !== "" ? $customer_extra_info['billing_last_name'][0] : '';
+                        $address .= isset($customer_extra_info['billing_company']) && $customer_extra_info['billing_company'][0] !== "" ? "<br/>" . $customer_extra_info['billing_company'][0] : '';
+                        $address .= "<br/><br/>";
+                        $address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] != null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0] . ", " : '';
+                        $address .= isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] != null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0] . ", " : '';
+                        $address .= isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] != null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0] . ", " : '';
+                        //$address .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":'';
+                        $address .= $billing_state_full_name ? $billing_state_full_name . ", " : '';
+                        //$address .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:'';
+                        $address .= $billing_country_full_name ? $billing_country_full_name : '';
 
-                    $address = isset($customer_extra_info['billing_first_name']) && $customer_extra_info['billing_first_name'][0] !== " " ? $customer_extra_info['billing_first_name'][0] . " " : '';
-                    $address .= isset($customer_extra_info['billing_last_name']) && $customer_extra_info['billing_last_name'][0] !== "" ? $customer_extra_info['billing_last_name'][0] : '';
-                    $address .= isset($customer_extra_info['billing_company']) && $customer_extra_info['billing_company'][0] !== "" ? "<br/>" . $customer_extra_info['billing_company'][0] : '';
-                    $address .= "<br/><br/>";
-                    $address .= isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] != null && $customer_extra_info['billing_address_1'][0] !== " " ? $customer_extra_info['billing_address_1'][0] . ", " : '';
-                    $address .= isset($customer_extra_info['billing_postcode']) && $customer_extra_info['billing_postcode'][0] != null && $customer_extra_info['billing_postcode'][0] !== " " ? $customer_extra_info['billing_postcode'][0] . ", " : '';
-                    $address .= isset($customer_extra_info['billing_city']) && $customer_extra_info['billing_city'][0] != null && $customer_extra_info['billing_city'][0] !== " " ? $customer_extra_info['billing_city'][0] . ", " : '';
-                    //$address .=  isset($customer_extra_info['billing_state']) && $customer_extra_info['billing_state'][0] !=null ? $customer_extra_info['billing_state'][0].",":'';
-                    $address .= $billing_state_full_name ? $billing_state_full_name . ", " : '';
-                    //$address .=  isset($customer_extra_info['billing_country']) && $customer_extra_info['billing_country'][0] !=null ? $customer_extra_info['billing_country'][0]:'';
-                    $address .= $billing_country_full_name ? $billing_country_full_name : '';
-
-                    if ($vat_number = $wccm_customer_model->get_vat_number($customer->ID))
-                        $address .= "<br/><br/><strong>" . __('VAT:', 'woocommerce-customers-manager') . "</strong> " . $vat_number;
-
+                        if ($vat_number = $wccm_customer_model->get_vat_number($customer->ID))
+                            $address .= "<br/><br/><strong>" . __('VAT:', 'woocommerce-customers-manager') . "</strong> " . $vat_number;
+                    }
                     //For csv export
                     $address_billing = isset($customer_extra_info['billing_address_1']) && $customer_extra_info['billing_address_1'][0] != null ? $customer_extra_info['billing_address_1'][0] . "," : ' ,';
                     $address_billing .= isset($customer_extra_info['billing_address_2']) && $customer_extra_info['billing_address_2'][0] != null ? $customer_extra_info['billing_address_2'][0] . "," : ' ,';
@@ -614,8 +625,8 @@ class WCCM_CustomerTable extends WP_List_Table {
                         'appointments_count' => $appoints_num,
                         'last_order_date' => $last_order_date,
                         'first_order_date' => $first_order_date,
-                        'total_spent' => /* get_woocommerce_currency_symbol(). */$total_amount_spent,
-                        'total_spent_without_currency' => $total_amount_spent,
+                        'total_spent' => /* get_woocommerce_currency_symbol(). */number_format($total_amount_spent),
+                        'total_spent_without_currency' => number_format($total_amount_spent),
                         'password_hash' => $customer->user_pass
                     ));
                 }
@@ -770,54 +781,54 @@ class WCCM_CustomerTable extends WP_List_Table {
 
         <script>
 
-                var wccm_role_empty_error = "<?php _e('You have to select at least one role', 'woocommerce-customers-manager'); ?>";
-                var wccm_user_empty_error = "<?php _e('You have to select at least one user', 'woocommerce-customers-manager'); ?>";
-                var wccm_role_generic_error = "<?php _e('An error has occurred!', 'woocommerce-customers-manager'); ?>";
-                var wccm_role_wait_message = "<?php _e('Assigning values, please wait...', 'woocommerce-customers-manager'); ?>";
-                var wccm_role_reload_message = "<?php _e('Assignment complete! Reloading page...', 'woocommerce-customers-manager'); ?>";
-                var data = [["ID", "Password hash",
-                        "<?php _e('Name', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Surname', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Role', 'woocommerce-customers-manager'); ?>",
-                        "Login",
-                        "Email",
-                        "<?php _e('Notes', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Registration date', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('First order date', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Last date', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('# Orders', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Total amount spent', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing name', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing surname', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing email', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing phone', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing company', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('VAT number', 'woocommerce-customers-manager'); ?>",
-                        //"\"<?php _e('Adrress (billing)', 'woocommerce-customers-manager'); ?>\"",
-                        "<?php _e('Billing address', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing address 2', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing postcode', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing city', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing state', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Billing country', 'woocommerce-customers-manager'); ?>",
-                        //"\"<?php _e('Address (shipping)', 'woocommerce-customers-manager'); ?>\"",
-                        "<?php _e('Shipping name', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping surname', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping phone', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping company', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping address', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping address 2', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping postcode', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping city', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping state', 'woocommerce-customers-manager'); ?>",
-                        "<?php _e('Shipping country', 'woocommerce-customers-manager'); ?>"
+            var wccm_role_empty_error = "<?php _e('You have to select at least one role', 'woocommerce-customers-manager'); ?>";
+            var wccm_user_empty_error = "<?php _e('You have to select at least one user', 'woocommerce-customers-manager'); ?>";
+            var wccm_role_generic_error = "<?php _e('An error has occurred!', 'woocommerce-customers-manager'); ?>";
+            var wccm_role_wait_message = "<?php _e('Assigning values, please wait...', 'woocommerce-customers-manager'); ?>";
+            var wccm_role_reload_message = "<?php _e('Assignment complete! Reloading page...', 'woocommerce-customers-manager'); ?>";
+            var data = [["ID", "Password hash",
+                    "<?php _e('Name', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Surname', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Role', 'woocommerce-customers-manager'); ?>",
+                    "Login",
+                    "Email",
+                    "<?php _e('Notes', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Registration date', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('First order date', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Last date', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('# Orders', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Total amount spent', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing name', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing surname', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing email', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing phone', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing company', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('VAT number', 'woocommerce-customers-manager'); ?>",
+                    //"\"<?php _e('Adrress (billing)', 'woocommerce-customers-manager'); ?>\"",
+                    "<?php _e('Billing address', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing address 2', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing postcode', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing city', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing state', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Billing country', 'woocommerce-customers-manager'); ?>",
+                    //"\"<?php _e('Address (shipping)', 'woocommerce-customers-manager'); ?>\"",
+                    "<?php _e('Shipping name', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping surname', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping phone', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping company', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping address', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping address 2', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping postcode', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping city', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping state', 'woocommerce-customers-manager'); ?>",
+                    "<?php _e('Shipping country', 'woocommerce-customers-manager'); ?>"
         <?php
         if (WCCM_Options::wpuef_include_fields_on_csv_export() && !empty($wpuef_column_titles))
             echo ',"\"' . implode('\"","\"', $wpuef_column_titles) . '\""';
         else
             echo ""
             ?>
-                ]
+            ]
         <?php
         foreach ($this->all_users as $customer) {
             list($billing_address1, $billing_address2, $billing_postcode, $billing_city, $billing_state, $billing_country ) = explode(",", $customer['address_billing']);
@@ -873,13 +884,13 @@ class WCCM_CustomerTable extends WP_List_Table {
         ?>];
 
 
-                if (jQuery('#search_id-search-input').val() != "" && typeof jQuery('#search_id-search-input').val() !== 'undefined')
-                {
-                    jQuery(".first-page").attr('href', jQuery(".first-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
-                    jQuery(".prev-page").attr('href', jQuery(".prev-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
-                    jQuery(".next-page").attr('href', jQuery(".next-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
-                    jQuery(".last-page").attr('href', jQuery(".last-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
-                }
+            if (jQuery('#search_id-search-input').val() != "" && typeof jQuery('#search_id-search-input').val() !== 'undefined')
+            {
+                jQuery(".first-page").attr('href', jQuery(".first-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
+                jQuery(".prev-page").attr('href', jQuery(".prev-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
+                jQuery(".next-page").attr('href', jQuery(".next-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
+                jQuery(".last-page").attr('href', jQuery(".last-page").attr('href') + "&s=" + jQuery('#search_id-search-input').val());
+            }
         <?php
         $get_string = "";
         if (isset($this->customers_ids_to_use_as_filter))
@@ -895,58 +906,58 @@ class WCCM_CustomerTable extends WP_List_Table {
         ?>
 
 
-                jQuery(".first-page").attr('href', jQuery(".first-page").attr('href') + "<?php echo $get_string; ?>");
-                jQuery(".prev-page").attr('href', jQuery(".prev-page").attr('href') + "<?php echo $get_string; ?>");
-                jQuery(".next-page").attr('href', jQuery(".next-page").attr('href') + "<?php echo $get_string; ?>");
-                jQuery(".last-page").attr('href', jQuery(".last-page").attr('href') + "<?php echo $get_string; ?>");
-                jQuery('th a').each(function (index, value)
+            jQuery(".first-page").attr('href', jQuery(".first-page").attr('href') + "<?php echo $get_string; ?>");
+            jQuery(".prev-page").attr('href', jQuery(".prev-page").attr('href') + "<?php echo $get_string; ?>");
+            jQuery(".next-page").attr('href', jQuery(".next-page").attr('href') + "<?php echo $get_string; ?>");
+            jQuery(".last-page").attr('href', jQuery(".last-page").attr('href') + "<?php echo $get_string; ?>");
+            jQuery('th a').each(function (index, value)
+            {
+                //console.log(jQuery(this).attr('href'));
+                jQuery(this).attr('href', jQuery(this).attr('href') + "<?php echo $get_string; ?>");
+            });
+
+            jQuery('#csv-button-customer-table').click(function ()
+            {
+                var ids_to_export = [];
+                var csvRows = [];
+
+                jQuery('th.check-column input').each(function (index)
                 {
-                    //console.log(jQuery(this).attr('href'));
-                    jQuery(this).attr('href', jQuery(this).attr('href') + "<?php echo $get_string; ?>");
-                });
-
-                jQuery('#csv-button-customer-table').click(function ()
-                {
-                    var ids_to_export = [];
-                    var csvRows = [];
-
-                    jQuery('th.check-column input').each(function (index)
+                    if (!isNaN(jQuery(this).attr('value')) && jQuery(this).prop("checked") == true)
                     {
-                        if (!isNaN(jQuery(this).attr('value')) && jQuery(this).prop("checked") == true)
-                        {
-                            ids_to_export.push(jQuery(this).attr('value'));
-                        }
-                    });
-
-
-                    for (var i = 0, l = data.length; i < l; ++i)
-                    {
-                        if (ids_to_export.length == 0)
-                            csvRows.push(data[i].join(','));
-                        else
-                        {
-                            if (i == 0) //Title column
-                                csvRows.push(data[0].join(','));
-                            else
-                                for (var j = 0; j < ids_to_export.length; j++)
-                                {
-                                    if (ids_to_export[j] == data[i][0])
-                                        csvRows.push(data[i].join(','));
-                                }
-
-                        }
+                        ids_to_export.push(jQuery(this).attr('value'));
                     }
-
-
-                    var csvString = csvRows.join("\r\n");
-                    var a = document.createElement('a');
-                    a.href = 'data:attachment/csv,' + encodeURIComponent(csvString);
-                    a.target = '_blank';
-                    a.download = 'WCCM-customers_list.csv';
-
-                    document.body.appendChild(a);
-                    a.click();
                 });
+
+
+                for (var i = 0, l = data.length; i < l; ++i)
+                {
+                    if (ids_to_export.length == 0)
+                        csvRows.push(data[i].join(','));
+                    else
+                    {
+                        if (i == 0) //Title column
+                            csvRows.push(data[0].join(','));
+                        else
+                            for (var j = 0; j < ids_to_export.length; j++)
+                            {
+                                if (ids_to_export[j] == data[i][0])
+                                    csvRows.push(data[i].join(','));
+                            }
+
+                    }
+                }
+
+
+                var csvString = csvRows.join("\r\n");
+                var a = document.createElement('a');
+                a.href = 'data:attachment/csv,' + encodeURIComponent(csvString);
+                a.target = '_blank';
+                a.download = 'WCCM-customers_list.csv';
+
+                document.body.appendChild(a);
+                a.click();
+            });
 
 
         </script>

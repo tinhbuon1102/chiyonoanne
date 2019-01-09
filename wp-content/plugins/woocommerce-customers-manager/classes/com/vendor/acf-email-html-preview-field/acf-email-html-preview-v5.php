@@ -83,7 +83,7 @@ class acf_html_email_preview_field extends acf_field {
 		
 		echo '<div id="acf_email_previw_wrapper" style="display:block; margin:50px 0 50px 0;">';
 		 if($use_footer_and_or_header == 'all' || $use_footer_and_or_header == 'all')
-		echo	$mail->email_header($email_heading );
+		//echo	$mail->email_header($email_heading );
 		echo $template_to_used;	
 		if($use_footer_and_or_header == 'all' || $use_footer_and_or_header == 'footer')
 			$mail->email_footer();

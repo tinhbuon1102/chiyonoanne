@@ -1312,7 +1312,7 @@ function zoa_child_shop_open_tag() {
         add_filter('woocommerce_order_item_name', 'zoa_change_order_product_title', 1000, 4);
 
         function zoa_change_order_product_title($title, $item = array(), $order = array()) {
-            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX))) {
+            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX)) && !is_cart()) {
                 return $title;
             }
             $_product = $item->get_product();
@@ -4615,6 +4615,16 @@ function zoa_woocommerce_mail_content($message) {
             }
         }
     }
+    if (strpos($message, 'order_tracking_template') !== false)
+    {
+    	preg_match('/order_tracking_template_(\d+)/', $message, $matches);
+    	if (!empty($matches) && isset($matches[1]))
+    	{
+    		$order_id = $matches[1];
+    		$tracking_template = zoa_order_tracking_email_template(array(), $order_id);
+    		$message = str_replace('{'. $matches[0] .'}', $tracking_template, $message);
+    	}
+    }
     return $message;
 }
 
@@ -4771,3 +4781,24 @@ function ch_manage_customers_custom_column($abs=null,$column_name, $item){
 
 add_filter('manage_customers_custom_column', 'ch_manage_customers_custom_column',10,3);
 //end
+
+add_shortcode('order_tracking_template', 'zoa_order_tracking_email_template');
+function zoa_order_tracking_email_template($atts, $order_id = null) {
+	global $order;
+	$atts = shortcode_atts( array(
+		'order_id' => null,
+	), $atts);
+	
+// 	8414
+	$order_id = $order_id ? $order_id : ($order ? $order->get_id() : $atts['order_id']);
+	if ($order_id && class_exists('WCST_Tracking_info_displayer'))
+	{
+		ob_start();
+		$order = wc_get_order( $order_id );
+		$tracking = new WCST_Tracking_info_displayer();
+		$tracking->email_shipping_details( $order );
+		$tracking_html = ob_get_contents();
+		ob_end_clean();
+		return $tracking_html;
+	}
+}

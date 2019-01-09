@@ -83,7 +83,7 @@
                 datatable.ajax.reload();
             });
             jQuery('.ch_user_select2').select2({
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 allowClear: true,
                 placeholder: {
                     id: "",
