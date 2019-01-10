@@ -1134,6 +1134,13 @@ body.en .order__summary .heading {
     padding-top: 24px;
     margin-top: 24px;
 }
+.summary .mini-product__info .product_title {
+    font-size: inherit;
+    margin-top: 0;
+    margin-bottom: 7px;
+    line-height: inherit;
+    display: block;
+}
 .mini-product__item:not(:last-child) {
     margin-bottom: 7px;
 }
@@ -2522,7 +2529,7 @@ body:not(.home) header.header-box:not(.is-scroll) {
 	font-family: 'Noto Sans JP', 游ゴシック, "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
 	font-weight: 300;
 }
-.summary .product_title {
+.shop--single .summary .product_title {
     font-size: 1.25rem;
     line-height: 1.5;
     margin-bottom: 3px;
@@ -2587,7 +2594,7 @@ section.related.products ul.products .product {
     width: calc(83.33333% - 30px);
     margin: 0 auto;
 	}
-	.summary .product_title {
+	.shop--single .summary .product_title {
 		font-size: 1.5rem;
 	}
 }
@@ -3757,6 +3764,12 @@ body.single-gallery-vertical .remodal-wrapper {
 .remodal_wraper .pro-carousel-thumb .slick-vertical .slick-slide {
     float: none;
 }
+.pdp__attribute--group .about_size_wraper .bodyshape_info > .pop-up-button {
+    line-height: 1;
+}
+.pdp__attribute--group .info_show_wrap .size_info {
+    margin-left: 5px;
+}
 /*Single Product Gallery*/
 .pro-carousel-image >#gallery-image > .slick-list > .slick-track > .slick-slide {
     display: -webkit-box;
@@ -3796,20 +3809,24 @@ body.single-gallery-vertical .remodal-wrapper {
 }
 @media (min-width: 768px) {
 	.pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute.break_width {
-    width: 100%;
-    margin-top: 24px;
+    
 	}
 	.order--checkout__summary__heading {
     cursor: default;
 	}
 	.pdp__attribute--group {
-    display: -webkit-box;
+    /*display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    flex-wrap: wrap;*/
+	display: block;
+	}
+	.pdp__attribute--group > div {
+		display: inline-block;
+		vertical-align: top;
 	}
 	.pdp__attribute--group > div:not(:last-child) {
     margin-right: 24px;
