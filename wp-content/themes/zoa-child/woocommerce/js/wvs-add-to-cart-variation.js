@@ -200,7 +200,7 @@ module.exports = __webpack_require__(4);
     VariationForm.prototype.onShow = function (event, variation, purchasable) {
         event.preventDefault();
 		if ($('#yith_wapo_groups_container').length) {
-			var selectedwapo = $('#yith_wapo_groups_container').find('.ywapo_selected');
+			var selectedwapo = $('#yith_wapo_groups_container').find('.ywapo_selected').length;
 			if ( purchasable && selectedwapo ) {
 				event.data.variationForm.$form.find('.single_add_to_cart_button').removeClass('disabled wc-variation-selection-needed wc-variation-is-unavailable');
 			event.data.variationForm.$form.find('.woocommerce-variation-add-to-cart').removeClass('woocommerce-variation-add-to-cart-disabled').addClass('woocommerce-variation-add-to-cart-enabled');

@@ -3795,6 +3795,10 @@ body.single-gallery-vertical .remodal-wrapper {
 	}
 }
 @media (min-width: 768px) {
+	.pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute.break_width {
+    width: 100%;
+    margin-top: 24px;
+	}
 	.order--checkout__summary__heading {
     cursor: default;
 	}
@@ -3893,12 +3897,6 @@ body.single-gallery-vertical .remodal-wrapper {
 	}
 	.prod-info {
 		margin-bottom: 40px;
-	}
-}
-@media only screen and (min-width: 1315px) {
-	.pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute.long_width {
-    width: 100%;
-    margin-top: 24px;
 	}
 }
 @media (max-width:767px) {
