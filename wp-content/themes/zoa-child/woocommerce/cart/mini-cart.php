@@ -52,7 +52,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 						), $cart_item_key );
 						?>
 						<?php if ( empty( $product_permalink ) ) : ?>
-							<?php echo $thumbnail . $product_name . '&nbsp;'; ?>
+							<?php echo $thumbnail . '&nbsp;'; ?>
 						<?php else : ?>
 							<a class="mini-product__link" href="<?php echo esc_url( $product_permalink ); ?>">
 								<?php echo $thumbnail; ?>
