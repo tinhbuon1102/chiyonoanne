@@ -161,7 +161,7 @@ if ( ! class_exists( 'YITH_WAPO_Frontend' ) ) {
 
 			// Add item data to the cart
 			add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'add_to_cart_validation' ), 50, 6 );
-			add_filter( 'woocommerce_add_cart_item_data', array( $this, 'add_cart_item_data' ), 10, 2 );
+			add_filter( 'woocommerce_add_cart_item_data', array( $this, 'add_cart_item_data' ), 10000000, 2 );
 			add_filter( 'woocommerce_cart_item_quantity' , array( $this, 'woocommerce_cart_item_quantity' ) , 10 , 3 );
 
 			// Add to cart
@@ -191,7 +191,7 @@ if ( ! class_exists( 'YITH_WAPO_Frontend' ) ) {
 			add_action( 'woocommerce_cart_item_restored' , array( $this, 'cart_item_restored' ), 10, 2 );
 
 			// Sold individually options actions
-			add_action( 'woocommerce_add_to_cart', array( $this, 'add_to_cart_sold_individually' ) , 10 , 6 ) ;
+// 			add_action( 'woocommerce_add_to_cart', array( $this, 'add_to_cart_sold_individually' ) , 10 , 6 ) ;
 			add_filter( 'woocommerce_cart_item_remove_link', array( $this, 'hide_remove_link' ), 10, 2 );
 			add_filter( 'woocommerce_cart_item_thumbnail', array( $this, 'hide_thumbnail_name' ), 10, 2 );
 			add_filter( 'woocommerce_cart_item_name', array( $this, 'hide_thumbnail_name' ), 10, 2 );

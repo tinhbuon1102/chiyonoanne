@@ -535,7 +535,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
           if (!jQuery('.mwb_wgm_added_wrapper').length)
           {
-        	  xhr.send('action=single_add_to_cart&nonce=' + zoa_ajax.nonce + '&product_id=' + single_atc_id + '&product_qty=' + _qty + '&variation_id=' + variation_id + '&variations=' + JSON.stringify(items));
+        	  if (jQuery('.ywapo_options_container').length)
+        	  {
+        		  jQuery('form.cart').find('input[name="add-to-cart"]').attr('disabled', true);
+        	  }
+        	  else {
+        		  jQuery('form.cart').find('input[name="add-to-cart"]').attr('disabled', false);
+        	  }
+        	  xhr.send('action=single_add_to_cart&nonce=' + zoa_ajax.nonce + '&product_id=' + single_atc_id + '&product_qty=' + _qty + '&variation_id=' + variation_id + '&variations=' + JSON.stringify(items) + '&' + jQuery('form.cart').serialize());
           }
         });
       };
