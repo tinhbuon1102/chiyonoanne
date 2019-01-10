@@ -1288,7 +1288,7 @@ function zoa_child_shop_open_tag() {
         	{
         		return $title;
         	}
-        	return zoa_change_product_title($title, $id = 0);
+        	return zoa_change_product_title($title, $id);
         }
         function zoa_change_product_title($title, $id = 0) {
             if (!$id)
