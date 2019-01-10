@@ -23,7 +23,7 @@ function getDataForDataTable() {
     $result['recordsFiltered'] = $result['recordsTotal'];
     $list = getDataPaging($keyword, $start, $length, $user_id);
 
-    if (count($list) > 0) {
+    if (@count($list) > 0) {
         foreach ($list as $value) {
             $arr_title = explode("(", $value->post_title);
             $obj[0] = str_replace("@", "-", $arr_title[0]);
@@ -66,7 +66,7 @@ function getTotal($keyword, $user_id) {
 
     if ($keyword != '') {
         $arr_keywork = explode(" ", $keyword);
-        if (count($arr_keywork) > 1) {
+        if (@count($arr_keywork) > 1) {
             $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' )";
             $str_where = '';
             foreach ($arr_keywork as $value_k) {
@@ -83,7 +83,7 @@ function getTotal($keyword, $user_id) {
     }
 
     $result = $wpdb->get_row($query);
-    if (count($result) > 0) {
+    if (@count($result) > 0) {
         if (isset($result->total) && $result->total > 0) {
             return $result->total;
         } else {
@@ -99,7 +99,7 @@ function getDataPaging($keyword, $start, $length, $user_id) {
     $query = "SELECT DISTINCT p.ID,p.post_title,p.post_author FROM " . $wpdb->prefix . "posts AS p JOIN " . $wpdb->prefix . "postmeta AS pm ON p.ID=pm.post_id LEFT JOIN " . $wpdb->prefix . "users AS u ON p.post_author=u.ID LEFT JOIN " . $wpdb->prefix . "usermeta AS um ON p.post_author=um.user_id WHERE p.post_type='booked_appointments' AND p.post_status='publish'";
     if ($keyword != '') {
         $arr_keywork = explode(" ", $keyword);
-        if (count($arr_keywork) > 1) {
+        if (@count($arr_keywork) > 1) {
             $query .= " AND (p.post_title LIKE '%{$keyword}%' OR u.user_email LIKE '%{$keyword}%' OR (pm.meta_value LIKE '%{$keyword}%' AND pm.meta_key='_appointment_guest_email' )";
             $str_where = '';
             foreach ($arr_keywork as $value_k) {
