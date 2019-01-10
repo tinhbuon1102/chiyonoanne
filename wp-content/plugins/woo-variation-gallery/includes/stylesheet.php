@@ -44,6 +44,5 @@
             max-width : 100% !important;
             }
         }
-
     <?php endif; ?>
 </style>

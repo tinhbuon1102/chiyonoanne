@@ -42,7 +42,8 @@ add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 language switcher
 **/
 function language_selector_flags(){
-    $languages = icl_get_languages('skip_missing=0&orderby=code');
+	if (function_exists('icl_object_id')) {
+		$languages = icl_get_languages('skip_missing=0&orderby=code');
     if(!empty($languages)){
 		echo '<div class="lang_flag_switcher">';
         foreach($languages as $l){
@@ -54,6 +55,8 @@ function language_selector_flags(){
         }
 		echo '</div>';
     }
+	}
+    
 }
 
 function hide_update_noticee_to_all_but_admin_users() {

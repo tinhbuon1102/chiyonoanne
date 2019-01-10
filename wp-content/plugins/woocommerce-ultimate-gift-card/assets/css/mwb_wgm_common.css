@@ -9,7 +9,7 @@
   -webkit-overflow-scrolling: touch!important;
   z-index: 9999999;    
 }
-#TB_window iframe#TB_iframeContent {
+body:not(.post-type-product):not(.wp-admin) #TB_window iframe#TB_iframeContent {
   margin: 0 auto;
   max-width: 600px;
   width: 100% !important;

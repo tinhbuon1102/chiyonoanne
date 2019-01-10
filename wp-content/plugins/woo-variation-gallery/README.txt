@@ -105,6 +105,11 @@ Yes, it is.
 
 == Changelog ==
 
+= 1.1.20 =
+
+* Add: RTL Support
+* Fix: Known JS Issue
+
 = 1.1.19 =
 
 * Fix: ROYAL Theme Issue

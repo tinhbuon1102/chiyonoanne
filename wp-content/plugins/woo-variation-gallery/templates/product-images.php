@@ -26,6 +26,7 @@
 		'arrows'         => false,
 		'adaptiveHeight' => true,
 		// 'lazyLoad'       => 'progressive',
+		'rtl'            => is_rtl(),
 	) );
 	
 	$thumbnail_slider_js_options = apply_filters( 'woo_variation_gallery_thumbnail_slider_js_options', array(
@@ -36,7 +37,8 @@
 		'asNavFor'       => '.woo-variation-gallery-slider',
 		'centerMode'     => true,
 		'infinite'       => true,
-		'centerPadding'  => '0px'
+		'centerPadding'  => '0px',
+		'rtl'            => is_rtl(),
 	) );
 	
 	$gallery_thumbnail_position = get_option( 'woo_variation_gallery_thumbnail_position', 'bottom' );
