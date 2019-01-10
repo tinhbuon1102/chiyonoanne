@@ -54,7 +54,7 @@ add_action('admin_head', 'hide_update_noticee_to_all_but_admin_users', 1);
 function elsey_change_cssjs_ver($src) {
     if (strpos($src, '?ver='))
         $src = remove_query_arg('ver', $src);
-    $src = add_query_arg(array('ver' => '3.8'), $src);
+    $src = add_query_arg(array('ver' => '3.9'), $src);
     return $src;
 }
 
@@ -1280,8 +1280,16 @@ function zoa_child_shop_open_tag() {
 
         add_action('woocommerce_single_product_summary', 'ouput_closing_div', 10);
 
-        add_filter('the_title', 'zoa_change_product_title', 1, 2);
+        add_filter('the_title', 'zoa_change_product_title_default', 1, 2);
 
+        
+        function zoa_change_product_title_default($title, $id = 0) {
+        	if (is_cart())
+        	{
+        		return $title;
+        	}
+        	return zoa_change_product_title($title, $id = 0);
+        }
         function zoa_change_product_title($title, $id = 0) {
             if (!$id)
                 return $title;
@@ -1312,7 +1320,7 @@ function zoa_child_shop_open_tag() {
         add_filter('woocommerce_order_item_name', 'zoa_change_order_product_title', 1000, 4);
 
         function zoa_change_order_product_title($title, $item = array(), $order = array()) {
-            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX)) && !is_cart()) {
+            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX))) {
                 return $title;
             }
             $_product = $item->get_product();
