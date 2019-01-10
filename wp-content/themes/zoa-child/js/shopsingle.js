@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
 	var attribute = $('.variations.pdp__attribute--group');
 	if (attribute.length > 0) {
 		$('.pdp__attribute--group > .pdp__attribute.variations__attribute').each(function() {
-			if ($(this).children().hasClass('.info_show_wrap')) {
+			if ($(this).find('.about_size_wraper').length) {
 			$(this).find('.info_show_wrap').before('<abbr class="required" title="Required">*</abbr>');
 		} else {
 			$(this).find('.pdp__attribute__label').append('<abbr class="required" title="Required">*</abbr>');
