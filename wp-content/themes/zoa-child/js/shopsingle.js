@@ -18,7 +18,19 @@ jQuery(document).ready(function($){
 	$('.mwb_wgm_delivery_via_email > input').each( function() {
 		$(this).wrap('<div class="form-row" />').wrap('<div class="field-wrapper" />');
 	});
-	
+	//add class if attribute element width is bigger width
+	$(window).on('load resize', function() {
+		//var winW = $(window).width();
+		var attList = [];
+		$('.pdp__attribute--group > .pdp__attribute variations__attribute').each(function(idx) {
+			attList[idx] = $(this).width;
+		});
+		var maxAttW = Math.max.apply(null,attList);
+		if ( maxAttW > 390 ) {
+			
+		}
+		console.log('attribute max width：' + maxAttW + 'px');
+	});
 	
 	function isAddToCartValid()
 	{

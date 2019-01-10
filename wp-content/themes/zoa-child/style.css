@@ -168,9 +168,6 @@ a.view_all, #getin a.link_underline {
 .js-product-item .c-product-item_wrap_info .add_to_cart_button {
 	display: none;
 }
-.disable_wishlist_float {
-	position: absolute;width: 100%;z-index: 99999;top: 0;
-}
 .add-to-wishlist-button.disabled {
 	position: relative;
 	overflow: hidden;

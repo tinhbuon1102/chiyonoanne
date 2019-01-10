@@ -3895,6 +3895,12 @@ body.single-gallery-vertical .remodal-wrapper {
 		margin-bottom: 40px;
 	}
 }
+@media only screen and (min-width: 1315px) {
+	.pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute.long_width {
+    width: 100%;
+    margin-top: 24px;
+	}
+}
 @media (max-width:767px) {
 	.pdp__attribute--group > .pdp__attribute, .ws-row {
     margin-top: 24px;
@@ -4412,6 +4418,13 @@ body #booked-profile-page .cf-meta-values-hidden {
     background: #e6e6e6 !important;
     border-color: #e6e6e6 !important;
 }
+.disable_wishlist_float {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    top: 0;
+}
 /**********
 yith product add-ons option style
 ************/
@@ -4457,4 +4470,8 @@ yith product add-ons option style
 
 .ywapo_options_container .ywapo_input_container.ywapo_input_container_labels.ywapo_selected {
     border-color: #000;
+}
+.ywapo_product_option_description p {
+    font-size: .75rem;
+    color: #666666;
 }

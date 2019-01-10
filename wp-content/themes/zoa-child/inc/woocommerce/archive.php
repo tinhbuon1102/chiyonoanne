@@ -113,8 +113,9 @@ if( ! function_exists( 'zoa_swatches_list' ) ) {
         }else{
             $output .= $label_output;
         }
+		return '';
 
-        return '<div class="pro-swatch-list">' . $output . '</div>';
+        //return '<div class="pro-swatch-list">' . $output . '</div>';
     }
 }
 

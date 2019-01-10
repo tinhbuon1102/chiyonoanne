@@ -190,8 +190,9 @@ class ParadoxTitanFrameworkOptionCode extends ParadoxTitanFrameworkOption {
 	 */
 	public function display() {
 		$this->echoOptionHeader();
-
+                
 		?>
+                <script src="<?php echo ParadoxTitanFramework::getURL( '../js/ace-min-noconflict/ace.js', __FILE__ ); ?>"></script>
 		<script>
 		jQuery(document).ready(function ($) {
 			var container = jQuery('#<?php echo $this->getID() ?>_ace_editor');
