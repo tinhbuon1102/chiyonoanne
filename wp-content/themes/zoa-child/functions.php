@@ -18,7 +18,26 @@ function get_user_role() {
 }
 
 ;
+/**
+load custom font for admin
 
+function my_admin_styles_load() {
+	wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500', array(), null, 'all' );
+}
+add_action( 'admin_enqueue_scripts', 'my_admin_styles_load' );
+**/
+/**
+load custom css for woocommerce-customers-manager
+**/
+function load_custom_wp_admin_style() {
+        // $hook is string value given add_menu_page function.
+        if(!class_exists('WCCM_CustomerDetails')) {
+                return;
+        }
+	wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
+    wp_enqueue_style('wcm_plugin_page_css');
+}
+add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 /**
 language switcher
 **/
@@ -125,6 +144,16 @@ function remove_menu_pages() {
         $remove_submenu = remove_submenu_page('woocommerce', 'wc-status');
     }
 }
+
+//remove customer manage option menu
+add_action('admin_menu', 'remove_wccm_sub_menu_pages', 999);
+
+function remove_wccm_sub_menu_pages() {
+    if (!current_user_can('level_10')) {
+        $remove_submenu = remove_submenu_page('manage_woocommerce', 'wccm-options-page');
+    }
+}
+
 
 // Rename WooCommerce to Shop
 if (!current_user_can('level_10')) {
@@ -1280,8 +1309,16 @@ function zoa_child_shop_open_tag() {
 
         add_action('woocommerce_single_product_summary', 'ouput_closing_div', 10);
 
-        add_filter('the_title', 'zoa_change_product_title', 1, 2);
+        add_filter('the_title', 'zoa_change_product_title_default', 1, 2);
 
+        
+        function zoa_change_product_title_default($title, $id = 0) {
+        	if (is_cart())
+        	{
+        		return $title;
+        	}
+        	return zoa_change_product_title($title, $id = 0);
+        }
         function zoa_change_product_title($title, $id = 0) {
             if (!$id)
                 return $title;
@@ -1312,7 +1349,7 @@ function zoa_child_shop_open_tag() {
         add_filter('woocommerce_order_item_name', 'zoa_change_order_product_title', 1000, 4);
 
         function zoa_change_order_product_title($title, $item = array(), $order = array()) {
-            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX)) && !is_cart()) {
+            if ((is_admin() && !(defined('DOING_AJAX') && DOING_AJAX))) {
                 return $title;
             }
             $_product = $item->get_product();

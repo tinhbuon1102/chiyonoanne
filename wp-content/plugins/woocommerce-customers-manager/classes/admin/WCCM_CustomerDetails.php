@@ -172,7 +172,7 @@ class WCCM_CustomerDetails {
 
 
         <h2><?php _e('Customers Details', 'woocommerce-customers-manager'); ?></h2>
-        <div class="postbox">
+        <div id="cdetails_postbox" class="postbox">
             <?php
             $orders = $this->get_all_user_orders($this->current_customer_id, $this->starting_date, $this->ending_date);
             //for ($i=0; $i<50; $i++)
@@ -181,32 +181,34 @@ class WCCM_CustomerDetails {
             ?>
             <div id="user-general-details">
                 <h3><?php _e('General Details', 'woocommerce-customers-manager'); ?></h3>
-                <p>
-                    <label><?php _e('Profile Image', 'woocommerce-customers-manager'); ?></label> <?php echo get_avatar($this->current_customer_id, 96, "", false, array('class' => 'wccm_avatar_img')); ?> <br />
+                <div class="detail_box user-general-details_box">
+                    <div class="profile_image">
+						<label><?php _e('Profile Image', 'woocommerce-customers-manager'); ?></label> <?php echo get_avatar($this->current_customer_id, 96, "", false, array('class' => 'wccm_avatar_img')); ?>
+					</div>
                     <?php
                     if($locale=='ja'||$locale=='site-default'){
                         ?>
-                        <label><?php _e('Last Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?> <br/>
-                        <label><?php _e('First Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?> <br />
+                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?></span></div>
+                        
                         <?php
                     } else {
                         ?>
-                        <label><?php _e('First Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?> <br />
-                        <label><?php _e('Last Name', 'woocommerce-customers-manager'); ?></label> <?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?> <br/>
+                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?></span></div>
                     <?php } ?> 
-                    <label><?php _e('Email Address', 'woocommerce-customers-manager'); ?></label><?php if (isset($this->customer_info->user_email)) echo $this->customer_info->user_email ?> <br/>
-                    <label><?php _e('Registration Date', 'woocommerce-customers-manager'); ?> </label> <?php if (isset($this->customer_info->user_registered)) echo $this->customer_info->user_registered ?> <br/>
-                    <label><?php _e('Roles', 'woocommerce-customers-manager'); ?> </label> 
+                    <div class="form_row"><label><?php _e('Email Address', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_info->user_email)) echo $this->customer_info->user_email ?></span></div>
+                    <div class="form_row"><label><?php _e('Registration Date', 'woocommerce-customers-manager'); ?> </label><span class="value"><?php if (isset($this->customer_info->user_registered)) echo $this->customer_info->user_registered ?></span></div>
+                    <div class="form_row"><label><?php _e('Roles', 'woocommerce-customers-manager'); ?> </label> 
+					<span class="value">
                     <?php
                     $user = new WP_User($this->current_customer_id);
                     if (!empty($user->roles) && is_array($user->roles)) {
                         foreach ($user->roles as $role_code)
                             echo $wp_roles->roles[$role_code]["name"] . " (" . __('Role code:', 'woocommerce-customers-manager') . " <i>" . $role_code . "</i>)<br/>";
                     }
-                    ?> <br/>
-                    <label><?php _e('Total Spent', 'woocommerce-customers-manager'); ?> </label> <b><?php echo WCCM_CustomerDetails::get_user_total_spent(null, null, $this->get_all_user_orders($this->current_customer_id)/* $orders */); ?></b> <br/><br/>
+                    ?></span></div>
+                    <div class="form_row"><label><?php _e('Total Spent', 'woocommerce-customers-manager'); ?> </label><span class="value"><b><?php echo WCCM_CustomerDetails::get_user_total_spent(null, null, $this->get_all_user_orders($this->current_customer_id)/* $orders */); ?></b></span></div>
 
-                </p>
+                </div>
 
                 <!--- Non Guest User extras -->
                 <?php if (!$this->is_guest_customer): ?>

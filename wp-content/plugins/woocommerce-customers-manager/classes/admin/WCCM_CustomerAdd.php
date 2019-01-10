@@ -36,6 +36,10 @@ class WCCM_CustomerAdd {
             $result['billing_first_name'] = str_replace('"', "'", $customer_extra_info['billing_first_name'][0]);
         if (isset($customer_extra_info['billing_last_name']))
             $result['billing_last_name'] = str_replace('"', "'", $customer_extra_info['billing_last_name'][0]);
+        if (isset($customer_extra_info['billing_first_name_kana']))
+            $result['billing_first_name_kana'] = str_replace('"', "'", $customer_extra_info['billing_first_name_kana'][0]);
+        if (isset($customer_extra_info['billing_last_name_kana']))
+            $result['billing_last_name_kana'] = str_replace('"', "'", $customer_extra_info['billing_last_name_kana'][0]);
         if (isset($customer_extra_info['billing_phone']))
             $result['billing_phone'] = $customer_extra_info['billing_phone'][0];
         if (isset($customer_extra_info['billing_email']))
@@ -60,6 +64,10 @@ class WCCM_CustomerAdd {
             $result['shipping_first_name'] = str_replace('"', "'", $customer_extra_info['shipping_first_name'][0]);
         if (isset($customer_extra_info['shipping_last_name']))
             $result['shipping_last_name'] = str_replace('"', "'", $customer_extra_info['shipping_last_name'][0]);
+        if (isset($customer_extra_info['shipping_first_name_kana']))
+            $result['shipping_first_name_kana'] = str_replace('"', "'", $customer_extra_info['shipping_first_name_kana'][0]);
+        if (isset($customer_extra_info['shipping_last_name_kana']))
+            $result['shipping_last_name_kana'] = str_replace('"', "'", $customer_extra_info['shipping_last_name_kana'][0]);
         if (isset($customer_extra_info['shipping_phone']))
             $result['shipping_phone'] = $customer_extra_info['shipping_phone'][0];
         if (isset($customer_extra_info['shipping_company']))
@@ -177,6 +185,8 @@ class WCCM_CustomerAdd {
         $wccm_customer_model->update_user_meta($user_id, $wpdb->prefix . 'capabilities', $roles_temp);
         $wccm_customer_model->update_user_meta($user_id, 'billing_first_name', $data_source['billing_first_name']);
         $wccm_customer_model->update_user_meta($user_id, 'billing_last_name', $data_source['billing_last_name']);
+        $wccm_customer_model->update_user_meta($user_id, 'billing_last_name_kana', $data_source['billing_last_name_kana']);
+        $wccm_customer_model->update_user_meta($user_id, 'billing_first_name_kana', $data_source['billing_first_name_kana']);
         $wccm_customer_model->update_user_meta($user_id, 'billing_email', $data_source['billing_email']);
         $wccm_customer_model->update_user_meta($user_id, 'billing_phone', $data_source['billing_phone']);
         $wccm_customer_model->update_user_meta($user_id, 'billing_company', $data_source['billing_company']);
@@ -203,6 +213,8 @@ class WCCM_CustomerAdd {
         }
         $wccm_customer_model->update_user_meta($user_id, 'shipping_first_name', $data_source['shipping_first_name']);
         $wccm_customer_model->update_user_meta($user_id, 'shipping_last_name', $data_source['shipping_last_name']);
+        $wccm_customer_model->update_user_meta($user_id, 'shipping_first_name_kana', $data_source['shipping_first_name_kana']);
+        $wccm_customer_model->update_user_meta($user_id, 'shipping_last_name_kana', $data_source['shipping_last_name_kana']);
         $wccm_customer_model->update_user_meta($user_id, 'shipping_phone', $data_source['shipping_phone']);
         $wccm_customer_model->update_user_meta($user_id, 'shipping_company', $data_source['shipping_company']);
         $wccm_customer_model->update_user_meta($user_id, 'shipping_address_1', $data_source['shipping_address_1']);
@@ -313,7 +325,7 @@ class WCCM_CustomerAdd {
 
                 <form class="validate" id="createuser" name="createuser" method="post" action="">
                 <!-- <input type="hidden" value="createuser" name="action">-->
-                    <input type="hidden" value="<?php //echo $_REQUEST['customer']            ?>" name="customer">
+                    <input type="hidden" value="<?php //echo $_REQUEST['customer']                 ?>" name="customer">
                     <input type="hidden" value="<?php echo $data_source['ID'] ?>" name="ID">
                     <?php if ($this->edit_mode): ?>
                         <input type="hidden" value="<?php echo $data_source['user_login'] ?>" name="user_login">
@@ -323,35 +335,47 @@ class WCCM_CustomerAdd {
                     ?>
                     <table class="form-table">
                         <tbody>
-                            <tr class="form-field form-required">
-                                <th scope="row"><label for="user_login">Username <span class="description">(<span class="field_required">required</span>)</span></label></th>
-                                <td><input required="required" type="text" aria-required="true" value="<?php if (isset($data_source['user_login'])) echo $data_source['user_login']; ?>" id="user_login" name="user_login" <?php if ($this->edit_mode) echo 'disabled'; ?>></td>
+                            <tr class="form-field field-username form-required">
+                                <th scope="row"><label for="user_login"><?php _e('Username', 'woocommerce-customers-manager'); ?> <span class="description">(<span class="field_required"><?php _e('required', 'woocommerce-customers-manager'); ?></span>)</span></label></th>
+                                <td><div class="field_input_wrap"><input required="required" type="text" aria-required="true" value="<?php if (isset($data_source['user_login'])) echo $data_source['user_login']; ?>" id="user_login" name="user_login" <?php if ($this->edit_mode) echo 'disabled'; ?>></div></td>
                             </tr>
-                            <tr class="form-field form-required">
-                                <th scope="row"><label for="email">E-mail <span class="description ">(<span class="field_required">required</span>)</span></label></th>
-                                <td><input required="required" type="text" value="<?php if (isset($data_source['email'])) echo $data_source['email']; ?>" id="email" name="email"></td>
+                            <tr class="form-field form-required field-email">
+                                <th scope="row"><label for="email">E-mail <span class="description ">(<span class="field_required"><?php _e('required', 'woocommerce-customers-manager'); ?></span>)</span></label></th>
+                                <td><div class="field_input_wrap"><input required="required" type="text" value="<?php if (isset($data_source['email'])) echo $data_source['email']; ?>" id="email" name="email"></div></td>
                             </tr>
                             <?php
                             if ($locale == 'ja' || $locale == 'site-default') {
                                 ?>
-                                <tr class="form-field">
-                                    <th scope="row"><label for="last_name"><?php _e('Last name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['last_name'])) echo $data_source['last_name']; ?>" id="last_name" name="last_name"></td>
-                                </tr>
-                                <tr class="form-field">
-                                    <th scope="row"><label for="first_name"><?php _e('First name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['first_name'])) echo $data_source['first_name']; ?>" id="first_name" name="first_name"></td>
+                                <tr class="form-field field-names">
+                                    <th scope="row"><label for="last_name"><?php _e('Name', 'woocommerce-customers-manager'); ?> </label></th>
+                                    <td>
+                                        <ul class="col_half_input names">
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('Last name', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['last_name'])) echo $data_source['last_name']; ?>" id="last_name" name="last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('First name', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['first_name'])) echo $data_source['first_name']; ?>" id="first_name" name="first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                        </ul>
+
+                                    </td>
                                 </tr>
                                 <?php
                             }else {
                                 ?>
-                                <tr class="form-field">
+                                <tr class="form-field field-names">
                                     <th scope="row"><label for="first_name"><?php _e('First name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['first_name'])) echo $data_source['first_name']; ?>" id="first_name" name="first_name"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['first_name'])) echo $data_source['first_name']; ?>" id="first_name" name="first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="last_name"><?php _e('Last name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['last_name'])) echo $data_source['last_name']; ?>" id="last_name" name="last_name"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['last_name'])) echo $data_source['last_name']; ?>" id="last_name" name="last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div></td>
                                 </tr>
                             <?php } ?>
                             <tr class="form-field">
@@ -362,8 +386,11 @@ class WCCM_CustomerAdd {
                                                 _e('Required', 'woocommerce-customers-manager');
                                             ?>)</span></label></th>
                                 <td>
-                                    <input value=" " class="hidden"><!-- #24364 workaround -->
-                                    <input type="password" autocomplete="off" id="pass1" name="pass1" value="">
+                                    <div class="field_input_wrap">
+                                        <input value=" " class="hidden"><!-- #24364 workaround -->
+                                        <input type="password" autocomplete="off" id="pass1" name="pass1" value="">
+                                    </div>
+
                                 </td>
                             </tr>
                             <tr class="form-field">
@@ -373,7 +400,9 @@ class WCCM_CustomerAdd {
                                             echo '<span class="description"> (Required)</span>'
                                             ?> </label></th>
                                 <td>
-                                    <input type="password" autocomplete="off" id="pass2" name="pass2" value="">
+                                    <div class="field_input_wrap">
+                                        <input type="password" autocomplete="off" id="pass2" name="pass2" value="">
+                                    </div>
                                     <!--<br>
                                     <div id="pass-strength-result" style="display: block;"><?php _e('Strength indicator', 'woocommerce-customers-manager'); ?> </div>
                                     <p class="description indicator-hint"><?php _e('Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ &amp; ).', 'woocommerce-customers-manager'); ?></p>
@@ -387,7 +416,7 @@ class WCCM_CustomerAdd {
                             <?php /* billing_country, billing_first_name, billing_last_name, billing_company, billing_address_1, billing_address_2, billing_city
                               billing_state, billing_postcode, billing_email, billing_phone */ ?>					
                             <tr class="form-field">
-                                <th scope="row"><label for="roles"><?php _e('Roles', 'woocommerce-customers-manager'); ?> <span class="description ">(<span class="field_required">required</span>)</span></label></th>
+                                <th scope="row"><label for="roles"><?php _e('Roles', 'woocommerce-customers-manager'); ?> <span class="description ">(<span class="field_required"><?php _e('required', 'woocommerce-customers-manager'); ?></span>)</span></label></th>
                                 <td>
                                     <select name="roles[]" class="js-role-select"  multiple="multiple" required="required">
                                         <?php
@@ -411,47 +440,98 @@ class WCCM_CustomerAdd {
                                     </select>
                                 </td>
                             </tr>
+                            <tr  class="wccm-billing-info">
+                                <th colspan="2"><h3><?php _e('Billing Details', 'woocommerce-customers-manager'); ?></h3></th>
+                            </tr>
                             <?php
                             if ($locale == 'ja' || $locale == 'site-default') {
                                 ?>
                                 <tr class="form-field">
-                                    <th scope="row"><label for="billing_last_name"><?php _e('Billing last name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_last_name'])) echo $data_source['billing_last_name']; ?>" id="billing_last_name" name="billing_last_name"></td>
+                                    <th scope="row"><label for="billing_last_name"><?php _e('Name', 'woocommerce-customers-manager'); ?> </label></th>
+                                    <td>
+                                        <ul class="col_half_input names">
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('Last name', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_last_name'])) echo $data_source['billing_last_name']; ?>" id="billing_last_name" name="billing_last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('First name', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_first_name'])) echo $data_source['billing_first_name']; ?>" id="billing_first_name" name="billing_first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                        </ul>
+                                    </td>
                                 </tr>
                                 <tr class="form-field">
-                                    <th scope="row"><label for="billing_first_name"><?php _e('Billing first name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_first_name'])) echo $data_source['billing_first_name']; ?>" id="billing_first_name" name="billing_first_name"></td>
+                                    <th scope="row"><label for="billing_last_name"><?php _e('Name Kana', 'woocommerce-customers-manager'); ?> </label></th>
+                                    <td>
+                                        <ul class="col_half_input names">
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('Last Kana', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_last_name_kana'])) echo $data_source['billing_last_name_kana']; ?>" id="billing_last_name_kana" name="billing_last_name_kana" placeholder="<?php _e('ヤマダ', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('First Kana', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_first_name_kana'])) echo $data_source['billing_first_name_kana']; ?>" id="billing_first_name_kana" name="billing_first_name_kana" placeholder="<?php _e('ハナコ', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                        </ul>
+                                    </td>
                                 </tr>
-                                x
                                 <?php
                             }else {
                                 ?>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_first_name"><?php _e('Billing first name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_first_name'])) echo $data_source['billing_first_name']; ?>" id="billing_first_name" name="billing_first_name"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_first_name'])) echo $data_source['billing_first_name']; ?>" id="billing_first_name" name="billing_first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_last_name"><?php _e('Billing last name', 'woocommerce-customers-manager'); ?> </label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_last_name'])) echo $data_source['billing_last_name']; ?>" id="billing_last_name" name="billing_last_name"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_last_name'])) echo $data_source['billing_last_name']; ?>" id="billing_last_name" name="billing_last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div></td>
+                                </tr>
+                                <tr class="form-field">
+                                    <th scope="row"><label for="billing_last_name"><?php _e('Name Kana', 'woocommerce-customers-manager'); ?> </label></th>
+                                    <td>
+                                        <ul class="col_half_input names">
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('First Kana', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_first_name_kana'])) echo $data_source['billing_first_name_kana']; ?>" id="billing_first_name_kana" name="billing_first_name_kana" placeholder="<?php _e('ハナコ', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                            <li>
+                                                <div class="field_input_wrap"><div class="field_vessel">
+                                                        <div class="field_label"><?php _e('Last Kana', 'woocommerce-customers-manager'); ?></div>
+                                                        <div class="field_input"><input type="text" value="<?php if (isset($data_source['billing_last_name_kana'])) echo $data_source['billing_last_name_kana']; ?>" id="billing_last_name_kana" name="billing_last_name_kana" placeholder="<?php _e('ヤマダ', 'woocommerce-customers-manager'); ?>"></div>
+                                                    </div></div>
+                                            </li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             <?php } ?>
-                            <tr>
+                            <tr class="form-field field-email">
                                 <th  scope="row"><label for="billing_email"><?php _e('Billing email', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['billing_email'])) echo $data_source['billing_email']; ?>" id="billing_email" name="billing_email"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_email'])) echo $data_source['billing_email']; ?>" id="billing_email" name="billing_email"></div></td>
                             </tr>
-                            <tr>
+                            <tr class="form-field field-tel">
                                 <th  scope="row"><label for="billing_phone"><?php _e('Billing phone', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['billing_phone'])) echo $data_source['billing_phone']; ?>" id="billing_phone" name="billing_phone"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_phone'])) echo $data_source['billing_phone']; ?>" id="billing_phone" name="billing_phone"></div></td>
                             </tr>
-                            <tr>
+                            <tr class="form-field">
                                 <th scope="row"><label for="billing_company"><?php _e('Billing company', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['billing_company'])) echo $data_source['billing_company']; ?>" id="billing_company" name="billing_company"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_company'])) echo $data_source['billing_company']; ?>" id="billing_company" name="billing_company"></div></td>
                             </tr>
 
                             <?php if ($wccm_customer_model->is_vat_field_enabled()): ?>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_eu_vat"><?php _e('Billing VAT number', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_eu_vat'])) echo $data_source['billing_eu_vat']; ?>" id="billing_eu_vat" name="billing_eu_vat"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_eu_vat'])) echo $data_source['billing_eu_vat']; ?>" id="billing_eu_vat" name="billing_eu_vat"></div></td>
                                 </tr>
                             <?php endif; ?>
                             <?php
@@ -459,7 +539,7 @@ class WCCM_CustomerAdd {
                                 ?>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_postcode"><?php _e('Post code', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_postcode'])) echo $data_source['billing_postcode']; ?>" id="billing_postcode" name="billing_postcode"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_postcode'])) echo $data_source['billing_postcode']; ?>" id="billing_postcode" name="billing_postcode"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_state"><?php _e('Billing state', 'woocommerce-customers-manager'); ?></label></th>
@@ -469,15 +549,15 @@ class WCCM_CustomerAdd {
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_city"><?php _e('Billing city', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_city'])) echo $data_source['billing_city']; ?>" id="billing_city" name="billing_city"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_city'])) echo $data_source['billing_city']; ?>" id="billing_city" name="billing_city"></div></td>
                                 </tr>
                                 <tr class="form-field">
-                                    <th scope="row"><label for="billing_address_1"><?php _e('Billing address', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_address_1'])) echo $data_source['billing_address_1']; ?>" id="billing_address_1" name="billing_address_1"></td>
+                                    <th scope="row"><label for="billing_address_1"><?php _e('Billing Address1', 'woocommerce-customers-manager'); ?></label></th>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_address_1'])) echo $data_source['billing_address_1']; ?>" id="billing_address_1" name="billing_address_1"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_address_2"><?php _e('Apartament, suite, unit, etc.', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_address_2'])) echo $data_source['billing_address_2']; ?>" id="billing_address_2" name="billing_address_2"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_address_2'])) echo $data_source['billing_address_2']; ?>" id="billing_address_2" name="billing_address_2"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_country"><?php _e('Billing country', 'woocommerce-customers-manager'); ?></label></th>
@@ -493,19 +573,19 @@ class WCCM_CustomerAdd {
                                 ?>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_address_1"><?php _e('Billing address', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_address_1'])) echo $data_source['billing_address_1']; ?>" id="billing_address_1" name="billing_address_1"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_address_1'])) echo $data_source['billing_address_1']; ?>" id="billing_address_1" name="billing_address_1"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_address_2"><?php _e('Apartament, suite, unit, etc.', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_address_2'])) echo $data_source['billing_address_2']; ?>" id="billing_address_2" name="billing_address_2"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_address_2'])) echo $data_source['billing_address_2']; ?>" id="billing_address_2" name="billing_address_2"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_postcode"><?php _e('Post code', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_postcode'])) echo $data_source['billing_postcode']; ?>" id="billing_postcode" name="billing_postcode"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_postcode'])) echo $data_source['billing_postcode']; ?>" id="billing_postcode" name="billing_postcode"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_city"><?php _e('Billing city', 'woocommerce-customers-manager'); ?></label></th>
-                                    <td><input type="text" value="<?php if (isset($data_source['billing_city'])) echo $data_source['billing_city']; ?>" id="billing_city" name="billing_city"></td>
+                                    <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['billing_city'])) echo $data_source['billing_city']; ?>" id="billing_city" name="billing_city"></div></td>
                                 </tr>
                                 <tr class="form-field">
                                     <th scope="row"><label for="billing_country"><?php _e('Billing country', 'woocommerce-customers-manager'); ?></label></th>
@@ -652,50 +732,103 @@ class WCCM_CustomerAdd {
                         <?php /* shipping_country, shipping_first_name, shipping_last_name, shipping_company, shipping_address_1, shipping_address_2, shipping_city
                           shipping_state, shipping_postcode, shipping_country */ ?>
                         <tr>
-                            <th><h3><?php _e('Shipping info as Billing info?', 'woocommerce-customers-manager'); ?></h3></th>
-                            <td><input type="checkbox" name="shipping_as_billing" id="shipping_as_billing" value="yes"></input></td>
+                            <td class="single_column" colspan="2"><div class="check_label">
+                                    <span class="label"><span class="label_checkbox"><input type="checkbox" name="shipping_as_billing" id="shipping_as_billing" value="yes"></input></span><?php _e('Shipping info as Billing info?', 'woocommerce-customers-manager'); ?></span>
+                                </div>
+                            </td>
                         </tr>
                         <tr  class="wccm-shipping-info">
-                            <th><h3><?php _e('Shipping info', 'woocommerce-customers-manager'); ?></h3></th>
-                            <td></td>
+                            <th colspan="2"><h3><?php _e('Shipping Details', 'woocommerce-customers-manager'); ?></h3></th>
                         </tr>
                         <?php
                         if ($locale == 'ja' || $locale == 'site-default') {
                             ?>
-                            <tr  class="wccm-shipping-info">
-                                <th scope="row"><label for="shipping_last_name"><?php _e('Shipping last name', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_last_name'])) echo $data_source['shipping_last_name']; ?>" id="shipping_last_name" name="shipping_last_name"></td>			
-                            </tr>	
-                            <tr  class="wccm-shipping-info">
-                                <th scope="row"><label for="shipping_first_name"><?php _e('Shipping first name', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_first_name'])) echo $data_source['shipping_first_name']; ?>" id="shipping_first_name" name="shipping_first_name"></td>
+                            <tr class="form-field wccm-shipping-info">
+                                <th scope="row"><label for="shipping_last_name"><?php _e('Name', 'woocommerce-customers-manager'); ?></label></th>
+                                <td>
+                                    <ul class="col_half_input names">
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('Last name', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_last_name'])) echo $data_source['shipping_last_name']; ?>" id="shipping_last_name" name="shipping_last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('First name', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_first_name'])) echo $data_source['shipping_first_name']; ?>" id="shipping_first_name" name="shipping_first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                    </ul>
+
+                                </td>			
+                            </tr>
+                            <tr class="form-field wccm-shipping-info">
+                                <th scope="row"><label for="shipping_last_name"><?php _e('Name Kana', 'woocommerce-customers-manager'); ?></label></th>
+                                <td>
+                                    <ul class="col_half_input names">
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('Last Kana', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_last_name_kana'])) echo $data_source['shipping_last_name_kana']; ?>" id="shipping_last_name_kana" name="shipping_last_name_kana" placeholder="<?php _e('ヤマダ', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('First Kana', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_first_name_kana'])) echo $data_source['shipping_first_name_kana']; ?>" id="shipping_first_name_kana" name="shipping_first_name_kana" placeholder="<?php _e('ハナコ', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                    </ul>
+
+                                </td>			
                             </tr>
                             <?php
                         }else {
                             ?>
-                            <tr  class="wccm-shipping-info">
+                            <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_first_name"><?php _e('Shipping first name', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_first_name'])) echo $data_source['shipping_first_name']; ?>" id="shipping_first_name" name="shipping_first_name"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_first_name'])) echo $data_source['shipping_first_name']; ?>" id="shipping_first_name" name="shipping_first_name" placeholder="<?php _e('First name', 'woocommerce-customers-manager'); ?>"></div></td>
                             </tr>
                             <tr  class="wccm-shipping-info">
                                 <th scope="row"><label for="shipping_last_name"><?php _e('Shipping last name', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_last_name'])) echo $data_source['shipping_last_name']; ?>" id="shipping_last_name" name="shipping_last_name"></td>			
-                            </tr>				
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_last_name'])) echo $data_source['shipping_last_name']; ?>" id="shipping_last_name" name="shipping_last_name" placeholder="<?php _e('Last name', 'woocommerce-customers-manager'); ?>"></div></td>			
+                            </tr>			
+                            <tr class="form-field wccm-shipping-info">
+                                <th scope="row"><label for="shipping_last_name"><?php _e('Name Kana', 'woocommerce-customers-manager'); ?></label></th>
+                                <td>
+                                    <ul class="col_half_input names">
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('First Kana', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_first_name_kana'])) echo $data_source['shipping_first_name_kana']; ?>" id="shipping_first_name_kana" name="shipping_first_name_kana" placeholder="<?php _e('ハナコ', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                        <li>
+                                            <div class="field_input_wrap"><div class="field_vessel">
+                                                    <div class="field_label"><?php _e('Last Kana', 'woocommerce-customers-manager'); ?></div>
+                                                    <div class="field_input"><input type="text" value="<?php if (isset($data_source['shipping_last_name_kana'])) echo $data_source['shipping_last_name_kana']; ?>" id="shipping_last_name_kana" name="shipping_last_name_kana" placeholder="<?php _e('ヤマダ', 'woocommerce-customers-manager'); ?>"></div>
+                                                </div></div>
+                                        </li>
+                                    </ul>
+
+                                </td>			
+                            </tr>
                         <?php } ?>
-                        <tr  class="wccm-shipping-info">
+                        <tr  class="form-field wccm-shipping-info">
                             <th scope="row"><label for="billing_phone"><?php _e('Shipping phone', 'woocommerce-customers-manager'); ?></label></th>
-                            <td><input type="text" value="<?php if (isset($data_source['shipping_phone'])) echo $data_source['shipping_phone']; ?>" id="shipping_phone" name="shipping_phone"></td>
+                            <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_phone'])) echo $data_source['shipping_phone']; ?>" id="shipping_phone" name="shipping_phone"></div></td>
                         </tr>
-                        <tr class="wccm-shipping-info">
+                        <tr class="form-field wccm-shipping-info">
                             <th scope="row"><label for="shipping_company"><?php _e('Shipping company', 'woocommerce-customers-manager'); ?></label></th>
-                            <td><input type="text" value="<?php if (isset($data_source['shipping_company'])) echo $data_source['shipping_company']; ?>" id="shipping_company" name="shipping_company"></td>
+                            <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_company'])) echo $data_source['shipping_company']; ?>" id="shipping_company" name="shipping_company"></div></td>
                         </tr>
                         <?php
                         if ($locale == 'ja' || $locale == 'site-default') {
                             ?>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_postcode"><?php _e('Post code', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_postcode'])) echo $data_source['shipping_postcode']; ?>" id="shipping_postcode" name="shipping_postcode"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_postcode'])) echo $data_source['shipping_postcode']; ?>" id="shipping_postcode" name="shipping_postcode"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_state"><?php _e('Shipping state', 'woocommerce-customers-manager'); ?></label></th>
@@ -706,15 +839,15 @@ class WCCM_CustomerAdd {
 
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_city"><?php _e('Shipping city', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_city'])) echo $data_source['shipping_city']; ?>" id="shipping_city" name="shipping_city"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_city'])) echo $data_source['shipping_city']; ?>" id="shipping_city" name="shipping_city"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
-                                <th scope="row"><label for="shipping_address_1"><?php _e('Shipping address', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_address_1'])) echo $data_source['shipping_address_1']; ?>" id="shipping_address_1" name="shipping_address_1"></td>
+                                <th scope="row"><label for="shipping_address_1"><?php _e('Shipping Address1', 'woocommerce-customers-manager'); ?></label></th>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_address_1'])) echo $data_source['shipping_address_1']; ?>" id="shipping_address_1" name="shipping_address_1"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_address_2"><?php _e('Apartament, suite, unit, etc.', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_address_2'])) echo $data_source['shipping_address_2']; ?>" id="shipping_address_2" name="shipping_address_2"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_address_2'])) echo $data_source['shipping_address_2']; ?>" id="shipping_address_2" name="shipping_address_2"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_country"><?php _e('Shipping country', 'woocommerce-customers-manager'); ?></label></th>
@@ -729,19 +862,19 @@ class WCCM_CustomerAdd {
                             ?>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_address_1"><?php _e('Shipping address', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_address_1'])) echo $data_source['shipping_address_1']; ?>" id="shipping_address_1" name="shipping_address_1"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_address_1'])) echo $data_source['shipping_address_1']; ?>" id="shipping_address_1" name="shipping_address_1"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_address_2"><?php _e('Apartament, suite, unit, etc.', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_address_2'])) echo $data_source['shipping_address_2']; ?>" id="shipping_address_2" name="shipping_address_2"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_address_2'])) echo $data_source['shipping_address_2']; ?>" id="shipping_address_2" name="shipping_address_2"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_postcode"><?php _e('Post code', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_postcode'])) echo $data_source['shipping_postcode']; ?>" id="shipping_postcode" name="shipping_postcode"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_postcode'])) echo $data_source['shipping_postcode']; ?>" id="shipping_postcode" name="shipping_postcode"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_city"><?php _e('Shipping city', 'woocommerce-customers-manager'); ?></label></th>
-                                <td><input type="text" value="<?php if (isset($data_source['shipping_city'])) echo $data_source['shipping_city']; ?>" id="shipping_city" name="shipping_city"></td>
+                                <td><div class="field_input_wrap"><input type="text" value="<?php if (isset($data_source['shipping_city'])) echo $data_source['shipping_city']; ?>" id="shipping_city" name="shipping_city"></div></td>
                             </tr>
                             <tr class="form-field wccm-shipping-info">
                                 <th scope="row"><label for="shipping_country"><?php _e('Shipping country', 'woocommerce-customers-manager'); ?></label></th>

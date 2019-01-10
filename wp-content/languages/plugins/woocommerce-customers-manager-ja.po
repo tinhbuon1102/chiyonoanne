@@ -3,7 +3,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: WooCommerce Customers Manager\n"
 "POT-Creation-Date: 2019-01-09 09:06+0900\n"
-"PO-Revision-Date: 2019-01-09 16:53+0900\n"
+"PO-Revision-Date: 2019-01-10 12:23+0900\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: classes/acf/pro/fields/class-acf-field-flexible-content.php:572
 #: customers-manager.php:232
 msgid "Add New"
-msgstr ""
+msgstr "新規追加"
 
 #: classes/acf/acf.php:389
 msgid "Add New Field Group"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: classes/acf/acf.php:422
 msgid "Edit Field"
-msgstr ""
+msgstr "項目を編集"
 
 #: classes/acf/acf.php:423
 #: classes/acf/includes/admin/views/field-group-fields.php:41
@@ -292,7 +292,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/admin-field-groups.php:524
 msgid "Status"
-msgstr "注文状況"
+msgstr "Status"
 
 #: classes/acf/includes/admin/admin-field-groups.php:622
 msgid "Customise WordPress with powerful, professional and intuitive fields."
@@ -481,11 +481,11 @@ msgstr ""
 #: classes/acf/includes/admin/tools/class-acf-admin-tool-import.php:66
 #: classes/acf/includes/fields/class-acf-field-file.php:57
 msgid "Select File"
-msgstr ""
+msgstr "ファイルを選択"
 
 #: classes/acf/includes/admin/tools/class-acf-admin-tool-import.php:76
 msgid "Import File"
-msgstr ""
+msgstr "ファイルを出力"
 
 #: classes/acf/includes/admin/tools/class-acf-admin-tool-import.php:100
 #: classes/acf/includes/fields/class-acf-field-file.php:170
@@ -526,18 +526,18 @@ msgstr ""
 #: classes/acf/includes/admin/views/field-group-field-conditional-logic.php:153
 #: classes/acf/includes/admin/views/field-group-locations.php:31
 msgid "Add rule group"
-msgstr ""
+msgstr "ルールグループを追加"
 
 #: classes/acf/includes/admin/views/field-group-field.php:38
 #: classes/acf/pro/fields/class-acf-field-flexible-content.php:424
 #: classes/acf/pro/fields/class-acf-field-repeater.php:294
 msgid "Drag to reorder"
-msgstr ""
+msgstr "ドラッグで順番変更"
 
 #: classes/acf/includes/admin/views/field-group-field.php:42
 #: classes/acf/includes/admin/views/field-group-field.php:45
 msgid "Edit field"
-msgstr ""
+msgstr "項目を編集"
 
 #: classes/acf/includes/admin/views/field-group-field.php:45
 #: classes/acf/includes/fields/class-acf-field-file.php:152
@@ -549,11 +549,11 @@ msgstr ""
 #: classes/admin/WCCM_CustomerTable.php:76
 #: classes/admin/WCCM_OrderDetailsPage.php:24
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: classes/acf/includes/admin/views/field-group-field.php:46
 msgid "Duplicate field"
-msgstr ""
+msgstr "項目を複製"
 
 #: classes/acf/includes/admin/views/field-group-field.php:47
 msgid "Move field to another group"
@@ -565,7 +565,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/views/field-group-field.php:48
 msgid "Delete field"
-msgstr ""
+msgstr "項目を削除"
 
 #: classes/acf/includes/admin/views/field-group-field.php:48
 #: classes/acf/pro/fields/class-acf-field-flexible-content.php:570
@@ -577,7 +577,7 @@ msgstr "削除"
 
 #: classes/acf/includes/admin/views/field-group-field.php:65
 msgid "Field Label"
-msgstr ""
+msgstr "項目タイトル"
 
 #: classes/acf/includes/admin/views/field-group-field.php:66
 msgid "This is the name which will appear on the EDIT page"
@@ -585,7 +585,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/views/field-group-field.php:75
 msgid "Field Name"
-msgstr ""
+msgstr "項目名"
 
 #: classes/acf/includes/admin/views/field-group-field.php:76
 msgid "Single word, no spaces. Underscores and dashes allowed"
@@ -593,7 +593,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/views/field-group-field.php:85
 msgid "Field Type"
-msgstr ""
+msgstr "フィールドタイプ"
 
 #: classes/acf/includes/admin/views/field-group-field.php:96
 msgid "Instructions"
@@ -605,7 +605,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/views/field-group-field.php:106
 msgid "Required?"
-msgstr ""
+msgstr "必須ですか？"
 
 #: classes/acf/includes/admin/views/field-group-field.php:129
 msgid "Wrapper Attributes"
@@ -649,7 +649,7 @@ msgstr ""
 #: classes/admin/WCCM_CustomerMetadataPage.php:97
 #: classes/admin/WCCM_CustomerTable.php:817 classes/admin/WCCM_Options.php:105
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: classes/acf/includes/admin/views/field-group-fields.php:7
 msgid "Key"
@@ -735,7 +735,7 @@ msgstr ""
 
 #: classes/acf/includes/admin/views/field-group-options.php:85
 msgid "Order No."
-msgstr ""
+msgstr "注文番号"
 
 #: classes/acf/includes/admin/views/field-group-options.php:86
 msgid "Field groups with a lower order will appear first"
@@ -3326,7 +3326,7 @@ msgstr ""
 
 #: classes/admin/WCCM_BulkEmail.php:124 customers-manager.php:234
 msgid "Bulk emails"
-msgstr ""
+msgstr "一括メール送信"
 
 #: classes/admin/WCCM_BulkEmail.php:133 classes/admin/WCCM_Discover.php:70
 #: customers-manager.php:228 customers-manager.php:371
@@ -4182,7 +4182,7 @@ msgstr "役割"
 
 #: classes/admin/WCCM_CustomerTable.php:136 classes/admin/WCCM_Options.php:128
 msgid "#Orders"
-msgstr "注文件数"
+msgstr "注文数"
 
 #: classes/admin/WCCM_CustomerTable.php:139 classes/admin/WCCM_Options.php:132
 msgid "Registered"
@@ -4218,10 +4218,12 @@ msgid ""
 "least an order in the selected period, how many orders and total amount "
 "spent."
 msgstr ""
+"このフィルターは日付を選択することで、その期間内に注文した顧客を検索できま"
+"す。（合計支払い金額、注文数もその期間内のものが表示されます）"
 
 #: classes/admin/WCCM_CustomerTable.php:287
 msgid "All dates"
-msgstr ""
+msgstr "全ての日付"
 
 #: classes/admin/WCCM_CustomerTable.php:595
 msgid "VAT:"
@@ -4249,7 +4251,7 @@ msgstr "検索"
 
 #: classes/admin/WCCM_CustomerTable.php:785
 msgid "Download selected customers CSV"
-msgstr ""
+msgstr "選択した顧客をCSVでダウンロード"
 
 #: classes/admin/WCCM_CustomerTable.php:789
 msgid "Download complete customers CSV"
@@ -8485,3 +8487,15 @@ msgstr "予約数"
 
 msgid "Appointments list"
 msgstr "予約一覧"
+
+msgid "Username"
+msgstr "ユーザ名"
+
+msgid "required"
+msgstr "必須"
+
+msgid "Billing Address1"
+msgstr "番地(請求先)"
+
+msgid "Shipping Address1"
+msgstr "番地(配送先)"
