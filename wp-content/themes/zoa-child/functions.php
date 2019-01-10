@@ -38,13 +38,30 @@ function load_custom_wp_admin_style() {
     wp_enqueue_style('wcm_plugin_page_css');
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+
+//ユーザ権限の取得
+function getUserLevel() {
+    global $current_user;
+    get_currentuserinfo();  //ユーザレベルを取得
+    $userLevel = array_keys($current_user->caps);
+    /*
+    管理者：administrator
+    編集者：editor
+    投稿者：author
+    寄稿者：contributor
+    購読者：subscriber
+    */
+    return $userLevel[0];
+}
+
 /**
 language switcher
 **/
 function language_selector_flags(){
+	$userLevel = getUserLevel();
 	if (function_exists('icl_object_id')) {
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
-    if(!empty($languages)){
+    if(!empty($languages) && $userLevel == "administrator"){
 		echo '<div class="lang_flag_switcher">';
         foreach($languages as $l){
             if(!$l['active']) echo '<div class="lang_flag"><a href="'.$l['url'].'">';
