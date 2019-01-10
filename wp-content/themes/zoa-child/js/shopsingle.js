@@ -20,19 +20,23 @@ jQuery(document).ready(function($){
 	});
 	//add class if attribute element width is bigger width
 	$(window).on('load resize', function() {
-		
-		var attList = [];
-		$('.pdp__attribute--group > .pdp__attribute variations__attribute').each(function() {
-			//attList[idx] = $(this).width();
-			attList.push($(this).width());
-		});
-		var maxAttW = Math.max.apply(null,attList);
-		
-		if ( maxAttW > 390 ) {
-			
+		var vairations = $('.variations.pdp__attribute--group');
+		if (vairations.length > 0) {
+			var variationCon = vairations.width();
+			var attList = [];
+			$('.pdp__attribute--group > .pdp__attribute.variations__attribute').each(function() {
+				attList.push($(this).width());
+			});
+			var maxAttW = Math.max.apply(null,attList);
+			var sumAttW = attList.reduceRight(function(a,b){return a+b;});
+			if ( maxAttW > 390 ) {
+				
+			}
+			console.log('attribute max width：' + maxAttW + ' px');
+			console.log('attContainer：' + variationCon + ' px');
+			console.log('attList sum：' + sumAttW + ' px');
+			console.log('attList sum + 24px：' + (sumAttW+24) + ' px');
 		}
-		console.log('attribute max width：' + maxAttW + 'px');
-		console.log('addList is：' + attList);
 	});
 	
 	function isAddToCartValid()
