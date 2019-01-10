@@ -20,16 +20,19 @@ jQuery(document).ready(function($){
 	});
 	//add class if attribute element width is bigger width
 	$(window).on('load resize', function() {
-		//var winW = $(window).width();
+		
 		var attList = [];
-		$('.pdp__attribute--group > .pdp__attribute variations__attribute').each(function(idx) {
-			attList[idx] = $(this).width;
+		$('.pdp__attribute--group > .pdp__attribute variations__attribute').each(function() {
+			//attList[idx] = $(this).width();
+			attList.push($(this).width());
 		});
 		var maxAttW = Math.max.apply(null,attList);
+		
 		if ( maxAttW > 390 ) {
 			
 		}
 		console.log('attribute max width：' + maxAttW + 'px');
+		console.log('addList is：' + attList);
 	});
 	
 	function isAddToCartValid()
