@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
 	$(window).on('load resize', function() {
 		
 		var attList = [];
-		$('.pdp__attribute--group > .pdp__attribute variations__attribute').each(function() {
+		$('.pdp__attribute--group > .pdp__attribute.variations__attribute').each(function() {
 			//attList[idx] = $(this).width();
 			attList.push($(this).width());
 		});
@@ -143,4 +143,11 @@ jQuery(document).ready(function($){
 		}
 	}
 	disableAddCartButton();
+	
+	$('body').on('click', '.ywapo_input_container_labels', function(){
+		$('.variations__attribute__value:eq(0)').find('input, select').each(function(){
+			$(this).trigger('change');
+			return false;
+		})
+	})
 });
