@@ -18,6 +18,17 @@ jQuery(document).ready(function($){
 	$('.mwb_wgm_delivery_via_email > input').each( function() {
 		$(this).wrap('<div class="form-row" />').wrap('<div class="field-wrapper" />');
 	});
+	//add required element for attribute
+	var attribute = $('.variations.pdp__attribute--group');
+	if (attribute.length > 0) {
+		$('.pdp__attribute--group > .pdp__attribute.variations__attribute').each(function() {
+			if ($(this).children().hasClass('.info_show_wrap')) {
+			$(this).find('.info_show_wrap').before('<abbr class="required" title="Required">*</abbr>');
+		} else {
+			$(this).find('.pdp__attribute__label').append('<abbr class="required" title="Required">*</abbr>');
+		}
+		});
+	}
 	//add class if attribute element width is bigger width
 	$(window).on('load resize', function() {
 		var vairations = $('.variations.pdp__attribute--group');
@@ -29,8 +40,10 @@ jQuery(document).ready(function($){
 			});
 			var maxAttW = Math.max.apply(null,attList);
 			var sumAttW = attList.reduceRight(function(a,b){return a+b;});
-			if ( maxAttW > 390 ) {
-				
+			if ( (sumAttW+24) > variationCon ) {
+				$('.pdp__attribute--group > .pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute').css('margin-top', '24px');
+			} else {
+				$('.pdp__attribute--group > .pdp__attribute.variations__attribute + .pdp__attribute.variations__attribute').css('margin-top', '0');
 			}
 			console.log('attribute max width：' + maxAttW + ' px');
 			console.log('attContainer：' + variationCon + ' px');
