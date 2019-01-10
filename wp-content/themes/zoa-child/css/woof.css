@@ -273,6 +273,16 @@
     -webkit-order: 1;
     order: 1;
 }
+.WOOF_Widget.toggle--active .woof_redraw_zone > .woof_submit_search_form_container + button#closeRefinement {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    -ms-flex-order: 2;
+    -webkit-order: 2;
+    order: 2;
+	width: 94%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
 .woof_submit_search_form_container {
     margin: 0;
 }
