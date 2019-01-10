@@ -73,7 +73,7 @@ add_action('admin_head', 'hide_update_noticee_to_all_but_admin_users', 1);
 function elsey_change_cssjs_ver($src) {
     if (strpos($src, '?ver='))
         $src = remove_query_arg('ver', $src);
-    $src = add_query_arg(array('ver' => '3.8'), $src);
+    $src = add_query_arg(array('ver' => '3.9'), $src);
     return $src;
 }
 
