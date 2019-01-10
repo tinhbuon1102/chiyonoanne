@@ -387,20 +387,23 @@ document.addEventListener('DOMContentLoaded', function () {
         /*event when variation changed=========*/
         jQuery(_body).on('found_variation', 'form.variations_form:eq(' + i + ')', function (event, variation) {
           /*get image url form `variation`*/
-          var img_url = variation.image.full_src,
-              thumb_url = variation.image.thumb_src;
-
-          /*change `src` image*/
-          _image.find('img').prop('src', img_url);
-          _thumb.find('img').prop('src', thumb_url);
-          _image.attr('data-zoom', img_url);
-
-          _image.addClass('image-is-loading');
-          _image.find('img').prop('src', img_url).one('load', function () {
-            return _image.removeClass('image-is-loading');
-          });
-
-          reinit_easy_zoom(_image);
+          if (variation.image)
+          {
+        	  var img_url = variation.image.full_src,
+        	  thumb_url = variation.image.thumb_src;
+        	  
+        	  /*change `src` image*/
+        	  _image.find('img').prop('src', img_url);
+        	  _thumb.find('img').prop('src', thumb_url);
+        	  _image.attr('data-zoom', img_url);
+        	  
+        	  _image.addClass('image-is-loading');
+        	  _image.find('img').prop('src', img_url).one('load', function () {
+        		  return _image.removeClass('image-is-loading');
+        	  });
+        	  
+        	  reinit_easy_zoom(_image);
+          }
         });
 
         /*reset variation========*/
