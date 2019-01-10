@@ -625,7 +625,7 @@ class WCCM_CustomerTable extends WP_List_Table {
                         'appointments_count' => $appoints_num,
                         'last_order_date' => $last_order_date,
                         'first_order_date' => $first_order_date,
-                        'total_spent' => /* get_woocommerce_currency_symbol(). */number_format($total_amount_spent),
+                        'total_spent' => get_woocommerce_currency_symbol(). number_format($total_amount_spent),
                         'total_spent_without_currency' => number_format($total_amount_spent),
                         'password_hash' => $customer->user_pass
                     ));

@@ -150,7 +150,7 @@ add_action('admin_menu', 'remove_wccm_sub_menu_pages', 999);
 
 function remove_wccm_sub_menu_pages() {
     if (!current_user_can('level_10')) {
-        $remove_submenu = remove_submenu_page('manage_woocommerce', 'wccm-options-page');
+        remove_submenu_page('woocommerce-customers-manager', 'wccm-options-page');
     }
 }
 
