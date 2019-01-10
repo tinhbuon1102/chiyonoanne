@@ -31,6 +31,9 @@
     left: 48%;
 }
 /*WOOF Filter Toggle*/
+.woof_redraw_zone>.woof_container.woof_submit_search_form_container h3.toggle__name {
+    font-weight: 400;
+}
 .WOOF_Widget .woof_container_inner > h4 {
 	padding: 0;
     position: relative;
@@ -38,6 +41,7 @@
     font-family: "proxima-nova",sans-serif;
     font-size: .85rem;
     line-height: 48px;
+	font-weight: 400;
 }
 .WOOF_Widget .woof_container_inner > h4 > .woof_front_toggle {
     float: none;
