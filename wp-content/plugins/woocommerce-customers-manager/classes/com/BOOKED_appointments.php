@@ -25,7 +25,7 @@ function getDataAppForDataTable() {
     $result['recordsFiltered'] = $result['recordsTotal'];
     $list = getDataPagingForCustome($start, $length, $user_id);
 
-    if (count($list) > 0) {
+    if (@count($list) > 0) {
         foreach ($list as $value) {
             $arr_title = explode("(", $value->post_title);
             $obj[0] = str_replace("@", "-", $arr_title[0]);
@@ -47,7 +47,7 @@ function getTotalForCustomer($user_id) {
     }
 
     $result = $wpdb->get_row($query);
-    if (count($result) > 0) {
+    if (@count($result) > 0) {
         if (isset($result->total) && $result->total > 0) {
             return $result->total;
         } else {

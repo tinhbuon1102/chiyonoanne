@@ -307,7 +307,7 @@ function add_scripts() {
     wp_localize_script('home-js', 'get_url', $get_url);
     wp_register_script('remodal', get_stylesheet_directory_uri() . '/js/remodal/remodal.js', array(), false, true);
     wp_register_script('slick-js', get_stylesheet_directory_uri() . '/js/slick/slick.js', array(), false, true);
-    wp_register_script('shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js', array(), false, true); //single shop
+    wp_register_script('shopsingle-js', get_stylesheet_directory_uri() . '/js/shopsingle.js?201901102020', array(), false, true); //single shop
     wp_register_script('popup-js', get_stylesheet_directory_uri() . '/js/popup.js', array(), false, true); //popup tooltip
     wp_register_script('woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
     wp_register_script('booked-js', get_stylesheet_directory_uri() . '/js/booked-custom.js', array(), false, true);
