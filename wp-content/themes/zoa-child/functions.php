@@ -61,7 +61,7 @@ function language_selector_flags(){
 	$userLevel = getUserLevel();
 	if (function_exists('icl_object_id')) {
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
-    if(!empty($languages) && $userLevel == "administrator"){
+    if(!empty($languages) && $userLevel == "administrator" && is_user_logged_in()){
 		echo '<div class="lang_flag_switcher">';
         foreach($languages as $l){
             if(!$l['active']) echo '<div class="lang_flag"><a href="'.$l['url'].'">';
