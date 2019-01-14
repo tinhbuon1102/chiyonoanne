@@ -2,20 +2,17 @@
 # This file is distributed under the same license as the Plugins - NC Size Chart for Woocommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-12-18 13:29+0000\n"
+"PO-Revision-Date: 2019-01-11 11:35+0900\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Loco https://localise.biz/\n"
-"Language: ja\n"
-"Project-Id-Version: Plugins - NC Size Chart for Woocommerce - Stable (latest "
-"release)\n"
-"POT-Creation-Date: 2018-12-18 13:25+0000\n"
-"Last-Translator: admin <admin@heart-hunger.com>\n"
-"Language-Team: Japanese\n"
-"Report-Msgid-Bugs-To: \n"
-"X-Loco-Version: 2.2.0; wp-5.0.1"
+"X-Generator: Poedit 1.8.12\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - NC Size Chart for Woocommerce - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #: public/class-productsize-chart-for-woocommerce-public.php:229
 msgid "Size Chart"
@@ -49,12 +46,12 @@ msgstr ""
 #: admin/class-productsize-chart-admin.php:114
 msgctxt "chart"
 msgid "Add Chart"
-msgstr "サイズ表追加"
+msgstr "表を追加"
 
 #: admin/class-productsize-chart-admin.php:112
 msgctxt "admin menu"
 msgid "Size Chart"
-msgstr "サイズチャート"
+msgstr ""
 
 #: admin/class-productsize-chart-admin.php:94
 msgid "Settings"
@@ -114,7 +111,7 @@ msgstr ""
 
 #: admin/includes/productsize-chart-settings-form.php:34
 msgid "Chart Heading"
-msgstr "サイズ表タイトル"
+msgstr ""
 
 #: admin/includes/productsize-chart-settings-form.php:25
 msgid "Default Settings"
@@ -130,7 +127,7 @@ msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:120
 msgid "Chart Categories"
-msgstr "サイズ表カテゴリ"
+msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:116
 msgid "After Product Meta"
@@ -154,7 +151,7 @@ msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:109
 msgid "Chart Popup Button Position"
-msgstr "サイズ表ポップアップ位置"
+msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:87
 #: admin/includes/productsize-chart-settings-form.php:91
@@ -172,7 +169,7 @@ msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:82
 msgid "Chart Table Style"
-msgstr "サイズ表テーブルスタイル"
+msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:76
 msgid "Overlay Color"
@@ -209,7 +206,7 @@ msgstr "左"
 #: admin/includes/productsize-chart-add-meta-form.php:63
 #: admin/includes/productsize-chart-add-meta-form.php:112
 msgid "Primary chart image position"
-msgstr "サイズ表画像位置"
+msgstr ""
 
 #: admin/includes/productsize-chart-add-meta-form.php:57
 #: admin/includes/productsize-chart-add-meta-form.php:108
@@ -259,7 +256,7 @@ msgstr ""
 #: admin/includes/productsize-chart-meta-form.php:44
 #: includes/meta-option/config/config.php:21
 msgid "Primary Chart Image"
-msgstr "サイズ表画像"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "Nabaraj Chapagain"
@@ -275,7 +272,7 @@ msgstr ""
 
 #: admin/class-productsize-chart-admin.php:119
 msgid "Size Charts"
-msgstr "サイズ表一覧"
+msgstr "サイズチャート"
 
 #: admin/class-productsize-chart-admin.php:170
 #: admin/includes/productsize-chart-select-chart-form.php:50
@@ -353,7 +350,7 @@ msgstr ""
 #: includes/meta-option/config/config.php:58
 #: includes/meta-option/config/config.php:59
 msgid "Add/Edit chart below"
-msgstr "サイズ表 追加/編集"
+msgstr ""
 
 #: admin/includes/productsize-chart-add-meta-form.php:83
 #: admin/includes/productsize-chart-add-meta-form.php:130
@@ -362,7 +359,7 @@ msgstr "サイズ表 追加/編集"
 #: includes/meta-option/config/config.php:50
 #: includes/meta-option/config/config.php:59
 msgid "Chart Table"
-msgstr "サイズ表テーブル"
+msgstr ""
 
 #: admin/includes/productsize-chart-meta-form.php:103
 msgid "Modal Pop Up"
@@ -491,7 +488,7 @@ msgstr ""
 
 #: admin/class-productsize-chart-admin.php:117
 msgid "Edit Chart"
-msgstr "サイズ表編集"
+msgstr ""
 
 #: admin/class-productsize-chart-admin.php:116
 msgid "New Chart"
@@ -499,7 +496,7 @@ msgstr ""
 
 #: admin/class-productsize-chart-admin.php:115
 msgid "Add New Chart"
-msgstr ""
+msgstr "新規サイズ表を作成"
 
 #: admin/class-productsize-chart-admin.php:113
 msgctxt "add new on admin bar"

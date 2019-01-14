@@ -17,6 +17,7 @@ class BookedShortcodes {
         add_shortcode('booked-profile', array($this, 'booked_profile_template'));
         add_shortcode('booked-login', array($this, 'booked_login_form'));
         add_shortcode('booked-cancellable-date', array($this, 'booked_cancellable_date'));
+		add_shortcode('booked-cancel-text', array($this, 'booked_cancel_text'));//added
 
         // Shortcode Actions
         add_action('template_redirect', array($this, 'booked_registration_redirect'));
@@ -138,6 +139,11 @@ class BookedShortcodes {
         $date = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
         return $date;
     }
+	/* cancel text gonna SHORTCODE added */
+	public function booked_cancel_text($atts, $content = null) {
+		$html = __('cancel_booked_email_text', 'zoa');
+		return $html;
+	}
 
     /* CALENDAR SHORTCODE */
 

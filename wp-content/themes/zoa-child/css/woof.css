@@ -127,7 +127,7 @@
     border: 1px #000 solid;
 }
 /*WOOF Label*/
-.woof_list_label .woof_label_term {
+.woocommerce .woof_list_label .woof_label_term {
     width: 100%;
     padding: .65rem .75rem;
     height: auto;
@@ -136,7 +136,7 @@
 	font-family: "proxima-nova",sans-serif;
 	text-align: left;
 }
-.woof_list_label .woof_label_term {
+.woocommerce .woof_list_label .woof_label_term {
     width: 100%;
     padding: .65rem .75rem;
     height: auto;
@@ -160,7 +160,7 @@
     -ms-flex-align: center;
     align-items: center;
 }
-.woof_list_label li .woof_label_term:hover, .woof_list_label li .woof_label_term.checked {
+.woocommerce .woof_list_label li .woof_label_term:hover, .woocommerce .woof_list_label li .woof_label_term.checked {
     background-color: #FFF;
     border-color: #000;
     color: #000;

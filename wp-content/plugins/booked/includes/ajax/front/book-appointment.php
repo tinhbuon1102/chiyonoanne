@@ -110,8 +110,8 @@ if ($appt_is_available):
 
     endif;
     // END Get custom field data
-
-    if ($customer_type == 'guest'):
+//////////////////////////////////////////////////////////////
+    if ($customer_type == 'guest')://Don't use now
         $name = esc_attr($_POST['guest_name']);
         $surname = isset($_POST['guest_surname']) && $_POST['guest_surname'] ? esc_attr($_POST['guest_surname']) : false;
         $fullname = ( $surname ? $name . ' ' . $surname : $name );
@@ -207,7 +207,7 @@ if ($appt_is_available):
             endif;
 
         endif;
-
+///////////////////////////////////////////////////////////
     elseif ($customer_type == 'current'):
 
         $user_id = !empty($_POST['user_id']) ? intval($_POST['user_id']) : false;
@@ -238,6 +238,10 @@ if ($appt_is_available):
         update_post_meta($post_id, '_appointment_timestamp', $timestamp);
         update_post_meta($post_id, '_appointment_timeslot', $timeslot);
         update_post_meta($post_id, '_appointment_user', $user_id);
+        //for portfolio image 
+        update_post_meta($post_id, 'pid', $_SESSION['pid']);
+        update_post_meta($post_id, 'image_id', $_SESSION['image_id']);
+        update_post_meta($post_id, 'p_image', $_SESSION['p_image']);
 
         if ($appointment_default_status == 'publish'): wp_publish_post($post_id);
         endif;
@@ -321,7 +325,7 @@ if ($appt_is_available):
                     'user_pass' => $password,
                     'first_name' => $name,
                     'last_name' => $surname,
-                    'role'=>'customer'
+                    'role' => 'customer'
                 );
                 $user_id = wp_insert_user($userdata);
 
@@ -355,6 +359,10 @@ if ($appt_is_available):
                 update_post_meta($post_id, '_appointment_timestamp', $timestamp);
                 update_post_meta($post_id, '_appointment_timeslot', $timeslot);
                 update_post_meta($post_id, '_appointment_user', $user_id);
+                //for portfolio image 
+                update_post_meta($post_id, 'pid', $_SESSION['pid']);
+                update_post_meta($post_id, 'image_id', $_SESSION['image_id']);
+                update_post_meta($post_id, 'p_image', $_SESSION['p_image']);
 
                 if ($appointment_default_status == 'publish'): wp_publish_post($post_id);
                 endif;
@@ -398,7 +406,7 @@ if ($appt_is_available):
                 $email_content = get_option('booked_registration_email_content');
                 $email_subject = get_option('booked_registration_email_subject');
                 if ($email_content && $email_subject):
-                    $r_phone=$arr_your_info['phone'];
+                    $r_phone = $arr_your_info['phone'];
                     $fullkananame = $arr_your_info['billing_last_name_kana'] . ' ' . $arr_your_info['billing_first_name_kana'];
                     $registration_token_replacements = array(
                         'name' => $fullname,
@@ -478,6 +486,11 @@ if ($appt_is_available):
                 update_post_meta($post_id, 'billing_guest_last_name_kana', $arr_your_info['billing_last_name_kana']);
                 update_post_meta($post_id, 'billing_guest_first_name_kana', $arr_your_info['billing_first_name_kana']);
                 update_post_meta($post_id, 'billing_guest_phone', $arr_your_info['phone']);
+                //for portfolio image 
+                update_post_meta($post_id, 'pid', $_SESSION['pid']);
+                update_post_meta($post_id, 'image_id', $_SESSION['image_id']);
+                update_post_meta($post_id, 'p_image', $_SESSION['p_image']);
+
                 if ($appointment_default_status == 'publish'): wp_publish_post($post_id);
                 endif;
 

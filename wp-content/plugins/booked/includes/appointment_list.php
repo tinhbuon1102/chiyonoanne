@@ -126,7 +126,17 @@ function get_user_list_ajax_callback() {
     global $wpdb;
     $query = "SELECT DISTINCT u.ID,u.user_email FROM " . $wpdb->prefix . "users AS u LEFT JOIN " . $wpdb->prefix . "usermeta AS um ON u.ID=um.user_id WHERE 1 ";
     if ($keyWork != '') {
-        $query .= " AND (u.user_email LIKE '%{$keyWork}%' OR (um.meta_value LIKE '%{$keyWork}%' AND (um.meta_key='last_name' OR um.meta_key='first_name')))";
+        $arr_keywork = explode(" ", $keyWork);
+        if (@count($arr_keywork) > 1) {
+            $query .= " AND (u.user_email LIKE '%{$keyWork}%' ";
+            $str_where = '';
+            foreach ($arr_keywork as $value_k) {
+                $str_where .= "OR (um.meta_value LIKE '%{$value_k}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='billing_last_name_kana' OR um.meta_key='billing_first_name_kana'))";
+            }
+            $query .= $str_where . ')';
+        } else {
+            $query .= " AND (u.user_email LIKE '%{$keyWork}%' OR (um.meta_value LIKE '%{$keyWork}%' AND (um.meta_key='last_name' OR um.meta_key='first_name' OR um.meta_key='billing_last_name_kana' OR um.meta_key='billing_first_name_kana')))";
+        }
     }
     $rows = $wpdb->get_results($query);
     $ex = array();

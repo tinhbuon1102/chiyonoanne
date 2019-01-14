@@ -59,7 +59,7 @@
                 </div>
             </fieldset>
             <div class="confirm_info col-md-4 col-xs-12">
-                <fieldset>
+                <fieldset class="ch_area_info">
                     <h3 class="appointment--confirm__form__title heading heading--small"><?php _e('Additional Question', 'zoa'); ?></h3>
                     <!--start loop of custom fields-->
                     <div class="form-row">

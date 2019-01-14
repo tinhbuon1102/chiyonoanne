@@ -12,16 +12,7 @@
 	<?php
 		endif;
 	?>
-	<?php 
 	
-	if (! is_user_logged_in()) : 
-	//woocommerce_get_template( 'myaccount/form-register.php' );
-	else:
-	$current_user = wp_get_current_user();
-	$fname = get_user_meta( $current_user->ID, 'first_name', true );
-	$lname = get_user_meta( $current_user->ID, 'last_name', true );
-	echo '<p>You are'.$lname.$fname.'</p>';
-    endif; ?>
 	<?php
 	//ACF
 	$step01 = get_field('step01');

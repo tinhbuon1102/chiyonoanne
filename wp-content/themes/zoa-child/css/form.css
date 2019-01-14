@@ -65,6 +65,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     padding-bottom: 24px;
     border-bottom: solid 1px #e8e8e8;
 }
+div#login-info.confirm-box {
+    border-bottom: none;
+    margin-bottom: 0;
+	padding-bottom: 0;
+}
+.booked-form .cf-block .field:last-child, body .booked-form .booked-calendar-fields .cf-block  {
+    margin-bottom: 0px;
+}
 .sideimg__content {
     position: relative;
     z-index: 1;
@@ -678,6 +686,14 @@ body #booked-profile-page .booked-tab-content {
     margin-top: -1px;
     border-radius: 0px !important;
     border-color: #e8e8e8;
+}
+div#app-form > .booked-form {
+    padding-top: 0;
+}
+
+body #app-form .booked-form .booked-appointments {
+    padding-top: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
 }
 @media only screen and (min-width: 48em) {
 	.order--checkout__footer .button-submit {

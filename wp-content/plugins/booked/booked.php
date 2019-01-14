@@ -648,7 +648,7 @@ if (!class_exists('booked_plugin')) {
                                 $display_name = ( isset($u->data->display_name) && $u->data->display_name ? $u->data->display_name . ' (' . $email . ')' : $email );
                                 ?>
                                 <option value="<?php echo $email; ?>"<?php echo ($selected_value == $email ? ' selected="selected"' : ''); ?>><?php echo $display_name; ?></option>
-                            <?php
+                                <?php
                             endforeach;
 
                         endif;
@@ -888,6 +888,7 @@ if (!class_exists('booked_plugin')) {
             );
             wp_localize_script('booked-functions', 'booked_js_vars', $booked_js_vars);
             wp_enqueue_script('booked-functions');
+            wp_enqueue_script('woof-js', get_stylesheet_directory_uri() . '/js/woof.js', array(), false, true);
         }
 
         public static function front_end_styles() {
@@ -902,6 +903,7 @@ if (!class_exists('booked_plugin')) {
             if (defined('NECTAR_THEME_NAME') && NECTAR_THEME_NAME == 'salient'):
                 wp_enqueue_style('booked-salient-overrides', BOOKED_PLUGIN_URL . '/assets/css/theme-specific/salient.css', array(), BOOKED_VERSION);
             endif;
+            wp_enqueue_style('woof-style',get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '');
         }
 
         public static function front_end_color_theme() {

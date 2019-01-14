@@ -43,7 +43,6 @@ $chart2_table=sizeof($chart2_assets)>0 ? $chart2_assets[0]['chart-table-1'] : ''
   <div class="field-description"><?php _e( 'Add/Edit chart title below', $this->plugin_name); ?></div>
   <div class="field-item"><input type="text" id="chart-title-1" name="chart-title-1" value="<?php echo  $chart1_title ; ?>" /></div>
 </div>
-
 <div id="field">
   <div class="field-title"><h4><?php _e( 'Chart Image', $this->plugin_name); ?></h4></div> 
   <div class="field-description"><?php _e( 'Add/Edit chart image below', $this->plugin_name); ?></div>

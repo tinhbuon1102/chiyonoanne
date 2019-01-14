@@ -11,7 +11,14 @@ $cancel_buffer = get_option('booked_cancellation_buffer', 0);
 $datetime_booked = isset($_POST['cancel_datetime']) ? $_POST['cancel_datetime'] : '';
 $date = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
 $date_cancel_string = "このご予約のキャンセルは " . $date . " までとなります。";
-$json_session = json_encode(array('user_lastname' => $user_lastname, 'user_firstname' => $user_firstname, 'billing_last_name_kana' => $billing_last_name_kana, 'billing_first_name_kana' => $billing_first_name_kana, 'email' => $email, 'phone' => $phone, 'is_register' => $is_register, 'cancel_datetime' => $date_cancel_string));
+if (isset($_SESSION['p_image']) && $_SESSION['p_image'] != '') {
+    $p_image = $_SESSION['p_image'];
+    $title = __('Inspired Photo', 'zoa');
+} else {
+    $p_image = '';
+    $title = '';
+}
+$json_session = json_encode(array('user_lastname' => $user_lastname, 'user_firstname' => $user_firstname, 'billing_last_name_kana' => $billing_last_name_kana, 'billing_first_name_kana' => $billing_first_name_kana, 'email' => $email, 'phone' => $phone, 'is_register' => $is_register, 'cancel_datetime' => $date_cancel_string, 'p_image' => $p_image,'title_area_image'=>$title));
 $_SESSION['your_info'] = $json_session;
 echo $_SESSION['your_info'];
 exit();

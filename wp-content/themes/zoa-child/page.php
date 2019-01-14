@@ -25,7 +25,7 @@ $is_sub_myaccount = count($request) > 1 && $request[0] == 'my-account';
 						get_template_part( 'template-parts/content', 'bespoke' );
 					} elseif ($post_data->post_name == 'bespoke') {
 						get_template_part( 'template-parts/content', 'bespoke_child' );
-					} elseif(is_page('reservation-test')) {
+					} elseif(is_page('reservation-form')) {
 						get_template_part( 'template-parts/content', 'booked' );
 					} else {
                 if( zoa_is_elementor() && zoa_elementor_page( get_the_ID() ) ){

@@ -37,5 +37,17 @@ j(document).ajaxComplete(function () {
             // If this has a true value, then label width will be the greatest between labels
             same_width: true
         });
+		
     }
+	if (j('.field select').length) {
+		j('.field select').addClass('input-select justselect').wrap('<div class="selectric-wrapper selectric-input-select selectric-responsive"></div>');
+	}
+	/*var listWrap = j('.cf-block > .field');
+	listWrap.each(function() {
+		if (j('.checkbox-radio-block input[type=radio]').length) {
+			j('.checkbox-radio-block input[type=radio]')
+			var wrapTag = '<div class="radio-wrap">';
+			j('.checkbox-radio-block input[type=radio]').parent('.checkbox-radio-block').wrapAll(wrapTag);
+		}
+	});*/
 });

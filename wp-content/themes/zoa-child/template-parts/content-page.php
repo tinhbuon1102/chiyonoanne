@@ -11,7 +11,7 @@
 		</header>
 	<?php
 		endif;
-	if (is_page('reservation-test')) {
+	if (is_page('reservation-form')) {
 		echo '<div id="bookedForm" class="custom-steps form form--stepped">';
 		the_content();
 		get_template_part( 'template-parts/booked', 'confirm' );

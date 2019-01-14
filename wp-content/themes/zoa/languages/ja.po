@@ -2195,3 +2195,6 @@ msgstr "メールアドレス"
 
 msgid "Phone"
 msgstr "電話番号"
+
+msgid "Other Tools"
+msgstr "その他ツール"

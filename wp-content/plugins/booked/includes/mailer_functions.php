@@ -28,6 +28,8 @@ function booked_mailer_tokens() {
         'customfields' => esc_html__("Display the appointment's custom field data.", "booked"),
         'id' => esc_html__("Display the appointment's unique identification number.", "booked"),
         'cancellable_datetime' => esc_html__("Display cancellable date time.", "booked"),
+        'portfolio_image' => esc_html__("Display portfolio image.", "booked"),
+        'cancel_text' => esc_html__("Display cancel text.", "booked"),
     ));
 }
 
@@ -92,7 +94,18 @@ function booked_get_appointment_tokens($appt_id) {
         $kananame = ( $kanalastname ? $kanalastname . ' ' . $kanafirstname : $kanafirstname );
         $phone = get_user_meta($appt_author, 'billing_phone', true);
     endif;
-
+    //portfolio_image
+    $portfolio_image = get_post_meta($appt_id, 'p_image', true);
+    if (isset($portfolio_image) && $portfolio_image != '') {
+        $portfolio_image = '<img style="max-width: 200px" src="' . $portfolio_image . '"/>';
+    } else {
+        $portfolio_image = '';
+    }
+    //cancel text
+    $myaccount_url = get_permalink(get_option('woocommerce_myaccount_page_id'));
+    $shop_phone = str_replace("-", "", get_option('woocommerce_store_phone'));
+    $contactpage_url = get_site_url() . '/contact';
+    $cancelText = sprintf(__('To cancel this appointment, please go to <a href="%s">My Page</a>, call to <a href="tel:%s">%s</a> or <a href="%s">contact</a> us.', 'booked'), $myaccount_url, $shop_phone, $shop_phone, $contactpage_url);
     // Calendar Name
     // $calendar_name
     $calendars = get_the_terms($appt_id, 'booked_custom_calendars');
@@ -150,7 +163,9 @@ function booked_get_appointment_tokens($appt_id) {
         'email' => $customer_email,
         'title' => $title,
         'id' => $appt_id,
-        'cancellable_datetime' => $cancellable_datetime
+        'cancellable_datetime' => $cancellable_datetime,
+        'portfolio_image' => $portfolio_image,
+        'cancel_text' => $cancelText
     ));
 }
 

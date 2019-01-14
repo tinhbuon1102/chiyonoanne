@@ -378,3 +378,6 @@ body .booked-form .condition-block{
     color: #E35656;
     margin: -1px 0 0 7px;
 }
+.acf-input .ch_delete_photo{
+    top: unset !important;
+}

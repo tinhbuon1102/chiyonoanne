@@ -132,6 +132,7 @@ span.description > .field_required {
 @media screen and (min-width: 821px) {
 	ul.col_half_input {
     display: table;
+	margin: 0;
 	}
 	ul.col_half_input > li {
     display: table-cell;

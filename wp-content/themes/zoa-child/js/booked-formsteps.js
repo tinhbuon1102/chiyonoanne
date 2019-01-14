@@ -220,6 +220,11 @@ jQuery(function ($) {
                 $('.ch-phone-info').html(response.phone);
                 $('.ch-term-text').html(response.cancel_datetime);
                 $(".ch-step2 div.msg2").css("display", "none");
+                //insert image to step3
+                if (response.p_image != '') {
+                    $("#app-form").append('<div class="acf-field ch_portfolio_image"><div class="acf-label"><label>' + response.title_area_image + '</label></div><div class="acf-input"><img src="' + response.p_image + '" alt="image"><span class="delete_photo ch_delete_photo">X</span></div></div>');
+                    $(".ch_area_info").append('<div class="acf-field ch_portfolio_image"><div class="acf-label"><label>' + response.title_area_image + '</label></div><div class="acf-input"><img src="' + response.p_image + '" alt="image"></div></div>');
+                }
             });
         }
         if ($('#step3').hasClass('is-active')) {
@@ -279,6 +284,8 @@ jQuery(function ($) {
                 $('.ch-aq').html(response);
                 $("#bookedForm .btn--2").css("display", "inline-block");
                 $("#bookedForm .status").css("display", "none");
+                var service=$("#app-form .calendar-name").text();
+                $("#bookedForm .ch-service").html('<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'+service+'</font></font>');
             });
         }
         nextStep(formId);
@@ -290,6 +297,7 @@ jQuery(function ($) {
 
 //submit form
     $("body").on("click", ".btn--2", function (event) {
+        $("#woof_html_buffer").css("display","block");
         $("#submit-request-appointment").click();
     });
 
@@ -312,4 +320,23 @@ jQuery(function ($) {
     }
     //wrap ul steps
     $('ul.form__steps').wrap('<div class="form__steps_wrap"></div>');
+
+    //remove portfolio image on step 3
+    $('body').on('click', 'span.ch_delete_photo', function (e) {
+        e.preventDefault();
+        var delete_el = $(this);
+        if (confirm(gl_remove_photo_text))
+        {
+            $('body').LoadingOverlay('show');
+            $.ajax({
+                type: "post",
+                url: gl_ajax_url,
+                data: {action: 'remove_booking_photo'},
+                dataType: 'json',
+            }).done(function (response) {
+                delete_el.closest('.ch_portfolio_image').remove();
+                $('body').LoadingOverlay('hide');
+            });
+        }
+    });
 });

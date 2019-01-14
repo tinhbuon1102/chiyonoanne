@@ -19,25 +19,27 @@ function get_user_role() {
 
 ;
 /**
-load custom font for admin
+  load custom font for admin
 
-function my_admin_styles_load() {
-	wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500', array(), null, 'all' );
-}
-add_action( 'admin_enqueue_scripts', 'my_admin_styles_load' );
-**/
+  function my_admin_styles_load() {
+  wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300,400,500', array(), null, 'all' );
+  }
+  add_action( 'admin_enqueue_scripts', 'my_admin_styles_load' );
+ * */
+
 /**
-load custom css for woocommerce-customers-manager
-**/
+  load custom css for woocommerce-customers-manager
+ * */
 function load_custom_wp_admin_style() {
-        // $hook is string value given add_menu_page function.
-        if(!class_exists('WCCM_CustomerDetails')) {
-                return;
-        }
-	wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
+    // $hook is string value given add_menu_page function.
+    if (!class_exists('WCCM_CustomerDetails')) {
+        return;
+    }
+    wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
     wp_enqueue_style('wcm_plugin_page_css');
 }
-add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+
+add_action('admin_enqueue_scripts', 'load_custom_wp_admin_style');
 
 //ユーザ権限の取得
 function getUserLevel() {
@@ -45,35 +47,38 @@ function getUserLevel() {
     get_currentuserinfo();  //ユーザレベルを取得
     $userLevel = array_keys($current_user->caps);
     /*
-    管理者：administrator
-    編集者：editor
-    投稿者：author
-    寄稿者：contributor
-    購読者：subscriber
-    */
+      管理者：administrator
+      編集者：editor
+      投稿者：author
+      寄稿者：contributor
+      購読者：subscriber
+     */
     return $userLevel[0];
 }
 
 /**
-language switcher
-**/
-function language_selector_flags(){
-	$userLevel = getUserLevel();
-	if (function_exists('icl_object_id')) {
-		$languages = icl_get_languages('skip_missing=0&orderby=code');
-    if(!empty($languages) && $userLevel == "administrator" && is_user_logged_in()){
-		echo '<div class="lang_flag_switcher">';
-        foreach($languages as $l){
-            if(!$l['active']) echo '<div class="lang_flag"><a href="'.$l['url'].'">';
-			if($l['active']) echo '<div class="lang_flag active">';
-            echo '<img src="'.$l['country_flag_url'].'" height="12" alt="'.$l['language_code'].'" width="18" />';
-			if($l['active']) echo '</div>';
-            if(!$l['active']) echo '</a></div>';
+  language switcher
+ * */
+function language_selector_flags() {
+    $userLevel = getUserLevel();
+    if (function_exists('icl_object_id')) {
+        $languages = icl_get_languages('skip_missing=0&orderby=code');
+        if (!empty($languages) && $userLevel == "administrator" && is_user_logged_in()) {
+            echo '<div class="lang_flag_switcher">';
+            foreach ($languages as $l) {
+                if (!$l['active'])
+                    echo '<div class="lang_flag"><a href="' . $l['url'] . '">';
+                if ($l['active'])
+                    echo '<div class="lang_flag active">';
+                echo '<img src="' . $l['country_flag_url'] . '" height="12" alt="' . $l['language_code'] . '" width="18" />';
+                if ($l['active'])
+                    echo '</div>';
+                if (!$l['active'])
+                    echo '</a></div>';
+            }
+            echo '</div>';
         }
-		echo '</div>';
     }
-	}
-    
 }
 
 function hide_update_noticee_to_all_but_admin_users() {
@@ -139,6 +144,14 @@ function change_posts_per_page($query) {
 
 add_action('pre_get_posts', 'change_posts_per_page');
 
+//remove basic admi menu
+function remove_admin_menus() {
+    global $menu;
+    unset($menu[75]); // ツール
+}
+
+add_action('admin_menu', 'remove_admin_menus');
+
 //remove MW FORM MENU
 function remove_menus() {
     if (!current_user_can('level_10')) {
@@ -147,6 +160,12 @@ function remove_menus() {
         remove_menu_page('edit.php?post_type=rl_gallery');
         remove_menu_page('edit.php?post_type=elementor_library');
         remove_menu_page('elementor');
+        remove_menu_page('wcst-shipping-tracking');
+        remove_menu_page('quadmenu_welcome');
+        remove_menu_page('duplicator-pro');
+        remove_menu_page('edit.php?post_type=birs_appointment');
+        remove_menu_page('edit.php?post_type=birs_client');
+        //remove_menu_page('');
     }
     remove_menu_page('edit.php?post_type=size_guide');
 }
@@ -171,9 +190,11 @@ add_action('admin_menu', 'remove_wccm_sub_menu_pages', 999);
 function remove_wccm_sub_menu_pages() {
     if (!current_user_can('level_10')) {
         remove_submenu_page('woocommerce-customers-manager', 'wccm-options-page');
+        remove_submenu_page('wcst-shipping-tracking', 'wcst-shipping-companies');
+        remove_submenu_page('quadmenu_pro', 'manage_options');
+        remove_submenu_page('woocommerce-customers-manager', 'acf-options-email-templates-configurator');
     }
 }
-
 
 // Rename WooCommerce to Shop
 if (!current_user_can('level_10')) {
@@ -264,15 +285,15 @@ function custom_content_after_body_open_tag() {
 
 add_action('after_body_open_tag', 'custom_content_after_body_open_tag');
 
-add_action( 'wp_enqueue_scripts', 'load_theme_scripts', 100 );//change woo-variation-swatches-pro add to cart js
+add_action('wp_enqueue_scripts', 'load_theme_scripts', 100); //change woo-variation-swatches-pro add to cart js
 
-    function load_theme_scripts() {
-		// add-to-cart-variation override
-		if ( woo_variation_swatches()->get_option( 'enable_single_variation_preview' ) || woo_variation_swatches()->get_option( 'disable_threshold' ) ):
-		wp_deregister_script( 'wc-add-to-cart-variation' );
-		wp_register_script( 'wc-add-to-cart-variation', get_stylesheet_directory_uri() . '/woocommerce/js/wvs-add-to-cart-variation.js', array(), '');
-		endif;
-    }
+function load_theme_scripts() {
+    // add-to-cart-variation override
+    if (woo_variation_swatches()->get_option('enable_single_variation_preview') || woo_variation_swatches()->get_option('disable_threshold')):
+        wp_deregister_script('wc-add-to-cart-variation');
+        wp_register_script('wc-add-to-cart-variation', get_stylesheet_directory_uri() . '/woocommerce/js/wvs-add-to-cart-variation.js', array(), '');
+    endif;
+}
 
 function custom_styles() {
     wp_enqueue_style('cal-style', get_stylesheet_directory_uri() . '/js/calendar/pignose.calendar.css', array(), '');
@@ -295,7 +316,7 @@ add_action('wp_enqueue_scripts', 'custom_styles');
 function add_scripts() {
     wp_register_style('snow-style', get_stylesheet_directory_uri() . '/css/snowfall.css', array(), '');
     wp_register_script('snow-js', get_stylesheet_directory_uri() . '/js/snowfall.js', array(), false, true);
-    wp_register_style('woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '');
+    wp_register_style('woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201901140848', array(), '');
     wp_register_style('giftcard-style', get_stylesheet_directory_uri() . '/css/giftcard.css', array(), '');
     wp_register_style('slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '');
     wp_register_style('slicktheme-style', get_stylesheet_directory_uri() . '/js/slick/slick-theme.css', array(), '');
@@ -349,7 +370,7 @@ function add_scripts() {
         wp_enqueue_script('reservation-js');
     } elseif (is_page('reservation-confirm')) {
         wp_enqueue_style('form-style');
-    } elseif (is_page('reservation-test')) {
+    } elseif (is_page('reservation-form')) {
         wp_enqueue_style('labelauty-style');
         wp_enqueue_style('form-style');
         wp_enqueue_style('tabs-style');
@@ -358,6 +379,9 @@ function add_scripts() {
         wp_enqueue_script('booked-steps');
         wp_enqueue_script('tabs-js');
         wp_enqueue_script('ajax-con');
+        wp_enqueue_style('woof-style');
+        wp_enqueue_script('woof-js');
+        wp_enqueue_script('popup-js');
     } elseif (is_page('about')) {
         wp_enqueue_style('portani-style');
         wp_enqueue_style('portfolio-style');
@@ -465,9 +489,9 @@ add_action('wp_enqueue_scripts', 'validation_scripts');
 
 function booked_button() {
     echo '<div class="btn-group">
-            <input type="button" class="btn btn--inverse btn--1 btn--prev js-prev" value="Previous" /> 
-            <input type="button" class="btn btn--next js-next" value="Next" />
-            <input type="submit" class="btn btn--2" value="Submit form" />
+            <input type="button" class="btn btn--inverse btn--1 btn--prev js-prev" value="' . __('Previous', 'zoa') . '" /> 
+            <input type="button" class="btn btn--next js-next" value="' . __('Next', 'zoa') . '" />
+            <input type="submit" class="btn btn--2" value="' . __('Book an Appointment', 'booked') . '" />
          </div>';
 }
 
@@ -1331,14 +1355,13 @@ function zoa_child_shop_open_tag() {
 
         add_filter('the_title', 'zoa_change_product_title_default', 1, 2);
 
-        
         function zoa_change_product_title_default($title, $id = 0) {
-        	if (is_cart())
-        	{
-        		return $title;
-        	}
-        	return zoa_change_product_title($title, $id);
+            if (is_cart()) {
+                return $title;
+            }
+            return zoa_change_product_title($title, $id);
         }
+
         function zoa_change_product_title($title, $id = 0) {
             if (!$id)
                 return $title;
@@ -1629,7 +1652,7 @@ function zoa_child_shop_open_tag() {
                         <?php esc_html_e('My Account', 'zoa'); ?>
                     <?php endif; ?>
                 </a>
-                <!--<a href="<?php //echo esc_url( $page_logout );  ?>"><?php //esc_html_e( 'Logout', 'zoa' );  ?></a>-->
+                <!--<a href="<?php //echo esc_url( $page_logout );         ?>"><?php //esc_html_e( 'Logout', 'zoa' );         ?></a>-->
             </div>
             <a href="<?php echo wc_get_cart_url(); ?>" id="shopping-cart-btn" class="oecicon oecicon-bag-20 menu-woo-cart js-cart-button"><span
                     class="shop-cart-count"><?php echo esc_html($count); ?></span></a>
@@ -1907,13 +1930,14 @@ function zoa_child_shop_open_tag() {
                             <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?><div class="bg_title_cover"><div class="container"><?php } ?>
                                     <div id="theme-page-title">
                                         <?php zoa_page_title(); ?>
-                                        <?php if (!is_woocommerce() && get_the_subtitle($post_id) != ''): echo '<p class="page-subtitle">' . get_the_subtitle() . '</p>';
+                                        <?php
+                                        if (!is_woocommerce() && get_the_subtitle($post_id) != ''): echo '<p class="page-subtitle">' . get_the_subtitle() . '</p>';
                                         endif;
                                         ?>
                                     </div>
                                     <?php if (get_field('summary')): ?><div class="short_summary"><?php the_field('summary'); ?></div><?php endif; ?>
-                            <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?></div></div><!--/.bg_title_cover---><?php } ?>
-            <?php endif; ?>
+                                    <?php if (has_post_thumbnail() && !is_home() && !is_archive() && !is_woocommerce()) { ?></div></div><!--/.bg_title_cover---><?php } ?>
+                        <?php endif; ?>
 
 
 
@@ -1921,10 +1945,10 @@ function zoa_child_shop_open_tag() {
                 </div>
             <?php } else if (is_singular('product') || is_checkout()) { ?>
                 <!--no breadcrumbs-->
-        <?php } else { ?>
+            <?php } else { ?>
                 <div class="breadcrumb_row">
                     <div class="max-width--large gutter-padding--full">
-                            <?php /* PAGE HEADER FOR BLOG POST */ ?>
+                        <?php /* PAGE HEADER FOR BLOG POST */ ?>
                         <div id="theme-bread" class="display--small-up">
                             <?php
                             if (function_exists('fw_ext_breadcrumbs')) {
@@ -3020,10 +3044,10 @@ function zoa_child_shop_open_tag() {
                         </div>
                     </div>
                 </div>
-    <?php } ?>
+            <?php } ?>
             </fieldset>
 
-    <?php if (isset($_SESSION['p_image']) && $_SESSION['p_image']) { ?>
+            <?php if (isset($_SESSION['p_image']) && $_SESSION['p_image']) { ?>
                 <fieldset>
                     <h3 class="appointment--confirm__form__title heading heading--small"><?php echo __('Inspired Photo', 'zoa') ?></h3>
                     <div class="form-row">
@@ -3034,7 +3058,7 @@ function zoa_child_shop_open_tag() {
                         </div>
                     </div>
                 </fieldset>
-    <?php } ?>
+            <?php } ?>
         </div>
     </div>
     <div class="cancel_term_text">
@@ -3463,7 +3487,7 @@ function zoa_shortcode_reservation_confirm($atts) {
     ?>
     <div id="reservationFormConfirm" class="form_entry">
         <div class="confirm-box">
-    <?php get_booking_confirm_html(); ?>
+            <?php get_booking_confirm_html(); ?>
         </div>
     </div>
     <?php
@@ -3490,9 +3514,9 @@ function zoa_add_html_above_table() {
     <span id="series_type_filter_wrap">
         <select name="series_type_filter" id="series_type_filter">
             <option value=""><?php _e('All Series', 'zoa'); ?></option>
-    <?php foreach ($series as $serie) { ?>
+            <?php foreach ($series as $serie) { ?>
                 <option value="<?php echo $serie->slug ?>" <?php echo isset($_REQUEST['series_type_filter']) && $_REQUEST['series_type_filter'] == $serie->slug ? 'selected' : '' ?>><?php echo $serie->name; ?></option>
-    <?php } ?>
+            <?php } ?>
         </select>
     </span>
     <?php
@@ -3876,8 +3900,8 @@ function zoa_wrap_product_image_override($size = 'woocommerce_thumbnail', $args 
                 ?>
             </div>
 
-        <?php /* PRODUCT LABEL */ ?>
-        <?php echo zoa_product_label($product); ?>
+            <?php /* PRODUCT LABEL */ ?>
+            <?php echo zoa_product_label($product); ?>
         </div>
         <?php
     }
@@ -4353,8 +4377,7 @@ function meta_box_deliver_option_markup($post) {
     $rates = array();
     $order = wc_get_order($post->ID);
     if (calculateShippingFeeWithDeliveryDate(false, $rates, $order))
-        ;
-    {
+        ; {
         $shipping_delivery_option = get_post_meta($order->get_id(), 'shipping_delivery_option', true);
 
         $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
@@ -4639,7 +4662,7 @@ if (!function_exists('woof_show_btn')) {
                         $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
                         ?>
                         <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
-        <?php endif; ?>
+                    <?php endif; ?>
                 </div><!--/.toggle__link-->
             </div><!--/.togggle-wrap-->
 
@@ -4672,15 +4695,13 @@ function zoa_woocommerce_mail_content($message) {
             }
         }
     }
-    if (strpos($message, 'order_tracking_template') !== false)
-    {
-    	preg_match('/order_tracking_template_(\d+)/', $message, $matches);
-    	if (!empty($matches) && isset($matches[1]))
-    	{
-    		$order_id = $matches[1];
-    		$tracking_template = zoa_order_tracking_email_template(array(), $order_id);
-    		$message = str_replace('{'. $matches[0] .'}', $tracking_template, $message);
-    	}
+    if (strpos($message, 'order_tracking_template') !== false) {
+        preg_match('/order_tracking_template_(\d+)/', $message, $matches);
+        if (!empty($matches) && isset($matches[1])) {
+            $order_id = $matches[1];
+            $tracking_template = zoa_order_tracking_email_template(array(), $order_id);
+            $message = str_replace('{' . $matches[0] . '}', $tracking_template, $message);
+        }
     }
     return $message;
 }
@@ -4828,34 +4849,113 @@ function ch_manage_customers_columns($columns) {
 
 add_filter('manage_customers_columns', 'ch_manage_customers_columns');
 
-function ch_manage_customers_custom_column($abs=null,$column_name, $item){
-    if($column_name=='appointments_list'){
-        return '<a class="" target="_blank" href="'. admin_url('admin.php?page=appointments-list&user_id='.$item).'"><span class="wp-menu-image dashicons-before dashicons-calendar-alt"></span></a>';
-    }else{
+function ch_manage_customers_custom_column($abs = null, $column_name, $item) {
+    if ($column_name == 'appointments_list') {
+        return '<a class="" target="_blank" href="' . admin_url('admin.php?page=appointments-list&user_id=' . $item) . '"><span class="wp-menu-image dashicons-before dashicons-calendar-alt"></span></a>';
+    } else {
         return $item[$column_name];
     }
 }
 
-add_filter('manage_customers_custom_column', 'ch_manage_customers_custom_column',10,3);
+add_filter('manage_customers_custom_column', 'ch_manage_customers_custom_column', 10, 3);
 //end
 
 add_shortcode('order_tracking_template', 'zoa_order_tracking_email_template');
+
 function zoa_order_tracking_email_template($atts, $order_id = null) {
-	global $order;
-	$atts = shortcode_atts( array(
-		'order_id' => null,
-	), $atts);
-	
+    global $order;
+    $atts = shortcode_atts(array(
+        'order_id' => null,
+            ), $atts);
+
 // 	8414
-	$order_id = $order_id ? $order_id : ($order ? $order->get_id() : $atts['order_id']);
-	if ($order_id && class_exists('WCST_Tracking_info_displayer'))
-	{
-		ob_start();
-		$order = wc_get_order( $order_id );
-		$tracking = new WCST_Tracking_info_displayer();
-		$tracking->email_shipping_details( $order );
-		$tracking_html = ob_get_contents();
-		ob_end_clean();
-		return $tracking_html;
-	}
+    $order_id = $order_id ? $order_id : ($order ? $order->get_id() : $atts['order_id']);
+    if ($order_id && class_exists('WCST_Tracking_info_displayer')) {
+        ob_start();
+        $order = wc_get_order($order_id);
+        $tracking = new WCST_Tracking_info_displayer();
+        $tracking->email_shipping_details($order);
+        $tracking_html = ob_get_contents();
+        ob_end_clean();
+        return $tracking_html;
+    }
+}
+
+function ch_rename_plugin_menus() {
+    global $menu;
+
+    // Define your changes here
+    $updates = array(
+        "YITH" => array(
+            'name' => __('Other Tools', 'zoa')
+        )
+    );
+
+    foreach ($menu as $k => $props) {
+
+        // Check for new values
+        $new_values = ( isset($updates[$props[0]]) ) ? $updates[$props[0]] : false;
+        if (!$new_values)
+            continue;
+
+        // Change menu name
+        $menu[$k][0] = $new_values['name'];
+    }
+}
+
+add_action('admin_init', 'ch_rename_plugin_menus');
+
+//process to save portfolio image for booked
+function ch_portfolio_image_for_booked() {
+    if (isset($_GET['pid'])) {
+        if (is_page('reservation-form')) {
+            $_SESSION['pid'] = $_GET['pid'];
+
+            if (isset($_REQUEST['serie_index']) && $_REQUEST['serie_index']) {
+                $images_series = get_field('images_series', $_GET['pid']);
+                foreach ($images_series as $loop_series_index => $images_serie) {
+                    if ($_REQUEST['serie_index'] == $loop_series_index + 1) {
+                        $pt_categorized_images = $images_serie['images'];
+                        foreach ($pt_categorized_images as $pt_categorized_image) {
+                            $image = $pt_categorized_image['sizes']['woocommerce_thumbnail'];
+                            $_SESSION['image_id'] = $pt_categorized_image['ID'];
+                        }
+                        break;
+                    }
+                }
+            } else {
+                $image = get_the_post_thumbnail_url($_GET['pid']);
+            }
+            if ($image == '') {
+                $image = get_stylesheet_directory_uri() . '/images/pf_sample_thum.jpg';
+            }
+            $_SESSION['p_image'] = $image;
+        } else {
+            unset($_SESSION['pid']);
+            unset($_SESSION['p_image']);
+            unset($_SESSION['image_id']);
+        }
+    } else {
+        unset($_SESSION['pid']);
+        unset($_SESSION['p_image']);
+        unset($_SESSION['image_id']);
+    }
+}
+
+add_action('template_redirect', 'ch_portfolio_image_for_booked');
+
+//show only 1st and 2nd sub menus booked for user is shop manager role
+add_action('admin_menu', 'ch_booked_menu_user_shop_manager_role', 999);
+
+function ch_booked_menu_user_shop_manager_role() {
+    $user = wp_get_current_user();
+    if (in_array('shop_manager', (array) $user->roles)) {
+        remove_submenu_page('booked-appointments', 'booked-pending');
+        remove_submenu_page('booked-appointments', 'edit-tags.php?taxonomy=booked_custom_calendars');
+        remove_submenu_page('booked-appointments', 'booked-settings');
+        remove_submenu_page('booked-appointments', 'booked-welcome');
+        remove_submenu_page('booked-appointments', 'booked-feeds');
+        remove_submenu_page('booked-appointments', 'booked_wc_payment_options');
+        remove_submenu_page('booked-appointments', 'booked-install-addons');
+    }
 }

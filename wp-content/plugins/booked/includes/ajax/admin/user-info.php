@@ -79,7 +79,7 @@ endif;
             $billing_first_name_kana = $user_info->billing_first_name_kana;
             $billing_phone = $user_info->billing_phone;
         endif;
-
+        $p_image = get_post_meta($appt_id, 'p_image', true);
         $name_requirements = get_option('booked_registration_name_requirements', array('require_name'));
 
         if (isset($name_requirements[0]) && $name_requirements[0] == 'require_surname'):
@@ -92,7 +92,7 @@ endif;
                 <input value="<?php echo $billing_last_name_kana; ?>" placeholder="<?php esc_html_e('Last Name Kana', 'booked'); ?>..." type="text" class="textfield" name="billing_last_name_kana" />
                 <input value="<?php echo $billing_first_name_kana; ?>" placeholder="<?php esc_html_e('First Name Kana', 'booked'); ?>..." type="text" class="textfield" name="billing_first_name_kana" />
             </div>
-    <?php else: ?>
+        <?php else: ?>
             <div class="field">
                 <input value="<?php echo $first_name . ( $last_name ? ' ' . $last_name : '' ); ?>" placeholder="<?php esc_html_e('Name', 'booked'); ?>..." type="text" class="large textfield" name="name" />
             </div>
@@ -118,7 +118,15 @@ endif;
         do_action('booked_after_appointment_information_admin');
 
         echo '<hr>';
-        ?><input type="hidden" name="action" value="booked_admin_edit_appt" />
+        ?>
+        <?php
+        if (isset($p_image) && $p_image != '') {
+            ?>
+            <img style="max-width: 200px" src="<?php echo $p_image; ?>"/>
+            <?php
+        }
+        ?>
+        <input type="hidden" name="action" value="booked_admin_edit_appt" />
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
         <input type="hidden" name="appt_id" value="<?php echo $appt_id; ?>" />
         <input type="hidden" name="calendar_id" value="<?php echo $calendar_id; ?>" /><?php ?><div class="field">

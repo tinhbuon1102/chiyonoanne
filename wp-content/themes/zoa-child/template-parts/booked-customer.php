@@ -2,6 +2,17 @@
 global $current_user;
 get_currentuserinfo();
 ?>
+<?php 
+/*
+	if (! is_user_logged_in()) : 
+	else:
+	$current_user = wp_get_current_user();
+	$fname = get_user_meta( $current_user->ID, 'first_name', true );
+	$lname = get_user_meta( $current_user->ID, 'last_name', true );
+	echo '<p>You are'.$lname.$fname.'</p>';
+    endif; 
+	*/
+?>
 <?php if(!is_user_logged_in()){?>
 <ul class="tabs">
 	<li><a href="#login-info"><i class="oecicon oecicon-single-03"></i><?php _e('Sign up', 'zoa'); ?></a></li>
@@ -74,9 +85,11 @@ get_currentuserinfo();
         </div>
         <div class="status msg2">&nbsp;</div>
     </div>
+	<?php if(!is_user_logged_in()){?>
 	<div id="signin-info" class="booked-login<?php if(!is_user_logged_in()){?> tab_content<?php }?>">
 		<div class="row flex-justify-center pad_row">
 			<fieldset class="sign_info col-md-12 col-xs-12"><?php echo do_shortcode('[booked-login]'); ?></fieldset>
 		</div>
 	</div>
+	<?php }?>
 </div>

@@ -3,7 +3,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: Booked Appointments\n"
 "POT-Creation-Date: 2019-01-04 00:05+0900\n"
-"PO-Revision-Date: 2019-01-04 10:06+0900\n"
+"PO-Revision-Date: 2019-01-13 20:55+0900\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "電話番号"
 #: post-types/booked_appointments.php:30 post-types/booked_appointments.php:32
 #: post-types/booked_appointments.php:48
 msgid "Appointments"
-msgstr ""
+msgstr "予約"
 
 #: booked.php:489 booked.php:505
 msgid "Pending"
@@ -2777,3 +2777,27 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://boxystudio.com"
 msgstr ""
+
+msgid "Appointments List"
+msgstr "予約一覧"
+
+msgid "Filter by customer"
+msgstr "顧客で絞り込み"
+
+msgid "Filter"
+msgstr "絞り込み"
+
+msgid "entries"
+msgstr "件"
+
+msgid "Show"
+msgstr "表示"
+
+msgid "Search:"
+msgstr "検索:"
+
+msgid "Phone"
+msgstr "電話番号"
+
+msgid "Email"
+msgstr "メールアドレス"

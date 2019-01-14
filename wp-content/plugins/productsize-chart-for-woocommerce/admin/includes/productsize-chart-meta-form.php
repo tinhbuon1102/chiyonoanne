@@ -35,11 +35,13 @@ $chart_table = get_post_meta( $post->ID, 'chart-table', true );
 
 ?>
 <div id="productsize-chart-meta-fields" class="chart-0"> 
+	
   <div id="field">
     <div class="field-title"><h4><?php _e( 'Label', $this->plugin_name); ?></h4></div> 
     <div class="field-description"><?php _e( 'Chart Label', $this->plugin_name); ?></div>
     <div class="field-item"><input type="text" id="label" name="label" value="<?php echo  $chart_label; ?>" /></div>
   </div>
+	<?php if (current_user_can('level_10')) { ?>
   <div id="field">
     <div class="field-title"><h4><?php _e( 'Primary Chart Image', $this->plugin_name); ?></h4></div> 
     <div class="field-description"><?php _e( 'Add/Edit primary chart image below', $this->plugin_name); ?></div>
@@ -116,6 +118,7 @@ $chart_table = get_post_meta( $post->ID, 'chart-table', true );
     <option value="after-product-meta" <?php echo $button_position=="after-product-meta" ? 'selected="selected"' : ''; ?>><?php _e( 'After Product Meta',$this->plugin_name); ?></option>
   </select></div>
 </div>
+<?php } ?>
 <div id="field">
  <div class="field-title"><h4><?php _e( 'Chart Categories', $this->plugin_name); ?></h4></div> 
  <div class="field-description"><?php _e( 'Select categories for chart to appear on.', $this->plugin_name); ?></div>

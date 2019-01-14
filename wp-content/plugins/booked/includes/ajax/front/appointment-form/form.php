@@ -61,13 +61,13 @@ if ( $is_user_logged_in && $appointment_limit ) {
 		// If there aren't any errors, and the user is logged in
 		if ( $is_user_logged_in && ! $error_message ) {
 			$msg = sprintf( _n( 'You are about to request an appointment for %s.', 'You are about to request appointments for %s.', $total_appts, 'booked' ), '<em>' . booked_get_name( $booked_current_user->ID ) . '</em>' ) . ' ' . _n( 'Please review and confirm that you would like to request the following appointment:', 'Please review and confirm that you would like to request the following appointments:', $total_appts, 'booked' );
-			echo wpautop( $msg );
+			//echo wpautop( $msg );
 		}
 
 		// If there aren't any errors, and the user isn't logged in
 		if ( ! $is_user_logged_in && ! $error_message ) {
 			$msg = _n( 'Please confirm that you would like to request the following appointment:', 'Please confirm that you would like to request the following appointments:', $total_appts, 'booked' );
-			echo wpautop( $msg );
+			//echo wpautop( $msg );
 		}
 
 		// If no errors, list the bookings

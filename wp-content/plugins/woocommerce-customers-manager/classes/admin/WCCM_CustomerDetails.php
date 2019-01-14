@@ -97,7 +97,7 @@ class WCCM_CustomerDetails {
             $wccm_order_model->assign_users($order_ids, $_GET['customer'], $additional_params);
         }
         $user_info = get_userdata($_REQUEST['customer']);
-        $locale= get_user_locale($_REQUEST['customer']);
+        $locale = get_user_locale($_REQUEST['customer']);
         $this->get_user_info();
         try {
             if (isset($this->customer_extra_info['billing_country'][0]) && file_exists(plugin_dir_path(__FILE__) . 'i18n/' . $this->customer_extra_info['billing_country'][0] . '.php'))
@@ -183,29 +183,29 @@ class WCCM_CustomerDetails {
                 <h3><?php _e('General Details', 'woocommerce-customers-manager'); ?></h3>
                 <div class="detail_box user-general-details_box">
                     <div class="profile_image">
-						<label><?php _e('Profile Image', 'woocommerce-customers-manager'); ?></label> <?php echo get_avatar($this->current_customer_id, 96, "", false, array('class' => 'wccm_avatar_img')); ?>
-					</div>
+                        <label><?php _e('Profile Image', 'woocommerce-customers-manager'); ?></label> <?php echo get_avatar($this->current_customer_id, 96, "", false, array('class' => 'wccm_avatar_img')); ?>
+                    </div>
                     <?php
-                    if($locale=='ja'||$locale=='site-default'){
+                    if ($locale == 'ja' || $locale == 'site-default') {
                         ?>
-                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?></span></div>
-                        
+                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                                           ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                                              ?></span></div>
+
                         <?php
                     } else {
                         ?>
-                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                               ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                            ?></span></div>
+                        <div class="form_row"><label><?php _e('Name', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_extra_info['first_name'])) echo $this->customer_extra_info['first_name'][0]; //$this->customer_extra_info['first_name'][0]                                              ?></span>&nbsp;<span class="value"><?php if (isset($this->customer_extra_info['last_name'])) echo $this->customer_extra_info['last_name'][0]//$this->customer_extra_info['last_name'][0]                                           ?></span></div>
                     <?php } ?> 
                     <div class="form_row"><label><?php _e('Email Address', 'woocommerce-customers-manager'); ?></label><span class="value"><?php if (isset($this->customer_info->user_email)) echo $this->customer_info->user_email ?></span></div>
                     <div class="form_row"><label><?php _e('Registration Date', 'woocommerce-customers-manager'); ?> </label><span class="value"><?php if (isset($this->customer_info->user_registered)) echo $this->customer_info->user_registered ?></span></div>
                     <div class="form_row"><label><?php _e('Roles', 'woocommerce-customers-manager'); ?> </label> 
-					<span class="value">
-                    <?php
-                    $user = new WP_User($this->current_customer_id);
-                    if (!empty($user->roles) && is_array($user->roles)) {
-                        foreach ($user->roles as $role_code)
-                            echo $wp_roles->roles[$role_code]["name"] . " (" . __('Role code:', 'woocommerce-customers-manager') . " <i>" . $role_code . "</i>)<br/>";
-                    }
-                    ?></span></div>
+                        <span class="value">
+                            <?php
+                            $user = new WP_User($this->current_customer_id);
+                            if (!empty($user->roles) && is_array($user->roles)) {
+                                foreach ($user->roles as $role_code)
+                                    echo $wp_roles->roles[$role_code]["name"] . " (" . __('Role code:', 'woocommerce-customers-manager') . " <i>" . $role_code . "</i>)<br/>";
+                            }
+                            ?></span></div>
                     <div class="form_row"><label><?php _e('Total Spent', 'woocommerce-customers-manager'); ?> </label><span class="value"><b><?php echo WCCM_CustomerDetails::get_user_total_spent(null, null, $this->get_all_user_orders($this->current_customer_id)/* $orders */); ?></b></span></div>
 
                 </div>
@@ -300,7 +300,7 @@ class WCCM_CustomerDetails {
                                     <table class="wp-list-table widefat striped wccm-customer-details-table" >
                                         <thead>
                                             <tr>
-                                                <th><?php _e('Product ID', 'woocommerce-customers-manager'); ?></th>
+                                                <th><?php _e('Product SKU', 'woocommerce-customers-manager'); ?></th>
                                                 <th><?php _e('Product name', 'woocommerce-customers-manager'); ?></th>
                                                 <th><?php _e('Quantity', 'woocommerce-customers-manager'); ?></th>
                                                 <th><?php _e('Sub total', 'woocommerce-customers-manager'); ?></th>
@@ -320,6 +320,7 @@ class WCCM_CustomerDetails {
                                                 //wccm_var_dump($product->get_variation_id());
                                                 //var_dump($wc_product);
                                                 $order_item_id = version_compare(WC_VERSION, '2.7', '<') ? $product['item_meta']['_product_id'][0] : $product->get_product_id();
+                                                $product_m = wc_get_product($order_item_id);
                                                 $order_item_variation_id = version_compare(WC_VERSION, '2.7', '<') ? $product['item_meta']['_variation_id'][0] : $product->get_variation_id();
                                                 $order_item_quantity = version_compare(WC_VERSION, '2.7', '<') ? $product['item_meta']['_qty'][0] : $product->get_quantity();
                                                 $discount = ($product['subtotal'] + $product['subtotal_tax']) - ($product['line_total'] + $product['line_tax']);
@@ -327,9 +328,11 @@ class WCCM_CustomerDetails {
                                                 ?>
                                                 <tr>
                                                     <td> <?php
-                                                        echo $order_item_id;
-                                                        if ($order_item_variation_id != 0)
-                                                            echo " (" . __('Var: ', 'woocommerce-customers-manager') . $order_item_variation_id . ")";
+                                                        echo $product_m->get_sku();
+                                                        if ($order_item_variation_id != 0){
+                                                            $product_v = wc_get_product($order_item_variation_id );
+                                                            echo " (" . __('Var: ', 'woocommerce-customers-manager') . $product_v->get_sku(). ")";
+                                                        }
                                                         ?> </td>
                                                     <td class="wccm_product_name_column"> <a href="<?php echo get_permalink($order_item_id); ?>">
                                                             <?php
@@ -341,10 +344,10 @@ class WCCM_CustomerDetails {
                                                             ?>
                                                         </a></td>
                                                     <td> <?php echo $order_item_quantity; ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format(ceil($product['subtotal'])); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($product['subtotal_tax'])); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($discount)); ?> </td>
-                                                    <td> <?php echo get_woocommerce_currency_symbol() .number_format( ceil($product['line_total'] + $product['line_tax']))//$wc_product->get_price_html();                              ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() . number_format(ceil($product['subtotal'])); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() . number_format(ceil($product['subtotal_tax'])); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() . number_format(ceil($discount)); ?> </td>
+                                                    <td> <?php echo get_woocommerce_currency_symbol() . number_format(ceil($product['line_total'] + $product['line_tax']))//$wc_product->get_price_html();                                             ?> </td>
                                                     <td> <a class="button-primary" target="_blank" href="<?php echo get_edit_post_link($order_item_id); ?>">  <?php _e('Edit', 'woocommerce-customers-manager'); ?> </a> </td>
                                                 </tr>
 
@@ -382,18 +385,18 @@ class WCCM_CustomerDetails {
                                             <?php
                                             $order_status = strtoupper($wc_order->get_status());
                                             if ($order_status == 'COMPLETED')
-                                                echo '<span class="order_status order_completed">' . $order_status . '</span>';
+                                                echo '<span class="order_status order_completed">' . __($order_status, 'woocommerce-customers-manager') . '</span>';
                                             else if ($order_status == 'PROCESSING' || $order_status == 'ON-HOLD')
-                                                echo '<span class="order_status order_processing_onhold">' . $order_status . '</span>';
+                                                echo '<span class="order_status order_processing_onhold">' . __($order_status, 'woocommerce-customers-manager') . '</span>';
                                             else
-                                                echo '<span class="order_status order_not_completed">' . $order_status . '</span>';
+                                                echo '<span class="order_status order_not_completed">' . __($order_status, 'woocommerce-customers-manager') . '</span>';
                                             //$order->post_status; 
                                             $refounded = $wc_order->get_total_refunded();
                                             $refounded = isset($refounded) ? floatval($refounded) : 0;
                                             if (method_exists($wc_order, 'get_total_shipping')) {
                                                 $total_shipping_numeric = $wc_order->get_shipping_total() != "" ? $wc_order->get_shipping_total() : 0;
                                                 $total_shipping = get_woocommerce_currency_symbol() . number_format($total_shipping_numeric);
-                                                $total_shipping_tax = get_woocommerce_currency_symbol() .number_format( $wc_order->get_shipping_tax());
+                                                $total_shipping_tax = get_woocommerce_currency_symbol() . number_format($wc_order->get_shipping_tax());
                                                 $total_order = get_woocommerce_currency_symbol() . number_format((ceil($order_total + $taxes_total + $total_shipping_numeric + $wc_order->get_shipping_tax() - $wc_order->get_total_discount(false) - $refounded)));
                                             } else {
                                                 $total_shipping = "N/A";
@@ -529,7 +532,7 @@ class WCCM_CustomerDetails {
                         $shipping_country_code = isset($this->customer_extra_info['shipping_country']) ? $this->customer_extra_info['shipping_country'][0] : "";
                         ?>
                         <?php
-                        if($locale=='ja'||$locale=='site-default'){
+                        if ($locale == 'ja' || $locale == 'site-default') {
                             ?>
                             <?php if (isset($this->customer_extra_info['billing_last_name'])) echo $this->customer_extra_info['billing_last_name'][0]; ?> <?php if (isset($this->customer_extra_info['billing_first_name'])) echo $this->customer_extra_info['billing_first_name'][0]; ?>
                             <?php
@@ -546,7 +549,7 @@ class WCCM_CustomerDetails {
                         ?>
                         <br/>
                         <?php
-                        if($locale=='ja'||$locale=='site-default'){
+                        if ($locale == 'ja' || $locale == 'site-default') {
                             if ($billing_postcode != "")
                                 echo $billing_postcode;
                             if (isset($billing_state_code) && $billing_state_code != null) {
@@ -619,7 +622,7 @@ class WCCM_CustomerDetails {
                     <p>
                         <label> <?php _e('Address', 'woocommerce-customers-manager'); ?></label>
                         <?php
-                        if($locale=='ja'||$locale=='site-default'){
+                        if ($locale == 'ja' || $locale == 'site-default') {
                             ?>
                             <?php if (isset($this->customer_extra_info['shipping_last_name'])) echo $this->customer_extra_info['shipping_last_name'][0] ?> <?php if (isset($this->customer_extra_info['shipping_first_name'])) echo $this->customer_extra_info['shipping_first_name'][0] ?>
                             <?php
@@ -635,7 +638,7 @@ class WCCM_CustomerDetails {
                         endif;
                         ?>
                         <?php
-                        if($locale=='ja'||$locale=='site-default'){
+                        if ($locale == 'ja' || $locale == 'site-default') {
                             if (isset($this->customer_extra_info['shipping_postcode']) && !empty($this->customer_extra_info['shipping_postcode'][0]) && $this->customer_extra_info['shipping_postcode'][0] != " ")
                                 echo "<br/>" . $this->customer_extra_info['shipping_postcode'][0];
                             if (isset($shipping_state_code) && $shipping_state_code != null) {
@@ -741,8 +744,49 @@ class WCCM_CustomerDetails {
                             </p>
                         </form>
                         </p>
+                        <?php
+                        $current_history = get_user_meta($_REQUEST['customer'], 'ch_wccm_email_history', true);
+                        $arr_current_history = @json_decode($current_history, true);
+                        if (@is_array($arr_current_history)) {
+                            if (@count($arr_current_history) > 0) {
+
+                                function cb($a, $b) {
+                                    return strtotime($b['createdtime']) - strtotime($a['createdtime']);
+                                }
+
+                                usort($arr_current_history, 'cb');
+                                ?>
+                                <h3> <?php _e('Email history', 'woocommerce-customers-manager'); ?></h3>
+                                <div>
+                                    <table class="table">
+                                        <thead>
+                                        <th><strong><?php esc_html_e('User send', 'woocommerce-customers-manager'); ?></strong></th>
+                                        <th><strong><?php esc_html_e('Date', 'woocommerce-customers-manager'); ?></strong></th>
+                                        <th><strong><?php esc_html_e('Subject', 'woocommerce-customers-manager'); ?></strong></th>
+                                        <th><strong><?php esc_html_e('Content', 'woocommerce-customers-manager'); ?></strong></th>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($arr_current_history as $value_h) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $value_h['usersend']; ?></td>
+                                                    <td><?php echo $value_h['createdtime']; ?></td>
+                                                    <td><?php echo $value_h['subject']; ?></td>
+                                                    <td><?php echo $value_h['content']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
-                <?php endif; ?>
+        <?php endif; ?>
 
 
 
@@ -765,7 +809,7 @@ class WCCM_CustomerDetails {
                     <div style="display:block; clear:both; height:50px; width:100%;"></div>	
                     <h3> <?php _e('Location', 'woocommerce-customers-manager'); ?></h3>
                     <div id="map-container"> </div>
-                <?php endif; ?>
+        <?php endif; ?>
 
                 <div style="display:block; clear:both; height:50px; width:100%;"></div>
                 <h3> <?php _e('Stats', 'woocommerce-customers-manager'); ?></h3>
