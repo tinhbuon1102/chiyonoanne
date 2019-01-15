@@ -4959,3 +4959,9 @@ function ch_booked_menu_user_shop_manager_role() {
         remove_submenu_page('booked-appointments', 'booked-install-addons');
     }
 }
+//remove rating sort
+function ch_woocommerce_catalog_orderby( $orderby ) {
+    unset($orderby["rating"]);
+    return $orderby;
+}
+add_filter( "woocommerce_catalog_orderby", "ch_woocommerce_catalog_orderby", 20 );

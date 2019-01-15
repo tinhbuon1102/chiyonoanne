@@ -4,24 +4,21 @@ global $WOOF;
 $_REQUEST['additional_taxes'] = $additional_taxes;
 $_REQUEST['hide_terms_count_txt'] = isset($this->settings['hide_terms_count_txt']) ? $this->settings['hide_terms_count_txt'] : 0;
 //***
-if(isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short']!=-1){
-    if((int)$_REQUEST['hide_terms_count_txt_short']==1){
-        $_REQUEST['hide_terms_count_txt']=1;
-    }else{
-        $_REQUEST['hide_terms_count_txt']=0;
+if (isset($_REQUEST['hide_terms_count_txt_short']) AND $_REQUEST['hide_terms_count_txt_short'] != -1) {
+    if ((int) $_REQUEST['hide_terms_count_txt_short'] == 1) {
+        $_REQUEST['hide_terms_count_txt'] = 1;
+    } else {
+        $_REQUEST['hide_terms_count_txt'] = 0;
     }
 }
 //***
 
-if (!function_exists('woof_draw_checkbox_childs'))
-{
+if (!function_exists('woof_draw_checkbox_childs')) {
 
-    function woof_draw_checkbox_childs($taxonomy_info, $tax_slug, $term_id, $childs, $show_count, $show_count_dynamic, $hide_dynamic_empty_pos)
-    {
+    function woof_draw_checkbox_childs($taxonomy_info, $tax_slug, $term_id, $childs, $show_count, $show_count_dynamic, $hide_dynamic_empty_pos) {
         $do_not_show_childs = (int) apply_filters('woof_terms_where_hidden_childs', $term_id);
 
-        if ($do_not_show_childs == 1)
-        {
+        if ($do_not_show_childs == 1) {
             return "";
         }
 
@@ -30,15 +27,13 @@ if (!function_exists('woof_draw_checkbox_childs'))
         $current_request = array();
         global $WOOF;
         $request = $WOOF->get_request_data();
-        if ($WOOF->is_isset_in_request_data($tax_slug))
-        {
+        if ($WOOF->is_isset_in_request_data($tax_slug)) {
             $current_request = $request[$tax_slug];
             $current_request = explode(',', urldecode($current_request));
         }
         //***
         static $hide_childs = -1;
-        if ($hide_childs == -1)
-        {
+        if ($hide_childs == -1) {
             $hide_childs = (int) get_option('woof_checkboxes_slide');
         }
 
@@ -46,14 +41,11 @@ if (!function_exists('woof_draw_checkbox_childs'))
         //excluding hidden terms
         $hidden_terms = array();
 
-        if (!isset($_REQUEST['woof_shortcode_excluded_terms']))
-        {
-            if (isset($WOOF->settings['excluded_terms'][$tax_slug]))
-            {
+        if (!isset($_REQUEST['woof_shortcode_excluded_terms'])) {
+            if (isset($WOOF->settings['excluded_terms'][$tax_slug])) {
                 $hidden_terms = explode(',', $WOOF->settings['excluded_terms'][$tax_slug]);
             }
-        } else
-        {
+        } else {
             $hidden_terms = explode(',', $_REQUEST['woof_shortcode_excluded_terms']);
         }
 
@@ -65,34 +57,27 @@ if (!function_exists('woof_draw_checkbox_childs'))
                     <?php
                     $count_string = "";
                     $count = 0;
-                    if (!in_array($term['slug'], $current_request))
-                    {
-                        if ($show_count)
-                        {
-                            if ($show_count_dynamic)
-                            {
+                    if (!in_array($term['slug'], $current_request)) {
+                        if ($show_count) {
+                            if ($show_count_dynamic) {
                                 $count = $WOOF->dynamic_count($term, 'multi', $_REQUEST['additional_taxes']);
-                            } else
-                            {
+                            } else {
                                 $count = $term['count'];
                             }
                             $count_string = '<span class="woof_checkbox_count">(' . $count . ')</span>';
                         }
                         //+++
-                        if ($hide_dynamic_empty_pos AND $count == 0)
-                        {
+                        if ($hide_dynamic_empty_pos AND $count == 0) {
                             continue;
                         }
                     }
 
-                    if ($_REQUEST['hide_terms_count_txt'])
-                    {
+                    if ($_REQUEST['hide_terms_count_txt']) {
                         $count_string = "";
                     }
 
                     //excluding hidden terms
-                    if (in_array($term['term_id'], $hidden_terms))
-                    {
+                    if (in_array($term['term_id'], $hidden_terms)) {
                         continue;
                     }
                     ?>
@@ -103,8 +88,7 @@ if (!function_exists('woof_draw_checkbox_childs'))
                                 echo $term['name'];
                             ?><?php echo $count_string ?></label>
                         <?php
-                        if (!empty($term['childs']))
-                        {
+                        if (!empty($term['childs'])) {
                             woof_draw_checkbox_childs($taxonomy_info, $tax_slug, $term['term_id'], $term['childs'], $show_count, $show_count_dynamic, $hide_dynamic_empty_pos);
                         }
                         ?>
@@ -124,8 +108,7 @@ if (!function_exists('woof_draw_checkbox_childs'))
     $woof_tax_values = array();
     $current_request = array();
     $request = $this->get_request_data();
-    if ($this->is_isset_in_request_data($tax_slug))
-    {
+    if ($this->is_isset_in_request_data($tax_slug)) {
         $current_request = $request[$tax_slug];
         $current_request = explode(',', urldecode($current_request));
     }
@@ -133,22 +116,18 @@ if (!function_exists('woof_draw_checkbox_childs'))
 
     //excluding hidden terms
     $hidden_terms = array();
-    if (!isset($_REQUEST['woof_shortcode_excluded_terms']))
-    {
-        if (isset($WOOF->settings['excluded_terms'][$tax_slug]))
-        {
+    if (!isset($_REQUEST['woof_shortcode_excluded_terms'])) {
+        if (isset($WOOF->settings['excluded_terms'][$tax_slug])) {
             $hidden_terms = explode(',', $WOOF->settings['excluded_terms'][$tax_slug]);
         }
-    } else
-    {
+    } else {
         $hidden_terms = explode(',', $_REQUEST['woof_shortcode_excluded_terms']);
     }
 
     //***
 
     $not_toggled_terms_count = 0;
-    if (isset($WOOF->settings['not_toggled_terms_count'][$tax_slug]))
-    {
+    if (isset($WOOF->settings['not_toggled_terms_count'][$tax_slug])) {
         $not_toggled_terms_count = intval($WOOF->settings['not_toggled_terms_count'][$tax_slug]);
     }
 
@@ -163,41 +142,33 @@ if (!function_exists('woof_draw_checkbox_childs'))
             <?php
             $count_string = "";
             $count = 0;
-            if (!in_array($term['slug'], $current_request))
-            {
-                if ($show_count)
-                {
-                    if ($show_count_dynamic)
-                    {
+            if (!in_array($term['slug'], $current_request)) {
+                if ($show_count) {
+                    if ($show_count_dynamic) {
                         $count = $this->dynamic_count($term, 'multi', $_REQUEST['additional_taxes']);
-                    } else
-                    {
+                    } else {
                         $count = $term['count'];
                     }
                     $count_string = '<span class="woof_checkbox_count">(' . $count . ')</span>';
                 }
                 //+++
-                if ($hide_dynamic_empty_pos AND $count == 0)
-                {
+                if ($hide_dynamic_empty_pos AND $count == 0) {
                     continue;
                 }
             }
 
-            if ($_REQUEST['hide_terms_count_txt'])
-            {
+            if ($_REQUEST['hide_terms_count_txt']) {
                 $count_string = "";
             }
 
             //excluding hidden terms
-            if (in_array($term['term_id'], $hidden_terms))
-            {
+            if (in_array($term['term_id'], $hidden_terms)) {
                 continue;
             }
 
             //***
 
-            if ($not_toggled_terms_count > 0 AND $terms_count_printed === $not_toggled_terms_count)
-            {
+            if ($not_toggled_terms_count > 0 AND $terms_count_printed === $not_toggled_terms_count) {
                 $hide_next_term_li = true;
             }
             ?>
@@ -211,8 +182,7 @@ if (!function_exists('woof_draw_checkbox_childs'))
                         echo $term['name'];
                     ?><?php echo $count_string ?></label>
                 <?php
-                if (!empty($term['childs']))
-                {
+                if (!empty($term['childs'])) {
                     woof_draw_checkbox_childs($taxonomy_info, $tax_slug, $term['term_id'], $term['childs'], $show_count, $show_count_dynamic, $hide_dynamic_empty_pos);
                 }
                 ?>
@@ -230,118 +200,66 @@ if (!function_exists('woof_draw_checkbox_childs'))
         if ($not_toggled_terms_count > 0 AND $terms_count_printed > $not_toggled_terms_count):
             ?>
             <li class="woof_open_hidden_li"><?php WOOF_HELPER::draw_more_less_button('checkbox') ?></li>
-            <?php endif; ?>
         <?php endif; ?>
+    <?php endif; ?>
 </ul>
 <!--start added code-->
 <?php if ($tax_slug == 'pa_size') { ?>
-<div class="info_show_wrap">
-	<div class="bodyshape_info size_info"><button class="cta pop-up-button js-actives"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Chiyono Anne's Size", 'zoa' ); ?></button></div>
-	<div class="pop-up tooltip-pop pop-size">
-		<div class="pop-head">
-				<h2 class="pop-title"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e( "About Chiyono Anne's Size", 'zoa' ); ?></h2>
-				<button class="pop-up-close"><i class="oecicon oecicon-simple-remove"></i></button>
-			</div>
-		<?php if (!empty($terms)): ?>
-        
-			<?php //echo '<div class="row">'; ?>
-			<?php //echo '<div class="col-12">'; ?>
-		<h4 class="size-title"><?php esc_html_e( "Bra Size", 'zoa' ); ?></h4>
-		<table class="size-chart">
-			<tbody>
-				<tr>
-					<th><?php esc_html_e( "SIZE", 'zoa' ); ?></th>
-					<?php foreach ($terms as $term) : ?>
-					<?php
-			            $count_string = "";
-			            $count = 0;
-						$sizeTypes = get_field('types', $term['taxonomy'] . '_' . $term['term_id'] );
-						$selectedCatName = '';
-						if (!empty($sizeTypes))
-						{
-							foreach ($sizeTypes as $sizeType)
-							{
-								$category = get_term($sizeType);
-								$selectedCatName = $category->name;
-								break;
-							}
-						}
-						?>
-						<?php if ($selectedCatName=='Bras') {
-							echo '<th>'.$term['name'].'</th>';
-						}
-						 ?>
-						<?php endforeach; ?>
-				</tr>
-				<tr>
-					<td><?php esc_html_e( "Cup Size", 'zoa' ); ?></td>
-					<td>A~B</td>
-					<td>C~D</td>
-					<td>E~F</td>
-					<?php /*foreach ($terms as $term) : 
-					$term_desc = term_description( $term['term_id'], $term );
-					$aDesc = explode(PHP_EOL, $term_desc);
-					$aDescLine = array();
-					$colon = '';
-					foreach ($aDesc as $desc)
-					{
-						if (strpos($desc, '：') !== false)
-						{
-							$colon = '：';
-						}
-						elseif (strpos($desc, ':') !== false)
-						{
-							$colon = ':';
-						}
-						if ($colon)
-						{
-							$aDescLine[] = explode($colon, $desc);
-						}
-					}
-					$descHtml = '';
-					if (!empty($aDescLine))
-					{
-						$descHtml .= '';
-						foreach ($aDescLine as $desLine)
-						{
-							if ($desLine[0] == 'カップサイズ') {
-								$descHtml .= '<td class="size_title">'. $desLine[1] .'</td>';
-							}
-							
-						}
-						$descHtml .= '';
-					}
-					echo $descHtml;
-					 endforeach; */?>
-				</tr>
-				<tr>
-					<td><?php esc_html_e( "Under Bust", 'zoa' ); ?></td>
-					<td>65~70cm</td>
-					<td>70~75cm</td>
-					<td>75~80cm</td>
-				</tr>
-			</tbody>
-		</table>
-		<h4 class="size-title"><?php esc_html_e( "Panty Size", 'zoa' ); ?></h4>
-		<table class="size-chart">
-			<tbody>
-				<tr>
-					<td><?php esc_html_e( "SIZE", 'zoa' ); ?></td>
-					<td>S</td>
-					<td>M</td>
-					<td>L</td>
-				</tr>
-				<tr>
-					<td><?php esc_html_e( "Hip", 'zoa' ); ?></td>
-					<td>80~88cm</td>
-					<td>85~93cm</td>
-					<td>90~98cm</td>
-				</tr>
-			</tbody>
-		</table>
-		<?php endif; ?>
-	</div>
-</div>
+    <div class="info_show_wrap">
+        <div class="bodyshape_info size_info"><button class="cta pop-up-button js-actives"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e("About Chiyono Anne's Size", 'zoa'); ?></button></div>
+        <div class="pop-up tooltip-pop pop-size">
+            <div class="pop-head">
+                <h2 class="pop-title"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e("About Chiyono Anne's Size", 'zoa'); ?></h2>
+                <button class="pop-up-close"><i class="oecicon oecicon-simple-remove"></i></button>
+            </div>
+            <?php if (!empty($terms)): ?>
+                <?php
+                $args = array(
+                    'post_type' => 'chart',
+                    'posts_per_page' => -1
+                );
+                $charts = new WP_Query($args);
+                if ($charts->have_posts()) {
+                    while ($charts->have_posts()) : $charts->the_post();
+                        $show_in_product_filter = get_field('show_in_product_filter', get_the_ID());
+                        if (isset($show_in_product_filter[0]) && strtolower($show_in_product_filter[0]) == 'show in product filter') {
+                            $chart_label = get_post_meta( get_the_ID(), 'label', true );
+                            $chart_table = get_post_meta(get_the_ID(), 'chart-table', true);
+                            if ($chart_table != '') {
+                                $arr_chart_table = json_decode($chart_table);
+                                if ($arr_chart_table) {
+                                    ?>
+                                    <h4 class="size-title"><?php echo $chart_label; ?></h4>
+                                    <table class="size-chart">
+                                        <tbody>
+                                            <?php
+                                            foreach ($arr_chart_table as $value) {
+                                                ?>
+                                                <tr>
+                                                    <?php
+                                                    foreach ($value as $value_row) {
+                                                        ?>
+                                                        <td><?php echo $value_row; ?></td>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                }
+                            }
+                        }
+                    endwhile;
+                }
+                wp_reset_query();
+                ?>
+            <?php endif; ?>
+        </div>
+    </div>
 <?php } ?>
 <!--end added code-->
 <?php

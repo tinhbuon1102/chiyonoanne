@@ -36,6 +36,9 @@
 	.button--full {
     width: 100%;
 	}
+	.shop-top-bar.display--mid-up .selectric-wrapper {
+    width: 150px;
+	}
 }
 /*Qty*/
 .qty {
@@ -4489,4 +4492,65 @@ yith product add-ons option style
 .ywapo_product_option_description p {
     font-size: .75rem;
     color: #666666;
+}
+/*Stripe payment gateway*/
+#stripe-card-element, #stripe-exp-element, #stripe-cvc-element {
+    padding: 15px 12px;
+}
+
+form.woocommerce-checkout .wc_payment_method label {
+    font-size: .85rem;
+}
+
+fieldset#wc-stripe-cc-form {
+    padding: 0;
+    margin: 0;
+}
+
+fieldset#wc-stripe-cc-form .form-row {
+    padding: 0;
+}
+.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label:before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: none;
+    border: 1px solid #000;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label {
+    position: relative;
+    padding-left: 24px;
+}
+.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label:after {
+	position: absolute;
+    content: '';
+    transition: all .2s ease;
+    top: 0px;
+    left: 4px;
+    width: 6px;
+    height: 10px;
+    -webkit-transform: scale(0) rotate(45deg);
+    transform: scale(0) rotate(45deg);
+    border-width: 2px;
+    border-style: solid;
+    border-color: #000;
+    border-top: 0;
+    border-left: 0;
+}
+.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated.checked label:after {
+	
+	-webkit-transform: scale(1) rotate(45deg);
+    transform: scale(1) rotate(45deg);
+}
+div#stripe-payment-data > p:not(.form-row) {
+    font-size: .85rem;
+    line-height: 1.5;
+    margin-top: 12px;
+    font-weight: 300;
 }
