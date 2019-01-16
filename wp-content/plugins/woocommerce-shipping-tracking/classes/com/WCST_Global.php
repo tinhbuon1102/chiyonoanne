@@ -79,4 +79,56 @@ if( !function_exists('apache_request_headers') )
         return( $arh );
     }
 }
+function wcst_get_order_tracking_data($order_id)
+{
+	if(!isset($order_id))
+		return;
+	
+	global $wcst_order_model;
+	$result = $first_company = array();
+	$tracking_meta = $wcst_order_model->get_order_meta($order_id);
+
+	//First company
+	foreach($wcst_order_model->tracking_key_array as $meta_name)
+	{
+		if(isset($tracking_meta[$meta_name]))
+			switch($meta_name)
+			{
+				case '_wcst_order_trackno': $first_company["tracking_number"] = $tracking_meta[$meta_name][0]; break;
+				case '_wcst_order_dispatch_date': $first_company["dispatch_date"] = $tracking_meta[$meta_name][0]; break;
+				case '_wcst_custom_text': $first_company["custom_text"] = $tracking_meta[$meta_name][0]; break;
+				case '_wcst_order_trackname': $first_company["company_name"] = $tracking_meta[$meta_name][0]; break;
+				case '_wcst_order_trackurl': $first_company["company_id"] = $tracking_meta[$meta_name][0]; break;
+				case '_wcst_order_track_http_url': $first_company["tracking_url"] = $tracking_meta[$meta_name][0]; break;
+			}
+	}
+	if(!empty($first_company))
+		$result[] = $first_company;
+	
+	//Additional companies
+	if(isset($tracking_meta[$wcst_order_model->tracking_additional_company_key]))
+	{
+		$additional_company = array();			
+		foreach($tracking_meta[$wcst_order_model->tracking_additional_company_key] as $current_additional_company)
+		{
+			foreach($wcst_order_model->tracking_key_array as $meta_name)
+			{
+				if(isset($current_additional_company[$meta_name]))
+					switch($meta_name)
+					{
+						case '_wcst_order_trackno': $additional_company["tracking_number"] = $current_additional_company[$meta_name]; break;
+						case '_wcst_order_dispatch_date': $additional_company["dispatch_date"] = $current_additional_company[$meta_name]; break;
+						case '_wcst_custom_text': $additional_company["custom_text"] = $current_additional_company[$meta_name]; break;
+						case '_wcst_order_trackname': $additional_company["company_name"] = $current_additional_company[$meta_name]; break;
+						case '_wcst_order_trackurl': $additional_company["company_id"] = $current_additional_company[$meta_name]; break;
+						case '_wcst_order_track_http_url': $additional_company["tracking_url"] = $current_additional_company[$meta_name]; break;
+					}
+			}
+		}
+		if(!empty($additional_company))
+			$result[] = $additional_company;
+	}
+	//wcst_var_dump($result);
+	return $result;
+}
 ?>

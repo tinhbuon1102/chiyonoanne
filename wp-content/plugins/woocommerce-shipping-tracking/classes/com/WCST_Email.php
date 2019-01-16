@@ -4,7 +4,7 @@ class WCST_Email
 	public function __construct()
 	{
 	}
-	public function send_active_notification_email_with_tracking_codes($recipients, $content, $subject = "", $email_heading = "")
+	public function send_active_notification_email_with_tracking_codes($recipients, $content, $subject = "", $email_heading = "", $order = null)
 	{
 		$mail = WC()->mailer();
 		//$email_heading = get_bloginfo('name');
@@ -18,6 +18,8 @@ class WCST_Email
 		
 		//$subject = __('Your products have been shipped','woocommerce-shipping-tracking');
 		
+		do_action('wcst_after_active_notofication_email', $recipients, $order);
+		
 		add_filter('wp_mail_from_name',array(&$this, 'wp_mail_from_name'), 99, 1);
 		add_filter('wp_mail_from', array(&$this, 'wp_mail_from')/* , 99, 1 */);
 		$attachments = /* isset($attachment[$recipients]) ? $attachment[$recipients] : */ array();
@@ -25,6 +27,8 @@ class WCST_Email
 			wp_mail( $recipients, $subject, $message, "Content-Type: text/html\r\n", $attachments);
 		remove_filter('wp_mail_from_name',array(&$this, 'wp_mail_from_name'));
 		remove_filter('wp_mail_from',array(&$this, 'wp_mail_from'));
+		
+		do_action('wcst_before_active_notofication_email', $recipients, $order);
 	}
 	public function wp_mail_from_name($name) 
 	{

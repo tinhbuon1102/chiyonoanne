@@ -4,7 +4,7 @@ class WCST_Order
 	var $tracking_key_array = array('_wcst_order_trackno','_wcst_order_dispatch_date', '_wcst_track_without_tracking_code',
 									'_wcst_custom_text','_wcst_order_trackname','_wcst_order_trackurl',
 									'_wcst_order_track_http_url','_wcst_order_disable_email');
-	var $tracking_additiona_compaly_key = '_wcst_additional_companies';
+	var $tracking_additional_company_key = '_wcst_additional_companies';
 	
 	public function __construct()
 	{
@@ -415,12 +415,16 @@ class WCST_Order
 		if(version_compare( WC_VERSION, '2.7', '<' ))
 			return  get_post_custom( $order_id );
 		
-		$order = wc_get_order($order_id);// new WC_Order($order_id); 
-		$meta = $order->get_meta_data();
 		$meta_to_return = array();
+		$order = wc_get_order($order_id);// new WC_Order($order_id); 
+		if(!isset($order) || $order == false)
+			return $meta_to_return;
+		
+		$meta = $order->get_meta_data();
+		
 		foreach((array)$meta as $current_meta)
 			foreach((array)$current_meta->value as $value)
-				if(in_array($current_meta->key, $this->tracking_key_array) || $current_meta->key == $this->tracking_additiona_compaly_key || $current_meta->key == 'wpml_language')
+				if(in_array($current_meta->key, $this->tracking_key_array) || $current_meta->key == $this->tracking_additional_company_key || $current_meta->key == 'wpml_language')
 				{
 					/* if(!isset($meta_to_return[$current_meta->key]))
 						$meta_to_return[$current_meta->key] = array(); */
@@ -572,7 +576,7 @@ class WCST_Order
 			$active_notification_email_subject = str_replace("[order_id]", WCST_Order::get_id($order), $active_notification_email_subject);
 			$active_notification_email_heading = str_replace("[order_id]", WCST_Order::get_id($order), $active_notification_email_heading);
 			
-			$wcst_email_model->send_active_notification_email_with_tracking_codes($this->get_billing_email($order), $message, $active_notification_email_subject, $active_notification_email_heading);
+			$wcst_email_model->send_active_notification_email_with_tracking_codes($this->get_billing_email($order), $message, $active_notification_email_subject, $active_notification_email_heading, $order);
 		}
 		
 		

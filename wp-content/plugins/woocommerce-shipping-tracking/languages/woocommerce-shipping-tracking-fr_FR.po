@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Shipping Tracking\n"
-"POT-Creation-Date: 2018-12-20 10:44+0100\n"
-"PO-Revision-Date: 2018-12-20 10:44+0100\n"
+"POT-Creation-Date: 2019-01-09 11:30+0100\n"
+"PO-Revision-Date: 2019-01-09 11:30+0100\n"
 "Last-Translator: LIJE Creative <info@lije-creative.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1402,8 +1402,8 @@ msgstr "Déplacer vers la corbeille. Êtes-vous sûr(e) ?"
 #: classes/acf/includes/fields/class-acf-field-true_false.php:159
 #: classes/acf/pro/admin/views/html-settings-updates.php:89
 #: classes/admin/WCST_AdminMenu.php:640 classes/admin/WCST_AdminMenu.php:657
-#: classes/admin/WCST_AdminMenu.php:694 classes/admin/WCST_AdminMenu.php:727
-#: classes/admin/WCST_AdminMenu.php:735 classes/admin/WCST_BulkImport.php:44
+#: classes/admin/WCST_AdminMenu.php:695 classes/admin/WCST_AdminMenu.php:728
+#: classes/admin/WCST_AdminMenu.php:736 classes/admin/WCST_BulkImport.php:44
 #: classes/admin/WCST_QuickAssignPage.php:82
 #: classes/com/WCST_HtmlHelper.php:239 classes/com/WCST_HtmlHelper.php:247
 msgid "Yes"
@@ -1414,8 +1414,8 @@ msgstr "Oui"
 #: classes/acf/includes/fields/class-acf-field-true_false.php:174
 #: classes/acf/pro/admin/views/html-settings-updates.php:99
 #: classes/admin/WCST_AdminMenu.php:639 classes/admin/WCST_AdminMenu.php:656
-#: classes/admin/WCST_AdminMenu.php:693 classes/admin/WCST_AdminMenu.php:728
-#: classes/admin/WCST_AdminMenu.php:734 classes/admin/WCST_BulkImport.php:43
+#: classes/admin/WCST_AdminMenu.php:694 classes/admin/WCST_AdminMenu.php:729
+#: classes/admin/WCST_AdminMenu.php:735 classes/admin/WCST_BulkImport.php:43
 #: classes/admin/WCST_QuickAssignPage.php:83
 #: classes/admin/WCST_QuickAssignPage.php:100
 #: classes/com/WCST_HtmlHelper.php:238
@@ -1896,7 +1896,7 @@ msgid "P"
 msgstr ""
 
 #: classes/acf/includes/fields/class-acf-field-email.php:25
-#: classes/admin/WCST_AdminMenu.php:154 classes/admin/WCST_AdminMenu.php:766
+#: classes/admin/WCST_AdminMenu.php:154 classes/admin/WCST_AdminMenu.php:767
 msgid "Email"
 msgstr ""
 
@@ -3710,7 +3710,7 @@ msgid "Shipping Company URL:"
 msgstr "URL de la société de livraison :"
 
 #: classes/admin/WCST_AdminMenu.php:316 classes/admin/WCST_AdminMenu.php:463
-#: classes/admin/WCST_AdminMenu.php:562 classes/admin/WCST_AdminMenu.php:799
+#: classes/admin/WCST_AdminMenu.php:562 classes/admin/WCST_AdminMenu.php:800
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
@@ -3886,27 +3886,27 @@ msgid ""
 "best to respect your needings."
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:588 classes/admin/WCST_AdminMenu.php:749
+#: classes/admin/WCST_AdminMenu.php:588 classes/admin/WCST_AdminMenu.php:750
 #: classes/frontend/WCST_CheckoutPage.php:31
-#: classes/frontend/WCST_ProductPage.php:54
+#: classes/frontend/WCST_ProductPage.php:56
 #: classes/frontend/WCST_ProductTable.php:21
 msgid "Estimated shipping date:"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:589 classes/admin/WCST_AdminMenu.php:752
+#: classes/admin/WCST_AdminMenu.php:589 classes/admin/WCST_AdminMenu.php:753
 #: classes/com/WCST_Shortcodes.php:31
 msgid "Out of stock, date unavailable"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:590 classes/admin/WCST_AdminMenu.php:764
+#: classes/admin/WCST_AdminMenu.php:590 classes/admin/WCST_AdminMenu.php:765
 #: classes/frontend/WCST_MyAccountPage.php:55
 #, fuzzy, php-format
 #| msgid "Track shipment"
 msgid "Track shipment #%s"
 msgstr "Suivi de livraison"
 
-#: classes/admin/WCST_AdminMenu.php:591 classes/admin/WCST_AdminMenu.php:771
-#: classes/com/WCST_Order.php:568
+#: classes/admin/WCST_AdminMenu.php:591 classes/admin/WCST_AdminMenu.php:772
+#: classes/com/WCST_Order.php:572
 msgid "Your products have been shipped"
 msgstr ""
 
@@ -4103,19 +4103,23 @@ msgstr ""
 msgid "F j, Y"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:690
-msgid "Admin order page - automatic dispatch date field filling"
+#: classes/admin/WCST_AdminMenu.php:688
+msgid "M j"
 msgstr ""
 
 #: classes/admin/WCST_AdminMenu.php:691
+msgid "Admin order page - automatic dispatch date field filling"
+msgstr ""
+
+#: classes/admin/WCST_AdminMenu.php:692
 msgid "Automatically fill dispatch date field with today date"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:697
+#: classes/admin/WCST_AdminMenu.php:698
 msgid "Tracking form redirection"
 msgstr "Redirection de formulaire de suivi"
 
-#: classes/admin/WCST_AdminMenu.php:698
+#: classes/admin/WCST_AdminMenu.php:699
 msgid ""
 "Select redirection method. Using the \"Open new tab\" method could cause the "
 "browse to detect the new tab as a popup."
@@ -4123,83 +4127,83 @@ msgstr ""
 "Sélectionner la méthode de redirection. Utiliser la méthode « Ouvrir un "
 "nouvel onglet » peut être détecté comme du spam."
 
-#: classes/admin/WCST_AdminMenu.php:700
+#: classes/admin/WCST_AdminMenu.php:701
 msgid "Same page"
 msgstr "Même page"
 
-#: classes/admin/WCST_AdminMenu.php:701
+#: classes/admin/WCST_AdminMenu.php:702
 msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
-#: classes/admin/WCST_AdminMenu.php:704
+#: classes/admin/WCST_AdminMenu.php:705
 #, fuzzy
 #| msgid "Tacking info positioning"
 msgid "Tracking info positioning"
 msgstr "Positionnement des informations de suivi"
 
-#: classes/admin/WCST_AdminMenu.php:705
+#: classes/admin/WCST_AdminMenu.php:706
 msgid "Order details page: select where to display tracking info"
 msgstr ""
 "Résumé de la commande : choisissez où afficher les informations de suivi"
 
-#: classes/admin/WCST_AdminMenu.php:707
+#: classes/admin/WCST_AdminMenu.php:708
 msgid "After order table"
 msgstr "Après le tableau de commande"
 
-#: classes/admin/WCST_AdminMenu.php:708
+#: classes/admin/WCST_AdminMenu.php:709
 msgid "Before order table"
 msgstr "Avant le tableau de commande"
 
-#: classes/admin/WCST_AdminMenu.php:711
+#: classes/admin/WCST_AdminMenu.php:712
 msgid "Product Page - automatic estimated shipping info positioning"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:712
+#: classes/admin/WCST_AdminMenu.php:713
 msgid ""
 "By default estimated shipping info on product page is displayed using the "
 "[wcst_show_estimated_date] shortcode. However using the following option you "
 "can display that info automatically at specific positions:"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:714
+#: classes/admin/WCST_AdminMenu.php:715
 msgid "Do not automatically show"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:715
+#: classes/admin/WCST_AdminMenu.php:716
 msgid "After variable options dropdown(s) and before add to cart button"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:716
+#: classes/admin/WCST_AdminMenu.php:717
 msgid "Before both variable options dropdown(s)\tand add to cart button"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:717
+#: classes/admin/WCST_AdminMenu.php:718
 msgid "After add to cart button"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:718
+#: classes/admin/WCST_AdminMenu.php:719
 msgid "After product images"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:719
+#: classes/admin/WCST_AdminMenu.php:720
 msgid "Before product Images"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:720
+#: classes/admin/WCST_AdminMenu.php:721
 msgid "Before short description"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:721
+#: classes/admin/WCST_AdminMenu.php:722
 msgid "After product description"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:724
+#: classes/admin/WCST_AdminMenu.php:725
 msgid ""
 "Show a warning text instead of the estimated date for item no longer in "
 "stock "
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:725
+#: classes/admin/WCST_AdminMenu.php:726
 msgid ""
 "to customize the showed text, use the <i>Text displayed when the product is "
 "out of stock</i> setting in the next section. Note: if the text is "
@@ -4207,55 +4211,55 @@ msgid ""
 "won't be displayed for the first 4 options due to a WooCommerce limitation."
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:731
+#: classes/admin/WCST_AdminMenu.php:732
 msgid "Cart/Checkout Pages - automatic estimated shipping display"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:732
+#: classes/admin/WCST_AdminMenu.php:733
 msgid ""
 "Would you like to display estimated shipping info under each product on "
 "product table displayed in Cart/Checkout page:"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:738
+#: classes/admin/WCST_AdminMenu.php:739
 msgid "Texts"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:739
+#: classes/admin/WCST_AdminMenu.php:740
 msgid "Estimation date"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:740
+#: classes/admin/WCST_AdminMenu.php:741
 msgid "Label to display before the date:"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:742
+#: classes/admin/WCST_AdminMenu.php:743
 msgid ""
 "This label is used on Product, Cart and Checkout pages to display product "
 "estimated shipping date. "
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:746 classes/admin/WCST_AdminMenu.php:761
+#: classes/admin/WCST_AdminMenu.php:747 classes/admin/WCST_AdminMenu.php:762
 msgid ""
 "<strong>WPML NOTE:</strong> to localize this label, simply switch language "
 "using WPML language selector and then save the options."
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:751
+#: classes/admin/WCST_AdminMenu.php:752
 msgid "Text displayed when the product is out of stock:"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:754
+#: classes/admin/WCST_AdminMenu.php:755
 #, fuzzy
 #| msgid "Track shipment"
 msgid "Tracking shipment button"
 msgstr "Suivi de livraison"
 
-#: classes/admin/WCST_AdminMenu.php:755
+#: classes/admin/WCST_AdminMenu.php:756
 msgid "Text displayed inside the button"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:757
+#: classes/admin/WCST_AdminMenu.php:758
 #, php-format
 msgid ""
 "This label is displayed on the Tracking shipment buttons displayed inside "
@@ -4263,39 +4267,39 @@ msgid ""
 "placeholder %s to identify the shipment progressive id."
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:767
+#: classes/admin/WCST_AdminMenu.php:768
 msgid "Active notification email subject"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:769
+#: classes/admin/WCST_AdminMenu.php:770
 msgid ""
 "This is the subject used for active notification emails (the ones sent by "
 "checking the \"Send a notification email\" in the order details page). "
 "Permitted shortcode: <strong>[order_id]</strong>. "
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:773
+#: classes/admin/WCST_AdminMenu.php:774
 #, fuzzy
 #| msgid "Email message preview"
 msgid "Active notification email heading"
 msgstr "Prévisualisation du message des emails"
 
-#: classes/admin/WCST_AdminMenu.php:775
+#: classes/admin/WCST_AdminMenu.php:776
 msgid ""
 "This is the heading used for active notification emails (the ones sent by "
 "checking the \"Send a notification email\" in the order details page). "
 "Permitted shortcode: <strong>[order_id]</strong>. "
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:779
+#: classes/admin/WCST_AdminMenu.php:780
 msgid "*BETA* Track shipping status in site"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:781 classes/admin/WCST_AdminMenu.php:784
+#: classes/admin/WCST_AdminMenu.php:782 classes/admin/WCST_AdminMenu.php:785
 msgid "AfterShip API Key"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:782
+#: classes/admin/WCST_AdminMenu.php:783
 msgid ""
 "Generate a valid API Key following the <a href=\"https://help.aftership.com/"
 "hc/en-us/articles/115008353227-How-to-generate-AfterShip-API-Key-\" target="
@@ -4303,7 +4307,7 @@ msgid ""
 "be able to track order via AfterShip service."
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:783
+#: classes/admin/WCST_AdminMenu.php:784
 msgid ""
 "The service will automatically detect the carrier from the tracking code (if "
 "supported) without the requirement of any further code. If you are using a "
@@ -4316,11 +4320,11 @@ msgid ""
 "\">support page</a>"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:786
+#: classes/admin/WCST_AdminMenu.php:787
 msgid "Company detection"
 msgstr ""
 
-#: classes/admin/WCST_AdminMenu.php:787
+#: classes/admin/WCST_AdminMenu.php:788
 msgid ""
 "The plugin will automatically detect the shipping company from the tracking "
 "code. This however may generate extra queries that may be exceding the "
@@ -4896,7 +4900,7 @@ msgstr ""
 msgid "Delivery: at least %1$s day(s)"
 msgstr ""
 
-#: classes/frontend/WCST_ProductPage.php:38
+#: classes/frontend/WCST_ProductPage.php:40
 msgid "Loading..."
 msgstr ""
 
@@ -4969,436 +4973,448 @@ msgid "CEVA"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:22
-msgid "China POST"
+msgid "Chilexpress"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:23
-msgid "Chrono Expres"
+msgid "China POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:24
-msgid "Chronos Couriers"
+msgid "Chrono Expres"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:25
-msgid "City link"
+msgid "Chronos Couriers"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:26
-msgid "CitySprint"
+msgid "City link"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:27
-msgid "Colissimo"
+msgid "CitySprint"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:28
-msgid "Collect+"
+msgid "Colissimo"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:29
-msgid "Correios"
+msgid "Collect+"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:30
-msgid "Correios Chile"
+msgid "Correios"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:32
-msgid "Correos España"
+#: included_companies/WCST_shipping_companies_list.php:31
+msgid "Correos de Chile"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:33
-msgid "CourierPost"
+msgid "Correos España"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:34
-msgid "CTT"
+msgid "CourierPost"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:35
-msgid "Danske Fragtmand"
+msgid "CTT"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:36
-msgid "Deutsche Post"
+msgid "Danske Fragtmand"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:37
-msgid "DHL"
+msgid "Deutsche Post"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:38
-msgid "DHLFORYOU International"
+msgid "DHL"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:39
-msgid "DHL Germany"
+msgid "DHLFORYOU International"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:40
-msgid "DPD Ireland"
+msgid "DHL Germany"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:41
-msgid "DPD Parcel"
+msgid "DPD Ireland"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:42
-msgid "Dynamex"
+msgid "DPD Parcel"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:43
-msgid "Elta"
+msgid "Dynamex"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:44
-msgid "Ensenda"
+msgid "Elta"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:45
-msgid "Estafeta"
+msgid "Ensenda"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:46
-msgid "Fastway Couriers AU"
+msgid "Estafeta"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:47
-msgid "Fastway Couriers NZ"
+msgid "Fastway Couriers AU"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:48
-msgid "Fedex"
+msgid "Fastway Couriers NZ"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:49
-msgid "First Flight Courier"
+msgid "Fedex"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:50
-msgid "FlyKing"
+msgid "First Flight Courier"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:51
-msgid "GATI"
+msgid "FlyKing"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:52
-msgid "GD Express"
+msgid "GATI"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:53
-msgid "GLS International"
+msgid "GD Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:54
-msgid "GLS Italia"
+msgid "GLS International"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:55
-msgid "GLS Denmark"
+msgid "GLS Italia"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:56
-msgid "Home Delivery Network"
+msgid "GLS Denmark"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:57
-msgid "HongKong POST"
+msgid "Home Delivery Network"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:58
-msgid "ICC Worldwide"
+msgid "HongKong POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:59
-msgid "InterLink Express"
+msgid "ICC Worldwide"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:60
-msgid "JNE Express"
+msgid "InterLink Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:61
-msgid "Japan POST"
+msgid "JNE Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:62
-msgid "LA Poste"
+msgid "Japan POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:63
-msgid "LaserShip"
+msgid "LA Poste"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:64
-msgid "LBC Express"
+msgid "LaserShip"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:65
-msgid "Lithuania POST"
+msgid "LBC Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:66
-msgid "Hermes UK"
+msgid "Lithuania POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:67
-msgid "My Hermes EU & Germany"
+msgid "Hermes UK"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:68
-msgid "NAPAREX"
+msgid "My Hermes EU & Germany"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:69
-msgid "New Zealand Post"
+msgid "NAPAREX"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:70
-msgid "New Zealand Couriers"
+msgid "New Zealand Post"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:71
-msgid "OCA Argentina"
+msgid "New Zealand Couriers"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:72
-msgid "OM International Courier & Cargo"
+msgid "OCA Argentina"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:73
-msgid "OnTrac"
+msgid "OM International Courier & Cargo"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:74
-msgid "Orbit Worldwide"
+msgid "OnTrac"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:75
-msgid "OverSeas Courier Service"
+msgid "Orbit Worldwide"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:76
-msgid "Pakistan POST"
+msgid "OverSeas Courier Service"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:77
-msgid "Parcel2Go"
+msgid "Pakistan POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:78
-msgid "Parcel Force"
+msgid "Parcel2Go"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:79
-msgid "Parcel link"
+msgid "Parcel Force"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:80
+msgid "Parcel link"
+msgstr ""
+
+#: included_companies/WCST_shipping_companies_list.php:81
 msgid "PBT Transport"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:83
+#: included_companies/WCST_shipping_companies_list.php:84
 msgid "PHL Post"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:84
+#: included_companies/WCST_shipping_companies_list.php:85
 msgid "Poslaju National Courier"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:85
+#: included_companies/WCST_shipping_companies_list.php:86
 msgid "POS Malaysia"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:86
+#: included_companies/WCST_shipping_companies_list.php:87
 msgid "Post Danmark"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:87
+#: included_companies/WCST_shipping_companies_list.php:88
 msgid "POST India"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:88
+#: included_companies/WCST_shipping_companies_list.php:89
 msgid "POSTNL International"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:89
+#: included_companies/WCST_shipping_companies_list.php:90
 msgid "POSTNL Local"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:90
+#: included_companies/WCST_shipping_companies_list.php:91
 msgid "Posten Norway"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:91
+#: included_companies/WCST_shipping_companies_list.php:92
 msgid "POST Office UK"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:92
+#: included_companies/WCST_shipping_companies_list.php:93
 #, fuzzy
 #| msgid "Post"
 msgid "Postnord"
 msgstr "Article"
 
-#: included_companies/WCST_shipping_companies_list.php:93
+#: included_companies/WCST_shipping_companies_list.php:94
 msgid "Purolator"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:94
+#: included_companies/WCST_shipping_companies_list.php:95
 msgid "Romania POST"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:95
+#: included_companies/WCST_shipping_companies_list.php:96
 msgid "Royal Mail"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:96
+#: included_companies/WCST_shipping_companies_list.php:97
 msgid "SafeXpress"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:97
+#: included_companies/WCST_shipping_companies_list.php:98
 msgid "South African Post Office"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:98
+#: included_companies/WCST_shipping_companies_list.php:99
 msgid "Selektvracht"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:99
+#: included_companies/WCST_shipping_companies_list.php:100
 msgid "Shree Mahavir Courier"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:100
+#: included_companies/WCST_shipping_companies_list.php:101
 msgid "Shree Maruti Courier"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:101
+#: included_companies/WCST_shipping_companies_list.php:102
 msgid "SingPost"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:102
+#: included_companies/WCST_shipping_companies_list.php:103
 msgid "SkyNET"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:103
+#: included_companies/WCST_shipping_companies_list.php:104
 msgid "SmartSend"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:104
+#: included_companies/WCST_shipping_companies_list.php:105
 msgid "S M Courier Services"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:105
+#: included_companies/WCST_shipping_companies_list.php:106
 msgid "Spee Dee"
 msgstr ""
 
-#: included_companies/WCST_shipping_companies_list.php:106
-msgid "T-Cat"
-msgstr ""
-
 #: included_companies/WCST_shipping_companies_list.php:107
-msgid "The Courier Guy"
+msgid "Starken"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:108
-msgid "TNT Express"
+msgid "T-Cat"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:109
-msgid "The Professionals Courier"
+msgid "The Courier Guy"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:110
-msgid "TradeLink International"
+msgid "TNT Chile"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:111
-msgid "Urgent Air Courier Express"
+msgid "TNT Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:112
-msgid "UK Mail"
+msgid "The Professionals Courier"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:113
-msgid "UPS"
+msgid "TradeLink International"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:114
-msgid "UPS Germany"
+msgid "Urgent Air Courier Express"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:115
-msgid "US Postal Service"
+msgid "UK Mail"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:116
-msgid "Yodel"
+msgid "UPS"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:117
-msgid "Thailand POST"
+msgid "UPS Germany"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:118
-msgid "Poste Italiane"
+msgid "US Postal Service"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:119
-msgid "Toll Australia"
+msgid "Yodel"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:120
-msgid "Russian POST"
+msgid "Thailand POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:121
-msgid "Inter Parcel"
+msgid "Poste Italiane"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:122
-msgid "DTDC India"
+msgid "Toll Australia"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:123
-msgid "Austria POST"
+msgid "Russian POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:124
-msgid "Armenia POST"
+msgid "Inter Parcel"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:125
-msgid "Belarus POST"
+msgid "DTDC India"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:126
-msgid "Belgium POST"
+msgid "Austria POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:127
-msgid "Bulgarian POST"
+msgid "Armenia POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:128
-msgid "Finland POST"
+msgid "Belarus POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:129
-msgid "ChronoPOST France"
+msgid "Belgium POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:130
-msgid "Temando"
+msgid "Bulgarian POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:131
-msgid "Seur"
+msgid "Finland POST"
 msgstr ""
 
 #: included_companies/WCST_shipping_companies_list.php:132
+msgid "ChronoPOST France"
+msgstr ""
+
+#: included_companies/WCST_shipping_companies_list.php:133
+msgid "Temando"
+msgstr ""
+
+#: included_companies/WCST_shipping_companies_list.php:134
+msgid "Seur"
+msgstr ""
+
+#: included_companies/WCST_shipping_companies_list.php:135
 msgid "Vietnam Post"
 msgstr ""
 

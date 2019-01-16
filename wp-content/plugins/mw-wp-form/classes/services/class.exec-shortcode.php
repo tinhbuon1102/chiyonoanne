@@ -60,7 +60,7 @@ class MW_WP_Form_Exec_Shortcode {
 		 * @deprecated since v4.0.0
 		 * Because refactoring changed the timing to execute the shortcode
 		 */
-		//do_action( 'mwform_after_exec_shortcode', $this->form_key );
+		do_action( 'mwform_after_exec_shortcode', $this->form_key );
 
 		do_action( 'mwform_start_main_process', $this->form_key );
 
@@ -74,14 +74,14 @@ class MW_WP_Form_Exec_Shortcode {
 		$is_valid = $Validation->is_valid();
 
 		$Redirected = new MW_WP_Form_Redirected( $this->form_key, $this->Setting, $is_valid, $this->Data->get_post_condition() );
-//		if ( $Redirected->get_request_uri() !== $Redirected->get_url() && $Redirected->get_url() ) {
-//			$Redirected->redirect_js();
-//		}
+		if ( $Redirected->get_request_uri() !== $Redirected->get_url() && $Redirected->get_url() ) {
+			$Redirected->redirect_js();
+		}
 
 		do_action( 'mwform_before_load_content_' . $this->form_key );
 
 		if ( $this->_is_direct_access() ) {
-			$content = $this->_get_input_page_content();
+			$content = $this->_get_direct_access_error_page_content();
 		} elseif ( $this->Data->get_send_error() ) {
 			$content = $this->_get_send_error_page_content();
 		} elseif ( 'input' === $this->view_flg ) {
@@ -233,13 +233,13 @@ class MW_WP_Form_Exec_Shortcode {
 	 * @return string $content
 	 */
 	protected function _get_direct_access_error_page_content() {
-//		$content = sprintf(
-//			'<div id="mw_wp_form_%s" class="mw_wp_form mw_wp_form_direct_access_error">
-//				%s
-//			<!-- end .mw_wp_form --></div>',
-//			esc_attr( $this->form_key ),
-//			__( 'You can not access this page directly.', 'mw-wp-form' )
-//		);
+		$content = sprintf(
+			'<div id="mw_wp_form_%s" class="mw_wp_form mw_wp_form_direct_access_error">
+				%s
+			<!-- end .mw_wp_form --></div>',
+			esc_attr( $this->form_key ),
+			__( 'You can not access this page directly.', 'mw-wp-form' )
+		);
 		$content = apply_filters( 'mwform_direct_access_error_content_raw_' . $this->form_key, $content, $this->Data );
 		$content = $this->_wpautop( $content );
 		$content = apply_filters( 'mwform_direct_access_error_content_' . $this->form_key, $content, $this->Data );
@@ -284,7 +284,7 @@ class MW_WP_Form_Exec_Shortcode {
 	protected function _wpautop( $content ) {
 		$has_wpautop = false;
 
-		if ( function_exists( 'is_gutenberg_page' ) ) {
+		if ( has_filter( 'the_content', '_restore_wpautop_hook' ) ) {
 			$has_wpautop = true;
 		} elseif ( has_filter( 'the_content', 'wpautop' ) ) {
 			$has_wpautop = true;

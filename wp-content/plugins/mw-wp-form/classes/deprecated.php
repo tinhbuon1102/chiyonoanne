@@ -2,8 +2,7 @@
 class MWF_Deprecated {
 
 	public function __construct() {
-		//add_action( 'mwform_after_exec_shortcode', array( $this, '_mwform_after_exec_shortcode' ), 10000 );
-                add_action( 'mwform_start_main_process', array( $this, '_mwform_after_exec_shortcode' ), 10000 );
+		add_action( 'mwform_after_exec_shortcode', array( $this, '_mwform_after_exec_shortcode' ), 10000 );
 	}
 
 	public function _mwform_after_exec_shortcode() {

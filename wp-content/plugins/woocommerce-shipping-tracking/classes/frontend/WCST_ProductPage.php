@@ -30,6 +30,8 @@ class WCST_ProductPage
 		$product_id = $product_id != null ? $product_id : $post->ID;
 		$product = wc_get_product($product_id);
 		
+		wcst_get_order_tracking_data(2944);
+		
 		if(!$is_ajax)
 		{
 			wp_enqueue_script('wcst-product-page', WCST_PLUGIN_PATH.'/js/wcst-frontend-product-page.js', array('jquery'));

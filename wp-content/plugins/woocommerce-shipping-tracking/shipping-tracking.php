@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Shipping Tracking
 Description: WCST plugin adds shipping tacking code to woocommerce mails and view order page.
 Author: Lagudi Domenico
-Version: 20.9
+Version: 21.1
 */
 
 
