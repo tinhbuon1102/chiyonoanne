@@ -1,0 +1,39 @@
+So you found my to-do list for this plugin? Well, hope you enjoy the little sneak preview of what's coming. 
+Missing some features you might like? Drop me a line at support@adtribes.io and we might just add it to the list. Thanks!
+
+Plugin functionalities:
+- Add support for Aelia Currency Switcher
+- Add support for Google Product Review feeds
+- Add possibility to create OR rules
+- Variable mismatch on our development environment after setting an include_only rule on SKU
+- Check JSON again
+
+
+BLOG:
+- Change WPML article, add support for multi-currency text
+
+Adtribes.io website changes:
+- Clean categories, products, website before going live again!!
+- Search functionaliteit bouwen die zoekt op Blog posts en pages
+- Er zitten maar 3 attributen in de URL waardoor structured data price ook niet klopt: https://adtribes.io/product/create-custom-feed/?attribute_pa_size=small&attribute_pa_color=yellow&attribute_kleurtje=White%2FBlack
+- Op de blog en alle andere pagina's buttons / links opnemen naar de WP-download pagina en de Elite pagina
+- Logo plaatsen op website zelf
+- Icon maken voor in WP-admin menu 
+
+OTHER ISSUES:
+- add OR filters and rules
+- Build a better WP Cron check, current one is not good enough
+- Add support for Google Shopping product review feeds - https://developers.google.com/product-review-feeds/
+- Remarketing and structured data fix, check if prices are correct (VAT issue) - on variation pages it shows prices without VAT in the structured data
+- Remarketing tags not yet on thank-you purchase page
+- Incomplete remarketing tag on cart-page
+- Cascading category mapping
+- Tracking & conversion
+	- dynamic dropdowns in GA / tracking page for values
+- Add support for Composite products: https://woocommerce.com/products/composite-products/
+- Add support for Bundled products: https://woocommerce.com/products/product-bundles/
+- Add more complex rules based on more than just 1 condition (AND)
+- Add localisation (at least for nl_NL and nl_BE / fr_BE) - https://codex.wordpress.org/I18n_for_WordPress_Developers#Translating_Plugins_and_Themes
+- AMAZON integration:
+	- requires a professional seller account, 39 dollar a month, before being able to create a developer account
+	- only than we can use their AWS service needed to connect our plugin
