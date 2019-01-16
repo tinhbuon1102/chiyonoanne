@@ -4555,9 +4555,17 @@ div#stripe-payment-data > p:not(.form-row) {
     font-weight: 300;
 }
 /*YITH Product Add-ons*/
-.wapo_option_description {
+.single_variation_wrap .wapo_option_description {
     font-size: .75rem;
     font-style: normal;
+    margin-top: 5px;
+}
+.single_variation_wrap .ywapo_label_price {
+    font-size: .85rem;
+}
+
+.single_variation_wrap .ywapo_label_price > span {
+    line-height: 1.15;
 }
 .yith_wapo_group_total table, .yith_wapo_group_total tbody {
     display: block;
