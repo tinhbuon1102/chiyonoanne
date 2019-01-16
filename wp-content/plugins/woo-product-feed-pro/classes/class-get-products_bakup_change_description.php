@@ -1577,6 +1577,7 @@ class WooSEA_Get_Products {
 				/**
 				 * When there is a specific description for a variation product than override the description of the mother product
 				 */
+        			$variable_description = '';
 				if(!empty($variable_description)){	
                         		$product_data['description'] = html_entity_decode((str_replace("\r", "", $variable_description)), ENT_QUOTES | ENT_XML1, 'UTF-8');
                         		$product_data['short_description'] = html_entity_decode((str_replace("\r", "", $variable_description)), ENT_QUOTES | ENT_XML1, 'UTF-8');
