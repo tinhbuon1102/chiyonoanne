@@ -29,3 +29,17 @@
     background: #FFF;
     cursor: not-allowed;
 }
+/*Stripe Error*/
+ul.woocommerce_error.wc-stripe-error {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+ul.woocommerce_error.wc-stripe-error > li {
+    font-size: .85rem;
+    font-weight: 500;
+    background-color: #fce4e4;
+    line-height: 1.6;
+    padding: 5px 12px;
+    border: 1px solid #cc0033;
+}
