@@ -35,8 +35,10 @@ function load_custom_wp_admin_style() {
     if (!class_exists('WCCM_CustomerDetails')) {
         return;
     }
+	wp_register_script('admin_custom_js', get_stylesheet_directory_uri() . '/admin/js/admin-custom.js', array(), '');
     wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
     wp_enqueue_style('wcm_plugin_page_css');
+	wp_enqueue_script('admin_custom_js');
 }
 
 add_action('admin_enqueue_scripts', 'load_custom_wp_admin_style');
