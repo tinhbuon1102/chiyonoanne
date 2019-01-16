@@ -1263,6 +1263,7 @@ class WooSEA_Get_Products {
 			$terms_product = wp_get_post_terms($post->ID,'series', $term_args);
 			foreach ($terms_product as $term_product) {
 				$post->post_content .= '<br />' . wpautop($term_product->description);
+				$product_data['title'] = $this->woosea_utf8_for_xml( $term_product->name . ' / ' .$product_data['title'] );
 			}
 			
 			$product_data['category_link'] = $catlink;
