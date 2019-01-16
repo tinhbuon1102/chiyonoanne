@@ -1,13 +1,11 @@
 #TB_window {
   left: 0 !important;
   margin: 0 auto !important;
-  max-width: 600px !important;
   right: 0 !important;
-  top: 10% !important;
-  width: 95% !important;
   /*IOS issue(Mobile device)*/
   -webkit-overflow-scrolling: touch!important;
-  z-index: 9999999;    
+  z-index: 9999999;
+  overflow: scroll;
 }
 body:not(.post-type-product):not(.wp-admin) #TB_window iframe#TB_iframeContent {
   margin: 0 auto;
