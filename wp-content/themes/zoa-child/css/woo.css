@@ -4243,6 +4243,9 @@ label.no-shipping-text {
 .c-product-item span.mwb_price {
     display: none;
 }
+.woocommerce .ywapo_group_container.form-row.form-row-wide {
+    margin-bottom: 24px;
+}
 @media (min-width: 768px) {
 	.preview_wrap {
     box-sizing: border-box;
