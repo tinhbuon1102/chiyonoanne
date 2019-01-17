@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-01-17 10:46+0900\n"
+"PO-Revision-Date: 2019-01-17 16:56+0900\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 "Last-Translator: \n"
@@ -1156,7 +1156,7 @@ msgstr "合計金額"
 #: templates/frontend/yith-wapo-group-type.php:40
 #: templates/yith-wccl-variable-loop.php:31
 msgid "Choose an option"
-msgstr ""
+msgstr "オプションを選択"
 
 #. Plugin Name of the plugin/theme
 msgid "YITH WooCommerce Product Add-ons Premium"

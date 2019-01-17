@@ -128,7 +128,7 @@ function zoa_enqueue_parent_theme_style() {
       array('zoa-theme-style'),
       date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
       ); */
-    wp_enqueue_style('ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201901171654', array('zoa-child-style'));
+    wp_enqueue_style('ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201901171657', array('zoa-child-style'));
     wp_enqueue_style('loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 

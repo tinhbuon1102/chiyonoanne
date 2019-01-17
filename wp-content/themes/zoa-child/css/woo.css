@@ -4265,6 +4265,7 @@ label.no-shipping-text {
 	}
 	.ywapo_options_container .selectric-responsive .selectbox {
     width: auto;
+	min-width: 145px;
 	}
 }
 /*New Zoa Override*/
