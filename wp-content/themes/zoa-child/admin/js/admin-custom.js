@@ -1,9 +1,6 @@
-(function($) {
-  $(document).ready(function(){
-    //Write jQuery script here
-    
-  });
+$(function() {
 	$('iframe').on('load',function(){
-		$('iframe').contents().find('body').addClass('iframe-body');
+            alert('runing');
+		$('iframe').contents().find('#wpwrap').addClass('iframe-body');
 	});
-})(jQuery);
+});
