@@ -4263,6 +4263,9 @@ label.no-shipping-text {
     -ms-flex-align: center;
     align-items: center;
 	}
+	.ywapo_options_container .selectric-responsive .selectbox {
+    width: auto;
+	}
 }
 /*New Zoa Override*/
 .entry-summary .product_meta {

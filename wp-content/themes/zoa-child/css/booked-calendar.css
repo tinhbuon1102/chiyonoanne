@@ -352,6 +352,28 @@ input[type="button"].btn.ch-hidden {
 body .booked-form #newAppointmentForm p.status{
     color: red;
 }
+/*Login Tabs*/
+body #booked-profile-page #booked-page-form .booked-tabs.login {
+    border-color: #000 !important;
+    background: transparent !important;
+}
+
+body #booked-profile-page #booked-page-form .booked-tabs li a {
+    background: #FFF !important;
+}
+body #booked-profile-page #booked-page-form input[type=submit].button-primary, body table.booked-calendar input[type=submit].button-primary, body .booked-list-view button.button, body .booked-list-view input[type=submit].button-primary, body .booked-list-view button.button, body .booked-list-view input[type=submit].button-primary, body .booked-modal input[type=submit].button-primary {
+    border-color: #000 !important;
+	background: #FFF !important;
+	color: #000 !important;
+}
+body #booked-profile-page #booked-page-form input[type=submit].button-primary:hover, body table.booked-calendar input[type=submit].button-primary:hover, body .booked-list-view button.button:hover, body .booked-list-view input[type=submit].button-primary:hover, body .booked-modal input[type=submit].button-primary:hover {
+	color: #FFF !important;
+	background: #000 !important;
+}
+body #booked-profile-page #booked-page-form input[type=email]:focus, body #booked-profile-page #booked-page-form input[type=text]:focus, body #booked-profile-page #booked-page-form input[type=password]:focus, body #booked-profile-page #booked-page-form textarea:focus {
+    border-color: #000;
+    background: #f9f9f9;
+}
 /*Confirm*/
 .ch-aq .cf-meta-value strong {
     font-family: 'Noto Sans JP', 游ゴシック, "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;

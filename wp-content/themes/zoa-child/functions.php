@@ -35,10 +35,12 @@ function load_custom_wp_admin_style() {
     if (!class_exists('WCCM_CustomerDetails')) {
         return;
     }
-	wp_register_script('admin_custom_js', get_stylesheet_directory_uri() . '/admin/js/admin-custom.js', array(), '');
-    wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
-    wp_enqueue_style('wcm_plugin_page_css');
-	wp_enqueue_script('admin_custom_js');
+    wp_register_script('admin_custom_js', get_stylesheet_directory_uri() . '/admin/js/admin-custom.js', array(), false, true);
+    if (isset($_REQUEST['page']) && in_array($_REQUEST['page'], array('woocommerce-customers-manager', 'wccm-add-new-customer', 'wccm-discover-customer', 'wccm-bulk-email-customer', 'wccm-import-customers', 'wccm-export-customers', 'wccm-options-page', 'acf-options-email-templates-configurator'))) {
+        wp_register_style('wcm_plugin_page_css', get_stylesheet_directory_uri() . '/admin/css/wcm-custom.css');
+        wp_enqueue_style('wcm_plugin_page_css');
+    }
+    wp_enqueue_script('admin_custom_js');
 }
 
 add_action('admin_enqueue_scripts', 'load_custom_wp_admin_style');
@@ -126,7 +128,7 @@ function zoa_enqueue_parent_theme_style() {
       array('zoa-theme-style'),
       date('YmdHis',filemtime( get_stylesheet_directory(). '/style.css'))
       ); */
-    wp_enqueue_style('ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201901170025', array('zoa-child-style'));
+    wp_enqueue_style('ec-style', get_stylesheet_directory_uri() . '/css/woo.css?201901171654', array('zoa-child-style'));
     wp_enqueue_style('loading-style', get_stylesheet_directory_uri() . '/css/loading.css', array('ec-style'));
 }
 
@@ -1654,7 +1656,7 @@ function zoa_child_shop_open_tag() {
                         <?php esc_html_e('My Account', 'zoa'); ?>
                     <?php endif; ?>
                 </a>
-                <!--<a href="<?php //echo esc_url( $page_logout );         ?>"><?php //esc_html_e( 'Logout', 'zoa' );         ?></a>-->
+                <!--<a href="<?php //echo esc_url( $page_logout );            ?>"><?php //esc_html_e( 'Logout', 'zoa' );            ?></a>-->
             </div>
             <a href="<?php echo wc_get_cart_url(); ?>" id="shopping-cart-btn" class="oecicon oecicon-bag-20 menu-woo-cart js-cart-button"><span
                     class="shop-cart-count"><?php echo esc_html($count); ?></span></a>
@@ -4379,7 +4381,8 @@ function meta_box_deliver_option_markup($post) {
     $rates = array();
     $order = wc_get_order($post->ID);
     if (calculateShippingFeeWithDeliveryDate(false, $rates, $order))
-        ; {
+        ;
+    {
         $shipping_delivery_option = get_post_meta($order->get_id(), 'shipping_delivery_option', true);
 
         $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
@@ -4664,7 +4667,7 @@ if (!function_exists('woof_show_btn')) {
                         $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
                         ?>
                         <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
-                    <?php endif; ?>
+        <?php endif; ?>
                 </div><!--/.toggle__link-->
             </div><!--/.togggle-wrap-->
 
@@ -4961,9 +4964,11 @@ function ch_booked_menu_user_shop_manager_role() {
         remove_submenu_page('booked-appointments', 'booked-install-addons');
     }
 }
+
 //remove rating sort
-function ch_woocommerce_catalog_orderby( $orderby ) {
+function ch_woocommerce_catalog_orderby($orderby) {
     unset($orderby["rating"]);
     return $orderby;
 }
-add_filter( "woocommerce_catalog_orderby", "ch_woocommerce_catalog_orderby", 20 );
+
+add_filter("woocommerce_catalog_orderby", "ch_woocommerce_catalog_orderby", 20);

@@ -27,6 +27,9 @@ table#table_orders {
     padding: 0;
     background: none;
 }
+#TB_iframeContent {
+    max-width: 100%;
+}
 /************
 customer add new/edit
 **************/
