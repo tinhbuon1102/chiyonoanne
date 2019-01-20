@@ -4480,6 +4480,9 @@ yith product add-ons option style
 .woocommerce form .form-row .ywapo_options_container .ywapo_input_container label > img {
     width: 25px;
 }
+.woocommerce form .form-row .ywapo_options_container .ywapo_input_container.ywapo_input_container_radio label > img {
+    width: 50px;
+}
 .ywapo_option_label {
     font-family: Eina03;
     font-size: 12px;

@@ -296,6 +296,8 @@ function load_theme_scripts() {
     if (woo_variation_swatches()->get_option('enable_single_variation_preview') || woo_variation_swatches()->get_option('disable_threshold')):
         wp_deregister_script('wc-add-to-cart-variation');
         wp_register_script('wc-add-to-cart-variation', get_stylesheet_directory_uri() . '/woocommerce/js/wvs-add-to-cart-variation.js', array(), '');
+        wp_deregister_script('yith_wapo_frontend');
+        wp_register_script('yith_wapo_frontend', get_stylesheet_directory_uri() . '/woocommerce/js/yith-wapo-frontend.js', array(), '');
     endif;
 }
 
@@ -1656,7 +1658,7 @@ function zoa_child_shop_open_tag() {
                         <?php esc_html_e('My Account', 'zoa'); ?>
                     <?php endif; ?>
                 </a>
-                <!--<a href="<?php //echo esc_url( $page_logout );            ?>"><?php //esc_html_e( 'Logout', 'zoa' );            ?></a>-->
+                <!--<a href="<?php //echo esc_url( $page_logout );               ?>"><?php //esc_html_e( 'Logout', 'zoa' );               ?></a>-->
             </div>
             <a href="<?php echo wc_get_cart_url(); ?>" id="shopping-cart-btn" class="oecicon oecicon-bag-20 menu-woo-cart js-cart-button"><span
                     class="shop-cart-count"><?php echo esc_html($count); ?></span></a>
@@ -4381,8 +4383,7 @@ function meta_box_deliver_option_markup($post) {
     $rates = array();
     $order = wc_get_order($post->ID);
     if (calculateShippingFeeWithDeliveryDate(false, $rates, $order))
-        ;
-    {
+        ; {
         $shipping_delivery_option = get_post_meta($order->get_id(), 'shipping_delivery_option', true);
 
         $selected_option_1 = !$shipping_delivery_option ? 'checked' : ($shipping_delivery_option == 1 ? 'checked' : '');
@@ -4667,7 +4668,7 @@ if (!function_exists('woof_show_btn')) {
                         $woof_filter_btn_txt = WOOF_HELPER::wpml_translate(null, $woof_filter_btn_txt);
                         ?>
                         <button style="float: left;" class="button woof_submit_search_form"><?php echo $woof_filter_btn_txt ?></button>
-        <?php endif; ?>
+                    <?php endif; ?>
                 </div><!--/.toggle__link-->
             </div><!--/.togggle-wrap-->
 
@@ -4972,3 +4973,26 @@ function ch_woocommerce_catalog_orderby($orderby) {
 }
 
 add_filter("woocommerce_catalog_orderby", "ch_woocommerce_catalog_orderby", 20);
+
+function ch_ss_hidden_fields() {
+    if (is_user_logged_in() && is_page('reservation-form')) {
+        if (isset($_SESSION['ss_date'])) {
+            echo '<input type="hidden" id="ss-date" value="' . $_SESSION['ss_date'] . '" /> ';
+            unset($_SESSION['ss_date']);
+        }
+        if (isset($_SESSION['ss_title'])) {
+            echo '<input type="hidden" id="ss-title" value="' . $_SESSION['ss_title'] . '" /> ';
+            unset($_SESSION['ss_title']);
+        }
+        if (isset($_SESSION['ss_timeslot'])) {
+            echo '<input type="hidden" id="ss-timeslot" value="' . $_SESSION['ss_timeslot'] . '" /> ';
+            unset($_SESSION['ss_timeslot']);
+        }
+        if (isset($_SESSION['ss_calendar_id'])) {
+            echo '<input type="hidden" id="ss-calendar-id" value="' . $_SESSION['ss_calendar_id'] . '" /> ';
+            unset($_SESSION['ss_calendar_id']);
+        }
+    }
+}
+
+add_action('wp_footer', 'ch_ss_hidden_fields');

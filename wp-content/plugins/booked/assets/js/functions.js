@@ -1224,6 +1224,71 @@ var booked_load_calendar_date_booking_options,
                 });
             }
         }
+        //Process to keep on step 2 after login
+        var ss_date = $("#ss-date").val();
+        var ss_title = $("#ss-title").val();
+        var ss_timeslot = $("#ss-timeslot").val();
+        var ss_calendar_id = $("#ss-calendar-id").val();
+        if (ss_calendar_id !== '' && ss_timeslot !== '' && ss_date !== '' && typeof ss_calendar_id !== 'undefined' && typeof ss_timeslot !== 'undefined' && typeof ss_date !== 'undefined') {
+            //proccess to select date
+            $('#calendarForm .booked-calendar').find('td').each(function (i, field) {
+                var current_date = $(this).attr('data-date');
+                if (typeof current_date !== 'undefined' && current_date === ss_date) {
+                    var $thisDate = $(this);
+                    $thisRow = $thisDate.parent();
+                    colspanSetting = $thisRow.find('td').length;
+                    booked_calendar_table = $thisDate.parents('table.booked-calendar');
+                    $('tr.week td').removeClass('active');
+                    $(field).addClass('active');
+                    $('tr.entryBlock').remove();
+                    $thisRow.after('<tr class="entryBlock booked-loading"><td colspan="' + colspanSetting + '"></td></tr>');
+                    $('tr.entryBlock').find('td').spin('booked');
+
+                    booked_load_calendar_date_booking_options = {'action': 'booked_calendar_date', 'date': ss_date, 'calendar_id': ss_calendar_id};
+                    $(document).trigger("booked-before-loading-calendar-booking-options");
+
+                    var calendarHeight = booked_calendar_table.height();
+                    booked_calendar_table.parent().height(calendarHeight);
+
+                    $.ajax({
+                        url: booked_js_vars.ajax_url,
+                        type: 'post',
+                        data: booked_load_calendar_date_booking_options,
+                        success: function (html) {
+                            $('tr.entryBlock').find('td').html(html);
+                            $('tr.entryBlock').removeClass('booked-loading');
+                            $('tr.entryBlock').find('.booked-appt-list').fadeIn(300);
+                            $('tr.entryBlock').find('.booked-appt-list').addClass('shown');
+                            adjust_calendar_boxes();
+                            //Process to select timelot
+                            $('.booked-appt-list').find('button').each(function (i, field) {
+                                var current_timelot = $(this).attr('data-timeslot');
+                                if (typeof current_timelot !== 'undefined' && current_timelot === ss_timeslot) {
+                                    var $button = $(field);
+                                    $button.on('click', window.bookedNewAppointment);
+                                    $button.triggerHandler('click');
+                                    //Process next to step 2
+                                    var form = $("#bookedForm"),
+                                            currentStep = $(form.find(".step.is-active")),
+                                            nextStep = currentStep.next(".step"),
+                                            currentStepTop = $(form.prev().find(".form__step.is-active")),
+                                            nextStepTop = currentStepTop.next(".form__step");
+
+                                    currentStep.removeClass("is-active").hide();
+                                    nextStep.addClass("is-active").show();
+                                    currentStepTop.removeClass("is-active");
+                                    nextStepTop.addClass("is-active");
+                                    $("#step2 .js-prev").css("display", "inline-block");
+                                    //END
+                                }
+                            });
+                            //END
+                        }
+                    });
+                }
+            });
+        }
+        //END
     });
 
     function bookedRemoveEmptyTRs() {
@@ -1394,7 +1459,6 @@ var booked_load_calendar_date_booking_options,
             resize_booked_modal();
         }
     }
-
 })(jQuery, window, document);
 
 // Create Booked Modal
