@@ -9,6 +9,10 @@ jQuery(function($){
 	
 	function populateBirthField()
 	{
+		$('#birth_year').append('<option value="">-----</option>');
+		$('#birth_year').append('<option value="">-----</option>');
+		$('#birth_year').append('<option value="">-----</option>');
+		
 		for (var i=1930; i<=2017; i++){
 			$('#birth_year').append('<option value="'+ i +'">'+ i +'</option>');
 		}
