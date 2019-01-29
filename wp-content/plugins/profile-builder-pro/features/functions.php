@@ -26,8 +26,8 @@ function wppb_register_settings() {
 function wppb_icl_t($context, $name, $value){  
 	if( function_exists( 'icl_t' ) )
 	{
-		return __($value, 'profile-builder');
-		return icl_t( $context, $name, $value );
+		$trans_text = icl_t( $context, $name, $value );
+		return $trans_text != $value ? $trans_text : __($value, 'profile-builder') ;
 	}
 		
 	else
