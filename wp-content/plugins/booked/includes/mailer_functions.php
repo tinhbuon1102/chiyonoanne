@@ -151,7 +151,11 @@ function booked_get_appointment_tokens($appt_id) {
     $title = get_post_meta($appt_id, '_appointment_title', true);
     $cancel_buffer = get_option('booked_cancellation_buffer', 0);
     $datetime_booked = date('Y-m-d', $timestamp) . ' ' . $time_text;
-    $cancellable_datetime = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
+    if (ICL_LANGUAGE_CODE == 'ja' || ICL_LANGUAGE_CODE == 'site-default') {
+        $cancellable_datetime = date_i18n("Y年n月j日 l G:i", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
+    } else {
+        $cancellable_datetime = date_i18n("D, F S, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
+    }
     return apply_filters('booked_appointment_tokens', array(
         'name' => $customer_name,
         'kananame' => $kananame,

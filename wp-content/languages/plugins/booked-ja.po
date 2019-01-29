@@ -3,7 +3,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: Booked Appointments\n"
 "POT-Creation-Date: 2019-01-04 00:05+0900\n"
-"PO-Revision-Date: 2019-01-13 20:55+0900\n"
+"PO-Revision-Date: 2019-01-29 15:44+0900\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,9 +13,8 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: booked.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "Last-Translator: \n"
 "Language: ja\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -29,8 +28,7 @@ msgstr "毎5分"
 msgid "Phone Number"
 msgstr "電話番号"
 
-#: booked.php:488 booked.php:503 booked.php:504 booked.php:686
-#: post-types/booked_appointments.php:30 post-types/booked_appointments.php:32
+#: booked.php:488 booked.php:503 booked.php:504 booked.php:686 post-types/booked_appointments.php:30 post-types/booked_appointments.php:32
 #: post-types/booked_appointments.php:48
 msgid "Appointments"
 msgstr "予約"
@@ -57,9 +55,7 @@ msgstr "このページへのアクセス権限がありません"
 
 #: booked.php:580
 #, php-format
-msgid ""
-"You need to create a page with the %s shortcode. It is required with your "
-"current settings."
+msgid "You need to create a page with the %s shortcode. It is required with your current settings."
 msgstr ""
 
 #: booked.php:580
@@ -85,8 +81,7 @@ msgstr[0] "ペンディング中の予約を見る"
 msgid "Assign this calendar to"
 msgstr ""
 
-#: booked.php:615 booked.php:648
-#: includes/ajax/front/appointment-form/bookings.php:70
+#: booked.php:615 booked.php:648 includes/ajax/front/appointment-form/bookings.php:70
 msgid "Default"
 msgstr "デフォルト"
 
@@ -107,8 +102,7 @@ msgstr ""
 msgid "more"
 msgstr ""
 
-#: booked.php:793 includes/admin-functions.php:266
-#: includes/ajax/init_admin.php:955 templates/settings.php:1333
+#: booked.php:793 includes/admin-functions.php:266 includes/ajax/init_admin.php:955 templates/settings.php:1333
 msgid "Space Available"
 msgid_plural "Spaces Available"
 msgstr[0] ""
@@ -137,8 +131,7 @@ msgstr "全ての項目は必須です"
 msgid "You are about to add the following time slot(s)"
 msgstr ""
 
-#: booked.php:800 includes/admin-functions.php:36
-#: includes/ajax/admin/user-info.php:46
+#: booked.php:800 includes/admin-functions.php:36 includes/ajax/admin/user-info.php:46
 msgid "to"
 msgstr ""
 
@@ -154,14 +147,10 @@ msgstr "予約を更新"
 msgid "Create Appointment"
 msgstr "予約を作成"
 
-#: booked.php:804 includes/admin-functions.php:34
-#: includes/admin-functions.php:62 includes/admin-functions.php:258
-#: includes/admin-functions.php:808 includes/ajax/admin/appointment-form.php:21
-#: includes/ajax/admin/user-info.php:44
-#: includes/ajax/front/appointment-form/appointment.php:22
-#: includes/ajax/init_admin.php:968 includes/dashboard-widget.php:167
-#: includes/functions.php:853 includes/functions.php:1220
-#: includes/mailer_functions.php:112 includes/shortcodes.php:308
+#: booked.php:804 includes/admin-functions.php:34 includes/admin-functions.php:62 includes/admin-functions.php:258
+#: includes/admin-functions.php:808 includes/ajax/admin/appointment-form.php:21 includes/ajax/admin/user-info.php:44
+#: includes/ajax/front/appointment-form/appointment.php:22 includes/ajax/init_admin.php:968 includes/dashboard-widget.php:167
+#: includes/functions.php:853 includes/functions.php:1220 includes/mailer_functions.php:112 includes/shortcodes.php:308
 #: templates/pending-list.php:170 templates/settings.php:1345
 msgid "All day"
 msgstr "全日"
@@ -247,11 +236,8 @@ msgid "Please enter your name to book an appointment."
 msgstr "予約を行うためにお名前をご入力ください"
 
 #: booked.php:892
-msgid ""
-"Please enter your name, your email address and choose a password to book an "
-"appointment."
-msgstr ""
-"予約を行うためにお名前、メールアドレスを入力し、パスワードご選択ください。"
+msgid "Please enter your name, your email address and choose a password to book an appointment."
+msgstr "予約を行うためにお名前、メールアドレスを入力し、パスワードご選択ください。"
 
 #: booked.php:893
 msgid "Please fill in all \"Information\" fields."
@@ -306,12 +292,8 @@ msgstr[0] ""
 #. translators: 1: plugin name(s).
 #: class-tgm-plugin-activation.php:355
 #, php-format
-msgid ""
-"The following add-on needs to be updated to its latest version to ensure "
-"maximum compatibility with Booked: %1$s."
-msgid_plural ""
-"The following add-ons need to be updated to their latest version to ensure "
-"maximum compatibility with Booked: %1$s."
+msgid "The following add-on needs to be updated to its latest version to ensure maximum compatibility with Booked: %1$s."
+msgid_plural "The following add-ons need to be updated to their latest version to ensure maximum compatibility with Booked: %1$s."
 msgstr[0] ""
 
 #. translators: 1: plugin name(s).
@@ -354,8 +336,8 @@ msgstr[0] ""
 msgid "Return to Add-On Installer"
 msgstr ""
 
-#: class-tgm-plugin-activation.php:393 class-tgm-plugin-activation.php:920
-#: class-tgm-plugin-activation.php:2626 class-tgm-plugin-activation.php:3673
+#: class-tgm-plugin-activation.php:393 class-tgm-plugin-activation.php:920 class-tgm-plugin-activation.php:2626
+#: class-tgm-plugin-activation.php:3673
 msgid "Return to the Dashboard"
 msgstr ""
 
@@ -376,9 +358,7 @@ msgstr ""
 #. translators: 1: plugin name.
 #: class-tgm-plugin-activation.php:399
 #, php-format
-msgid ""
-"Add-on not activated. A higher version of %s is needed for Booked. Please "
-"update the add-on."
+msgid "Add-on not activated. A higher version of %s is needed for Booked. Please update the add-on."
 msgstr ""
 
 #. translators: 1: dashboard link.
@@ -392,9 +372,7 @@ msgid "Dismiss this notice"
 msgstr ""
 
 #: class-tgm-plugin-activation.php:403
-msgid ""
-"There are one or more required or recommended add-ons to install, update or "
-"activate."
+msgid "There are one or more required or recommended add-ons to install, update or activate."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:404
@@ -414,21 +392,15 @@ msgid "Set the parent_slug config variable instead."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:1027
-msgid ""
-"The remote plugin package does not contain a folder with the desired slug "
-"and renaming did not work."
+msgid "The remote plugin package does not contain a folder with the desired slug and renaming did not work."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:1027 class-tgm-plugin-activation.php:1030
-msgid ""
-"Please contact the plugin provider and ask them to package their plugin "
-"according to the WordPress guidelines."
+msgid "Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:1030
-msgid ""
-"The remote plugin package consists of more than one file, but the files are "
-"not packaged in a folder."
+msgid "The remote plugin package consists of more than one file, but the files are not packaged in a folder."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:1214 class-tgm-plugin-activation.php:3041
@@ -653,9 +625,7 @@ msgid "The installation of %1$s failed."
 msgstr ""
 
 #: class-tgm-plugin-activation.php:3600
-msgid ""
-"The installation and activation process is starting. This process may take a "
-"while on some hosts, so please be patient."
+msgid "The installation and activation process is starting. This process may take a while on some hosts, so please be patient."
 msgstr ""
 
 #. translators: 1: plugin name.
@@ -683,9 +653,7 @@ msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
 #: class-tgm-plugin-activation.php:3608
-msgid ""
-"The installation process is starting. This process may take a while on some "
-"hosts, so please be patient."
+msgid "The installation process is starting. This process may take a while on some hosts, so please be patient."
 msgstr ""
 
 #. translators: 1: plugin name.
@@ -835,13 +803,11 @@ msgstr "30分"
 msgid "45 minutes"
 msgstr "45分"
 
-#: includes/admin-functions.php:314 templates/settings.php:320
-#: templates/settings.php:400
+#: includes/admin-functions.php:314 templates/settings.php:320 templates/settings.php:400
 msgid "1 hour"
 msgstr "1時間"
 
-#: includes/admin-functions.php:329 includes/functions.php:883
-#: includes/functions.php:912 includes/functions.php:1246
+#: includes/admin-functions.php:329 includes/functions.php:883 includes/functions.php:912 includes/functions.php:1246
 #, php-format
 msgid "%d space available"
 msgid_plural "%d spaces available"
@@ -851,17 +817,14 @@ msgstr[0] "%d個の空き予約"
 msgid "Back to"
 msgstr "戻る"
 
-#: includes/admin-functions.php:538 includes/admin-functions.php:840
-#: includes/admin-functions.php:1098
+#: includes/admin-functions.php:538 includes/admin-functions.php:840 includes/admin-functions.php:1098
 #, php-format
 msgid "%d Appointment"
 msgid_plural "%d Appointments"
 msgstr[0] "%d件の予約"
 
-#: includes/admin-functions.php:585 includes/shortcodes.php:130
-#: includes/shortcodes.php:179 includes/widgets.php:38
-#: templates/settings.php:1168 templates/settings.php:1269
-#: templates/settings.php:1390 templates/settings.php:1454
+#: includes/admin-functions.php:585 includes/shortcodes.php:130 includes/shortcodes.php:179 includes/widgets.php:38
+#: templates/settings.php:1168 templates/settings.php:1269 templates/settings.php:1390 templates/settings.php:1454
 msgid "Default Calendar"
 msgstr "デフォルトカレンダー"
 
@@ -883,36 +846,28 @@ msgstr[0] ""
 msgid "available"
 msgstr ""
 
-#: includes/admin-functions.php:855 includes/admin-functions.php:913
-#: includes/admin-functions.php:967 includes/dashboard-widget.php:182
+#: includes/admin-functions.php:855 includes/admin-functions.php:913 includes/admin-functions.php:967 includes/dashboard-widget.php:182
 #: templates/pending-list.php:192
 msgid "(this user no longer exists)"
 msgstr ""
 
-#: includes/admin-functions.php:869 includes/admin-functions.php:932
-#: includes/admin-functions.php:987 templates/pending-list.php:217
+#: includes/admin-functions.php:869 includes/admin-functions.php:932 includes/admin-functions.php:987 templates/pending-list.php:217
 msgid "Approve"
 msgstr "承認"
 
-#: includes/admin-functions.php:885 includes/ajax/admin/appointment-form.php:29
-#: post-types/booked_appointments.php:36
+#: includes/admin-functions.php:885 includes/ajax/admin/appointment-form.php:29 post-types/booked_appointments.php:36
 msgid "New Appointment"
 msgstr "新規予約"
 
 #: includes/admin-functions.php:899
-msgid ""
-"There are additional appointments booked from previously available time "
-"slots:"
+msgid "There are additional appointments booked from previously available time slots:"
 msgstr ""
 
 #: includes/admin-functions.php:953
-msgid ""
-"There are no appointment slots available for this day, however there are "
-"appointments booked from previously available time slots:"
+msgid "There are no appointment slots available for this day, however there are appointments booked from previously available time slots:"
 msgstr ""
 
-#: includes/admin-functions.php:1005 includes/functions.php:924
-#: includes/functions.php:933 includes/functions.php:1274
+#: includes/admin-functions.php:1005 includes/functions.php:924 includes/functions.php:933 includes/functions.php:1274
 #: includes/functions.php:1283
 msgid "There are no appointment time slots available for this day."
 msgstr ""
@@ -933,46 +888,37 @@ msgstr ""
 msgid "Enter a label for this option..."
 msgstr ""
 
-#: includes/admin-functions.php:1155 includes/admin-functions.php:1294
-#: templates/settings.php:1499
+#: includes/admin-functions.php:1155 includes/admin-functions.php:1294 templates/settings.php:1499
 msgid "Checkbox"
 msgstr ""
 
-#: includes/admin-functions.php:1162 includes/admin-functions.php:1301
-#: templates/settings.php:1507
+#: includes/admin-functions.php:1162 includes/admin-functions.php:1301 templates/settings.php:1507
 msgid "Radio Button"
 msgstr ""
 
-#: includes/admin-functions.php:1169 includes/admin-functions.php:1308
-#: templates/settings.php:1515
+#: includes/admin-functions.php:1169 includes/admin-functions.php:1308 templates/settings.php:1515
 msgid "Option"
 msgstr ""
 
-#: includes/admin-functions.php:1202 includes/admin-functions.php:1320
-#: templates/settings.php:1483
+#: includes/admin-functions.php:1202 includes/admin-functions.php:1320 templates/settings.php:1483
 msgid "Single Line Text"
 msgstr ""
 
-#: includes/admin-functions.php:1203 includes/admin-functions.php:1214
-#: includes/admin-functions.php:1225 includes/admin-functions.php:1237
-#: includes/admin-functions.php:1249 templates/settings.php:1484
-#: templates/settings.php:1490 templates/settings.php:1496
+#: includes/admin-functions.php:1203 includes/admin-functions.php:1214 includes/admin-functions.php:1225 includes/admin-functions.php:1237
+#: includes/admin-functions.php:1249 templates/settings.php:1484 templates/settings.php:1490 templates/settings.php:1496
 #: templates/settings.php:1504 templates/settings.php:1512
 msgid "Required Field"
 msgstr ""
 
-#: includes/admin-functions.php:1204 includes/admin-functions.php:1215
-#: templates/settings.php:1485 templates/settings.php:1491
+#: includes/admin-functions.php:1204 includes/admin-functions.php:1215 templates/settings.php:1485 templates/settings.php:1491
 msgid "Enter a label for this field..."
 msgstr ""
 
-#: includes/admin-functions.php:1213 includes/admin-functions.php:1321
-#: templates/settings.php:1489
+#: includes/admin-functions.php:1213 includes/admin-functions.php:1321 templates/settings.php:1489
 msgid "Paragraph Text"
 msgstr ""
 
-#: includes/admin-functions.php:1224 includes/admin-functions.php:1322
-#: templates/settings.php:1495
+#: includes/admin-functions.php:1224 includes/admin-functions.php:1322 templates/settings.php:1495
 msgid "Checkboxes"
 msgstr ""
 
@@ -980,8 +926,7 @@ msgstr ""
 msgid "Enter a label for this checkbox group..."
 msgstr ""
 
-#: includes/admin-functions.php:1236 includes/admin-functions.php:1323
-#: templates/settings.php:1503
+#: includes/admin-functions.php:1236 includes/admin-functions.php:1323 templates/settings.php:1503
 msgid "Radio Buttons"
 msgstr ""
 
@@ -989,8 +934,7 @@ msgstr ""
 msgid "Enter a label for this radio button group..."
 msgstr ""
 
-#: includes/admin-functions.php:1248 includes/admin-functions.php:1324
-#: templates/settings.php:1511
+#: includes/admin-functions.php:1248 includes/admin-functions.php:1324 templates/settings.php:1511
 msgid "Drop Down"
 msgstr ""
 
@@ -998,8 +942,7 @@ msgstr ""
 msgid "Enter a label for this drop-down group..."
 msgstr ""
 
-#: includes/admin-functions.php:1260 includes/admin-functions.php:1325
-#: templates/settings.php:1519
+#: includes/admin-functions.php:1260 includes/admin-functions.php:1325 templates/settings.php:1519
 msgid "Text Content"
 msgstr ""
 
@@ -1007,8 +950,7 @@ msgstr ""
 msgid "HTML is allowed in this field."
 msgstr ""
 
-#: includes/ajax/admin/add-appointment.php:145
-#: includes/ajax/admin/edit-appointment.php:21
+#: includes/ajax/admin/add-appointment.php:145 includes/ajax/admin/edit-appointment.php:21
 msgid "That email does not appear to be valid."
 msgstr ""
 
@@ -1028,52 +970,36 @@ msgstr "ゲスト"
 msgid "Select a customer"
 msgstr "顧客を選択"
 
-#: includes/ajax/admin/appointment-form.php:72
-#: includes/ajax/admin/appointment-form.php:93
-#: includes/ajax/admin/user-info.php:87
-#: includes/ajax/front/appointment-form/form-fields-guest.php:18
-#: includes/ajax/front/appointment-form/form-fields-registration.php:13
+#: includes/ajax/admin/appointment-form.php:72 includes/ajax/admin/appointment-form.php:93 includes/ajax/admin/user-info.php:87
+#: includes/ajax/front/appointment-form/form-fields-guest.php:18 includes/ajax/front/appointment-form/form-fields-registration.php:13
 #: includes/general-functions.php:346
 msgid "First Name"
 msgstr "姓"
 
-#: includes/ajax/admin/appointment-form.php:73
-#: includes/ajax/admin/appointment-form.php:94
-#: includes/ajax/admin/user-info.php:88
-#: includes/ajax/front/appointment-form/form-fields-guest.php:19
-#: includes/ajax/front/appointment-form/form-fields-registration.php:14
+#: includes/ajax/admin/appointment-form.php:73 includes/ajax/admin/appointment-form.php:94 includes/ajax/admin/user-info.php:88
+#: includes/ajax/front/appointment-form/form-fields-guest.php:19 includes/ajax/front/appointment-form/form-fields-registration.php:14
 #: includes/general-functions.php:351
 msgid "Last Name"
 msgstr "名"
 
-#: includes/ajax/admin/appointment-form.php:77
-#: includes/ajax/admin/appointment-form.php:98
-#: includes/ajax/admin/user-info.php:92
-#: includes/ajax/front/appointment-form/form-fields-guest.php:24
-#: includes/ajax/front/appointment-form/form-fields-guest.php:27
+#: includes/ajax/admin/appointment-form.php:77 includes/ajax/admin/appointment-form.php:98 includes/ajax/admin/user-info.php:92
+#: includes/ajax/front/appointment-form/form-fields-guest.php:24 includes/ajax/front/appointment-form/form-fields-guest.php:27
 #: includes/ajax/front/appointment-form/form-fields-registration.php:18
 msgid "Name"
 msgstr "お名前"
 
-#: includes/ajax/admin/appointment-form.php:82
-#: includes/ajax/admin/appointment-form.php:104
-#: includes/ajax/admin/user-info.php:98
-#: includes/ajax/front/appointment-form/form-fields-forgot.php:6
-#: includes/ajax/front/appointment-form/form-fields-guest.php:25
-#: includes/ajax/front/appointment-form/form-fields-guest.php:34
-#: includes/ajax/front/appointment-form/form-fields-login.php:6
-#: includes/ajax/front/appointment-form/form-fields-registration.php:23
-#: includes/general-functions.php:356 includes/shortcodes.php:419
+#: includes/ajax/admin/appointment-form.php:82 includes/ajax/admin/appointment-form.php:104 includes/ajax/admin/user-info.php:98
+#: includes/ajax/front/appointment-form/form-fields-forgot.php:6 includes/ajax/front/appointment-form/form-fields-guest.php:25
+#: includes/ajax/front/appointment-form/form-fields-guest.php:34 includes/ajax/front/appointment-form/form-fields-login.php:6
+#: includes/ajax/front/appointment-form/form-fields-registration.php:23 includes/general-functions.php:356 includes/shortcodes.php:419
 msgid "Email Address"
 msgstr "メールアドレス"
 
-#: includes/ajax/admin/appointment-form.php:83
-#: includes/ajax/front/appointment-form/form-fields-registration.php:24
+#: includes/ajax/admin/appointment-form.php:83 includes/ajax/front/appointment-form/form-fields-registration.php:24
 msgid "Choose a password"
 msgstr "パスワードを選択"
 
-#: includes/ajax/admin/appointment-form.php:123
-#: includes/ajax/front/appointment-form/form.php:82
+#: includes/ajax/admin/appointment-form.php:123 includes/ajax/front/appointment-form/form.php:82
 #: includes/ajax/front/appointment-form/form.php:191
 msgid "Cancel"
 msgstr "キャンセル"
@@ -1094,15 +1020,11 @@ msgstr "顧客情報"
 msgid "Appointment Information"
 msgstr "予約情報"
 
-#: includes/ajax/front/appointment-form.php:31
-#: includes/ajax/front/book-appointment.php:502
-msgid ""
-"Sorry, someone just booked this appointment before you could. Please choose "
-"a different booking time."
+#: includes/ajax/front/appointment-form.php:31 includes/ajax/front/book-appointment.php:502
+msgid "Sorry, someone just booked this appointment before you could. Please choose a different booking time."
 msgstr ""
-"申し訳ございません。ご予約完了の前に、別のお客様のご予約にて現在ご選択のお日"
-"にち・お時間が予約不可となりました。お手数ですが、再度別のお日にち・お時間を"
-"ご選択の上、ご予約をお願い致します。"
+"申し訳ございません。ご予約完了の前に、別のお客様のご予約にて現在ご選択のお日にち・お時間が予約不可となりました。お手数ですが、再度別のお"
+"日にち・お時間をご選択の上、ご予約をお願い致します。"
 
 #: includes/ajax/front/appointment-form.php:54
 msgid "Request an Appointment"
@@ -1167,9 +1089,7 @@ msgid "Registration:"
 msgstr "新規登録:"
 
 #: includes/ajax/front/appointment-form/form-fields-registration.php:3
-msgid ""
-"Please enter your name, your email address and choose a password to get "
-"started."
+msgid "Please enter your name, your email address and choose a password to get started."
 msgstr "お名前とメールアドレスを入力し、パスワードを選択してください"
 
 #: includes/ajax/front/appointment-form/form.php:42
@@ -1198,19 +1118,15 @@ msgstr "戻る"
 
 #: includes/ajax/front/appointment-form/form.php:127
 #, php-format
-msgid ""
-"Sorry, but you've hit the appointment limit. Each user may only book %d "
-"appointment at a time."
-msgid_plural ""
-"Sorry, but you've hit the appointment limit. Each user may only book %d "
-"appointments at a time."
+msgid "Sorry, but you've hit the appointment limit. Each user may only book %d appointment at a time."
+msgid_plural "Sorry, but you've hit the appointment limit. Each user may only book %d appointments at a time."
 msgstr[0] ""
 
 #: includes/ajax/front/appointment-form/form.php:132
 #, php-format
 msgid ""
-"Sorry, but you're about to book more appointments than you are allowed to "
-"book at a time. Each user may only book %d appointments at a time."
+"Sorry, but you're about to book more appointments than you are allowed to book at a time. Each user may only book %d appointments at a "
+"time."
 msgstr ""
 
 #: includes/ajax/front/appointment-form/form.php:142
@@ -1220,23 +1136,16 @@ msgid_plural "You are about to request appointments for %s."
 msgstr[0] ""
 
 #: includes/ajax/front/appointment-form/form.php:142
-msgid ""
-"Please review and confirm that you would like to request the following "
-"appointment:"
-msgid_plural ""
-"Please review and confirm that you would like to request the following "
-"appointments:"
+msgid "Please review and confirm that you would like to request the following appointment:"
+msgid_plural "Please review and confirm that you would like to request the following appointments:"
 msgstr[0] ""
 
 #: includes/ajax/front/appointment-form/form.php:148
-msgid ""
-"Please confirm that you would like to request the following appointment:"
-msgid_plural ""
-"Please confirm that you would like to request the following appointments:"
+msgid "Please confirm that you would like to request the following appointment:"
+msgid_plural "Please confirm that you would like to request the following appointments:"
 msgstr[0] ""
 
-#: includes/ajax/front/appointment-form/form.php:170
-#: includes/general-functions.php:367
+#: includes/ajax/front/appointment-form/form.php:170 includes/general-functions.php:367
 msgid "Please enter the following text:"
 msgstr ""
 
@@ -1249,15 +1158,12 @@ msgid "Request Appointment"
 msgid_plural "Request Appointments"
 msgstr[0] "予約をリクエスト"
 
-#: includes/ajax/front/appointment-form/form.php:190 includes/functions.php:868
-#: includes/functions.php:1235
+#: includes/ajax/front/appointment-form/form.php:190 includes/functions.php:868 includes/functions.php:1235
 msgid "Book Appointment"
 msgid_plural "Book Appointments"
 msgstr[0] "予約する"
 
-#: includes/ajax/front/book-appointment.php:115
-#: includes/ajax/front/book-appointment.php:278
-#: includes/ajax/front/book-appointment.php:425
+#: includes/ajax/front/book-appointment.php:115 includes/ajax/front/book-appointment.php:278 includes/ajax/front/book-appointment.php:425
 msgid "Your full name is required to book an appointment."
 msgstr ""
 
@@ -1266,8 +1172,7 @@ msgid "The email address you have entered doesn't appear to be valid."
 msgstr ""
 
 #: includes/ajax/front/book-appointment.php:184
-msgid ""
-"Your name and a valid email address are required to book an appointment."
+msgid "Your name and a valid email address are required to book an appointment."
 msgstr ""
 
 #: includes/ajax/front/book-appointment.php:186
@@ -1351,9 +1256,7 @@ msgstr "ユーザ名: %s"
 
 #: includes/functions.php:1346
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"もしこれが間違いや身に覚えがなければ、このメールを無視してください。リセット"
-"は行われません。"
+msgstr "もしこれが間違いや身に覚えがなければ、このメールを無視してください。リセットは行われません。"
 
 #: includes/functions.php:1347
 msgid "To reset your password, visit the following address:"
@@ -1390,15 +1293,13 @@ msgstr ""
 
 #: includes/functions.php:1838
 msgid ""
-"Your appointment has been requested! We have also set up an account for you. "
-"Your login information has been sent via email. When logged in, you can view "
-"your upcoming appointments below. Be sure to change your password to "
-"something more memorable by using the Edit Profile tab above."
+"Your appointment has been requested! We have also set up an account for you. Your login information has been sent via email. When "
+"logged in, you can view your upcoming appointments below. Be sure to change your password to something more memorable by using the Edit "
+"Profile tab above."
 msgstr ""
 
 #: includes/functions.php:1847
-msgid ""
-"Your appointment has been requested! It will be updated below if approved."
+msgid "Your appointment has been requested! It will be updated below if approved."
 msgstr ""
 
 #: includes/functions.php:1849
@@ -1413,8 +1314,7 @@ msgstr "プロフィールを編集"
 msgid "Update Avatar"
 msgstr "アバターを更新"
 
-#: includes/functions.php:1875 includes/functions.php:1884
-#: includes/functions.php:1888 includes/functions.php:1894
+#: includes/functions.php:1875 includes/functions.php:1884 includes/functions.php:1888 includes/functions.php:1894
 #: includes/functions.php:1898
 msgid "(disabled in demo)"
 msgstr ""
@@ -1693,8 +1593,7 @@ msgstr "予約が見つかりませんでした"
 msgid "No Appointments found in Trash."
 msgstr "ゴミ箱に予約は見つかりませんでした"
 
-#: post-types/booked_appointments.php:60 post-types/booked_appointments.php:75
-#: templates/welcome.php:21
+#: post-types/booked_appointments.php:60 post-types/booked_appointments.php:75 templates/welcome.php:21
 msgid "Custom Calendars"
 msgstr "カスタムカレンダー"
 
@@ -1750,16 +1649,12 @@ msgstr "カスタムカレンダーが見つかりませんでした"
 msgid "All Calendars"
 msgstr "全てのカレンダー"
 
-#: templates/admin-calendar.php:63 templates/pending-list.php:31
-#: templates/settings.php:37
+#: templates/admin-calendar.php:63 templates/pending-list.php:31 templates/settings.php:37
 msgid "There are no calendars assigned to you."
 msgstr ""
 
-#: templates/admin-calendar.php:64 templates/pending-list.php:32
-#: templates/settings.php:38
-msgid ""
-"Get in touch with the Administration of this site to get a calendar assigned "
-"to you."
+#: templates/admin-calendar.php:64 templates/pending-list.php:32 templates/settings.php:38
+msgid "Get in touch with the Administration of this site to get a calendar assigned to you."
 msgstr ""
 
 #: templates/pending-list.php:37 templates/settings.php:43
@@ -1854,10 +1749,8 @@ msgstr "予約タイプ"
 
 #: templates/settings.php:118
 msgid ""
-"You have the option to choose between \"Registered\" and \"Guest\" booking. "
-"Registered booking will require all appointments to be booked by a "
-"registered user (default). Guest booking will allow anyone with a name and "
-"email address to book an appointment."
+"You have the option to choose between \"Registered\" and \"Guest\" booking. Registered booking will require all appointments to be "
+"booked by a registered user (default). Guest booking will allow anyone with a name and email address to book an appointment."
 msgstr ""
 
 #: templates/settings.php:124
@@ -1885,8 +1778,7 @@ msgid "Require \"First Name\" and \"Last Name\""
 msgstr "姓名を必須"
 
 #: templates/settings.php:144
-msgid ""
-"Require your customers to enter their first and last name in two text fields."
+msgid "Require your customers to enter their first and last name in two text fields."
 msgstr "2つのフィールドで姓名を要求"
 
 #: templates/settings.php:155
@@ -1930,8 +1822,7 @@ msgstr ""
 
 #: templates/settings.php:194
 #, php-format
-msgid ""
-"%s We were not able to auto-detect. You need to %s with the %s shortcode."
+msgid "%s We were not able to auto-detect. You need to %s with the %s shortcode."
 msgstr ""
 
 #: templates/settings.php:194
@@ -1960,9 +1851,7 @@ msgid "Login Redirect"
 msgstr ""
 
 #: templates/settings.php:236
-msgid ""
-"If you would like the login form to redirect somewhere else (instead of "
-"reloading the same page), you can choose a page here."
+msgid "If you would like the login form to redirect somewhere else (instead of reloading the same page), you can choose a page here."
 msgstr ""
 
 #: templates/settings.php:250
@@ -1974,9 +1863,7 @@ msgid "Custom Login Tab Content"
 msgstr ""
 
 #: templates/settings.php:268
-msgid ""
-"If you would like the login form to include a custom message (above the "
-"login form), you can add that here."
+msgid "If you would like the login form to include a custom message (above the login form), you can add that here."
 msgstr ""
 
 #: templates/settings.php:283
@@ -1984,9 +1871,7 @@ msgid "Time Slot Intervals"
 msgstr ""
 
 #: templates/settings.php:285
-msgid ""
-"Choose the intervals you need for your appointment time slots. This will "
-"only affect the way default time slots are entered."
+msgid "Choose the intervals you need for your appointment time slots. This will only affect the way default time slots are entered."
 msgstr ""
 
 #: templates/settings.php:311
@@ -1995,10 +1880,8 @@ msgstr ""
 
 #: templates/settings.php:313
 msgid ""
-"To prevent appointments from getting booked too close to the current date "
-"and/or time, you can set an appointment buffer. Available appointments time "
-"slots will be pushed up to a new date and time depending on which buffer "
-"amount you choose below."
+"To prevent appointments from getting booked too close to the current date and/or time, you can set an appointment buffer. Available "
+"appointments time slots will be pushed up to a new date and time depending on which buffer amount you choose below."
 msgstr ""
 
 #: templates/settings.php:319 templates/settings.php:396
@@ -2086,11 +1969,8 @@ msgid "Prevent Appointments Before Date"
 msgstr "この日以前の予約を受け付けない"
 
 #: templates/settings.php:358
-msgid ""
-"To prevent appointments from getting booked before a certain date, you can "
-"choose that date below."
-msgstr ""
-"特定の日付前から予約を受け付けなくするには、以下の日にちを選択してください"
+msgid "To prevent appointments from getting booked before a certain date, you can choose that date below."
+msgstr "特定の日付前から予約を受け付けなくするには、以下の日にちを選択してください"
 
 #: templates/settings.php:364 templates/settings.php:380
 msgid "Choose a date"
@@ -2101,32 +1981,23 @@ msgid "Prevent Appointments After Date"
 msgstr "この日以降の予約を受け付けない"
 
 #: templates/settings.php:374
-msgid ""
-"To prevent appointments from getting booked after a certain date, you can "
-"choose that date below."
-msgstr ""
-"特定の日付後から予約を受け付けなくするには、以下の日にちを選択してください"
+msgid "To prevent appointments from getting booked after a certain date, you can choose that date below."
+msgstr "特定の日付後から予約を受け付けなくするには、以下の日にちを選択してください"
 
 #: templates/settings.php:388
 msgid "Cancellation Buffer"
 msgstr "キャンセルバッファー"
 
 #: templates/settings.php:390
-msgid ""
-"To prevent appointments from getting cancelled too close to the appointment "
-"time, you can set a cancellation buffer."
-msgstr ""
-"予約日に近い日にちの予約キャンセルを防ぐには、キャンセルバッファーを設定でき"
-"ます。"
+msgid "To prevent appointments from getting cancelled too close to the appointment time, you can set a cancellation buffer."
+msgstr "予約日に近い日にちの予約キャンセルを防ぐには、キャンセルバッファーを設定できます。"
 
 #: templates/settings.php:434
 msgid "Appointment Limit"
 msgstr "予約制限"
 
 #: templates/settings.php:436
-msgid ""
-"To prevent users from booking too many appointments, you can set an "
-"appointment limit."
+msgid "To prevent users from booking too many appointments, you can set an appointment limit."
 msgstr "ユーザから多すぎる予約を防ぐには予約制限を設定できます。"
 
 #: templates/settings.php:442
@@ -2194,9 +2065,7 @@ msgid "New Appointment Default"
 msgstr ""
 
 #: templates/settings.php:473
-msgid ""
-"Would you like your appointment requests to go into a pending list or should "
-"they be approved immediately?"
+msgid "Would you like your appointment requests to go into a pending list or should they be approved immediately?"
 msgstr ""
 
 #: templates/settings.php:479
@@ -2236,9 +2105,7 @@ msgid "Hide the number of available time slots"
 msgstr ""
 
 #: templates/settings.php:540
-msgid ""
-"Hide the already booked time slots (cannot be used with \"Public Appointments"
-"\")"
+msgid "Hide the already booked time slots (cannot be used with \"Public Appointments\")"
 msgstr ""
 
 #: templates/settings.php:546
@@ -2254,9 +2121,7 @@ msgid "Do not allow users to cancel their own appointments."
 msgstr ""
 
 #: templates/settings.php:568
-msgid ""
-"Redirect users (except Admins and Booking Agents) from the \"/wp-admin/\" "
-"URL."
+msgid "Redirect users (except Admins and Booking Agents) from the \"/wp-admin/\" URL."
 msgstr ""
 
 #: templates/settings.php:574
@@ -2269,9 +2134,8 @@ msgstr ""
 
 #: templates/settings.php:631
 msgid ""
-"If you DO NOT want to send emails for any of the actions listed below, just "
-"remove the email subject or content text (or both) and the email will not be "
-"sent for that notification."
+"If you DO NOT want to send emails for any of the actions listed below, just remove the email subject or content text (or both) and the "
+"email will not be sent for that notification."
 msgstr ""
 
 #: templates/settings.php:636
@@ -2287,9 +2151,7 @@ msgid "Header/Logo Image"
 msgstr ""
 
 #: templates/settings.php:665
-msgid ""
-"Choose an image for your custom emails. Keep it 600px or less for best "
-"results."
+msgid "Choose an image for your custom emails. Keep it 600px or less for best results."
 msgstr ""
 
 #: templates/settings.php:668
@@ -2301,16 +2163,13 @@ msgid "Remove"
 msgstr ""
 
 #: templates/settings.php:678
-msgid ""
-"Which Administrator or Booking Agent user should receive the notification "
-"emails by default?"
+msgid "Which Administrator or Booking Agent user should receive the notification emails by default?"
 msgstr ""
 
 #: templates/settings.php:680
 msgid ""
-"By default, Booked uses the \"Settings > General > E-mail Address\" setting. "
-"Also, each custom calendar can have their own user notification setting, "
-"this is just the default."
+"By default, Booked uses the \"Settings > General > E-mail Address\" setting. Also, each custom calendar can have their own user "
+"notification setting, this is just the default."
 msgstr ""
 
 #: templates/settings.php:689
@@ -2332,11 +2191,9 @@ msgstr ""
 
 #: templates/settings.php:715
 msgid ""
-"Some SMTP clients reject emails being sent \"from\" your customers. Google "
-"is one of them, but they simply change the name of the sender to prevent the "
-"rejection. Others do not. You can check the following option to \"Force the "
-"sender name/email\", but you will not be able to reply directly to the "
-"notification emails coming from customers."
+"Some SMTP clients reject emails being sent \"from\" your customers. Google is one of them, but they simply change the name of the "
+"sender to prevent the rejection. Others do not. You can check the following option to \"Force the sender name/email\", but you will not "
+"be able to reply directly to the notification emails coming from customers."
 msgstr ""
 
 #: templates/settings.php:719
@@ -2348,9 +2205,7 @@ msgid "Still not working?"
 msgstr ""
 
 #: templates/settings.php:727
-msgid ""
-"If you are still having issues, check the box below to disable the Booked "
-"mailer and let WordPress handle the emails completely."
+msgid "If you are still having issues, check the box below to disable the Booked mailer and let WordPress handle the emails completely."
 msgstr ""
 
 #: templates/settings.php:731
@@ -2475,10 +2330,8 @@ msgstr ""
 
 #: templates/settings.php:786 templates/settings.php:1027
 msgid ""
-"WordPress crons do not run unless someone visits your site. Because of this, "
-"some reminders might not get sent out. To prevent this from happening, you "
-"would need to setup cron to run from the server level using the following "
-"command:"
+"WordPress crons do not run unless someone visits your site. Because of this, some reminders might not get sent out. To prevent this "
+"from happening, you would need to setup cron to run from the server level using the following command:"
 msgstr ""
 
 #: templates/settings.php:806
@@ -2486,8 +2339,7 @@ msgid "Customer Appointment Reminder Content"
 msgstr ""
 
 #: templates/settings.php:809 templates/settings.php:1049
-msgid ""
-"This is the email content for appoinment reminders. Some tokens you can use:"
+msgid "This is the email content for appoinment reminders. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:844
@@ -2495,9 +2347,7 @@ msgid "User Registration"
 msgstr ""
 
 #: templates/settings.php:847
-msgid ""
-"The email content that is sent to the user upon registration (using the "
-"Booked registration form). Some tokens you can use:"
+msgid "The email content that is sent to the user upon registration (using the Booked registration form). Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:849
@@ -2517,9 +2367,7 @@ msgid "Appointment Confirmation"
 msgstr ""
 
 #: templates/settings.php:884
-msgid ""
-"The email content that is sent to the user upon appointment creation. Some "
-"tokens you can use:"
+msgid "The email content that is sent to the user upon appointment creation. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:918
@@ -2527,9 +2375,7 @@ msgid "Appointment Approval"
 msgstr ""
 
 #: templates/settings.php:921
-msgid ""
-"The email content that is sent to the user upon appointment approval. Some "
-"tokens you can use:"
+msgid "The email content that is sent to the user upon appointment approval. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:955 templates/settings.php:1120
@@ -2537,9 +2383,7 @@ msgid "Appointment Cancellation"
 msgstr ""
 
 #: templates/settings.php:958
-msgid ""
-"The email content that is sent to the user upon appointment cancellation. "
-"Some tokens you can use:"
+msgid "The email content that is sent to the user upon appointment cancellation. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:983
@@ -2555,15 +2399,11 @@ msgid "Appointment Request"
 msgstr ""
 
 #: templates/settings.php:1087
-msgid ""
-"The email content that is sent (to the selected admin users above) upon "
-"appointment request. Some tokens you can use:"
+msgid "The email content that is sent (to the selected admin users above) upon appointment request. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:1123
-msgid ""
-"The email content that is sent (to the selected admin users above) upon "
-"cancellation. Some tokens you can use:"
+msgid "The email content that is sent (to the selected admin users above) upon cancellation. Some tokens you can use:"
 msgstr ""
 
 #: templates/settings.php:1164
@@ -2578,8 +2418,7 @@ msgstr ""
 msgid "Bulk"
 msgstr ""
 
-#: templates/settings.php:1204 templates/settings.php:1427
-#: templates/settings.php:1432
+#: templates/settings.php:1204 templates/settings.php:1427 templates/settings.php:1432
 msgid "Close"
 msgstr ""
 
@@ -2637,12 +2476,9 @@ msgstr ""
 
 #: templates/settings.php:1565
 msgid ""
-"You can use this shortcode to display the front-end booking calendar. Use "
-"the \"calendar\" attribute to display a specific calendar. Use the \"year\" "
-"and/or \"month\" attributes to display a specific month and/or year. You can "
-"also use the \"switcher\" variable to add a calendar switcher dropdown above "
-"the calendar. Your users can then switch between each calendar you've "
-"created."
+"You can use this shortcode to display the front-end booking calendar. Use the \"calendar\" attribute to display a specific calendar. "
+"Use the \"year\" and/or \"month\" attributes to display a specific month and/or year. You can also use the \"switcher\" variable to add "
+"a calendar switcher dropdown above the calendar. Your users can then switch between each calendar you've created."
 msgstr ""
 
 #: templates/settings.php:1575
@@ -2654,9 +2490,7 @@ msgid "Display the Login / Register Form"
 msgstr ""
 
 #: templates/settings.php:1594
-msgid ""
-"If the Registration tab doesn't show up, be sure to allow registrations from "
-"the Settings > General page."
+msgid "If the Registration tab doesn't show up, be sure to allow registrations from the Settings > General page."
 msgstr ""
 
 #: templates/settings.php:1601
@@ -2665,8 +2499,7 @@ msgstr ""
 
 #: templates/settings.php:1602
 msgid ""
-"You can use this shortcode to display the profile content on any page. If a "
-"user is not logged in, they will see the login form instead."
+"You can use this shortcode to display the profile content on any page. If a user is not logged in, they will see the login form instead."
 msgstr ""
 
 #: templates/settings.php:1609
@@ -2674,9 +2507,7 @@ msgid "Display User's Appointments"
 msgstr ""
 
 #: templates/settings.php:1610
-msgid ""
-"You can use this shortcode to display just the currently logged in user's "
-"upcoming appointments."
+msgid "You can use this shortcode to display just the currently logged in user's upcoming appointments."
 msgstr ""
 
 #: templates/settings.php:1630
@@ -2684,9 +2515,7 @@ msgid "Export Appointments"
 msgstr ""
 
 #: templates/settings.php:1631
-msgid ""
-"You can export all appointments or specify what you want by choosing from "
-"the below options."
+msgid "You can export all appointments or specify what you want by choosing from the below options."
 msgstr ""
 
 #: templates/settings.php:1634
@@ -2733,9 +2562,8 @@ msgstr ""
 #: templates/welcome.php:5
 #, php-format
 msgid ""
-"If this is your first time using %s, you will find some helpful \"Getting "
-"Started\" links below. If you just updated the plugin, you can find out "
-"what's new in the \"What's New\" section below."
+"If this is your first time using %s, you will find some helpful \"Getting Started\" links below. If you just updated the plugin, you "
+"can find out what's new in the \"What's New\" section below."
 msgstr ""
 
 #: templates/welcome.php:18
@@ -2801,3 +2629,9 @@ msgstr "電話番号"
 
 msgid "Email"
 msgstr "メールアドレス"
+
+msgid ""
+"To cancel this appointment, please go to <a href=\"%s\">My Page</a>, call to <a href=\"tel:%s\">%s</a> or <a href=\"%s\">contact</a> us."
+msgstr ""
+"この予約をキャンセルするには<a href=\"%s\">マイページ</a>からキャンセルをするか、<a href=\"tel:%s\">%s</a>までお電話、または<a href=\"%s"
+"\">お問い合わせ</a>にてご連絡ください。"

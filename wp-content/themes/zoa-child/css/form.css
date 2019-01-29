@@ -897,3 +897,72 @@ body #app-form .booked-form .booked-appointments {
     margin-top: 40px;
 	}
 }
+/*******************
+Register Form
+********************/
+.page-register .wppb-form-field input, .page-register .wppb-form-field input[type="text"], .page-register .wppb-form-field input[type="number"], .page-register .wppb-form-field input[type="email"], .page-register .wppb-form-field input[type="url"], .page-register .wppb-form-field input[type="password"], .page-register .wppb-form-field input[type="search"], .page-register .wppb-form-field select, .page-register .wppb-form-field textarea, .page-register .wppb-checkboxes, .page-register .wppb-radios, .page-register #wppb-login-wrap .login-username input, .page-register #wppb-login-wrap .login-password input {
+	float: none;
+}
+.page-register .wppb-form-field input, .page-register .wppb-form-field input[type="text"], .page-register .wppb-form-field input[type="number"], .page-register .wppb-form-field input[type="email"], .page-register .wppb-form-field input[type="url"], .page-register .wppb-form-field input[type="password"], .page-register .wppb-form-field input[type="search"], .page-register .wppb-form-field textarea, .page-register #wppb-login-wrap .login-username input, .page-register #wppb-login-wrap .login-password input {
+	padding: .625rem .75rem;
+	width: 100%;
+    height: auto;
+	-webkit-transition: all 230ms ease-in-out;
+    transition: all 230ms ease-in-out;
+    background-color: #f6f6f6;
+    border-radius: 0;
+    border: solid 1px #f6f6f6;
+    outline-width: 0;
+    -webkit-appearance: none;
+    line-height: 1.25rem;
+}
+.page-register .wppb-form-field label.form-row__label {
+    float: none;
+    width: 100%;
+}
+.page-register .wppb-user-forms ul li:after {
+	content: none;
+}
+.wppb-form-field span.value {
+    margin: 0;
+    font-style: normal;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap > li > label {
+    display: none;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap > li > input, .wppb-user-forms > ul > li > .value > ul.column_wrap > li > select {
+	float: none;
+}
+ul.column_wrap {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+ul.column_wrap > li {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+@media only screen and (min-width: 768px) {
+	.wppb-user-forms > ul > li {
+		display: -webkit-box;
+		display: -moz-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+	}
+	.page-register .wppb-form-field label.form-row__label {
+		width: 250px;
+		margin-bottom: 0;
+	}
+	.page-register .wppb-form-field span.value {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+	}
+}

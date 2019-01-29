@@ -102,7 +102,7 @@ add_action('admin_head', 'hide_update_noticee_to_all_but_admin_users', 1);
 function elsey_change_cssjs_ver($src) {
     if (strpos($src, '?ver='))
         $src = remove_query_arg('ver', $src);
-    $src = add_query_arg(array('ver' => '4.9'), $src);
+    $src = add_query_arg(array('ver' => '4.8'), $src);
     return $src;
 }
 
@@ -362,6 +362,7 @@ function add_scripts() {
     wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_register_script('register', get_stylesheet_directory_uri() . '/js/register.js', array(), false, true);
+	wp_register_script('register-js', get_stylesheet_directory_uri() . '/js/registration.js', array(), false, true);
     wp_enqueue_script('remodal');
 
     if (is_home() || is_front_page()) {
@@ -424,7 +425,9 @@ function add_scripts() {
         wp_enqueue_script('shopsingle-js');
     } elseif (is_page('register')) {
     	wp_enqueue_script('register');
+		wp_enqueue_script('register-js');
     	wp_enqueue_style('validation_engine_css');
+		wp_enqueue_style('form-style');
     	
     }
     elseif (is_page('contact') || is_page('contact-confirm') || is_page('press-contact-confirm') || is_page('contact-thanks')) {
@@ -1132,21 +1135,6 @@ function zoa_child_shop_open_tag() {
         return $label;
     }
 
-    add_action( 'user_register', 'elsey_user_register', 9999, 1 );
-    function elsey_user_register( $user_id ) {
-    	if (isset($_POST['last_name_kana']))
-    	{
-    		$birth = array();
-    		$birth['year'] = $_POST['birth_year'];
-    		$birth['month'] = $_POST['birth_month'];
-    		$birth['day'] = $_POST['birth_date'];
-    		
-    		update_user_meta($user_id, 'account_birth', $birth);
-    		update_user_meta($user_id, 'billing_last_name_kana', $_POST['last_name_kana']);
-    		update_user_meta($user_id, 'billing_first_name_kana', $_POST['first_name_kana']);
-    	}
-    }
-    
 //change dashboard content in my account
     add_action('woocommerce_account_dashboard', 'custom_woocommerce_account_dashboard');
 
@@ -1213,8 +1201,8 @@ function zoa_child_shop_open_tag() {
                             <select class="input-select justselect" name="account_birth[month]" id="account_birth_month">
                                 <option value=""><?php _e('Month'); ?></option>
                                 <?php
-                                foreach ($months as $index_month => $month) {
-                                	printf('<option value="%1$s" %2$s>%3$s</option>', $index_month + 1, selected($birth_date['month'], $index_month, false), $month);
+                                foreach ($months as $month) {
+                                    printf('<option value="%1$s" %2$s>%1$s</option>', $month, selected($birth_date['month'], $month, false));
                                 }
                                 ?>
                             </select>
