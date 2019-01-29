@@ -7,6 +7,22 @@ jQuery(function($){
 		}
 	});
 	
+	function populateBirthField()
+	{
+		for (var i=1930; i<=2017; i++)
+			$('#birth_year').append('<option value="'+ i +'">'+ i +'</option>');
+		}
+	
+		for (var i=1; i<=12; i++)
+			$('#birth_month').append('<option value="'+ i +'">'+ i +'</option>');
+		}
+
+		for (var i=1; i<=31; i++)
+			$('#birth_day').append('<option value="'+ i +'">'+ i +'</option>');
+		}
+	}
+	populateBirthField();
+	
 	$.fn.autoKana('#first_name', '#first_name_kana');
 	$.fn.autoKana('#last_name', '#last_name_kana');
 	
