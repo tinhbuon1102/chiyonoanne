@@ -28,7 +28,7 @@ function wppb_icl_t($context, $name, $value){
 		return icl_t( $context, $name, $value );
 		
 	else
-		return $value;
+		return __($value, 'profile-builder');
 }
 
 
