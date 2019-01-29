@@ -5014,3 +5014,9 @@ if (!function_exists('pll_current_language'))
 		return $_REQUEST['lang'];
 	}
 }
+
+add_filter( 'wppb_register_pre_form_message', 'elsey_wppb_register_pre_form_message', 999, 1 );
+function elsey_wppb_register_pre_form_message($message)
+{
+	return '';
+}

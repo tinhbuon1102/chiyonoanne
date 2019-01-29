@@ -417,7 +417,7 @@ class Profile_Builder_Form_Creator{
 			<p class="form-submit" <?php echo $wppb_form_submit_extra_attr; ?> >
 				<?php
 				if( $this->args['form_type'] == 'register' )
-					$button_name = ( current_user_can( 'create_users' ) ? __( 'Add User', 'profile-builder' ) : __( 'Register', 'profile-builder' ) );
+					$button_name = ( current_user_can( 'create_users' ) ? __( 'Register', 'profile-builder' ) : __( 'Register', 'profile-builder' ) );
 					
 				elseif( $this->args['form_type'] == 'edit_profile' )
 					$button_name = __( 'Update', 'profile-builder' );
