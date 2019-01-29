@@ -1132,6 +1132,21 @@ function zoa_child_shop_open_tag() {
         return $label;
     }
 
+    add_action( 'user_register', 'elsey_user_register', 9999, 1 );
+    function elsey_user_register( $user_id ) {
+    	if (isset($_POST['last_name_kana']))
+    	{
+    		$birth = array();
+    		$birth['year'] = $_POST['birth_year'];
+    		$birth['month'] = $_POST['birth_month'];
+    		$birth['day'] = $_POST['birth_date'];
+    		
+    		update_user_meta($user_id, 'account_birth', $birth);
+    		update_user_meta($user_id, 'billing_last_name_kana', $_POST['last_name_kana']);
+    		update_user_meta($user_id, 'billing_first_name_kana', $_POST['first_name_kana']);
+    	}
+    }
+    
 //change dashboard content in my account
     add_action('woocommerce_account_dashboard', 'custom_woocommerce_account_dashboard');
 
@@ -1198,8 +1213,8 @@ function zoa_child_shop_open_tag() {
                             <select class="input-select justselect" name="account_birth[month]" id="account_birth_month">
                                 <option value=""><?php _e('Month'); ?></option>
                                 <?php
-                                foreach ($months as $month) {
-                                    printf('<option value="%1$s" %2$s>%1$s</option>', $month, selected($birth_date['month'], $month, false));
+                                foreach ($months as $index_month => $month) {
+                                	printf('<option value="%1$s" %2$s>%3$s</option>', $index_month + 1, selected($birth_date['month'], $index_month, false), $month);
                                 }
                                 ?>
                             </select>

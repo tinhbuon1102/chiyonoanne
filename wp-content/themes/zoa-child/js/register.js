@@ -11,18 +11,18 @@ jQuery(function($){
 	{
 		$('#birth_year option:eq(0)').text('-----');
 		$('#birth_month option:eq(0)').text('-----');
-		$('#birth_day option:eq(0)').text('-----');
+		$('#birth_date option:eq(0)').text('-----');
 		
-		for (var i=1930; i<=2017; i++){
+		for (var i=1950; i<=2015; i++){
 			$('#birth_year').append('<option value="'+ i +'">'+ i +'</option>');
 		}
 	
-		for (var i=1; i<=12; i++) {
-			$('#birth_month').append('<option value="'+ i +'">'+ i +'</option>');
+		for (var i=0; i < gl_month_array.length; i++) {
+			$('#birth_month').append('<option value="'+ (i + 1) +'">'+ gl_month_array[i] +'</option>');
 		}
 
 		for (var i=1; i<=31; i++) {
-			$('#birth_day').append('<option value="'+ i +'">'+ i +'</option>');
+			$('#birth_date').append('<option value="'+ i +'">'+ i +'</option>');
 		}
 	}
 	populateBirthField();

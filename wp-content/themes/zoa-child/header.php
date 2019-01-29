@@ -36,6 +36,7 @@ if ($user->ID)
 		var gl_date_is_tempty_text = '<?php echo __('Date is empty', 'zoa')?>';
 		var gl_time_is_tempty_text = '<?php echo __('Time is empty', 'zoa')?>';
 		var gl_cancel_order_alert_text = '<?php echo __('Are you sure to cancel this order ?', 'zoa')?>';
+		var gl_month_array = <?php echo json_encode(array(__('January'), __('February'), __('March'), __('April'), __('May'), __('June'), __('July'), __('August'), __('September'), __('October'), __('November'), __('December')));?>;
 	</script>
 </head>
 

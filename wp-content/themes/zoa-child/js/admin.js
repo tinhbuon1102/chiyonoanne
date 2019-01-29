@@ -1,4 +1,10 @@
 jQuery(function($){
+	$('#last_name_kana').closest('tr').hide();
+	$('#first_name_kana').closest('tr').hide();
+	$('#birth_year').closest('tr').hide();
+	$('#birth_month').closest('tr').hide();
+	$('#birth_date').closest('tr').hide();
+	
 	if ($('#product_attribute_color').length)
 	{
 		var params = { 
