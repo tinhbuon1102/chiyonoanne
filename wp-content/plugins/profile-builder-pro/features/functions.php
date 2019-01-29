@@ -25,7 +25,10 @@ function wppb_register_settings() {
 // WPML support
 function wppb_icl_t($context, $name, $value){  
 	if( function_exists( 'icl_t' ) )
+	{
+		return __($value, 'profile-builder');
 		return icl_t( $context, $name, $value );
+	}
 		
 	else
 		return __($value, 'profile-builder');
