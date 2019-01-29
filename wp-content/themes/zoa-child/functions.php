@@ -331,6 +331,8 @@ function add_scripts() {
     wp_register_style('contact-style', get_stylesheet_directory_uri() . '/css/contact.css', array(), '');
     wp_register_style('portani-style', get_stylesheet_directory_uri() . '/css/port-animation.css', array(), '');
     wp_register_style('portfolio-style', get_stylesheet_directory_uri() . '/css/portfolio.css', array(), '');
+    wp_register_style('validation_engine_css', get_stylesheet_directory_uri() . '/js/validationEngine.jquery.css', array(), '');
+    
     wp_register_script('moment-js', get_stylesheet_directory_uri() . '/js/calendar/moment.min.js', array(), false, true);
     //wp_register_script( 'calmain-js', get_stylesheet_directory_uri() . '/js/calendar/main.js');
     wp_register_script('formstep-js', get_stylesheet_directory_uri() . '/js/form-steps.js', array(), false, true);
@@ -359,6 +361,7 @@ function add_scripts() {
     wp_register_style('tabs-style', get_stylesheet_directory_uri() . '/css/tabs.css', array(), '');
     wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
+    wp_register_script('register', get_stylesheet_directory_uri() . '/js/register.js', array(), false, true);
     wp_enqueue_script('remodal');
 
     if (is_home() || is_front_page()) {
@@ -419,7 +422,12 @@ function add_scripts() {
         wp_enqueue_script('slick-js');
         wp_enqueue_script('popup-js');
         wp_enqueue_script('shopsingle-js');
-    } elseif (is_page('contact') || is_page('contact-confirm') || is_page('press-contact-confirm') || is_page('contact-thanks')) {
+    } elseif (is_page('register')) {
+    	wp_enqueue_script('register');
+    	wp_enqueue_style('validation_engine_css');
+    	
+    }
+    elseif (is_page('contact') || is_page('contact-confirm') || is_page('press-contact-confirm') || is_page('contact-thanks')) {
         wp_enqueue_style('contact-style');
     }/* elseif (is_singular('post') || is_post_type_archive('post')) {
       //wp_enqueue_script('blog');
