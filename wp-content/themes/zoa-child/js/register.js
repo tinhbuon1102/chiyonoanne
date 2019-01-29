@@ -9,15 +9,15 @@ jQuery(function($){
 	
 	function populateBirthField()
 	{
-		for (var i=1930; i<=2017; i++)
+		for (var i=1930; i<=2017; i++){
 			$('#birth_year').append('<option value="'+ i +'">'+ i +'</option>');
 		}
 	
-		for (var i=1; i<=12; i++)
+		for (var i=1; i<=12; i++) {
 			$('#birth_month').append('<option value="'+ i +'">'+ i +'</option>');
 		}
 
-		for (var i=1; i<=31; i++)
+		for (var i=1; i<=31; i++) {
 			$('#birth_day').append('<option value="'+ i +'">'+ i +'</option>');
 		}
 	}
