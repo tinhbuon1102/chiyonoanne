@@ -5004,3 +5004,10 @@ function ch_ss_hidden_fields() {
 }
 
 add_action('wp_footer', 'ch_ss_hidden_fields');
+
+if (!function_exists('pll_current_language'))
+{
+	function pll_current_language(){
+		return $_REQUEST['lang'];
+	}
+}
