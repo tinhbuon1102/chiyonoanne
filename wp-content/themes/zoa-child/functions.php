@@ -361,7 +361,7 @@ function add_scripts() {
     wp_register_style('tabs-style', get_stylesheet_directory_uri() . '/css/tabs.css', array(), '');
     wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
-    wp_register_script('register', get_stylesheet_directory_uri() . '/js/register.js', array(), false, true);
+    wp_register_script('registration', get_stylesheet_directory_uri() . '/js/registration.js', array(), false, true);
     wp_enqueue_script('remodal');
 
     if (is_home() || is_front_page()) {
@@ -423,7 +423,7 @@ function add_scripts() {
         wp_enqueue_script('popup-js');
         wp_enqueue_script('shopsingle-js');
     } elseif (is_page('register')) {
-    	wp_enqueue_script('register');
+    	wp_enqueue_script('registration');
     	wp_enqueue_style('validation_engine_css');
     	
     }
