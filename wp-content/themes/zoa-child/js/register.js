@@ -4,6 +4,7 @@ jQuery(function($){
 		var required = $(this).attr('required');
 		if (typeof required !== typeof undefined && required !== false) {
 			$(this).addClass('validate[required]');
+			$(this).attr("data-parsley-required","true").attr("data-parsley-trigger","focusout");
 		}
 	});
 	
@@ -29,25 +30,24 @@ jQuery(function($){
 	
 	$.fn.autoKana('#first_name', '#first_name_kana');
 	$.fn.autoKana('#last_name', '#last_name_kana');
+	$('form#wppb-register-user').attr('data-parsley-validate', '');
 	
 	$('body').on('change', '#email', function(e){
 		$('#username').val($('#email').val());
 	});
 	
+	var validateForm = $("form#wppb-register-user");
+	
+	validateForm.parsley().on('field:validated', function() {
+	    var ok = $('.parsley-error').length === 0;
+	  })
+	  .on('form:submit', function() {
+	    return true;
+	  });
+	
 	$('body').on('click', '#register', function(e){
-		e.preventDefault();
 		$('#username').val($('#email').val());
 		
-		var validateForm = $("form#wppb-register-user");
-  		validateForm.validationEngine({
-  			promptPosition : 'inline',
-  			addFailureCssClassToField : "inputError",
-  			bindMethod : "live"
-  		});
-  		var isValid = validateForm.validationEngine('validate');
-  		if (isValid) {
-  			validateForm.submit();
-  		}
 		/*$('.wppb-user-forms > ul > li > .value > ul.column_wrap > li').each(function () {
 			if ($(this).find('.formError')) {
 				$(this).addClass('has_error');

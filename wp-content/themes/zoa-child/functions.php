@@ -485,7 +485,7 @@ function validation_scripts() {
     wp_register_script('parsley-lang-ja', get_stylesheet_directory_uri() . '/js/i18n/ja.js?201812042322', array(), false, true);
     wp_register_script('parsley-script', get_stylesheet_directory_uri() . '/js/parsley-script.js?201812111441', array('parsley-js'), false, true);
     wp_register_style('validation-style', get_stylesheet_directory_uri() . '/css/validation.css?201812131628');
-    if (is_page('contact') || is_checkout() || is_product()) {
+    if (is_page('contact') || is_checkout() || is_product() || is_page('register')) {
         wp_enqueue_script('parsley-js');
         if (get_locale() == 'ja') {
             wp_enqueue_script('parsley-lang-ja');
