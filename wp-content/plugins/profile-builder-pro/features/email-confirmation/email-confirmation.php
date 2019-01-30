@@ -506,6 +506,22 @@ function wppb_create_user( $user_name, $password, $email) {
 //send an email to the admin regarding each and every new subscriber, and - if selected - to the user himself
 function wppb_notify_user_registration_email( $bloginfo, $user_name, $email, $send_credentials_via_email, $password, $adminApproval ){
 
+	if (function_exists('WC'))
+	{
+		$user_data = get_user_by( 'email', $email );
+		$mailer = WC()->mailer();
+		$mails = $mailer->get_emails();
+		$email_to_send = 'customer_new_account';
+		if ( ! empty( $mails ) ) {
+			foreach ( $mails as $mail ) {
+				if ( $mail->id == $email_to_send ) {
+					$mail->trigger( $user_data->ID );
+				}
+			}
+		}
+		return;
+	}
+	
     /* if login with email is enabled user_name gets the value of the users email */
     $wppb_general_settings = get_option( 'wppb_general_settings' );
     if ( isset( $wppb_general_settings['loginWith'] ) && ( $wppb_general_settings['loginWith'] == 'email' ) ) {
