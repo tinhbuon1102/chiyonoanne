@@ -900,6 +900,9 @@ body #app-form .booked-form .booked-appointments {
 /*******************
 Register Form
 ********************/
+.page-register .wppb-user-forms ul {
+    max-width: initial;
+}
 .page-register .wppb-form-field input, .page-register .wppb-form-field input[type="text"], .page-register .wppb-form-field input[type="number"], .page-register .wppb-form-field input[type="email"], .page-register .wppb-form-field input[type="url"], .page-register .wppb-form-field input[type="password"], .page-register .wppb-form-field input[type="search"], .page-register .wppb-form-field select, .page-register .wppb-form-field textarea, .page-register .wppb-checkboxes, .page-register .wppb-radios, .page-register #wppb-login-wrap .login-username input, .page-register #wppb-login-wrap .login-password input {
 	float: none;
 }
@@ -920,14 +923,23 @@ Register Form
     float: none;
     width: 100%;
 }
+.page-register .wppb-form-field label, .page-register #wppb-login-wrap .login-username label, .page-register #wppb-login-wrap .login-password label {
+	float: none;
+}
 .page-register .wppb-user-forms ul li:after {
 	content: none;
+}
+.page-register .wppb-user-forms ul li {
+    padding-bottom: 0;
+}
+.page-register .wppb-user-forms > ul > li:not(:last-child) {
+    margin-bottom: 24px;
 }
 .wppb-form-field span.value {
     margin: 0;
     font-style: normal;
 }
-.wppb-user-forms > ul > li > .value > ul.column_wrap > li > label {
+.wppb-user-forms > ul > li > .value > ul.column_wrap > li > label, .column_wrap.has_label > .wppb-form-field > span.flex_input > label > span.wppb-required {
     display: none;
 }
 .wppb-user-forms > ul > li > .value > ul.column_wrap > li > input, .wppb-user-forms > ul > li > .value > ul.column_wrap > li > select {
@@ -940,12 +952,74 @@ ul.column_wrap {
     display: -ms-flexbox;
     display: flex;
 }
-
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2.has_error {
+    display: block;
+}
+.column_wrap.has_label > .wppb-form-field > span.flex_input {
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
 ul.column_wrap > li {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+}
+.page-register .wppb-user-forms ul li ul.column_wrap.name_column, .page-register .wppb-user-forms ul li ul.column_wrap.kana_column {
+    margin-left: -.75rem;
+    margin-right: -.75rem;
+}
+
+.page-register .wppb-user-forms ul li ul.column_wrap.name_column li, .page-register .wppb-user-forms ul li ul.column_wrap.kana_column li {
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap > li.column_2 > label {
+    display: block;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2 > label, .column_wrap.has_label > .wppb-form-field > span.flex_input > label {
+    width: 48px;
+	line-height: 42px;
+    text-align: center;
+	font-style: normal;
+    background-color: #f6f6f6;
+	position: relative;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2 > label:after, .column_wrap.has_label > .wppb-form-field > span.flex_input > label:after {
+    content: "";
+    height: 26px;
+    width: 1px;
+    background: rgba(0,0,0,.15);
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 0;
+}
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2 {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2 > input {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.wppb-user-forms > ul > li > .value > ul.column_wrap.has_label > li.column_2 > label > span.wppb-required {
+    display: none;
+}
+.wppb-user-forms .formError.inline .formErrorContent {
+    margin: 0 !important;
+    padding: 0;
 }
 @media only screen and (min-width: 768px) {
 	.wppb-user-forms > ul > li {

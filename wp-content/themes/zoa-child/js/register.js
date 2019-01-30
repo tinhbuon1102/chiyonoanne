@@ -9,9 +9,9 @@ jQuery(function($){
 	
 	function populateBirthField()
 	{
-		$('#birth_year option:eq(0)').text('-----');
-		$('#birth_month option:eq(0)').text('-----');
-		$('#birth_date option:eq(0)').text('-----');
+		$('#birth_year option:eq(0)').text(translation.year_label);
+		$('#birth_month option:eq(0)').text(translation.month_label);
+		$('#birth_date option:eq(0)').text(translation.day_label);
 		
 		for (var i=1950; i<=2015; i++){
 			$('#birth_year').append('<option value="'+ i +'">'+ i +'</option>');
@@ -48,5 +48,38 @@ jQuery(function($){
   		if (isValid) {
   			validateForm.submit();
   		}
+		/*$('.wppb-user-forms > ul > li > .value > ul.column_wrap > li').each(function () {
+			if ($(this).find('.formError')) {
+				$(this).addClass('has_error');
+				$(this).find('label, input').wrapAll('<span class="flex_input"></span>');
+			} else {
+				if ($(this).hasClass('has_error')) {
+					$(this).removeClass('has_error');
+				}
+				if ($(this).find('span.flex_input')) {
+					$(this).find('label, input').unwrap();
+				}
+			}
+		});*/
 	});
-})
+	/*$('form#wppb-register-user input').focusout(function(e) {
+		e.preventDefault();
+		$('.wppb-user-forms > ul > li > .value > ul.column_wrap > li').each(function () {
+			if ($(this).find('.formError')) {
+				if (!$(this).hasClass('has_error')) {
+					$(this).addClass('has_error');
+				}
+				if (!$(this).find('span.flex_input')) {
+					$(this).find('label, input').wrapAll('<span class="flex_input"></span>');
+				}
+			} else {
+				if ($(this).hasClass('has_error')) {
+					$(this).removeClass('has_error');
+				}
+				if ($(this).find('span.flex_input')) {
+					$(this).find('label, input').unwrap();
+				}
+			}
+		});
+	});*/
+});

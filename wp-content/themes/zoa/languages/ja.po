@@ -2178,6 +2178,9 @@ msgstr "商品がカートに追加されました！"
 msgid "View cart"
 msgstr "かごの中身を見る"
 
+msgid "Kana Name"
+msgstr "お名前（カナ）"
+
 msgid "Last Name"
 msgstr "姓"
 
@@ -2198,3 +2201,12 @@ msgstr "電話番号"
 
 msgid "Other Tools"
 msgstr "その他ツール"
+
+msgid "Year"
+msgstr "年"
+
+msgid "Month"
+msgstr "月"
+
+msgid "Day"
+msgstr "日"

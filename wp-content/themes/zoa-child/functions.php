@@ -362,7 +362,17 @@ function add_scripts() {
     wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_register_script('register', get_stylesheet_directory_uri() . '/js/register.js', array(), false, true);
+	$translation_array = array(
+		'name_label' => __('Name', 'zoa'),
+		'kana_label' => __('Kana Name', 'zoa'),
+		'dbirth_label' => __('Date of Birth', 'zoa'),
+        'year_label' => __('Year', 'zoa'),
+		'month_label' => __('Month', 'zoa'),
+		'day_label' => __('Day', 'zoa')
+    );
+	wp_localize_script('register', 'translation', $translation_array);
 	wp_register_script('register-js', get_stylesheet_directory_uri() . '/js/registration.js', array(), false, true);
+	wp_localize_script('register-js', 'translation', $translation_array);
     wp_enqueue_script('remodal');
 
     if (is_home() || is_front_page()) {
