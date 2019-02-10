@@ -5030,3 +5030,81 @@ function elsey_wppb_register_pre_form_message($message)
 {
 	return '';
 }
+
+add_action('wp_ajax_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
+add_action('wp_ajax_nopriv_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
+function zoa_woo_square_plugin_start_manual_square_to_woo_sync ()
+{
+	$curl = curl_init();
+	
+	$Date = date('Y-m-d');
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => "https://connect.squareup.com/v2/customers",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"authorization: Bearer ".get_option('woo_square_access_token'),
+			"cache-control: no-cache",
+			"Accept: application/json",
+		),
+	));
+	
+	$response = curl_exec($curl);
+	
+	curl_close($curl);
+	
+	$customers_obj = json_decode($response, true);
+	if (! empty($response)) {
+		foreach ($customers_obj['customers'] as $customer)
+		{
+			$user_email = $customer['email_address'];
+			$user_first_name = $customer['given_name'];
+			$user_last_name = $customer['family_name'];
+			
+			if ( $user_email && is_email( $user_email ) && !email_exists( $user_email ) ) {
+				$user_id = register_new_user( $user_email, $user_email );
+				
+				update_user_meta($user_id, 'square_customer_id', $customer['id']);
+				update_user_meta($user_id, 'first_name', $user_first_name);
+				update_user_meta($user_id, 'last_name', $user_last_name);
+				
+				// Update billing info
+				update_user_meta($user_id, 'billing_first_name', $user_first_name);
+				update_user_meta($user_id, 'billing_last_name', $user_last_name);
+				update_user_meta($user_id, 'billing_email', $customer['email_address']);
+				update_user_meta($user_id, 'billing_phone', $customer['phone_number']);
+				
+				if (isset($customer['address']))
+				{
+					update_user_meta($user_id, 'billing_address_1', $customer['address']['address_line_1']);
+					update_user_meta($user_id, 'billing_address_2', $customer['address']['address_line_2']);
+					update_user_meta($user_id, 'billing_city', $customer['address']['locality']);
+					update_user_meta($user_id, 'billing_state', $customer['address']['administrative_district_level_1']);
+					update_user_meta($user_id, 'billing_postcode', $customer['address']['postal_code']);
+					update_user_meta($user_id, 'billing_country', $customer['address']['country']);
+				}
+				// Update shipping info
+				update_user_meta($user_id, 'shipping_first_name', $user_first_name);
+				update_user_meta($user_id, 'shipping_last_name', $user_last_name);
+				update_user_meta($user_id, 'shipping_email', $customer['email_address']);
+				update_user_meta($user_id, 'shipping_phone', $customer['phone_number']);
+				
+				if (isset($customer['address']))
+				{
+					update_user_meta($user_id, 'shipping_address_1', $customer['address']['address_line_1']);
+					update_user_meta($user_id, 'shipping_address_2', $customer['address']['address_line_2']);
+					update_user_meta($user_id, 'shipping_city', $customer['address']['locality']);
+					update_user_meta($user_id, 'shipping_state', $customer['address']['administrative_district_level_1']);
+					update_user_meta($user_id, 'shipping_postcode', $customer['address']['postal_code']);
+					update_user_meta($user_id, 'shipping_country', $customer['address']['country']);
+				}
+			}
+			
+		}
+	}
+	
+}
