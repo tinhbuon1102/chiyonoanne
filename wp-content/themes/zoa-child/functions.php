@@ -5031,15 +5031,15 @@ function elsey_wppb_register_pre_form_message($message)
 	return '';
 }
 
-add_action('wp_ajax_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
-add_action('wp_ajax_nopriv_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
+// add_action('wp_ajax_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
+// add_action('wp_ajax_nopriv_start_manual_square_to_woo_sync', 'zoa_woo_square_plugin_start_manual_square_to_woo_sync', 1);
 function zoa_woo_square_plugin_start_manual_square_to_woo_sync ()
 {
 	$curl = curl_init();
 	
 	$Date = date('Y-m-d');
 	curl_setopt_array($curl, array(
-		CURLOPT_URL => "https://connect.squareup.com/v2/customers",
+		CURLOPT_URL => "https://connect.squareup.com/v2/locations/".get_option('woo_square_location_id')."/transactions/ZFJuQKpmBzvmajZjDtovsWieV",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
@@ -5058,6 +5058,7 @@ function zoa_woo_square_plugin_start_manual_square_to_woo_sync ()
 	curl_close($curl);
 	
 	$customers_obj = json_decode($response, true);
+	pr($customers_obj);die;
 	if (! empty($response)) {
 		foreach ($customers_obj['customers'] as $customer)
 		{
