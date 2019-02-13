@@ -300,7 +300,7 @@ if ($appt_is_available):
             $surname = $arr_your_info['user_lastname']; // ( isset($_POST['booked_appt_surname']) && $_POST['booked_appt_surname'] ? esc_attr($_POST['booked_appt_surname']) : false );
             $fullname = $arr_your_info['user_lastname'] . ' ' . $arr_your_info['user_firstname']; //( $surname ? $name . ' ' . $surname : $name );
             $email = $arr_your_info['email']; // $_POST['booked_appt_email'];
-            $password = rand_string(8); // $_POST['booked_appt_password'];
+            $password = $arr_your_info['password']; // $_POST['booked_appt_password'];
 //            if ($name_requirements == 'require_surname' && !$surname):
 //
 //                echo 'error###' . esc_html__('Your full name is required to book an appointment.', 'booked');
@@ -403,26 +403,18 @@ if ($appt_is_available):
                 endif;
 
                 // Send a registration welcome email to the new user?
-                $email_content = get_option('booked_registration_email_content');
-                $email_subject = get_option('booked_registration_email_subject');
+                $mail = WC()->mailer();
+                $email_heading = get_bloginfo('name');
+                $mailuser = new WC_Email_Customer_New_Account();
+                $mailuser->user_login = $email;
+                $mailuser->user_pass = $password;
+                $mailuser->password_generated = false;
+                $mail->email_header($email_heading);
+                $email_content = $mailuser->get_content_html();
+                $mail->email_footer();
+                $email_subject = $mailuser->get_subject();
                 if ($email_content && $email_subject):
-                    $r_phone = $arr_your_info['phone'];
-                    $fullkananame = $arr_your_info['billing_last_name_kana'] . ' ' . $arr_your_info['billing_first_name_kana'];
-                    $registration_token_replacements = array(
-                        'name' => $fullname,
-                        'kananame' => $fullkananame,
-                        'phone' => $r_phone,
-                        'email' => $email,
-                        'username' => $email,
-                        'password' => $password
-                    );
-
-                    $admin_email = booked_which_admin_to_send_email(esc_html($_POST['calendar_id']));
-                    $email_content = booked_token_replacement($email_content, $registration_token_replacements, 'user');
-                    $email_subject = booked_token_replacement($email_subject, $registration_token_replacements, 'user');
-
-                    do_action('booked_registration_email', $registration_token_replacements['email'], $email_subject, $email_content, $admin_email);
-
+                    $mail->send($email, stripslashes($email_subject), stripslashes($email_content));
                 endif;
 
                 // Send an email to the User?

@@ -17,7 +17,6 @@ class BookedShortcodes {
         add_shortcode('booked-profile', array($this, 'booked_profile_template'));
         add_shortcode('booked-login', array($this, 'booked_login_form'));
         add_shortcode('booked-cancellable-date', array($this, 'booked_cancellable_date'));
-		add_shortcode('booked-cancel-text', array($this, 'booked_cancel_text'));//added
 
         // Shortcode Actions
         add_action('template_redirect', array($this, 'booked_registration_redirect'));
@@ -139,11 +138,6 @@ class BookedShortcodes {
         $date = date_i18n("l, F j, Y H:i A", strtotime('-' . $cancel_buffer . ' hours', strtotime($datetime_booked)));
         return $date;
     }
-	/* cancel text gonna SHORTCODE added */
-	public function booked_cancel_text($atts, $content = null) {
-		$html = __('cancel_booked_email_text', 'zoa');
-		return $html;
-	}
 
     /* CALENDAR SHORTCODE */
 
@@ -428,7 +422,6 @@ class BookedShortcodes {
 
                     <ul class="booked-tabs login bookedClearFix">
                         <li<?php if (!isset($_POST['booked_reg_submit'])) { ?> class="active"<?php } ?>><a href="#login"><i class="booked-icon booked-icon-lock"></i><?php esc_html_e('Sign In', 'booked'); ?></a></li>
-            <?php if (get_option('users_can_register')): ?><li<?php if (isset($_POST['booked_reg_submit'])) { ?> class="active"<?php } ?>><a href="#register"><i class="booked-icon booked-icon-pencil"></i><?php esc_html_e('Register', 'booked'); ?></a></li><?php endif; ?>
                         <li><a href="#forgot"><i class="booked-icon booked-icon-question-circle"></i><?php esc_html_e('Forgot Password', 'booked'); ?></a></li>
                     </ul>
 
@@ -462,31 +455,6 @@ class BookedShortcodes {
 
                         </div>
                     </div>
-
-            <?php if (get_option('users_can_register')): ?>
-
-                        <div id="profile-register" class="booked-tab-content">
-                            <div class="booked-form-wrap bookedClearFix">
-
-                                <?php
-                                global $registration_complete, $booked_reg_errors;
-
-                                if ($registration_complete == 'error') {
-                                    ?><div class="booked-custom-error" style="display:block"><?php echo implode('<br>', $booked_reg_errors); ?></div><?php
-                                }
-
-                                $name = (isset($_POST['booked_reg_name']) ? $_POST['booked_reg_name'] : '');
-                                $surname = (isset($_POST['booked_reg_surname']) ? $_POST['booked_reg_surname'] : '');
-                                $email = (isset($_POST['booked_reg_email']) ? $_POST['booked_reg_email'] : '');
-                                $password = (isset($_POST['booked_reg_password']) ? $_POST['booked_reg_password'] : '');
-
-                                booked_registration_form($name, $surname, $email, $password);
-                                ?>
-
-                            </div>
-                        </div>
-
-            <?php endif; ?>
 
                     <div id="profile-forgot" class="booked-tab-content">
                         <div class="booked-form-wrap bookedClearFix">

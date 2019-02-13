@@ -1,0 +1,90 @@
+
+Time: 2019/01/30 15:29:36
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 789
+Memory Used, Peak: 4194304, 4194304
+---------------------
+
+Time: 2019/01/30 15:29:36
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 4194304, 4194304
+---------------------
+
+Time: 2019/01/30 15:29:36
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 4194304, 4194304
+---------------------
+
+Time: 2019/01/30 15:47:15
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 789
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/01/30 15:47:15
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/01/30 15:47:15
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/01/31 18:44:10
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 789
+Memory Used, Peak: 12582912, 12582912
+---------------------
+
+Time: 2019/01/31 18:44:10
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 12582912, 12582912
+---------------------
+
+Time: 2019/01/31 18:44:10
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 113.179.5.143
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 12582912, 12582912
+---------------------

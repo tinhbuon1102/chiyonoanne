@@ -56,7 +56,10 @@ jQuery(document).ready(function ($) {
     $('#checkout').find('.validate-required').each(function (i, field) {
         var v_input = $(field).find('input[type="text"]');
         var v_select = $(field).find('select');
-        if (v_input.attr('type') != 'hidden' && (v_input.val() == '' || v_select.val() == '')) {
+		if ($('#step-1').find('label.no-shipping-text') ) {
+			$('#step-1').find('.js-next').removeClass('ch-disable-add-to-cart');
+			console.log('Gift Checkout!');
+		} else if (v_input.attr('type') != 'hidden' && (v_input.val() == '' || v_select.val() == '')) {
             $('#checkout .js-next').addClass('ch-disable-add-to-cart');
         }
     });

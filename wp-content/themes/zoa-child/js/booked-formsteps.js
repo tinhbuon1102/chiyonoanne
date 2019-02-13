@@ -196,11 +196,12 @@ jQuery(function ($) {
             var billing_last_name_kana = $("#billing_last_name_kana").val();
             var billing_first_name_kana = $("#billing_first_name_kana").val();
             var email = $("#email").val();
+            var password = $("#b_password").val();
             var phone = $("#phone").val();
             var cancel_datetime = $(".ch-term-text").attr('cancel-datetime');
             var n = $("#is_register:checked").length;
             var is_register = n;
-            var dataString = '&user_lastname=' + user_lastname + '&user_firstname=' + user_firstname + '&billing_last_name_kana=' + billing_last_name_kana + '&billing_first_name_kana=' + billing_first_name_kana + '&email=' + email + '&phone=' + phone + '&is_register=' + is_register + '&cancel_datetime=' + cancel_datetime;
+            var dataString = '&user_lastname=' + user_lastname + '&user_firstname=' + user_firstname + '&billing_last_name_kana=' + billing_last_name_kana + '&billing_first_name_kana=' + billing_first_name_kana + '&email=' + email + '&phone=' + phone + '&is_register=' + is_register + '&cancel_datetime=' + cancel_datetime + '&password=' + password;
             var n = booked_js_vars.ajax_url.indexOf('?');
             if (n > 0) {
                 var url_call = booked_js_vars.ajax_url + '&action=booked_fill_yourinfo_form_steps';
@@ -284,8 +285,8 @@ jQuery(function ($) {
                 $('.ch-aq').html(response);
                 $("#bookedForm .btn--2").css("display", "inline-block");
                 $("#bookedForm .status").css("display", "none");
-                var service=$("#app-form .calendar-name").text();
-                $("#bookedForm .ch-service").html('<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'+service+'</font></font>');
+                var service = $("#app-form .calendar-name").text();
+                $("#bookedForm .ch-service").html('<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">' + service + '</font></font>');
             });
         }
         nextStep(formId);
@@ -297,7 +298,7 @@ jQuery(function ($) {
 
 //submit form
     $("body").on("click", ".btn--2", function (event) {
-        $("#woof_html_buffer").css("display","block");
+        $("#woof_html_buffer").css("display", "block");
         $("#submit-request-appointment").click();
     });
 

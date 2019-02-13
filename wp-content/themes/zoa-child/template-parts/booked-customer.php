@@ -2,25 +2,25 @@
 global $current_user;
 get_currentuserinfo();
 ?>
-<?php 
+<?php
 /*
-	if (! is_user_logged_in()) : 
-	else:
-	$current_user = wp_get_current_user();
-	$fname = get_user_meta( $current_user->ID, 'first_name', true );
-	$lname = get_user_meta( $current_user->ID, 'last_name', true );
-	echo '<p>You are'.$lname.$fname.'</p>';
-    endif; 
-	*/
+  if (! is_user_logged_in()) :
+  else:
+  $current_user = wp_get_current_user();
+  $fname = get_user_meta( $current_user->ID, 'first_name', true );
+  $lname = get_user_meta( $current_user->ID, 'last_name', true );
+  echo '<p>You are'.$lname.$fname.'</p>';
+  endif;
+ */
 ?>
-<?php if(!is_user_logged_in()){?>
-<ul class="tabs">
-	<li><a href="#login-info"><i class="oecicon oecicon-single-03"></i><?php _e('Sign up', 'zoa'); ?></a></li>
-	<li><a href="#signin-info"><i class="oecicon oecicon-log-in-2"></i><?php _e('Login', 'zoa'); ?></a></li>
-</ul>
-<?php }?>
-<div id="reservationFormCustomer" class="form_entry<?php if(!is_user_logged_in()){?> tab_container<?php }?>">
-    <div id="login-info" class="confirm-box ch-step2<?php if(!is_user_logged_in()){?> tab_content<?php }?>">
+<?php if (!is_user_logged_in()) { ?>
+    <ul class="tabs">
+        <li><a href="#login-info"><i class="oecicon oecicon-single-03"></i><?php _e('Sign up', 'zoa'); ?></a></li>
+        <li><a href="#signin-info"><i class="oecicon oecicon-log-in-2"></i><?php _e('Login', 'zoa'); ?></a></li>
+    </ul>
+<?php } ?>
+<div id="reservationFormCustomer" class="form_entry<?php if (!is_user_logged_in()) { ?> tab_container<?php } ?>">
+    <div id="login-info" class="confirm-box ch-step2<?php if (!is_user_logged_in()) { ?> tab_content<?php } ?>">
         <div class="row flex-justify-center pad_row">
             <fieldset class="confirm_info col-md-12 col-xs-12">
                 <div class="form-row">
@@ -61,6 +61,20 @@ get_currentuserinfo();
                         </div>
                     </div>
                 </div>
+                <?php
+                if (!is_user_logged_in()) {
+                    ?>
+                    <div id="password-row" class="form-row">
+                        <div class="field-wrapper">
+                            <div class="flex-row pad_row">
+                                <div class="col-md-12 col-xs-12">
+                                    <label class="form-row__label"><?php _e('Password', 'zoa'); ?><i class="required-asterisk booked-icon booked-icon-required"></i></label>
+                                    <input type="password" required="required" id="b_password" name="b_password" value=""/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="form-row">
                     <div class="field-wrapper">
                         <div class="flex-row pad_row">
@@ -85,11 +99,11 @@ get_currentuserinfo();
         </div>
         <div class="status msg2">&nbsp;</div>
     </div>
-	<?php if(!is_user_logged_in()){?>
-	<div id="signin-info" class="booked-login<?php if(!is_user_logged_in()){?> tab_content<?php }?>">
-		<div class="row flex-justify-center pad_row">
-			<fieldset class="sign_info col-md-12 col-xs-12"><?php echo do_shortcode('[booked-login]'); ?></fieldset>
-		</div>
-	</div>
-	<?php }?>
+    <?php if (!is_user_logged_in()) { ?>
+        <div id="signin-info" class="booked-login<?php if (!is_user_logged_in()) { ?> tab_content<?php } ?>">
+            <div class="row flex-justify-center pad_row">
+                <fieldset class="sign_info col-md-12 col-xs-12"><?php echo do_shortcode('[booked-login]'); ?></fieldset>
+            </div>
+        </div>
+    <?php } ?>
 </div>
