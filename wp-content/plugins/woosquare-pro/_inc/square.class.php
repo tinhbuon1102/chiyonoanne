@@ -20,8 +20,8 @@ class Square {
         $this->app_id = $app_id;
         if(empty($locationId)){ $locationId = 'me'; }
         $this->locationId = $locationId;
-        $this->squareURL = "https://connect.squareup.com/v2/" . $this->locationId;
-        $this->mainSquareURL = "https://connect.squareup.com/v2/me";
+        $this->squareURL = "https://connect.squareup.com/v1/" . $this->locationId;
+        $this->mainSquareURL = "https://connect.squareup.com/v1/me";
     }
 
     
@@ -88,7 +88,6 @@ class Square {
 			Helpers::debug_log('info', "The response of authorize curl request" . $response);
 			curl_close($curl);
 			$response_v_1 = json_decode($response, true); 
-			
 			update_option('woo_square_account_type', @$response_v_1['account_type']);
 			update_option('woo_square_account_currency_code', @$response_v_1['currency_code']);
 				// live/production app id from Square account

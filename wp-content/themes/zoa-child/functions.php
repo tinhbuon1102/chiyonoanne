@@ -320,8 +320,8 @@ function custom_styles() {
 add_action('wp_enqueue_scripts', 'custom_styles');
 
 function add_scripts() {
-    wp_register_style('snow-style', get_stylesheet_directory_uri() . '/css/snowfall.css', array(), '');
-    wp_register_script('snow-js', get_stylesheet_directory_uri() . '/js/snowfall.js', array(), false, true);
+    //wp_register_style('snow-style', get_stylesheet_directory_uri() . '/css/snowfall.css', array(), '');
+    //wp_register_script('snow-js', get_stylesheet_directory_uri() . '/js/snowfall.js', array(), false, true);
     wp_register_style('woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201901140848', array(), '');
     wp_register_style('giftcard-style', get_stylesheet_directory_uri() . '/css/giftcard.css', array(), '');
     wp_register_style('slick-style', get_stylesheet_directory_uri() . '/js/slick/slick.css', array(), '');
@@ -5109,3 +5109,38 @@ function zoa_woo_square_plugin_start_manual_square_to_woo_sync ()
 	}
 	
 }
+//Delete cache of shop page and product category page when you have new project publish
+add_action( 'save_post', 'ch_published_product', 10, 3);
+
+function ch_published_product($post_id, $post, $update){
+    if ($post->post_status != 'publish' || $post->post_type != 'product') {
+        return;
+    }
+
+    if (!$product = wc_get_product( $post )) {
+        return;
+    }
+
+    $path_cache=ABSPATH.'wp-content/cache/wp-rocket/'.$_SERVER['HTTP_HOST'];
+    $shop=$path_cache.'/shop';
+    ch_rmdir_recurse($shop);
+    
+    $product_category=$path_cache.'/product-category';
+    ch_rmdir_recurse($product_category);
+}
+
+function ch_rmdir_recurse($path) {
+  $path = rtrim($path, '/') . '/';
+  $handle = opendir($path);
+
+  while (false !== ($file = readdir($handle))) {
+    if($file != '.' and $file != '..' ) {
+      $fullpath = $path.$file;
+      if (is_dir($fullpath)) ch_rmdir_recurse($fullpath);
+      else unlink($fullpath);
+    }
+  }
+  closedir($handle);
+  rmdir($path);
+}
+//end

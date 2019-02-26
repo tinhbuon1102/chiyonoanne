@@ -89,7 +89,9 @@ function wc_change_admin_new_order_email_recipient( $recipient, $order ) {
     } else {
         $recipient = $recipient;
     }
+	
     return $recipient; 
+	
 }
 if(get_option('sync_square_order_notify') == 1){
 	//add_filter('woocommerce_email_recipient_new_order', 'wc_change_admin_new_order_email_recipient', 1, 2);
@@ -453,6 +455,7 @@ function woo_square_delete_category($category_id,$term_taxonomy_id, $deleted_cat
     
     //delete category options
     delete_option( "is_square_sync_{$category_id}" );
+    delete_option( "category_square_id_{$category_id}" );
     delete_option( "category_square_id_{$category_id}" );
     
     //no need to call square
