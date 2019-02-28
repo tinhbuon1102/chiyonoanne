@@ -860,7 +860,6 @@ if ( !class_exists( 'YITH_WAPO_Type' ) ) {
 
 						$use_display = $price < 0 ? false : true;
 
-						// thangtqvn - fixed missing text label
 						$label = YITH_WAPO_Option::getOptionDataByValueKey( $single_type, $key, 'label' );
 						$label = $label ? $label : $single_type->label;
 						$cart_item_data[] = array(
