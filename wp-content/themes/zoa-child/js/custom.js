@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
         /***********/
         $('.banner-ad-link').on('click', function (e) {
             e.preventDefault();
-            var inst = $('[data-remodal-id=portfolio_modal]').remodal();
+            var inst = $('[data-remodal-id=news_top_modal]').remodal();
             var wraper = $(this).closest('.grid-item');
             var pID = $(this).attr('data-id');
 

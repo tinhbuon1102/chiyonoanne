@@ -48,5 +48,14 @@ wp_footer();
   <br>
 </div>
 
+<div class="remodal" data-remodal-id="news_top_modal" id="news_top_modal" role="dialog" data-remodal-options="hashTracking: false, closeOnOutsideClick: true">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div class="remodal_wraper">
+    
+  </div>
+  <br>
+</div>
+
+
 </body>
 </html>
