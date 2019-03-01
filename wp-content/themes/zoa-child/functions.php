@@ -476,7 +476,7 @@ function custom_scripts() {
     wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812140713', array(), false, true);
 }
 
-add_action('wp_enqueue_scripts', 'custom_scripts');
+add_action('wp_enqueue_scripts', 'custom_scripts', 100000);
 
 //validation script
 function validation_scripts() {
