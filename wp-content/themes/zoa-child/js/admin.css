@@ -10,3 +10,8 @@
 	display: none;
 }
 #product_series {width: 11%;}
+
+._billing_last_name_kana_field, ._shipping_last_name_kana_field{
+    float: right !important;
+    clear: right !important;
+}

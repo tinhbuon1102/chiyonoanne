@@ -5144,3 +5144,24 @@ function ch_rmdir_recurse($path) {
   rmdir($path);
 }
 //end
+
+// Begin - customize order detail ADMIN
+add_filter( 'woocommerce_admin_billing_fields', 'look_woocommerce_admin_extra_fields', 10, 1 );
+add_filter( 'woocommerce_admin_shipping_fields', 'look_woocommerce_admin_extra_fields', 10, 1 );
+function look_woocommerce_admin_extra_fields($fields){
+	$fieldExtras = array();
+	$fieldExtras['first_name_kana'] = array(
+		'label' => __( '名(ふりがな)', 'woocommerce' ),
+		'show'  => false
+	);
+	
+	$fieldExtras['last_name_kana'] = array(
+		'label' => __( '姓(ふりがな)', 'woocommerce' ),
+		'show'  => false
+	);
+	
+	
+	$fields = insertAtSpecificIndex($fields, $fieldExtras, array_search('last_name', array_keys($fields)) + 1);
+	
+	return $fields;
+}
