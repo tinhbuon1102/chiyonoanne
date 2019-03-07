@@ -1,4 +1,60 @@
 <?php
+//webcast works start
+function url_transcation_id($url) {
+    $link_array = explode('/',$url);
+    $size_url = sizeof($link_array);
+    return $link_array[$size_url-1];
+}
+function get_trans_data($id) {
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://connect.squareup.com/v2/locations/".get_option('woo_square_location_id')."/transactions/".$id,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "authorization: Bearer ".get_option('woo_square_access_token'),
+        "cache-control: no-cache",
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+    $payment_obj = json_decode($response);
+    return $payment_obj->transaction->tenders;
+}
+
+function get_cutm_data($id) {
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://connect.squareup.com/v2/customers/".$id,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "authorization: Bearer ".get_option('woo_square_access_token'),
+        "cache-control: no-cache",
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+    $payment_obj = json_decode($response);
+    return $payment_obj;
+}
+//webcast works end
 square_woo_debug_log('info', "Callback page called.");
 
 require(dirname(__FILE__) . '/../../../wp-blog-header.php');
@@ -92,13 +148,47 @@ if (empty($response)) {
 				 }
 			 }
 
-            
-            $user = get_user_by('login', 'square_user');
+            //webcast works start
+            $trans_id = url_transcation_id ($payment->payment_url);
+            $trans_data = get_trans_data($trans_id);
+            $cust_id = '';
+            foreach ($trans_data as $trans_customer) {
+                if (isset($trans_customer->customer_id)) {
+                    $cust_id = $trans_customer->customer_id;
+                }
+            }
+            if ($cust_id) {
+                $customer_data = get_cutm_data($cust_id);
+                $cust_email = '';
+                $cust_phone = '';
+                foreach ($customer_data as $customer) {
+                    $cust_email = $customer->email_address;
+                    $cust_phone = $customer->phone_number;
+                }
+            }
+            $user_email_data = get_user_by('email', $cust_email);
+            if ($user_email_data) {
+                $user = $user_email_data;
+            }
+            else {
+                $user = get_user_by('login', 'square_user');
+            }
+            $user_id = $user->ID;
+            //webcast works end
+            //$user = get_user_by('login', 'square_user');
             $args = array(
                 'customer_id' => $user->ID,
                 'created_via' => 'Square',
             );
             $order = wc_create_order($args);
+            //add by webcast
+            // Set billing address
+            $billing_address = array('country' => get_user_meta( $user_id, 'billing_country', true ), 'first_name' => get_user_meta( $user_id, 'billing_first_name', true ), 'last_name' => get_user_meta( $user_id, 'billing_last_name', true ), 'company' => get_user_meta( $user_id, 'billing_company', true ), 'address_1' => get_user_meta( $user_id, 'billing_address_1', true ), 'address_2' => get_user_meta( $user_id, 'billing_address_2', true ), 'postcode' => get_user_meta( $user_id, 'billing_postcode', true ), 'city' => get_user_meta( $user_id, 'billing_city', true ), 'state' => get_user_meta( $user_id, 'billing_state', true ), 'email' => $cust_email, 'phone' => get_user_meta( $user_id, 'billing_phone', true ));
+            $order->set_address($billing_address, 'billing');
+            // Set shipping address
+            $shipping_address = array('country' => get_user_meta( $user_id, 'shipping_country', true ), 'first_name' => get_user_meta( $user_id, 'shipping_first_name', true ), 'last_name' => get_user_meta( $user_id, 'shipping_last_name', true ), 'company' => get_user_meta( $user_id, 'shipping_company', true ), 'address_1' => get_user_meta( $user_id, 'shipping_address_1', true ), 'address_2' => get_user_meta( $user_id, 'shipping_address_2', true ), 'postcode' => get_user_meta( $user_id, 'shipping_postcode', true ), 'city' => get_user_meta( $user_id, 'shipping_city', true ), 'state' => get_user_meta( $user_id, 'shipping_state', true ), 'email' => $cust_email, 'phone' => get_user_meta( $user_id, 'shipping_country', true ));
+            $order->set_address($shipping_address, 'shipping');
+
             square_woo_debug_log('info', "Creating new order for : ".$order->get_order_number()." and payment id is ".$payment->id);
 			// if (!is_wp_error( $order )) {
 				// square_woo_debug_log('info', json_encode($order->get_error_message()));
