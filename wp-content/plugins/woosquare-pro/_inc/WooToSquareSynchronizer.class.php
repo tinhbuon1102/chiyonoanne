@@ -404,7 +404,8 @@ class WooToSquareSynchronizer {
 				'track_inventory' => $attr['track_inventory'],
 				'price_money' => array(
 				"currency_code" => get_option('woocommerce_currency'),
-				"amount" =>  100 * $attr['price_money']['amount'],
+				//"amount" =>  100 * $attr['price_money']['amount'],
+				"amount" =>  $attr['price_money']['amount'],
 				)
 				);
 			}
@@ -448,7 +449,8 @@ class WooToSquareSynchronizer {
 			'track_inventory' => ($productDetails['_manage_stock'][0] == "yes" or $productDetails['_manage_stock'][0] == "1") ? true : false,
 			'price_money' => array(
 			"currency_code" => get_option('woocommerce_currency'),
-			"amount" => 100 * $productDetails['_price'][0]
+			//"amount" => 100 * $productDetails['_price'][0]
+			"amount" => $productDetails['_price'][0]
 			)
 			);
 		}
