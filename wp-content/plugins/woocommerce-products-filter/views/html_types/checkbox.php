@@ -208,10 +208,12 @@ if (!function_exists('woof_draw_checkbox_childs')) {
     <div class="info_show_wrap">
         <div class="bodyshape_info size_info"><button class="cta pop-up-button js-actives"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e("About Chiyono Anne's Size", 'zoa'); ?></button></div>
         <div class="pop-up tooltip-pop pop-size">
+            <div class="pop-container">
             <div class="pop-head">
                 <h2 class="pop-title"><i class="oecicon oecicon-alert-circle-que"></i><?php esc_html_e("About Chiyono Anne's Size", 'zoa'); ?></h2>
                 <button class="pop-up-close"><i class="oecicon oecicon-simple-remove"></i></button>
             </div>
+            <div class="pop-body">
             <?php if (!empty($terms)): ?>
                 <?php
                 $args = array(
@@ -221,9 +223,9 @@ if (!function_exists('woof_draw_checkbox_childs')) {
                 $charts = new WP_Query($args);
                 if ($charts->have_posts()) {
                     while ($charts->have_posts()) : $charts->the_post();
-                        $show_in_product_filter = get_field('show_in_product_filter', get_the_ID());
-                        if (isset($show_in_product_filter[0]) && strtolower($show_in_product_filter[0]) == 'show in product filter') {
-                            $chart_label = get_post_meta( get_the_ID(), 'label', true );
+                        $chart_product_category = get_field('product_category', get_the_ID());
+                        if ($chart_product_category) {
+                        	$chart_label = ucwords($chart_product_category);
                             $chart_table = get_post_meta(get_the_ID(), 'chart-table', true);
                             if ($chart_table != '') {
                                 $arr_chart_table = json_decode($chart_table);
@@ -258,6 +260,8 @@ if (!function_exists('woof_draw_checkbox_childs')) {
                 wp_reset_query();
                 ?>
             <?php endif; ?>
+        </div><!--/pop-body-->
+        </div><!--/pop-container-->
         </div>
     </div>
 <?php } ?>

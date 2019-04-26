@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") or die("");
 /**
 this class is a copy of native WP_List_Table from wp-admin/includes/class-wp-list-table.php
 */

@@ -5,12 +5,12 @@
 if ( !defined('DUPXABSPATH') )
 	define('DUPXABSPATH', dirname(__FILE__) . '/');
 
-$GLOBALS['DUPX_INIT']  = str_replace("\\", '/', (realpath(dirname(__FILE__) . '/..')));
 $API['BaseRootPath']   = rtrim(str_replace("\\", '/', str_ireplace('api', '', dirname(__FILE__))), '/');
 
 //echo $GLOBALS['DUPX_INIT']. '<br/>';
 //echo $API['BaseRootPath']. '<br/>';
-
+$GLOBALS['DUPX_INIT']  = $API['BaseRootPath'];
+require_once("{$API['BaseRootPath']}//classes/utilities/class.u.notices.manager.php");
 require_once("{$API['BaseRootPath']}/classes/utilities/class.u.php");
 require_once("{$API['BaseRootPath']}/classes/config/class.constants.php");
 require_once("{$API['BaseRootPath']}/classes/config/class.archive.config.php");

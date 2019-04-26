@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") or die("");
 /**
  * Classes for building the package database file
  *
@@ -89,6 +90,12 @@ class DUP_PRO_DatabaseInfo
     public $versionComment;
 
     /**
+     * table wise row counts array, Key as table name and value as row count
+     *  table name => row count
+     */
+    public $tableWiseRowCounts;
+
+    /**
      * Integer field file structure of table, table name as key
      */
     private $intFieldsStruct = array();
@@ -102,6 +109,7 @@ class DUP_PRO_DatabaseInfo
     function __construct()
     {
         $this->collationList = array();
+        $this->tableWiseRowCounts = array();
     }
 }
 
@@ -375,7 +383,15 @@ class DUP_PRO_Database
         }
 
         //Filter tables
-        $tables			 = $wpdb->get_col('SHOW TABLES');
+        $res = $wpdb->get_results('SHOW FULL TABLES', ARRAY_N);
+        $tables = array();
+        $baseTables = array();
+        foreach ($res as $row) {
+            $tables[] = $row[0];
+            if ('BASE TABLE' == $row[1]) {
+                $baseTables[] = $row[0];
+            }
+        }
         $filterTables	 = isset($this->FilterTables) ? explode(',', $this->FilterTables) : null;
         $mu_filter_tables = $this->Package->Multisite->getTablesToFilter();
         $tblAllCount	 = count($tables);
@@ -444,6 +460,8 @@ class DUP_PRO_Database
             DUP_PRO_LOG::trace("Executing mysql dump command by popen: $cmd");
             $handle = popen($cmd, "r");
             if ($handle) {
+                $sql_header  = "/* DUPLICATOR-PRO (MYSQL-DUMP BUILD MODE) MYSQL SCRIPT CREATED ON : ".@date("Y-m-d H:i:s")." */\n\n";
+                file_put_contents($this->dbStorePathPublic, $sql_header, FILE_APPEND);
                 while (!feof($handle)) {
                     $line = fgets($handle); //get ony one line
                     if ($line) {
@@ -504,13 +522,17 @@ class DUP_PRO_Database
             DUP_PRO_Log::info("RESPONSE: {$output}");
         }        
 
-        DUP_PRO_Log::info("TABLES: total:{$tblAllCount} | filtered:{$tblFilterCount} | create:{$tblCreateCount}");
-        DUP_PRO_Log::info("FILTERED: [{$this->FilterTables}]");
-        DUP_PRO_Log::info("RESPONSE: {$output}");
-
         $sql_footer = "\n\n/* Duplicator WordPress Timestamp: ".date("Y-m-d H:i:s")."*/\n";
         $sql_footer .= "/* ".DUPLICATOR_PRO_DB_EOF_MARKER." */\n";
         file_put_contents($this->dbStorePathPublic, $sql_footer, FILE_APPEND);
+
+        foreach ($tables as $table) {
+            if (in_array($table, $baseTables)) {
+                $row_count = $GLOBALS['wpdb']->get_var("SELECT Count(*) FROM `{$table}`");
+                $rewrite_table_as = $this->rewriteTableNameAs($table);
+                $this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as] = $row_count;
+            }
+        }
 
         return ($output) ? false : true;
     }
@@ -605,6 +627,9 @@ class DUP_PRO_Database
 
             $actual_row_count = $wpdb->get_var("SELECT Count(*) FROM `{$table}`");
             $rewrite_table_as = $this->rewriteTableNameAs($table);
+            if (!isset($this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as])) {
+                $this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as] = $actual_row_count;
+            }
             $row_count = 0;
             if ($actual_row_count > $global->package_phpdump_qrylimit) {
                 $row_count = ceil($actual_row_count / $global->package_phpdump_qrylimit);
@@ -709,7 +734,9 @@ class DUP_PRO_Database
         DUP_PRO_LOG::trace("Database: buildInChunks Start");
         if($package->db_build_progress->wasInterrupted){
             $package->db_build_progress->failureCount++;
-            DUP_PRO_LOG::trace('Database: buildInChunks failure count increased to  '.$package->db_build_progress->failureCount);
+            $log_msg = 'Database: buildInChunks failure count increased to  '.$package->db_build_progress->failureCount;
+            DUP_PRO_LOG::trace($log_msg);
+            error_log($log_msg);
         }
 
         if($package->db_build_progress->errorOut || $package->db_build_progress->failureCount > DUPLICATOR_PRO_SQL_SCRIPT_PHP_CODE_MULTI_THREADED_MAX_RETRIES){
@@ -1075,17 +1102,25 @@ class DUP_PRO_Database
             $chunk_index = isset($this->Package->db_build_progress->chunkIndex) ? ($this->Package->db_build_progress->chunkIndex + 1) : 1;
             $chunk_header = "\n /* SQL Chunk Header Index ".$chunk_index." */ \n";
             DUP_PRO_U::fwrite($handle, $chunk_header);
+
+            $db_build_progress = new DUP_PRO_DB_Build_Progress();
+            DUP_PRO_U::objectCopy($this->Package->db_build_progress, $db_build_progress);
             $is_completed = false;
             $sql = '';
 
-            while (!$this->Package->db_build_progress->completed && !$is_completed && $elapsed_time < $worker_time) {
+            while (!$db_build_progress->completed && !$is_completed && $elapsed_time < $worker_time) {
 
                 //row count to process in one loop
                 $chunk_size				 = $global->package_phpdump_qrylimit;
 
                 $table					 = $tables[$current_index];
                 $rewrite_table_as        = $this->rewriteTableNameAs($table);
-                $row_count				 = $wpdb->get_var("SELECT Count(*) FROM `{$table}`");
+                if (isset($this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as])) {
+                    $row_count = $this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as];
+                } else {
+                    $row_count = $wpdb->get_var("SELECT Count(*) FROM `{$table}`");
+                    $this->Package->Database->info->tableWiseRowCounts[$rewrite_table_as] = $row_count;
+                }
                 $rows_left_to_process	 = 0;
 
                 $this->setProgressPer($current_index, $row_offset, $row_count);
@@ -1139,15 +1174,15 @@ class DUP_PRO_Database
                             $bulk_counter++;
                             
                             // Temp: Uncomment this to randomly kill the php db process to simulate real world hosts and verify system recovers properly
-//                            if(($this->Package->db_build_progress->failureCount === 0) && (rand(0, 5000) == 1)) {
+//                            if(($db_build_progress->failureCount === 0) && (rand(0, 5000) == 1)) {
 //                                DUP_PRO_LOG::trace("#### intentionally killing db");
 //                                exit(1);
 //                            }
                         
                             
-                            $this->Package->db_build_progress->totalRowOffset++;
-                            $this->Package->db_build_progress->tableOffset	 = $row_offset;
-                            $this->Package->db_build_progress->bulkOffset = $bulk_counter;
+                            $db_build_progress->totalRowOffset++;
+                            $db_build_progress->tableOffset	 = $row_offset;
+                            $db_build_progress->bulkOffset = $bulk_counter;
 
                             $elapsed_time = time() - $start_time;
                             $time_over = $elapsed_time >= $worker_time;
@@ -1163,21 +1198,21 @@ class DUP_PRO_Database
                                 DUP_PRO_U::fwrite($handle, $sql);
                                 if (($row_offset == $row_count)) {
                                     $row_offset										 = 0;
-                                    $this->Package->db_build_progress->tableOffset	 = $row_offset;
+                                    $db_build_progress->tableOffset	 = $row_offset;
                                     if ($table_count != $current_index + 1) {
                                         $current_index++;
                                         $this->setProgressPer($current_index);
-                                        $this->Package->db_build_progress->tableIndex = $current_index;
+                                        $db_build_progress->tableIndex = $current_index;
                                     } else {
                                         $is_completed = true;
                                     }
                                 }
-                                $this->Package->db_build_progress->fileOffset = DUP_PRO_U::ftell($handle);
-                                $this->Package->db_build_progress->bulkSizeOffset = 0;
-                                $this->Package->db_build_progress->bulkOffset = 0;
+                                $db_build_progress->fileOffset = DUP_PRO_U::ftell($handle);
+                                $db_build_progress->bulkSizeOffset = 0;
+                                $db_build_progress->bulkOffset = 0;
                                 $bulk_done = false;
                                 $bulk_counter = 0;
-                                DUP_PRO_LOG::trace("#### saving sql offset {$this->Package->db_build_progress->fileOffset}");
+                                DUP_PRO_LOG::trace("#### saving sql offset {$db_build_progress->fileOffset}");
                                 $sql = "";
                                 if ($time_over) {
                                     break;
@@ -1189,11 +1224,11 @@ class DUP_PRO_Database
                     $rows	= null;
                 } else {
                     $row_offset										 = 0;
-                    $this->Package->db_build_progress->tableOffset	 = $row_offset;
+                    $db_build_progress->tableOffset	 = $row_offset;
                     if ($table_count != $current_index + 1) {
                         $current_index++;
                         $this->setProgressPer($current_index);
-                        $this->Package->db_build_progress->tableIndex = $current_index;
+                        $db_build_progress->tableIndex = $current_index;
                     } else {
                         $is_completed = true;
                     }
@@ -1213,11 +1248,12 @@ class DUP_PRO_Database
         }
         if ($is_completed) {
             $this->writeSQLFooter($handle);
-            $this->Package->db_build_progress->completed = true;
+            $db_build_progress->completed = true;
         }
 
-        $this->Package->db_build_progress->chunkIndex = $chunk_index;
-        $this->Package->db_build_progress->fileOffset = DUP_PRO_U::ftell($handle);
+        $db_build_progress->chunkIndex = $chunk_index;
+        $db_build_progress->fileOffset = DUP_PRO_U::ftell($handle);
+        DUP_PRO_U::objectCopy($db_build_progress, $this->Package->db_build_progress); 
         $this->Package->update();
 
         @fclose($handle);
@@ -1255,7 +1291,7 @@ class DUP_PRO_Database
             $processedSchemaSize += ($tableSchemaSize * $rowProcessed) / $rowCount;
         }      
 
-        $per = SnapLibUtil::getWorkPercent(DUP_PRO_PackageStatus::DBSTART, DUP_PRO_PackageStatus::DBDONE, $this->Package->db_build_progress->totalSchemaSize, $processedSchemaSize);
+        $per = DupProSnapLibUtil::getWorkPercent(DUP_PRO_PackageStatus::DBSTART, DUP_PRO_PackageStatus::DBDONE, $this->Package->db_build_progress->totalSchemaSize, $processedSchemaSize);
         $this->Package->set_status($per);
     }
 

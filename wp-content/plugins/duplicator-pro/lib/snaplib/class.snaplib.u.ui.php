@@ -1,12 +1,14 @@
 <?php
+if (!defined("ABSPATH") && !defined("DUPXABSPATH")) 
+    die("");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-if(!class_exists('SnapLibUIU')) {
-class SnapLibUIU
+if(!class_exists('DupProSnapLibUIU')) {
+class DupProSnapLibUIU
 {
     public static function echoBoolean($val)
     {
@@ -15,7 +17,12 @@ class SnapLibUIU
 
     public static function echoChecked($val)
     {
-        echo $val ? 'checked' : '';
+        // filter_var is available in >= php 5.2 
+        if (function_exists('filter_var') && defined('FILTER_VALIDATE_BOOLEAN')) {
+            echo filter_var($val, FILTER_VALIDATE_BOOLEAN) ? 'checked' : '';
+        } else {
+            echo $val ? 'checked' : '';
+        }
     }
 
     public static function echoDisabled($val)

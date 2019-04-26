@@ -154,7 +154,7 @@ C-PANEL PANEL -->
 	</div>
 	<div id='s2-adv-opts' class="s2-opts" style="display:none;padding-top:0">
 		<div class="help-target"><a href="<?php echo $GLOBALS['_HELP_URL_PATH'];?>#help-s2" target="help">
-			<i class="fa fa-question-circle"></i></a>
+			<i class="fas fa-question-circle fa-sm"></i></a>
 		</div>
 
 		<table class="dupx-opts dupx-advopts">
@@ -228,7 +228,7 @@ C-PANEL PANEL -->
 
 	<div id='s2-dbtest-area-cpnl' class="s2-dbtest-area">
 		<div id="s2-dbrefresh-cpnl">
-			<a href="javascript:void(0)" onclick="DUPX.testDBConnect()"><i class="fa fa-refresh"></i> Retry Test</a>
+			<a href="javascript:void(0)" onclick="DUPX.testDBConnect()"><i class="fa fa-sync fa-sm"></i> Retry Test</a>
 		</div>
 		<div style="clear:both"></div>
 		<div id="s2-dbtest-hb-cpnl" class="s2-dbtest-hb">
@@ -242,7 +242,7 @@ C-PANEL PANEL -->
 	<br/><br/><br/>
 
 	<div class="footer-buttons">
-		<button id="s2-dbtest-btn-cpnl" type="button" onclick="DUPX.testDBConnect()" class="default-btn" /><i class="fa fa-database"></i> Test Database</button>
+		<button id="s2-dbtest-btn-cpnl" type="button" onclick="DUPX.testDBConnect()" class="default-btn" /><i class="fas fa-database fa-sm"></i> Test Database</button>
 		<button id="s2-next-btn-cpnl" type="button" onclick="DUPX.confirmDeployment()" class="default-btn disabled" disabled="true"
 				title="The 'Test Database' connectivity requirements must pass to continue with install!">
 			Next <i class="fa fa-caret-right"></i>

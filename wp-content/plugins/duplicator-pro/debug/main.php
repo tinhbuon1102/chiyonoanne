@@ -1,6 +1,7 @@
 <?php
 defined("ABSPATH") or die("");
-DUP_PRO_U::hasCapability('read');
+// DUP_PRO_U::hasCapability('read');
+DUP_PRO_U::hasCapability('export');
 
 global $wpdb;
 require_once(DUPLICATOR_PRO_PLUGIN_PATH . '/assets/js/javascript.php');
@@ -105,8 +106,8 @@ jQuery(document).ready(function($)
 
 				if ($check.is(':checked')) 
 				{
-					$('#results-all').html('<i class="fa fa-cog fa-spin fa-fw fa-lg"></i>');
-					$result.html('<i class="fa fa-circle-o-notch fa-spin fa-fw fa-lg"></i>');
+					$('#results-all').html('<i class="fa fa-cog fa-sm fa-spin fa-fw fa-lg"></i>');
+					$result.html('<i class="fas fa-circle-notch fa-spin fa-fw fa-lg"></i>');
 
 					//Run any callbacks if defined
 					if ($form.attr("onsubmit") != undefined) {
@@ -117,9 +118,17 @@ jQuery(document).ready(function($)
 					$.ajax({
 						type: "POST",
 						url: ajaxurl,
-						dataType: "json",
 						data: input,
-						success: function(data) { DupPro.Debug.ProcessResult(data, $result) },
+						success: function(respData) {
+							try {
+								var data = DupPro.parseJSON(respData);								
+							} catch(err) {
+								console.error(err.message);
+								console.error('JSON parse failed for response data: ' + respData);
+								return false;
+							}
+							DupPro.Debug.ProcessResult(data, $result);
+						},
 						error: function(data) {},
 						done: function(data) {}
 					});

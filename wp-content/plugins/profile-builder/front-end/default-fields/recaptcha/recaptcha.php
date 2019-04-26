@@ -76,6 +76,8 @@ function wppb_recaptcha_script_footer(){
     //we don't have jquery on the backend
     if( current_filter() != 'wp_footer' ) {
         wp_print_scripts('jquery');
+    }else if(!wp_script_is('jquery')){
+        wp_print_scripts('jquery');
     }
     
     //get site key
@@ -149,7 +151,7 @@ function wppb_recaptcha_script_footer(){
 
     echo '<script src="https://www.google.com/recaptcha/api.js?onload=wppbRecaptchaCallback&render=explicit" async defer></script>';
 }
-add_action('wp_footer', 'wppb_recaptcha_script_footer', 999);
+add_action('wp_footer', 'wppb_recaptcha_script_footer', 9999);
 add_action('login_footer', 'wppb_recaptcha_script_footer');
 add_action('register_form', 'wppb_recaptcha_script_footer');
 add_action('lost_password', 'wppb_recaptcha_script_footer');

@@ -23,7 +23,22 @@ if( ! class_exists( 'Ph_WC_Shipping_Pro_Common' ) ) {
             }
 
             return self::$active_plugins;
-        }
+		}
+		
+		/**
+		 * Check whether specified plugin is active or not.
+		 * @param string $plugin (Required) Path to the main plugin file from plugins directory.
+		 * @return boolean
+		 */
+		public static function is_plugin_active( $plugin ){
+
+			if ( ! self::$active_plugins ) self::get_active_plugins();
+
+			if( ! empty($plugin) )
+				return in_array( $plugin, self::$active_plugins ) || array_key_exists( $plugin, self::$active_plugins );
+			else
+				return false;
+		}
         
     }
     new Ph_WC_Shipping_Pro_Common();

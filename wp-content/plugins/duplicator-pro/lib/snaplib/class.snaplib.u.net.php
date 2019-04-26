@@ -1,12 +1,14 @@
 <?php
+if (!defined("ABSPATH") && !defined("DUPXABSPATH")) 
+    die("");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-if(!class_exists('SnapLibNetU')) {
-class SnapLibNetU
+if(!class_exists('DupProSnapLibNetU')) {
+class DupProSnapLibNetU
 {
     public static function postWithoutWait($url, $params)
     {

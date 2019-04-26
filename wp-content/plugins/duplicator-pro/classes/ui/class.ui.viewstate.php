@@ -56,7 +56,8 @@ class DUP_PRO_UI_ViewState
      */
     public static function saveByPost()
     {
-        DUP_PRO_U::hasCapability('read');
+        check_ajax_referer('DUP_PRO_UI_ViewState_SaveByPost', 'nonce');        
+        DUP_PRO_U::hasCapability('export');        
 
         // $post    = stripslashes_deep($_POST);
         $key     = sanitize_text_field($_POST['key']);

@@ -1,4 +1,6 @@
 <?php
-if (!class_exists('SnapLib_32BitSizeLimitException')):
-class SnapLib_32BitSizeLimitException extends Exception {}
+if (!defined("ABSPATH") && !defined("DUPXABSPATH")) 
+    die("");
+if (!class_exists('DupProSnapLib_32BitSizeLimitException')):
+class DupProSnapLib_32BitSizeLimitException extends Exception {}
 endif;

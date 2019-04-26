@@ -221,7 +221,8 @@
                 add_action('wp_ajax_eh_load_shipping_pro_rule',array( $this,"eh_load_shipping_pro_rule"));
                 include_once( 'includes/class-wf-matrices-exporter.php' );          
                 
-                add_action( 'init', array( $this, 'wf_includes' ) );
+				add_action( 'init', array( $this, 'wf_includes' ) );
+				add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
             }
             function eh_load_shipping_pro_rule()
             {
@@ -245,7 +246,13 @@
                     include_once( 'core/woocommerce-shipping-pro-core.php' );
                 }
                 $this->third_party_plugin_support();
-            }
+			}
+			
+			public function admin_scripts() {
+				wp_enqueue_script( 'jquery' );
+				wp_enqueue_script( 'jquery-ui-sortable' );
+				wp_enqueue_script( 'ph-wc-shipping-pro-admin', plugins_url( '/resources/js/admin.js', __FILE__ ), array( 'jquery' ) );
+			}
 
             /**
              * To support third party plugins.

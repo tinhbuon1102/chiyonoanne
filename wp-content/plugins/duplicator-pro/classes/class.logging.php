@@ -452,7 +452,7 @@ class DUP_PRO_Log
        
         foreach ($profileLogArray as $profileLog) {
 			$avgTime	= ($profileLog->numCalls != 0)	? $profileLog->culmulativeTime / $profileLog->numCalls	: -1;
-            $name		= SnapLibStringU::truncateString($profileLog->eventName, $eventWidth);
+            $name		= DupProSnapLibStringU::truncateString($profileLog->eventName, $eventWidth);
             $entry		= sprintf("%-{$eventWidth}s | %-7d | %-6.3f | %9.3f \n", $name, $profileLog->numCalls, $avgTime, $profileLog->culmulativeTime);
             $txt		.= $entry;
         }

@@ -1,5 +1,6 @@
 <?php
-
+if (!defined("ABSPATH") && !defined("DUPXABSPATH"))
+    die("");
 //---------- DUPARCHIVE MINI EXPANDER: The contents of this file will be injected into the installer bootlog at build time ------------------------
 
 class DupArchiveHeaderMiniU
@@ -127,7 +128,7 @@ class DupArchiveMiniGlobHeader //extends HeaderBase
         fread($archiveHandle, 4);
 
         if ($skipGlob) {
-          //  SnapLibIOU::fseek($archiveHandle, $instance->storedSize, SEEK_CUR);
+          //  DupProSnapLibIOU::fseek($archiveHandle, $instance->storedSize, SEEK_CUR);
 		    if(fseek($archiveHandle, $instance->storedSize, SEEK_CUR) === -1)
 			{
                 throw new Exception("Can't fseek when skipping glob at location:".ftell($archiveHandle));

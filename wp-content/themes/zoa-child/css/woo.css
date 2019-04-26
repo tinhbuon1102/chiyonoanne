@@ -1789,6 +1789,7 @@ ul.wc_payment_methods.payment_methods.methods > li > label {
 	position: relative;
 }
 .info_show_wrap .pop-up {
+    margin: 0 !important;
     position: fixed;
     z-index: 3;
     background: #FFF;
@@ -1799,6 +1800,29 @@ ul.wc_payment_methods.payment_methods.methods > li > label {
     font-size: .75rem;
     transform: scale(0,0);
     transition: all 0.3s;
+    max-height: 90%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+}
+.pop-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.pop-body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
 }
 .info_show_wrap .pop-up.pop-bodyshape {
 	padding: 1rem .75rem 0;
@@ -1863,6 +1887,9 @@ button.pop-up-close {
 	.info_show_wrap .pop-up {
 		width: 460px;
 	}
+    .info_show_wrap .pop-up.js-actives {
+    transform: scale(1,1) translate(-50%, -50%);
+    }
 }
 @media screen and (max-width: 991px) {
 	.info_show_wrap .pop-up {

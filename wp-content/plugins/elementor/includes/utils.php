@@ -120,10 +120,6 @@ class Utils {
 
 		$link = add_query_arg( 'utm_term', $theme_name, $link );
 
-		if ( defined( 'ELEMENTOR_PARTNER_ID' ) ) {
-			$link = add_query_arg( 'partner_id', sanitize_key( ELEMENTOR_PARTNER_ID ), $link );
-		}
-
 		return $link;
 	}
 
@@ -628,5 +624,40 @@ class Utils {
 		}
 
 		return implode( ' ', $rendered_attributes );
+	}
+
+	public static function get_meta_viewport( $context = '' ) {
+		$meta_tag = '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />';
+		/**
+		 * Viewport meta tag.
+		 *
+		 * Filters the Elementor preview URL.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param string $meta_tag Viewport meta tag.
+		 */
+		return apply_filters( 'elementor/template/viewport_tag', $meta_tag, $context );
+	}
+
+	/**
+	 * Add Elementor Config js vars to the relevant script handle,
+	 * WP will wrap it with <script> tag.
+	 * To make sure this script runs thru the `script_loader_tag` hook, use a known handle value.
+	 * @param string $handle
+	 * @param string $js_var
+	 * @param mixed $config
+	 */
+	public static function print_js_config( $handle, $js_var, $config ) {
+		$config = wp_json_encode( $config );
+
+		if ( get_option( 'elementor_editor_break_lines' ) ) {
+			// Add new lines to avoid memory limits in some hosting servers that handles the buffer output according to new line characters
+			$config = str_replace( '}},"', '}},' . PHP_EOL . '"', $config );
+		}
+
+		$script_data = 'var ' . $js_var . ' = ' . $config . ';';
+
+		wp_add_inline_script( $handle, $script_data, 'before' );
 	}
 }

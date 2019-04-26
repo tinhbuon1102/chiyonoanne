@@ -201,6 +201,21 @@
 			$width = 100;
 		}
 		
+		if ( function_exists( 'oxygen_woocommerce_use_custom_product_image_gallery_layout' ) ) {
+			$width = 50;
+		}
+		
 		return $width;
 	}, 8 );
+	
+	
+	function wvg_oxygen_theme_support() {
+		// Remove Oxygen Theme Gallery
+		if ( function_exists( 'oxygen_woocommerce_use_custom_product_image_gallery_layout' ) ):
+			add_filter( 'oxygen_woocommerce_use_custom_product_image_gallery_layout', '__return_false' );
+		endif;
+	}
+	
+	add_action( 'woocommerce_init', 'wvg_oxygen_theme_support', 9 );
+
 	

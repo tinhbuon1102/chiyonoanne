@@ -41,6 +41,13 @@ class DUP_PRO_U
      */
     public static $PHP7_plus;
 
+    /**
+     * array of ini disable functions
+     *
+     * @var array
+     */
+    private static $iniDisableFuncs = null;
+
 	// Pseudo-constants
     private static $type_format_array;
 
@@ -200,6 +207,18 @@ class DUP_PRO_U
     }
 
     /**
+     * Localize and echo the current text as a variable
+     *
+     * @param string $text The text to localize
+     *
+     * @return variable Returns the text as a localized variable
+     */
+    public static function _e($text)
+    {
+        return _e($text, DUP_PRO_Constants::PLUGIN_SLUG);
+    }
+
+    /**
      * Localize and return the current text as a variable with escaping
      *
      * @param string $text The text to localize
@@ -298,6 +317,9 @@ class DUP_PRO_U
      */
     public static function getDownloadAttachment($filepath, $contentType)
     {
+        // Clean previous or after eny notice texts
+        ob_clean();
+        ob_start();
         $filename = basename($filepath);
 
         header('Content-Type: $contentType');
@@ -307,6 +329,7 @@ class DUP_PRO_U
         if (readfile($filepath) === false) {
             throw new Exception(self::__("Couldn't read {$filepath}"));
         }
+        ob_end_flush();
     }
 
     /**
@@ -384,13 +407,13 @@ class DUP_PRO_U
         $ret_val = $wpdb->get_var($query_string);
 
         if ($ret_val == 0) {
-            DUP_PRO_LOG::trace("Couldnt get mysql lock {$lock_name}");
+            DUP_PRO_LOG::trace("Mysql lock {$lock_name} denied");
             return false;
         } else if ($ret_val == null) {
             DUP_PRO_LOG::trace("Error retrieving mysql lock {$lock_name}");
             return false;
         } else {
-            DUP_PRO_LOG::trace("Mysql lock {$lock_name} obtained");
+            DUP_PRO_LOG::trace("Mysql lock {$lock_name} acquired");
             return true;
         }
     }
@@ -436,6 +459,21 @@ class DUP_PRO_U
         {
             wp_die(DUP_PRO_U::esc_html__('You do not have sufficient permissions to access this page.'));
             return;
+        }
+    }
+
+    /**
+     * Does the current user have the capability
+     *
+     * @return null Dies if user doesn't have the correct capability
+     */
+    public static function checkAjax()
+    {
+        if (!wp_doing_ajax()) {
+            $errorMsg = DUP_PRO_U::esc_html__('You do not have called from AJAX to access this page.');
+            DUP_PRO_LOG::trace($errorMsg);
+            error_log($errorMsg);
+            wp_die($errorMsg);
         }
     }
 
@@ -569,6 +607,16 @@ class DUP_PRO_U
                 $destObject->$member_name = $member_value;
             }
         }
+    }
+
+    /**
+     * Is the server PHP 5.3 or better
+     *
+     * @return  bool    Returns true if the server PHP 5.3 or better
+     */
+    public static function isCurlExists()
+    {
+        return function_exists('curl_version');
     }
 
     /**
@@ -736,26 +784,83 @@ class DUP_PRO_U
      */
     public static function getWPCoreTables()
     {
-		global $wpdb;
-		return array(
-			"{$wpdb->prefix}commentmeta",
-			"{$wpdb->prefix}comments",
-			"{$wpdb->prefix}links",
-			"{$wpdb->prefix}options",
-			"{$wpdb->prefix}postmeta",
-			"{$wpdb->prefix}posts",
-			"{$wpdb->prefix}term_relationships",
-			"{$wpdb->prefix}term_taxonomy",
-			"{$wpdb->prefix}termmeta",
-			"{$wpdb->prefix}terms",
-			"{$wpdb->prefix}usermeta",
-			"{$wpdb->prefix}blogs",
-			"{$wpdb->prefix}blog_versions",
-			"{$wpdb->prefix}users");
+        global $wpdb;
+        $result = array();
+        foreach (self::getWPCoreTablesEnd() as $tend) {
+            $result[] = $wpdb->prefix.$tend;
+        }
+        return $result;
     }
 
+    public static function getWPCoreTablesEnd()
+    {
+        return array(
+            'commentmeta',
+            'comments',
+            'links',
+            'options',
+            'postmeta',
+            'posts',
+            'term_relationships',
+            'term_taxonomy',
+            'termmeta',
+            'terms',
+            'usermeta',
+            'blogs',
+            'blog_versions',
+            'blogmeta',
+            'users',
+            'site',
+            'sitemeta',
+            'signups',
+            'registration_log',
+            'blog_versions');
+    }
 
-   /**
+    public static function isWPCoreTable($table)
+    {
+        global $wpdb;
+
+        if (strpos($table, $wpdb->prefix) !== 0) {
+            return false;
+        }
+
+        $subTName = substr($table, strlen($wpdb->prefix));
+        $coreEnds = self::getWPCoreTablesEnd();
+
+        if (in_array($subTName, $coreEnds)) {
+            return true;
+        } else if (is_multisite()) {
+            $exTable = explode('_', $subTName);
+            if (count($exTable) >= 2 && is_numeric($exTable[0])) {
+                $tChekc = implode('_', array_slice($exTable, 1));
+                if (get_blog_details((int) $exTable[0], false) !== false && in_array($tChekc, $coreEnds)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static function getWPBlogIdTable($table)
+    {
+        global $wpdb;
+
+        if (!is_multisite() || strpos($table, $wpdb->prefix) !== 0) {
+            return 0;
+        }
+
+        $subTName = substr($table, strlen($wpdb->prefix));
+        $exTable  = explode('_', $subTName);
+        if (count($exTable) >= 2 && is_numeric($exTable[0]) && get_blog_details((int) $exTable[0], false) !== false) {
+            return (int) $exTable[0];
+        } else {
+            return 0;
+        }
+    }
+
+    /**
     * Finds if its a valid executable or not
     * @param type $exe A non zero length executable path to find if that is executable or not.
     * @param type $expectedValue expected value for the result
@@ -981,6 +1086,50 @@ class DUP_PRO_U
             }
         }
         return $tell_result;
+    }
+
+    /**
+     * return ini disable functions array
+     *
+     * @return array
+     */
+    public static function getIniDisableFuncs() {
+        if (is_null(self::$iniDisableFuncs)) {
+            $tmpFuncs = ini_get ( 'disable_functions' );
+            $tmpFuncs = explode(',',$tmpFuncs);
+            self::$iniDisableFuncs = array();
+            foreach ($tmpFuncs as $cFunc) {
+                self::$iniDisableFuncs[] = trim($cFunc);
+            }
+        }
+
+        return self::$iniDisableFuncs;
+    }
+
+    /**
+     * Check if functione exists and isn't in ini disable_functions
+     *
+     * @param string $function_name
+     * @return bool
+     */
+    public static function isIniFunctionEnalbe($function_name) {
+        return function_exists($function_name) && !in_array($function_name, self::getIniDisableFuncs());
+    }
+
+    /**
+     * Check to see if the URL is valid
+     *
+     * @param string $url - preferably a fully qualified URL
+     * @return boolean - true if it is out there somewhere
+     */
+    public static function urlExists($url) {
+        if (($url == '') || ($url == null)) { return false; }
+        $response = wp_remote_head($url, array('timeout' => 5));
+        $accepted_status_codes = array(200, 301, 302);
+        if (!is_wp_error($response) && in_array(wp_remote_retrieve_response_code($response), $accepted_status_codes)) {
+            return true;
+        }
+        return false;
     }
 }
 

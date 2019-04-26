@@ -201,51 +201,51 @@ msgstr ""
 msgid "Back to BuddyPress Settings page"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:225
+#: ../pb-add-on-buddypress/index.php:222
 msgid "Profile Builder Avatar field is disabled to allow use of BuddyPress Avatar."
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:382
+#: ../pb-add-on-buddypress/index.php:379
 msgid "BuddyPress needs to be installed and activated for Profile Builder - BuddyPress Integration Add-on to work as expected!"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:511, ../pb-add-on-campaign-monitor-integration/admin/widget.php:226, ../pb-add-on-campaign-monitor-integration/admin/widget.php:228, ../profile-builder-2.0/admin/manage-fields.php:244
+#: ../pb-add-on-buddypress/index.php:508, ../pb-add-on-campaign-monitor-integration/admin/widget.php:226, ../pb-add-on-campaign-monitor-integration/admin/widget.php:228, ../profile-builder-2.0/admin/manage-fields.php:244
 msgid "Name"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:514
+#: ../pb-add-on-buddypress/index.php:511
 msgid "Username:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:518
+#: ../pb-add-on-buddypress/index.php:515
 msgid "First Name:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:522
+#: ../pb-add-on-buddypress/index.php:519
 msgid "Last Name:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:526
+#: ../pb-add-on-buddypress/index.php:523
 msgid "Nickname:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:530
+#: ../pb-add-on-buddypress/index.php:527
 msgid "Display name:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:534, ../profile-builder-2.0/admin/manage-fields.php:250
+#: ../pb-add-on-buddypress/index.php:531, ../profile-builder-2.0/admin/manage-fields.php:250
 msgid "Contact Info"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:537
+#: ../pb-add-on-buddypress/index.php:534
 msgid "Website:"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:541, ../profile-builder-2.0/admin/manage-fields.php:261
+#: ../pb-add-on-buddypress/index.php:538, ../profile-builder-2.0/admin/manage-fields.php:261
 msgid "About Yourself"
 msgstr ""
 
-#: ../pb-add-on-buddypress/index.php:544
+#: ../pb-add-on-buddypress/index.php:541
 msgid "Biographical Info:"
 msgstr ""
 
@@ -389,31 +389,35 @@ msgstr ""
 msgid "Width (px)"
 msgstr ""
 
-#: index.php:40
+#: ../pb-add-on-customization-toolbox/index.php:40
 msgid "Forms"
 msgstr ""
 
-#: index.php:41
+#: ../pb-add-on-customization-toolbox/index.php:41
 msgid "Fields"
 msgstr ""
 
-#: index.php:42
+#: ../pb-add-on-customization-toolbox/index.php:42
 msgid "Userlisting"
 msgstr ""
 
-#: index.php:43
+#: ../pb-add-on-customization-toolbox/index.php:43
 msgid "Shortcodes"
 msgstr ""
 
-#: index.php:61, index.php:71
+#: ../pb-add-on-customization-toolbox/index.php:44
+msgid "Admin"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/index.php:62, ../pb-add-on-customization-toolbox/index.php:72
 msgid "Customization Toolbox"
 msgstr ""
 
-#: index.php:61
+#: ../pb-add-on-customization-toolbox/index.php:62
 msgid "Toolbox"
 msgstr ""
 
-#: index.php:145, ../pb-add-on-social-connect/index.php:236, ../profile-builder-2.0/admin/admin-functions.php:226, ../profile-builder-2.0/admin/general-settings.php:76, ../profile-builder-2.0/admin/general-settings.php:76
+#: ../pb-add-on-customization-toolbox/index.php:147, ../pb-add-on-social-connect/index.php:237, ../profile-builder-2.0/admin/admin-functions.php:226, ../profile-builder-2.0/admin/general-settings.php:76, ../profile-builder-2.0/admin/general-settings.php:76
 msgid "Settings"
 msgstr ""
 
@@ -421,63 +425,63 @@ msgstr ""
 msgid "The email confirmation does not match your email address."
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:203, ../profile-builder-2.0/admin/admin-bar.php:61
+#: ../pb-add-on-field-visibility/index.php:205, ../profile-builder-2.0/admin/admin-bar.php:61
 msgid "Visibility"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:203
+#: ../pb-add-on-field-visibility/index.php:205
 msgid "<strong>Admin Only</strong> field is visible only for administrators. <strong>User Locked</strong> field is visible for both administrators and users, but only administrators have the capability to edit it."
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:204
+#: ../pb-add-on-field-visibility/index.php:206
 msgid "User Role Visibility"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:204
+#: ../pb-add-on-field-visibility/index.php:206
 msgid "Select which user roles see this field"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:205
+#: ../pb-add-on-field-visibility/index.php:207
 msgid "Location Visibility"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:205
+#: ../pb-add-on-field-visibility/index.php:207
 msgid "Select the locations you wish the field to appear"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:223
+#: ../pb-add-on-field-visibility/index.php:225
 msgid "<pre>Title</pre><pre>Type</pre><pre>Meta Name</pre><pre class=\"wppb-mb-head-required\">Required</pre><pre class=\"wppb-mb-head-visibility\"></pre>"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:223, ../pb-add-on-labels-edit/pble.php:354, ../profile-builder-2.0/admin/manage-fields.php:1239, ../profile-builder-2.0/features/functions.php:787, ../profile-builder-2.0/features/functions.php:794, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:108, ../profile-builder-2.0/features/roles-editor/roles-editor.php:866, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:183, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:197, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:211, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:225, ../profile-builder-2.0/modules/multiple-forms/multiple-forms.php:406
+#: ../pb-add-on-field-visibility/index.php:225, ../pb-add-on-labels-edit/pble.php:354, ../profile-builder-2.0/admin/manage-fields.php:1239, ../profile-builder-2.0/features/functions.php:788, ../profile-builder-2.0/features/functions.php:795, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:108, ../profile-builder-2.0/features/roles-editor/roles-editor.php:866, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:183, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:197, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:211, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:225, ../profile-builder-2.0/modules/multiple-forms/multiple-forms.php:406
 msgid "Edit"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:223, ../profile-builder-2.0/admin/manage-fields.php:1239, ../profile-builder-2.0/features/functions.php:780, ../profile-builder-2.0/features/functions.php:794, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:113, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:121, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:218, ../profile-builder-2.0/features/roles-editor/roles-editor.php:179, ../profile-builder-2.0/features/roles-editor/roles-editor.php:884, ../profile-builder-2.0/features/roles-editor/roles-editor.php:893, ../profile-builder-2.0/features/roles-editor/roles-editor.php:904, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:183, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:197, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:211, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:225
+#: ../pb-add-on-field-visibility/index.php:225, ../profile-builder-2.0/admin/manage-fields.php:1239, ../profile-builder-2.0/features/functions.php:781, ../profile-builder-2.0/features/functions.php:795, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:113, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:121, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:218, ../profile-builder-2.0/features/roles-editor/roles-editor.php:179, ../profile-builder-2.0/features/roles-editor/roles-editor.php:884, ../profile-builder-2.0/features/roles-editor/roles-editor.php:893, ../profile-builder-2.0/features/roles-editor/roles-editor.php:904, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:183, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:197, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:211, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:225
 msgid "Delete"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:244
+#: ../pb-add-on-field-visibility/index.php:246
 msgid "This field is visible only for administrators."
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:247
+#: ../pb-add-on-field-visibility/index.php:249
 msgid "This field is visible for both administrators and users, but only administrators have the capability to edit it."
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:270
+#: ../pb-add-on-field-visibility/index.php:272
 msgid "This field is visible only for the following user roles: %1$s"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:316
+#: ../pb-add-on-field-visibility/index.php:318
 msgid "This field is visible only in the following locations: %1$s"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:458
+#: ../pb-add-on-field-visibility/index.php:460
 msgid "Get file"
 msgstr ""
 
-#: ../pb-add-on-field-visibility/index.php:587
+#: ../pb-add-on-field-visibility/index.php:589
 msgid "You do not have the capabilities necessary to edit this field."
 msgstr ""
 
@@ -681,15 +685,15 @@ msgstr ""
 msgid "Replace labels with placeholders:"
 msgstr ""
 
-#: ../pb-add-on-placeholder-labels/pbpl.php:171, ../pb-add-on-social-connect/index.php:323, ../profile-builder-2.0/admin/general-settings.php:111, ../profile-builder-2.0/admin/general-settings.php:124, ../profile-builder-2.0/admin/general-settings.php:173, ../profile-builder-2.0/admin/general-settings.php:220, ../profile-builder-2.0/admin/private-website.php:58, ../profile-builder-2.0/admin/private-website.php:115, includes/views/view-fields.php:18, includes/views/view-fields.php:71, includes/views/view-fields.php:91, includes/views/view-fields.php:107, includes/views/view-fields.php:127, includes/views/view-forms.php:131, includes/views/view-forms.php:146, includes/views/view-forms.php:166, includes/views/view-forms.php:183, includes/views/view-forms.php:221, includes/views/view-forms.php:242, includes/views/view-forms.php:262, includes/views/view-forms.php:284, includes/views/view-shortcodes.php:16, includes/views/view-shortcodes.php:32, includes/views/view-shortcodes.php:48, includes/views/view-shortcodes.php:64, includes/views/view-userlisting.php:53, includes/views/view-userlisting.php:75, ../profile-builder-2.0/features/content-restriction/content-restriction.php:86, ../profile-builder-2.0/modules/multiple-forms/edit-profile-forms.php:206, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:229, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:230, ../profile-builder-2.0/modules/user-listing/userlisting.php:2339
+#: ../pb-add-on-placeholder-labels/pbpl.php:171, ../pb-add-on-social-connect/index.php:324, ../profile-builder-2.0/admin/general-settings.php:111, ../profile-builder-2.0/admin/general-settings.php:124, ../profile-builder-2.0/admin/general-settings.php:173, ../profile-builder-2.0/admin/general-settings.php:220, ../profile-builder-2.0/admin/private-website.php:58, ../profile-builder-2.0/admin/private-website.php:115, ../pb-add-on-customization-toolbox/includes/views/view-admin.php:18, ../pb-add-on-customization-toolbox/includes/views/view-admin.php:34, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:18, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:66, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:181, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:197, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:217, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:240, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:261, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:132, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:149, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:164, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:184, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:201, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:239, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:260, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:280, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:302, ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:16, ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:32, ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:48, ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:64, ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:53, ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:75, ../profile-builder-2.0/features/content-restriction/content-restriction.php:86, ../profile-builder-2.0/modules/multiple-forms/edit-profile-forms.php:206, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:229, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:230, ../profile-builder-2.0/modules/user-listing/userlisting.php:2339
 msgid "Yes"
 msgstr ""
 
-#: ../pb-add-on-placeholder-labels/pbpl.php:172, ../pb-add-on-social-connect/index.php:324, ../profile-builder-2.0/admin/general-settings.php:125, ../profile-builder-2.0/admin/general-settings.php:174, ../profile-builder-2.0/admin/general-settings.php:219, ../profile-builder-2.0/admin/private-website.php:57, ../profile-builder-2.0/admin/private-website.php:114, ../profile-builder-2.0/features/content-restriction/content-restriction.php:85, ../profile-builder-2.0/modules/multiple-forms/edit-profile-forms.php:206, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:229, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:230
+#: ../pb-add-on-placeholder-labels/pbpl.php:172, ../pb-add-on-social-connect/index.php:325, ../profile-builder-2.0/admin/general-settings.php:125, ../profile-builder-2.0/admin/general-settings.php:174, ../profile-builder-2.0/admin/general-settings.php:219, ../profile-builder-2.0/admin/private-website.php:57, ../profile-builder-2.0/admin/private-website.php:114, ../profile-builder-2.0/features/content-restriction/content-restriction.php:85, ../profile-builder-2.0/modules/multiple-forms/edit-profile-forms.php:206, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:229, ../profile-builder-2.0/modules/multiple-forms/register-forms.php:230
 msgid "No"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:184, ../pb-add-on-social-connect/index.php:185, ../pb-add-on-social-connect/index.php:291, ../pb-add-on-social-connect/index.php:295
+#: ../pb-add-on-social-connect/index.php:184, ../pb-add-on-social-connect/index.php:185, ../pb-add-on-social-connect/index.php:292, ../pb-add-on-social-connect/index.php:296
 msgid "Social Connect"
 msgstr ""
 
@@ -714,11 +718,11 @@ msgid "Facebook App ID"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:208
-msgid "Google+ Login"
+msgid "Google Login"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:209
-msgid "Google+ Client ID"
+msgid "Google Client ID"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:210
@@ -742,194 +746,198 @@ msgid "LinkedIn Client ID"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:215
+msgid "LinkedIn Client Secret"
+msgstr ""
+
+#: ../pb-add-on-social-connect/index.php:216
 msgid "Buttons Order"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:215
+#: ../pb-add-on-social-connect/index.php:216
 msgid "Drag and drop the dots to re-order."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:216
+#: ../pb-add-on-social-connect/index.php:217
 msgid "Buttons Re-Order"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:216
+#: ../pb-add-on-social-connect/index.php:217
 msgid "Save the buttons order from the buttons order checkboxes"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:217
+#: ../pb-add-on-social-connect/index.php:218
 msgid "Buttons Location"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:217
+#: ../pb-add-on-social-connect/index.php:218
 msgid "Display social buttons before or after the forms fields."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:218
+#: ../pb-add-on-social-connect/index.php:219
 msgid "Buttons Style"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:219
+#: ../pb-add-on-social-connect/index.php:220
 msgid "Heading Before Buttons (Login/Register)"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:219, ../pb-add-on-social-connect/index.php:220
+#: ../pb-add-on-social-connect/index.php:220, ../pb-add-on-social-connect/index.php:221
 msgid "Empty field will remove the heading."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:220
+#: ../pb-add-on-social-connect/index.php:221
 msgid "Heading Before Buttons (Edit Profile)"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:221
+#: ../pb-add-on-social-connect/index.php:222
 msgid "Facebook Button Text (Login/Register)"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:222
-msgid "Google+ Button Text (Login/Register)"
-msgstr ""
-
 #: ../pb-add-on-social-connect/index.php:223
-msgid "Twitter Button Text (Login/Register)"
+msgid "Google Button Text (Login/Register)"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:224
-msgid "LinkedIn Button Text (Login/Register)"
+msgid "Twitter Button Text (Login/Register)"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:225
-msgid "Facebook Button Text (Edit Profile)"
+msgid "LinkedIn Button Text (Login/Register)"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:226
-msgid "Google+ Button Text (Edit Profile)"
+msgid "Facebook Button Text (Edit Profile)"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:227
-msgid "Twitter Button Text (Edit Profile)"
+msgid "Google Button Text (Edit Profile)"
 msgstr ""
 
 #: ../pb-add-on-social-connect/index.php:228
+msgid "Twitter Button Text (Edit Profile)"
+msgstr ""
+
+#: ../pb-add-on-social-connect/index.php:229
 msgid "LinkedIn Button Text (Edit Profile)"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:229
+#: ../pb-add-on-social-connect/index.php:230
 msgid "Unlink Accounts (Edit Profile)"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:229
+#: ../pb-add-on-social-connect/index.php:230
 msgid "This option will display linked social platforms to users accounts and will allow to easily unlink them in Edit Profile page."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:230
+#: ../pb-add-on-social-connect/index.php:231
 msgid "Default Social Connect CSS in the Front-end"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:250
+#: ../pb-add-on-social-connect/index.php:251
 msgid "Help"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:320
+#: ../pb-add-on-social-connect/index.php:321
 msgid "Display Social Connect buttons:"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:369
+#: ../pb-add-on-social-connect/index.php:370
 msgid "You have successfully unlinked %% from your account."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:380
+#: ../pb-add-on-social-connect/index.php:382
 msgid "An account with this email address already exists.<br> Do you want to connect it?"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:381
+#: ../pb-add-on-social-connect/index.php:383
 msgid "Please enter your website account password"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:382
+#: ../pb-add-on-social-connect/index.php:384
 msgid "Please enter a new email"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:383
+#: ../pb-add-on-social-connect/index.php:385
 msgid "You have successfully linked your account to %%."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:384, ../pb-add-on-social-connect/twitter/twitter.php:108
+#: ../pb-add-on-social-connect/index.php:386, ../pb-add-on-social-connect/twitter/twitter.php:109
 msgid "Something went wrong. Please try again later!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:385
+#: ../pb-add-on-social-connect/index.php:387
 msgid "Before you can access your account you need to confirm your email address. Please check your inbox and click the activation link."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:386
+#: ../pb-add-on-social-connect/index.php:388
 msgid "<strong>ERROR</strong>: You need to confirm your email address before you can log in."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:387
+#: ../pb-add-on-social-connect/index.php:389
 msgid "Before you can access your account an administrator has to approve it. You will be notified via email."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:388, ../profile-builder-2.0/features/admin-approval/admin-approval.php:180
+#: ../pb-add-on-social-connect/index.php:390, ../profile-builder-2.0/features/admin-approval/admin-approval.php:180
 msgid "<strong>ERROR</strong>: Your account has to be confirmed by an administrator before you can log in."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:389
+#: ../pb-add-on-social-connect/index.php:391
 msgid "You will be redirected in 5 seconds. If not, click %%."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:390, ../profile-builder-2.0/features/functions.php:1059
+#: ../pb-add-on-social-connect/index.php:392, ../profile-builder-2.0/features/functions.php:1060
 msgid "here"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:391
+#: ../pb-add-on-social-connect/index.php:393
 msgid "<strong>You can only login with social accounts, not register!</strong><br>Please link your social account to an existing user account first."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:392
+#: ../pb-add-on-social-connect/index.php:394
 msgid "Wrong password!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:393
+#: ../pb-add-on-social-connect/index.php:395
 msgid "Please enter a valid email!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:394
+#: ../pb-add-on-social-connect/index.php:396
 msgid "You can only login on this form.<br>Register with your social account on the register form."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:400, ../pb-add-on-social-connect/index.php:401
+#: ../pb-add-on-social-connect/index.php:402, ../pb-add-on-social-connect/index.php:403
 msgid "Please enter your Facebook email!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:413
+#: ../pb-add-on-social-connect/index.php:415
 msgid "Waiting for Twitter..."
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:414, ../pb-add-on-social-connect/index.php:415
+#: ../pb-add-on-social-connect/index.php:416, ../pb-add-on-social-connect/index.php:417
 msgid "Please enter your Twitter email!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:695
+#: ../pb-add-on-social-connect/index.php:697
 msgid "Profile Builder not active!"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:832, ../profile-builder-2.0/admin/admin-functions.php:37, ../profile-builder-2.0/admin/general-settings.php:8
+#: ../pb-add-on-social-connect/index.php:834, ../profile-builder-2.0/admin/admin-functions.php:37, ../profile-builder-2.0/admin/general-settings.php:8
 msgid "General Settings"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:836
+#: ../pb-add-on-social-connect/index.php:838
 msgid "Application Settings"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:840
+#: ../pb-add-on-social-connect/index.php:842
 msgid "Appearance Settings"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:904
+#: ../pb-add-on-social-connect/index.php:906
 msgid "Unlink"
 msgstr ""
 
-#: ../pb-add-on-social-connect/index.php:911
+#: ../pb-add-on-social-connect/index.php:913
 msgid "Your account is linked with:"
 msgstr ""
 
@@ -937,11 +945,11 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: ../pb-add-on-woocommerce/billing-fields.php:6, ../pb-add-on-woocommerce/shipping-fields.php:6, ../profile-builder-2.0/admin/manage-fields.php:246, includes/views/view-fields.php:166
+#: ../pb-add-on-woocommerce/billing-fields.php:6, ../pb-add-on-woocommerce/shipping-fields.php:6, ../profile-builder-2.0/admin/manage-fields.php:246, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:127
 msgid "First Name"
 msgstr ""
 
-#: ../pb-add-on-woocommerce/billing-fields.php:7, ../pb-add-on-woocommerce/shipping-fields.php:7, ../profile-builder-2.0/admin/manage-fields.php:247, includes/views/view-fields.php:172
+#: ../pb-add-on-woocommerce/billing-fields.php:7, ../pb-add-on-woocommerce/shipping-fields.php:7, ../profile-builder-2.0/admin/manage-fields.php:247, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:133
 msgid "Last Name"
 msgstr ""
 
@@ -1189,7 +1197,7 @@ msgstr ""
 msgid "Click to edit"
 msgstr ""
 
-#: ../pb-add-on-campaign-monitor-integration/admin/cmonitor-page.php:451, ../pb-add-on-mailchimp-integration/admin/mailchimp-page.php:171, ../profile-builder-2.0/features/functions.php:773, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:403, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:395
+#: ../pb-add-on-campaign-monitor-integration/admin/cmonitor-page.php:451, ../pb-add-on-mailchimp-integration/admin/mailchimp-page.php:171, ../profile-builder-2.0/features/functions.php:774, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:403, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:395
 msgid "Cancel"
 msgstr ""
 
@@ -1319,47 +1327,47 @@ msgstr ""
 msgid "The Campaign Monitor API key is either missing or is invalid."
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29
+#: admin/manage-fields.php:29
 msgid "Communication Preferences"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29, ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:9, ../profile-builder-2.0/admin/manage-fields.php:251, ../profile-builder-2.0/front-end/recover.php:119, includes/shortcodes/resend-activation.php:9, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:169, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:169, ../profile-builder-2.0/modules/user-listing/userlisting.php:117
+#: admin/manage-fields.php:29, front-end/gdpr-communication-preferences.php:9, ../profile-builder-2.0/admin/manage-fields.php:251, ../profile-builder-2.0/front-end/recover.php:119, ../pb-add-on-customization-toolbox/includes/shortcodes/resend-activation.php:9, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:169, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:169, ../profile-builder-2.0/modules/user-listing/userlisting.php:117
 msgid "E-mail"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29, ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:9
+#: admin/manage-fields.php:29, front-end/gdpr-communication-preferences.php:9
 msgid "Telephone"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29, ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:9
+#: admin/manage-fields.php:29, front-end/gdpr-communication-preferences.php:9
 msgid "SMS"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29, ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:9
+#: admin/manage-fields.php:29, front-end/gdpr-communication-preferences.php:9
 msgid "Post"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:29
+#: admin/manage-fields.php:29
 msgid "Select which communication preferences are available on your site ( drag and drop to re-order )"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:30
+#: admin/manage-fields.php:30
 msgid "Communication Preferences Order"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/admin/manage-fields.php:30
+#: admin/manage-fields.php:30
 msgid "Save the communication preferences order"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:44, ../pb-add-on-select2/front-end/select2-field.php:72, ../pb-add-on-select2/front-end/select2-multiple-field.php:87, ../profile-builder-2.0/front-end/extra-fields/avatar/avatar.php:74, ../profile-builder-2.0/front-end/extra-fields/checkbox/checkbox.php:46, ../profile-builder-2.0/front-end/extra-fields/colorpicker/colorpicker.php:45, ../profile-builder-2.0/front-end/extra-fields/datepicker/datepicker.php:40, ../profile-builder-2.0/front-end/extra-fields/input/input.php:30, ../profile-builder-2.0/front-end/extra-fields/input-email/input-email.php:30, ../profile-builder-2.0/front-end/extra-fields/input-hidden/input-hidden.php:34, ../profile-builder-2.0/front-end/extra-fields/input-url/input-url.php:30, ../profile-builder-2.0/front-end/extra-fields/map/map.php:51, ../profile-builder-2.0/front-end/extra-fields/number/number.php:30, ../profile-builder-2.0/front-end/extra-fields/phone/phone.php:39, ../profile-builder-2.0/front-end/extra-fields/radio/radio.php:44, ../profile-builder-2.0/front-end/extra-fields/select/select.php:51, ../profile-builder-2.0/front-end/extra-fields/select-cpt/select-cpt.php:58, ../profile-builder-2.0/front-end/extra-fields/select-multiple/select-multiple.php:47, ../profile-builder-2.0/front-end/extra-fields/select-timezone/select-timezone.php:49, ../profile-builder-2.0/front-end/extra-fields/textarea/textarea.php:30, ../profile-builder-2.0/front-end/extra-fields/upload/upload.php:70, ../profile-builder-2.0/front-end/extra-fields/wysiwyg/wysiwyg.php:33
+#: front-end/gdpr-communication-preferences.php:44, ../pb-add-on-select2/front-end/select2-field.php:72, ../pb-add-on-select2/front-end/select2-multiple-field.php:87, ../profile-builder-2.0/front-end/extra-fields/avatar/avatar.php:74, ../profile-builder-2.0/front-end/extra-fields/checkbox/checkbox.php:46, ../profile-builder-2.0/front-end/extra-fields/colorpicker/colorpicker.php:45, ../profile-builder-2.0/front-end/extra-fields/datepicker/datepicker.php:40, ../profile-builder-2.0/front-end/extra-fields/input/input.php:30, ../profile-builder-2.0/front-end/extra-fields/input-email/input-email.php:30, ../profile-builder-2.0/front-end/extra-fields/input-hidden/input-hidden.php:34, ../profile-builder-2.0/front-end/extra-fields/input-url/input-url.php:30, ../profile-builder-2.0/front-end/extra-fields/map/map.php:51, ../profile-builder-2.0/front-end/extra-fields/number/number.php:30, ../profile-builder-2.0/front-end/extra-fields/phone/phone.php:39, ../profile-builder-2.0/front-end/extra-fields/radio/radio.php:44, ../profile-builder-2.0/front-end/extra-fields/select/select.php:51, ../profile-builder-2.0/front-end/extra-fields/select-cpt/select-cpt.php:58, ../profile-builder-2.0/front-end/extra-fields/select-multiple/select-multiple.php:47, ../profile-builder-2.0/front-end/extra-fields/select-timezone/select-timezone.php:49, ../profile-builder-2.0/front-end/extra-fields/textarea/textarea.php:30, ../profile-builder-2.0/front-end/extra-fields/upload/upload.php:70, ../profile-builder-2.0/front-end/extra-fields/wysiwyg/wysiwyg.php:33
 msgid "required"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:68
+#: front-end/gdpr-communication-preferences.php:68
 msgid "Date"
 msgstr ""
 
-#: ../pb-add-on-gdpr-communication-preferences/front-end/gdpr-communication-preferences.php:68
+#: front-end/gdpr-communication-preferences.php:68
 msgid "Preference"
 msgstr ""
 
@@ -1559,12 +1567,12 @@ msgstr ""
 msgid "Sign in with Facebook"
 msgstr ""
 
-#: ../pb-add-on-social-connect/google/google.php:39
-msgid "Link with Google+"
+#: ../pb-add-on-social-connect/google/google.php:31
+msgid "Link with Google"
 msgstr ""
 
-#: ../pb-add-on-social-connect/google/google.php:45
-msgid "Sign in with Google+"
+#: ../pb-add-on-social-connect/google/google.php:37
+msgid "Sign in with Google"
 msgstr ""
 
 #: ../pb-add-on-social-connect/linkedin/linkedin.php:40
@@ -1575,19 +1583,19 @@ msgstr ""
 msgid "Sign in with LinkedIn"
 msgstr ""
 
-#: ../pb-add-on-social-connect/twitter/twitter.php:52
+#: ../pb-add-on-social-connect/twitter/twitter.php:53
 msgid "Connection with twitter Failed"
 msgstr ""
 
-#: ../pb-add-on-social-connect/twitter/twitter.php:57
+#: ../pb-add-on-social-connect/twitter/twitter.php:58
 msgid "Error Receiving Request Token"
 msgstr ""
 
-#: ../pb-add-on-social-connect/twitter/twitter.php:141
+#: ../pb-add-on-social-connect/twitter/twitter.php:142
 msgid "Link with Twitter"
 msgstr ""
 
-#: ../pb-add-on-social-connect/twitter/twitter.php:147
+#: ../pb-add-on-social-connect/twitter/twitter.php:148
 msgid "Sign in with Twitter"
 msgstr ""
 
@@ -1763,15 +1771,15 @@ msgstr ""
 msgid "Very weak"
 msgstr ""
 
-#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:280, ../profile-builder-2.0/features/functions.php:607, ../profile-builder-2.0/features/functions.php:631
+#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:280, ../profile-builder-2.0/features/functions.php:608, ../profile-builder-2.0/features/functions.php:632
 msgid "Weak"
 msgstr ""
 
-#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:281, ../profile-builder-2.0/features/functions.php:607, ../profile-builder-2.0/features/functions.php:631
+#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:281, ../profile-builder-2.0/features/functions.php:608, ../profile-builder-2.0/features/functions.php:632
 msgid "Medium"
 msgstr ""
 
-#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:282, ../profile-builder-2.0/features/functions.php:607, ../profile-builder-2.0/features/functions.php:631
+#: ../profile-builder-2.0/admin/admin-functions.php:137, ../profile-builder-2.0/admin/general-settings.php:282, ../profile-builder-2.0/features/functions.php:608, ../profile-builder-2.0/features/functions.php:632
 msgid "Strong"
 msgstr ""
 
@@ -2247,7 +2255,7 @@ msgstr ""
 msgid "Username and Email"
 msgstr ""
 
-#: ../profile-builder-2.0/admin/general-settings.php:249, ../profile-builder-2.0/admin/manage-fields.php:245, ../profile-builder-2.0/front-end/login.php:246, ../profile-builder-2.0/front-end/login.php:260, ../profile-builder-2.0/front-end/login.php:389, includes/views/view-fields.php:160, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:166, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:168, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:60, ../profile-builder-2.0/modules/email-customizer/email-customizer.php:28, ../profile-builder-2.0/modules/user-listing/userlisting.php:111, ../profile-builder-2.0/modules/user-listing/userlisting.php:303, ../profile-builder-2.0/modules/user-listing/userlisting.php:778, ../profile-builder-2.0/modules/user-listing/userlisting.php:2290
+#: ../profile-builder-2.0/admin/general-settings.php:249, ../profile-builder-2.0/admin/manage-fields.php:245, ../profile-builder-2.0/front-end/login.php:246, ../profile-builder-2.0/front-end/login.php:260, ../profile-builder-2.0/front-end/login.php:389, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:121, ../profile-builder-2.0/features/admin-approval/class-admin-approval.php:166, ../profile-builder-2.0/features/email-confirmation/class-email-confirmation.php:168, ../profile-builder-2.0/modules/custom-redirects/custom_redirects_admin.php:60, ../profile-builder-2.0/modules/email-customizer/email-customizer.php:28, ../profile-builder-2.0/modules/user-listing/userlisting.php:111, ../profile-builder-2.0/modules/user-listing/userlisting.php:303, ../profile-builder-2.0/modules/user-listing/userlisting.php:778, ../profile-builder-2.0/modules/user-listing/userlisting.php:2290
 msgid "Username"
 msgstr ""
 
@@ -4437,7 +4445,7 @@ msgstr ""
 msgid "We recommend \"<a href=\"%s\" target=\"_blank\">Custom Profile Menus</a>\" addon if you need different menu items for logged in / logged out users."
 msgstr ""
 
-#: ../profile-builder-2.0/admin/private-website.php:127, ../profile-builder-2.0/features/functions.php:766, includes/views/view-fields.php:217, includes/views/view-forms.php:303, includes/views/view-shortcodes.php:77, includes/views/view-userlisting.php:91, ../profile-builder-2.0/features/content-restriction/content-restriction.php:159, ../profile-builder-2.0/modules/class-mustache-templates/class-mustache-templates.php:390, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:402, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:394
+#: ../profile-builder-2.0/admin/private-website.php:127, ../profile-builder-2.0/features/functions.php:767, ../pb-add-on-customization-toolbox/includes/views/view-admin.php:47, ../pb-add-on-customization-toolbox/includes/views/view-fields.php:275, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:321, ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:77, ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:91, ../profile-builder-2.0/features/content-restriction/content-restriction.php:159, ../profile-builder-2.0/modules/class-mustache-templates/class-mustache-templates.php:390, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:402, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:394
 msgid "Save Changes"
 msgstr ""
 
@@ -4498,7 +4506,7 @@ msgid "The serial number couldn't be validated because process timed out. This i
 msgstr ""
 
 #: ../profile-builder-2.0/admin/register-version.php:87
-msgid "(e.g. RMPB-15-SN-253a55baa4fbe7bf595b2aabb8d72985)"
+msgid "(e.g. CLPB-15-SN-253a55baa4fbe7bf595b2aabb8d72985)"
 msgstr ""
 
 #: ../profile-builder-2.0/admin/register-version.php:243
@@ -4506,70 +4514,70 @@ msgid "<p>Your <strong>Profile Builder</strong> serial number is invalid or miss
 msgstr ""
 
 #: ../profile-builder-2.0/admin/register-version.php:246
-msgid "<p>Your <strong>Profile Builder</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now and get 40&#37; off %4$s %5$sDismiss%6$s</p>"
+msgid "<p>Your <strong>Profile Builder</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s %5$sDismiss%6$s</p>"
 msgstr ""
 
 #: ../profile-builder-2.0/admin/register-version.php:251
-msgid "<p>Your <strong>Profile Builder</strong> license is about to expire on %5$s. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now and get 40&#37; off %4$s %6$sDismiss%7$s</p>"
+msgid "<p>Your <strong>Profile Builder</strong> license is about to expire on %5$s. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s %6$sDismiss%7$s</p>"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:252
+#: ../profile-builder-2.0/features/functions.php:253
 msgid "GDPR Checkbox"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:252
+#: ../profile-builder-2.0/features/functions.php:253
 msgid "I allow the website to collect and store the data I submit through this form."
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:581
+#: ../profile-builder-2.0/features/functions.php:582
 msgid "Strength indicator"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:607, ../profile-builder-2.0/features/functions.php:631
+#: ../profile-builder-2.0/features/functions.php:608, ../profile-builder-2.0/features/functions.php:632
 msgid "Very Weak"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:621
+#: ../profile-builder-2.0/features/functions.php:622
 msgid "Minimum length of %d characters."
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:632
+#: ../profile-builder-2.0/features/functions.php:633
 msgid "The password must have a minimum strength of %s."
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:709
+#: ../profile-builder-2.0/features/functions.php:710
 msgid "This field is required"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:747, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:461, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:470, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:523, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:568
+#: ../profile-builder-2.0/features/functions.php:748, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:463, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:472, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:525, ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:570
 msgid "Please enter a (valid) reCAPTCHA value"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:754
+#: ../profile-builder-2.0/features/functions.php:755
 msgid "Incorrect phone number"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:794, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:444, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:436
+#: ../profile-builder-2.0/features/functions.php:795, ../pb-add-on-labels-edit/assets/lib/wck-api/wordpress-creation-kit.php:444, ../profile-builder-2.0/assets/lib/wck-api/wordpress-creation-kit.php:436
 msgid "Content"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:961
+#: ../profile-builder-2.0/features/functions.php:962
 msgid "<br><br>Also, you will be able to visit your site at "
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:974
+#: ../profile-builder-2.0/features/functions.php:975
 msgid "<br><br>You can visit your site at "
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:1060
+#: ../profile-builder-2.0/features/functions.php:1061
 msgid "You will soon be redirected automatically. If you see this page for more than %1$d seconds, please click %2$s.%3$s"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:1185
+#: ../profile-builder-2.0/features/functions.php:1191
 msgid "No feed available,please visit our <a href=\"%s\">homepage</a>!"
 msgstr ""
 
-#: ../profile-builder-2.0/features/functions.php:1220
+#: ../profile-builder-2.0/features/functions.php:1226
 msgid "You are not currently logged in."
 msgstr ""
 
@@ -4865,331 +4873,379 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: includes/fields/restricted-words.php:24, includes/forms/restricted-email-domains.php:19, includes/forms/restricted-email-domains.php:24
+#: ../pb-add-on-customization-toolbox/includes/fields/restricted-words.php:24, ../pb-add-on-customization-toolbox/includes/forms/restricted-email-domains.php:19, ../pb-add-on-customization-toolbox/includes/forms/restricted-email-domains.php:24
 msgid "$validation_message"
 msgstr ""
 
-#: includes/fields/send-credentials-text.php:12
+#: ../pb-add-on-customization-toolbox/includes/fields/send-credentials-text.php:12
 msgid "$text"
 msgstr ""
 
-#: includes/fields/unique-display-name.php:19
+#: ../pb-add-on-customization-toolbox/includes/fields/unique-display-name.php:19
 msgid "This display name is already in use. Please choose another one."
 msgstr ""
 
-#: includes/shortcodes/resend-activation.php:5
+#: ../pb-add-on-customization-toolbox/includes/shortcodes/resend-activation.php:5
 msgid "Resend activation email"
 msgstr ""
 
-#: includes/views/view-fields.php:14
+#: ../pb-add-on-customization-toolbox/includes/views/view-admin.php:14
+msgid "Allow users with the 'delete_users' capability to view the Admin Approval list"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-admin.php:23
+msgid "By checking this option, you will allow users that have the 'delete_users' capability to access and use the Admin Approval list."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-admin.php:30
+msgid "Allow users with the 'delete_users' capability to view the list of Unconfirmed Emails"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-admin.php:39
+msgid "By checking this option, you will allow users that have the 'delete_users' capability to see the list of Unconfirmed Email Addresses."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:14
 msgid "Automatically generate password for users"
 msgstr ""
 
-#: includes/views/view-fields.php:23
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:23
 msgid "By checking this option, the password will be automatically generated and emailed to the user."
 msgstr ""
 
-#: includes/views/view-fields.php:30
-msgid "Modify `Send Credentials` checkbox"
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:30
+msgid "Modify 'Send Credentials' checkbox"
 msgstr ""
 
-#: includes/views/view-fields.php:34
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:34
 msgid "Hidden and checked"
 msgstr ""
 
-#: includes/views/view-fields.php:39
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:39
 msgid "Field text:"
 msgstr ""
 
-#: includes/views/view-fields.php:49
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:49
 msgid "By default, the user needs to choose if he wants to receive a registration email."
 msgstr ""
 
-#: includes/views/view-fields.php:52
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:52
 msgid "By checking the <strong>Hidden and checked</strong> option, the field won't be shown and the message will always be sent to the user."
 msgstr ""
 
-#: includes/views/view-fields.php:55
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:55
 msgid "If you choose to show the field, you can modify the default text by entering something in the field from above."
 msgstr ""
 
-#: includes/views/view-fields.php:67
-msgid "Hide Repeater Fields from the back-end profile page"
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:62
+msgid "Redirect users to a page if they have empty required fields"
 msgstr ""
 
-#: includes/views/view-fields.php:76
-msgid "Repeater Fields from Profile Builder do not work on the back-end user profile page, they are just displayed. If you want to remove them completely, you can use this option."
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:71
+msgid "Redirect Page:"
 msgstr ""
 
-#: includes/views/view-fields.php:79
-msgid "You will still be able to use them from a front-end edit profile form."
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:91
+msgid "By activating this option, logged in users which have empty required fields on their profile will be redirected to the page you added above."
 msgstr ""
 
-#: includes/views/view-fields.php:87
-msgid "Unique `Display Name` for users"
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:94
+msgid "For example, you can redirect these users to the Edit Profile form so they can add the missing info."
 msgstr ""
 
-#: includes/views/view-fields.php:96
-msgid "By checking this option, users will not be able to choose a <strong>Display Name</strong> that is already used by another account."
-msgstr ""
-
-#: includes/views/view-fields.php:103
-msgid "Always capitalize `First Name` and `Last Name` default fields"
-msgstr ""
-
-#: includes/views/view-fields.php:112
-msgid "If you have these fields in your forms, they will be always saved with the first letter as uppercase."
-msgstr ""
-
-#: includes/views/view-fields.php:115
-msgid "eg.: <strong>Jhon Doe</strong> instead of <strong>jhon doe</strong>"
-msgstr ""
-
-#: includes/views/view-fields.php:123
-msgid "Datepicker starts on Monday"
-msgstr ""
-
-#: includes/views/view-fields.php:132
-msgid "Will make all Datepickers use Monday as the first day of the week."
-msgstr ""
-
-#: includes/views/view-fields.php:140
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:101
 msgid "Ban certain words from being used in fields"
 msgstr ""
 
-#: includes/views/view-fields.php:147, includes/views/view-forms.php:21
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:108, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:21
 msgid "On"
 msgstr ""
 
-#: includes/views/view-fields.php:155
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:116
 msgid "Affected fields:"
 msgstr ""
 
-#: includes/views/view-fields.php:179
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:140
 msgid "Banned words:"
 msgstr ""
 
-#: includes/views/view-fields.php:198, includes/views/view-forms.php:66
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:159, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:66
 msgid "Error message:"
 msgstr ""
 
-#: includes/views/view-fields.php:209
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:170
 msgid "Allows you to define some words which users cannot use in their Username, First Name or Last Name when registering."
 msgstr ""
 
-#: includes/views/view-forms.php:14
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:177
+msgid "Unique 'Display Name' for users"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:186
+msgid "By checking this option, users will not be able to choose a <strong>Display Name</strong> that is already used by another account."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:193
+msgid "Always capitalize 'First Name' and 'Last Name' default fields"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:202
+msgid "If you have these fields in your forms, they will be always saved with the first letter as uppercase."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:205
+msgid "eg.: <strong>John Doe</strong> instead of <strong>john doe</strong>"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:213
+msgid "Datepicker starts on Monday"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:222
+msgid "Will make all Datepickers use Monday as the first day of the week."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:236
+msgid "Hide Repeater Fields from the back-end profile page"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:245
+msgid "Repeater Fields from Profile Builder do not work on the back-end user profile page, they are just displayed. If you want to remove them completely, you can use this option."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:248
+msgid "You will still be able to use them from a front-end edit profile form."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:257
+msgid "Update database entries when changing meta key"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-fields.php:266
+msgid "If you activate this option, when changing the meta key of a field, existing entries from the database will be updated as well."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:14
 msgid "Allow or deny email domains from registering"
 msgstr ""
 
-#: includes/views/view-forms.php:29
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:29
 msgid "Type:"
 msgstr ""
 
-#: includes/views/view-forms.php:34
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:34
 msgid "Allow"
 msgstr ""
 
-#: includes/views/view-forms.php:40
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:40
 msgid "Deny"
 msgstr ""
 
-#: includes/views/view-forms.php:47
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:47
 msgid "Restricted domains:"
 msgstr ""
 
-#: includes/views/view-forms.php:77
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:77
 msgid "This option lets you allow registrations only from certain domains or deny registrations from certain domains."
 msgstr ""
 
-#: includes/views/view-forms.php:80
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:80
 msgid "You should add only the domain in the list from above. eg.: gmail.com"
 msgstr ""
 
-#: includes/views/view-forms.php:92
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:92
 msgid "Forms that should bypass Email Confirmation"
 msgstr ""
 
-#: includes/views/view-forms.php:119
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:119
 msgid "Users registering through any of the selected forms will not need to confirm their email address."
 msgstr ""
 
-#: includes/views/view-forms.php:127
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:128
+msgid "Disable Email Confirmation for Social Connect registrations"
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:137
+msgid "If checked, will allow users that register through the Social Connect add-on to bypass the Email Confirmation feature."
+msgstr ""
+
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:145
 msgid "Remember me checked by default"
 msgstr ""
 
-#: includes/views/view-forms.php:136
-msgid "Check the `Remember Me` checkbox on Login forms, by default."
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:154
+msgid "Check the 'Remember Me' checkbox on Login forms, by default."
 msgstr ""
 
-#: includes/views/view-forms.php:142
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:160
 msgid "Remove validation from back-end profile page"
 msgstr ""
 
-#: includes/views/view-forms.php:151
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:169
 msgid "When saving the back-end user profile, Profile Builder fields will not be validated anymore. eg.: bypass required attribute"
 msgstr ""
 
-#: includes/views/view-forms.php:162
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:180
 msgid "Always show edit other users dropdown"
 msgstr ""
 
-#: includes/views/view-forms.php:171
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:189
 msgid "For perfomance reasons, we disable the select if you have more than 5000 users on your website. This option lets you enable it again."
 msgstr ""
 
-#: includes/views/view-forms.php:179
-msgid "Consider `Anyone can Register` WordPress option"
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:197
+msgid "Consider 'Anyone can Register' WordPress option"
 msgstr ""
 
-#: includes/views/view-forms.php:189
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:207
 msgid "setting"
 msgstr ""
 
-#: includes/views/view-forms.php:191
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:209
 msgid "By default, Profile Builder ignores this %1$s. If you check this option, our registration form will consider it."
 msgstr ""
 
-#: includes/views/view-forms.php:199
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:217
 msgid "Modify default Redirect Delay timer"
 msgstr ""
 
-#: includes/views/view-forms.php:206
-msgid "This allows you to change the amount of seconds it takes for the <strong>`After Registration`</strong> redirect to happen."
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:224
+msgid "This allows you to change the amount of seconds it takes for the <strong>'After Registration'</strong> redirect to happen."
 msgstr ""
 
-#: includes/views/view-forms.php:209
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:227
 msgid "The default is 3 seconds. Leave empty if you do not want to change it."
 msgstr ""
 
-#: includes/views/view-forms.php:217
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:235
 msgid "Save Admin Approval status in usermeta"
 msgstr ""
 
-#: includes/views/view-forms.php:226
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:244
 msgid "By default, the Admin Approval status is saved as a custom taxonomy that is attached to the user."
 msgstr ""
 
-#: includes/views/view-forms.php:229
-msgid "If you check this option, the status will also be saved in the `*_usermeta` table under the <strong>wppb_approval_status</strong> meta name."
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:247
+msgid "If you check this option, the status will also be saved in the '*_usermeta' table under the <strong>wppb_approval_status</strong> meta name."
 msgstr ""
 
-#: includes/views/view-forms.php:238
-msgid "Redirect `/author` page if user is not approved"
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:256
+msgid "Redirect '/author' page if user is not approved"
 msgstr ""
 
-#: includes/views/view-forms.php:247
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:265
 msgid "By default, users placed in Admin Approval will not be able to login, but the Author pages will be accessible."
 msgstr ""
 
-#: includes/views/view-forms.php:250
-msgid "Using this option you can redirect these pages, sending users who try to toolboxess them to your home page."
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:268
+msgid "Using this option you can redirect these pages, sending users who try to access them to your home page."
 msgstr ""
 
-#: includes/views/view-forms.php:258
-msgid "Save `Last Login` date in usermeta"
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:276
+msgid "Save 'Last Login' date in usermeta"
 msgstr ""
 
-#: includes/views/view-forms.php:267
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:285
 msgid "By checking this option, each time a user logins, the date and time will be saved in the database."
 msgstr ""
 
-#: includes/views/view-forms.php:270
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:288
 msgid "The meta name for the field will be <strong>last_login_date</strong>."
 msgstr ""
 
-#: includes/views/view-forms.php:273, includes/views/view-forms.php:295
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:291, ../pb-add-on-customization-toolbox/includes/views/view-forms.php:313
 msgid "You can <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/manage-user-fields/#Manage_existing_custom_fields_with_Profile_Builder\" target=\"_blank\">create a field with this meta name</a> in Profile Builder to display it in the Userlisting or Edit Profile forms."
 msgstr ""
 
-#: includes/views/view-forms.php:280
-msgid "Save `Last Profile Update` date in usermeta"
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:298
+msgid "Save 'Last Profile Update' date in usermeta"
 msgstr ""
 
-#: includes/views/view-forms.php:289
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:307
 msgid "By checking this option, each time a modifies his profile the date and time will be saved in the database."
 msgstr ""
 
-#: includes/views/view-forms.php:292
+#: ../pb-add-on-customization-toolbox/includes/views/view-forms.php:310
 msgid "The meta name for the field will be <strong>last_profile_update_date</strong>."
 msgstr ""
 
-#: includes/views/view-shortcodes.php:12
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:12
 msgid "Enable Compare shortcode"
 msgstr ""
 
-#: includes/views/view-shortcodes.php:21
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:21
 msgid "You can read more info about this shortcode by following <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/developers-knowledge-base/shortcodes/compare-shortcode/\">this url</a>."
 msgstr ""
 
-#: includes/views/view-shortcodes.php:28
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:28
 msgid "Enable Usermeta shortcode"
 msgstr ""
 
-#: includes/views/view-shortcodes.php:37
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:37
 msgid "You can read more info about this shortcode by following <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/developers-knowledge-base/shortcodes/display-user-meta/\">this url</a>."
 msgstr ""
 
-#: includes/views/view-shortcodes.php:44
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:44
 msgid "Enable Resend Activation Email shortcode"
 msgstr ""
 
-#: includes/views/view-shortcodes.php:53
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:53
 msgid "You can read more info about this shortcode by following <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/developers-knowledge-base/shortcodes/resend-confirmation-email/\">this url</a>."
 msgstr ""
 
-#: includes/views/view-shortcodes.php:60
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:60
 msgid "Enable Format Date shortcode"
 msgstr ""
 
-#: includes/views/view-shortcodes.php:69
+#: ../pb-add-on-customization-toolbox/includes/views/view-shortcodes.php:69
 msgid "You can read more info about this shortcode by following <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/developers-knowledge-base/shortcodes/format-date-shortcode/\">this url</a>."
 msgstr ""
 
-#: includes/views/view-userlisting.php:12
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:12
 msgid "Change placeholder text for Search box"
 msgstr ""
 
-#: includes/views/view-userlisting.php:19
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:19
 msgid "This refers to the placeholder text from the <strong>{{{extra_search_all_fields}}}</strong> tag."
 msgstr ""
 
-#: includes/views/view-userlisting.php:22
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:22
 msgid "Default text is <strong>Search Users by All Fields</strong>, use this option to change it to something else. Leave empty if you do not want to change it."
 msgstr ""
 
-#: includes/views/view-userlisting.php:29
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:29
 msgid "Modify base URL for Single Userlisting"
 msgstr ""
 
-#: includes/views/view-userlisting.php:37
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:37
 msgid "By default Single Userlisting URLs contain the word <strong>user</strong>. eg.: "
 msgstr ""
 
-#: includes/views/view-userlisting.php:42
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:42
 msgid "Using this option, you can change the word <strong>user</strong> to something else. Leave empty if you do not want to change it."
 msgstr ""
 
-#: includes/views/view-userlisting.php:49
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:49
 msgid "Make the Single Userlisting URLs work with user nicename"
 msgstr ""
 
-#: includes/views/view-userlisting.php:59
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:59
 msgid "By default Single Userlisting URLs are generated using the users ID. eg.: "
 msgstr ""
 
-#: includes/views/view-userlisting.php:64
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:64
 msgid "With this option activated, the URLs will be generated using the users <strong>nicename</strong>."
 msgstr ""
 
-#: includes/views/view-userlisting.php:71
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:71
 msgid "Remove repetition counts from Faceted Menus"
 msgstr ""
 
-#: includes/views/view-userlisting.php:80
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:80
 msgid "The number of users that share a particular value is shown for the Select and Checkbox facet types."
 msgstr ""
 
-#: includes/views/view-userlisting.php:83
+#: ../pb-add-on-customization-toolbox/includes/views/view-userlisting.php:83
 msgid "If you enable this option they will be hidden."
 msgstr ""
 
@@ -5349,7 +5405,7 @@ msgstr ""
 msgid "Conditional Rules"
 msgstr ""
 
-#: ../profile-builder-2.0/features/conditional-fields/conditional-fields.php:458
+#: ../profile-builder-2.0/features/conditional-fields/conditional-fields.php:456
 msgid "This field has conditional logic enabled."
 msgstr ""
 
@@ -6781,15 +6837,15 @@ msgstr ""
 msgid "To use reCAPTCHA you must get an API key from"
 msgstr ""
 
-#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:176
+#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:178
 msgid "For security reasons, you must pass the remote ip to reCAPTCHA!"
 msgstr ""
 
-#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:241
+#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:243
 msgid "To use reCAPTCHA you must get an API public key from:"
 msgstr ""
 
-#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:523
+#: ../profile-builder-2.0/front-end/default-fields/recaptcha/recaptcha.php:525
 msgid "Click the BACK button on your browser, and try again."
 msgstr ""
 

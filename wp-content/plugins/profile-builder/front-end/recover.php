@@ -222,7 +222,7 @@ function wppb_front_end_password_recovery(){
                 $requestedUserID = $query[0]->ID;
                 $requestedUserLogin = $query[0]->user_login;
                 $requestedUserEmail = $query[0]->user_email;
-                $requestedUserNicename = $query[0]->user_nicename;
+                $urlUsername = rawurlencode( $query[0]->user_login );
 
                 if( $wppb_generalSettings['loginWith'] == 'username' || $wppb_generalSettings['loginWith'] == 'usernameemail' )
                     $display_username_email = $query[0]->user_login;
@@ -233,7 +233,7 @@ function wppb_front_end_password_recovery(){
                 $key = wppb_retrieve_activation_key( $requestedUserLogin );
 
                 //send primary email message
-                $recoveruserMailMessage1  = sprintf( __('Someone requested that the password be reset for the following account: <b>%1$s</b><br/>If this was a mistake, just ignore this email and nothing will happen.<br/>To reset your password, visit the following link:%2$s', 'profile-builder'), $display_username_email, '<a href="'.esc_url( add_query_arg( array( 'loginName' => $requestedUserNicename, 'key' => $key ), wppb_curpageurl() ) ).'">'.esc_url( add_query_arg( array( 'loginName' => $requestedUserNicename, 'key' => $key ), wppb_curpageurl() ) ).'</a>');
+                $recoveruserMailMessage1  = sprintf( __('Someone requested that the password be reset for the following account: <b>%1$s</b><br/>If this was a mistake, just ignore this email and nothing will happen.<br/>To reset your password, visit the following link:%2$s', 'profile-builder'), $display_username_email, '<a href="'.esc_url( add_query_arg( array( 'loginName' => $urlUsername, 'key' => $key ), wppb_curpageurl() ) ).'">'.esc_url( add_query_arg( array( 'loginName' => $urlUsername, 'key' => $key ), wppb_curpageurl() ) ).'</a>' );
                 $recoveruserMailMessage1  = apply_filters( 'wppb_recover_password_message_content_sent_to_user1', $recoveruserMailMessage1, $requestedUserID, $requestedUserLogin, $requestedUserEmail );
 
                 $recoveruserMailMessageTitle1 = sprintf(__('Password Reset from "%1$s"', 'profile-builder'), $blogname = get_option('blogname') );

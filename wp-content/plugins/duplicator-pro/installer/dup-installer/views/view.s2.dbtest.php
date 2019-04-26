@@ -76,7 +76,7 @@ defined("DUPXABSPATH") or die("");
 					</ul>
 				</li>
 				<li>If using the 'Basic' option then try using the <a href="javascript:void(0)" onclick="DUPX.togglePanels('cpanel')">'cPanel'</a> option.</li>
-				<li><i class="fa fa-file-code-o"> </i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
+				<li><i class="far fa-file-code"> </i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
 			</ul>
 		</div>
 
@@ -97,7 +97,7 @@ defined("DUPXABSPATH") or die("");
 			<div class="sub-title">TROUBLESHOOT</div>
 			<ul>
 				<li>Contact your host and have them upgrade your MySQL server.</li>
-				<li><i class="fa fa-file-code-o"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
+				<li><i class="far fa-file-code"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
 			</ul>
 		</div>
 
@@ -127,7 +127,7 @@ defined("DUPXABSPATH") or die("");
 						</ul>
 					</li>
 					<li>If using the 'Basic' option then try using the <a href="javascript:void(0)" onclick="DUPX.togglePanels('cpanel')">'cPanel'</a> option.</li>
-					<li><i class="fa fa-file-code-o"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
+					<li><i class="far fa-file-code"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
 				</ul>
 
 			</div>
@@ -167,7 +167,7 @@ defined("DUPXABSPATH") or die("");
 							<li><i class="fa fa-video-camera"></i> <a href="https://www.youtube.com/watch?v=CHwxXGPnw48" target="_video">Add database user in cPanel newer versions</a></li>
 						</ul>
 					</li>
-					<li><i class="fa fa-file-code-o"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
+					<li><i class="far fa-file-code"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
 				</ul>
 			</div>
 		{{/if_neq}}
@@ -224,7 +224,7 @@ defined("DUPXABSPATH") or die("");
 							<li><i class="fa fa-video-camera"></i> <a href="https://www.youtube.com/watch?v=FfX-B-h3vo0" target="_video">How to grant user privileges in phpMyAdmin</a></li>
 						</ul>
 					</li>
-				<li><i class="fa fa-file-code-o"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
+				<li><i class="far fa-file-code"></i> <a href='{{{faqURL}}}#faq-installer-100-q' target='_help'>I'm running into issues with the Database what can I do?</a></li>
 			</ul>
 		</div>
 
@@ -260,7 +260,7 @@ defined("DUPXABSPATH") or die("");
 
 			<div class="sub-title">TROUBLESHOOT</div>
 			<ul>
-				<li><i class="fa fa-file-code-o"></i> <a href='{{{faqURL}}}#faq-installer-110-q' target='_help'>What is Compatibility mode & 'Unknown Collation' errors?</a></li>
+				<li><i class="far fa-file-code"></i> <a href='{{{faqURL}}}#faq-installer-110-q' target='_help'>What is Compatibility mode & 'Unknown Collation' errors?</a></li>
 			</ul>
 
 		</div>
@@ -358,7 +358,7 @@ DUPX.testDBConnect = function ()
 	}
 
 	$dbArea.show(250);
-	$dbResult.html("<div class='message'><i class='fa fa-circle-o-notch fa-spin fa-fw'></i>Running Database Validation. <br/>  Please wait...</div>");
+	$dbResult.html("<div class='message'><i class='fa fa-circle-notch fa-spin fa-fw'></i>Running Database Validation. <br/>  Please wait...</div>");
 	$dbButton.attr('disabled', 'true');
 
 	if (document.location.href.indexOf('?') > -1) {
@@ -368,10 +368,26 @@ DUPX.testDBConnect = function ()
     }
 	$.ajax({
 		type: "POST",
+		dataType: "text",
 		timeout: 25000,
 		url: ajax_url,
 		data: $('#s2-input-form').serialize(),
-		success: function (data) {
+		success: function (respData, textStatus, xHr) {
+			try { 
+                var data = DUPX.parseJSON(respData); 
+            } catch(err) {
+                console.error(err);
+                console.error('JSON parse failed for response data: ' + respData);
+				var msg  = "<b>Error Processing Request</b> <br/> An error occurred while testing the database connection! Please Try Again...<br/> ";
+				msg		+= "<small>If the error persists contact your host for database connection requirements.</small><br/> ";
+				msg		+= "<small>Status details: " + textStatus + "</small>";
+				$dbResult.html("<div class='message dupx-fail'>" + msg + "</div>");
+				<?php if ($GLOBALS['DUPX_DEBUG']) : ?>
+					var jsonStr = JSON.stringify(data, null, 2);
+					$('#debug-dbtest-json').val(jsonStr);
+				<?php endif; ?>
+                return false; 
+            } 
 			DUPX.intTestDBResults(data, $dbResult);
 		},
 		error: function (data) {

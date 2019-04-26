@@ -30,10 +30,9 @@ class DUPX_MU
         // For non-main subsite we need to move around some tables and files
         $subsite_prefix = "{$base_prefix}{$subsite_id}_";
 
-        $escaped_subsite_prefix = self::escSQLSimple($subsite_prefix);
+        $subsite_table_names = self::getSubsiteTables($subsite_id, $dbh, $base_prefix);
 
         $all_table_names     = DUPX_DB::queryColumnToArray($dbh, "SHOW TABLES");
-        $subsite_table_names = DUPX_DB::queryColumnToArray($dbh, "SHOW TABLES LIKE '{$escaped_subsite_prefix}%'");
 
         DUPX_Log::info("####rename subsite tables to standalone. table names = ".print_r($subsite_table_names, true));
 
@@ -57,6 +56,17 @@ class DUPX_MU
             DUPX_DB::renameTable($dbh, $table_name, $new_table_name);
             DUPX_Log::info("####renamed $table_name $new_table_name");
         }
+    }
+
+    public static function getSubsiteTables($subsite_id, $dbh, $base_prefix) {
+        // For non-main subsite we need to move around some tables and files
+        $subsite_prefix = "{$base_prefix}{$subsite_id}_";
+
+        $escaped_subsite_prefix = self::escSQLSimple($subsite_prefix);
+
+        $subsite_table_names = DUPX_DB::queryColumnToArray($dbh, "SHOW TABLES LIKE '{$escaped_subsite_prefix}%'");
+
+        return $subsite_table_names;
     }
 
     // <editor-fold defaultstate="collapsed" desc="PRIVATE METHODS">
@@ -431,7 +441,7 @@ class DUPX_MU
     // Purge all subsite tables other than the one indicated by $retained_subsite_id
     private static function purgeMultisiteTables($dbh, $base_prefix)
     {
-        $multisite_table_names = array('blogs', 'blog_versions', 'registration_log', 'signups', 'site', 'sitemeta');
+        $multisite_table_names = array('blogs', 'blog_versions', 'blogmeta', 'registration_log', 'signups', 'site', 'sitemeta');
 
         // Remove multisite specific tables
         foreach ($multisite_table_names as $multisite_table_name) {

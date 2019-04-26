@@ -1,8 +1,8 @@
-# Copyright (C) 2019 WooCommerce Variation Gallery
-# This file is distributed under the same license as the WooCommerce Variation Gallery package.
+# Copyright (C) 2019 Additional Variation Images Gallery
+# This file is distributed under the same license as the Additional Variation Images Gallery package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Variation Gallery\n"
+"Project-Id-Version: Additional Variation Images Gallery\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,112 +20,144 @@ msgstr ""
 msgid "Woo Variation Gallery Images"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:17
+#: ../includes/class-woo-variation-gallery-settings.php:17, ../includes/class-woo-variation-gallery-settings2.php:280
 msgid "WooCommerce Variation Gallery Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:18
+#: ../includes/class-woo-variation-gallery-settings.php:18, ../includes/class-woo-variation-gallery-settings2.php:281
 msgid "Gallery Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:30, ../includes/class-woo-variation-gallery-settings.php:48, ../woo-variation-gallery.php:451
+#: ../includes/class-woo-variation-gallery-settings.php:30, ../includes/class-woo-variation-gallery-settings.php:48, ../includes/class-woo-variation-gallery-settings2.php:13, ../woo-variation-gallery.php:453
 msgid "WooCommerce Variation Gallery"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:55
+#: ../includes/class-woo-variation-gallery-settings.php:55, ../includes/class-woo-variation-gallery-settings2.php:89
 msgid "Thumbnails Item"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:59
+#: ../includes/class-woo-variation-gallery-settings.php:59, ../includes/class-woo-variation-gallery-settings2.php:93
 msgid "Product Thumbnails Item Image"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:60
+#: ../includes/class-woo-variation-gallery-settings.php:60, ../includes/class-woo-variation-gallery-settings2.php:94
 msgid "Product Thumbnails Item Image. Default value is: %d. Limit: 2-8."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:70
+#: ../includes/class-woo-variation-gallery-settings.php:70, ../includes/class-woo-variation-gallery-settings2.php:105
 msgid "Thumbnails Gap"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:74
+#: ../includes/class-woo-variation-gallery-settings.php:74, ../includes/class-woo-variation-gallery-settings2.php:109
 msgid "Product Thumbnails Gap In Pixel"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:75
+#: ../includes/class-woo-variation-gallery-settings.php:75, ../includes/class-woo-variation-gallery-settings2.php:110
 msgid "Product Thumbnails Gap In Pixel. Default value is: %d. Limit: 0-20."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:86, ../includes/class-woo-variation-gallery-settings.php:102, ../includes/class-woo-variation-gallery-settings.php:118, ../includes/class-woo-variation-gallery-settings.php:134
+#: ../includes/class-woo-variation-gallery-settings.php:86, ../includes/class-woo-variation-gallery-settings.php:102, ../includes/class-woo-variation-gallery-settings.php:118, ../includes/class-woo-variation-gallery-settings.php:134, ../includes/class-woo-variation-gallery-settings2.php:135, ../includes/class-woo-variation-gallery-settings2.php:151, ../includes/class-woo-variation-gallery-settings2.php:167, ../includes/class-woo-variation-gallery-settings2.php:183
 msgid "Gallery Width"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:90
+#: ../includes/class-woo-variation-gallery-settings.php:90, ../includes/class-woo-variation-gallery-settings2.php:139
 msgid "Slider gallery width in % for large devices."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:91
+#: ../includes/class-woo-variation-gallery-settings.php:91, ../includes/class-woo-variation-gallery-settings2.php:140
 msgid "Slider Gallery Width in %%. Default value is: %d. Limit: 10-100. Please check this <a target=\"_blank\" href=\"%s\">how to video to configure it.</a>"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:106
+#: ../includes/class-woo-variation-gallery-settings.php:106, ../includes/class-woo-variation-gallery-settings2.php:155
 msgid "Slider gallery width in px for medium devices, small desktop"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:107
+#: ../includes/class-woo-variation-gallery-settings.php:107, ../includes/class-woo-variation-gallery-settings2.php:156
 msgid "Slider gallery width in pixel for medium devices, small desktop. Default value is: 0. Limit: 0-1000. Media query (max-width : 992px)"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:122
+#: ../includes/class-woo-variation-gallery-settings.php:122, ../includes/class-woo-variation-gallery-settings2.php:171
 msgid "Slider gallery width in px for small devices, tablets"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:123
+#: ../includes/class-woo-variation-gallery-settings.php:123, ../includes/class-woo-variation-gallery-settings2.php:172
 msgid "Slider gallery width in pixel for medium devices, small desktop. Default value is: 720. Limit: 0-1000. Media query (max-width : 768px)"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:138
+#: ../includes/class-woo-variation-gallery-settings.php:138, ../includes/class-woo-variation-gallery-settings2.php:187
 msgid "Slider gallery width in px for extra small devices, phones"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:139
+#: ../includes/class-woo-variation-gallery-settings.php:139, ../includes/class-woo-variation-gallery-settings2.php:188
 msgid "Slider gallery width in pixel for extra small devices, phones. Default value is: 320. Limit: 0-1000. Media query (max-width : 480px)"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:151
+#: ../includes/class-woo-variation-gallery-settings.php:151, ../includes/class-woo-variation-gallery-settings2.php:199
 msgid "Gallery Bottom Gap"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:155
+#: ../includes/class-woo-variation-gallery-settings.php:155, ../includes/class-woo-variation-gallery-settings2.php:203
 msgid "Slider gallery gottom margin in pixel"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:156
+#: ../includes/class-woo-variation-gallery-settings.php:156, ../includes/class-woo-variation-gallery-settings2.php:204
 msgid "Slider gallery bottom margin in pixel. Default value is: %d. Limit: 10-100."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:166
+#: ../includes/class-woo-variation-gallery-settings.php:166, ../includes/class-woo-variation-gallery-settings2.php:52
 msgid "Reset Variation Gallery"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:169
+#: ../includes/class-woo-variation-gallery-settings.php:169, ../includes/class-woo-variation-gallery-settings2.php:55
 msgid "Always Reset Gallery After Variation Select"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:174
+#: ../includes/class-woo-variation-gallery-settings.php:174, ../includes/class-woo-variation-gallery-settings2.php:61
+msgid "Gallery Image Preload"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings.php:177, ../includes/class-woo-variation-gallery-settings2.php:64
+msgid "Variation Gallery Image Preload"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings.php:182, ../includes/class-woo-variation-gallery-settings2.php:215
 msgid "Preload Style"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:180
+#: ../includes/class-woo-variation-gallery-settings.php:188, ../includes/class-woo-variation-gallery-settings2.php:221
 msgid "Fade"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:181
+#: ../includes/class-woo-variation-gallery-settings.php:189, ../includes/class-woo-variation-gallery-settings2.php:222
 msgid "Blur"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:182
+#: ../includes/class-woo-variation-gallery-settings.php:190, ../includes/class-woo-variation-gallery-settings2.php:223
 msgid "Gray"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:28
+msgid "General"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:29
+msgid "Advanced"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:30
+msgid "Tutorials"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:44
+msgid "Advanced Options"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:81
+msgid "Thumbnail Options"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-settings2.php:127
+msgid "Gallery Options"
 msgstr ""
 
 #: ../includes/deactive-feedback-dialog.php:10
@@ -156,130 +188,138 @@ msgstr ""
 msgid "Upgrade to pro to add more images and videos"
 msgstr ""
 
-#: ../woo-variation-gallery.php:82
+#: ../includes/tutorials.php:6
+msgid "How to tutorials"
+msgstr ""
+
+#: ../includes/tutorials.php:43
+msgid "PRO"
+msgstr ""
+
+#: ../woo-variation-gallery.php:84
 msgid "It's a temporary deactivation."
 msgstr ""
 
-#: ../woo-variation-gallery.php:87
+#: ../woo-variation-gallery.php:89
 msgid "I couldn't understand how to make it work."
 msgstr ""
 
-#: ../woo-variation-gallery.php:89
+#: ../woo-variation-gallery.php:91
 msgid "It converts single variation image to multiple variation image gallery. <br><a target=\"_blank\" href=\"http://bit.ly/demo-dea-dilogue\">Please check live demo</a>."
 msgstr ""
 
-#: ../woo-variation-gallery.php:93
+#: ../woo-variation-gallery.php:95
 msgid "My Gallery looks <strong>too small</strong>."
 msgstr ""
 
-#: ../woo-variation-gallery.php:95
+#: ../woo-variation-gallery.php:97
 msgid "<a target=\"_blank\" href=\"http://bit.ly/video-tuts-for-deactivate-dialogue\">Please check this video to configure it.</a>."
 msgstr ""
 
-#: ../woo-variation-gallery.php:99
+#: ../woo-variation-gallery.php:101
 msgid "I no longer need the plugin"
 msgstr ""
 
-#: ../woo-variation-gallery.php:104
+#: ../woo-variation-gallery.php:106
 msgid "I found a better plugin"
 msgstr ""
 
-#: ../woo-variation-gallery.php:105
+#: ../woo-variation-gallery.php:107
 msgid "Please share which plugin"
 msgstr ""
 
-#: ../woo-variation-gallery.php:109
+#: ../woo-variation-gallery.php:111
 msgid "The plugin <strong>broke my layout</strong> or some functionality."
 msgstr ""
 
-#: ../woo-variation-gallery.php:111
+#: ../woo-variation-gallery.php:113
 msgid "<a target=\"_blank\" href=\"https://getwooplugins.com/tickets/\">Please open a support ticket</a>, we will fix it immediately."
 msgstr ""
 
-#: ../woo-variation-gallery.php:115
+#: ../woo-variation-gallery.php:117
 msgid "I need someone to <strong>setup this plugin.</strong>"
 msgstr ""
 
-#: ../woo-variation-gallery.php:116
+#: ../woo-variation-gallery.php:118
 msgid "Your email address."
 msgstr ""
 
-#: ../woo-variation-gallery.php:118
+#: ../woo-variation-gallery.php:120
 msgid "Please provide your email address to contact with you <br>and help you to setup and configure this plugin."
 msgstr ""
 
-#: ../woo-variation-gallery.php:122
+#: ../woo-variation-gallery.php:124
 msgid "The plugin is <strong>too complicated to configure.</strong>"
 msgstr ""
 
-#: ../woo-variation-gallery.php:124
+#: ../woo-variation-gallery.php:126
 msgid "<a target=\"_blank\" href=\"https://getwooplugins.com/documentation/woocommerce-variation-gallery/\">Have you checked our documentation?</a>."
 msgstr ""
 
-#: ../woo-variation-gallery.php:128
+#: ../woo-variation-gallery.php:130
 msgid "I need specific feature that you don't support."
 msgstr ""
 
-#: ../woo-variation-gallery.php:129
+#: ../woo-variation-gallery.php:131
 msgid "Please share with us."
 msgstr ""
 
-#: ../woo-variation-gallery.php:134
+#: ../woo-variation-gallery.php:136
 msgid "Other"
 msgstr ""
 
-#: ../woo-variation-gallery.php:135
+#: ../woo-variation-gallery.php:137
 msgid "Please share the reason"
 msgstr ""
 
-#: ../woo-variation-gallery.php:339
+#: ../woo-variation-gallery.php:342
 msgid "Quick Feedback"
 msgstr ""
 
-#: ../woo-variation-gallery.php:352
+#: ../woo-variation-gallery.php:355
 msgid "Choose Image"
 msgstr ""
 
-#: ../woo-variation-gallery.php:353
+#: ../woo-variation-gallery.php:356
 msgid "Add Images"
 msgstr ""
 
-#: ../woo-variation-gallery.php:426
+#: ../woo-variation-gallery.php:428
 msgid "Settings"
 msgstr ""
 
-#: ../woo-variation-gallery.php:433
+#: ../woo-variation-gallery.php:435
 msgid "Go Pro"
 msgstr ""
 
-#: ../woo-variation-gallery.php:451
+#: ../woo-variation-gallery.php:453
 msgid "Currently, you are using older version of WooCommerce. It's recommended to use latest version of WooCommerce to work with %s."
 msgstr ""
 
-#: ../woo-variation-gallery.php:459
+#: ../woo-variation-gallery.php:461
 msgid "Please check PHP version requirement."
 msgstr ""
 
-#: ../woo-variation-gallery.php:461
+#: ../woo-variation-gallery.php:463
 msgid "It's required to use latest version of PHP to use <strong>WooCommerce Variation Gallery</strong>."
 msgstr ""
 
-#: ../woo-variation-gallery.php:473
+#: ../woo-variation-gallery.php:475
 msgid "WooCommerce"
 msgstr ""
 
-#: ../woo-variation-gallery.php:481
+#: ../woo-variation-gallery.php:483
 msgid "<strong>WooCommerce Variation Gallery</strong> is an add-on of "
 msgstr ""
 
-#: ../woo-variation-gallery.php:542
+#: ../woo-variation-gallery.php:544
 msgid "Read Documentation"
 msgstr ""
 
-#: ../woo-variation-gallery.php:543
+#: ../woo-variation-gallery.php:545
 msgid "Facing issue?"
 msgstr ""
 
-#: ../woo-variation-gallery.php:543
+#: ../woo-variation-gallery.php:545
 msgid "Please open a support ticket."
 msgstr ""

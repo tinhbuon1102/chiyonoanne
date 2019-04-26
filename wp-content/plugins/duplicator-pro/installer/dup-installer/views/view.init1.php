@@ -75,7 +75,7 @@ VIEW: STEP 0 - PASSWORD -->
 			<label for="secure-pass">&nbsp; Enter Password</label>
 			<div id="i1-pass-input">
 				<input type="password" name="secure-pass" id="secure-pass" required="required" />
-				<button type="button" class="pass-toggle" id="secure-lock" onclick="DUPX.togglePassword()" title="Show/Hide the password"><i class="fa fa-eye"></i></button>
+				<button type="button" class="pass-toggle" id="secure-lock" onclick="DUPX.togglePassword()" title="Show/Hide the password"><i class="fas fa-eye fa-xs"></i></button>
 			</div>
             <button type="button" name="secure-btn" id="secure-btn" class="default-btn" onclick="DUPX.checkPassword()">Submit</button>
 		</div>
@@ -105,10 +105,10 @@ VIEW: STEP 0 - PASSWORD -->
 		var $input = $('#secure-pass');
 		var $lock  = $('#secure-lock');
 		if (($input).attr('type') == 'text') {
-			$lock.html('<i class="fa fa-eye"></i>');
+			$lock.html('<i class="fas fa-eye fa-xs"></i>');
 			$input.attr('type', 'password');
 		} else {
-			$lock.html('<i class="fa fa-eye-slash"></i>');
+			$lock.html('<i class="fas fa-eye-slash fa-xs"></i>');
 			$input.attr('type', 'text');
 		}
 	}

@@ -30,8 +30,9 @@ class wf_woocommerce_shipping_pro_method extends WC_Shipping_Method {
 		if(!empty($calc_per) && !empty($calc_min_max)) {
 			$calculation_mode = $calc_per."_".$calc_min_max;
 		}
-		$this->remove_free_text	   	= $this->get_option('remove_free_text');
+		$this->remove_free_text	   		= $this->get_option('remove_free_text');
 		$this->and_logic 				= $this->get_option('and_logic')== 'yes' ? true : false;
+		$this->strict_and_logic			= $this->get_option('strict_and_logic')== 'yes' ? true : false;
 		
 		$this->multiselect_act_class	=	'multiselect';
 		$this->drop_down_style	=	'chosen_select ';			
@@ -187,6 +188,13 @@ class wf_woocommerce_shipping_pro_method extends WC_Shipping_Method {
 				'default' 	  => 'no',
 				'description' => __( 'On enabling this, the calculation logic for "Shipping Class" and "Product Category" fields will follow AND logic. By default the plugin follows OR logic', 'wf_woocommerce_shipping_pro' ),
 				'label'	  =>  __( 'Enable', 'wf_woocommerce_shipping_pro' ),
+			),
+			'strict_and_logic'	=>	array(
+				'title'			=>	__( 'Strict Logic (AND)', 'wf_woocommerce_shipping_pro' ),
+				'type'			=>	'checkbox',
+				'default'		=>	'no',
+				'description'	=>	__( 'On enabling this, the plugin will calculate rates only for the Shiping Classes and Product Categories mentioned in the rule.', 'wf_woocommerce_shipping_pro'),
+				'label'			=>	__( 'Enable', 'wf_woocommerce_shipping_pro' ),
 			),
 			'displayed_columns' => array(
 				'title'	   => __( 'Display/Hide matrix columns', 'wf_woocommerce_shipping_pro' ),
@@ -351,7 +359,7 @@ class wf_woocommerce_shipping_pro_method extends WC_Shipping_Method {
 			$_product = $package_item['data'];
 			$total_weight += apply_filters( 'wf_shipping_pro_item_weight', (float) $_product->get_weight() * $package_item['quantity'], $package_item, $package_items );
 		}
-		return $total_weight;
+		return apply_filters('ph_shipping_pro_total_weight',$total_weight, $package_items);
 	}
 	
 	
@@ -500,7 +508,10 @@ class wf_woocommerce_shipping_pro_method extends WC_Shipping_Method {
 				if( isset($input_value[$item_id]) && is_array($input_value[$item_id]) ){
 					if( $this->and_logic && ($field_name == 'product_category' || $field_name == 'shipping_class' ) ){
 						// return $input_value[$item_id] == $rule_value; //If both arrays are equal, for strict AND logic.
-						return count(array_intersect($rule_value, $input_value[$item_id])) == count($rule_value);
+						$matched_shipping_class_or_prod_cat_count 	= count(array_intersect($rule_value, $input_value[$item_id]));
+						$rule_val_count								= count($rule_value);
+						$input_value_count							= count($input_value[$item_id]);
+						return $this->strict_and_logic ? ( $matched_shipping_class_or_prod_cat_count == $rule_val_count && $rule_val_count == $input_value_count ) : ( $matched_shipping_class_or_prod_cat_count == $rule_val_count );
 					}else{
 						return count( array_intersect($input_value[$item_id],$rule_value) ) > 0;
 					}
@@ -640,7 +651,7 @@ class wf_woocommerce_shipping_pro_method extends WC_Shipping_Method {
 						$method_id = preg_replace( '/[^A-Za-z0-9\-]/', '', $method_id ); //Omit unsupported charectors
 						$this->add_rate( array(
 										'id'		=> $this->id . ':' . $method_id,
-										'label'		=> apply_filters( 'wpml_translate_single_string', $method_cost['shipping_name'], 'wf_woocommerce_shipping_pro', 'shipping-method-title_'.$method_cost['shipping_name'] ),
+										'label'		=> apply_filters( 'ph_wc_shipping_pro_rate_label', $method_cost['shipping_name'] ),
 										'cost'		=> $method_cost['cost'],
 										'taxes'		=> '',
 										'calc_tax'	=> $this->calc_mode_strategy->wf_calc_tax()));

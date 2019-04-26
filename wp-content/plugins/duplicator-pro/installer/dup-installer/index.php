@@ -1,4 +1,5 @@
 <?php
+defined("DUPXABSPATH") or die("");
 $API['BaseRootPath'] =  str_ireplace('dup-installer', '', dirname(__FILE__));
 $API['BaseRootURL']  = '//' . $_SERVER['HTTP_HOST'] . str_ireplace('dup-installer', '', dirname($_SERVER['PHP_SELF']));
 

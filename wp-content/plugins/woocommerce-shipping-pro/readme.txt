@@ -1,6 +1,6 @@
 === WooCommerce Shipping Pro with Table Rate ===
 Contributors: WooForce / DaZ
-Version: 3.1.1
+Version: 3.1.3
 
 Tags: Shipping rates, Table Rates, WooCommerce, Wordpress
 Requires at least: 3.0.1

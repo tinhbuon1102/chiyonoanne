@@ -3,15 +3,20 @@
 	Plugin Name: WooCommerce Shipping Pro with Table Rate
 	Plugin URI: https://www.pluginhive.com/product/woocommerce-table-rate-shipping-pro-plugin/
 	Description: Intuitive Rule Based Shipping Plug-in for WooCommerce. Set shipping rates based on rules based by Country, State, Post Code, Product Category,Shipping Class and Weight.
-	Version: 3.1.1
+	Version: 3.1.3
 	Author: PluginHive
 	Author URI: https://www.pluginhive.com/about/
 	Copyright: 2014-2015 PluginHive.
 	WC requires at least: 2.6.0
-	WC tested up to: 3.4
+	WC tested up to: 3.5.7
 
 */
-    
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 function wf_shipping_pro_activatoin_check(){
     //check if basic version is there
     if ( is_plugin_active('weight-country-woocommerce-shipping/weight-country-woocommerce-shipping.php') ){
@@ -24,8 +29,8 @@ register_activation_hook( __FILE__, 'wf_shipping_pro_activatoin_check' );
 load_plugin_textdomain( 'wf_woocommerce_shipping_pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 require_once 'includes/class-ph-wc-shipping-pro-common.php';
-$active_plugins = Ph_WC_Shipping_Pro_Common::get_active_plugins();
-if (in_array( 'woocommerce/woocommerce.php', $active_plugins )) {	
+$wc_active = Ph_WC_Shipping_Pro_Common::is_plugin_active('woocommerce/woocommerce.php');
+if ( $wc_active ) {
 
     include( 'wf-shipping-pro-common.php' );
 	if ( is_admin() ) {

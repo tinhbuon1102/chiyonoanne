@@ -14,21 +14,21 @@ defined("ABSPATH") or die("");
 ARCHIVE
 ================================================================ -->
 <div class="details-title">
-	<i class="fa fa-file-archive-o"></i>&nbsp;<?php DUP_PRO_U::esc_html_e('Archive'); ?>
+	<i class="far fa-file-archive fa-sm"></i>&nbsp;<?php DUP_PRO_U::esc_html_e('Archive'); ?>
 	<sup class="dup-small-ext-type"><?php echo $global->get_archive_extension_type(); ?></sup>
-	<div class="dup-more-details" onclick="DupPro.Pack.showDetailsDlg()" title="<?php DUP_PRO_U::esc_attr_e('Show Scan Details');?>"><i class="fa fa-window-maximize"></i></div>
+	<div class="dup-more-details" onclick="DupPro.Pack.showDetailsDlg()" title="<?php DUP_PRO_U::esc_attr_e('Show Scan Details');?>"><i class="far fa-window-maximize"></i></div>
 </div>
 
 <div class="scan-header scan-item-first">
-	<i class="fa fa-files-o"></i>
+	<i class=""fa fa-files fa-sm"></i>
 	<?php DUP_PRO_U::esc_html_e("Files"); ?>
 	<div class="scan-header-details">
 		<div class="dup-scan-filter-status">
 			<?php
 				if ($archive_export_onlydb) {
-					echo '<i class="fa fa-filter"></i> '; DUP_PRO_U::esc_html_e('Database Only');
+					echo '<i class="fa fa-filter fa-sm"></i> '; DUP_PRO_U::esc_html_e('Database Only');
 				} elseif ($Package->Archive->FilterOn) {
-					echo '<i class="fa fa-filter"></i> '; DUP_PRO_U::esc_html_e('Enabled');
+					echo '<i class="fa fa-filter fa-sm"></i> '; DUP_PRO_U::esc_html_e('Enabled');
 				}
 			?>
 		</div>
@@ -41,7 +41,23 @@ ARCHIVE
 		<div class="dup-data-size-uncompressed"><?php DUP_PRO_U::esc_html_e("uncompressed"); ?></div>
 	</div>
 </div>
+<?php
+if ($global->skip_archive_scan) { ?>
+<div class="scan-item ">
+	<div class='title' onclick="DupPro.Pack.toggleScanItem(this);">
+		<div class="text"><i class="fa fa-caret-right"></i> <?php DUP_PRO_U::esc_html_e('File checks skipped');?></div>
+		<div id="skip-archive-scan-status"><div class="badge badge-warn"><?php DUP_PRO_U::esc_html_e("Notice"); ?></div></div>
+	</div>
+    <div class="info">
+        <?php DUP_PRO_U::esc_html_e("All file checks are skipped. This could cause problems during extraction if problematic files are included."); ?>
+        <br><br>
+        <b><?php DUP_PRO_U::esc_html_e("To enable, uncheck Packages > Advanced Settings > Scan File Checks > \"Skip\" to enable."); ?></b>
 
+    </div>
+</div>
+<?php
+} else {
+?>
 <!-- ======================
 SIZE CHECKS -->
 <div class="scan-item">
@@ -81,62 +97,38 @@ SIZE CHECKS -->
 				$hlptxt = sprintf(DUP_PRO_U::__('Files over %1$s are listed below. Larger files such as movies or zipped content can cause timeout issues on some budget hosts.  '
 					. 'If you are having issues creating a package try excluding the directory paths below or go back to Step 1 and add them.'),
 					DUP_PRO_U::byteSize(DUPLICATOR_PRO_SCAN_WARNFILESIZE));
+                $hlptxt .= "<br><br><b>".DUP_PRO_U::__('Right click on tree node to open the bulk actions menu').'</b>';
 			?>
 		</div>
-		<script id="hb-files-large" type="text/x-handlebars-template">
-			<div class="container">
+        <div id="hb-files-large-result" class="hb-files-style">
+            <div class="container">
 				<div class="hdrs">
 					<span style="font-weight:bold">
 						<?php DUP_PRO_U::esc_html_e('Quick Filters'); ?>
-						<sup><i class="fa fa-question-circle" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Large Files"); ?>" data-tooltip="<?php echo $hlptxt; ?>"></i></sup>
+						<sup><i class="fas fa-question-circle fa-sm" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Large Files"); ?>" data-tooltip="<?php echo $hlptxt; ?>"></i></sup>
 					</span>
 					<div class='hdrs-up-down'>
 						<i class="fa fa-caret-up fa-lg dup-nav-toggle" onclick="DupPro.Pack.toggleAllDirPath(this, 'hide')" title="<?php DUP_PRO_U::esc_attr_e("Hide All"); ?>"></i>
 						<i class="fa fa-caret-down fa-lg dup-nav-toggle" onclick="DupPro.Pack.toggleAllDirPath(this, 'show')" title="<?php DUP_PRO_U::esc_attr_e("Show All"); ?>"></i>
 					</div>
 				</div>
-				<div class="data">
-					<?php _duplicatorGetRootPath();	?>
-					{{#if ARC.FilterInfo.Files.Size}}
-						{{#each ARC.FilterInfo.TreeSize as |directory|}}
-							<div class="directory">
-								<i class="fa fa-caret-right fa-lg dup-nav" onclick="DupPro.Pack.toggleDirPath(this)"></i> &nbsp;
-								{{#if directory.iscore}}
-									<i class="fa fa-window-close-o  chk-off" title="<?php DUP_PRO_U::esc_attr_e('Core WordPress directories should not be filtered. Use caution when excluding files.'); ?>"></i>
-								{{else}}
-									<input type="checkbox" name="dir_paths[]" value="{{directory.dir}}" id="lf_dir_{{@index}}" onclick="DupPro.Pack.filesOff(this)" />
-								{{/if}}
-								<label for="lf_dir_{{@index}}" title="{{directory.dir}}">
-									<i class="size">[{{directory.size}}]</i> {{directory.sdir}}/
-								</label> <br/>
-								<div class="files">
-									{{#each directory.files as |file|}}
-										<input type="checkbox" name="file_paths[]" value="{{file.path}}" id="lf_file_{{directory.dir}}-{{@index}}" />
-										<label for="lf_file_{{directory.dir}}-{{@index}}" title="{{file.path}}">
-											<i class="size">[{{file.bytes}}]</i>	{{file.name}}
-										</label> <br/>
-									{{/each}}
-								</div>
-							</div>
-						{{/each}}
-					{{else}}
-						 <?php DUP_PRO_U::esc_html_e('No large files found during this scan.'); ?>
-					{{/if}}
-				</div>
+                <div class="data">
+                    <div id="hb-files-large-jstree"></div>
+                </div>
 			</div>
 			<div class="apply-btn">
 				<div class="apply-warn">
 					 <?php DUP_PRO_U::esc_html_e('*Checking a directory will exclude all items in that path recursively.'); ?>
 				</div>
-				<button type="button" class="button-small" onclick="DupPro.Pack.applyFilters(this, 'large')">
-					<i class="fa fa-filter"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
+				<button type="button" class="button-small duplicator-pro-quick-filter-btn" disabled="disabled" onclick="DupPro.Pack.applyFilters(this, 'large')">
+					<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
 				</button>
 				<button type="button" class="button-small" onclick="DupPro.Pack.showPathsDlg('large')" title="<?php DUP_PRO_U::esc_attr_e('Copy Paths to Clipboard');?>">
 					<i class="fa fa-clipboard" aria-hidden="true"></i>
 				</button>
 			</div>
-		</script>
-		<div id="hb-files-large-result" class="hb-files-style"></div>
+
+        </div>
 	</div>
 </div>
 
@@ -183,8 +175,8 @@ ADDON SITES -->
                 <div class="apply-warn">
                     <?php DUP_PRO_U::esc_html_e('*Checking a directory will exclude all items in that path recursively.'); ?>
                 </div>
-                <button type="button" class="button-small" onclick="DupPro.Pack.applyFilters(this, 'addon')">
-                    <i class="fa fa-filter"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
+                <button type="button" class="button-small duplicator-pro-quick-filter-btn" disabled="disabled" onclick="DupPro.Pack.applyFilters(this, 'addon')">
+                    <i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
                 </button>
             </div>
         </script>
@@ -202,68 +194,36 @@ NAME CHECKS -->
 	<div class="info">
 		<?php
 			DUP_PRO_U::esc_html_e('Unicode and special characters such as "*?><:/\|", can be problematic on some hosts.  ');
-            echo '<b>';
+            echo '<br><b>';
             DUP_PRO_U::esc_html_e('Only consider using this filter if the package build is failing. Select files that are not important to your site or you can migrate manually.');
             echo'</b>';
 			$txt = DUP_PRO_U::__('If this environment/system and the system where it will be installed are setup to support Unicode and long paths then these filters can be ignored.  '
 				. 'If you run into issues with creating or installing a package, then is recommended to filter these paths.');
+            $txt .= "<br><br><b>".DUP_PRO_U::__('Right click on tree node to open the bulk actions menu').'</b>';
 		?>
-		<script id="hb-files-utf8" type="text/x-handlebars-template">
-			<div class="container">
+        <div id="hb-files-utf8-result" class="hb-files-style">
+            <div class="container">
 				<div class="hdrs">
 					<span style="font-weight:bold"><?php DUP_PRO_U::esc_html_e('Quick Filters');?></span>
-						<sup><i class="fa fa-question-circle" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Name Checks"); ?>" data-tooltip="<?php echo $txt; ?>"></i></sup>
+						<sup><i class="fas fa-question-circle fa-sm" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Name Checks"); ?>" data-tooltip="<?php echo $txt; ?>"></i></sup>
 					<div class='hdrs-up-down'>
 						<i class="fa fa-caret-up fa-lg dup-nav-toggle" onclick="DupPro.Pack.toggleAllDirPath(this, 'hide')" title="<?php DUP_PRO_U::esc_attr_e("Hide All"); ?>"></i>
 						<i class="fa fa-caret-down fa-lg dup-nav-toggle" onclick="DupPro.Pack.toggleAllDirPath(this, 'show')" title="<?php DUP_PRO_U::esc_attr_e("Show All"); ?>"></i>
 					</div>
 				</div>
-				<div class="data">
-					<?php _duplicatorGetRootPath();	?>
-					{{#if  ARC.FilterInfo.TreeWarning}}
-						{{#each ARC.FilterInfo.TreeWarning as |directory|}}
-							<div class="directory">
-								{{#if directory.count}}
-									<i class="fa fa-caret-right fa-lg dup-nav" onclick="DupPro.Pack.toggleDirPath(this)"></i> &nbsp;
-								{{else}}
-									<i class="empty"></i>
-								{{/if}}
-
-								{{#if directory.iscore}}
-									<i class="fa fa-window-close-o  chk-off" title="<?php DUP_PRO_U::esc_attr_e('Core WordPress directories should not be filtered. Use caution when excluding files.'); ?>"></i>
-								{{else}}
-									<input type="checkbox" name="dir_paths[]" value="{{directory.dir}}" id="nc1_dir_{{@index}}" onclick="DupPro.Pack.filesOff(this)" />
-								{{/if}}
-
-								<label for="nc1_dir_{{@index}}" title="{{directory.dir}}">
-									<i class="count">({{directory.count}})</i>
-									{{directory.sdir}}/
-								</label> <br/>
-								<div class="files">
-									{{#each directory.files}}
-										<input type="checkbox" name="file_paths[]" value="{{path}}" id="warn_file_{{directory.dir}}-{{@index}}" />
-										<label for="warn_file_{{directory.dir}}-{{@index}}" title="{{path}}">
-											{{name}}
-										</label> <br/>
-									{{/each}}
-								</div>
-							</div>
-						{{/each}}
-					{{else}}
-						<?php DUP_PRO_U::esc_html_e('No file/directory name warnings found.');?>
-					{{/if}}
-				</div>
-			</div>
-			<div class="apply-btn">
-				<button type="button" class="button-small" onclick="DupPro.Pack.applyFilters(this, 'utf8')">
-					<i class="fa fa-filter"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
+                <div class="data">
+                    <div id="hb-files-utf8-jstree"></div>
+                </div>
+            </div>
+            <div class="apply-btn">
+				<button type="button" class="button-small duplicator-pro-quick-filter-btn" disabled="disabled" onclick="DupPro.Pack.applyFilters(this, 'utf8');">
+					<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
 				</button>
 				<button type="button" class="button-small" onclick="DupPro.Pack.showPathsDlg('utf8')" title="<?php DUP_PRO_U::esc_attr_e('Copy Paths to Clipboard');?>">
 					<i class="fa fa-clipboard" aria-hidden="true"></i>
 				</button>
 			</div>
-		</script>
-		<div id="hb-files-utf8-result" class="hb-files-style"></div>
+        </div>
 	</div>
 </div>
 
@@ -286,7 +246,7 @@ UNREADABLE FILES -->
 					<div class="directory">
 						{{#if ARC.UnreadableItems}}
 							{{#each ARC.UnreadableItems as |uitem|}}
-								<i class="fa fa-lock"></i> {{uitem}} <br/>
+								<i class="fa fa-lock fa-sm"></i> {{uitem}} <br/>
 							{{/each}}
 						{{else}}
                             <i>
@@ -301,7 +261,7 @@ UNREADABLE FILES -->
 					<div class="directory">
 						{{#if  ARC.RecursiveLinks}}
 							{{#each ARC.RecursiveLinks as |link|}}
-								<i class="fa fa-lock"></i> {{link}} <br/>
+								<i class="fa fa-lock fa-sm"></i> {{link}} <br/>
 							{{/each}}
 						{{else}}
 							<i>
@@ -318,19 +278,22 @@ UNREADABLE FILES -->
     </div>
 </div>
 
+<?php 
+}
+?>
 
 <!-- ================================================================
 DATABASE
 ================================================================ -->
 <div class="scan-header">
-	<i class="fa fa-table"></i>
+	<i class="fa fa-table fa-sm fa-sm"></i>
 	<?php DUP_PRO_U::esc_html_e("Database"); ?>
 	<div class="scan-header-details">
 		<small style="font-weight:normal; font-size:12px"><?php echo $legacy_sql_string ?></small>
 		<div class="dup-scan-filter-status">
 			<?php
 			if ($Package->Database->FilterOn) {
-				echo '<i class="fa fa-filter"></i> ';
+				echo '<i class="fa fa-filter fa-sm"></i> ';
 				DUP_PRO_U::esc_html_e('Enabled');
 			}
 			?>
@@ -433,7 +396,7 @@ DIALOG: Scan Results -->
 <div id="dup-archive-details" style="display:none">
 
 	<!-- PACKAGE -->
-	<h2><i class="fa fa-archive"></i> <?php DUP_PRO_U::esc_html_e('Package');?></h2>
+	<h2><i class="fa fa-archive fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Package');?></h2>
 	<div class="info">
 		<label><?php DUP_PRO_U::esc_html_e('Name');?>:</label> <?php echo esc_html($_POST['package-name']); ?><br/>
 		<label><?php DUP_PRO_U::esc_html_e('Notes');?>:</label> <?php echo strlen($_POST['package-notes']) ? esc_html($_POST['package-notes']) : DUP_PRO_U::__('- no notes -') ; ?> <br/>
@@ -441,7 +404,7 @@ DIALOG: Scan Results -->
 	</div><br/>
 
 	<!-- DATABASE -->
-	<h2><i class="fa fa-table"></i> <?php DUP_PRO_U::esc_html_e('Database');?></h2>
+	<h2><i class="fa fa-table fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Database');?></h2>
 	<div class="info">
 		<label><?php DUP_PRO_U::esc_html_e('Name:');?></label><?php echo esc_html(DB_NAME); ?> <br/>
 		<label><?php DUP_PRO_U::esc_html_e('Host:');?></label><?php echo esc_html(DB_HOST); ?> <br/>
@@ -451,7 +414,7 @@ DIALOG: Scan Results -->
 	
 	<!-- FILE FILTERS -->
 	<h2 style="border:none">
-		<i class="fa fa-filter"></i> <?php DUP_PRO_U::esc_html_e('File Filters');?>:
+		<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('File Filters');?>:
 		<small style="font-weight:none; font-style: italic">
 			<?php echo ($Package->Archive->FilterOn) ? DUP_PRO_U::__('Is currently enabled') : DUP_PRO_U::__('Is currently disabled') ;?>
 		</small>
@@ -525,7 +488,7 @@ DIALOG: PATHS COPY & PASTE -->
 	<textarea class="path-dirs"></textarea>
 	<br/><br/>
 
-	<b><i class="fa fa-files-o"></i> <?php DUP_PRO_U::esc_html_e('Files');?></b>
+	<b><i class=""fa fa-files fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Files');?></b>
 	<div class="copy-button">
 		<button type="button" class="button-small" onclick="DupPro.Pack.copyText(this, '#arc-paths-dlg textarea.path-files')">
 			<i class="fa fa-clipboard"></i> <?php DUP_PRO_U::esc_html_e('Click to Copy');?>
@@ -540,6 +503,9 @@ DIALOG: PATHS COPY & PASTE -->
 <script>
 jQuery(document).ready(function($)
 {
+    var utf8_tree = $('#hb-files-utf8-jstree').length ? $('#hb-files-utf8-jstree') : null;
+    var large_tree = $('#hb-files-large-jstree').length ? $('#hb-files-large-jstree') : null;
+
 	Handlebars.registerHelper('stripWPRoot', function(path) {
 		return  path.replace('<?php echo rtrim(DUPLICATOR_PRO_WPROOTPATH, "//") ?>', '');
 	});
@@ -561,14 +527,25 @@ jQuery(document).ready(function($)
 		return;
 	}
 
+    DupPro.Pack.FilterButton = {
+        loading : function (btn) {
+            $(btn).html('<i class="fas fa-circle-notch fa-spin"></i> <?php DUP_PRO_U::esc_html_e('Initializing Please Wait...');?>');
+            $(btn).prop('disabled' , true);
+            $('#dup-build-button').prop('disable' , true);
+        },
+        reset : function (btn) {
+            $(btn).html('<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>');
+            $(btn).prop('disabled' , true);
+            $('#dup-build-button').prop('disable' , false);
+        }
+    };
+
 	//Opens a dialog to show scan details
 	DupPro.Pack.showPathsDlg = function (type)
 	{
-		var id = (type == 'large') ? '#hb-files-large-result' : '#hb-files-utf8-result'
-		var dirFilters  = [];
-		var fileFilters = [];
-		$(id + " input[name='dir_paths[]']:checked").each(function()  {dirFilters.push($(this).val());});
-		$(id + " input[name='file_paths[]']:checked").each(function() {fileFilters.push($(this).val());});
+		var filters = DupPro.Pack.getFiltersLists(type);
+        var dirFilters  = filters.dir;
+		var fileFilters = filters.file;
 
 		var $dirs  = $('#dup-archive-paths textarea.path-dirs');
 		var $files = $('#dup-archive-paths textarea.path-files');
@@ -584,7 +561,7 @@ jQuery(document).ready(function($)
 		<?php $alert2->showAlert(); ?>
 
 		return;
-	}
+	};
 
 	//Toggles a directory path to show files
 	DupPro.Pack.toggleDirPath = function(item)
@@ -622,30 +599,63 @@ jQuery(document).ready(function($)
 		 }
 	}
 
-	DupPro.Pack.applyFilters = function(btn, type)
-	{
-		var $btn = $(btn);
-		$btn.html('<i class="fa fa-circle-o-notch fa-spin"></i> <?php DUP_PRO_U::esc_html_e('Initializing Please Wait...');?>');
-		$btn.attr('disabled', 'true');
-		$('#dup-build-button').removeAttr('disabled');
+    DupPro.Pack.getFiltersLists = function(type) {
+        var result = {
+            'dir' : [],
+            'file' : []
+        };
 
-		var id = '';
         switch(type){
             case 'large':
-                id = '#hb-files-large-result';
+                console.log(large_tree);
+                if (large_tree) {
+                    $.each(large_tree.jstree("get_checked",null,true), function(index, value){
+                        var original = large_tree.jstree(true).get_node(value).original;
+                        if (original.type.startsWith('folder')) {
+                            result.dir.push(original.fullPath);
+                        } else {
+                            result.file.push(original.fullPath);
+                        }
+                    });
+                }
                 break;
             case 'utf8':
-                id = '#hb-files-utf8-result';
+                if (utf8_tree) {
+                    $.each(utf8_tree.jstree("get_checked",null,true), function(index, value){
+                        var original = utf8_tree.jstree(true).get_node(value).original;
+                        if (original.type.startsWith('folder')) {
+                            result.dir.push(original.fullPath);
+                        } else {
+                            result.file.push(original.fullPath);
+                        }
+                    });
+                }
                 break;
             case 'addon':
-                id = '#hb-addon-sites-result';
+                var id = '#hb-addon-sites-result';
+                if ($(id).length) {
+                    $(id + " input[name='dir_paths[]']:checked").each(function()  {result.dir.push($(this).val());});
+                    $(id + " input[name='file_paths[]']:checked").each(function() {result.file.push($(this).val());});
+                }
                 break;
         }
-		var dirFilters  = [];
-		var fileFilters = [];
-		$(id + " input[name='dir_paths[]']:checked").each(function()  {dirFilters.push($(this).val());});
-		$(id + " input[name='file_paths[]']:checked").each(function() {fileFilters.push($(this).val());});
+        return result;
+    };
 
+	DupPro.Pack.applyFilters = function(btn, type)
+	{
+        var filterButton = btn;
+        var filters = DupPro.Pack.getFiltersLists(type);
+        var dirFilters  = filters.dir;
+		var fileFilters = filters.file;
+
+        if (dirFilters.length === 0 && fileFilters.length === 0) {
+            alert('No filter selected');
+            return false;
+        }
+
+        DupPro.Pack.FilterButton.loading(filterButton);
+	
 		var data = {
 			action: 'DUP_PRO_CTRL_Package_addQuickFilters',
 			nonce: '<?php echo wp_create_nonce('DUP_PRO_CTRL_Package_addQuickFilters'); ?>',
@@ -656,18 +666,167 @@ jQuery(document).ready(function($)
 		$.ajax({
 			type: "POST",
 			cache: false,
+			dataType: "text",
 			url: ajaxurl,
-			dataType: "json",
 			timeout: 100000,
 			data: data,
 			complete: function() { },
-			success:  function() {  DupPro.Pack.reRunScanner();},
+			success:  function(respData) {
+				try {
+                    var data = DupPro.parseJSON(respData);
+                } catch(err) {
+                    console.error(err);
+					console.error('JSON parse failed for response data: ' + respData);
+					console.log(respData);
+                	<?php $alert4->showAlert(); ?>
+					return false;
+				}
+               
+				DupPro.Pack.reRunScanner(function () {
+                    DupPro.Pack.FilterButton.reset(filterButton);
+                });
+			},
 			error: function(data) {
 				console.log(data);
                 <?php $alert4->showAlert(); ?>
 			}
 		});
-	}
+
+        return false;
+	};
+    
+    DupPro.Pack.treeContextMenu = function (node) {
+        var items = {};
+        if (node.type.startsWith('folder')) {
+            items = {
+                selectAll: { 
+                    label: "<?php DUP_PRO_U::esc_html_e('Select all childs files and folders'); ?>",
+                    action: function (obj) {
+                        $(obj.reference).parent().find('> .jstree-children .warning-node > .jstree-anchor:not(.jstree-checked) .jstree-checkbox')
+                            .each(function ()  {
+                                var _this = $(this);
+                                if (_this.parents('.selected-node').length === 0) {
+                                    _this.trigger('click');
+                                }
+                            });
+                    }
+                },
+                selectAllFiles: { 
+                    label: "<?php DUP_PRO_U::esc_html_e('Select only all childs files'); ?>",
+                    action: function (obj) {
+                        $(obj.reference).parent().find('> .jstree-children .file-node.warning-node > .jstree-anchor:not(.jstree-checked) .jstree-checkbox')
+                            .each(function ()  {
+                                var _this = $(this);
+                                if (_this.parents('.selected-node').length === 0) {
+                                    _this.trigger('click');
+                                }
+                            });
+                    }
+                },
+                unselectAll: { 
+                    label: "<?php DUP_PRO_U::esc_html_e('Unselect all childs elements'); ?>",
+                    action: function (obj) {
+                        $(obj.reference).parent().find('> .jstree-children .jstree-node > .jstree-anchor.jstree-checked .jstree-checkbox').trigger('click');
+                    }
+                }
+            };
+        }
+        return items;
+    };
+
+    DupPro.Pack.initTree = function(tree , data , filterBtn) {
+        var treeObj = tree;
+        var nameData =  data;
+
+        treeObj.jstree('destroy');
+        treeObj.jstree({
+            'core' : {
+                "check_callback": true,
+                'cache' : false,
+                //'data' : nameData,
+                "themes": {
+                    "name": "snap",
+                    "dots": true,
+                    "icons": true
+                },
+                'data' : {
+                    'url' : function (node) {                        
+                        var folder = (node.id === '#') ? '' : node.original.fullPath;
+                        return ajaxurl + '?' +
+                               'nonce=' + '<?php echo wp_create_nonce('duplicator_pro_get_folder_children'); ?>' + '&' +
+                               'action=' + 'duplicator_pro_get_folder_children'  + '&' +
+                               'folder=' + folder;
+                    },
+                    'data' : function (node) {
+                        console.log(node);
+                        return { 'id' : node.id };
+                    }
+                }
+            },
+            'types': {
+                "folder": {
+                    "icon": "jstree-icon jstree-folder",
+                    "li_attr" : {
+                      "class" : 'folder-node'
+                  }
+              },
+              "file": {
+                  "icon": "jstree-icon jstree-file",
+                  "li_attr" : {
+                      "class" : 'file-node'
+                  }
+              },
+              "info-text": {
+                  "icon": "jstree-noicon",
+                  "li_attr" : {
+                      "class" : 'info-node'
+                  }
+              }
+          },
+          "checkbox" : {
+              visible				: true, // a boolean indicating if checkboxes should be visible (can be changed at a later time using `show_checkboxes()` and `hide_checkboxes`). Defaults to `true`.
+              three_state			: false, // a boolean indicating if clicking anywhere on the node should act as clicking on the checkbox. Defaults to `true`.
+              whole_node			: false, // a boolean indicating if clicking anywhere on the node should act as clicking on the checkbox. Defaults to `true`.
+              keep_selected_style	: false, // a boolean indicating if the selected style of a node should be kept, or removed. Defaults to `true`.
+              cascade				: '',   // This setting controls how cascading and undetermined nodes are applied.
+                                          // If 'up' is in the string - cascading up is enabled, if 'down' is in the string - cascading down is enabled, if 'undetermined' is in the string - undetermined nodes will be used.
+                                          // If `three_state` is set to `true` this setting is automatically set to 'up+down+undetermined'. Defaults to ''./
+              tie_selection		: false, // This setting controls if checkbox are bound to the general tree selection or to an internal array maintained by the checkbox plugin. Defaults to `true`, only set to `false` if you know exactly what you are doing.
+              cascade_to_disabled : false, // This setting controls if cascading down affects disabled checkboxes
+              cascade_to_hidden   : false   //This setting controls if cascading down affects hidden checkboxes
+          },
+          "contextmenu" : {
+              "items" : DupPro.Pack.treeContextMenu
+          },
+          "plugins" : [
+              "checkbox",
+              "contextmenu",
+              "types",
+              //"dnd",
+              //"massload",
+              //"search",
+              //"sort",
+              //"state",
+              //"types",
+              //"unique",
+              //"wholerow",
+              "changed",
+              //"conditionalselect"
+          ]
+      }).on('check_node.jstree', function (e, data) {
+            treeObj.find('#' + data.node.id).addClass('selected-node');
+            filterBtn.prop("disabled", false);
+      }).on('uncheck_node.jstree' , function (e, data) {
+            treeObj.find('#' + data.node.id).removeClass('selected-node');
+            if (treeObj.jstree("get_selected").length === 0) {
+                filterBtn.prop("disabled", true);
+            }
+      }).on('ready.jstree', function () {
+            // insert data
+            tree.jstree(true).create_node(null, nameData);
+      });
+
+    };
 
 	DupPro.Pack.initArchiveFilesData = function(data)
 	{
@@ -683,38 +842,58 @@ jQuery(document).ready(function($)
 		$('#data-arc-fullcount').text(data.ARC.FullCount || errMsg);
 
 		//LARGE FILES
-		var template = $('#hb-files-large').html();
-		var templateScript = Handlebars.compile(template);
-		var html = templateScript(data);
-		$('#hb-files-large-result').html(html);
+        if ($("#hb-files-large-result").length) {
+            DupPro.Pack.initTree(
+                    large_tree ,
+                    data.ARC.FilterInfo.TreeSize ,
+                    $("#hb-files-large-result .duplicator-pro-quick-filter-btn")
+                    );
+        }
 
         //ADDON SITES
-        var template = $('#hb-addon-sites').html();
-        var templateScript = Handlebars.compile(template);
-        var html = templateScript(data);
-        $('#hb-addon-sites-result').html(html);
+        if ($("#hb-addon-sites").length) {
+            var template = $('#hb-addon-sites').html();
+            var templateScript = Handlebars.compile(template);
+            var html = templateScript(data);
+            $('#hb-addon-sites-result').html(html);
+        }
 
 		//NAME CHECKS
-		var template = $('#hb-files-utf8').html();
-		var templateScript = Handlebars.compile(template);
-		var html = templateScript(data);
-		$('#hb-files-utf8-result').html(html);
+        if ($("#hb-files-utf8-result").length) {
+            DupPro.Pack.initTree(
+                    utf8_tree ,
+                    data.ARC.FilterInfo.TreeWarning ,
+                    $("#hb-files-utf8-result .duplicator-pro-quick-filter-btn")
+                    );
+        }
 
         //UNREADABLE FILES
-        var template = $('#unreadable-files').html();
-        var templateScript = Handlebars.compile(template);
-        var html = templateScript(data);
-        $('#unreadable-files-result').html(html);
+        if ($("#unreadable-files").length) {
+            var template = $('#unreadable-files').html();
+            var templateScript = Handlebars.compile(template);
+            var html = templateScript(data);
+            $('#unreadable-files-result').html(html);
+        }
 
 
 		//SCANNER DETAILS: Dirs
-		var template = $('#hb-filter-file-list').html();
-		var templateScript = Handlebars.compile(template);
-		var html = templateScript(data);
-		$('div.hb-filter-file-list-result').html(html);
+        if ($("#hb-filter-file-list").length) {
+            var template = $('#hb-filter-file-list').html();
+            var templateScript = Handlebars.compile(template);
+            var html = templateScript(data);
+            $('div.hb-filter-file-list-result').html(html);
+        }
 
 		DupPro.UI.loadQtip();
+	};
 
-	}
+	$("#form-duplicator").on('change', "#hb-files-large-result input[type='checkbox'], #hb-files-utf8-result input[type='checkbox'], #hb-addon-sites-result input[type='checkbox']", function() {		
+		if ($("#hb-addon-sites-result input[type='checkbox']:checked").length) {
+			var addon_disabled_prop = false;
+		} else {
+			var addon_disabled_prop = true;
+		}
+		$("#hb-addon-sites-result .duplicator-pro-quick-filter-btn").prop("disabled", addon_disabled_prop);			
+	});
 });
 </script>

@@ -1,15 +1,15 @@
 <?php
 	/**
-	 * Plugin Name: WooCommerce Additional Variation Images Gallery
+	 * Plugin Name: Additional Variation Images Gallery for WooCommerce
 	 * Plugin URI: https://wordpress.org/plugins/woo-variation-gallery/
 	 * Description: Allows to insert multiple images for per variation to let visitors to see a different images when WooCommerce product variations are switched. Requires WooCommerce 3.2+
 	 * Author: Emran Ahmed
-	 * Version: 1.1.20
+	 * Version: 1.1.25
 	 * Domain Path: /languages
 	 * Requires at least: 4.8
-	 * Tested up to: 5.0
+	 * Tested up to: 5.1
 	 * WC requires at least: 3.2
-	 * WC tested up to: 3.5
+	 * WC tested up to: 3.6
 	 * Text Domain: woo-variation-gallery
 	 * Author URI: https://getwooplugins.com/
 	 */
@@ -20,7 +20,7 @@
 		
 		final class Woo_Variation_Gallery {
 			
-			protected        $_version  = '1.1.20';
+			protected        $_version  = '1.1.25';
 			protected static $_instance = null;
 			
 			public static function instance() {
@@ -33,6 +33,7 @@
 			
 			public function __construct() {
 				$this->constants();
+				$this->language();
 				$this->includes();
 				$this->hooks();
 				do_action( 'woo_variation_gallery_loaded', $this );
@@ -59,7 +60,8 @@
 			
 			public function includes() {
 				if ( $this->is_required_php_version() ) {
-					require_once $this->include_path( 'class-woo-variation-gallery-settings.php' );
+					// require_once $this->include_path( 'class-woo-variation-gallery-settings.php' );
+					require_once $this->include_path( 'class-woo-variation-gallery-settings2.php' );
 					require_once $this->include_path( 'functions.php' );
 					require_once $this->include_path( 'hooks.php' );
 					require_once $this->include_path( 'theme-supports.php' );
@@ -268,7 +270,7 @@
 				
 				
 				if ( wvg_is_ie11() ) {
-					wp_enqueue_script( 'bluebird', esc_url( "https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.2/bluebird{$suffix}.js" ), array(), '3.5.2' );
+					wp_enqueue_script( 'bluebird', $this->assets_uri( "/js/bluebird{$suffix}.js" ), array(), '3.5.3' );
 				}
 				
 				wp_enqueue_script( 'woo-variation-gallery-slider', esc_url( $this->assets_uri( "/js/slick{$suffix}.js" ) ), array( 'jquery' ), '1.8.1', true );
@@ -281,6 +283,7 @@
 					'gallery_reset_on_variation_change' => ( 'yes' === get_option( 'woo_variation_gallery_reset_on_variation_change', 'yes' ) ),
 					'enable_gallery_zoom'               => ( 'yes' === get_option( 'woo_variation_gallery_zoom', 'yes' ) ),
 					'enable_gallery_lightbox'           => ( 'yes' === get_option( 'woo_variation_gallery_lightbox', 'yes' ) ),
+					'enable_gallery_preload'            => ( 'yes' === get_option( 'woo_variation_gallery_image_preload', 'yes' ) ),
 					'enable_thumbnail_slide'            => false,
 					'gallery_thumbnails_columns'        => absint( get_option( 'woo_variation_gallery_thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ) ),
 					'is_vertical'                       => false,
@@ -330,7 +333,7 @@
 				$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 				
 				if ( ! apply_filters( 'stop_gwp_live_feed', false ) ) {
-					wp_enqueue_style( 'gwp-feed', esc_url( $this->feed_css_uri() ) );
+					wp_enqueue_style( 'gwp-feed', esc_url( $this->feed_css_uri() ), array( 'dashicons' ) );
 				}
 				
 				// GWP Admin Helper
@@ -377,7 +380,6 @@
 			
 			public function hooks() {
 				
-				add_action( 'init', array( $this, 'language' ) );
 				add_action( 'admin_notices', array( $this, 'php_requirement_notice' ) );
 				add_action( 'admin_notices', array( $this, 'wc_requirement_notice' ) );
 				add_action( 'admin_notices', array( $this, 'wc_version_requirement_notice' ) );
@@ -572,8 +574,9 @@
 				if ( get_option( 'activate-woo-variation-gallery' ) === 'yes' ) {
 					delete_option( 'activate-woo-variation-gallery' );
 					wp_safe_redirect( add_query_arg( array(
-						                                 'page' => 'wc-settings',
-						                                 'tab'  => 'woo-variation-gallery'
+						                                 'page'    => 'wc-settings',
+						                                 'tab'     => 'woo-variation-gallery',
+						                                 'section' => 'tutorials'
 					                                 ), admin_url( 'admin.php' ) ) );
 				}
 			}
@@ -710,26 +713,7 @@
 					return $feed_css_uri;
 				}
 				
-				$api_url = "https://api.github.com/repos/EmranAhmed/gwp-admin-notice/commits/master";
-				
-				if ( isset( $_GET[ 'raw_gwp_feed_css' ] ) ) {
-					delete_transient( "gwp_feed_css" );
-				}
-				
-				if ( false === ( $sha = get_transient( 'gwp_feed_css' ) ) ) {
-					$response = wp_remote_get( $api_url, $args = array(
-						'sslverify' => false,
-						'timeout'   => 60
-					) );
-					
-					if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) == 200 ) {
-						$body = json_decode( wp_remote_retrieve_body( $response ) );
-						$sha  = $body->sha;
-						set_transient( "gwp_feed_css", $sha, 3 * HOUR_IN_SECONDS );
-					}
-				}
-				
-				return sprintf( 'https://cdn.rawgit.com/EmranAhmed/gwp-admin-notice/%s/gwp-admin-notice%s.css', substr( $sha, 0, 8 ), $suffix );
+				return $this->assets_uri( "/css/gwp-admin-notice{$suffix}.css" );
 			}
 			
 			public function feed_close() {

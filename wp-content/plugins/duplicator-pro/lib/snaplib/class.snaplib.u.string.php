@@ -1,11 +1,13 @@
 <?php
+if (!defined("ABSPATH") && !defined("DUPXABSPATH")) 
+    die("");
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if(!class_exists('SnapLibStringU')) {
-class SnapLibStringU
+if(!class_exists('DupProSnapLibStringU')) {
+class DupProSnapLibStringU
 {
     public static function boolToString($b)
     {
@@ -57,7 +59,7 @@ class SnapLibStringU
             throw new Exception("Error decoding JSON");
         }
     }
-
+	
 	/**
      * Returns true if the $needle is found in the $haystack
      *

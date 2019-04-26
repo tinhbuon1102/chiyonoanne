@@ -72,6 +72,31 @@ class DUPX_U
     }
 
     /**
+     * Add replace strings to substitute old url to new url
+     * 1) no protocol old url to no protocol new url (es. //www.hold.url  => //www.new.url)
+     * 2) wrong protocol new url to right protocol new url (es. http://www.new.url => https://www.new.url)
+     *
+     * @param string $old
+     * @param string $new
+     */
+    public static function replacmentUrlOldToNew($old, $new)
+    {
+        //SEARCH WITH NO PROTOCOL: RAW "//"
+        $url_old_raw = str_ireplace(array('http://', 'https://'), '//', $old);
+        $url_new_raw = str_ireplace(array('http://', 'https://'), '//', $new);
+        self::queueReplacementWithEncodings($url_old_raw, $url_new_raw);
+        //FORCE NEW PROTOCOL "//"
+        $url_new_info   = parse_url($new);
+        $url_new_domain = $url_new_info['scheme'].'://'.$url_new_info['host'];
+        if ($url_new_info['scheme'] == 'http') {
+            $url_new_wrong_protocol = 'https://'.$url_new_info['host'];
+        } else {
+            $url_new_wrong_protocol = 'http://'.$url_new_info['host'];
+        }
+        self::queueReplacementWithEncodings($url_new_wrong_protocol, $url_new_domain);
+    }
+
+    /**
 	 * Does one string contain other
 	 *
 	 * @param string $haystack		The full string to search
@@ -143,7 +168,7 @@ class DUPX_U
     public static function isURLActive($url, $port, $timeout = 5)
     {
         if (function_exists('fsockopen')) {
-            @ini_set("default_socket_timeout", 5);
+            @ini_set("default_socket_timeout", $timeout);
             $port      = isset($port) && is_integer($port) ? $port : 80;
             $connected = @fsockopen($url, $port, $errno, $errstr, $timeout); //website and port
             if ($connected) {
@@ -154,6 +179,94 @@ class DUPX_U
         } else {
             return false;
         }
+    }
+
+    /**
+     * move all folder content up to parent
+     *
+     * @param string $subFolderName full path
+     * @param boolean $deleteSubFolder if true delete subFolder after moved all
+     * @return boolean
+     *
+     */
+    public static function moveUpfromSubFolder($subFolderName, $deleteSubFolder = false)
+    {
+        if (!is_dir($subFolderName)) {
+            return false;
+        }
+
+        $parentFolder = dirname($subFolderName);
+        if (!is_writable($parentFolder)) {
+            return false;
+        }
+
+        $success = true;
+        if (($subList = glob(rtrim($subFolderName, '/').'/*', GLOB_NOSORT)) === false) {
+            DUPX_Log::info("Problem glob folder ".$subFolderName);
+            return false;
+        } else {
+            foreach ($subList as $cName) {
+                $destination = $parentFolder.'/'.basename($cName);
+                if (file_exists($destination)) {
+                    $success = self::deletePath($destination);
+                }
+
+                if ($success) {
+                    $success = rename($cName, $destination);
+                } else {
+                    break;
+                }
+            }
+
+            if ($success && $deleteSubFolder) {
+                $success = self::deleteDirectory($subFolderName, true);
+            }
+        }
+
+        if (!$success) {
+            DUPX_Log::info("Problem om moveUpfromSubFolder subFolder:".$subFolderName);
+        }
+
+        return $success;
+    }
+
+    /**
+     * @param string $archive_filepath  full path of zip archive
+     *
+     * @return boolean|string  path of dup-installer folder of false if not found
+     */
+    public static function findDupInstallerFolder($archive_filepath)
+    {
+		if (!class_exists('ZipArchive')) {
+            return '';
+        }
+        $zipArchive = new ZipArchive();
+        $result     = false;
+
+        if ($zipArchive->open($archive_filepath) === true) {
+            for ($i = 0; $i < $zipArchive->numFiles; $i++) {
+                $stat     = $zipArchive->statIndex($i);
+                $safePath = rtrim(self::setSafePath($stat['name']), '/');
+                if (substr_count($safePath, '/') > 2) {
+                    continue;
+                }
+
+                $exploded = explode('/',$safePath);
+                if (($dup_index = array_search('dup-installer' , $exploded)) !== false) {
+                    $result = implode('/' , array_slice($exploded , 0 , $dup_index));
+                    break;
+                }                
+            }
+            if ($zipArchive->close() !== true) {
+                DUPX_Log::info("Can't close ziparchive:".$archive_filepath);
+                return false;
+            }
+        } else {
+            DUPX_Log::info("Can't open zip archive:".$archive_filepath);
+            return false;
+        }
+
+        return $result;
     }
     
 	/**
@@ -217,6 +330,30 @@ class DUPX_U
 
 		return $success && rmdir($directory);
 	}
+
+    /**
+     * Safely remove a file or directory and recursively if needed
+     *
+     * @param string $directory The full path to the directory to remove
+     *
+     * @return bool Returns true if all content was removed
+     */
+    public static function deletePath($path)
+    {
+        $success = true;
+
+        if (is_dir($path)) {
+            $success = self::deleteDirectory($path, true);
+        } else {
+            $success = @unlink($path);
+
+            if ($success === false) {
+                DUPX_Log::info( __FUNCTION__.": Problem deleting file:".$path);
+            }
+        }
+
+        return $success;
+    }
 
 	/**
 	 * Dumps a variable for debugging
@@ -425,6 +562,7 @@ class DUPX_U
 	{
 		$val	 = trim($val);
 		$last	 = strtolower($val[strlen($val) - 1]);
+		$val	 = intval($val);
 		switch ($last) {
 			// The 'G' modifier is available since PHP 5.1.0
 			case 'g':
@@ -537,21 +675,27 @@ class DUPX_U
 
     /**
      * @param $url string The URL whichs domain you want to get
-     * @return bool|string The domain part of the given URL
+     * @return string The domain part of the given URL
+     *                  www.myurl.co.uk     => myurl.co.uk
+     *                  www.google.com      => google.com
+     *                  my.test.myurl.co.uk => myurl.co.uk
+     *                  www.myurl.localweb  => myurl.localweb
+     *
      */
     public static function getDomain($url)
     {
         $pieces = parse_url($url);
         $domain = isset($pieces['host']) ? $pieces['host'] : '';
-        if(strpos($domain,".") !== false){
+        if (strpos($domain, ".") !== false) {
             if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
                 return $regs['domain'];
+            } else {
+                $exDomain = explode('.', $domain);
+                return implode('.', array_slice($exDomain, -2, 2));
             }
-        }else{
+        } else {
             return $domain;
         }
-
-        return false;
     }
 
     public static function getDefaultURL($url_to_replace,$main_url,$is_subdomain)
@@ -1067,9 +1211,9 @@ class DUPX_U
 		$string = str_replace('&', '&amp;', $string);
 
 		// Change back the allowed entities in our entity whitelist
-		$string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', 'self::wp_kses_named_entities', $string);
-		$string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', 'self::wp_kses_normalize_entities2', $string);
-		$string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', 'self::wp_kses_normalize_entities3', $string);
+		$string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', 'DUPX_U::wp_kses_named_entities', $string);
+		$string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', 'DUPX_U::wp_kses_normalize_entities2', $string);
+		$string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', 'DUPX_U::wp_kses_normalize_entities3', $string);
 
 		return $string;
 	}
@@ -1746,5 +1890,126 @@ class DUPX_U
 			return self::esc_html($matches[0]);
 		return $matches[0];
 	}
+
+	/**
+	 * Normalize a filesystem path.
+	 *
+	 * On windows systems, replaces backslashes with forward slashes
+	 * and forces upper-case drive letters.
+	 * Allows for two leading slashes for Windows network shares, but
+	 * ensures that all other duplicate slashes are reduced to a single.
+	 *
+	 * @param string $path Path to normalize.
+	 * @return string Normalized path.
+	 */
+	public static function wp_normalize_path( $path ) {
+		$wrapper = '';
+		if ( self::wp_is_stream( $path ) ) {
+			list( $wrapper, $path ) = explode( '://', $path, 2 );
+			$wrapper .= '://';
+		}
+
+		// Standardise all paths to use /
+		$path = str_replace( '\\', '/', $path );
+
+		// Replace multiple slashes down to a singular, allowing for network shares having two slashes.
+		$path = preg_replace( '|(?<=.)/+|', '/', $path );
+
+		// Windows paths should uppercase the drive letter
+		if ( ':' === substr( $path, 1, 1 ) ) {
+			$path = ucfirst( $path );
+		}
+
+		return $wrapper . $path;
+	}
+
+	/**
+	 * Test if a given path is a stream URL
+	 *
+	 * @param string $path The resource path or URL.
+	 * @return bool True if the path is a stream URL.
+	 */
+	public static function wp_is_stream( $path ) {
+		if ( false === strpos( $path, '://' ) ) {
+			// $path isn't a stream
+			return false;
+		}
+
+		$wrappers    = stream_get_wrappers();
+		$wrappers    = array_map( 'preg_quote', $wrappers );
+		$wrappers_re = '(' . join( '|', $wrappers ) . ')';
+
+		return preg_match( "!^$wrappers_re://!", $path ) === 1;
+	}
+
+	/**
+	 * Appends a trailing slash.
+	 *
+	 * @param string $string What to add the trailing slash to.
+	 * @return string String with trailing slash added.
+	 */
+	public static function trailingslashit( $string ) {
+		return self::untrailingslashit( $string ) . '/';
+	}
+
+	/**
+	 * Removes trailing forward slashes and backslashes if they exist.
+	 *
+	 * @param string $string What to remove the trailing slashes from.
+	 * @return string String without the trailing slashes.
+	 */
+	public static function untrailingslashit( $string ) {
+		return rtrim( $string, '/\\' );
+	}
+
+	/**
+	 * Toggle maintenance mode for the site.
+	 *
+	 * Creates/deletes the maintenance file to enable/disable maintenance mode.
+	 *
+	 * @param bool $enable True to enable maintenance mode, false to disable.
+	 */
+	public static function maintenanceMode($enable = false, $rootPath = '') {
+        if (empty($rootPath)) {
+            $rootPath = get_home_path();
+		}
+		$rootPath = self::trailingslashit($rootPath);
+        $file = $rootPath.'.maintenance';
+		if ($enable) {
+			// Create maintenance file to signal that we are upgrading
+			$maintenanceString = '<?php $upgrading = ' . time() . '; ?>';
+			if (file_exists($file)) unlink($file);
+			file_put_contents($file, $maintenanceString);
+		} elseif (!$enable && file_exists($file)) {
+			unlink($file);
+		}
+    }
+
+    /**
+     * Check if string is base64 encoded
+     *
+     * @param type $str
+     * @return boolean|str return false if isn't base64 string or decoded string
+     */
+    public static function is_base64($str)
+    {
+        // Check if there are valid base64 characters
+        if (!preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $str)) {
+            return false;
+        }
+
+        // Decode the string in strict mode and check the results
+        $decoded = base64_decode($str, true);
+        if (false === $decoded) {
+            return false;
+        }
+
+        // Encode the string again
+        if (base64_encode($decoded) != $str) {
+            return false;
+        }
+
+        return $decoded;
+    }
 }
 DUPX_U::init();

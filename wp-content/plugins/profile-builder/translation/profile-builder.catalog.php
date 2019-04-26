@@ -97,6 +97,7 @@
 <?php __("Fields", "profile-builder"); ?>
 <?php __("Userlisting", "profile-builder"); ?>
 <?php __("Shortcodes", "profile-builder"); ?>
+<?php __("Admin", "profile-builder"); ?>
 <?php __("Customization Toolbox", "profile-builder"); ?>
 <?php __("Toolbox", "profile-builder"); ?>
 <?php __("Settings", "profile-builder"); ?>
@@ -173,13 +174,14 @@
 <?php __("Allow only login with Social Connect on Profile Builder Login Form.<br>Social Connect will still automatically register users on other forms.", "profile-builder"); ?>
 <?php __("Facebook Login", "profile-builder"); ?>
 <?php __("Facebook App ID", "profile-builder"); ?>
-<?php __("Google+ Login", "profile-builder"); ?>
-<?php __("Google+ Client ID", "profile-builder"); ?>
+<?php __("Google Login", "profile-builder"); ?>
+<?php __("Google Client ID", "profile-builder"); ?>
 <?php __("Twitter Login", "profile-builder"); ?>
 <?php __("Twitter API Key", "profile-builder"); ?>
 <?php __("Twitter API Secret", "profile-builder"); ?>
 <?php __("LinkedIn Login", "profile-builder"); ?>
 <?php __("LinkedIn Client ID", "profile-builder"); ?>
+<?php __("LinkedIn Client Secret", "profile-builder"); ?>
 <?php __("Buttons Order", "profile-builder"); ?>
 <?php __("Drag and drop the dots to re-order.", "profile-builder"); ?>
 <?php __("Buttons Re-Order", "profile-builder"); ?>
@@ -191,11 +193,11 @@
 <?php __("Empty field will remove the heading.", "profile-builder"); ?>
 <?php __("Heading Before Buttons (Edit Profile)", "profile-builder"); ?>
 <?php __("Facebook Button Text (Login/Register)", "profile-builder"); ?>
-<?php __("Google+ Button Text (Login/Register)", "profile-builder"); ?>
+<?php __("Google Button Text (Login/Register)", "profile-builder"); ?>
 <?php __("Twitter Button Text (Login/Register)", "profile-builder"); ?>
 <?php __("LinkedIn Button Text (Login/Register)", "profile-builder"); ?>
 <?php __("Facebook Button Text (Edit Profile)", "profile-builder"); ?>
-<?php __("Google+ Button Text (Edit Profile)", "profile-builder"); ?>
+<?php __("Google Button Text (Edit Profile)", "profile-builder"); ?>
 <?php __("Twitter Button Text (Edit Profile)", "profile-builder"); ?>
 <?php __("LinkedIn Button Text (Edit Profile)", "profile-builder"); ?>
 <?php __("Unlink Accounts (Edit Profile)", "profile-builder"); ?>
@@ -383,8 +385,8 @@
 <?php __("Check this to allow users to create their own options beside the pre-existing ones.", "profile-builder"); ?>
 <?php __("Link with Facebook", "profile-builder"); ?>
 <?php __("Sign in with Facebook", "profile-builder"); ?>
-<?php __("Link with Google+", "profile-builder"); ?>
-<?php __("Sign in with Google+", "profile-builder"); ?>
+<?php __("Link with Google", "profile-builder"); ?>
+<?php __("Sign in with Google", "profile-builder"); ?>
 <?php __("Link with LinkedIn", "profile-builder"); ?>
 <?php __("Sign in with LinkedIn", "profile-builder"); ?>
 <?php __("Connection with twitter Failed", "profile-builder"); ?>
@@ -1109,10 +1111,10 @@
 <?php __("The serial number couldn't be validated because it expired!", "profile-builder"); ?>
 <?php __(" Your serial number is expired, please %1$s Renew Your License%2$s.", "profile-builder"); ?>
 <?php __("The serial number couldn't be validated because process timed out. This is possible due to the server being down. Please try again later!", "profile-builder"); ?>
-<?php __("(e.g. RMPB-15-SN-253a55baa4fbe7bf595b2aabb8d72985)", "profile-builder"); ?>
+<?php __("(e.g. CLPB-15-SN-253a55baa4fbe7bf595b2aabb8d72985)", "profile-builder"); ?>
 <?php __("<p>Your <strong>Profile Builder</strong> serial number is invalid or missing. <br/>Please %1$sregister your copy%2$s to receive access to automatic updates and support. Need a license key? %3$sPurchase one now%4$s</p>", "profile-builder"); ?>
-<?php __("<p>Your <strong>Profile Builder</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now and get 40&#37; off %4$s %5$sDismiss%6$s</p>", "profile-builder"); ?>
-<?php __("<p>Your <strong>Profile Builder</strong> license is about to expire on %5$s. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now and get 40&#37; off %4$s %6$sDismiss%7$s</p>", "profile-builder"); ?>
+<?php __("<p>Your <strong>Profile Builder</strong> license has expired. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s %5$sDismiss%6$s</p>", "profile-builder"); ?>
+<?php __("<p>Your <strong>Profile Builder</strong> license is about to expire on %5$s. <br/>Please %1$sRenew Your Licence%2$s to continue receiving access to product downloads, automatic updates and support. %3$sRenew now %4$s %6$sDismiss%7$s</p>", "profile-builder"); ?>
 <?php __("GDPR Checkbox", "profile-builder"); ?>
 <?php __("I allow the website to collect and store the data I submit through this form.", "profile-builder"); ?>
 <?php __("Strength indicator", "profile-builder"); ?>
@@ -1205,30 +1207,40 @@
 <?php __("$text", "profile-builder"); ?>
 <?php __("This display name is already in use. Please choose another one.", "profile-builder"); ?>
 <?php __("Resend activation email", "profile-builder"); ?>
+<?php __("Allow users with the 'delete_users' capability to view the Admin Approval list", "profile-builder"); ?>
+<?php __("By checking this option, you will allow users that have the 'delete_users' capability to access and use the Admin Approval list.", "profile-builder"); ?>
+<?php __("Allow users with the 'delete_users' capability to view the list of Unconfirmed Emails", "profile-builder"); ?>
+<?php __("By checking this option, you will allow users that have the 'delete_users' capability to see the list of Unconfirmed Email Addresses.", "profile-builder"); ?>
 <?php __("Automatically generate password for users", "profile-builder"); ?>
 <?php __("By checking this option, the password will be automatically generated and emailed to the user.", "profile-builder"); ?>
-<?php __("Modify `Send Credentials` checkbox", "profile-builder"); ?>
+<?php __("Modify 'Send Credentials' checkbox", "profile-builder"); ?>
 <?php __("Hidden and checked", "profile-builder"); ?>
 <?php __("Field text:", "profile-builder"); ?>
 <?php __("By default, the user needs to choose if he wants to receive a registration email.", "profile-builder"); ?>
 <?php __("By checking the <strong>Hidden and checked</strong> option, the field won't be shown and the message will always be sent to the user.", "profile-builder"); ?>
 <?php __("If you choose to show the field, you can modify the default text by entering something in the field from above.", "profile-builder"); ?>
-<?php __("Hide Repeater Fields from the back-end profile page", "profile-builder"); ?>
-<?php __("Repeater Fields from Profile Builder do not work on the back-end user profile page, they are just displayed. If you want to remove them completely, you can use this option.", "profile-builder"); ?>
-<?php __("You will still be able to use them from a front-end edit profile form.", "profile-builder"); ?>
-<?php __("Unique `Display Name` for users", "profile-builder"); ?>
-<?php __("By checking this option, users will not be able to choose a <strong>Display Name</strong> that is already used by another account.", "profile-builder"); ?>
-<?php __("Always capitalize `First Name` and `Last Name` default fields", "profile-builder"); ?>
-<?php __("If you have these fields in your forms, they will be always saved with the first letter as uppercase.", "profile-builder"); ?>
-<?php __("eg.: <strong>Jhon Doe</strong> instead of <strong>jhon doe</strong>", "profile-builder"); ?>
-<?php __("Datepicker starts on Monday", "profile-builder"); ?>
-<?php __("Will make all Datepickers use Monday as the first day of the week.", "profile-builder"); ?>
+<?php __("Redirect users to a page if they have empty required fields", "profile-builder"); ?>
+<?php __("Redirect Page:", "profile-builder"); ?>
+<?php __("By activating this option, logged in users which have empty required fields on their profile will be redirected to the page you added above.", "profile-builder"); ?>
+<?php __("For example, you can redirect these users to the Edit Profile form so they can add the missing info.", "profile-builder"); ?>
 <?php __("Ban certain words from being used in fields", "profile-builder"); ?>
 <?php __("On", "profile-builder"); ?>
 <?php __("Affected fields:", "profile-builder"); ?>
 <?php __("Banned words:", "profile-builder"); ?>
 <?php __("Error message:", "profile-builder"); ?>
 <?php __("Allows you to define some words which users cannot use in their Username, First Name or Last Name when registering.", "profile-builder"); ?>
+<?php __("Unique 'Display Name' for users", "profile-builder"); ?>
+<?php __("By checking this option, users will not be able to choose a <strong>Display Name</strong> that is already used by another account.", "profile-builder"); ?>
+<?php __("Always capitalize 'First Name' and 'Last Name' default fields", "profile-builder"); ?>
+<?php __("If you have these fields in your forms, they will be always saved with the first letter as uppercase.", "profile-builder"); ?>
+<?php __("eg.: <strong>John Doe</strong> instead of <strong>john doe</strong>", "profile-builder"); ?>
+<?php __("Datepicker starts on Monday", "profile-builder"); ?>
+<?php __("Will make all Datepickers use Monday as the first day of the week.", "profile-builder"); ?>
+<?php __("Hide Repeater Fields from the back-end profile page", "profile-builder"); ?>
+<?php __("Repeater Fields from Profile Builder do not work on the back-end user profile page, they are just displayed. If you want to remove them completely, you can use this option.", "profile-builder"); ?>
+<?php __("You will still be able to use them from a front-end edit profile form.", "profile-builder"); ?>
+<?php __("Update database entries when changing meta key", "profile-builder"); ?>
+<?php __("If you activate this option, when changing the meta key of a field, existing entries from the database will be updated as well.", "profile-builder"); ?>
 <?php __("Allow or deny email domains from registering", "profile-builder"); ?>
 <?php __("Type:", "profile-builder"); ?>
 <?php __("Allow", "profile-builder"); ?>
@@ -1238,29 +1250,31 @@
 <?php __("You should add only the domain in the list from above. eg.: gmail.com", "profile-builder"); ?>
 <?php __("Forms that should bypass Email Confirmation", "profile-builder"); ?>
 <?php __("Users registering through any of the selected forms will not need to confirm their email address.", "profile-builder"); ?>
+<?php __("Disable Email Confirmation for Social Connect registrations", "profile-builder"); ?>
+<?php __("If checked, will allow users that register through the Social Connect add-on to bypass the Email Confirmation feature.", "profile-builder"); ?>
 <?php __("Remember me checked by default", "profile-builder"); ?>
-<?php __("Check the `Remember Me` checkbox on Login forms, by default.", "profile-builder"); ?>
+<?php __("Check the 'Remember Me' checkbox on Login forms, by default.", "profile-builder"); ?>
 <?php __("Remove validation from back-end profile page", "profile-builder"); ?>
 <?php __("When saving the back-end user profile, Profile Builder fields will not be validated anymore. eg.: bypass required attribute", "profile-builder"); ?>
 <?php __("Always show edit other users dropdown", "profile-builder"); ?>
 <?php __("For perfomance reasons, we disable the select if you have more than 5000 users on your website. This option lets you enable it again.", "profile-builder"); ?>
-<?php __("Consider `Anyone can Register` WordPress option", "profile-builder"); ?>
+<?php __("Consider 'Anyone can Register' WordPress option", "profile-builder"); ?>
 <?php __("setting", "profile-builder"); ?>
 <?php __("By default, Profile Builder ignores this %1$s. If you check this option, our registration form will consider it.", "profile-builder"); ?>
 <?php __("Modify default Redirect Delay timer", "profile-builder"); ?>
-<?php __("This allows you to change the amount of seconds it takes for the <strong>`After Registration`</strong> redirect to happen.", "profile-builder"); ?>
+<?php __("This allows you to change the amount of seconds it takes for the <strong>'After Registration'</strong> redirect to happen.", "profile-builder"); ?>
 <?php __("The default is 3 seconds. Leave empty if you do not want to change it.", "profile-builder"); ?>
 <?php __("Save Admin Approval status in usermeta", "profile-builder"); ?>
 <?php __("By default, the Admin Approval status is saved as a custom taxonomy that is attached to the user.", "profile-builder"); ?>
-<?php __("If you check this option, the status will also be saved in the `*_usermeta` table under the <strong>wppb_approval_status</strong> meta name.", "profile-builder"); ?>
-<?php __("Redirect `/author` page if user is not approved", "profile-builder"); ?>
+<?php __("If you check this option, the status will also be saved in the '*_usermeta' table under the <strong>wppb_approval_status</strong> meta name.", "profile-builder"); ?>
+<?php __("Redirect '/author' page if user is not approved", "profile-builder"); ?>
 <?php __("By default, users placed in Admin Approval will not be able to login, but the Author pages will be accessible.", "profile-builder"); ?>
-<?php __("Using this option you can redirect these pages, sending users who try to toolboxess them to your home page.", "profile-builder"); ?>
-<?php __("Save `Last Login` date in usermeta", "profile-builder"); ?>
+<?php __("Using this option you can redirect these pages, sending users who try to access them to your home page.", "profile-builder"); ?>
+<?php __("Save 'Last Login' date in usermeta", "profile-builder"); ?>
 <?php __("By checking this option, each time a user logins, the date and time will be saved in the database.", "profile-builder"); ?>
 <?php __("The meta name for the field will be <strong>last_login_date</strong>.", "profile-builder"); ?>
 <?php __("You can <a href=\"https://www.cozmoslabs.com/docs/profile-builder-2/manage-user-fields/#Manage_existing_custom_fields_with_Profile_Builder\" target=\"_blank\">create a field with this meta name</a> in Profile Builder to display it in the Userlisting or Edit Profile forms.", "profile-builder"); ?>
-<?php __("Save `Last Profile Update` date in usermeta", "profile-builder"); ?>
+<?php __("Save 'Last Profile Update' date in usermeta", "profile-builder"); ?>
 <?php __("By checking this option, each time a modifies his profile the date and time will be saved in the database.", "profile-builder"); ?>
 <?php __("The meta name for the field will be <strong>last_profile_update_date</strong>.", "profile-builder"); ?>
 <?php __("Enable Compare shortcode", "profile-builder"); ?>

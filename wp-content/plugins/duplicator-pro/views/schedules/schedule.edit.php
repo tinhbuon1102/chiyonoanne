@@ -130,7 +130,7 @@ TOOL-BAR -->
         </td>
         <td>
 			<div class="btnnav">
-				<a href="<?php echo $schedules_tab_url; ?>" class="add-new-h2"> <i class="fa fa-clock-o"></i> <?php DUP_PRO_U::esc_html_e('Schedules'); ?></a>
+				<a href="<?php echo $schedules_tab_url; ?>" class="add-new-h2"> <i class="far fa-clock fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Schedules'); ?></a>
 				<?php if ($schedule_id == -1) : ?>
 					<span><?php DUP_PRO_U::esc_html_e('Add New') ?></span>
 				<?php else : ?>
@@ -176,10 +176,10 @@ TOOL-BAR -->
             ?>
             </select>
 			<a href="javascript:void(0)" onclick="DupPro.Schedule.EditTemplate()" style="margin-top:2px" class="button button-small" title="<?php DUP_PRO_U::esc_attr_e("Edit Selected Template") ?>">
-				<i class="fa fa-pencil-square-o"></i>
+                <i class="far fa-edit"></i>
 			</a>
 			<a href="admin.php?page=duplicator-pro-tools&tab=templates" style="margin-top:2px" class="button button-small" title="<?php DUP_PRO_U::esc_attr_e("List All Templates") ?>" target="edit-template">
-				<i class="fa fa-clone"></i>
+				<i class="far fa-clone"></i>
 			</a>
         </td>
     </tr>	
@@ -289,7 +289,7 @@ TOOL-BAR -->
                     ?>
                 </select> 
                 <?php _e("hours"); ?>
-                <i class="fa fa-question-circle" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Frequency Note:"); ?>" data-tooltip="<?php echo DUP_PRO_U::__('Package will build every x hours starting at 00:00.') . '<br/><br/>' . $frequency_note; ?>"></i>
+                <i class="fas fa-question-circle fa-sm" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Frequency Note:"); ?>" data-tooltip="<?php echo DUP_PRO_U::__('Package will build every x hours starting at 00:00.') . '<br/><br/>' . $frequency_note; ?>"></i>
                 <br/>
             </div>
             
@@ -306,7 +306,7 @@ TOOL-BAR -->
                     ?>
                 </select> 
                 <?php _e("days"); ?>
-                <i class="fa fa-question-circle" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Frequency Note:"); ?>" data-tooltip="<?php $frequency_note ?>"></i>
+                <i class="fas fa-question-circle fa-sm" data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Frequency Note:"); ?>" data-tooltip="<?php $frequency_note ?>"></i>
                 <br/>
             </div>
 

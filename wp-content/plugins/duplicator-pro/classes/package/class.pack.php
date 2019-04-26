@@ -306,9 +306,12 @@ class DUP_PRO_Package
         $this->upload_infos = array();
 
         foreach ($storage_ids as $storage_id) {
-            $upload_info = new DUP_PRO_Package_Upload_Info();
-            $upload_info->storage_id = $storage_id;
-            array_push($this->upload_infos, $upload_info);
+            $storage_id_is_exist = DUP_PRO_Storage_Entity::is_exist($storage_id);
+            if ($storage_id_is_exist) {
+                $upload_info = new DUP_PRO_Package_Upload_Info();
+                $upload_info->storage_id = $storage_id;
+                array_push($this->upload_infos, $upload_info);
+            }
         }
 
         DUP_PRO_LOG::trace("upload infos added:" . count($this->upload_infos));
@@ -459,6 +462,69 @@ class DUP_PRO_Package
         return $file_path;
     }
 
+    /**
+     * Validates the inputs from the UI for correct data input
+	 *
+     * @return DUP_Validator
+     */
+    public function validateInputs()
+    {
+        $validator = new DUP_PRO_Validator();
+
+        $validator->filter_custom($this->Name , DUP_PRO_Validator::FILTER_VALIDATE_NOT_EMPTY ,
+            array(  'valkey' => 'Name' ,
+                    'errmsg' => __('Package name can\'t be empty', 'duplicator'),
+                )
+            );
+
+        $validator->explode_filter_custom($this->Archive->FilterDirs, ';' , DUP_PRO_Validator::FILTER_VALIDATE_FOLDER ,
+            array(  'valkey' => 'FilterDirs' ,
+                    'errmsg' => __('Directories: <b>%1$s</b> isn\'t a valid path', 'duplicator'),
+                )
+            );
+
+        $validator->explode_filter_custom($this->Archive->FilterExts, ';' , DUP_PRO_Validator::FILTER_VALIDATE_FILE_EXT ,
+            array(  'valkey' => 'FilterExts' ,
+                    'errmsg' => __('File extension: <b>%1$s</b> isn\'t a valid extension', 'duplicator'),
+                )
+            );
+
+        $validator->explode_filter_custom($this->Archive->FilterFiles, ';' , DUP_PRO_Validator::FILTER_VALIDATE_FILE ,
+            array(  'valkey' => 'FilterFiles' ,
+                    'errmsg' => __('Files: <b>%1$s</b> isn\'t a valid file name', 'duplicator'),
+                )
+            );
+
+		//FILTER_VALIDATE_DOMAIN throws notice message on PHP 5.6
+		if (defined('FILTER_VALIDATE_DOMAIN')) {
+			$validator->filter_var($this->Installer->OptsDBHost, FILTER_VALIDATE_DOMAIN ,  array(
+						'valkey' => 'OptsDBHost' ,
+						'errmsg' => __('MySQL Server Host: <b>%1$s</b> isn\'t a valid host', 'duplicator'),
+						'acc_vals' => array(
+							'' ,
+							'localhost'
+						)
+					)
+				);
+		}
+        
+        /*
+         * no exist in PRO version
+        $validator->filter_var($this->Installer->OptsDBPort, FILTER_VALIDATE_INT , array(
+                    'valkey' => 'OptsDBPort' ,
+                    'errmsg' => __('MySQL Server Port: <b>%1$s</b> isn\'t a valid port', 'duplicator'),
+                    'acc_vals' => array(
+                        ''
+                    ),
+                    'options' => array(
+                       'min_range' => 0
+                    )
+                )
+            );
+        */
+        return $validator;
+    }
+
     public function process_storages()
     {
         DUP_PRO_LOG::trace("Processing storages");
@@ -492,16 +558,19 @@ class DUP_PRO_Package
                     DUP_PRO_LOG::trace("telling storage id $upload_info->storage_id to process");
                     $storage = DUP_PRO_Storage_Entity::get_by_id($upload_info->storage_id);
 
-                    if ($upload_info->has_started() === false) {
-                        $upload_info->start();
-                    }
+                     // Protection against deleted storage 
+                    if (!is_null($storage)) {
+                        if ($upload_info->has_started() === false) {
+                            $upload_info->start();
+                        }
 
-                    // Process a bit of work then let the next cron take care of if it's completed or not.
-                    $storage->process_package($this, $upload_info);
+                        // Process a bit of work then let the next cron take care of if it's completed or not.
+                        $storage->process_package($this, $upload_info);
 
-                    if ($upload_info->has_completed()) {
-                        // It just completed so update its upload status
-                        $upload_info->end_ticks = time();
+                        if ($upload_info->has_completed()) {
+                            // It just completed so update its upload status
+                            $upload_info->end_ticks = time();
+                        }
                     }
 
                     break;
@@ -738,7 +807,7 @@ class DUP_PRO_Package
             @chmod($files_list_temppath, 0644);
             @chmod($dirs_list_temppath, 0644);
 
-            SnapLibIOU::chmodPattern($archive_temppath_pattern, 0644);
+            DupProSnapLibIOU::chmodPattern($archive_temppath_pattern, 0644);
         }
 
         @chmod($archive_cfg_filepath, 0644);
@@ -747,7 +816,7 @@ class DUP_PRO_Package
         @chmod($scan_json_filepath, 0644);
         @chmod($files_list_filepath, 0644);
         @chmod($dirs_list_filepath, 0644);
-        SnapLibIOU::chmodPattern($archive_filepath_pattern, 0644);
+        DupProSnapLibIOU::chmodPattern($archive_filepath_pattern, 0644);
 
         if ($delete_log_files) {
             @chmod($log_filepath, 0644);
@@ -760,7 +829,7 @@ class DUP_PRO_Package
             @unlink($scan_json_temppath);
             @unlink($files_list_temppath);
             @unlink($dirs_list_temppath);
-            SnapLibIOU::rmPattern($archive_temppath_pattern);
+            DupProSnapLibIOU::rmPattern($archive_temppath_pattern);
         }
 
         @unlink($archive_cfg_temppath);
@@ -769,7 +838,7 @@ class DUP_PRO_Package
         @unlink($scan_json_filepath);
         @unlink($files_list_filepath);
         @unlink($dirs_list_filepath);
-        SnapLibIOU::rmPattern($archive_filepath_pattern);
+        DupProSnapLibIOU::rmPattern($archive_filepath_pattern);
 
         if ($delete_log_files) {
             @unlink($log_filepath);
@@ -822,6 +891,11 @@ class DUP_PRO_Package
             if (property_exists($stdobject->Database->info, 'collationList')) {
                 if ($stdobject->Database->info->collationList != null) {
                     $package->Database->info->collationList = $stdobject->Database->info->collationList;
+                }
+            }
+            if (property_exists($stdobject->Database->info, 'tableWiseRowCounts')) {
+                if ($stdobject->Database->info->tableWiseRowCounts != null) {
+                    $package->Database->info->tableWiseRowCounts = (array) $stdobject->Database->info->tableWiseRowCounts;
                 }
             }
         }
@@ -1067,10 +1141,10 @@ class DUP_PRO_Package
 				$name_check = (count($this->Archive->FilterInfo->Files->Warning) + count($this->Archive->FilterInfo->Dirs->Warning)) ? 'Warn' : 'Good';
 			}
 
-			$report['ARC']['Dirs'] = $this->Archive->Dirs;
+			// $report['ARC']['Dirs'] = $this->Archive->Dirs;
 			$report['ARC']['RecursiveLinks'] = $this->Archive->RecursiveLinks;
 			$report['ARC']['UnreadableItems'] = array_merge($this->Archive->FilterInfo->Files->Unreadable,$this->Archive->FilterInfo->Dirs->Unreadable);
-			$report['ARC']['Files'] = $this->Archive->Files;
+			// $report['ARC']['Files'] = $this->Archive->Files;
 			$report['ARC']['Status']['Names'] = $name_check;
 			$report['ARC']['Status']['Big'] = count($this->Archive->FilterInfo->Files->Size) ? 'Warn' : 'Good';
 			$report['ARC']['Status']['AddonSites'] = count($this->Archive->FilterInfo->Dirs->AddonSites) ? 'Warn' : 'Good';
@@ -1189,7 +1263,11 @@ class DUP_PRO_Package
             $global->adjust_settings_for_system();
 
             $this->build_progress->set_build_mode();
-            $packageObj = json_encode($this);
+            if (function_exists('wp_json_encode')) { 
+                $packageObj = wp_json_encode($this);
+            } else {
+                $packageObj = json_encode($this);
+            }
 
             $results = $wpdb->insert($wpdb->base_prefix . "duplicator_pro_packages", array(
                 'name' => $this->Name,
@@ -1262,6 +1340,7 @@ class DUP_PRO_Package
             $php_max_time = ($php_max_time == 0) ? "(0) no time limit imposed" : "[{$php_max_time}] not allowed";
             $php_max_memory = ($php_max_memory === false) ? "Unable to set php memory_limit" : DUPLICATOR_PRO_PHP_MAX_MEMORY . " ({$php_max_memory} default)";
             $architecture = DUP_PRO_U::getArchitectureString();
+            $clientkickoffstate = $global->clientside_kickoff ? 'on' : 'off';
 
             $info = "********************************************************************************\n";
             $info .= "DUPLICATOR PRO PACKAGE-LOG: " . @date("Y-m-d H:i:s") . "\n";
@@ -1272,6 +1351,7 @@ class DUP_PRO_Package
             $info .= "PHP INFO:\t" . phpversion() . ' | ' . 'SAPI: ' . php_sapi_name() . "\n";
             $info .= "SERVER:\t\t{$_SERVER['SERVER_SOFTWARE']} \n";
             $info .= "ARCHITECTURE:\t{$architecture} \n";
+            $info .= "CLIENT KICKOFF: {$clientkickoffstate} \n";
             $info .= "PHP TIME LIMIT: {$php_max_time} \n";
             $info .= "PHP MAX MEMORY: {$php_max_memory} \n";
             $info .= "RUN TYPE: " . $this->get_type_string() . "\n";
@@ -1327,9 +1407,12 @@ class DUP_PRO_Package
             DUP_PRO_Log::info("********************************************************************************");
             foreach ($this->upload_infos as $upload_info) {
                 $storage = DUP_PRO_Storage_Entity::get_by_id($upload_info->storage_id);
-                $storage_type_string = strtoupper($storage->get_storage_type_string());
-                $storage_path = $storage->get_storage_location_string();
-                DUP_PRO_Log::info("$storage_type_string: $storage->name, $storage_path");
+                // Protection against deleted storage 
+                if (!is_null($storage)) {
+                    $storage_type_string = strtoupper($storage->get_storage_type_string());
+                    $storage_path = $storage->get_storage_location_string();
+                    DUP_PRO_Log::info("$storage_type_string: $storage->name, $storage_path");
+                }
             }
 
             if (!$this->build_progress->failed) {
@@ -1444,7 +1527,7 @@ class DUP_PRO_Package
         $sql_done_txt = DUP_PRO_U::tailFile($sql_temp_path, 3);
         
         // Note: Had to add extra size check of 800 since observed bad sql when filter was on 
-        if (!strstr($sql_done_txt, 'DUPLICATOR_PRO_MYSQLDUMP_EOF') || (!$this->Database->FilterOn && $sql_temp_size < 5120) || ($sql_temp_size < 800)) {
+        if (!strstr($sql_done_txt, 'DUPLICATOR_PRO_MYSQLDUMP_EOF') || (!$this->Database->FilterOn && $sql_temp_size < 5120) || ($this->Database->FilterOn && $this->Database->info->tablesFinalCount > 0 && $sql_temp_size < 800)) {
             $this->build_progress->failed = true;
             $this->update();
             $this->set_status(DUP_PRO_PackageStatus::ERROR);
@@ -1771,7 +1854,10 @@ class DUP_PRO_Package
         foreach ($this->upload_infos as $upload_info) {
             if ($upload_info->storage_id > 0) {
                 $storage = DUP_PRO_Storage_Entity::get_by_id($upload_info->storage_id);
-                array_push($storages, $storage);
+                // Protection against deleted storage
+                if (!is_null($storage)) {
+                    array_push($storages, $storage);
+                }                
             } else {
                 if ($include_virtual) {
                     if ($upload_info->storage_id == DUP_PRO_Virtual_Storage_IDs::Default_Local) {
@@ -1793,8 +1879,16 @@ class DUP_PRO_Package
     // Used when we already have a package object that we need to make active
     public function set_temporary_package()
     {
-        DUP_PRO_Log::trace("Package ".print_r($this,true));
-        $json_package = json_encode($this);
+        // If the trace is not enabled, We should not waste memory and time in executing print_r($this,true) 
+        if (DUP_PRO_Log::isTraceLogEnabled()) {
+            DUP_PRO_Log::trace("Package ".print_r($this,true));
+        }
+        if (function_exists('wp_json_encode')) {
+            $json_package = wp_json_encode($this);
+        } else {
+            $json_package = json_encode($this);
+        }
+        
         update_option(self::OPT_ACTIVE, $json_package);
     }
 
@@ -1833,15 +1927,18 @@ class DUP_PRO_Package
                 $filter_files = '';
             }
             
-
             $tablelist = isset($post['dbtables']) ? implode(',', $post['dbtables']) : '';
 
             $compatlist = isset($post['dbcompat']) ? implode(',', $post['dbcompat']) : '';
 
             //PACKAGE
             // Replaces any \n \r or \n\r from the package notes
-            $unwanted_chars = array("\n", "\r", "\n\r");
-            $mtemplate->notes = str_replace($unwanted_chars, '', sanitize_textarea_field($post['package-notes']));
+            if (isset($post['package-notes'])) {
+                $unwanted_chars   = array("\n", "\r", "\n\r");
+                $mtemplate->notes = str_replace($unwanted_chars, '', sanitize_textarea_field($post['package-notes']));
+            } else {
+                $mtemplate->notes = '';
+            }
 
             //MULTISITE
             $mtemplate->filter_sites = $filter_sites;
@@ -1854,29 +1951,26 @@ class DUP_PRO_Package
             $mtemplate->archive_filter_files = sanitize_textarea_field($filter_files);
 
             //INSTALLER
-            $mtemplate->installer_opts_secure_on = isset($post['secure-on']) ? 1 : 0;
-            $secure_pass = sanitize_text_field($post['secure-pass']);
-            $mtemplate->installer_opts_secure_pass =  base64_encode($secure_pass);
+            $mtemplate->installer_opts_secure_on   = isset($post['secure-on']) ? 1 : 0;
+            $secure_pass                           = isset($post['secure-pass']) ? sanitize_text_field($post['secure-pass']) : '';
+            $mtemplate->installer_opts_secure_pass = base64_encode($secure_pass);
 
             //BRAND
-            $mtemplate->installer_opts_brand = isset($post['brand']) ? (is_numeric($post['brand']) && (int)$post['brand'] > 0 ? (int)$post['brand'] : -2 ) : -2;
+            $mtemplate->installer_opts_brand = isset($post['brand']) ? (is_numeric($post['brand']) && (int) $post['brand'] > 0 ? (int) $post['brand'] : -2 ) : -2;
 
-            $mtemplate->installer_opts_skip_scan = (isset($post['skipscan']) && 1 == $post['skipscan']) ? 1 : 0;
+            $mtemplate->installer_opts_skip_scan      = (isset($post['skipscan']) && 1 == $post['skipscan']) ? 1 : 0;
             //cPanel
-            $mtemplate->installer_opts_cpnl_enable = (isset($post['cpnl-enable']) && 1 == $post['cpnl-enable']) ? 1 : 0;
-            $mtemplate->installer_opts_cpnl_host = sanitize_text_field($post['cpnl-host']);
-            $mtemplate->installer_opts_cpnl_user = sanitize_text_field($post['cpnl-user']);
-            $mtemplate->installer_opts_cpnl_db_action = sanitize_text_field($post['cpnl-dbaction']);
-            $mtemplate->installer_opts_cpnl_db_host = sanitize_text_field($post['cpnl-dbhost']);
-            $mtemplate->installer_opts_cpnl_db_name = sanitize_text_field($post['cpnl-dbname']);
-            $mtemplate->installer_opts_cpnl_db_user = sanitize_text_field($post['cpnl-dbuser']);
+            $mtemplate->installer_opts_cpnl_enable    = (isset($post['cpnl-enable']) && 1 == $post['cpnl-enable']) ? 1 : 0;
+            $mtemplate->installer_opts_cpnl_host      = isset($post['cpnl-host']) ? sanitize_text_field($post['cpnl-host']) : '';
+            $mtemplate->installer_opts_cpnl_user      = isset($post['cpnl-user']) ? sanitize_text_field($post['cpnl-user']) : '';
+            $mtemplate->installer_opts_cpnl_db_action = isset($post['cpnl-dbaction']) ? sanitize_text_field($post['cpnl-dbaction']) : '';
+            $mtemplate->installer_opts_cpnl_db_host   = isset($post['cpnl-dbhost']) ? sanitize_text_field($post['cpnl-dbhost']) : '';
+            $mtemplate->installer_opts_cpnl_db_name   = isset($post['cpnl-dbname']) ? sanitize_text_field($post['cpnl-dbname']) : '';
+            $mtemplate->installer_opts_cpnl_db_user   = isset($post['cpnl-dbuser']) ? sanitize_text_field($post['cpnl-dbuser']) : '';
             //Basic
-            $mtemplate->installer_opts_db_host = sanitize_text_field($post['dbhost']);
-            $mtemplate->installer_opts_db_name = sanitize_text_field($post['dbname']);
-            $mtemplate->installer_opts_db_user = sanitize_text_field($post['dbuser']);
-            //Advanced
-            $mtemplate->installer_opts_cache_wp = (isset($post['cache-wp']) && 1 == $post['cache-wp']) ? 1 : 0;
-            $mtemplate->installer_opts_cache_path = (isset($post['cache-path']) && 1 == $post['cache-path']) ? 1 : 0;
+            $mtemplate->installer_opts_db_host        = isset($post['dbhost']) ? sanitize_text_field($post['dbhost']) : '';
+            $mtemplate->installer_opts_db_name        = isset($post['dbname']) ? sanitize_text_field($post['dbname']) : '';
+            $mtemplate->installer_opts_db_user        = isset($post['dbuser']) ? sanitize_text_field($post['dbuser']) : '';
 
             //DATABASE
             $mtemplate->database_filter_on = isset($post['dbfilter-on']) ? 1 : 0;
@@ -1887,6 +1981,14 @@ class DUP_PRO_Package
         }
     }
 
+    /**
+     *
+     * @global type $wp_version
+     * @param int $template_id
+     * @param type $storage_ids
+     * @param string $name
+     * @return \DUP_PRO_Package
+     */
     public static function set_temporary_package_from_template_and_storages($template_id, $storage_ids, $name)
     {
         global $wp_version;
@@ -1946,8 +2048,6 @@ class DUP_PRO_Package
             $package->Installer->OptsDBHost = $manual_template->installer_opts_db_host;
             $package->Installer->OptsDBName = $manual_template->installer_opts_db_name;
             $package->Installer->OptsDBUser = $manual_template->installer_opts_db_user;
-            $package->Installer->OptsCacheWP = $manual_template->installer_opts_cache_wp;
-            $package->Installer->OptsCachePath = $manual_template->installer_opts_cache_path;
             $package->Installer->OptsSecureOn = $manual_template->installer_opts_secure_on;
             $package->Installer->OptsSecurePass = $manual_template->installer_opts_secure_pass;
             $package->Installer->OptsSkipScan = $manual_template->installer_opts_skip_scan;
@@ -1977,8 +2077,11 @@ class DUP_PRO_Package
             $system_global->save();
 
             update_option(self::OPT_ACTIVE, $json_package);
+
+            return $package;
         } else {
             DUP_PRO_LOG::trace('Template ' . $manual_template->id . "doesn't exist!");
+            return null;
         }
     }
 
@@ -1994,12 +2097,21 @@ class DUP_PRO_Package
      *  @return void */
     public static function set_temporary_package_member($property, $value)
     {
+
         $package = self::get_temporary_package();
+        if ($property == 'Status') {
+            do_action('duplicator_pro_package_before_set_status' , $package , $value);
+        }
+
         $reflectionClass = new ReflectionClass($package);
         $reflectionClass->getProperty($property)->setValue($package, $value);
         $json_package = json_encode($package);
 
         update_option(self::OPT_ACTIVE, $json_package);
+
+        if ($property == 'Status') {
+            do_action('duplicator_pro_package_after_set_status' , $package , $value);
+        }
     }
 
     /**
@@ -2008,6 +2120,8 @@ class DUP_PRO_Package
      *  @return void */
     public function set_status($status)
     {
+        do_action('duplicator_pro_package_before_set_status' , $this , $status);
+
         global $wpdb;
         $this->Status = $status;
         $packageObj = json_encode($this);
@@ -2030,6 +2144,8 @@ class DUP_PRO_Package
         $sql = "UPDATE `{$table}` SET  status = {$status}, package = '$packageObj' WHERE ID = {$this->ID}";
 
         $wpdb->query($sql);
+
+        do_action('duplicator_pro_package_after_set_status' , $this , $status);
     }
 
     public function update()
@@ -2141,7 +2257,7 @@ class DUP_PRO_Package
 
             if ($files !== false) {
                 foreach ($files as $file_path) {
-                    // Cut back to keeping things around for just an hour 15 min
+                    // Cut back to keeping things around for just 15 min
                     if (filemtime($file_path) <= time() - DUP_PRO_Constants::TEMP_CLEANUP_SECONDS) {
                         unlink($file_path);
                     }
@@ -2180,7 +2296,7 @@ class DUP_PRO_Package
 		if(file_exists($extras_directory)) {
 			try
 			{
-				SnapLibIOU::rrmdir($extras_directory);
+				DupProSnapLibIOU::rrmdir($extras_directory);
 			}
 			catch(Exception $ex)
 			{

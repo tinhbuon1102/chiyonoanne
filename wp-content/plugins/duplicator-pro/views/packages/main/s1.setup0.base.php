@@ -116,7 +116,7 @@ TOOL-BAR -->
 		</td>
 		<td>
 			<div class="btnnav">
-				<a href="<?php echo esc_url($packages_tab_url); ?>" class="add-new-h2"><i class="fa fa-archive"></i> <?php DUP_PRO_U::esc_html_e('Packages'); ?></a>
+				<a href="<?php echo esc_url($packages_tab_url); ?>" class="add-new-h2"><i class="fa fa-archive fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Packages'); ?></a>
 				<span> <?php _e("Create New"); ?></span>
 			</div>
 		</td>
@@ -137,15 +137,15 @@ $form_action_url = '?page=duplicator-pro&tab=packages&inner_page=new2&_wpnonce='
 	<input type="hidden" id="dup-form-opts-action" name="action" value="">
 	<div class="dpro-general-area">
 		<label class="lbl-larger">&nbsp;Apply Template:</label>
-		<i class="fa fa-question-circle"
+		<i class="fas fa-question-circle fa-sm"
 			data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Apply Template:"); ?>"
 			data-tooltip="<?php DUP_PRO_U::esc_attr_e('An optional template configuration that can be applied to this package setup. An [Unassigned] template will retain the settings from the last scan/build.'); ?>"></i>
 		<div style="float:right">
 			<a href="admin.php?page=duplicator-pro-tools&tab=templates" class="button button-small" title="<?php DUP_PRO_U::esc_attr_e("List All Templates") ?>" target="_blank">
-				<i class="fa fa-clone"></i>
+				<i class="far fa-clone"></i>
 			</a>
 			<a href="javascript:void(0)" onclick="DupPro.Pack.EditTemplate()"  class="button button-small" title="<?php DUP_PRO_U::esc_attr_e("Edit Selected Template") ?>">
-				<i class="fa fa-pencil-square-o"></i>
+                <i class="fa fa-pen-square"></i>
 			</a>
 		</div>
 		<br/>
@@ -168,7 +168,7 @@ $form_action_url = '?page=duplicator-pro&tab=packages&inner_page=new2&_wpnonce='
 		<a href="javascript:void(0)" onClick="DupPro.Pack.ResetName()" title="<?php DUP_PRO_U::esc_attr_e('Toggle a default name') ?>"><i class="fa fa-undo"></i></a>
 		<div class="dup-notes-add">
 			<a href="javascript:void(0)" onClick="jQuery('#dup-notes-area').toggle()" class="button button-small"  title="<?php DUP_PRO_U::esc_attr_e('Add Notes') ?>">
-				<i class="fa fa-pencil-square-o"></i>
+				<i class="far fa-edit"></i>
 			</a>
 		</div>
 		<input id="package-name"  name="package-name" type="text" maxlength="40"  required="true" data-regexp="^[0-9A-Za-z|_]+$" />
@@ -329,22 +329,22 @@ jQuery(function($)
 
             //-- Database
             var	filterTableKey;
-            var databaseFilterTables = selectedTemplate.database_filter_tables.split(",");
-            $("#dup-dbtables input").prop("checked", false).css('text-decoration', 'none');
+            if ("" != selectedTemplate.database_filter_tables) {
+                var databaseFilterTables = selectedTemplate.database_filter_tables.split(",");
+                $("#dup-dbtables input").prop("checked", false).css('text-decoration', 'none');
 
-            for (filterTableKey in databaseFilterTables) {
-                    var filterTable = databaseFilterTables[filterTableKey];
-                    var selector = "#dbtables-" + filterTable;
-                    $(selector).prop("checked", true);
-                    $(selector).parent().css('text-decoration', 'line-through');
+                for (filterTableKey in databaseFilterTables) {
+                        var filterTable = databaseFilterTables[filterTableKey];
+                        var selector = "#dbtables-" + filterTable;
+                        $(selector).prop("checked", true);
+                        $(selector).parent().css('text-decoration', 'line-through');
+                }
             }
 
             $("#dbhost").val(selectedTemplate.installer_opts_db_host);
             $("#dbname").val(selectedTemplate.installer_opts_db_name);
             $("#dbuser").val(selectedTemplate.installer_opts_db_user);
 
-            $("#cache-wp").prop("checked", selectedTemplate.installer_opts_cache_wp);
-            $("#cache-path").prop("checked", selectedTemplate.installer_opts_cache_path);
         } else {
             console.log("Template ID doesn't exist?? " + selectedId);
         }
@@ -433,11 +433,22 @@ jQuery(document).ready(function ($) {
 
         $.ajax({
 			type: "POST",
-			dataType: "json",
 			url: ajaxurl,
 			data: ajaxData,
 			beforeSend: function () {},
-			success: function (data) {location.reload();},
+			success: function (respData, textStatus, xHr) {
+                try {
+                    var data = DupPro.parseJSON(respData);
+                } catch(err) {
+                    console.error(err);
+                    console.error('JSON parse failed for response data: ' + respData);
+                    console.log('switchDupArchiveNotice:AJAX error. textStatus=');
+                    console.log(textStatus);
+                    location.reload();
+                    return false;
+                }
+                location.reload();
+            },
 			error: function (xHr, textStatus) {
 				console.log('switchDupArchiveNotice:AJAX error. textStatus=');
 				console.log(textStatus);

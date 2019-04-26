@@ -47,7 +47,7 @@ $archive_export_onlydb = isset($_POST['export-onlydb']) ? 1 :0;
 
 <style>
 	/*PROGRESS-BAR - RESULTS - ERROR */
-	form#form-duplicator {text-align:center; max-width:650px; min-height:200px; margin:0px auto 0px auto; padding:0px;}
+	form#form-duplicator {text-align:center; max-width:1024px; min-height:200px; margin:0px auto 0px auto; padding:0px;}
 	div.dup-progress-title {font-size:22px; padding:5px 0 20px 0; font-weight:bold}
 	div#dup-msg-success {padding:0 5px 5px 5px; text-align:left}
 	div#dup-msg-success div.details {padding:10px 15px 10px 15px; margin:5px 0 15px 0; background:#fff; border-radius:5px; border:1px solid #ddd;box-shadow:0 8px 6px -6px #999; }
@@ -67,11 +67,14 @@ $archive_export_onlydb = isset($_POST['export-onlydb']) ? 1 :0;
 	div.scan-item-first { border-top-right-radius:4px; border-top-left-radius:4px}
 	div.scan-item-last {border-bottom:1px solid #E0E0E0}
 	div.scan-item div.title {background-color:#F1F1F1; width:100%; padding:4px 0 4px 0; cursor:pointer; height:20px;}
+    @media screen and (min-width: 1280px) {
+        div.scan-item div.title {padding:10px 0 10px 0;}
+    }
 	div.scan-item div.title:hover {background-color:#ECECEC;}
 	div.scan-item div.text {font-weight:bold; font-size:14px; float:left;  position:relative; left:10px}
 	div.scan-item div.badge {float:right; border-radius:4px; color:#fff; min-width:40px; text-align:center; position:relative; right:10px; font-size:12px; padding:0 3px 0 3px}
 	div.scan-item div.badge-pass {background:green;}
-	div.scan-item div.badge-warn {background:#630f0f;}
+	div.scan-item div.badge-warn {background:#636363;}
 	div.scan-item div.info {display:none; padding:10px; background:#fff}
 	div.scan-good {display:inline-block; color:green;font-weight:bold;}
 	div.scan-warn {display:inline-block; color:#630f0f;font-weight:bold;}
@@ -103,7 +106,7 @@ $archive_export_onlydb = isset($_POST['export-onlydb']) ? 1 :0;
 	div.hb-files-style div.container {border:1px solid #E0E0E0; border-radius:4px; margin:5px 0 10px 0}
 	div.hb-files-style div.container b {font-weight:bold}
 	div.hb-files-style div.container div.divider {margin-bottom:2px; font-weight:bold}
-	div.hb-files-style div.data {padding:8px; line-height:21px; height:175px; overflow-y:scroll; }
+	div.hb-files-style div.data {padding:8px; line-height:21px; min-height:100px; max-height:70vh; overflow-y:scroll; }
 	div.hb-files-style div.hdrs {background:#fff; padding:2px 4px 4px 6px; border-bottom:1px solid #E0E0E0; font-weight:bold}
 	div.hb-files-style div.hdrs sup i.fa {font-size:11px}
 	div.hb-files-style div.hdrs-up-down {float:right;  margin:2px 12px 0 0}
@@ -153,7 +156,51 @@ $archive_export_onlydb = isset($_POST['export-onlydb']) ? 1 :0;
 
     /*Footer*/
     div.dup-button-footer {text-align:center; margin:0}
+
+    /** JSTREE **/
+    .jstree .root-node > .jstree-anchor { font-weight: bold; }
+    .jstree .info-node > .jstree-anchor { font-weight: bold; }
+    .jstree .info-node > .jstree-anchor .jstree-checkbox {display: none;}
+
+
+    .jstree .warning-node > .jstree-anchor {color: red;}
+    .jstree .filtered-node .jstree-anchor {opacity: 0.3; text-decoration: line-through; }
+    .jstree .jstree-checkbox-disabled {opacity: 0.3;}
+
+
 </style>
+
+<?php
+$validator = $Package->validateInputs();
+if (!$validator->isSuccess()) {
+    ?>
+<form id="form-duplicator" method="post" action="<?php echo $package_list_url ?>">
+		<!--  ERROR MESSAGE -->
+		<div id="dup-msg-error">
+			<div class="dup-hdr-error"><i class="fa fa-exclamation-circle"></i> <?php DUP_PRO_U::esc_html_e('Input fields not valid'); ?></div>
+			<i><?php DUP_PRO_U::esc_html_e('Please try again!'); ?></i><br/>
+			<div style="text-align:left">
+				<b><?php DUP_PRO_U::esc_html_e("Server Status:"); ?></b> &nbsp;
+				<div id="dup-msg-error-response-status" style="display:inline-block"></div><br/>
+				<b><?php DUP_PRO_U::esc_html_e("Error Message:"); ?></b>
+                <div id="dup-msg-error-response-text">
+                    <ul>
+                        <?php
+                        $validator->getErrorsFormat("<li>%s</li>");
+                        ?>
+                    </ul>
+                </div>
+			</div>
+		</div>
+        <?php
+		$back_nonce = wp_create_nonce('new1-package');
+		?>
+		<input type="button" value="&#9664; <?php DUP_PRO_U::esc_html_e("Back") ?>" onclick="window.location.assign('?page=duplicator-pro&tab=packages&inner_page=new1&_wpnonce='+'<?php echo $back_nonce;?>')" class="button button-large" />
+</form>
+    <?php
+    return;
+}
+?>
 
 
 <!-- ====================
@@ -174,7 +221,7 @@ TOOL-BAR -->
         </td>
         <td>
 			<div class="btnnav">
-				<a href="<?php echo $packages_tab_url; ?>" class="add-new-h2"><i class="fa fa-archive"></i> <?php DUP_PRO_U::esc_html_e('Packages'); ?></a>
+				<a href="<?php echo $packages_tab_url; ?>" class="add-new-h2"><i class="fa fa-archive fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Packages'); ?></a>
 				<span> <?php _e("Create New"); ?></span>
 			</div>
         </td>
@@ -190,7 +237,7 @@ TOOL-BAR -->
 
 		<!--  PROGRESS BAR -->
 		<div id="dup-progress-bar-area">
-			<div style="font-size:1.7em; margin-bottom:20px"><i class="fa fa-circle-o-notch fa-spin"></i> <?php DUP_PRO_U::esc_html_e('Scanning Site'); ?></div>
+			<div style="font-size:1.7em; margin-bottom:20px"><i class="fa fa-circle-notch fa-spin"></i> <?php DUP_PRO_U::esc_html_e('Scanning Site'); ?></div>
 			<div id="dup-progress-bar"></div>
 			<b><?php DUP_PRO_U::esc_html_e('Please Wait...'); ?></b><br/><br/>
 			<i><?php DUP_PRO_U::esc_html_e('Keep this window open during the scan process.'); ?></i><br/>
@@ -200,7 +247,7 @@ TOOL-BAR -->
 		<!--  SCAN DETAILS REPORT -->
 		<div id="dup-msg-success" style="display:none">
 			<div style="text-align:center">
-				<div class="dup-hdr-success"><i class="fa fa-check-square-o"></i> <?php DUP_PRO_U::esc_html_e('Scan Complete'); ?></div>
+				<div class="dup-hdr-success"><i class="far fa-check-square"></i> <?php DUP_PRO_U::esc_html_e('Scan Complete'); ?></div>
 				<div id="dup-msg-success-subtitle">
 					<?php DUP_PRO_U::esc_html_e("Process Time:"); ?> <span id="data-rpt-scantime"></span>
 				</div>
@@ -257,20 +304,33 @@ jQuery(document).ready(function ($)
 		ScheduleRunning: 5
 	}
 
-	DupPro.Pack.runScanner = function () {
+	DupPro.Pack.runScanner = function (callbackOnSuccess) {
 		var input = {action: 'duplicator_pro_package_scan',file_notice:'<?= $core_file_notice; ?>',dir_notice:'<?= $core_dir_notice; ?>', nonce: '<?php echo wp_create_nonce('duplicator_pro_package_scan'); ?>' };
 
 		$.ajax({
 			type: "POST",
 			cache: false,
+			dataType: "text",
 			url: ajaxurl,
-			dataType: "json",
 			timeout: 10000000,
 			data: input,
 			complete: function () {},
-			success: function (data) {
-
-				var data    = data || new Object();
+			success: function (respData, textStatus, xHr) {
+				try {
+					var data = DupPro.parseJSON(respData);
+				} catch(err) {
+					console.error(err);
+					console.error('JSON parse failed for response data: ' + respData);
+					var status = xHr.status + ' -' + xHr.statusText;
+					$('#dup-progress-bar-area, #dup-build-button').hide();
+					$('#dup-msg-error-response-status').html(status)
+					$('#dup-msg-error-response-text').html(xHr.responseText);
+					$('#dup-msg-error, .dup-button-footer').show();
+					console.log(data);					
+					return false;
+				}
+				var data = data || new Object();
+				
 				if(data.ScanStatus !== undefined && data.ScanStatus == 'running'){
                     DupPro.Pack.runScanner();
                 }else{
@@ -280,6 +340,9 @@ jQuery(document).ready(function ($)
 
                     if (status == DupPro.Pack.WebServiceStatus.Pass) {
                         DupPro.Pack.loadScanData(data);
+                        if (typeof callbackOnSuccess === "function") {
+                            callbackOnSuccess(data);
+                        }
                         $('.dup-button-footer').show();
                     } else if (status == DupPro.Pack.WebServiceStatus.ScheduleRunning) {
                         // as long as its just saying that someone blocked us keep trying
@@ -319,12 +382,12 @@ jQuery(document).ready(function ($)
                 });
         }
         
-	DupPro.Pack.reRunScanner = function ()
+	DupPro.Pack.reRunScanner = function (callbackOnSuccess)
 	{
 		$('#dup-msg-success,#dup-msg-error,.dup-button-footer,#dpro-confirm-area').hide();
 		$('#dpro-confirm-check').prop('checked', false);
 		$('#dup-progress-bar-area').show();
-		DupPro.Pack.runScanner();
+		DupPro.Pack.runScanner(callbackOnSuccess);
 	}
 
 	DupPro.Pack.loadScanData = function (data)
@@ -400,7 +463,7 @@ jQuery(document).ready(function ($)
 						html += '</tr></table>';
 					});
 				}
-				$('#data-db-tablelist').append(html);
+				$('#data-db-tablelist').html(html);
 			} else {
 				html = '<?php DUP_PRO_U::esc_html_e("Unable to report on database stats") ?>';
 				$('#dup-scan-db').html(html);
@@ -424,9 +487,10 @@ jQuery(document).ready(function ($)
 			return true;
 		}
 
-		var sizeChecks = $('#hb-files-large-result input:checked');
-		var utf8Checks = $('#hb-files-utf8-result input:checked');
-		if (sizeChecks.length > 0 || utf8Checks.length > 0) {
+		var sizeChecks = $('#hb-files-large-jstree').length ? $('#hb-files-large-jstree').jstree(true).get_checked() : 0;
+		var addonChecks = $('#hb-addon-sites-result input:checked');
+		var utf8Checks = $('#hb-files-utf8-jstree').length ? $('#hb-files-utf8-jstree').jstree(true).get_checked() : 0;
+		if (sizeChecks.length > 0 || addonChecks.length > 0 || utf8Checks.length > 0) {
 			$('#dpro-confirm-area').show();
 			$('#dup-build-button').prop('disabled', true);
 			return false;
@@ -454,7 +518,7 @@ jQuery(document).ready(function ($)
 	{      
 		var result;
 		switch (status) {
-			case false :    result = '<div class="scan-warn"><i class="fa fa-exclamation-triangle"></i></div>'; break;
+			case false :    result = '<div class="scan-warn"><i class="fa fa-exclamation-triangle fa-sm"></i></div>'; break;
 			case 'Warn' :   result = '<div class="badge badge-warn">Notice</div>'; break;
 			case true :     result = '<div class="scan-good"><i class="fa fa-check"></i></div>'; break;
 			case 'Good' :   result = '<div class="badge badge-pass">Good</div>'; break;

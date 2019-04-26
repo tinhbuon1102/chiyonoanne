@@ -32,8 +32,8 @@ $openbase	= ini_get("open_basedir");
 $datetime1	= $GLOBALS['DUPX_AC']->created;
 $datetime2	= date("Y-m-d H:i:s");
 $fulldays	= round(abs(strtotime($datetime1) - strtotime($datetime2))/86400);
-$root_path	= SnapLibIOU::safePath($GLOBALS['DUPX_ROOT'], true);
-$archive_path = SnapLibIOU::safePath($GLOBALS['FW_PACKAGE_PATH'], true);
+$root_path	= DupProSnapLibIOU::safePath($GLOBALS['DUPX_ROOT'], true);
+$archive_path = DupProSnapLibIOU::safePath($GLOBALS['FW_PACKAGE_PATH'], true);
 $wpconf_path = "{$root_path}/wp-config.php";
 $max_time_zero = ($GLOBALS['DUPX_ENFORCE_PHP_INI']) ? false : @set_time_limit(0);
 $max_time_size = 314572800;  //300MB
@@ -50,9 +50,31 @@ if ($is_dbonly) {
 }
 $notice['30'] = $fulldays <= 180 ? 'Good' : 'Warn';
 $notice['40'] = DUPX_Server::$php_version_53_plus	 ? 'Good' : 'Warn';
+
+$packagePHP = $GLOBALS['DUPX_AC']->version_php;
+$currentPHP = DUPX_Server::$php_version;
+$packagePHPMajor = intval($packagePHP);
+$currentPHPMajor = intval($currentPHP);
+$notice['45'] = ($packagePHPMajor === $currentPHPMajor || $GLOBALS['DUPX_AC']->exportOnlyDB) ? 'Good' : 'Warn';
+
 $notice['50'] = empty($openbase) ? 'Good' : 'Warn';
 $notice['60'] = !$max_time_warn ? 'Good' : 'Warn';
 $notice['70'] = !$parent_has_wordfence ? 'Good' : 'Warn';
+$notice['80'] = !$GLOBALS['DUPX_AC']->is_outer_root_wp_config_file	? 'Good' : 'Warn';
+if ($GLOBALS['DUPX_AC']->exportOnlyDB) {
+	$notice['90'] = 'Good';
+} else {
+	$notice['90'] = (!$GLOBALS['DUPX_AC']->is_outer_root_wp_content_dir) 
+						? 'Good' 
+						: 'Warn';
+}
+
+$space_free = @disk_free_space($GLOBALS['DUPX_ROOT']); 
+$archive_size = filesize($GLOBALS['FW_PACKAGE_PATH']);
+$notice['100'] = ($space_free && $archive_size > $space_free) 
+                    ? 'Warn'
+                    : 'Good';
+
 $all_notice = in_array('Warn', $notice) ? 'Warn' : 'Good';
 
 //SUMMATION
@@ -70,6 +92,7 @@ $archive_config			= DUPX_ArchiveConfig::getInstance();
 //MULTISITE
 $show_multisite = ($archive_config->mu_mode !== 0) && (count($archive_config->subsites) > 0);
 $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::BusinessGold);
+
 ?>
 
 <form id="s1-input-form" method="post" class="content-form">
@@ -131,10 +154,6 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
                     <tr>
                         <td>Size:</td>
                         <td><?php echo DUPX_U::readableByteSize($arcSize);?> </td>
-                    </tr>
-                    <tr>
-                        <td>Name:</td>
-                        <td><?php echo "{$GLOBALS['FW_PACKAGE_NAME']}"; ?> </td>
                     </tr>
                     <tr>
                         <td>Path:</td>
@@ -356,7 +375,6 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
 		<div class="title" data-type="toggle" data-target="#s1-notice40"><i class="fa fa-caret-right"></i> PHP Version 5.2</div>
 		<div class="info" id="s1-notice40">
 			<?php
-				$currentPHP = DUPX_Server::$php_version;
 				$cssStyle   = DUPX_Server::$php_version_53_plus	 ? 'color:green' : 'color:red';
 				echo "<b style='{$cssStyle}'>This server is currently running PHP version [{$currentPHP}]</b>.<br/>"
 				. "Duplicator Pro allows PHP 5.2 to be used during install but does not officially support it.  If you're using PHP 5.2 we strongly recommend NOT using it and having your "
@@ -369,6 +387,18 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
                 ?>
             </div>
 
+        <!-- NOTICE 45 -->
+		<div class="status <?php echo ($notice['45'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo $notice['45']; ?></div>
+		<div class="title" data-type="toggle" data-target="#s1-notice45"><i class="fa fa-caret-right"></i> PHP Version mismatch</div>
+		<div class="info" id="s1-notice45">
+			<?php
+                $cssStyle   = $notice['45'] == 'Good' ? 'color:green' : 'color:red';
+				echo "<b style='{$cssStyle}'>You are migrating site from PHP {$packagePHP} to PHP {$currentPHP}</b>.<br/>"
+                    ."If the PHP version of your website is different than the PHP version of your package 
+                    it MAY cause problems with the functioning of your website.<br/>";
+                ?>
+            </div>
+
 		<!-- NOTICE 50 -->
 		<div class="status <?php echo ($notice['50'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo $notice['50']; ?></div>
 		<div class="title" data-type="toggle" data-target="#s1-notice50"><i class="fa fa-caret-right"></i> PHP Open Base</div>
@@ -376,8 +406,8 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
 			<b>Open BaseDir:</b> <i><?php echo $notice['50'] == 'Good' ? "<i class='dupx-pass'>Disabled</i>" : "<i class='dupx-fail'>Enabled</i>"; ?></i>
 			<br/><br/>
 
-                If <a href="http://www.php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank">open_basedir</a> is enabled and your
-                having issues getting your site to install properly; please work with your host and follow these steps to prevent issues:
+                If <a href="http://php.net/manual/en/ini.core.php#ini.open-basedir" target="_blank">open_basedir</a> is enabled and you're
+                having issues getting your site to install properly please work with your host and follow these steps to prevent issues:
                 <ol style="margin:7px; line-height:19px">
                     <li>Disable the open_basedir setting in the php.ini file</li>
                     <li>If the host will not disable, then add the path below to the open_basedir setting in the php.ini<br/>
@@ -421,6 +451,35 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
             Having Wordfence in a parent site can interfere with the install, however no such condition was detected.
             <?php endif;?>
         </div>
+
+        <!-- NOTICE 80 -->
+		<div class="status <?php echo ($notice['80'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo DUPX_U::esc_html($notice['80']); ?></div>
+		<div class="title" data-type="toggle" data-target="#s1-notice80"><i class="fa fa-caret-right"></i> wp-config.php file location</div>
+		<div class="info" id="s1-notice80">
+			When this item shows a warning, it indicates the wp-config.php file was detected in the directory above the WordPress root folder on the source site. 
+			<br/><br/>
+			The Duplicator Installer will place the wp-config.php file in the root folder of the WordPress installation. This will not affect operation of the site.
+		</div>
+
+		<!-- NOTICE 90 -->
+		<div class="status <?php echo ($notice['90'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo DUPX_U::esc_html($notice['90']); ?></div>
+		<div class="title" data-type="toggle" data-target="#s1-notice90"><i class="fa fa-caret-right"></i> wp-content directory location</div>
+		<div class="info" id="s1-notice90">
+			When this item shows a warning, it indicates the wp-content directory was not in the WordPress root folder on the source site.
+			<br/><br/>
+			The Duplicator Installer will place the wp-content directory in the WordPress root folder of the WordPress installation. This will not affect operation of the site.
+		</div>
+
+        <!-- NOTICE 100 -->
+		<div class="status <?php echo ($notice['100'] == 'Good') ? 'pass' : 'fail' ?>"><?php echo DUPX_U::esc_html($notice['100']); ?></div>
+		<div class="title" data-type="toggle" data-target="#s1-notice100"><i class="fa fa-caret-right"></i> Sufficient disk space</div>
+		<div class="info" id="s1-notice100">
+        <?php
+        echo ($notice['100'] == 'Good')
+                ? 'You have sufficient disk space in your machine to extract the archive.'
+                : 'You don’t have sufficient disk space in your machine to extract the archive. Ask your host to increase disk space.'
+        ?>
+		</div>
         </div>
     </div>
     <br/><br/>
@@ -504,7 +563,7 @@ $multisite_disabled = ($archive_config->getLicenseType() != DUPX_LicenseType::Bu
     </div>
     <div id="s1-area-adv-opts" style="display:none">
         <div class="help-target">
-            <a href="<?php echo DUPX_U::esc_url($GLOBALS['_HELP_URL_PATH']); ?>#help-s1" target="_blank"><i class="fa fa-question-circle"></i></a>
+            <a href="<?php echo DUPX_U::esc_url($GLOBALS['_HELP_URL_PATH']); ?>#help-s1" target="_blank"><i class="fas fa-question-circle fa-sm"></i></a>
         </div><br/>
 
 	<div class="hdr-sub3">General</div>
@@ -691,7 +750,7 @@ Auto Posts to view.step2.php
     <!--  PROGRESS BAR -->
     <div id="progress-area">
         <div style="width:500px; margin:auto">
-            <div class="progress-text"><i class="fa fa-circle-o-notch fa-spin"></i> Extracting Archive Files<span id="progress-pct"></span></div>
+            <div class="progress-text"><i class="fas fa-circle-notch fa-spin"></i> Extracting Archive Files<span id="progress-pct"></span></div>
             <div id="secondary-progress-text"></div>
             <div id="progress-notice"></div>
             <div id="progress-bar"></div>
@@ -752,7 +811,7 @@ DUPX.getManaualArchiveOpt = function ()
     DUPX.startExtraction = function()
     {
         var isManualExtraction = ($("#archive_engine").val() == "manual");
-        var zipEnabled = <?php echo SnapLibStringU::boolToString($archive_config->isZipArchive()); ?>;
+        var zipEnabled = <?php echo DupProSnapLibStringU::boolToString($archive_config->isZipArchive()); ?>;
         var chunkingEnabled  = ($("#archive_engine").val() == "ziparchivechunking");
 
         $("#operation-text").text("Extracting Archive Files");
@@ -908,10 +967,19 @@ DUPX.pingDAWS = function ()
 	$.ajax({
 		type: "POST",
 		timeout: DUPX.DAWS.PingWorkerTimeInSec * 2000, // Double worker time and convert to ms
-		dataType: "json",
 		url: DUPX.DAWS.Url,
 		data: JSON.stringify(request),
-		success: function (data) {
+		success: function (respData, textStatus, xHr) {
+            try {
+                var data = DUPX.parseJSON(respData);
+            } catch(err) {
+                console.error(err);
+                console.error('JSON parse failed for response data: ' + respData);
+                console.log('AJAX error. textStatus=');
+                console.log(textStatus);
+                DUPX.handleDAWSCommunicationProblem(xHr, true, textStatus, 'ping');
+                return false;
+            }
 
 			DUPX.DAWS.FailureCount = 0;
 			console.log("pingDAWS:AJAX success. Resetting failure count");
@@ -1062,7 +1130,6 @@ DUPX.kickOffDupArchiveExtract = function ()
 	$.ajax({
 		type: "POST",
 		timeout: DUPX.DAWS.KickoffWorkerTimeInSec * 2000,  // Double worker time and convert to ms
-		dataType: "json",
 		url: DUPX.DAWS.Url,
 		data: requestString,
 		beforeSend: function () {
@@ -1071,7 +1138,16 @@ DUPX.kickOffDupArchiveExtract = function ()
 			$('#s1-result-form').show();
 			DUPX.updateProgressPercent(0);
 		},
-		success: function (data) {
+		success: function (respData, textStatus, xHr) {
+            try {
+                var data = DUPX.parseJSON(respData);
+            } catch(err) {
+                console.error(err);
+                console.error('JSON parse failed for response data: ' + respData);
+                console.log('kickOffDupArchiveExtract:AJAX error. textStatus=', textStatus);
+			    DUPX.handleDAWSCommunicationProblem(xHr, false, textStatus);
+                return false;
+            }
 
 			console.log('kickOffDupArchiveExtract:success');
 			if (typeof (data) != 'undefined' && data.pass == 1) {
@@ -1129,13 +1205,23 @@ DUPX.finalizeDupArchiveExtraction = function(dawsStatus)
 	$.ajax({
 		type: "POST",
 		timeout: 30000,
-		dataType: "json",
 		url: window.location.href,
 		data: formData,
 		beforeSend: function () {
 
 		},
-		success: function (data) {
+		success: function (respData, textStatus, xHr) {
+            try {
+                var data = DUPX.parseJSON(respData);
+            } catch(err) {
+                console.error(err);
+                console.error('JSON parse failed for response data: ' + respData);
+                console.log("finalizeDupArchiveExtraction:error");
+                console.log(xHr.statusText);
+                console.log(xHr.getAllResponseHeaders());
+                console.log(xHr.responseText);
+                return false;
+            }
 			console.log("finalizeDupArchiveExtraction:success");
 		},
 		error: function (xHr) {
@@ -1167,12 +1253,16 @@ DUPX.runStandardExtraction = function ()
 			$form.hide();
 			$('#s1-result-form').show();
 		},
-		success: function (data, textstatus, xHr) {
-            $("#ajax-json-debug").val(data);
-            var dataJSON = data;
-            data = DUPX.parseJSON(data, xHr, textstatus);
-            if (false === data) {
-                return;
+		success: function (respData, textStatus, xHr) {
+            $("#ajax-json-debug").val(respData);
+            var dataJSON = respData;
+            try {
+                var data = DUPX.parseJSON(respData);
+            } catch(err) {
+                console.error(err);
+                console.error('JSON parse failed for response data: ' + respData);
+                DUPX.ajaxCommunicationFailed(xHr, textStatus, 'extract');
+                return false;
             }
 			if (typeof (data) != 'undefined' && data.pass == 1) {
 				$("#ajax-logging").val($("input:radio[name=logging]:checked").val());
@@ -1242,13 +1332,17 @@ DUPX.runChunkedExtraction = function (data)
                 DUPX.updateProgressPercent(0);
             }
         },
-        success: function (data, textstatus, xHr) {
-            if(typeof (data) != 'undefined'){
-                var dataJSON = data;
-                $("#ajax-json-debug").val(data);
-                data = DUPX.parseJSON(data, xHr, textstatus);
-                if (false === data) {
-                    return;
+        success: function (respData, textStatus, xHr) {
+            if(typeof (respData) != 'undefined'){
+                var dataJSON = respData;
+                $("#ajax-json-debug").val(respData);
+                try {
+                    var data = DUPX.parseJSON(respData);
+                } catch(err) {
+                    console.error(err);
+                    console.error('JSON parse failed for response data: ' + respData);
+                    DUPX.ajaxCommunicationFailed(xHr, textStatus, 'extract');
+                    return false;
                 }
                 if (data.pass == 1) {
                     $("#ajax-logging").val($("input:radio[name=logging]:checked").val());
@@ -1288,20 +1382,20 @@ DUPX.runChunkedExtraction = function (data)
                 }
             }
         },
-        error: function (xHr, textstatus) {
-            DUPX.ajaxCommunicationFailed(xHr, textstatus, 'extract');
+        error: function (xHr, textStatus) {
+            DUPX.ajaxCommunicationFailed(xHr, textStatus, 'extract');
         }
     });
 };
 
 
-DUPX.ajaxCommunicationFailed = function (xhr, textstatus, page)
+DUPX.ajaxCommunicationFailed = function (xhr, textStatus, page)
 {
 	var status = "<b>Server Code:</b> " + xhr.status + "<br/>";
 	status += "<b>Status:</b> " + xhr.statusText + "<br/>";
 	status += "<b>Response:</b> " + xhr.responseText + "<hr/>";
 
-	if(textstatus && textstatus.toLowerCase() == "timeout" || textstatus.toLowerCase() == "service unavailable") {
+	if(textStatus && textStatus.toLowerCase() == "timeout" || textStatus.toLowerCase() == "service unavailable") {
 
 		var default_timeout_message = "<b>Recommendation:</b><br/>";
 			default_timeout_message += "See <a target='_blank' href='https://snapcreek.com/duplicator/docs/faqs-tech/?180116102141#faq-trouble-100-q'>this FAQ item</a> for possible resolutions.";
@@ -1359,31 +1453,6 @@ DUPX.ajaxCommunicationFailed = function (xhr, textstatus, page)
 	DUPX.hideProgressBar();
 };
 
-DUPX.parseJSON = function(mixData, xHr, textstatus) {
-    try {
-		var parsed = JSON.parse(mixData);
-		return parsed;
-	} catch (e) {
-		console.log("JSON parse failed - 1");
-	}
-
-	var jsonStartPos = mixData.indexOf('{');
-	var jsonLastPos = mixData.lastIndexOf('}');
-	if (jsonStartPos > -1 && jsonLastPos > -1) {
-		var expectedJsonStr = mixData.slice(jsonStartPos, jsonLastPos + 1);
-		try {
-			var parsed = JSON.parse(expectedJsonStr);
-			return parsed;
-		} catch (e) {
-            console.log("JSON parse failed - 2");
-            DUPX.ajaxCommunicationFailed(xHr, textstatus, 'extract');
-            return false;
-		}
-	}
-    DUPX.ajaxCommunicationFailed(xHr, textstatus, 'extract');
-    return false;
-}
-
 /** Go back on AJAX result view */
 DUPX.hideErrorResult = function ()
 {
@@ -1422,7 +1491,7 @@ DUPX.onSafeModeSwitch = function ()
 $(document).ready(function ()
 {
 	DUPX.DAWS = new Object();
-	DUPX.DAWS.Url = document.URL.substr(0,document.URL.lastIndexOf('/')) + '/lib/dup_archive/daws/daws.php';
+	DUPX.DAWS.Url = window.location.href + '?is_daws=1&daws_csrf_token=<?php echo DUPX_CSRF::generate('daws');?>';
 	DUPX.DAWS.StatusPeriodInMS = 10000;
 	DUPX.DAWS.PingWorkerTimeInSec = 9;
 	DUPX.DAWS.KickoffWorkerTimeInSec = 6; // Want the initial progress % to come back quicker
@@ -1438,8 +1507,17 @@ $(document).ready(function ()
 	$("*[data-type='toggle']").click(DUPX.toggleClick);
 	$("#tabs").tabs();
 	DUPX.acceptWarning();
-	$('#set_file_perms').trigger("click");
-	$('#set_dir_perms').trigger("click");
+
+    <?php
+    $isWindows = DUPX_U::isWindows();
+    if (!$isWindows) {
+    ?>
+        $('#set_file_perms').trigger("click");
+        $('#set_dir_perms').trigger("click");
+    <?php
+    }
+    ?>
+
 	DUPX.toggleSetupType();
 
 	<?php echo ($arcCheck == 'Fail') ? "$('#s1-area-archive-file-link').trigger('click');" : ""; ?>

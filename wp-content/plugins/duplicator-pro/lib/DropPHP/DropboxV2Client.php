@@ -1,4 +1,5 @@
 <?php
+defined("ABSPATH") or die("");
 /**
  * Dropbox v2 API with wordpress http api
  * https://www.dropbox.com/developers/documentation/http/documentation
@@ -83,8 +84,7 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
               https://www.dropbox.com/developers/documentation/http/documentation#oa2-token
              */
             $url      = self::OAUTH2_URL.'token';
-            $response = wp_remote_post($url,
-                array(
+            $args = array(
                 // 'method'      => 'POST',
                 // 'timeout'     => 45,
                 // 'redirection' => 5,
@@ -93,13 +93,14 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
                 // 'headers'     => array("Content-type" => "application/x-www-form-urlencoded;charset=UTF-8"),
                 // 'headers'     => array("Content-type" => "application/x-www-form-urlencoded;charset=UTF-8"),
                 'body' => array(
-                    'client_id' => $this->appParams['app_key'],
-                    'client_secret' => $this->appParams['app_secret'],
-                    'code' => $auth_code,
-                    'grant_type' => 'authorization_code',
-                )
+                        'client_id' => $this->appParams['app_key'],
+                        'client_secret' => $this->appParams['app_secret'],
+                        'code' => $auth_code,
+                        'grant_type' => 'authorization_code',
                 )
             );
+            $args = $this->injectExtraReqArgs($args);
+            $response = wp_remote_post($url, $args);
 
             if (is_wp_error($response)) {
                 $error_message = $response->get_error_message();
@@ -270,6 +271,7 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
                     'Dropbox-API-Arg' => json_encode($params['api_arg'])
                 )
             );
+            $args = $this->injectExtraReqArgs($args);
             $response          = wp_remote_request($url, $args);
 
             if (is_wp_error($response)) {
@@ -426,10 +428,17 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
                 );
                 $params['content']                     = null;
                 $dropbox_client_upload_info->file_meta = $this->apiCall('files/upload_session/finish', 'POST', $params, true);
-                // ob_start();
-                // print_r($dropbox_client_upload_info->file_meta);
-                // $data=ob_get_clean();
-                // file_put_contents(dirname(__FILE__) . '/file_meta.log',$data,FILE_APPEND);
+                /*
+                ob_start();
+                print_r($dropbox_client_upload_info->file_meta);
+                $data=ob_get_clean();
+                file_put_contents(dirname(__FILE__) . '/file_meta.log',$data,FILE_APPEND);
+                */
+                if (null == $dropbox_client_upload_info->file_meta) {
+                    DUP_PRO_LOG::traceError("**** Upload finish dropbox API call given null value! Something going wrong.");
+                    usleep(500);
+                    $dropbox_client_upload_info->increase_failure_count();
+                }
             }
 
             $dropbox_client_upload_info->upload_id   = $upload_id;
@@ -633,7 +642,7 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
                 );
             }
 
-
+            $args = $this->injectExtraReqArgs($args);
             $response = wp_remote_request($url, $args);
 
             $params['content'] = '';
@@ -662,6 +671,15 @@ if (!class_exists('DUP_PRO_DropboxV2Client')) {
                     return false;
                 }
             }
+        }
+
+        private function injectExtraReqArgs($opts) {
+            $global = DUP_PRO_Global_Entity::get_instance();
+            $opts['sslverify'] = $global->ssl_disableverify ? false : true;
+            if (!$global->ssl_useservercerts) {
+                $opts['sslcertificates'] = DUPLICATOR_PRO_CERT_PATH;
+            }
+            return $opts;
         }
     }
     if (!class_exists('DropboxException')) {

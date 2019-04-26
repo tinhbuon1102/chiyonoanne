@@ -122,13 +122,12 @@ class DUPX_UpdateEngine
      * Begins the processing for replace logic
      *
      * @param mysql $conn The db connection object
-     * @param array $list Key value pair of 'search' and 'replace' arrays
      * @param array $tables The tables we want to look at
      * @param array $fullsearch Search every column regardless of its data type
      *
      * @return array Collection of information gathered during the run.
      */
-    public static function load($conn, $list = array(), $tables = array(), $fullsearch = false, $fixpartials = false)
+    public static function load($conn, $tables = array(), $fullsearch = false)
     {
 
         @mysqli_autocommit($conn, false);
@@ -150,6 +149,9 @@ class DUPX_UpdateEngine
             'err_all' => 0
         );
 
+        $nManager = DUPX_NOTICE_MANAGER::getInstance();
+        $srManager = DUPX_S_R_MANAGER::getInstance();
+
 		function set_sql_column_safe(&$str) {
 			$str = "`$str`";
 		}
@@ -158,25 +160,12 @@ class DUPX_UpdateEngine
     	$searchList = array();
     	$replaceList = array();
 
-    	foreach ($list as $item) {
-    	    $searchList[] = $item['search'];
-    	    $replaceList[] = $item['replace'];
-    	}
-
         $profile_start = DUPX_U::getMicrotime();
         if (is_array($tables) && !empty($tables)) {
 
             foreach ($tables as $table) {
                 $report['scan_tables']++;
                 $columns = array();
-
-                // Get a list of columns in this table
-                $sql = 'DESCRIBE ' . mysqli_real_escape_string($conn, $table);
-                $fields = mysqli_query($conn, $sql);
-                if (!$fields)  continue;
-                while ($column = mysqli_fetch_array($fields)) {
-                    $columns[$column['Field']] = $column['Key'] == 'PRI' ? true : false;
-                }
 
                 // Count the number of rows we have in the table if large we'll split into blocks
                 $row_count = mysqli_query($conn, "SELECT COUNT(*) FROM `".mysqli_real_escape_string($conn, $table)."`");
@@ -187,6 +176,23 @@ class DUPX_UpdateEngine
                 if ($row_count == 0) {
                     DUPX_Log::info("{$table}^ ({$row_count})");
                     continue;
+                }
+
+                // search replace by table
+                $searchList = array();
+                $replaceList = array();
+                $list = $srManager->getSearchReplaceList($table);
+                foreach ($list as $item) {
+                    $searchList[] = $item['search'];
+                    $replaceList[] = $item['replace'];
+                }
+
+                // Get a list of columns in this table
+                $sql = 'DESCRIBE ' . mysqli_real_escape_string($conn, $table);
+                $fields = mysqli_query($conn, $sql);
+                if (!$fields)  continue;
+                while ($column = mysqli_fetch_array($fields)) {
+                    $columns[$column['Field']] = $column['Key'] == 'PRI' ? true : false;
                 }
 
                 // $page_size = 25000;
@@ -214,6 +220,30 @@ class DUPX_UpdateEngine
                     DUPX_Log::info("{$table}{$colMsg} ({$row_count})");
                 }
 
+                $columnsSRList = array();
+                foreach ($columns as $column => $primary_key) {
+                    if (($cScope = self::getSearchReplaceCustomScope($table, $column)) === false) {
+                        // if don't have custom scope get normal search and reaplce table list
+                        $columnsSRList[$column] = array(
+                            'list' => &$list,
+                            'sList' => &$searchList,
+                            'rList' => &$replaceList,
+                            'exactMatch' => false
+                        );
+                    } else {
+                        // if column have custom scope overvrite default table search/replace list
+                        $columnsSRList[$column] = array(
+                            'list' => $srManager->getSearchReplaceList($cScope, true, false),
+                            'sList' => array(),
+                            'rList' => array(),
+                            'exactMatch' => self::isExactMatch($table, $column)
+                        );
+                        foreach ($columnsSRList[$column]['list'] as $item) {
+                            $columnsSRList[$column]['sList'][]  = $item['search'];
+                            $columnsSRList[$column]['rList'][]  = $item['replace'];
+                        }
+                    }
+                }
                 //Paged Records
                 for ($page = 0; $page < $pages; $page++) {
                     $current_row = 0;
@@ -223,14 +253,21 @@ class DUPX_UpdateEngine
                     $data = mysqli_query($conn, $sql);
 
                     if (!$data) {
-                        $report['errsql'][] = mysqli_error($conn);
+                        $errMsg = mysqli_error($conn);
+                        $report['errsql'][] = $errMsg;
+                        $nManager->addFinalReportNotice(array(
+                            'shortMsg' => 'DATA-REPLACE ERRORS: MySQL',
+                            'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                            'longMsg' => $errMsg,
+                            'sections' => 'search_replace'
+                        ));
                     }
 
                     $scan_count = ($row_count < $end) ? $row_count : $end;
                     DUPX_Log::info("\tScan => {$start} of {$scan_count}", 2);
 
                     //Loops every row
-                    while ($row = mysqli_fetch_array($data)) {
+                    while ($row = mysqli_fetch_assoc($data)) {
                         $report['scan_rows']++;
                         $current_row++;
                         $upd_col = array();
@@ -243,7 +280,11 @@ class DUPX_UpdateEngine
                         //Loops every cell
                         foreach ($columns as $column => $primary_key) {
                             $report['scan_cells']++;
-                            if (!isset($row[$column]))  continue;
+                            if (!isset($row[$column]))  {
+                                continue;
+                            }
+
+                            $safe_column = '`'.mysqli_real_escape_string($conn, $column).'`';
                             $edited_data = $data_to_fix = $row[$column];
                             $base64converted = false;
                             $txt_found = false;
@@ -251,23 +292,25 @@ class DUPX_UpdateEngine
                             //Unkeyed table code
                             //Added this here to add all columns to $where_sql
                             //The if statement with $txt_found would skip additional columns -TG
-                            if($is_unkeyed && ! empty($data_to_fix)) {
-                                $where_sql[] = mysqli_real_escape_string($conn, $column) . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
+                            if ($is_unkeyed && !empty($data_to_fix)) {
+                                $where_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
                             }
 
                             //Only replacing string values
                             if (!empty($row[$column]) && !is_numeric($row[$column]) && $primary_key != 1) {
-                                //Base 64 detection
-                                if (base64_decode($row[$column], true)) {
-                                    $decoded = base64_decode($row[$column], true);
-                                    if (self::isSerialized($decoded)) {
-                                        $edited_data = $decoded;
-                                        $base64converted = true;
-                                    }
-                                }
+                                // get search and reaplace list for column
+                                $tColList        = &$columnsSRList[$column]['list'];
+                                $tColSearchList  = &$columnsSRList[$column]['sList'];
+                                $tColreplaceList = &$columnsSRList[$column]['rList'];
+                                $tColExactMatch  = $columnsSRList[$column]['exactMatch'];
 
-                                //Skip table cell if match not found
-                                foreach ($list as $item) {
+                                // skip empty search col
+                                if (empty($tColSearchList)) {
+                                    continue;
+                                }
+                               
+                                // Search strings in data
+                                foreach ($tColList  as $item) {
                                     if (strpos($edited_data, $item['search']) !== false) {
                                         $txt_found = true;
                                         break;
@@ -275,42 +318,72 @@ class DUPX_UpdateEngine
                                 }
 
                                 if (!$txt_found) {
-                                    continue;
-                                }
+                                    //if not found decetc Base 64
+                                    if (($decoded = DUPX_U::is_base64($row[$column])) !== false) {
+                                        $edited_data = $decoded;
+                                        $base64converted = true;
 
-                                //Replace logic - level 1: simple check on any string or serlized strings
-/*
-                                *** fixpartials options become deprecated **/
-                                $edited_data = self::searchAndReplaceItems($searchList , $replaceList , $edited_data);
+                                        // Search strings in data decoded
+                                        foreach ($tColList  as $item) {
+                                            if (strpos($edited_data, $item['search']) !== false) {
+                                                $txt_found = true;
+                                                break;
+                                            }
+                                        }
+                                    }
 
-
-                                                //Replace logic - level 2: repair serialized strings that have become broken
-                                // check value without unserialize it
-                                if (self::is_serialized_string( $edited_data )) {
-                                    $serial_check = self::fixSerialString($edited_data);
-                                    if ($serial_check['fixed']) {
-                                        $edited_data = $serial_check['data'];
-                                    } elseif ($serial_check['tried'] && !$serial_check['fixed']) {
-                                        $serial_err++;
+                                    //Skip table cell if match not found
+                                    if (!$txt_found) {
+                                        continue;
                                     }
                                 }
 
+                                if (self::is_serialized_string( $edited_data ) && strlen($edited_data) > MAX_STRLEN_SERIALIZED_CHECK) {
+                                    // skip search and replace for too big serialized string
+                                    $serial_err++;
+                                } else  {
+                                    //Replace logic - level 1: simple check on any string or serlized strings
+                                    if ($tColExactMatch) {
+                                        
+                                        // if is exact match search and replace the itentical string
+                                        if (($rIndex = array_search($edited_data,$tColSearchList)) !== false) {
+                                            DUPX_Log::info("ColExactMatch ".$column.' search:'.$edited_data.' replace:'.$tColreplaceList[$rIndex].' index:'.$rIndex);
+                                            $edited_data = $tColreplaceList[$rIndex];
+                                           
+                                        }
+                                    } else {
+                                        // search if column contain search list
+                                        $edited_data = self::searchAndReplaceItems($tColSearchList , $tColreplaceList , $edited_data);
+                                        
+                                        //Replace logic - level 2: repair serialized strings that have become broken
+                                        // check value without unserialize it
+                                        if (self::is_serialized_string( $edited_data )) {
+                                            $serial_check = self::fixSerialString($edited_data);
+                                            if ($serial_check['fixed']) {
+                                                $edited_data = $serial_check['data'];
+                                            } elseif ($serial_check['tried'] && !$serial_check['fixed']) {
+                                                $serial_err++;
+                                            }
+                                        }
+                                    }
+
+                                }
                             }
 
                             //Change was made
-                            if ($edited_data != $data_to_fix || $serial_err > 0) {
+                            if ($serial_err > 0 || $edited_data != $data_to_fix) {
                                 $report['updt_cells']++;
                                 //Base 64 encode
                                 if ($base64converted) {
                                     $edited_data = base64_encode($edited_data);
                                 }
-                                $upd_col[] = $column;
-                                $upd_sql[] = $column . ' = "' . mysqli_real_escape_string($conn, $edited_data) . '"';
+                                $upd_col[] = $safe_column;
+                                $upd_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $edited_data) . '"';
                                 $upd = true;
                             }
 
                             if ($primary_key) {
-                                $where_sql[] = $column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
+                                $where_sql[] = $safe_column . ' = "' . mysqli_real_escape_string($conn, $data_to_fix) . '"';
                             }
                         }
 
@@ -320,22 +393,46 @@ class DUPX_UpdateEngine
 							$result	= mysqli_query($conn, $sql);
                             if ($result) {
                                 if ($serial_err > 0) {
-                                    $report['errser'][] = "SELECT " . implode(', ',
+                                    $errMsg = "SELECT " . implode(', ',
                                             $upd_col) . " FROM `{$table}`  WHERE " . implode(' AND ',
                                             array_filter($where_sql)) . ';';
+                                    $report['errser'][] = $errMsg;
+
+                                    $nManager->addFinalReportNotice(array(
+                                        'shortMsg' => 'DATA-REPLACE ERROR: Serialization',
+                                        'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                        'longMsg' => $errMsg,
+                                        'sections' => 'search_replace'
+                                    ));
                                 }
                                 $report['updt_rows']++;
                             } else {
+                                $errMsg = mysqli_error($conn);
 								$report['errsql'][]	= ($GLOBALS['LOGGING'] == 1)
-									? 'DB ERROR: ' . mysqli_error($conn)
-									: 'DB ERROR: ' . mysqli_error($conn) . "\nSQL: [{$sql}]\n";
-							}
+									? 'DB ERROR: ' . $errMsg
+									: 'DB ERROR: ' . $errMsg . "\nSQL: [{$sql}]\n";
+
+                                $nManager->addFinalReportNotice(array(
+                                    'shortMsg' => 'DATA-REPLACE ERRORS: MySQL',
+                                    'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                    'longMsg' => $errMsg,
+                                    'sections' => 'search_replace'
+                                ));
+                            }
 
 							//DEBUG ONLY:
                             DUPX_Log::info("\t{$sql}\n", 3);
 
                         } elseif ($upd) {
-                            $report['errkey'][] = sprintf("Row [%s] on Table [%s] requires a manual update.", $current_row, $table);
+                            $errMsg =  sprintf("Row [%s] on Table [%s] requires a manual update.", $current_row, $table);
+                            $report['errkey'][] = $errMsg;
+
+                            $nManager->addFinalReportNotice(array(
+                                    'shortMsg' => 'DATA-REPLACE ERROR: Key',
+                                    'level' => DUPX_NOTICE_ITEM::SOFT_WARNING,
+                                    'longMsg' => $errMsg,
+                                    'sections' => 'search_replace'
+                                ));
                         }
                     }
                     //DUPX_U::fcgiFlush();
@@ -351,12 +448,15 @@ class DUPX_UpdateEngine
         @mysqli_commit($conn);
         @mysqli_autocommit($conn, true);
 
+        $nManager->saveNotices();
+        
         $profile_end = DUPX_U::getMicrotime();
         $report['time'] = DUPX_U::elapsedTime($profile_end, $profile_start);
         $report['errsql_sum'] = empty($report['errsql']) ? 0 : count($report['errsql']);
         $report['errser_sum'] = empty($report['errser']) ? 0 : count($report['errser']);
         $report['errkey_sum'] = empty($report['errkey']) ? 0 : count($report['errkey']);
         $report['err_all'] = $report['errsql_sum'] + $report['errser_sum'] + $report['errkey_sum'];
+
         return $report;
     }
 
@@ -403,9 +503,8 @@ class DUPX_UpdateEngine
 		unset($_tmp);
 
 	    } elseif (is_object($data)) {
-		// it can never be an object type
-		DUPX_Log::info("OBJECT DATA IMPOSSIBLE\n" , 1);
-
+            // it can never be an object type
+            DUPX_Log::info("OBJECT DATA IMPOSSIBLE\n" );
 	    }
 
 	    return $data;
@@ -481,212 +580,119 @@ class DUPX_UpdateEngine
 	}
 
     /**
-     * Take a serialized array and unserialized it replacing elements and
-     * serializing any subordinate arrays and performing the replace.
-     *
-     * @param string $from String we're looking to replace.
-     * @param string $to What we want it to be replaced with
-     * @param array $data Used to pass any subordinate arrays back to in.
-     * @param bool $serialised Does the array passed via $data need serializing.
-     *
-     * @return array    The original array with all elements replaced as needed.
-     */
-    public static function recursiveUnserializeReplace($from = '', $to = '', $data = '', $serialised = false, &$objArr = array(), $fixpartials = false)
-    {
-        // some unseriliased data cannot be re-serialised eg. SimpleXMLElements
-        try {
-            if (is_string($data) && ($unserialized = @unserialize($data)) !== false) {
-                $data = self::recursiveUnserializeReplace($from, $to, $unserialized, true, $objArr, $fixpartials);
-            } elseif (is_array($data)) {
-                $_tmp = array();
-                foreach ($data as $key => $value) {
-                    $_tmp[$key] = self::recursiveUnserializeReplace($from, $to, $value, false, $objArr, $fixpartials);
-                }
-                $data = $_tmp;
-                unset($_tmp);
-            } elseif (is_object($data)) {
-                foreach ($objArr as $obj) {
-                    if ($obj === spl_object_hash($data)) {
-                        DUPX_Log::info("Recursion detected.");
-                        return $data;
-                    }
-                }
-
-                $objArr[] = spl_object_hash($data);
-                // RSR NEW LOGIC
-                $_tmp = $data;
-                if($fixpartials){
-                    if(method_exists($data,"getObjectVars")) {
-                        $props = $data->getObjectVars();
-                    }else{
-                        $props = get_object_vars($data);
-                    }
-                    foreach ($props as $key => $value) {
-                        $obj_replace_result = self::recursiveUnserializeReplace($from, $to, $value, false, $objArr, $fixpartials);
-                        if(method_exists($_tmp,"setVar")){
-                            $property_name = self::cleanPropertyName($_tmp,$key);
-                            $_tmp->setVar($property_name,$obj_replace_result);
-                        }else{
-                            $_tmp->$key = $obj_replace_result;
-                        }
-                    }
-                }else{
-                    $props = get_object_vars($data);
-                    foreach ($props as $key => $value) {
-                        // if ("__PHP_Incomplete_Class_Name" == $key)  continue;
-                        // if (isset($_tmp->$key)) {
-                            $_tmp->$key = self::recursiveUnserializeReplace($from, $to, $value, false, $objArr);
-                        // } else {
-                            // $key is like \0
-                            /*
-                            $int_key = intval($key);
-                            if ($key == $int_key && isset($_tmp->$int_key)) {
-                                $_tmp->$int_key = self::recursiveUnserializeReplace($from, $to, $value, false, $objArr);
-                            } else {
-                                throw new Exception('Object key->'.$key.' is not exist');
-                            }
-                            */
-                        // }
-                    }
-                }
-                $data = $_tmp;
-                unset($_tmp);
-            } else {
-                if (is_string($data)) {
-                    $data = str_replace($from, $to, $data);
-                }
-            }
-
-            if ($serialised) {
-                return serialize($data);
-            }
-        } catch (Exception $error) {
-            DUPX_Log::info("\nRECURSIVE UNSERIALIZE ERROR: With string\n" . $error, 2);
-        } catch (Error $error) {
-            DUPX_Log::info("\nRECURSIVE UNSERIALIZE ERROR: With string\n" . print_r($error, true), 2);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Crates a php file containing a quasi-class with
-     * the properties of the partial object
-     *
-     * @param $partialObject __PHP_Incomplete_Class the source object
-     * @return string the path to the file
-     */
-    private static function createClassDefinition($partialObject)
-    {
-        $object_properties = get_object_vars($partialObject);
-        $class_name = '';
-        $public_properties = array();
-        $private_properties = array();
-        $protected_properties = array();
-
-
-        foreach ($object_properties as $name => $val){
-            if($name == "__PHP_Incomplete_Class_Name"){
-                $class_name = $val;
-            }elseif(isset($class_name) && strpos($name,$class_name) !== false){
-                $private_properties[] = str_replace("\0","",str_replace($class_name,"",$name));
-            }elseif(strpos($name,"*") !== false){
-                $protected_properties[] = str_replace("\0","",str_replace("*","",$name));
-            }else{
-                $public_properties[] = $name;
-            }
-        }
-
-        $class_str = "<?php\nclass $class_name{\n";
-        $class_str .= "\t//PUBLIC PROPERTIES\n";
-        foreach ($public_properties as $public_property){
-            $class_str .= "\tpublic $".$public_property.";\n";
-        }
-        $class_str .= "\t//PROTECTED PROPERTIES\n";
-        foreach ($protected_properties as $protected_property){
-            $class_str .= "\tprotected $".$protected_property.";\n";
-        }
-        $class_str .= "\t//PRIVATE PROPERTIES\n";
-        foreach ($private_properties as $private_property){
-            $class_str .= "\tprivate $".$private_property.";\n";
-        }
-        $class_str .= "\t//FUNCTION TO SET ALL PROPERTIES\n";
-        $class_str .= "\t".'public function setVar($name,$value)';
-        $class_str .= "\t{\n";
-        $class_str .= "\t\t".'$this->$name = $value;'."\n";
-        $class_str .= "\t}\n\n";
-
-//        $class_str .= "\t//FUNCTION TO Get ALL PROPERTIES\n";
-//        $class_str .= "\t".'public function getVar($name)';
-//        $class_str .= "\t{\n";
-//        $class_str .= "\t\t".'return $this->{$name};'."\n";
-//        $class_str .= "\t}\n";
-
-        $class_str .= "\t//GET ALL OBJECT VARS\n";
-        $class_str .= "\t".'public function getObjectVars()';
-        $class_str .= "\t{\n";
-        $class_str .= "\t\t".'return get_object_vars($this);'."\n";
-        $class_str .= "\t}\n";
-
-        $class_str .= "}";
-
-        $filename = uniqid().".php";
-        $path = str_replace("\\","/",dirname(__FILE__)).'/tmp/';
-        mkdir($path);
-
-        if(file_put_contents($path.$filename,$class_str) !== false){
-            return $path.$filename;
-        }else{
-            throw new Exception("Couldn't write to ".$path.$filename);
-        }
-    }
-
-    private static function recursiveClassInclude($data, &$objArr = array()){
-        if(is_object($data) && is_a($data, '__PHP_Incomplete_Class')){
-            foreach ($objArr as $obj) {
-                if($obj == spl_object_hash($data)){
-                    DUPX_Log::info("Recursion");
-                    return;
-                }
-            }
-            $objArr[] = spl_object_hash($data);
-            include self::createClassDefinition($data);
-            $props = get_object_vars($data);
-            foreach ($props as $key => $value) {
-                self::recursiveClassInclude($value,$objArr);
-            }
-        }elseif(is_array($data)){
-            foreach ($data as $key => $value) {
-                self::recursiveClassInclude($value,$objArr);
-            }
-        }
-    }
-
-    private static function cleanPropertyName($obj,$str){
-        $class_name = get_class($obj);
-        return str_replace("*", "", str_replace("\0","",str_replace($class_name,"",$str)));
-    }
-
-    private static function deleteTempClassFiles(){
-        $path = str_replace("\\","/",dirname(__FILE__)).'/tmp/*';
-        $files = glob($path); // get all file names
-        foreach($files as $file){ // iterate files
-            if(is_file($file))
-                unlink($file); // delete file
-        }
-    }
-
-    /**
      * Test if a string in properly serialized
      *
      * @param string $data Any string type
      *
      * @return bool Is the string a serialized string
      */
-    public static function isSerialized($data)
+    public static function unserializeTest($data)
     {
-        $test = @unserialize(($data));
-        return ($test !== false || $test === 'b:0;') ? true : false;
+        if (!is_string($data)) {
+            return false;
+        } else if ($data === 'b:0;') {
+            return true;
+        } else {        
+            try {
+                DUPX_Handler::$should_log = false;
+                $unserialize_ret = @unserialize($data);
+                DUPX_Handler::$should_log = true;
+                return ($unserialize_ret !== false);
+             } catch (Exception $e) {
+                DUPX_Log::info("Unserialize exception: ".$e->getMessage());
+                //DEBUG ONLY:
+                DUPX_Log::info("Serialized data\n".$data, 3);
+                return false;
+            }
+        }
+    }
+
+    /**
+     * custom columns list
+     * if the table / column pair exists in this array then the search scope will be overwritten with that contained in the array
+     *
+     * @var array
+     */
+    private static $customScopes = array(
+        'blogs' => array(
+            'domain' => array(
+                'scope' => 'domain_host',
+                'exact' => true
+            ),
+            'path' => array(
+                'scope' => 'domain_path',
+                'exact' => true
+            )
+        ),
+        'signups' => array(
+            'domain' => array(
+                'scope' => 'domain_host',
+                'exact' => true
+            ),
+            'path' => array(
+                'scope' => 'domain_path',
+                'exact' => true
+            )
+        ),
+        'site' => array(
+            'domain' => array(
+                'scope' => 'domain_host',
+                'exact' => true
+            ),
+            'path' => array(
+                'scope' => 'domain_path',
+                'exact' => true
+            )
+        )
+    );
+
+    /**
+     *
+     * @param string $table
+     * @param string $column
+     * @return boolean|string  false if custom scope not found or return custom scoper for table/column
+     */
+    private static function getSearchReplaceCustomScope($table, $column)
+    {
+        if (strpos($table, $GLOBALS['DUPX_AC']->wp_tableprefix) !== 0) {
+            return false;
+        }
+
+        $table_key = substr($table, strlen($GLOBALS['DUPX_AC']->wp_tableprefix));
+
+        if (!array_key_exists($table_key, self::$customScopes)) {
+            return false;
+        }
+
+        if (!array_key_exists($column, self::$customScopes[$table_key])) {
+            return false;
+        }
+
+        return self::$customScopes[$table_key][$column]['scope'];
+    }
+
+    /**
+     *
+     * @param string $table
+     * @param string $column
+     * @return boolean if true search a exact match in column if false search as LIKE
+     */
+    private static function isExactMatch($table, $column) {
+        if (strpos($table, $GLOBALS['DUPX_AC']->wp_tableprefix) !== 0) {
+            return false;
+        }
+
+        $table_key = substr($table, strlen($GLOBALS['DUPX_AC']->wp_tableprefix));
+
+        if (!array_key_exists($table_key, self::$customScopes)) {
+            return false;
+        }
+
+        if (!array_key_exists($column, self::$customScopes[$table_key])) {
+            return false;
+        }
+
+        return self::$customScopes[$table_key][$column]['exact'];
     }
 
     /**
@@ -700,11 +706,12 @@ class DUPX_UpdateEngine
 	{
 		$result = array('data' => $data, 'fixed' => false, 'tried' => false);
 
-		if (!self::isSerialized($data)) {
+        // check if serialized string must be fixed
+		if (!self::unserializeTest($data)) {
 
 		    $serialized_fixed = self::recursiveFixSerialString($data);
 
-			if (self::isSerialized($serialized_fixed)) {
+			if (self::unserializeTest($serialized_fixed)) {
 
 			    $result['data'] = $serialized_fixed;
 
@@ -836,11 +843,4 @@ class DUPX_UpdateEngine
 
 	}
 
-    /**
-     *  The call back method call from via fixSerialString
-     */
-    private static function fixStringCallback($matches)
-    {
-        return 's:' . strlen(($matches[2]));
-    }
 }

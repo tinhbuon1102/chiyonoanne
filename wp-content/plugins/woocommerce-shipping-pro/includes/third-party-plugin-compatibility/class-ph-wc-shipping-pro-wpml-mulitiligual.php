@@ -28,8 +28,19 @@ if( ! class_exists("Ph_WC_Shipping_Pro_WPML_Mulitiligual") ) {
             // To switch language to default language.
             add_action( 'ph_woocommerce_shipping_pro_before_shipping_calculation', array( $this, 'switch_lang_to_default_lang') );
             // To switch language to current language.
-            add_action( 'ph_woocommerce_shipping_pro_after_shipping_calculation', array( $this, 'switch_lang_to_current_lang') );
-        }
+			add_action( 'ph_woocommerce_shipping_pro_after_shipping_calculation', array( $this, 'switch_lang_to_current_lang') );
+			add_filter( 'ph_wc_shipping_pro_rate_label', array( $this, 'shipping_rate_label_in_current_language' ) );
+		}
+		
+		/**
+		 * Get the Shipping rate label in current language.
+		 * @param string $label Shipping Method name
+		 * @return string
+		 */
+		public function shipping_rate_label_in_current_language( $label ) {
+			$label = apply_filters( 'wpml_translate_single_string', $label, 'wf_woocommerce_shipping_pro', 'shipping-method-title_'.$label, self::$wpml_current_language );
+			return $label;
+		}
 
         /**
          * Switch Laguage to WPML default language.

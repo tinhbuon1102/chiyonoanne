@@ -43,13 +43,24 @@ if (isset($_REQUEST['action'])) {
 
 <!-- ===============================
 NEW FEATURES -->
-<label class="profile-type"><?php DUP_PRO_U::esc_html_e("New Features "); echo  "({$dup_version})" ; ?></label>
-<?php
-        //DUP_PRO_U::esc_html_e('Primarily a security and bug-fix release.');
-	?>
-<br/>
-    See <a href="https://snapcreek.com/duplicator/docs/changelog/" target="_blank">changelog</a> for details on new features and fixes in this release.
-<br/><br/><br/>
+<label class="profile-type"><?php DUP_PRO_U::esc_html_e("Release Details"); ?></label>
+
+<p class="item">
+
+    <!--
+    <?php
+//    echo '<b>';
+//    DUP_PRO_U::esc_html_e('S3-Compatible Storage: ');
+//    echo '</b>';
+//
+//    DUP_PRO_U::esc_html_e('Support for S3-Compatible Storage types besides Amazon (Wasabi, Digital Ocean, etc...)');
+
+    ?>
+
+    <br/><br/>-->
+    See <a href="https://snapcreek.com/duplicator/docs/changelog/" target="_blank">changelog</a> for details on all new features and fixes in this release.           
+</p>
+
 
 <!-- ===============================
 RECENT FEATURES -->
@@ -76,7 +87,7 @@ RECENT FEATURES -->
 FEATURE SURVEY -->
 <label class="profile-type"><?php DUP_PRO_U::esc_html_e("Want a New Feature?")?></label><br/>
 <?php
-    echo '<strong><a target="blank" href="https://www.surveymonkey.com/r/XGFC7K8">' . 
+    echo '<strong><a target="blank" href="https://snapcreek.com/prosurvey">' . 
         DUP_PRO_U::__('Just answer this single question') . '</a></strong>' . DUP_PRO_U::__(' to tell us what feature you want added!');
 ?>
 <br/><br/><br/>
@@ -99,7 +110,7 @@ DUP_PRO_U::esc_html_e("Beta features are considered experimental and should not 
 	BETA -->
 	<input type="checkbox" name="_profile_beta" id="_profile_beta" <?php echo DUP_PRO_UI::echoChecked($global->profile_beta); ?> />
 	<label for="_profile_beta" class="profile-type"><?php DUP_PRO_U::esc_html_e("Enable"); ?></label>
-	<i class="fa fa-question-circle"
+	<i class="fas fa-question-circle fa-sm"
 		data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Debug views"); ?>"
 		data-tooltip="<?php DUP_PRO_U::esc_attr_e('Checking this checkbox will enable various beta features.  These features should NOT be used in production environments.  Please '
 			. 'let us know your thoughts and report any issue encountered.  This will help to more quickly get the feature out of Beta.'); ?>"></i>
@@ -130,7 +141,7 @@ DUP_PRO_U::esc_html_e("Beta features are considered experimental and should not 
 	DESIGN CONCEPTS 
 	<input type="checkbox" name="_profile_idea" id="_profile_idea" <?php echo DUP_PRO_UI::echoChecked($global->profile_idea); ?> />
 	<label for="_profile_idea" class="profile-type"><?php DUP_PRO_U::esc_html_e("Design Concepts"); ?></label>
-	<i class="fa fa-question-circle"
+	<i class="fas fa-question-circle fa-sm"
 		data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Concept Views"); ?>"
 		data-tooltip="<?php DUP_PRO_U::esc_attr_e('Checking this checkbox will enable various idea design concepts.  These features MAY NOT function fully and should '
 			. 'NEVER be used in production enviroments.  In some cases the features will simply just be UI mockups.  Please let us know what you think of the concepts as '

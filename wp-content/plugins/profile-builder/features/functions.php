@@ -164,11 +164,7 @@ function wppb_mail( $to, $subject, $message, $message_from = null, $context = nu
 	
 	if ( $send_email ) {
 		//we add this filter to enable html encoding
-		if ( version_compare( phpversion(), '5.4.0', '<' ) ) {
-			add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
-		}else{
-			add_filter('wp_mail_content_type', function( $content_type ) { return 'text/html'; } );
-		}
+		add_filter('wp_mail_content_type', 'wppb_html_content_type' );
 
 		$atts = apply_filters( 'wppb_mail', compact( 'to', 'subject', 'message', 'headers' ), $context );
 
@@ -180,6 +176,11 @@ function wppb_mail( $to, $subject, $message, $message_from = null, $context = nu
 	}
 
 	return '';
+}
+
+/* return text/html as email content type. used in  wp_mail_content_type filter */
+function wppb_html_content_type( $content_type ){
+    return 'text/html';
 }
 
 function wppb_activate_account_check(){
@@ -1133,8 +1134,13 @@ function wppb_private_website_functionality(){
 				$allowed_pages = apply_filters( 'wppb_private_website_allowed_pages', $allowed_pages );
 
                 global $post;
-				if( !isset( $post ) )
-				    $post_id = 0;
+				if( !isset( $post ) ) {
+				    if( function_exists('url_to_postid') ) {
+                        $post_id = url_to_postid(wppb_curpageurl());//try to get the id from the actual url
+                    }else {
+                        $post_id = 0;
+                    }
+                }
 				else
                     $post_id = $post->ID;
 

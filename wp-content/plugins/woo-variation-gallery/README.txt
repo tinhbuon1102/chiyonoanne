@@ -1,10 +1,12 @@
-=== WooCommerce Additional Variation Images Gallery ===
-Contributors: EmranAhmed, getwooplugins, wpeshaan
+=== Additional Variation Images Gallery for WooCommerce ===
+Contributors: EmranAhmed, wpeshaan, getwooplugins
 Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, product variation image, variation images gallery, additional image, additianal variation image, WooCommerce variation product thumbnail gallery
 Requires at least: 4.8
-Tested up to: 5.0
+Tested up to: 5.1
 Requires PHP: 5.6
 Stable tag: trunk
+WC requires at least: 3.2
+WC tested up to: 3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,11 +14,11 @@ Allows to insert multiple images for per variation to let visitors to see a diff
 
 == Description ==
 
-=== How To Install WooCommerce Additional Variation Images Gallery Plugin ===
+=== How To Install Additional Variation Images Gallery Plugin ===
 
 [youtube https://www.youtube.com/watch?v=AuEbw3X0Irs]
 
-When it comes to displaying multiple images for WooCommerce product attribute variation to drive sales and conversion, WooCommerce Additional Variation Images Gallery is incredible to option to pick.
+When it comes to displaying multiple images for WooCommerce product attribute variation to drive sales and conversion, Additional Variation Images Gallery for WooCommerce is incredible to option to pick.
 
 WooCommerce comes with a basic option to insert a single image for a product variation. It means, there is no option to insert more than a single variation image when it highly essential to sell your product.
 
@@ -32,28 +34,39 @@ If you are looking for a plugin to insert multiple images per variation for WooC
 * Variation Image Removing Option
 * Unlimited WooCommerce Plugins support Including <a href="http://bit.ly/wvg-org-item-page"> WooCommerce Variation Swatches</a> 
 
-= Sites Built With WooCommerce Additional Variation Images Gallery Plugin =
+= Sites Built With Additional Variation Images Gallery Plugin =
 <blockquote>
 <ul>
 <li><a target="_blank" href="http://bit.ly/gallery-demo-flatsome-01">himeswear.com</a> | Built With: Flatsome Theme | Niche: Clothing Store. </li>
 
+<li><a target="_blank" href="http://bit.ly/showcase-gallery-wp-org-demo-03">denardo.online</a> | Built With: Divi Theme | Niche: Automobile Wheels Store. </li>
+
 <li><a target="_blank" href="http://bit.ly/gallery-plugin-demo-01">bell-motorcycle-helmets.co.uk</a> | Built With: Avada Theme | Niche: Motorcycle Helmet Store. </li>
+
+<li><a target="_blank" href="http://bit.ly/showcase-gallery-wp-org-02">saintlombard.com</a> | Built With: Avada WooCommerce Theme | Niche: Ladies Purse Bag Store. </li>
+
+<li><a target="_blank" href="http://bit.ly/showcase-gallery-wordpress-org-01">lemalindine.com</a> | Built With: Shopkeeper WooCommerce Theme | Niche: Sandal Store. </li>
+
+<li><a target="_blank" href="http://bit.ly/showcase-gallery-wporg-demo-04">wallycase.com</a> | Built With: Aurum WooCommerce Theme | Niche: Mobile Case Store. </li>
+
 </ul>
 </blockquote>
 
-= PREMIUM FEATURES OF WOOCOMMERCE ADDITIONAL VARIATION IMAGES GALLERY =
+= PREMIUM FEATURES OF ADDITIONAL VARIATION IMAGES GALLERY =
 
-[Live Demo](http://bit.ly/wvg-demo-pro) | [Upgrade to PRO](http://bit.ly/variation-image-gl-pro) | [Documentation](http://bit.ly/wvariation-image-gallery-doc) | [Support](https://getwooplugins.com/tickets/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
+[Live Demo](http://bit.ly/variation-gallery-live-demo) | [Upgrade to PRO](http://bit.ly/variation-image-gl-pro) | [Documentation](http://bit.ly/wvariation-image-gallery-doc) | [Support](https://getwooplugins.com/tickets/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
 
 * Display Unlimited Images For Each WooCommerce Product Variation 
 * Insert YouTube Video in the Product Image Gallery.
 * Insert Vimeo Video in the Product Image Gallery. 
 * Insert Video From WordPress Media Library in the Product.
+* Enable Auto Slide for Product Variation Gallery
+* Top, Left, Right Gallery Thumbnail Position. 
 * Video Zoom and Lightbox
 * Automatic Updates 
 * Exclusive Technical Support
 
-=== How To Insert Videos as WooCommerce Variation Image Gallery (Pro Feature) ===
+=== How To Insert Videos on Additional Variation Image Gallery (Pro Feature) ===
 
 [youtube https://www.youtube.com/watch?v=wopbjNkJNEc]
 
@@ -63,7 +76,7 @@ If you are looking for a plugin to insert multiple images per variation for WooC
 
 1. Login to your the admin panel
 2. Navigate to Plugins -> Add New
-3. Search **WooCommerce Additional Variation Images Gallery**
+3. Search **Additional Variation Images Gallery for WooCommerce**
 4. Click install and activate respectively.
 
 ### Manual Install From WordPress Dashboard
@@ -104,6 +117,27 @@ Yes, it is.
 4. Adding Images on gallery
 
 == Changelog ==
+
+= 1.1.25 =
+
+* Update: Readme and Support WooCommerce 3.6
+
+= 1.1.24 =
+
+* Update: Settings Panel
+* Add: Tutorial Section
+
+= 1.1.23 =
+
+* Add: Oxygen Theme Support
+
+= 1.1.22 =
+
+* Remove: CDN Load
+
+= 1.1.21 =
+
+* Add: Image Preload Settings
 
 = 1.1.20 =
 

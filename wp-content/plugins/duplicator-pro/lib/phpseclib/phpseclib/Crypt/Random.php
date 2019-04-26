@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Random Number Generator
  *
@@ -23,7 +22,7 @@
  */
 
 namespace phpseclib\Crypt;
-
+defined("ABSPATH") or die("");
 use phpseclib\Crypt\AES;
 use phpseclib\Crypt\Base;
 use phpseclib\Crypt\Blowfish;

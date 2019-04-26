@@ -16,6 +16,8 @@ if (isset($_REQUEST['action'])) {
 	switch ($_REQUEST['action']) {
 
 		case 'save':
+			$global->uninstall_settings = isset($_POST['uninstall_settings']) ? 1 : 0;
+			$global->uninstall_packages= isset($_POST['uninstall_packages']) ? 1 : 0;
 			$global->wpfront_integrate = isset($_REQUEST['_wpfront_integrate']) ? 1 : 0;
 			$global->debug_on			= isset($_REQUEST['_debug_on']) ? 1 : 0;
 			$global->trace_profiler_on  = isset($_REQUEST['_trace_profiler_on']) ? 1 : 0;
@@ -23,7 +25,7 @@ if (isset($_REQUEST['action'])) {
 	
 		case 'trace':
 			$trace_direction = $_REQUEST['_logging_mode'] == 'on' ? 'on' : 'off';
-			$action_response .= ' &nbsp; ' . DUP_PRO_U::__("Trace settings have been turned {$trace_direction}.");;
+			$action_response .= ' &nbsp; ' . DUP_PRO_U::__("Trace settings have been turned {$trace_direction}.");
 		break;
 	}
 
@@ -81,7 +83,16 @@ $wpfront_ready = apply_filters('wpfront_user_role_editor_duplicator_integration_
 
 <?php if ($action_updated) : ?>
 	<div class="notice notice-success is-dismissible dpro-wpnotice-box"><p><?php echo $action_response; ?></p></div>
-<?php endif; ?>
+<?php endif;
+
+$duplicator_pro_settings_message = get_transient('duplicator_pro_settings_message');
+if ($duplicator_pro_settings_message) {
+?>
+	<div class="notice notice-success is-dismissible dpro-wpnotice-box"><p><?php echo esc_html($duplicator_pro_settings_message); ?></p></div>
+<?php
+	delete_transient('duplicator_pro_settings_message');
+}
+?>
 
 <!-- ===============================
 PLUG-IN SETTINGS -->
@@ -91,6 +102,17 @@ PLUG-IN SETTINGS -->
 	<tr valign="top">
 		<th scope="row"><label><?php DUP_PRO_U::esc_html_e("Version"); ?></label></th>
 		<td><?php echo DUPLICATOR_PRO_VERSION ?></td>
+	</tr>
+	<tr valign="top">
+		<th scope="row"><label><?php DUP_PRO_U::esc_html_e("Uninstall"); ?></label></th>
+		<td>
+			<input type="checkbox" name="uninstall_settings" id="uninstall_settings" <?php echo DUP_PRO_UI::echoChecked($global->uninstall_settings); ?> /> 
+			<label for="uninstall_settings"><?php DUP_PRO_U::esc_html_e("Delete Plugin Settings"); ?> </label><br/>
+
+			<input type="checkbox" name="uninstall_packages" id="uninstall_packages" <?php echo DUP_PRO_UI::echoChecked($global->uninstall_packages); ?> /> 
+			<label for="uninstall_packages"><?php DUP_PRO_U::esc_html_e("Delete Entire Storage Directory"); ?></label><br/>
+
+		</td>
 	</tr>
 	<tr>
 		<th scope="row"><label><?php DUP_PRO_U::esc_html_e("Custom Roles"); ?></label></th>
@@ -167,11 +189,11 @@ ADVANCED SETTINGS -->
 		<th scope="row"><label><?php DUP_PRO_U::esc_html_e("Settings"); ?></label></th>
 		<td>
 			<button class="button"  onclick="DupPro.Pack.ConfirmResetAll(); return false">
-				<i class="fa fa-repeat"></i> <?php echo DUP_PRO_U::__('Reset All'); ?>
+				<i class="fas fa-redo fa-sm"></i> <?php echo DUP_PRO_U::__('Reset All'); ?>
 			</button>
 			<p class="description">
 				<?php DUP_PRO_U::esc_html_e("Reset all settings to their defaults."); ?>
-				<i class="fa fa-question-circle"
+				<i class="fas fa-question-circle fa-sm"
 					data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Reset Settings"); ?>"
 					data-tooltip="<?php DUP_PRO_U::esc_attr_e('Resets standard settings to defaults. Does not affect license key, storage or schedules.'); ?>"></i>
 			</p>
@@ -214,12 +236,18 @@ jQuery(document).ready(function ($) {
 		$.ajax({
 			type: "POST",
 			url: ajaxurl,
-			dataType: "json",
 			data: {
 				action: 'duplicator_pro_reset_user_settings',
 				nonce: '<?php echo wp_create_nonce('duplicator_pro_reset_user_settings'); ?>'
 			},
-			success: function (data) {
+			success: function (respData) {
+				try {
+					var data = DupPro.parseJSON(respData);
+				} catch(err) {
+					console.error(err);
+					console.error('JSON parse failed for response data: ' + respData);
+					var data = respData;
+				}
 				DupPro.ReloadWindow(data);
 			}
 		});

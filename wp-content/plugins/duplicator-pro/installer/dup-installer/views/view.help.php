@@ -1,13 +1,14 @@
 <?php
+defined("DUPXABSPATH") or die("");
 	//The help for both pro and lite are shared.  Pro is where the master lives.  Use the flag below to
     //indicate if this help lives in lite or pro
-	$pro_version = true;
+	//$pro_version = true;
 ?>
 <!-- =========================================
 HELP FORM -->
 <div id="main-help">
 <div class="help-online"><br/>
-	<i class="fa fa-file-text-o"></i> For complete help visit the
+	<i class="far fa-file-alt fa-sm"></i> For complete help visit the
 	<a href="https://snapcreek.com/support/docs/" target="_blank">Online Knowledge-Base</a> <br/>
 	<small>Features available only in Duplicator Pro are flagged with a <sup>pro</sup> tag.</small>
 </div>
@@ -82,7 +83,7 @@ STEP 1
 		</td>
 	</tr>
 	<tr>
-		<td>Overwrite Install</td>
+		<td>Overwrite Install <sup>pro</sup></td>
 		<td>
 			This mode indicates that the installer was started in a location that contains an existing site.  With this mode <b>the existing site will be overwritten</b> with
 			the contents of the archive.zip/daf and the database.sql file.  This is an advanced option and users should be pre-paired to know that state of their database
@@ -90,7 +91,7 @@ STEP 1
 		</td>
 	</tr>
 	<tr>
-		<td>Overwrite Install <br/> Database Only</td>
+		<td>Overwrite Install <br/> Database Only <sup>pro</sup></td>
 		<td>
 			This mode indicates that the installer was started in a location that contains an existing site.  With this mode <b>the existing site will be overwritten</b> with
 			the contents of the database.sql file.  This is an advanced option and users should be pre-paired to know that state of their database and site files ahead of time.
@@ -100,7 +101,7 @@ STEP 1
 	<br/><br/>
 
 
-    The "Extract Archive" screen is separated into four sections:
+    Step 1 of the installer is separated into four sections for pro and three for lite.  Below is an overview of each area:
 	<br/><br/>
 
 	<h3>Archive</h3>
@@ -165,6 +166,8 @@ STEP 1
 
 				<b>All Directories:</b> Check the 'All Directories' check-box and enter in the desired <a href="http://php.net/manual/en/function.chmod.php" target="_blank">chmod command</a>
 				to recursively set octal value on all the directories being extracted.  Typically this value is 755 on most servers and hosts.
+				<br/><br/>
+				<i>Note: These settings only apply to Linux operating systems</i>
 			</td>
 		</tr>
 		<tr>
@@ -200,15 +203,15 @@ STEP 1
 				handle the new server environment.  This is an	advanced option and should only be used if you know how to properly configure your web servers configuration.
 				<br/><br/>
 
-<!--				<b>Ignore All:</b> This option simply does nothing.  No files are backed up, nothing is renamed or created.  This advanced option assumes you already have your
-				config files setup and know how they should behave in the new environment.
-				<br/><br/>-->
+				<b>Ignore All:</b> This option simply does nothing.  No files are backed up, nothing is renamed or created.  This advanced option assumes you already have your
+				config files setup and know how they should behave in the new environment.  When the package is build it will always create a htaccess.orig or web.config.orig.
+				Since these files are already in the archive file they will show up when the archive is extracted.
+				<br/><br/>
 
-				<small>
 				<b>Additional Notes:</b>
 				Inside the archive.zip will be a copy of the original .htaccess (Apache) or the web.config (IIS) files that were setup with your packaged site.  They are both
-				renamed to htaccess.orig and web.config.orig.  Using either Create New or Restore Original if any existing config files exist for the extraction process they will
-				be backed up with a .bak extension.</small>
+				renamed to htaccess.orig and web.config.orig.  When using either 'Create New' or 'Restore Original' any existing config files  will	be backed up with a .bak extension.
+				<i>None of these changes are made until Step 3 is completed, to avoid any issues the .htaccess might cause during the install</i>
 				<br/><br/>
 			</td>
 		</tr>
@@ -493,6 +496,10 @@ STEP 3
 			<td>These plug-ins are the plug-ins that were activated when the package was created and represent the plug-ins that will be activated after the install.</td>
 		</tr>
 		<tr>
+			<td>Update email domains</td>
+			<td>The domain portion of all email addresses will be updated if this option is enabled.</td>
+		</tr>
+		<tr>
 			<td>Full Search</td>
 			<td>Full search forces a scan of every single cell in the database. If it is not checked then only text based columns are searched which makes the update process much faster.
 			Use this option if you have issues with data not updating correctly.</td>
@@ -500,6 +507,14 @@ STEP 3
 		<tr>
 			<td>Post GUID</td>
 			<td>If your moving a site keep this value checked. For more details see the <a href="http://codex.wordpress.org/Changing_The_Site_URL#Important_GUID_Note" target="_blank">notes on GUIDS</a>.	Changing values in the posts table GUID column can change RSS readers to evaluate that the posts are new and may show them in feeds again.</td>
+		</tr>
+        <tr>
+			<td>Cross search <sup>pro</sup></td>
+            <td>
+                This option enables the searching and replacing of subsite domains and paths that link to each other.  <br>
+                Check this option if hyperlinks of at least one subsite point to another subsite.<br>
+                Uncheck this option there if there are at least <?php echo MAX_SITES_TO_DEFAULT_ENABLE_CORSS_SEARCH ?> subsites and no subsites hyperlinking to each other (Checking this option in this scenario would unnecessarily load your server).<br><br>
+                Check this option If you unsure if you need this option.<br></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="section">WP-Config File</td>

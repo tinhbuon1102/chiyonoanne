@@ -32,8 +32,7 @@ if ($_POST['view_mode'] == 'basic') {
 	}
 	
 	if (isset($_POST['dbpass'])) {
-		$post_db_pass = DUPX_U::wp_unslash($_POST['dbpass']);
-		$_POST['dbpass'] = trim($post_db_pass);
+		$_POST['dbpass'] = trim($_POST['dbpass']);
 	} else {
 		$_POST['dbpass'] = null;
 	}
@@ -68,7 +67,7 @@ else {
 	$_POST['dbhost']	= isset($_POST['cpnl-dbhost']) ? DUPX_U::sanitize_text_field(trim($_POST['cpnl-dbhost'])) : null;
 	$_POST['dbname']	= isset($_POST['cpnl-dbname-result']) ? DUPX_U::sanitize_text_field(trim($_POST['cpnl-dbname-result'])) : null;
 	$_POST['dbuser']	= isset($_POST['cpnl-dbuser-result']) ? DUPX_U::sanitize_text_field(trim($_POST['cpnl-dbuser-result'])) : null;
-	$_POST['dbpass']	= isset($_POST['cpnl-dbpass']) ? trim(DUPX_U::wp_unslash($_POST['cpnl-dbpass'])) : null;
+	$_POST['dbpass']	= isset($_POST['cpnl-dbpass']) ? trim($_POST['cpnl-dbpass']) : null;
 	$_POST['dbport']	= isset($_POST['cpnl-dbhost']) ? parse_url($_POST['cpnl-dbhost'], PHP_URL_PORT) : 3306;
 	$_POST['dbport']	= (!empty($_POST['cpnl-dbport'])) ? DUPX_U::sanitize_text_field($_POST['cpnl-dbport']) : 3306;
 	$_POST['dbnbsp']	= (isset($_POST['cpnl-dbnbsp']) && $_POST['cpnl-dbnbsp'] == '1') ? true : false;
@@ -109,7 +108,7 @@ $dbTestIn->mode		 = DUPX_U::sanitize_text_field($_POST['view_mode']);
 $dbTestIn->dbaction	 = DUPX_U::sanitize_text_field($_POST['dbaction']);
 $dbTestIn->dbhost	 = DUPX_U::sanitize_text_field($_POST['dbhost']);
 $dbTestIn->dbuser	 = DUPX_U::sanitize_text_field($_POST['dbuser']);
-$dbTestIn->dbpass	 = trim(DUPX_U::wp_unslash($_POST['dbpass']));
+$dbTestIn->dbpass	 = trim($_POST['dbpass']);
 $dbTestIn->dbname	 = DUPX_U::sanitize_text_field($_POST['dbname']);
 $dbTestIn->dbport	 = DUPX_U::sanitize_text_field($_POST['dbport']);
 $dbTestIn->dbcollatefb = DUPX_U::sanitize_text_field($_POST['dbcollatefb']);
@@ -171,7 +170,7 @@ if ($_POST['view_mode'] == 'cpnl') {
 		//user passwords requirements are not met.
 		if ($_POST['cpnl-dbuser-chk']) {
 			$post_db_user = DUPX_U::sanitize_text_field($_POST['dbuser']);
-			$post_db_pass = trim(DUPX_U::wp_unslash($_POST['dbpass']));
+			$post_db_pass = trim($_POST['dbpass']);
 			$result = $CPNL->create_db_user($cpnlToken, $post_db_user, $post_db_pass);
 			if ($result['status'] !== true) {
 				DUPX_Log::info('CPANEL API ERROR: create_db_user ' . print_r($result['cpnl_api'], true), 2);
@@ -241,9 +240,8 @@ if($not_yet_logged){
 $dbinstall = new DUPX_DBInstall($_POST, $ajax2_start);
 if ($_POST['dbaction'] != 'manual') {
     if(!isset($_POST['continue_chunking'])){
-        $dbinstall->prepareSQL();
         $dbinstall->prepareDB();
-    } else if($_POST['first_chunk'] == 1) {
+    } else if(isset($_POST['first_chunk']) && $_POST['first_chunk'] == 1) {
 		$dbchunk_retry = intval($_POST['dbchunk_retry']);
 		if ($dbchunk_retry > 0) {
 			DUPX_Log::info("## >> Last DB Chunk installation was failed, so retrying from start point. Retrying count: ".$dbchunk_retry);
@@ -289,16 +287,43 @@ if ($_POST['dbaction'] == 'manual') {
     echo json_encode($ret);
     die();
 } elseif(isset($_POST['continue_chunking']) && ($_POST['continue_chunking'] === 'false' && $_POST['pass'] == 1)) {
-    $JSON['pass'] = 1;
+    $rowCountMisMatchTables = $dbinstall->getRowCountMisMatchTables();
+	$JSON['pass'] = 1;
+	if (!empty($rowCountMisMatchTables)) {
+		$nManager = DUPX_NOTICE_MANAGER::getInstance();
+		$errMsg = 'ERROR: Database Table row count verification was failed for table(s): '
+									.implode(', ', $rowCountMisMatchTables).'.';
+		DUPX_Log::info($errMsg);
+		$nManager->addNextStepNoticeMessage($errMsg, DUPX_NOTICE_ITEM::HARD_WARNING);
+		$nManager->addFinalReportNotice(array(
+			'shortMsg' => 'Database Table row count validation error',
+			'level' => DUPX_NOTICE_ITEM::HARD_WARNING,
+			'longMsg' => $errMsg,
+			'sections' => 'database'
+		));
+		$nManager->saveNotices();
+	}
 } elseif(!isset($_POST['continue_chunking'])) {
 	$dbinstall->writeInDB();
-    $JSON['pass'] = 1;
+	$rowCountMisMatchTables = $dbinstall->getRowCountMisMatchTables();
+	$JSON['pass'] = 1;
+	if (!empty($rowCountMisMatchTables)) {
+		$nManager = DUPX_NOTICE_MANAGER::getInstance();
+		$errMsg = 'ERROR: Database Table row count verification was failed for table(s): '
+									.implode(', ', $rowCountMisMatchTables).'.';
+		DUPX_Log::info($errMsg);
+		$nManager->addNextStepNoticeMessage($errMsg , DUPX_NOTICE_ITEM::SOFT_WARNING);
+		$nManager->addFinalReportNotice(array(
+			'shortMsg' => 'Database Table row count validation error',
+			'level' => DUPX_NOTICE_ITEM::HARD_WARNING,
+			'longMsg' => $errMsg,
+			'sections' => 'database'
+		));
+		$nManager->saveNotices();
+	}
 }
 
 $dbinstall->runCleanupRotines();
-$dbinstall->disableRSSSL();
-$dbinstall->insertMigrationFlag();
-
 
 $dbinstall->profile_end = DUPX_U::getMicrotime();
 $dbinstall->writeLog();

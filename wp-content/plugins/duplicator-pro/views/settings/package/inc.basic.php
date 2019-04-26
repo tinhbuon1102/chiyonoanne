@@ -100,7 +100,7 @@ class DUP_PRO_UI_Settings_General_Basic
             </div><br/>
         <?php else : ?>
             <div class="dup-feature-notfound">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <i class="fa fa-exclamation-triangle fa-sm" aria-hidden="true"></i>
                 <?php
                     self::getMySqlDumpPathProblems($mysqlDumpPath, !empty($mysqlDumpPath));
                 ?>
@@ -204,7 +204,7 @@ DATABASE -->
 					<?php DUP_PRO_UI_Settings_General_Basic::getMySQLDumpMessage($mysqlDumpFound, (!empty($mysqlDumpPath) ? $mysqlDumpPath : $global->package_mysqldump_path)); ?>
 
 					<label><?php DUP_PRO_U::esc_html_e("Custom Path"); ?></label>
-					<i class="fa fa-question-circle"
+					<i class="fas fa-question-circle fa-sm"
 						data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("mysqldump"); ?>"
 						data-tooltip="<?php DUP_PRO_U::esc_attr_e('Add a custom path if the path to mysqldump is not properly detected.   For all paths use a forward slash as the '
 							. 'path seperator.  On Linux systems use mysqldump for Windows systems use mysqldump.exe.  If the path tried does not work please contact your hosting '
@@ -227,7 +227,7 @@ DATABASE -->
 				</option>
 			</select>
 
-			<i style="margin-right:7px;" class="fa fa-question-circle"
+			<i style="margin-right:7px;" class="fas fa-question-circle fa-sm"
 				data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("PHP Code Mode:"); ?>"
 				data-tooltip="<?php DUP_PRO_U::esc_attr_e('Single-Threaded mode attempts to create the entire database script in one request.  Multi-Threaded mode allows the database script '
 					. 'to be chunked over multiple requests.  Multi-Threaded mode is typically slower but much more reliable especially for larger databases.'); ?>"></i>
@@ -243,7 +243,7 @@ DATABASE -->
 					}
 				?>
 			</select>
-						<i style="margin-right:7px" class="fa fa-question-circle"
+						<i style="margin-right:7px" class="fas fa-question-circle fa-sm"
 			   data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("PHP Query Limit Size:"); ?>"
 			   data-tooltip="<?php DUP_PRO_U::esc_attr_e('A higher limit size will speed up the database build time, however it will use more memory.  If your host has memory caps start off low.'); ?>"></i>
 
@@ -269,7 +269,7 @@ ARCHIVE ENGINE -->
 		<label for="archive_compression_off"><?php DUP_PRO_U::esc_html_e("Off"); ?></label> &nbsp;
 		<input type="radio" name="archive_compression"  id="archive_compression_on" value="1" <?php echo DUP_PRO_UI::echoChecked($global->archive_compression == true); ?>  />
 		<label for="archive_compression_on"><?php DUP_PRO_U::esc_html_e("On"); ?></label>
-		<i style="margin-right:7px;" class="fa fa-question-circle"
+		<i style="margin-right:7px;" class="fas fa-question-circle fa-sm"
 			data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Shell Exec Archive Compression:"); ?>"
 			data-tooltip="<?php DUP_PRO_U::esc_attr_e('Controls archive compression. This setting applies to DupArchive, Shell Zip and ZipArchive only on PHP 7.0 or higher.'); ?>"></i>
 	</td>
@@ -324,7 +324,7 @@ ARCHIVE ENGINE -->
 					<?php DUP_PRO_U::esc_html_e("Single-Threaded"); ?>
 				</option>
 			</select>
-			<i style="margin-right:7px;" class="fa fa-question-circle"
+			<i style="margin-right:7px;" class="fas fa-question-circle fa-sm"
 				data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("PHP ZipArchive Mode:"); ?>"
 				data-tooltip="<?php DUP_PRO_U::esc_attr_e('Single-Threaded mode attempts to create the entire archive in one request.  Multi-Threaded mode allows the archive '
 					. 'to be chunked over multiple requests.  Multi-Threaded mode is typically slower but much more reliable especially for larger sites.'); ?>"></i>
@@ -340,7 +340,7 @@ ARCHIVE ENGINE -->
 					   data-parsley-required data-parsley-errors-container="#ziparchive_chunk_size_error_container" data-parsley-min="5" data-parsley-type="number"
 					   type="text" name="ziparchive_chunk_size_in_mb" id="ziparchive_chunk_size_in_mb" value="<?php echo $global->ziparchive_chunk_size_in_mb; ?>" />
 				<label><?php DUP_PRO_U::esc_html_e('MB'); ?></label>
-				<i style="margin-right:7px" class="fa fa-question-circle"
+				<i style="margin-right:7px" class="fas fa-question-circle fa-sm"
 					data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("PHP ZipArchive Buffer:"); ?>"
 					data-tooltip="<?php DUP_PRO_U::esc_attr_e('Buffer size only applies to multi-threaded requests and indicates how large an archive will get before a close is registered.  Higher values are faster but can be more unstable based on the hosts max_execution time.'); ?>"></i>
 				<div id="ziparchive_chunk_size_error_container" class="duplicator-error-container"></div>

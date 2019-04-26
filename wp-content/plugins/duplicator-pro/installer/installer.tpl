@@ -1,5 +1,17 @@
 <?php
+
+if (!defined('KB_IN_BYTES')) { define('KB_IN_BYTES', 1024); }
+if (!defined('MB_IN_BYTES')) { define('MB_IN_BYTES', 1024 * KB_IN_BYTES); }
+if (!defined('GB_IN_BYTES')) { define('GB_IN_BYTES', 1024 * MB_IN_BYTES); }
+if (!defined('DUPLICATOR_PHP_MAX_MEMORY')) { define('DUPLICATOR_PHP_MAX_MEMORY', 4096 * MB_IN_BYTES); }
+
 date_default_timezone_set('UTC'); // Some machines don’t have this set so just do it here.
+@ignore_user_abort(true);
+@set_time_limit(3600);
+@ini_set('memory_limit', DUPLICATOR_PHP_MAX_MEMORY);
+@ini_set('max_input_time', '-1');
+@ini_set('pcre.backtrack_limit', PHP_INT_MAX);
+@ini_set('default_socket_timeout', 3600);
 
 class DUPX_CSRF {
 	
@@ -232,25 +244,26 @@ class DUPX_Bootstrap
 				return $error;
 			}
 
-			// For .daf
-			if (!$isZip) {
-												
-				if (!filter_var(self::ARCHIVE_SIZE, FILTER_VALIDATE_INT) || self::ARCHIVE_SIZE > 2147483647) {
+			if (!filter_var(self::ARCHIVE_SIZE, FILTER_VALIDATE_INT) || self::ARCHIVE_SIZE > 2147483647) {
 				
-					$os_first_three_chars = substr(PHP_OS, 0, 3);
-					$os_first_three_chars = strtoupper($os_first_three_chars);
-					$no_of_bits = PHP_INT_SIZE * 8;
+				$os_first_three_chars = substr(PHP_OS, 0, 3);
+				$os_first_three_chars = strtoupper($os_first_three_chars);
+				$no_of_bits = PHP_INT_SIZE * 8;
 
-					if ($no_of_bits == 32) {
-
+				if ($no_of_bits == 32) {
+					if ($isZip) { // ZIP
+						if ('WIN' === $os_first_three_chars) {
+							$error = "This package is currently {$archiveExpectedEasy} and it's on a Windows OS. PHP on Windows does not support files larger than 2GB. Please use the file filters to get your package lower to support this server or try the package on a Linux server.";
+							return $error;
+						}
+					} else { // DAF
 						if ('WIN' === $os_first_three_chars) {
 							$error  = 'Windows PHP limitations prevents extraction of archives larger than 2GB. Please do the following: <ol><li>Download and use the <a target="_blank" href="https://snapcreek.com/duplicator/docs/faqs-tech/#faq-trouble-052-q">Windows DupArchive extractor</a> to extract all files from the archive.</li><li>Perform a <a target="_blank" href="https://snapcreek.com/duplicator/docs/faqs-tech/#faq-installer-015-q">Manual Extract Install</a> starting at step 4.</li></ol>';
 						} else 	{					
 							$error  = 'This archive is too large for 32-bit PHP. Ask your host to upgrade the server to 64-bit PHP or install on another system has 64-bit PHP.';
 						}
-
 						return $error;
-					}					
+					}
 				}
 			}
 			
@@ -323,8 +336,24 @@ class DUPX_Bootstrap
 		//ATTEMPT EXTRACTION:
 		//ZipArchive and Shell Exec
 		if ($extract_installer) {
-
 			self::log("Ready to extract the installer");
+
+			self::log("Checking permission of destination folder");
+			$destination = dirname(__FILE__);
+			if (!is_writable($destination)) {
+				self::log("destination folder for extraction is not writable");
+				if (@chmod($destination, 0755)) {
+					self::log("Permission of destination folder changed to 0755");
+				} else {
+					self::log("Permission of destination folder failed to change to 0755");
+				}
+			}
+
+			if (!is_writable($destination)) {
+				$error	= "NOTICE: The {$destination} directory is not writable on this server please talk to your host or server admin about making ";
+				$error	.= "<a target='_blank' href='https://snapcreek.com/duplicator/docs/faqs-tech/#faq-trouble-055-q'>writable {$destination} directory</a> on this server. <br/>";
+				return $error; 
+			}
 
 			if ($isZip) {
 				$zip_mode = $this->getZipMode();
@@ -337,8 +366,14 @@ class DUPX_Bootstrap
 						if ($extract_success) {
 							self::log('Successfully extracted with ZipArchive');
 						} else {
-							$error = 'Error extracting with ZipArchive. ';
-							self::log($error);
+							if (0 == $this->installer_files_found) {
+								$error = 'This archive is not properly formatted and does not contain a dup-installer directory. Please make sure you are attempting to install the original archive and not one that has been reconstructed.';
+								self::log($error);
+								return $error;
+							} else {
+								$error = 'Error extracting with ZipArchive. ';
+								self::log($error);
+							}
 						}
 					} else {
 						self::log("WARNING: ZipArchive is not enabled.");
@@ -383,6 +418,73 @@ class DUPX_Bootstrap
 					self::log("Error expanding installer subdirectory:".$ex->getMessage());
 					throw $ex;
 				}
+			}
+
+			$is_apache = (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache') !== false || strpos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed') !== false);
+			$is_nginx = (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false);
+
+			$sapi_type = php_sapi_name();
+			$php_ini_data = array(						
+						'max_execution_time' => 3600,
+						'max_input_time' => -1,
+						'ignore_user_abort' => 'On',
+						'post_max_size' => '4096M',
+						'upload_max_filesize' => '4096M',
+						'memory_limit' => DUPLICATOR_PHP_MAX_MEMORY,
+						'default_socket_timeout' => 3600,
+						'pcre.backtrack_limit' => 99999999999,
+					);
+			$sapi_type_first_three_chars = substr($sapi_type, 0, 3);
+			if ('fpm' === $sapi_type_first_three_chars) {
+				self::log("SAPI: FPM");
+				if ($is_apache) {
+					self::log('Server: Apache');
+				} elseif ($is_nginx) {
+					self::log('Server: Nginx');
+				}
+
+				if (($is_apache && function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) || $is_nginx) {
+					$htaccess_data = array();
+					foreach ($php_ini_data as $php_ini_key=>$php_ini_val) {
+						if ($is_apache) {
+							$htaccess_data[] = 'SetEnv PHP_VALUE "'.$php_ini_key.' = '.$php_ini_val.'"';
+						} elseif ($is_nginx) {
+							if ('On' == $php_ini_val || 'Off' == $php_ini_val) {
+								$htaccess_data[] = 'php_flag '.$php_ini_key.' '.$php_ini_val;
+							} else {
+								$htaccess_data[] = 'php_value '.$php_ini_key.' '.$php_ini_val;
+							}							
+						}
+					}				
+				
+					$htaccess_text = implode("\n", $htaccess_data);
+					$htaccess_file_path = dirname(__FILE__).'/dup-installer/.htaccess';
+					self::log("creating {$htaccess_file_path} with the content:");
+					self::log($htaccess_text);
+					@file_put_contents($htaccess_file_path, $htaccess_text);
+				}
+			} elseif ('cgi' === $sapi_type_first_three_chars || 'litespeed' === $sapi_type) {
+				if ('cgi' === $sapi_type_first_three_chars) {
+					self::log("SAPI: CGI");
+				} else {
+					self::log("SAPI: litespeed");
+				}
+				if (version_compare(phpversion(), 5.5) >= 0 && (!$is_apache || 'litespeed' === $sapi_type)) {
+					$ini_data = array();
+					foreach ($php_ini_data as $php_ini_key=>$php_ini_val) {
+						$ini_data[] = $php_ini_key.' = '.$php_ini_val;
+					}
+					$ini_text = implode("\n", $ini_data);
+					$ini_file_path = dirname(__FILE__).'/dup-installer/.user.ini';
+					self::log("creating {$ini_file_path} with the content:");
+					self::log($ini_text);
+					@file_put_contents($ini_file_path, $ini_text);
+				} else{
+					self::log("No need to create dup-installer/.htaccess or dup-installer/.user.ini");
+				}
+			} else {
+				self::log("No need to create dup-installer/.htaccess or dup-installer/.user.ini");
+				self::log("SAPI: Unrecognized");
 			}
 		} else {
 			self::log("Didn't need to extract the installer.");
@@ -433,6 +535,11 @@ class DUPX_Bootstrap
 
 		if ($error === null) {
                  
+                if(!file_exists($installer_directory)) {
+        
+                    $error = 'Can\'t extract installer directory. See <a target="_blank" href="https://snapcreek.com/duplicator/docs/faqs-tech/#faq-installer-022-q">this FAQ item</a> for details on how to resolve.</a>';
+                }
+                
                     if($error == null) {
 
                         $bootloader_name	 = basename(__FILE__);
@@ -566,10 +673,11 @@ class DUPX_Bootstrap
      *
      * @return bool		Returns true if the data was properly extracted
      */
-	private function extractInstallerZipArchive($archive_filepath)
+	private function extractInstallerZipArchive($archive_filepath, $checkSubFolder = false)
 	{
 		$success	 = true;
 		$zipArchive	 = new ZipArchive();
+		$subFolderArchiveList   = array();
 
 		if ($zipArchive->open($archive_filepath) === true) {
 			self::log("Successfully opened $archive_filepath");
@@ -581,47 +689,77 @@ class DUPX_Bootstrap
 
 			for ($i = 0; $i < $zipArchive->numFiles; $i++) {
 				$stat		 = $zipArchive->statIndex($i);
-				$filename	 = $stat['name'];
+				if ($checkSubFolder == false) {
+					$filenameCheck = $stat['name'];
+					$filename = $stat['name'];
+                    $tmpSubFolder = null;
+				} else {
+					$safePath = rtrim(self::setSafePath($stat['name']) , '/');
+					$tmpArray = explode('/' , $safePath);
+					
+					if (count($tmpArray) < 2)  {
+						continue;
+					}
 
-				if ($this->startsWith($filename, $folder_prefix)) {
-					$installer_files_found++;
+					$tmpSubFolder = $tmpArray[0];
+					array_shift($tmpArray);
+					$filenameCheck = implode('/' , $tmpArray);
+					$filename = $stat['name'];
+				}
+
+				
+				if ($this->startsWith($filenameCheck , $folder_prefix)) {
+					$installer_files_found ++;
+
+					if (!empty($tmpSubFolder) && !in_array($tmpSubFolder , $subFolderArchiveList)) {
+						$subFolderArchiveList[] = $tmpSubFolder;
+					}
 
 					if ($zipArchive->extractTo($destination, $filename) === true) {
 						self::log("Success: {$filename} >>> {$destination}");
 					} else {
-						self::log("Error extracting {$filename} from archive file");
+						self::log("Error extracting {$filename} from archive archive file");
 						$success = false;
 						break;
 					}
 				}
 			}
 
-            $lib_directory = dirname(__FILE__).'/'.self::INSTALLER_DIR_NAME.'/lib';
-            $snaplib_directory = $lib_directory.'/snaplib';
+			if ($checkSubFolder && count($subFolderArchiveList) !== 1) {
+				self::log("Error: Multiple dup subfolder archive");
+				$success = false;			
+			} else {
+				if ($checkSubFolder) {
+					$this->moveUpfromSubFolder(dirname(__FILE__).'/'.$subFolderArchiveList[0] , true);
+				}
 
-            // If snaplib files aren't present attempt to extract and copy those
-            if(!file_exists($snaplib_directory))
-            {
-                $folder_prefix = 'snaplib/';
-                $destination = $lib_directory;
+			    $lib_directory = dirname(__FILE__).'/'.self::INSTALLER_DIR_NAME.'/lib';
+			    $snaplib_directory = $lib_directory.'/snaplib';
 
-                for ($i = 0; $i < $zipArchive->numFiles; $i++) {
-                    $stat		 = $zipArchive->statIndex($i);
-                    $filename	 = $stat['name'];
+			    // If snaplib files aren't present attempt to extract and copy those
+			    if(!file_exists($snaplib_directory))
+			    {
+				$folder_prefix = 'snaplib/';
+				$destination = $lib_directory;
 
-                    if ($this->startsWith($filename, $folder_prefix)) {
-                        $installer_files_found++;
+				for ($i = 0; $i < $zipArchive->numFiles; $i++) {
+				    $stat		 = $zipArchive->statIndex($i);
+				    $filename	 = $stat['name'];
 
-                        if ($zipArchive->extractTo($destination, $filename) === true) {
-                            self::log("Success: {$filename} >>> {$destination}");
-                        } else {
-                            self::log("Error extracting {$filename} from archive file");
-                            $success = false;
-                            break;
-                        }
-                    }
-                }
-            }
+				    if ($this->startsWith($filename, $folder_prefix)) {
+				        $installer_files_found++;
+
+				        if ($zipArchive->extractTo($destination, $filename) === true) {
+				            self::log("Success: {$filename} >>> {$destination}");
+				        } else {
+				            self::log("Error extracting {$filename} from archive archive file");
+				            $success = false;
+				            break;
+				        }
+				    }
+				}
+			    }
+			}
 
 			if ($zipArchive->close() === true) {
 				self::log("Successfully closed archive file");
@@ -629,18 +767,72 @@ class DUPX_Bootstrap
 				self::log("Problem closing archive file");
 				$success = false;
 			}
-
-			if ($installer_files_found < 10) {
-				self::log("Couldn't find the installer directory in the archive!");
-
-				$success = false;
+			
+			if ($success != false && $installer_files_found < 10) {
+				if ($checkSubFolder) {
+					self::log("Couldn't find the installer directory in the archive!");
+					$success = false;
+				} else {
+					self::log("Couldn't find the installer directory in archive root! Check subfolder");
+					$this->extractInstallerZipArchive($archive_filepath, true);
+				}
 			}
 		} else {
-			self::log("Couldn't open archive file with ZipArchive");
+			self::log("Couldn't open archive archive file with ZipArchive");
 			$success = false;
 		}
+
 		return $success;
 	}
+
+    /**
+     * move all folder content up to parent
+     *
+     * @param string $subFolderName full path
+     * @param boolean $deleteSubFolder if true delete subFolder after moved all
+     * @return boolean
+     * 
+     */
+    private function moveUpfromSubFolder($subFolderName, $deleteSubFolder = false)
+    {
+        if (!is_dir($subFolderName)) {
+            return false;
+        }
+
+        $parentFolder = dirname($subFolderName);
+        if (!is_writable($parentFolder)) {
+            return false;
+        }
+
+        $success = true;
+        if (($subList = glob(rtrim($subFolderName, '/').'/*', GLOB_NOSORT)) === false) {
+            self::log("Problem glob folder ".$subFolderName);
+            return false;
+        } else {
+            foreach ($subList as $cName) {
+                $destination = $parentFolder.'/'.basename($cName);
+                if (file_exists($destination)) {
+                    $success = self::deletePath($destination);
+                }
+
+                if ($success) {
+                    $success = rename($cName, $destination);
+                } else {
+                    break;
+                }
+            }
+
+            if ($success && $deleteSubFolder) {
+                $success = self::deleteDirectory($subFolderName, true);
+            }
+        }
+
+        if (!$success) {
+            self::log("Problem om moveUpfromSubFolder subFolder:".$subFolderName);
+        }
+
+        return $success;
+    }
 
 	/**
      * Extracts only the 'dup-installer' files using Shell-Exec Unzip
@@ -855,12 +1047,93 @@ class DUPX_Bootstrap
 
         return $files;
     }
+    
+	/**
+     * Safely remove a directory and recursively if needed
+     *
+     * @param string $directory The full path to the directory to remove
+     * @param string $recursive recursively remove all items
+     *
+     * @return bool Returns true if all content was removed
+     */
+    public static function deleteDirectory($directory, $recursive)
+    {
+        $success = true;
+
+        $filenames = array_diff(scandir($directory), array('.', '..'));
+
+        foreach ($filenames as $filename) {
+            $fullPath = $directory.'/'.$filename;
+
+            if (is_dir($fullPath)) {
+                if ($recursive) {
+                    $success = self::deleteDirectory($fullPath, true);
+                }
+            } else {
+                $success = @unlink($fullPath);
+                if ($success === false) {
+                    self::log( __FUNCTION__.": Problem deleting file:".$fullPath);
+                }
+            }
+
+            if ($success === false) {
+                self::log("Problem deleting dir:".$directory);
+                break;
+            }
+        }
+
+        return $success && rmdir($directory);
+    }
+
+    /**
+     * Safely remove a file or directory and recursively if needed
+     *
+     * @param string $directory The full path to the directory to remove
+     *
+     * @return bool Returns true if all content was removed
+     */
+    public static function deletePath($path)
+    {
+        $success = true;
+
+        if (is_dir($path)) {
+            $success = self::deleteDirectory($path, true);
+        } else {
+            $success = @unlink($path);
+
+            if ($success === false) {
+                self::log( __FUNCTION__.": Problem deleting file:".$path);
+            }
+        }
+
+        return $success;
+    }
+    
+    /**
+	 *  Makes path safe for any OS for PHP
+	 *
+	 *  Paths should ALWAYS READ be "/"
+	 * 		uni:  /home/path/file.txt
+	 * 		win:  D:/home/path/file.txt
+	 *
+	 *  @param string $path		The path to make safe
+	 *
+	 *  @return string The original $path with a with all slashes facing '/'.
+	 */
+	public static function setSafePath($path)
+	{
+		return str_replace("\\", "/", $path);
+	}
 }
 
-$boot  = new DUPX_Bootstrap();
-$boot_error = $boot->run();
-$auto_refresh = isset($_POST['auto-fresh']) ? true : false;
-DUPX_CSRF::resetAllTokens();
+try {
+    $boot  = new DUPX_Bootstrap();
+    $boot_error = $boot->run();
+    $auto_refresh = isset($_POST['auto-fresh']) ? true : false;
+    DUPX_CSRF::resetAllTokens();
+} catch (Exception $e) {
+   $boot_error = $e->getMessage();
+}
 
 if ($boot_error == null) {
 	$secure_csrf_token = DUPX_CSRF::generate('secure');

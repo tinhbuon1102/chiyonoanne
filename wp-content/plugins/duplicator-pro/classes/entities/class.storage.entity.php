@@ -131,7 +131,9 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
     public $s3_access_key;
     public $s3_bucket;
     public $s3_max_files                 = 10;
-    public $s3_region;
+    public $s3_provider                  = 'amazon';
+    public $s3_region                    = '';
+    public $s3_endpoint                  = '';
     public $s3_secret_key;
     public $s3_storage_class             = 'STANDARD';
     public $s3_storage_folder            = '';
@@ -231,7 +233,9 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
         $instance->s3_access_key     = $storage_data->s3_access_key;
         $instance->s3_bucket         = $storage_data->s3_bucket;
         $instance->s3_max_files      = $storage_data->s3_max_files;
+        $instance->s3_provider       = $storage_data->s3_provider;
         $instance->s3_region         = $storage_data->s3_region;
+        $instance->s3_endpoint       = $storage_data->s3_endpoint;
         $instance->s3_secret_key     = $storage_data->s3_secret_key;
         $instance->s3_storage_class  = $storage_data->s3_storage_class;
         $instance->s3_storage_folder = $storage_data->s3_storage_folder;
@@ -349,7 +353,9 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
         $this->s3_bucket         = $source_storage->s3_bucket;
         $this->s3_access_key     = $source_storage->s3_access_key;
         $this->s3_secret_key     = $source_storage->s3_secret_key;
+        $this->s3_provider       = $source_storage->s3_provider;
         $this->s3_region         = $source_storage->s3_region;
+        $this->s3_endpoint       = $source_storage->s3_endpoint;
         $this->s3_storage_class  = $source_storage->s3_storage_class;
 
         //ONEDRIVE FIELDS
@@ -409,6 +415,14 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
 
     public function onedrive_is_business(){
         return !empty( $this->onedrive_endpoint_url) && !empty($this->onedrive_resource_id);
+    }
+
+    public function s3_is_amazon() {
+        if ((empty($this->s3_provider) || (!empty($this->s3_provider) && 'amazon' == $this->s3_provider))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function get_onedrive_storage_folder(){
@@ -687,7 +701,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
 
     public function get_full_s3_client()
     {
-        return DUP_PRO_S3_U::get_s3_client($this->s3_region, $this->s3_access_key, $this->s3_secret_key);
+        return DUP_PRO_S3_U::get_s3_client($this->s3_region, $this->s3_access_key, $this->s3_secret_key, $this->s3_endpoint);
     }
 
     public static function delete_by_id($storage_id)
@@ -727,6 +741,13 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
         }
 
         return $storage;
+    }
+
+    public static function is_exist($id) {
+        if (DUP_PRO_Virtual_Storage_IDs::Default_Local == $id) {
+            return true;
+        }
+        return self::is_exist_by_id_and_type($id, get_class());
     }
 
     public function get_dropbox_combined_access_token($use_curl = true)
@@ -928,7 +949,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                 break;
 
             case DUP_PRO_Storage_Types::S3:
-                $type_text = DUP_PRO_U::__('Amazon S3');
+                $type_text = $this->s3_is_amazon() ? DUP_PRO_U::__('Amazon S3') : DUP_PRO_U::__('S3-Compatible (Generic)');
                 break;
             case DUP_PRO_Storage_Types::OneDrive:
                 $type_text = !$this->onedrive_is_business() ? DUP_PRO_U::__('OneDrive') : DUP_PRO_U::__('OneDrive (B)');
@@ -1298,7 +1319,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                                         $this->purge_old_dropbox_packages($dropbox);
                                     }
                                 }else{
-                                    DUP_PRO_LOG::traceError("Uploaded File is corrupted, the hashes don't match!");
+                                    DUP_PRO_LOG::traceError("Uploaded File is corrupted, the hashes don't match! Is account out of space?");
                                     $upload_info->increase_failure_count();
 
                                 }
@@ -1786,9 +1807,18 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
     public function get_storage_location_string()
     {
         switch ($this->storage_type) {
-            case DUP_PRO_Storage_Types::Dropbox:
-                return "https://dropbox.com/home/Apps/Duplicator%20Pro/$this->dropbox_storage_folder";
+            case DUP_PRO_Storage_Types::Dropbox:                    
+
+                $dropbox = $this->get_dropbox_client();           
+                $dropBoxInfo = $dropbox->GetAccountInfo();
+               
+                if (!isset($dropBoxInfo->locale) || $dropBoxInfo->locale == 'en') {
+                    return "https://dropbox.com/home/Apps/Duplicator%20Pro/$this->dropbox_storage_folder";
+                } else {
+                    return "https://dropbox.com/home";
+                }
                 break;
+            
 
             case DUP_PRO_Storage_Types::FTP:
                 return "ftp://$this->ftp_server:$this->ftp_port/$this->ftp_storage_folder";
@@ -1818,9 +1848,15 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
             case DUP_PRO_Storage_Types::OneDrive:
                 if(empty($this->onedrive_storage_folder_web_url)){
                     if($this->onedrive_authorization_state === DUP_PRO_OneDrive_Authorization_States::Authorized){
-                        $this->onedrive_storage_folder_web_url = $this->get_onedrive_storage_folder()->getWebURL();
+                        $storage_folder = $this->get_onedrive_storage_folder();
+                        if (!empty($storage_folder)) {
+                            $this->onedrive_storage_folder_web_url = $this->get_onedrive_storage_folder()->getWebURL();
+                        } else {
+                            $this->onedrive_storage_folder_web_url = DUP_PRO_U::__("Can't read storage folder");
+                            return $this->onedrive_storage_folder_web_url;
+                        }
                     }else{
-                        $this->onedrive_storage_folder_web_url = "Not Authenticated";
+                        $this->onedrive_storage_folder_web_url = DUP_PRO_U::__("Not Authenticated");
                         return $this->onedrive_storage_folder_web_url;
                     }
                     $this->save();
@@ -2063,7 +2099,8 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                 } catch (Exception $e) {
                     $upload_info->failed = true;
                     $upload_info->increase_failure_count();
-                    DUP_PRO_LOG::traceError("Problems copying package $package->Name to $this->sftp_storage_folder. " + $e->getMessage());
+                    error_log("Problems copying package $package->Name to $this->sftp_storage_folder. " . $e->getMessage());
+                    DUP_PRO_LOG::traceError("Problems copying package $package->Name to $this->sftp_storage_folder. " . $e->getMessage());
                 }
             }else{
                 DUP_PRO_LOG::traceError("Installer doesn't exist for $package->Name!? - $source_installer_filepath");
@@ -2132,7 +2169,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
 
             if ($this->local_max_files > 0) {
 
-                if ($this->purge_package_record) {
+                if (isset($this->purge_package_record) && $this->purge_package_record) {
                     global $wpdb;
                     $table = $wpdb->base_prefix . "duplicator_pro_packages";
                     $purge_name_hash_arr = array();   
@@ -2177,7 +2214,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                     $dirs_txt_filepath  = str_replace($suffix, '_dirs.txt', $archive_filepath);
 
                     
-                    if ($this->purge_package_record) {
+                    if (isset($this->purge_package_record) && $this->purge_package_record) {
                         $purge_name_hash_arr[] = $wpdb->prepare("%s", basename($archive_filepath, $suffix));
                     }
                                         
@@ -2192,7 +2229,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                 }
                 
                 // Purge package record logic
-                if ($this->purge_package_record && !empty($purge_name_hash_arr)) {
+                if (isset($this->purge_package_record) && $this->purge_package_record && !empty($purge_name_hash_arr)) {
                     $max_created = $wpdb->get_var("SELECT max(created) FROM ".$table." WHERE concat_ws('_', name, hash) IN (".implode(', ', $purge_name_hash_arr).")");
                     $sql = $wpdb->prepare("DELETE FROM ".$table." WHERE created <= %s AND status = %d", $max_created, 100);
                     $wpdb->query($sql);
@@ -2711,7 +2748,7 @@ class DUP_PRO_Storage_Entity extends DUP_PRO_JSON_Entity_Base
                 return DUP_PRO_U::__('Local');
 
             case DUP_PRO_Storage_Types::S3:
-                return DUP_PRO_U::__('Amazon S3');
+                return $this->s3_is_amazon() ? DUP_PRO_U::__('Amazon S3') : DUP_PRO_U::__('S3-Compatible (Generic)');
             case DUP_PRO_Storage_Types::OneDrive:
                 return !$this->onedrive_is_business() ? DUP_PRO_U::__('OneDrive') : DUP_PRO_U::__('OneDrive (B)');
 

@@ -10,7 +10,7 @@
 META-BOX: STORAGE -->
 <div class="dup-box" id="dup-pack-storage-panel-area">
     <div class="dup-box-title" id="dpro-store-title">
-        <i class="fa fa-database"></i> <?php DUP_PRO_U::esc_html_e('Storage') ?> <sup id="dpro-storage-title-count" class="dup-box-title-badge"></sup>
+        <i class="fas fa-database fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Storage') ?> <sup id="dpro-storage-title-count" class="dup-box-title-badge"></sup>
         <div class="dup-box-arrow"></div>
     </div>			
 
@@ -49,7 +49,7 @@ META-BOX: STORAGE -->
                             <td>
                                 <a href="?page=duplicator-pro-storage&tab=storage&inner_page=edit&storage_id=<?php echo intval($store->id); ?>" target="_blank">
                                     <?php
-                                    echo ($is_valid == false) ? '<i class="fa fa-exclamation-triangle"></i>' : (($store_type == 'Local') ? '<i class="fa fa-server"></i>' : '<i class="fa fa-cloud"></i>');
+                                    echo ($is_valid == false) ? '<i class="fa fa-exclamation-triangle fa-sm"></i>' : (($store_type == 'Local') ? '<i class="fa fa-server"></i>' : '<i class="fa fa-cloud"></i>');
                                     echo " ".esc_html($store->name);
                                     ?>
                                 </a>

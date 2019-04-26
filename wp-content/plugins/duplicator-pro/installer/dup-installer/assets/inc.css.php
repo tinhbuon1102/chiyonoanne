@@ -9,6 +9,7 @@
 	select {padding-left:0; width:99%}
 	select:disabled {background:#EBEBE4}
 	input.readonly {background-color:#efefef;}
+    .no-display { display: none; }
 
 	/* ============================
 	COMMON VIEWS
@@ -60,15 +61,113 @@
 	div.hdr-sub4:hover  {background-color:#dfdfdf; cursor:pointer}
 	div.toggle-hdr:hover {cursor:pointer; background-color:#f1f1f1; border:1px solid #dcdcdc; }
 	div.toggle-hdr:hover a{color:#000}
+    
+    [data-type="toggle"] > i.fa,
+    i.fa.fa-toggle-empty { min-width: 8px; }
 
+	/* ============================
+	NOTICES
+	============================ */
+    /* step messages */
+    #step-messages { padding: 10px 25px 0; }
+    .notice {
+        background: #fff;
+        border-left: 4px solid #fff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.5);
+        margin: 5px 0 2px;
+        padding: 1px 12px;
+        border-radius: 4px;
+    }
+
+    .notice-report {
+        border-left: 4px solid #fff;
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 4px;
+    }
+
+    .notice-report .title {
+        padding: 0 10px;
+    }
+
+    .notice-report .info {
+        border-top: 1px solid #dedede;
+        padding: 10px;
+        font-size: 10px;
+        background: #FAFAFA;
+    }
+
+    .notice.l-info,
+    .notice.l-notice {
+        border-left-color: #46b450;
+    }
+    .notice.l-swarning {
+        border-left-color: #d6ef49;
+    }
+    .notice.l-hwarning {
+        border-left-color: #efe348;
+    }
+    .notice.l-critical {
+        border-left-color: #d82929;
+    }
+    .notice.l-fatal {
+        border-left-color: #000000;
+    }
+
+    .report-sections-list .section {
+        border: 1px solid #DFDFDF;
+        margin-bottom: 20px;
+    }
+    
+    .report-sections-list .section > .section-title {
+        background-color: #efefef;
+        padding: 3px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .report-sections-list .section > .section-content {
+        padding: 5px;
+    }
+
+    .notice-level-status {
+        border-radius: 4px;
+        padding: 1px 5px 1px 5px;
+        margin: 2px 5px;
+        font-size: 10px;
+        display: inline-block;
+        color: #FFF;
+        font-weight: bold;
+    }
+
+    .notice-level-status.l-info,
+    .notice-level-status.l-notice {
+        background: #46b450;
+    }
+    .notice-level-status.l-swarning {
+        background: #d6ef49;
+    }
+    .notice-level-status.l-hwarning {
+        background: #efe348;
+    }
+    .notice-level-status.l-critical {
+        background: #d82929;
+    }
+    .notice-level-status.l-fatal {
+        background: #000000;
+    }
+
+    
     /*Adv Opts */
     table.dupx-opts {width:100%; border:0px;}
-	table.dupx-opts td{white-space:nowrap; padding:3px;}
+	table.dupx-opts td{padding:3px;}
 	table.dupx-opts td:first-child{width:125px; font-weight: bold}
 	table.dupx-advopts td:first-child{width:125px;}
 	table.dupx-advopts label.radio {width:50px; display:inline-block}
-	table.dupx-advopts label {cursor:pointer}
+	table.dupx-advopts label {white-space:nowrap; cursor:pointer}
 	table.dupx-advopts-space {line-height:24px}
+	table.dupx-advopts tr {vertical-align:top}
 
 	div.error-pane {border:1px solid #efefef; border-left:4px solid #D54E21; padding:0 0 0 10px; margin:2px 0 10px 0}
 	div.dupx-ui-error {padding-top:2px; font-size:13px; line-height: 20px}
@@ -79,6 +178,7 @@
 	form#form-debug {display:block; margin:10px auto; width:750px;}
 	form#form-debug a {display:inline-block;}
 	form#form-debug pre {margin-top:-2px; display:none}
+	small.info {font-style:italic}
 
     /*Dialog Info */
 	div.dlg-serv-info {line-height:22px; font-size:12px}
@@ -123,7 +223,7 @@
 	div.s1-reqs div.header {background-color:#E0E0E0; color:#000;  border-bottom: 1px solid silver; padding:2px; font-weight:bold }
 	div.s1-reqs div.status {float:right; border-radius:4px; color:#fff; padding:0 3px 0 3px; margin:4px 5px 0 0; font-size:11px; min-width:30px; text-align:center;}
 	div.s1-reqs div.pass {background-color:green;}
-	div.s1-reqs div.fail {background-color:maroon;}
+	div.s1-reqs div.fail {background-color:#636363;}
 	div.s1-reqs div.title {padding:3px 3px 3px 5px; font-size:13px;}
 	div.s1-reqs div.title:hover {background-color:#dfdfdf; cursor:pointer}
 	div.s1-reqs div.info {padding:8px 8px 20px 8px; background-color:#fff; display:none; line-height:18px; font-size: 12px}
@@ -246,6 +346,13 @@
 	div.s3-manaual-msg {font-style: italic; margin:-2px 0 5px 0}
 	small.s3-warn {color:maroon; font-style:italic}
 
+    #s3-subsite-mapping .site-item {
+        margin-top: 10px;
+    }
+    .main_site .mu_replace {
+        border: 2px solid red;
+    }
+
 	/* ============================
 	STEP 4 VIEW
 	============================ */
@@ -293,6 +400,15 @@
 	table.help-opt td:first-child {font-weight:bold; padding-right:10px; white-space:nowrap}
 	table.help-opt th {background: #333; color: #fff;border:1px solid #333; padding:3px}
 
+    /* ============================
+    VIEW EXCEPTION
+	============================	*/
+    .exception-trace {
+        overflow: auto;
+        border: 1px solid lightgray;
+        padding: 10px;
+        margin: 0;
+    }
 
 	/*!
 	 * password indicator

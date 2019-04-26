@@ -39,31 +39,14 @@ if (isset($_REQUEST['action'])) {
 }
 
 $pending_cancelled_package_ids = DUP_PRO_Package::get_pending_cancellations();
-$qryResult			= $wpdb->get_results("SELECT * FROM `{$wpdb->base_prefix}duplicator_pro_packages` ORDER BY id DESC", ARRAY_A);
-$qryStatusActive	= $wpdb->get_results("SELECT status FROM `{$wpdb->base_prefix}duplicator_pro_packages` WHERE status < 100 and status > 0", ARRAY_A);
-$totalElements		= count($qryResult);
-$statusActive		= count($qryStatusActive);
-
-//Report All Packages sizes:
-$totalSize = 0;
-foreach ($qryResult as $row) {
-	$Package = DUP_PRO_Package::get_from_json($row['package']);
-	if (is_object($Package)) {
-		$pack_archive_size	 = $Package->Archive->Size;
-	} else {
-		$pack_archive_size	 = 0;
-	}
-	$totalSize = $totalSize + $pack_archive_size;
-}
-
+$totalElements = $wpdb->get_var("SELECT count(id) as totalElements FROM `{$wpdb->base_prefix}duplicator_pro_packages`");
+$statusActive = $wpdb->get_var("SELECT count(id) as totalElements FROM `{$wpdb->base_prefix}duplicator_pro_packages`  WHERE status < 100 and status > 0");
 
 $pager		= new DUP_PRO_Package_Pagination();
 $per_page	= $pager->get_per_page();
-if ($totalElements > $per_page) {
-	$current_page	= ($statusActive >= 1) ? 1 : $pager->get_pagenum();
-	$offset			= ( $current_page - 1 ) * $per_page;
-	$qryResult		= $wpdb->get_results("SELECT * FROM `{$wpdb->base_prefix}duplicator_pro_packages` ORDER BY id DESC LIMIT ${offset}, ${per_page} ", ARRAY_A);
-}
+$current_page	= ($statusActive >= 1) ? 1 : $pager->get_pagenum();
+$offset			= ( $current_page - 1 ) * $per_page;
+$qryResult		= $wpdb->get_results("SELECT * FROM `{$wpdb->base_prefix}duplicator_pro_packages` ORDER BY id DESC LIMIT ${offset}, ${per_page} ", ARRAY_A);
 
 $global = DUP_PRO_Global_Entity::get_instance();
 $active_package_present = DUP_PRO_Package::is_active_package_present();
@@ -164,6 +147,13 @@ $gift_nonce = wp_create_nonce('DUP_PRO_CTRL_Package_toggleGiftFeatureButton');
 
     #btn-logs-gift{background-color: #af5e52;color:#fff;display:none}
     #btn-logs-gift:hover{border-color: #222;}
+
+
+    /* Quick fix */
+    .color-alert { color: #dc3232 !important; }
+    .wp-core-ui button.quick-fix-button { background: #dc3232; color: white; border: 0 none; box-shadow: 0 0 3px darkgray; }
+
+
 </style>
 
 <div id='dpro-error-orphans' class="error">
@@ -198,8 +188,8 @@ TOOL-BAR -->
 			<a href="javascript:void(0)" class="button  grey-icon" title="<?php DUP_PRO_U::esc_attr_e("Get Help") ?>" onclick="jQuery('#contextual-help-link').trigger('click')">
 				<i class="fa fa-question-circle grey-icon"></i>
 			</a>
-			<a href="admin.php?page=duplicator-pro-settings&tab=package" class="button grey-icon" title="<?php DUP_PRO_U::esc_attr_e("Settings") ?>"><i class="fa fa-gear"></i></a>
-			<a href="admin.php?page=duplicator-pro-tools&tab=templates" class="button" title="<?php DUP_PRO_U::esc_attr_e("Templates") ?>"><i class="fa fa-clone"></i></a>
+			<a href="admin.php?page=duplicator-pro-settings&tab=package" class="button grey-icon" title="<?php DUP_PRO_U::esc_attr_e("Settings") ?>"><i class="fa fa-cog"></i></a>
+			<a href="admin.php?page=duplicator-pro-tools&tab=templates" class="button" title="<?php DUP_PRO_U::esc_attr_e("Templates") ?>"><i class="far fa-clone"></i></i></a>
 			<?php if ($global->profile_beta) : ?>
 				<a href="admin.php?page=duplicator-pro-tools&tab=import" id="btn-logs-dialog" class="button grey-icon" title="<?php DUP_PRO_U::esc_attr_e("Import") ?>"><i class="fa fa-download"></i></a>
 			<?php endif; ?>
@@ -217,7 +207,7 @@ TOOL-BAR -->
 		</td>
 		<td>
 			<div class="btnnav">
-			<span><i class="fa fa-archive"></i> <?php _e("Packages"); ?></span>
+                <span><i class="fa fa-archive fa-sm"></i> <?php DUP_PRO_U::_e("Packages"); ?></span>
 			<a id="dup-pro-create-new" onClick="return DupPro.Pack.CreateNew(this);" href="<?php echo $edit_package_url; ?>" class="add-new-h2 <?php echo ($active_package_present ? 'disabled' : ''); ?>"><?php DUP_PRO_U::esc_html_e('Create New'); ?></a>
 			</div>
 		</td>
@@ -228,15 +218,15 @@ TOOL-BAR -->
 <?php
 	if ($recommended_text_fix_present) {
 		echo '<p>';
-		echo '<b style="font-size:18px">'.DUP_PRO_U::__('Duplicator Pro').' </b><br/>';
-		echo '<b>'.DUP_PRO_U::__('Configuration Error(s) Detected:').' </b>';
+		echo '<b style="font-size:18px"><i class="fa fa-exclamation-circle fa-3 color-alert" ></i> '.DUP_PRO_U::__('Duplicator Pro').' </b><br/>';
+		echo '<b style="text-transform: uppercase;" >'.DUP_PRO_U::__('Configuration Error(s) Detected:').' </b>';
 		echo DUP_PRO_U::esc_html_e('Please perform the following actions below then build package again.');
 		echo '</p>';
 		echo '<ul class="dpro-auto-conf">';
         $is_quick_fix = false;
 		foreach ($system_global->recommended_fixes as $fix) {
 			if ($fix->recommended_fix_type == DUP_PRO_Recommended_Fix_Type::Text) {
-				echo "<li><i class='fa fa-question-circle' data-tooltip='{$fix->error_text}'></i>&nbsp; {$fix->parameter1} </li>";
+				echo "<li><i class='fa fa-question-circle color-alert' data-tooltip='{$fix->error_text}'></i>&nbsp; {$fix->parameter1} </li>";
 			}
             else if ($fix->recommended_fix_type == DUP_PRO_Recommended_Fix_Type::QuickFix) {
                 $is_quick_fix = true;
@@ -244,13 +234,13 @@ TOOL-BAR -->
                 . "<table width='100%' id='quick-fix-{$fix->id}-table'>"
                     . "<tr>"
                         . "<td width='13%' valign='middle' style='text-align:center' id='quick-fix-{$fix->id}-action'>"
-                            . "<button id='quick-fix-{$fix->id}-button' onclick='return DupPro.Pack.QuickFix(this, {{$fix->parameter2}})' type='button' class='button' data-id='{$fix->id}' data-toggle='#quick-fix-{$fix->id}'>"
+                            . "<button id='quick-fix-{$fix->id}-button' onclick='return DupPro.Pack.QuickFix(this, {{$fix->parameter2}})' type='button' class='button quick-fix-button' data-id='{$fix->id}' data-toggle='#quick-fix-{$fix->id}'>"
                                 . "<i class='fa fa-wrench' aria-hidden='true'></i>&nbsp; "
                                 .DUP_PRO_U::__('Resolve This')
                             ."</button>"
                         . "</td>"
                         . "<td valign='middle' id='quick-fix-{$fix->id}-message'>"
-                            . "<i id='quick-fix-{$fix->id}-info' class='fa fa-question-circle' data-tooltip='{$fix->error_text}'></i>&nbsp; {$fix->parameter1}"
+                            . "<i id='quick-fix-{$fix->id}-info' class='fa fa-question-circle color-alert' data-tooltip='{$fix->error_text}'></i>&nbsp; {$fix->parameter1}"
                         . "</td>"
                     . "</tr>"
                 . "</table>"
@@ -258,7 +248,7 @@ TOOL-BAR -->
 			}
 		}
 		echo "</ul>";
-		echo "<div style='margin-left:3px'><a href='#' onclick='DupPro.Pack.ClearMessages();'>".DUP_PRO_U::__('Clear').'</a></div>';
+		echo '<div style="margin:0 0 20px 3px;"><a href="#" class="button" style="padding: 0 50px;" onclick="DupPro.Pack.ClearMessages();">'.DUP_PRO_U::__('Clear').'</a></div>';
 	}
 ?>
 </div>
@@ -284,7 +274,7 @@ LIST ALL PACKAGES -->
 	<tr>
 		<td colspan="7" class="dpro-list-nopackages">
 			<br/>
-			<i class="fa fa-archive"></i>
+			<i class="fa fa-archive fa-sm"></i>
 			<?php DUP_PRO_U::esc_html_e("No Packages Found."); ?><br/>
 			<?php DUP_PRO_U::esc_html_e("Click the 'Create New' button to build a package."); ?>
 			<div class="dpro-quick-start">
@@ -341,6 +331,7 @@ foreach ($rows as $row) {
 	$archive_name = basename($Package->Archive->getURL());
 	$arc_url = $Package->Archive->getURL();
 	$js_arc_params = "'{$archive_name}', '{$arc_url}'";
+	$installer_name = $Package->get_installer_filename();
 
 	switch($Package->Type) {
 		case DUP_PRO_PackageType::MANUAL:
@@ -362,7 +353,8 @@ foreach ($rows as $row) {
 	<?php if (($row['status'] >= 100) || ($storage_problem)) : ?>
 		<!-- COMPLETE -->
 		<tr class="dpro-pkinfo <?php echo $css_alt ?>" id="duppro-packagerow-<?php echo $row['id']; ?>">
-			<td class="pass"><input name="delete_confirm" type="checkbox" id="<?php echo $row['id']; ?>" /></td>
+			<td class="pass"><input name="delete_confirm" type="checkbox" id="<?php echo esc_attr($row['id']); ?>" 
+					data-archive-name="<?php echo esc_attr($archive_name);?>" data-installer-name="<?php echo esc_attr($installer_name);?>" /></td>
 			<td <?php echo $package_type_style; ?>><?php echo $package_type_string . " <sup>{$pack_format}</sup>"; ?></td>
             <?php if($display_brand===true && $is_freelancer_plus): ?>
             <td class='brand-name'>
@@ -387,7 +379,7 @@ foreach ($rows as $row) {
 						</button>
 					 <?php endif; ?>
 					<nav class="dpro-dnload-menu-items">
-						<div onClick="DupPro.Pack.DownloadFile(<?php echo $js_arc_params ?>); DupPro.Pack.DownloadPackageFile(0, <?php echo $Package->ID; ?>); jQuery(this).parent().hide();" >
+						<div onClick="DupPro.Pack.DownloadFile(<?php echo $js_arc_params ?>); setTimeout(function(){ DupPro.Pack.DownloadPackageFile(0, <?php echo $Package->ID; ?>); }, 700); jQuery(this).parent().hide();" >
 							<span title="<?php if(!$archive_exists){DUP_PRO_U::esc_html_e("Download not accessible from here");} ?>">
 								<i class="fa <?php echo ($archive_exists && $installer_exists  ? 'fa-download' : 'fa-exclamation-triangle') ?>"></i> <?php DUP_PRO_U::esc_html_e("Both Files") ?>
 							</span>
@@ -399,7 +391,7 @@ foreach ($rows as $row) {
 						</div>
 						<div onClick="DupPro.Pack.DownloadFile(<?php echo $js_arc_params ?>);  jQuery(this).parent().hide();">
 							<span title="<?php if(!$archive_exists){DUP_PRO_U::esc_html_e("Download not accessible from here");} ?>">
-								<i class="fa <?php echo ($archive_exists ? 'fa-file-archive-o' : 'fa-exclamation-triangle') ?>"></i> 
+								<i class="<?php echo ($archive_exists ? 'far fa-file-archive' : 'fa fa-exclamation-triangle') ?>"></i> 
 									<?php echo DUP_PRO_U::__("Archive") . " ({$pack_format})" ?>
 							</span>
 						</div>
@@ -413,10 +405,10 @@ foreach ($rows as $row) {
 					</button>
 					<nav class="dpro-bar-menu-items">
 						<div onClick="DupPro.Pack.OpenPackDetail(<?php echo "$Package->ID"; ?>);">
-							<span><i class="fa fa-archive" ></i> <?php DUP_PRO_U::esc_html_e("Details") ?></span>
+							<span><i class="fa fa-archive fa-sm" ></i> <?php DUP_PRO_U::esc_html_e("Details") ?></span>
 						</div>
 						<div onClick="DupPro.Pack.OpenPackTransfer(<?php echo "$Package->ID"; ?>);">
-							<span><i class="fa fa-refresh" ></i> <?php DUP_PRO_U::esc_html_e("Transfer") ?></span>
+							<span><i class="fa fa-sync" ></i> <?php DUP_PRO_U::esc_html_e("Transfer") ?></span>
 						</div>
 						<!-- REMOTE STORE BUTTON -->
 						<?php if ($storage_problem) : ?>
@@ -425,11 +417,11 @@ foreach ($rows as $row) {
 							</div>
 						<?php elseif ($remote_display) : ?>
 							<div onClick="DupPro.Pack.ShowRemote(<?php echo "$Package->ID, '$Package->Name'"; ?>);" >
-								<span ><i class="fa fa-database" ></i> <?php DUP_PRO_U::esc_html_e("Storage") ?></span>
+								<span ><i class="fas fa-database fa-sm" ></i> <?php DUP_PRO_U::esc_html_e("Storage") ?></span>
 							</div>
 						<?php else : ?>
 							<div style="color:#999" title="<?php DUP_PRO_U::esc_attr_e("No Remote Storages") ?>">
-								<span><i class="fa fa-database" ></i> <?php DUP_PRO_U::esc_html_e("Storage") ?></span>
+								<span><i class="fas fa-database fa-sm" ></i> <?php DUP_PRO_U::esc_html_e("Storage") ?></span>
 							</div>
 						<?php endif; ?>
 					</nav>
@@ -464,11 +456,11 @@ foreach ($rows as $row) {
 			$progress_css = 'run';
 			if ($status >= 75) {
 				$stop_button_text	 = DUP_PRO_U::__('Stop Transfer');
-				$progress_html		 = "<i class='fa fa-refresh fa-spin'></i> <span id='status-progress-{$id}'>0</span>%"
+				$progress_html		 = "<i class='fa fa-sync fa-sm fa-spin'></i> <span id='status-progress-{$id}'>0</span>%"
 					."<span style='display:none' id='status-{$id}'>{$status}</span>";
 			} else if ($status > 0) {
 				$stop_button_text	 = DUP_PRO_U::__('Stop Build');
-				$progress_html		 = "<i class='fa fa-gear fa-spin'></i> <span id='status-{$id}'>{$status}</span>%";
+				$progress_html		 = "<i class='fa fa-cog fa-sm fa-spin'></i> <span id='status-{$id}'>{$status}</span>%";
 			} else {
 				// In a pending state
 				$stop_button_text	 = DUP_PRO_U::__('Cancel Pending');
@@ -479,13 +471,23 @@ foreach ($rows as $row) {
 			$progress_css = 'fail';
 
 			if ($status == DUP_PRO_PackageStatus::ERROR) {
-				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle"></i> <a href="#" onclick="DupPro.Pack.OpenPackDetail('.$Package->ID.'); return false;">'.DUP_PRO_U::__('Error Processing')."</a></div><span style='display:none' id='status-$id'>$status</span>";
+				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle fa-sm"></i> <a href="#" onclick="DupPro.Pack.OpenPackDetail('.$Package->ID.'); return false;">'.DUP_PRO_U::__('Error Processing')."</a></div><span style='display:none' id='status-$id'>$status</span>";
 			} else if ($status == DUP_PRO_PackageStatus::BUILD_CANCELLED) {
-				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle"></i> '.DUP_PRO_U::__('Build Cancelled')."</div><span style='display:none' id='status-$id'>$status</span>";
+				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle fa-sm"></i> '.DUP_PRO_U::__('Build Cancelled')."</div><span style='display:none' id='status-$id'>$status</span>";
 			} else if ($status == DUP_PRO_PackageStatus::PENDING_CANCEL) {
-				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle"></i> '.DUP_PRO_U::__('Cancelling Build')."</div><span style='display:none' id='status-$id'>$status</span>";
+				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle fa-sm"></i> '.DUP_PRO_U::__('Cancelling Build')."</div><span style='display:none' id='status-$id'>$status</span>";
 			} else if ($status == DUP_PRO_PackageStatus::REQUIREMENTS_FAILED) {
-				$progress_error = '<div class="progress-error"><i class="fa fa-exclamation-triangle"></i> '.DUP_PRO_U::__('Requirements Failed')."</div><span style='display:none' id='status-$id'>$status</span>";
+				$package_id = $row['id'];
+				$package = DUP_PRO_Package::get_by_id($package_id);
+				$package_log_store_dir = dirname($package->StorePath);
+				$package_log_store_dir = trailingslashit($package_log_store_dir);
+				$is_txt_log_file_exist = file_exists("{$package_log_store_dir}{$package->NameHash}_log.txt");
+				if ($is_txt_log_file_exist) {
+					$link_log = "{$package->StoreURL}{$package->NameHash}_log.txt";    
+				} else { // .log is for backward compatibility
+					$link_log = "{$package->StoreURL}{$package->NameHash}.log";
+				}
+				$progress_error = '<div class="progress-error"><a href="'.esc_url($link_log).'" target="_blank"><i class="fa fa-exclamation-triangle fa-sm"></i> '.DUP_PRO_U::__('Requirements Failed')."</a></div><span style='display:none' id='status-$id'>$status</span>";
 			}
 		}
 		?>
@@ -508,12 +510,12 @@ foreach ($rows as $row) {
 						<i class="fa <?php echo ($installer_exists ? 'fa-bolt' : 'fa-exclamation-triangle') ?>"></i> <?php DUP_PRO_U::esc_html_e("Installer") ?>
 					</button>
 					<button id="<?php echo "{$uniqueid}_archive.zip" ?>" <?php DUP_PRO_UI::echoDisabled(!$archive_exists); ?> class="button no-select"  onClick="location.href = '<?php echo $Package->Archive->getURL(); ?>'; return false;">
-						<i class="fa <?php echo ($archive_exists ? 'fa-file-archive-o' : 'fa-exclamation-triangle') ?>"></i> <?php DUP_PRO_U::esc_html_e("Archive") ?>
+						<i class="<?php echo ($archive_exists ? 'far fa-file-archive' : 'fa fa-exclamation-triangle') ?>"></i> <?php DUP_PRO_U::esc_html_e("Archive") ?>
 					</button>
 				<?php else : ?>
 					<?php if ($status == 0): ?>
 						<button onClick="DupPro.Pack.StopBuild(<?php echo $row['id']; ?>); return false;" class="button button-large dpro-btn-stop">
-							<i class="fa fa-close"></i> &nbsp; <?php echo $stop_button_text; ?>
+							<i class="fa fa-times fa-sm"></i> &nbsp; <?php echo $stop_button_text; ?>
 						</button>
 						<?php echo $progress_html; ?>
 					<?php else: ?>
@@ -558,7 +560,7 @@ foreach ($rows as $row) {
 							<div id="dpro-progress-bar"></div>
 						</div>
 						<button onClick="DupPro.Pack.StopBuild(<?php echo $row['id']; ?>); return false;" class="button button-large dpro-btn-stop">
-							<i class="fa fa-close"></i> &nbsp; <?php echo $stop_button_text; ?>
+							<i class="fa fa-times fa-sm"></i> &nbsp; <?php echo $stop_button_text; ?>
 						</button>
 					</div>
 				</td>
@@ -578,7 +580,7 @@ foreach ($rows as $row) {
 			<div class="dpro-pack-status-info">
 				<?php  if ($max_pack_store < $totalElements && $max_pack_store != 0) :?>
 					<?php	echo DUP_PRO_U::esc_html__("Note: max package retention enabled") ; ?>
-					<i class="fa fa-question-circle"
+					<i class="fas fa-question-circle fa-sm"
 						data-tooltip-title="<?php DUP_PRO_U::esc_attr_e("Storage Packages:"); ?>"
 						data-tooltip='<?php printf(DUP_PRO_U::esc_attr__("The number of packages to keep is set at [%d]. To change this setting go to "
 							. 'Duplicator Pro > Storage > Default > Max Packages and change the value, otherwise this note can be ignored.'), absint($max_pack_store)); ?>'></i>
@@ -586,7 +588,6 @@ foreach ($rows as $row) {
 			</div>
 			<div style="float:right">
 				<?php
-					echo DUP_PRO_U::__("Total Size")	. ': ' . DUP_PRO_U::byteSize($totalSize).  ' &nbsp;|&nbsp; ';
 					echo '<i>' . DUP_PRO_U::__("Time")	. ': <span id="dpro-clock-container"></span></i>';
 				?>
 			</div>
@@ -602,7 +603,7 @@ foreach ($rows as $row) {
 	<div class="dpro-paged-nav tablenav">
 		<?php if ($statusActive > 0) : ?>
 			<div id="dpro-paged-progress" style="padding-right: 10px">
-				<i class="fa fa-circle-o-notch fa-spin fa-lg fa-fw"></i>
+				<i class="fas fa-circle-notch fa-spin fa-lg fa-fw"></i>
 				<i><?php DUP_PRO_U::esc_html_e('Paging disabled during build...');?></i>
 			</div>
 		<?php else : ?>
@@ -631,13 +632,13 @@ THICK-BOX DIALOGS: -->
 
 	$alert1 = new DUP_PRO_UI_Dialog();
 	$alert1->title		= DUP_PRO_U::__('Bulk Action Required');
-	$alert1->message	= '<i class="fa fa-exclamation-triangle"></i>&nbsp;';
+	$alert1->message	= '<i class="fa fa-exclamation-triangle fa-sm"></i>&nbsp;';
 	$alert1->message	.= DUP_PRO_U::__('No selections made! Please select an action from the "Bulk Actions" drop down menu!');
 	$alert1->initAlert();
 	
 	$alert2 = new DUP_PRO_UI_Dialog();
 	$alert2->title		= DUP_PRO_U::__('Selection Required');
-	$alert2->message	= '<i class="fa fa-exclamation-triangle"></i>&nbsp;';
+	$alert2->message	= '<i class="fa fa-exclamation-triangle fa-sm"></i>&nbsp;';
 	$alert2->message	.= DUP_PRO_U::__('No selections made! Please select at least one package to delete!');
 	$alert2->initAlert();
 
@@ -708,7 +709,7 @@ DupPro.Pack.QuickFix = function(e, pharams){
             loading : function(){
                 $this.prop('disabled',true)
                         .addClass('disabled')
-                        .html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i> <?php DUP_PRO_U::esc_html_e('Please Wait...')?>');
+                        .html('<i class="fas fa-circle-notch fa-spin fa-fw"></i> <?php DUP_PRO_U::esc_html_e('Please Wait...')?>');
             },
             reset : function(){
                 $this.prop('disabled',false)
@@ -731,15 +732,27 @@ DupPro.Pack.QuickFix = function(e, pharams){
     $.ajax({
 		type: "POST",
 		url: ajaxurl,
-		dataType: "json",
 		data: {
             action : 'duplicator_pro_quick_fix',
             setup : pharams,
 			id : id,
 			nonce: '<?php echo wp_create_nonce('duplicator_pro_quick_fix'); ?>'
         }
-	}).done(function(data){
-        console.log(data);
+	}).done(function(respData, x){
+        try {
+			var data = DupPro.parseJSON(respData);  
+		} catch(err) {
+			console.error(err); 
+            console.error('JSON parse failed for response data: ' + respData);
+
+			button.reset();
+			error.message('<?php DUP_PRO_U::esc_html_e('Unexpected Error!')?>');
+			console.log(respData);
+			console.log(x);
+			return false;
+		}
+		
+		console.log(data);
         if(data.error === false)
         {
             fix.remove();
@@ -887,9 +900,16 @@ DupPro.Pack.Delete = function()
 	$.ajax({
 		type: "POST",
 		url: ajaxurl,
-		dataType: "json",
 		data: {action: 'duplicator_pro_package_delete', duplicator_pro_delid: list, nonce: '<?php echo $delete_nonce; ?>'},
-		success: function(data) {
+		success: function(respData) {
+			try {
+				var data = DupPro.parseJSON(respData);
+			} catch(err) {
+				console.error(err);
+				console.error('JSON parse failed for response data: ' + respData);
+				alert('Failed to delete package with AJAX resp: '+respData);
+				return false;
+			}
 			//Increment back a page-set if no items are left
 			if ($('#form-duplicator-nav').length) {
 				if (pageItems.length == list.split(",").length)
@@ -953,11 +973,20 @@ DupPro.Pack.ShowRemote = function(package_id, name)
 	$.ajax({
 		type: "POST",
 		url: ajaxurl,
-		dataType: "json",
 		timeout: 10000000,
 		data: data,
 		complete: function() {},
-		success: function(data) {
+		success: function(respData) {
+			try {
+				var data = DupPro.parseJSON(respData);
+			} catch(err) {
+				console.error(err);
+				console.error('JSON parse failed for response data: ' + respData);
+				<?php $alert5->showAlert(); ?>
+				console.log(respData);
+				return false;
+			}
+				
 			if (! data.succeeded) {
 				var text = "<?php DUP_PRO_U::esc_html_e('Got an error or a warning'); ?>: " + data.message;
                 <?php $alert4->showAlert(); ?>
@@ -1096,9 +1125,23 @@ $('#btn-logs-gift').on('click touchstart',function(e)
     $.ajax({
 		type: "POST",
 		url: ajaxurl,
-		dataType: "json",
 		data: data
-	}).done(function(data) {
+	}).done(function(respData) {
+		try {
+            var data = '';
+            
+            if (typeof respData === 'string') {
+                data = DupPro.parseJSON(respData);
+            } else {
+                data = respData;
+            }
+		} catch(err) {
+			console.error(err);
+			console.error('JSON parse failed for response data: ' + respData);
+			DupPro.Pack.SetUpdateInterval(60);
+			console.log(data);
+			return false;
+		}
         window.location.href = href;
     }).fail(function(data) {
         DupPro.Pack.SetUpdateInterval(60);
@@ -1113,11 +1156,21 @@ DupPro.Pack.UpdateUnfinishedPackages = function()
 	$.ajax({
 		type: "POST",
 		url: ajaxurl,
-		dataType: "json",
+		dataType: "text",
 		timeout: 10000000,
 		data: data,
 		complete: function() { },
-		success: function(data) {
+		success: function(respData) {
+			try {
+				var data = DupPro.parseJSON(respData);
+			} catch(err) {
+				// console.error(err);
+				console.error('JSON parse failed for response data: ' + respData);
+				DupPro.Pack.SetUpdateInterval(60);
+				console.log(respData);
+				return false;
+			}
+			
 			var activePackagePresent = false;
 
 			if(DupPro.Pack.packageCount == -1) {

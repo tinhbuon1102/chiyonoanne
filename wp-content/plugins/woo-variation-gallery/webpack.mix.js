@@ -53,7 +53,7 @@ woo-variation-gallery.php`;
 
 if (Mix.inProduction()) {
     mix.generatePot({
-        package   : 'WooCommerce Variation Gallery',
+        package   : 'Additional Variation Images Gallery',
         bugReport : 'https://github.com/EmranAhmed/woo-variation-gallery/issues',
         src       : '**/*.php',
         domain    : 'woo-variation-gallery',
@@ -62,11 +62,11 @@ if (Mix.inProduction()) {
 }
 
 mix.banner({
-    banner : "WooCommerce Variation Gallery v1.1.20 \n\nAuthor: Emran Ahmed ( emran.bd.08@gmail.com ) \nDate: " + new Date().toLocaleString() + "\nReleased under the GPLv3 license."
+    banner : "Additional Variation Images Gallery v1.1.25 \n\nAuthor: Emran Ahmed ( emran.bd.08@gmail.com ) \nDate: " + new Date().toLocaleString() + "\nReleased under the GPLv3 license."
 });
 
 mix.notification({
-    title : 'WooCommerce Variation Gallery',
+    title : 'Additional Variation Images Gallery',
     // contentImage : Mix.paths.root('images/logo.png')
 });
 
@@ -78,6 +78,9 @@ mix.babel(`node_modules/slick-carousel/slick/slick${min}.js`, `assets/js/slick${
 
 // mix.babel(`src/js/single-product.js`, `assets/js/single-product${min}.js`);
 mix.js(`src/js/frontend.js`, `assets/js/frontend${min}.js`);
+mix.copy(`src/js/bluebird.js`, `assets/js/bluebird${min}.js`);
+
+
 mix.sass(`src/scss/slick.scss`, `assets/css/slick${min}.css`);
 mix.sass(`src/scss/frontend.scss`, `assets/css/frontend${min}.css`);
 mix.sass(`src/scss/theme-support.scss`, `assets/css/theme-support${min}.css`);
@@ -86,3 +89,4 @@ mix.js(`src/js/backend.js`, `assets/js/admin${min}.js`);
 mix.js(`src/js/gwp-admin.js`, `assets/js/gwp-admin${min}.js`);
 mix.sass(`src/scss/backend.scss`, `assets/css/admin${min}.css`);
 mix.sass(`src/scss/gwp-admin.scss`, `assets/css/gwp-admin${min}.css`);
+mix.sass(`src/scss/gwp-admin-notice.scss`, `assets/css/gwp-admin-notice${min}.css`);

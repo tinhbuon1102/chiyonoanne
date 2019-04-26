@@ -75,7 +75,7 @@ switch ($section) {
 		$brand_list_url		= 'admin.php?page=duplicator-pro-settings&tab=package&sub=brand&view=list';
 		$brand_edit_url		= 'admin.php?page=duplicator-pro-settings&tab=package&sub=brand&view=edit';
 
-		$view = isset($_REQUEST['view']) ? SnapLibUtil::sanitize($_REQUEST['view']) : 'list';
+		$view = isset($_REQUEST['view']) ? DupProSnapLibUtil::sanitize($_REQUEST['view']) : 'list';
 		include($view == 'edit'
 				? 'inc.brand.edit.php'
 				: 'inc.brand.list.php');

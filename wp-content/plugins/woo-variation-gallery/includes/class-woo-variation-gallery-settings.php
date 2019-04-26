@@ -171,6 +171,14 @@
 					),
 					
 					array(
+						'title'   => esc_html__( 'Gallery Image Preload', 'woo-variation-gallery' ),
+						'type'    => 'checkbox',
+						'default' => 'yes',
+						'desc'    => esc_html__( 'Variation Gallery Image Preload', 'woo-variation-gallery' ),
+						'id'      => 'woo_variation_gallery_image_preload'
+					),
+					
+					array(
 						'title'   => esc_html__( 'Preload Style', 'woo-variation-gallery' ),
 						'type'    => 'select',
 						'class'   => 'wc-enhanced-select',
@@ -194,4 +202,5 @@
 		}
 		
 		new Woo_Variation_Gallery_Settings();
+	
 	endif;

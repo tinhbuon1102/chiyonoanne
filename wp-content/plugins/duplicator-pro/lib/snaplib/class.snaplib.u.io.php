@@ -1,4 +1,6 @@
 <?php
+if (!defined("ABSPATH") && !defined("DUPXABSPATH")) 
+    die("");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,8 +10,8 @@
 require_once(dirname(__FILE__).'/class.snaplib.u.string.php');
 require_once(dirname(__FILE__).'/class.snaplib.u.os.php');
 
-if(!class_exists('SnapLibIOU')) {
-class SnapLibIOU
+if(!class_exists('DupProSnapLibIOU')) {
+class DupProSnapLibIOU
 {
     // Real upper bound of a signed int is 214748364.
     // The value chosen below, makes sure we have a buffer of ~4.7 million.
@@ -50,7 +52,7 @@ class SnapLibIOU
     }
 
     public static function safePath($path, $real = false)
-    {
+    {       
         if($real) {
             $path = realpath($path);
         }
@@ -67,13 +69,13 @@ class SnapLibIOU
         if(!file_exists($destination)) {
             self::mkdir($destination);
         }
-
+        
         foreach($fileSystemObjects as $fileSystemObject)
         {
             $shouldMove = true;
-
+            
             if($exclusions != null) {
-
+            
                 foreach($exclusions as $exclusion) {
                     if (preg_match($exclusion, $fileSystemObject) === 1) {
                         $shouldMove = false;
@@ -81,26 +83,26 @@ class SnapLibIOU
                     }
                 }
             }
-
+            
             if($shouldMove) {
-
+            
                 $newName = $destination . '/' . basename($fileSystemObject);
 
 				if(!file_exists($fileSystemObject)) {
 					$failures[] = "Tried to move {$fileSystemObject} to {$newName} but it didn't exist!";
 				} else if(!@rename($fileSystemObject, $newName)) {
                     $failures[] = "Couldn't move {$fileSystemObject} to {$newName}";
-                }
+                }       
             }
         }
 
         if($exceptionOnError && count($failures) > 0) {
             throw new Exception(implode(',', $failures));
         }
-
+        
         return $failures;
     }
-
+    
     public static function rename($oldname, $newname, $removeIfExists = false)
     {
         if($removeIfExists) {
@@ -117,17 +119,17 @@ class SnapLibIOU
             throw new Exception("Couldn't rename {$oldname} to {$newname}");
         }
     }
-
+    
     public static function fopen($filepath, $mode, $throwOnError = true)
     {
-        if(SnapLibOSU::$isWindows) {
-
-            if(strlen($filepath) > SnapLibOSU::WindowsMaxPathLength) {
+        if(DupProSnapLibOSU::$isWindows) {
+            
+            if(strlen($filepath) > DupProSnapLibOSU::WindowsMaxPathLength) {
                 throw new Exception("Skipping a file that exceeds allowed Windows path length. File: {$filepath}");
             }
         }
 
-        if (SnapLibStringU::startsWith($mode, 'w') || SnapLibStringU::startsWith($mode, 'c') || file_exists($filepath)) {
+        if (DupProSnapLibStringU::startsWith($mode, 'w') || DupProSnapLibStringU::startsWith($mode, 'c') || file_exists($filepath)) {
             $file_handle = @fopen($filepath, $mode);
         } else {
             if($throwOnError) {
@@ -170,7 +172,7 @@ class SnapLibIOU
             throw new Exception("{$dirname} doesn't exist");
         }
     }
-
+    
     public static function rm($filepath, $mustExist = false)
     {
         if (file_exists($filepath)) {
@@ -230,7 +232,7 @@ class SnapLibIOU
         }
     }
 
-    static function rrmdir($dir)
+    public static function rrmdir($dir)
     {
         if (is_dir($dir)) {
             $objects = scandir($dir);
@@ -238,7 +240,7 @@ class SnapLibIOU
                 if ($object != "." && $object != "..") {
                     if (is_dir($dir."/".$object))
                     {
-                        SnapLibIOU::rrmdir($dir."/".$object);
+                        DupProSnapLibIOU::rrmdir($dir."/".$object);
                     }
                     else
                     {
@@ -265,7 +267,7 @@ class SnapLibIOU
     public static function fseek($handle, $offset, $whence = SEEK_SET)
     {
         $ret_val = @fseek($handle, $offset, $whence);
-        
+
         if ($ret_val !== 0) {
             $filepath = stream_get_meta_data($handle);
             $filepath = $filepath["uri"];
@@ -275,7 +277,7 @@ class SnapLibIOU
             }
             //This check is not strict, but in most cases 32 Bit PHP will be the issue
             else if(abs($offset) > self::FileSizeLimit32BitPHP || $filesize > self::FileSizeLimit32BitPHP || ($offset < 0 && $whence == SEEK_SET)){
-                throw new SnapLib_32BitSizeLimitException("Trying to seek on a file beyond the capability of 32 bit PHP. offset=$offset filesize=$filesize");
+                throw new DupProSnapLib_32BitSizeLimitException("Trying to seek on a file beyond the capability of 32 bit PHP. offset=$offset filesize=$filesize");
             }else {
                 throw new Exception("Error seeking to file offset $offset. Retval = $ret_val");
             }
@@ -295,9 +297,9 @@ class SnapLibIOU
 
     public static function mkdir($pathname, $mode = 0755, $recursive = false)
     {
-        if(SnapLibOSU::$isWindows) {
+        if(DupProSnapLibOSU::$isWindows) {
 
-            if(strlen($pathname) > SnapLibOSU::WindowsMaxPathLength) {
+            if(strlen($pathname) > DupProSnapLibOSU::WindowsMaxPathLength) {
                 throw new Exception("Skipping creating directory that exceeds allowed Windows path length. File: {$pathname}");
             }
         }

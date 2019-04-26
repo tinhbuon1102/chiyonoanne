@@ -12,9 +12,11 @@ defined("DUPXABSPATH") or die("");
  */
 class DUPX_MultisiteMode
 {
-	const Standalone = 0;
-	const Subdomain = 1;
-	const Subdirectory = 2;
+    const SingleSite  = -1;
+    const Standalone   = 0;
+    const Subdomain    = 1;
+    const Subdirectory = 2;
+
 }
 
 class DUPX_Constants
@@ -26,10 +28,6 @@ class DUPX_Constants
 	 */
 	public static function init()
 	{
-		if (!defined('KB_IN_BYTES'))  define('KB_IN_BYTES', 1024);
-		if (!defined('MB_IN_BYTES'))  define('MB_IN_BYTES', 1024 * KB_IN_BYTES);
-		if (!defined('GB_IN_BYTES'))  define('GB_IN_BYTES', 1024 * MB_IN_BYTES);
-
 		$dup_installer_dir_absolute_path = dirname(dirname(dirname(__FILE__)));
 		$config_files = glob($dup_installer_dir_absolute_path.'/dup-archive__*.txt');
 		$config_file_absolute_path = array_pop($config_files);
@@ -53,6 +51,10 @@ class DUPX_Constants
 		$GLOBALS['DB_RENAME_PREFIX'] = 'x-bak-' . @date("dHis") . '__';
 		$GLOBALS['DB_INSTALL_MULTI_THREADED_MAX_RETRIES'] = 3;
 
+        if (!defined('MAX_SITES_TO_DEFAULT_ENABLE_CORSS_SEARCH')) {
+            define('MAX_SITES_TO_DEFAULT_ENABLE_CORSS_SEARCH',  10);
+        }
+
 		//UPDATE TABLE SETTINGS
 		$GLOBALS['REPLACE_LIST'] = array();
 		$GLOBALS['DEBUG_JS'] = false;
@@ -60,7 +62,7 @@ class DUPX_Constants
 		//PHP INI SETUP: all time in seconds
 		if (!isset($GLOBALS['DUPX_ENFORCE_PHP_INI']) || !$GLOBALS['DUPX_ENFORCE_PHP_INI']) {
 			@ini_set('mysql.connect_timeout', '5000');
-			@ini_set('memory_limit', '5000M');
+			@ini_set('memory_limit', DUPLICATOR_PHP_MAX_MEMORY);
 			@ini_set("max_execution_time", '5000');
 			@ini_set("max_input_time", '5000');
 			@ini_set('default_socket_timeout', '5000');
@@ -84,13 +86,17 @@ class DUPX_Constants
 		$GLOBALS['LOGGING']				= isset($_POST['logging']) ? DUPX_U::sanitize_text_field($_POST['logging']) : 1;
 		$GLOBALS['CURRENT_ROOT_PATH']	= str_replace('\\', '/', realpath(dirname(__FILE__) . "/../../../"));
 		$GLOBALS['LOG_FILE_PATH']		= $GLOBALS['DUPX_INIT'] . '/' . $GLOBALS["LOG_FILE_NAME"];
+        $GLOBALS["NOTICES_FILE_NAME"]	= "dup-installer-notices__{$GLOBALS['PACKAGE_HASH']}.json";
+        $GLOBALS["NOTICES_FILE_PATH"]	= $GLOBALS['DUPX_INIT'] . '/' . $GLOBALS["NOTICES_FILE_NAME"];
 		$GLOBALS['CHOWN_ROOT_PATH']		= @chmod("{$GLOBALS['CURRENT_ROOT_PATH']}", 0755);
-		$GLOBALS['CHOWN_LOG_PATH']		= @chmod("{$GLOBALS['CURRENT_ROOT_PATH']}/{$GLOBALS['LOG_FILE_NAME']}", 0644);
+		$GLOBALS['CHOWN_LOG_PATH']		= @chmod("{$GLOBALS['LOG_FILE_PATH']}", 0644);
+        $GLOBALS['CHOWN_NOTICES_PATH']	= @chmod("{$GLOBALS['NOTICES_FILE_PATH']}", 0644);
 		$GLOBALS['URL_SSL']				= (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on') ? true : false;
 		$GLOBALS['URL_PATH']			= ($GLOBALS['URL_SSL']) ? "https://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}" : "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}";
 		$GLOBALS['PHP_MEMORY_LIMIT']	= ini_get('memory_limit') === false ? 'n/a' : ini_get('memory_limit');
 		$GLOBALS['PHP_SUHOSIN_ON']		= extension_loaded('suhosin') ? 'enabled' : 'disabled';
 		$GLOBALS['DISPLAY_MAX_OBJECTS_FAILED_TO_SET_PERM'] = 5;
+
 
 		// Displaying notice for slow zip chunk extraction
 		$GLOBALS['ZIP_ARC_CHUNK_EXTRACT_DISP_NOTICE_AFTER'] = 5 * 60 * 60; // 5 minutes
@@ -107,15 +113,23 @@ class DUPX_Constants
 			$GLOBALS['ZIP_ARC_CHUNK_EXTRACT_NOTICES'][$key] = $val.$additional_msg;
 		}
 
+        /**
+         * Inizialize notices manager and load file
+         */
+        $noticesManager = DUPX_NOTICE_MANAGER::getInstance();
+
 		//Restart log if user starts from step 1
         if($GLOBALS["VIEW"] == "step1" && !isset($_POST['archive_engine'])){
             $GLOBALS['LOG_FILE_HANDLE'] = @fopen($GLOBALS['LOG_FILE_PATH'], "w+");
+            $noticesManager->resetNotices();
         }else{
             $GLOBALS['LOG_FILE_HANDLE'] = @fopen($GLOBALS['LOG_FILE_PATH'], "a+");
         }
 
 		$GLOBALS['FW_USECDN'] = false;
 		$GLOBALS['HOST_NAME'] = strlen($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $_SERVER['HTTP_HOST'];
+
+        if (!defined('MAX_STRLEN_SERIALIZED_CHECK')) { define('MAX_STRLEN_SERIALIZED_CHECK', 2000000); }
 	}
 }
 

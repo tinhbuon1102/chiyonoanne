@@ -23,12 +23,23 @@ if($is_standard_mode) {
     $dbFormDisabledString = '';
 } else {
 	$wpConfigPath	= "{$GLOBALS['DUPX_ROOT']}/wp-config.php";
-	$defines = DUPX_WPConfig::parseDefines($wpConfigPath);
+	require_once($GLOBALS['DUPX_INIT'].'/classes/config/class.wp.config.tranformer.php');
+	$config_transformer = new WPConfigTransformer($wpConfigPath);
+	function dupxGetDbConstVal($constName) {
+		if ($GLOBALS['config_transformer']->exists('constant', $constName)) {
+			$configVal = $GLOBALS['config_transformer']->get_value('constant', $constName);
+			$constVal = htmlspecialchars($configVal);
+		} else {
+			$constVal = '';
+		}
+		return $constVal;
+	}
 
-	$ovr_dbhost = htmlspecialchars(SnapLibUtil::getArrayValue($defines, 'DB_HOST'));
-	$ovr_dbname = htmlspecialchars(SnapLibUtil::getArrayValue($defines, 'DB_NAME'));
-	$ovr_dbuser = htmlspecialchars(SnapLibUtil::getArrayValue($defines, 'DB_USER'));
-	$ovr_dbpass = htmlspecialchars(SnapLibUtil::getArrayValue($defines, 'DB_PASSWORD'));
+	$ovr_dbhost = dupxGetDbConstVal('DB_HOST');
+	$ovr_dbname = dupxGetDbConstVal('DB_NAME');
+	$ovr_dbuser = dupxGetDbConstVal('DB_USER');
+	$ovr_dbpass = dupxGetDbConstVal('DB_PASSWORD');
+
     $dbhost = '';
     $dbname = '';
     $dbuser = '';
@@ -50,7 +61,7 @@ BASIC PANEL -->
 				click the 'Apply button' to set the placeholder values.  To use different database settings click the 'Reset button' to clear and set new values.
 				<br/><br/>
 
-				<i><i class="fa fa-warning"></i> Warning: Please note that reusing an existing site's database will <u>overwrite</u> all of its data. If you're not 100% sure about
+				<i><i class="fas fa-exclamation-triangle fa-sm"></i> Warning: Please note that reusing an existing site's database will <u>overwrite</u> all of its data. If you're not 100% sure about
 				using these database settings, then create a new database and use the new credentials instead.</i>
 			</div>
 
@@ -108,7 +119,7 @@ OPTIONS -->
 </div>
 <div id="s2-opts-basic" class="s2-opts" style="display:none;padding-top:0">
 	<div class="help-target">
-		<a href="<?php echo DUPX_U::esc_url($GLOBALS['_HELP_URL_PATH'].'#help-s2');?>" target="_blank"><i class="fa fa-question-circle"></i></a>
+		<a href="<?php echo DUPX_U::esc_url($GLOBALS['_HELP_URL_PATH'].'#help-s2');?>" target="_blank"><i class="fas fa-question-circle fa-sm"></i></a>
 	</div>
 
 	<table class="dupx-opts dupx-advopts dupx-advopts-space">
@@ -172,7 +183,7 @@ BASIC: DB VALIDATION -->
 
 <div id="s2-dbtest-area-basic" class="s2-dbtest-area">
 	<div id="s2-dbrefresh-basic">
-		<a href="javascript:void(0)" onclick="DUPX.testDBConnect()"><i class="fa fa-refresh"></i> Retry Test</a>
+		<a href="javascript:void(0)" onclick="DUPX.testDBConnect()"><i class="fa fa-sync fa-sm"></i> Retry Test</a>
 	</div>
 	<div style="clear:both"></div>
 	<div id="s2-dbtest-hb-basic" class="s2-dbtest-hb">
@@ -187,7 +198,7 @@ BASIC: DB VALIDATION -->
 <br/><br/><br/>
 
 <div class="footer-buttons">
-	<button id="s2-dbtest-btn-basic" type="button" onclick="DUPX.testDBConnect()" class="default-btn" /><i class="fa fa-database"></i> Test Database</button>
+	<button id="s2-dbtest-btn-basic" type="button" onclick="DUPX.testDBConnect()" class="default-btn" /><i class="fas fa-database fa-sm"></i> Test Database</button>
 	<button id="s2-next-btn-basic" type="button" onclick="DUPX.confirmDeployment()" class="default-btn disabled" disabled="true"
 			title="The 'Test Database' connectivity requirements must pass to continue with install!">
 		Next <i class="fa fa-caret-right"></i>

@@ -229,9 +229,7 @@ class Manager {
 
 		return [
 			'templates' => $this->get_templates(),
-			'config' => [
-				'categories' => $library_data['categories'],
-			],
+			'config' => $library_data['types_data'],
 		];
 	}
 
@@ -262,11 +260,9 @@ class Manager {
 
 		$args['content'] = json_decode( $args['content'], true );
 
-		if ( 'page' === $args['type'] ) {
-			$page = SettingsManager::get_settings_managers( 'page' )->get_model( $args['post_id'] );
+		$page = SettingsManager::get_settings_managers( 'page' )->get_model( $args['post_id'] );
 
-			$args['page_settings'] = $page->get_data( 'settings' );
-		}
+		$args['page_settings'] = $page->get_data( 'settings' );
 
 		$template_id = $source->save_item( $args );
 
@@ -631,7 +627,7 @@ class Manager {
 	 * @access private
 	 */
 	private function on_direct_import_template_success() {
-		wp_safe_redirect( admin_url( 'edit.php?post_type=' . Source_Local::CPT ) );
+		wp_safe_redirect( admin_url( Source_Local::ADMIN_MENU_SLUG ) );
 	}
 
 	/**
