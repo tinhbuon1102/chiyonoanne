@@ -102,7 +102,7 @@ add_action('admin_head', 'hide_update_noticee_to_all_but_admin_users', 1);
 function elsey_change_cssjs_ver($src) {
     if (strpos($src, '?ver='))
         $src = remove_query_arg('ver', $src);
-    $src = add_query_arg(array('ver' => '4.8'), $src);
+    $src = add_query_arg(array('ver' => '4.9'), $src);
     return $src;
 }
 
@@ -332,6 +332,7 @@ function add_scripts() {
     wp_register_style('portani-style', get_stylesheet_directory_uri() . '/css/port-animation.css', array(), '');
     wp_register_style('portfolio-style', get_stylesheet_directory_uri() . '/css/portfolio.css', array(), '');
     wp_register_style('validation_engine_css', get_stylesheet_directory_uri() . '/js/validationEngine.jquery.css', array(), '');
+    wp_register_style('nano-scroll-style', get_stylesheet_directory_uri() . '/css/nanoscroller.css', array(), '');
     
     wp_register_script('moment-js', get_stylesheet_directory_uri() . '/js/calendar/moment.min.js', array(), false, true);
     //wp_register_script( 'calmain-js', get_stylesheet_directory_uri() . '/js/calendar/main.js');
@@ -362,6 +363,7 @@ function add_scripts() {
     wp_register_script('tabs-js', get_stylesheet_directory_uri() . '/js/tabs.js', array(), false, true);
     wp_register_script('ajax-con', get_stylesheet_directory_uri() . '/js/ajax-con.js', array(), false, true);
     wp_register_script('register', get_stylesheet_directory_uri() . '/js/register.js', array(), false, true);
+    wp_register_script('nano-scroll', get_stylesheet_directory_uri() . '/js/jquery.nanoscroller.js', array(), false, true);
 	$translation_array = array(
 		'name_label' => __('Name', 'zoa'),
 		'kana_label' => __('Kana Name', 'zoa'),
@@ -433,6 +435,8 @@ function add_scripts() {
         wp_enqueue_script('slick-js');
         wp_enqueue_script('popup-js');
         wp_enqueue_script('shopsingle-js');
+        wp_enqueue_style('nano-scroll-style');
+        wp_enqueue_script('nano-scroll');
     } elseif (is_page('register')) {
     	wp_enqueue_script('register');
 		wp_enqueue_script('register-js');

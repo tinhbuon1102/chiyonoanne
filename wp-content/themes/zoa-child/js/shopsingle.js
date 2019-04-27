@@ -10,6 +10,11 @@ jQuery(document).ready(function($){
 		var SImageW = $(".single-gallery-slider.single-gallery-vertical .single-product-gallery.pro-single-image .pro-carousel-image #gallery-image .pro-img-item").width();//aspect 3:4
 		$('.single-gallery-slider.single-gallery-vertical .single-product-gallery.pro-single-image .pro-carousel-image #gallery-image .pro-img-item').css('height', (SImageW*4/3) + 'px');
 		
+		//add nano scroller for gallery thumb
+		$('.pro-carousel-thumb').addClass('nano');
+		$('.gallery-thumb').addClass('nano-content');
+		$('.pro-carousel-thumb').height($('#gallery-image').height());
+		$('.pro-carousel-thumb').nanoScroller();
 	});
 	//change class for woocommerce ultimate gift card plugin
 	$( 'form.cart .mwb_wgm_added_wrapper p.mwb_wgm_section' ).each( function() {
