@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
 		
 		//add nano scroller for gallery thumb
 		$('.pro-carousel-thumb').addClass('nano');
-		$('.gallery-thumb').addClass('nano-content');
+		$('#gallery-thumb').addClass('nano-content');
 		$('.pro-carousel-thumb').height($('#gallery-image').height());
 		$('.pro-carousel-thumb').nanoScroller();
 	});
