@@ -9,7 +9,7 @@ if (function_exists('plugin_dir_url')) {
     if (!defined('MB_IN_BYTES'))  define('MB_IN_BYTES', 1024 * KB_IN_BYTES);
     if (!defined('GB_IN_BYTES'))  define('GB_IN_BYTES', 1024 * MB_IN_BYTES);
 
-    define('DUPLICATOR_PRO_VERSION', '3.8.2.1');
+    define('DUPLICATOR_PRO_VERSION', '3.8.2.2');
     define('DUPLICATOR_PRO_LIMIT_UPLOAD_VERSION', '3.3.0.0'); // Limit Drag & Drop`
     define('DUPLICATOR_PRO_GIFT_THIS_RELEASE', false); // Display Gift - should be true for new features OR if we want them to fill out survey
     define('DUPLICATOR_PRO_PLUGIN_URL', plugin_dir_url(__FILE__));

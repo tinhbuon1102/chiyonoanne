@@ -310,7 +310,11 @@ class DUP_PRO_Log
     {
         if (self::$traceEnabled || $force_trace) {
             $send_trace_to_error_log = (bool) get_option('duplicator_pro_send_trace_to_error_log', false);
-            $unique_id               = sprintf("%08x", abs(crc32($_SERVER['REMOTE_ADDR'].$_SERVER['REQUEST_TIME'].$_SERVER['REMOTE_PORT'])));
+            if (isset($_SERVER['REMOTE_PORT'])) {
+                $unique_id = sprintf("%08x", abs(crc32($_SERVER['REMOTE_ADDR'].$_SERVER['REQUEST_TIME'].$_SERVER['REMOTE_PORT'])));
+            } else {
+                $unique_id = sprintf("%08x", abs(crc32($_SERVER['REMOTE_ADDR'].$_SERVER['REQUEST_TIME'])));
+            }
 
             if ($calling_function_override == null) {
 				$calling_function = DUP_PRO_U::getCallingFunctionName();

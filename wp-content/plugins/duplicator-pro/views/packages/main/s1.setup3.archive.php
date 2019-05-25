@@ -51,7 +51,7 @@ defined("ABSPATH") or die("");
 	<i class="far fa-file-archive fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Archive') ?> 
 	<sup class="dup-box-title-badge"><?php echo esc_html($archive_format); ?></sup> &nbsp;
 	<span style="font-size:13px">
-		<span id="dup-archive-filter-file" title="<?php DUP_PRO_U::esc_attr_e('File filter enabled') ?>"><i class=""fa fa-files fa-sm></i> <i class="fa fa-filter fa-sm"></i> &nbsp;&nbsp;</span>
+		<span id="dup-archive-filter-file" title="<?php DUP_PRO_U::esc_attr_e('File filter enabled') ?>"><i class="fa fa-files fa-sm"></i> <i class="fa fa-filter fa-sm"></i> &nbsp;&nbsp;</span>
 		<span id="dup-archive-filter-db" title="<?php DUP_PRO_U::esc_attr_e('Database filter enabled') ?>"><i class="fa fa-table fa-sm"></i> <i class="fa fa-filter fa-sm"></i></span>
 		<span id="dup-archive-db-only" title="<?php DUP_PRO_U::esc_attr_e('Archive Only the Database') ?>"> <?php DUP_PRO_U::esc_html_e('Database Only') ?> </span>
 	</span>

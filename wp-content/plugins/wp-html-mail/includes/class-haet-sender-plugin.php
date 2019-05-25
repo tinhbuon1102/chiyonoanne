@@ -9,6 +9,8 @@ require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-wp-support-plus-resp
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-birthday-emails.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-gravityforms.php';
 require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-happyforms.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-ultimate-wp-mail.php';
+require HAET_MAIL_PATH . 'includes/class-haet-sender-plugin-divi-theme.php';
 
 class Haet_Different_Plugin_Exception extends Exception {}
 
@@ -23,6 +25,12 @@ class Haet_Sender_Plugin {
 
     public static function get_available_plugins(){
         $plugins = array(
+            // 'PLUGIN_SLUG'   =>  array(
+            //     'name'      =>  'PLUGIN_SLUG',
+            //     'file'      =>  'PLUGIN_FOLDER/MAIN_PLUGIN_FILE.php',
+            //     'class'     =>  'DETECTOR_CLASS_IN_THIS_PLUGIN',
+            //     'display_name' => 'DISPLAY_NAME'
+            // ),
             'contact-form-7'   =>  array(
                 'name'      =>  'contact-form-7',
                 'file'      =>  'contact-form-7/wp-contact-form-7.php',
@@ -71,6 +79,19 @@ class Haet_Sender_Plugin {
                 'file'      =>  'happyforms/happyforms.php',
                 'class'     =>  'Haet_Sender_Plugin_Happyforms',
                 'display_name' => 'HappyForms'
+            ),
+            'ultimate-wp-mail'   =>  array(
+                'name'      =>  'ultimate-wp-mail',
+                'file'      =>  'ultimate-wp-mail/Main.php',
+                'class'     =>  'Haet_Sender_Plugin_UltimateWPMail',
+                'display_name' => 'Ultimate WP Mail'
+            ),
+            'divi-theme'   =>  array(
+                'name'      =>  'divi-theme',
+                'file'      =>  'Divi',
+                'class'     =>  'Haet_Sender_Plugin_DiviTheme',
+                'display_name' => 'Divi',
+                'image_url' =>  HAET_MAIL_URL . '/images/divi-theme.png'
             ),
         );
 
@@ -142,6 +163,10 @@ class Haet_Sender_Plugin {
                         return true;
                     }
                 }
+            }
+            $active_theme = wp_get_theme();
+            if ( $plugin['display_name'] == $active_theme->name || $plugin['display_name']== $active_theme->parent_theme ) {
+                return true;
             }
         }
         return false;

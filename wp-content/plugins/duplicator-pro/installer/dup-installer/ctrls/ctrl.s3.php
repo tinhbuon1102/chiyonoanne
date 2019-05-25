@@ -657,8 +657,7 @@ if ($GLOBALS['DUPX_AC']->mu_mode !== DUPX_MultisiteMode::Standalone) {
         $config_transformer->update('constant', 'NOBLOGREDIRECT', $_POST['url_new'], array( 'add'=> false, 'normalize' => true));
     }
 
-    $db_pass = isset($_POST['dbpass']) ? DupProSnapLibUtil::wp_json_encode(trim($_POST['dbpass'])) : "''";
-    $db_pass = str_replace(array('\x00','\/'), array('','/'), $db_pass);
+    $db_pass = DUPX_U::getEscapedGenericString(trim($_POST['dbpass']));
 
     $config_transformer->update('constant', 'DB_NAME', trim(DUPX_U::wp_unslash($_POST['dbname'])));
     $config_transformer->update('constant', 'DB_USER', trim(DUPX_U::wp_unslash($_POST['dbuser'])));

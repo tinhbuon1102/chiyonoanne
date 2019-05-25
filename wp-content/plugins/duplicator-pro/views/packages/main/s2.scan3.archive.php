@@ -20,7 +20,7 @@ ARCHIVE
 </div>
 
 <div class="scan-header scan-item-first">
-	<i class=""fa fa-files fa-sm"></i>
+	<i class="fa fa-files fa-sm"></i>
 	<?php DUP_PRO_U::esc_html_e("Files"); ?>
 	<div class="scan-header-details">
 		<div class="dup-scan-filter-status">
@@ -124,7 +124,7 @@ SIZE CHECKS -->
 					<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
 				</button>
 				<button type="button" class="button-small" onclick="DupPro.Pack.showPathsDlg('large')" title="<?php DUP_PRO_U::esc_attr_e('Copy Paths to Clipboard');?>">
-					<i class="fa fa-clipboard" aria-hidden="true"></i>
+					<i class="fa far fa-clipboard" aria-hidden="true"></i>
 				</button>
 			</div>
 
@@ -220,7 +220,7 @@ NAME CHECKS -->
 					<i class="fa fa-filter fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Add Filters &amp; Rescan');?>
 				</button>
 				<button type="button" class="button-small" onclick="DupPro.Pack.showPathsDlg('utf8')" title="<?php DUP_PRO_U::esc_attr_e('Copy Paths to Clipboard');?>">
-					<i class="fa fa-clipboard" aria-hidden="true"></i>
+					<i class="fa far fa-clipboard" aria-hidden="true"></i>
 				</button>
 			</div>
         </div>
@@ -482,16 +482,16 @@ DIALOG: PATHS COPY & PASTE -->
 	<b><i class="fa fa-folder"></i> <?php DUP_PRO_U::esc_html_e('Directories');?></b>
 	<div class="copy-button">
 		<button type="button" class="button-small" onclick="DupPro.Pack.copyText(this, '#arc-paths-dlg textarea.path-dirs')">
-			<i class="fa fa-clipboard"></i> <?php DUP_PRO_U::esc_html_e('Click to Copy');?>
+			<i class="fa far fa-clipboard"></i> <?php DUP_PRO_U::esc_html_e('Click to Copy');?>
 		</button>
 	</div>
 	<textarea class="path-dirs"></textarea>
 	<br/><br/>
 
-	<b><i class=""fa fa-files fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Files');?></b>
+	<b><i class="fa fa-files fa-sm"></i> <?php DUP_PRO_U::esc_html_e('Files');?></b>
 	<div class="copy-button">
 		<button type="button" class="button-small" onclick="DupPro.Pack.copyText(this, '#arc-paths-dlg textarea.path-files')">
-			<i class="fa fa-clipboard"></i> <?php DUP_PRO_U::esc_html_e('Click to Copy');?>
+			<i class="fa far fa-clipboard"></i> <?php DUP_PRO_U::esc_html_e('Click to Copy');?>
 		</button>
 	</div>
 	<textarea class="path-files"></textarea>

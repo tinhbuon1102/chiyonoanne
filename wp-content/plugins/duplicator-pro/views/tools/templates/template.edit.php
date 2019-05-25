@@ -185,7 +185,7 @@ ARCHIVE -->
 
 	<!-- =================
 	FILES -->
-	<b class="dpro-hdr"><i class=""fa fa-files fa-sm"></i> <?php DUP_PRO_U::esc_html_e('FILES'); ?></b>
+	<b class="dpro-hdr"><i class="fa fa-files fa-sm"></i> <?php DUP_PRO_U::esc_html_e('FILES'); ?></b>
 
 	<input id="archive_export_onlydb" type="checkbox" <?php DUP_PRO_UI::echoChecked($package_template->archive_export_onlydb) ?> name="archive_export_onlydb"   onclick="DupPro.Template.ExportOnlyDB()"  />
 	<label for="archive_export_onlydb"><?php _e("Archive Only the Database"); ?></label> <br/>

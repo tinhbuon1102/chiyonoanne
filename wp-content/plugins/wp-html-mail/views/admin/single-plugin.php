@@ -29,15 +29,17 @@ $is_bridge_installed = class_exists($plugin['class']);
         <?php elseif( !$is_bridge_installed ): ?>
             <p style="text-align:right;">
                 <?php _e('Install WP HTML Mail for','wp-html-mail'); ?><br>
-                <a class="button-secondary" href="http://etzelstorfer.com/en/downloads/wp-html-mail-<?php echo $plugin_name; ?>" target="_blank">
+                <a class="button-secondary" href="https://codemiq.com/en/downloads/wp-html-mail-<?php echo $plugin_name; ?>" target="_blank">
                     <?php echo $plugin['display_name']; ?> &gt;
                 </a>
             </p>
         <?php elseif( $is_bridge_installed && !$is_installed ): ?>
             <?php echo $plugin['display_name'].' '.__('is currently not installed.','wp-html-mail'); ?>
-            <a href="<?php echo wp_nonce_url( network_admin_url( 'update.php?action=install-plugin&plugin='.$plugin_name ), 'install-plugin_'.$plugin_name ); ?>">
-                <?php echo __('install','wp-html-mail').' '.$plugin['display_name']; ?>
-            </a>
+            <?php if( strpos( $plugin['name'], '-theme' ) === false ): ?>
+                <a href="<?php echo wp_nonce_url( network_admin_url( 'update.php?action=install-plugin&plugin='.$plugin_name ), 'install-plugin_'.$plugin_name ); ?>">
+                    <?php echo __('install','wp-html-mail').' '.$plugin['display_name']; ?>
+                </a>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </li>

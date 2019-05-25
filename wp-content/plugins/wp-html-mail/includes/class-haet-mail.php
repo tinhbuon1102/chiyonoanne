@@ -227,12 +227,6 @@ final class Haet_Mail {
 
 		$template = apply_filters( 'haet_mail_modify_styled_mail', $template );
 
-		$custom_css_desktop = apply_filters( 'haet_mail_css_desktop', '' );
-		$custom_css_mobile = apply_filters( 'haet_mail_css_mobile', '' );
-
-		$template = str_replace( '/**** ADD CSS HERE ****/', $custom_css_desktop . '/**** ADD CSS HERE ****/', $template );
-		$template = str_replace( '/**** ADD MOBILE CSS HERE ****/', $custom_css_mobile . '/**** ADD MOBILE CSS HERE ****/', $template );
-
 		$template = $this->prepare_email_for_delivery($template);
 
 		$tabs = array(
@@ -335,16 +329,19 @@ final class Haet_Mail {
 			$use_template = true;
 		else
 			$use_template = $sender_plugin->use_template();
-
-		// $debug = 'DEBUG<br>';
-		// $debug .= '<pre>=====POST:'.print_r($_POST,true).'</pre>';
-		// $debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
-		// $debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
-		// $debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
-		// if( strpos( $email['message'], '</body>' ) !== false )
-		// 	$email['message'] = str_replace( '</body>', $debug, $email['message'] );
-		// else
-		// 	$email['message'] .= $debug; 
+		
+		
+		//Debug
+		//$debug = 'DEBUG<br>';
+		//$debug .= '<pre>=====POST:'.print_r($_POST,true).'</pre>';
+		//$debug .= '<pre>=====GET:'.print_r($_GET,true).'</pre>';
+		//$debug .= 'SENDER-PLUGIN: <pre>'.print_r($sender_plugin,true).'</pre><br>';
+		//$debug .= 'ACTIVE-PLUGINS: <pre>'.print_r(Haet_Sender_Plugin::get_active_plugins(),true).'</pre><br>';
+		
+		//if( strpos( $email['message'], '</body>' ) !== false )
+		//$email['message'] = str_replace( '</body>', $debug, $email['message'] );
+		//else
+		//$email['message'] .= $debug; 
 
 		$use_template = apply_filters( 'haet_mail_use_template', $use_template, array('to' => $email['to'], 'subject' => $email['subject'], 'message' => $email['message'], 'headers' => $email['headers'], 'attachments' => $email['attachments'], 'sender_plugin' => ($sender_plugin?$sender_plugin->get_plugin_name():null)) );
 
@@ -409,6 +406,11 @@ final class Haet_Mail {
 
 		$email = $this->add_attachments( $email );
 
+		if( $this->is_debug_mode() ){
+			$debug_filename = trailingslashit( get_temp_dir() ) . 'debug-' . uniqid() . '.txt';
+			file_put_contents( $debug_filename, print_r( $email, true ) );
+			$email['attachments'][] = $debug_filename;
+		}
 
 		if(	isset( $options['testmode'] ) 
 			&& isset( $options['testmode_recipient'] ) 
@@ -445,8 +447,7 @@ final class Haet_Mail {
 				}
 			}	
 		}
-		
-
+	
 		return $email;
 	}
 
@@ -556,10 +557,24 @@ final class Haet_Mail {
 
 
 	private function prepare_email_for_delivery( $message ){
+		// general custom CSS via filters
+		$custom_css_desktop = '';
+		$custom_css_mobile = '';
+		$custom_css_desktop = apply_filters( 'haet_mail_css_desktop', $custom_css_desktop );
+		$custom_css_mobile = apply_filters( 'haet_mail_css_mobile', $custom_css_mobile );
+		$custom_css_mobile = ' @media screen and (max-width: 400px) { ' . PHP_EOL . $custom_css_mobile . ' } ';
+		$message = str_replace( '/**** ADD CSS HERE ****/', $custom_css_desktop . '/**** ADD CSS HERE ****/', $message );
+		$message = str_replace( '/**** ADD MOBILE CSS HERE ****/', $custom_css_mobile . '/**** ADD MOBILE CSS HERE ****/', $message );
+
+
 		$message = $this->inline_css($message);
 
 		// remove any scripts injected by hooks and shortcodes
 		$message = preg_replace( '/(<script.*<\/script>)/Us', '', $message );
+
+		// OMG, isn't there a better way to get rid of these encoding issues!?
+		$message = htmlentities( $message, ENT_NOQUOTES, "UTF-8", false );
+		$message = str_replace(array('&lt;','&gt;'),array('<','>'), $message);
 
 		return $message;
 	}
@@ -674,6 +689,7 @@ final class Haet_Mail {
 	}
 
 
+
 	/**
 	 * Show action links on the plugin screen
 	 */
@@ -695,6 +711,23 @@ final class Haet_Mail {
 				<?php
 			}
 		}
+	}
+
+	/**
+	 * added in 2.9
+	 * debug mode can only be used when testmode is active to avoid sending debug infos to clients
+	 */
+	public function is_debug_mode(){
+		$options = $this->get_options();
+		return ( 
+				is_array( $options ) 
+				&& isset( $options['testmode'] ) 
+				&& $options['testmode'] 
+				&& isset( $options['testmode_recipient'] ) 
+				&& is_email( trim( $options['testmode_recipient'] ) )
+				&& isset( $options['debugmode'] ) 
+				&& $options['debugmode']
+		);
 	}
 }
 
