@@ -260,7 +260,9 @@ if (!class_exists('booked_plugin')) {
         }
 
         public function admin_init() {
-
+            if(isset($_REQUEST['booked_another_email_get_notification'])){
+                update_option('booked_another_email_get_notification', $_REQUEST['booked_another_email_get_notification']);
+            }
             if (isset($_POST['booked_export_appointments_csv'])):
                 include('includes/export-csv.php');
             endif;

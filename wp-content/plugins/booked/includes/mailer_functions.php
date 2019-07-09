@@ -13,6 +13,9 @@ $booked_mailer_actions = apply_filters('booked_mailer_actions', array(
 
 foreach ($booked_mailer_actions as $action):
     add_action($action, 'booked_mailer', 10, 5);
+if(in_array($action, array('booked_admin_confirmation_email','booked_admin_reminder_email','booked_admin_cancellation_email'))){
+    add_action($action, 'booked_mailer_to_another_admin', 10, 5);
+}
 endforeach;
 
 function booked_mailer_tokens() {
@@ -178,6 +181,59 @@ function booked_mailer($to = false, $subject, $message, $from_email = false, $fr
     if (!$to)
         return false;
 
+    add_filter('wp_mail_content_type', 'booked_set_html_content_type');
+
+    $booked_email_logo = get_option('booked_email_logo');
+    if ($booked_email_logo):
+        $logo = apply_filters('booked_email_logo_html', '<img src="' . $booked_email_logo . '" style="max-width:100%; height:auto; display:block; margin:10px 0 20px;">');
+    else :
+        $logo = apply_filters('booked_email_logo_html', '');
+    endif;
+
+    $link_color = get_option('booked_button_color', '#56C477');
+    $force_sender = get_option('booked_email_force_sender', false);
+    $disable_booked_mailer = get_option('booked_emailer_disabled', false);
+
+    if ($disable_booked_mailer):
+        $from_email = false;
+        $from_name = false;
+    elseif ($force_sender):
+        $admin_email = get_option('admin_email');
+        $from_email = get_option('booked_email_force_sender_from', $admin_email);
+        $from_name = false;
+    endif;
+
+    if (file_exists(get_stylesheet_directory() . '/booked/email-template.html')):
+        $template = file_get_contents(get_stylesheet_directory() . '/booked/email-template.html', true);
+    elseif (file_exists(get_template_directory() . '/booked/email-template.html')):
+        $template = file_get_contents(get_template_directory() . '/booked/email-template.html', true);
+    else:
+        $template = file_get_contents(untrailingslashit(BOOKED_PLUGIN_DIR) . '/includes/email-templates/default.html', true);
+    endif;
+
+    $filter = array('%content%', '%logo%', '%link_color%');
+    $replace = array(wpautop($message), $logo, $link_color);
+    if ($from_email):
+        $headers[] = 'From: ' . ( $from_name ? $from_name . ' <' . $from_email . '>' : $from_email );
+    endif;
+    $headers[] = 'Content-Type: text/html; charset=UTF-8';
+    $message = str_replace($filter, $replace, $template);
+
+    wp_mail($to, $subject, $message, $headers);
+
+    remove_filter('wp_mail_content_type', 'booked_set_html_content_type');
+}
+
+
+function booked_mailer_to_another_admin($to = false, $subject, $message, $from_email = false, $from_name = false) {
+
+    $current_booked_another_email_get_notification_value = get_option('booked_another_email_get_notification', '');
+    $to=$current_booked_another_email_get_notification_value;
+    if (!$to)
+        return false;
+    if(empty($to)){
+        return false;
+    }
     add_filter('wp_mail_content_type', 'booked_set_html_content_type');
 
     $booked_email_logo = get_option('booked_email_logo');

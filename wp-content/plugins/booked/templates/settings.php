@@ -1091,7 +1091,19 @@ Your friends at ' . get_bloginfo('name');
 
                                         </div>
                                         <div id="booked-subtab-admin-emails" class="subtab-content">
-
+<div class="section-row">
+    <div class="section-head">
+        <h3>
+            <?php echo esc_html__('Another Email to get notification email', 'booked'); ?>
+        </h3>
+        <div>
+            <?php
+             $current_booked_another_email_get_notification_value = get_option('booked_another_email_get_notification', '');
+            ?>
+            <input type="email" class="field" value="<?php echo $current_booked_another_email_get_notification_value; ?>" name="booked_another_email_get_notification"/>
+        </div>
+    </div>
+</div>
                                             <div class="section-row">
                                                 <div class="section-head">
                                                     <?php $section_title = esc_html__('Admin/Agent Appointment Reminder', 'booked'); ?>
