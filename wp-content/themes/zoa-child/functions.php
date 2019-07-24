@@ -1375,14 +1375,14 @@ function zoa_child_shop_open_tag() {
         }
 
         function ws_closing_div() {
-            echo '</div><!-- /.ws-row -->';
+//             echo '</div><!-- /.ws-row -->';
         }
 
         add_action('woocommerce_single_product_summary', 'output_opening_div', 1);
 
         add_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
 
-        add_action('woocommerce_single_product_summary', 'ouput_closing_div', 10);
+        add_action('woocommerce_single_product_summary', 'ouput_closing_div', 12);
 
         add_filter('the_title', 'zoa_change_product_title_default', 1, 2);
 

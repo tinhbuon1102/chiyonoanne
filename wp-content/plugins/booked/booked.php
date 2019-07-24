@@ -117,7 +117,7 @@ if (!class_exists('booked_plugin')) {
         }
 
         public static function admin_reminders() {
-
+//For 1st time
             $admin_reminder_buffer = get_option('booked_admin_reminder_buffer', 30);
             $start_timestamp = current_time('timestamp');
             $end_timestamp = strtotime(date_i18n('Y-m-d H:i:s', current_time('timestamp')) . ' + ' . $admin_reminder_buffer . ' minutes');
@@ -179,10 +179,74 @@ if (!class_exists('booked_plugin')) {
             endif;
 
             wp_reset_postdata();
+
+//For 2st time
+            $admin_reminder_buffer = get_option('booked_admin_reminder_buffer2', 30);
+            $start_timestamp = current_time('timestamp');
+            $end_timestamp = strtotime(date_i18n('Y-m-d H:i:s', current_time('timestamp')) . ' + ' . $admin_reminder_buffer . ' minutes');
+
+            $args = array(
+                'post_type' => 'booked_appointments',
+                'posts_per_page' => -1,
+                'post_status' => array('publish', 'future'),
+                'meta_query' => array(
+                    array(
+                        'key' => '_appointment_timestamp',
+                        'value' => array($start_timestamp, $end_timestamp),
+                        'compare' => 'BETWEEN',
+                    )
+                )
+            );
+
+            $bookedAppointments = new WP_Query($args);
+
+            if ($bookedAppointments->have_posts()):
+                while ($bookedAppointments->have_posts()):
+
+                    $bookedAppointments->the_post();
+                    global $post;
+
+                    $appt_id = $post->ID;
+                    $reminder_sent1 = get_post_meta($appt_id, '_appointment_admin_reminder_sent', true);
+                    $reminder_sent2 = get_post_meta($appt_id, '_appointment_admin_reminder_sent2', true);
+
+                    $calendars = get_the_terms($appt_id, 'booked_custom_calendars');
+                    if (!empty($calendars)):
+                        foreach ($calendars as $calendar):
+                            $calendar_id = $calendar->term_id;
+                        endforeach;
+                    else:
+                        $calendar_id = false;
+                    endif;
+
+                    if ($reminder_sent1 && !$reminder_sent2 && apply_filters('booked_prepare_sending_reminder', true, $appt_id)):
+
+                        $email_content = get_option('booked_admin_reminder_email', false);
+                        $email_subject = get_option('booked_admin_reminder_email_subject', false);
+                        if ($email_content && $email_subject):
+
+                            $admin_email = booked_which_admin_to_send_email($calendar_id);
+                            $token_replacements = booked_get_appointment_tokens($appt_id);
+                            $email_content = booked_token_replacement($email_content, $token_replacements);
+                            $email_subject = booked_token_replacement($email_subject, $token_replacements);
+
+                            update_post_meta($appt_id, '_appointment_admin_reminder_sent2', true);
+
+                            do_action('booked_admin_reminder_email', $admin_email, $email_subject, $email_content, $token_replacements['email'], $token_replacements['name']);
+
+                        endif;
+
+                    endif;
+
+                endwhile;
+
+            endif;
+
+            wp_reset_postdata();
         }
 
         public static function user_reminders() {
-
+//1st time
             $user_reminder_buffer = get_option('booked_reminder_buffer', 30);
 
             $start_timestamp = current_time('timestamp');
@@ -236,6 +300,63 @@ if (!class_exists('booked_plugin')) {
             endif;
 
             wp_reset_postdata();
+            //2st time
+            $user_reminder_buffer = get_option('booked_reminder_buffer2', 30);
+
+            $start_timestamp = current_time('timestamp');
+            $end_timestamp = strtotime(date_i18n('Y-m-d H:i:s', current_time('timestamp')) . ' + ' . $user_reminder_buffer . ' minutes');
+
+            $args = array(
+                'post_type' => 'booked_appointments',
+                'posts_per_page' => -1,
+                'post_status' => array('publish', 'future'),
+                'meta_query' => array(
+                    array(
+                        'key' => '_appointment_timestamp',
+                        'value' => array($start_timestamp, $end_timestamp),
+                        'compare' => 'BETWEEN',
+                    )
+                )
+            );
+
+            $bookedAppointments = new WP_Query($args);
+            if ($bookedAppointments->have_posts()):
+                while ($bookedAppointments->have_posts()):
+
+                    $bookedAppointments->the_post();
+                    global $post;
+
+                    $appt_id = $post->ID;
+                    //get value to check if reminder 1st sent OR not yet
+                    $reminder_sent1 = get_post_meta($appt_id, '_appointment_user_reminder_sent', true);
+                    //end
+                    $reminder_sent2 = get_post_meta($appt_id, '_appointment_user_reminder_sent2', true);
+
+                    $send_mail = true;
+                    if ($reminder_sent1 && !$reminder_sent2 && apply_filters('booked_prepare_sending_reminder', true, $appt_id)):
+
+                        $email_content = get_option('booked_reminder_email', false);
+                        $email_subject = get_option('booked_reminder_email_subject', false);
+
+                        if ($email_content && $email_subject):
+
+                            $token_replacements = booked_get_appointment_tokens($appt_id);
+                            $email_content = booked_token_replacement($email_content, $token_replacements);
+                            $email_subject = booked_token_replacement($email_subject, $token_replacements);
+
+                            update_post_meta($appt_id, '_appointment_user_reminder_sent2', true);
+
+                            do_action('booked_reminder_email', $token_replacements['email'], $email_subject, $email_content);
+
+                        endif;
+
+                    endif;
+
+                endwhile;
+
+            endif;
+
+            wp_reset_postdata();
         }
 
         public static function cron_schedules($schedules) {
@@ -260,7 +381,7 @@ if (!class_exists('booked_plugin')) {
         }
 
         public function admin_init() {
-            if(isset($_REQUEST['booked_another_email_get_notification'])){
+            if (isset($_REQUEST['booked_another_email_get_notification'])) {
                 update_option('booked_another_email_get_notification', $_REQUEST['booked_another_email_get_notification']);
             }
             if (isset($_POST['booked_export_appointments_csv'])):
@@ -439,7 +560,9 @@ if (!class_exists('booked_plugin')) {
                 'booked_email_force_sender_from',
                 'booked_emailer_disabled',
                 'booked_reminder_buffer',
+                'booked_reminder_buffer2',
                 'booked_admin_reminder_buffer',
+                'booked_admin_reminder_buffer2',
                 'booked_reminder_email',
                 'booked_admin_reminder_email',
                 'booked_reminder_email_subject',
@@ -905,7 +1028,7 @@ if (!class_exists('booked_plugin')) {
             if (defined('NECTAR_THEME_NAME') && NECTAR_THEME_NAME == 'salient'):
                 wp_enqueue_style('booked-salient-overrides', BOOKED_PLUGIN_URL . '/assets/css/theme-specific/salient.css', array(), BOOKED_VERSION);
             endif;
-            wp_enqueue_style('woof-style',get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '');
+            wp_enqueue_style('woof-style', get_stylesheet_directory_uri() . '/css/woof.css?201812140748', array(), '');
         }
 
         public static function front_end_color_theme() {

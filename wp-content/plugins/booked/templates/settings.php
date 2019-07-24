@@ -833,7 +833,7 @@
                                                 <div class="section-head">
                                                     <?php $section_title = esc_html__('Customer Appointment Reminder', 'booked'); ?>
                                                     <h3><?php echo esc_attr($section_title); ?></h3>
-                                                    <p><?php esc_html_e('When do you want to send out appointment reminders?', 'booked'); ?></p>
+                                                    <p><?php esc_html_e('When do you want to send out appointment reminders 1st time ?', 'booked'); ?></p>
 
                                                     <?php
                                                     $option_name = 'booked_reminder_buffer';
@@ -867,6 +867,22 @@
                                                         '80640' => esc_html__('2 months before', 'booked'),
                                                         '120960' => esc_html__('3 months before', 'booked'),
                                                     );
+                                                    ?>
+
+                                                    <div class="select-box">
+                                                        <select name="<?php echo $option_name; ?>">
+                                                    <?php
+                                                    foreach ($interval_options as $current_value => $option_title):
+                                                        echo '<option value="' . $current_value . '"' . ($selected_value == $current_value ? ' selected' : '') . '>' . $option_title . '</option>';
+                                                    endforeach;
+                                                    ?>
+                                                        </select>
+                                                    </div><!-- /.select-box -->
+<p><?php esc_html_e('When do you want to send out appointment reminders 2st time?', 'booked'); ?></p>
+
+                                                    <?php
+                                                    $option_name = 'booked_reminder_buffer2';
+                                                    $selected_value = get_option($option_name, 30);
                                                     ?>
 
                                                     <div class="select-box">
@@ -1108,7 +1124,7 @@ Your friends at ' . get_bloginfo('name');
                                                 <div class="section-head">
                                                     <?php $section_title = esc_html__('Admin/Agent Appointment Reminder', 'booked'); ?>
                                                     <h3><?php echo esc_attr($section_title); ?></h3>
-                                                    <p><?php esc_html_e('When do you want to send out appointment reminders?', 'booked'); ?></p>
+                                                    <p><?php esc_html_e('When do you want to send out appointment reminders 1st time ?', 'booked'); ?></p>
 
                                                     <?php
                                                     $option_name = 'booked_admin_reminder_buffer';
@@ -1142,6 +1158,22 @@ Your friends at ' . get_bloginfo('name');
                                                         '80640' => esc_html__('2 months before', 'booked'),
                                                         '120960' => esc_html__('3 months before', 'booked'),
                                                     );
+                                                    ?>
+
+                                                    <div class="select-box">
+                                                        <select name="<?php echo $option_name; ?>">
+                                                    <?php
+                                                    foreach ($interval_options as $current_value => $option_title):
+                                                        echo '<option value="' . $current_value . '"' . ($selected_value == $current_value ? ' selected' : '') . '>' . $option_title . '</option>';
+                                                    endforeach;
+                                                    ?>
+                                                        </select>
+                                                    </div><!-- /.select-box -->
+<p><?php esc_html_e('When do you want to send out appointment reminders 2st time ?', 'booked'); ?></p>
+
+                                                    <?php
+                                                    $option_name = 'booked_admin_reminder_buffer2';
+                                                    $selected_value = get_option($option_name, 30);
                                                     ?>
 
                                                     <div class="select-box">
