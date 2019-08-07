@@ -224,7 +224,7 @@ if (!function_exists('woof_draw_checkbox_childs')) {
                 if ($charts->have_posts()) {
                     while ($charts->have_posts()) : $charts->the_post();
                         $chart_product_category = get_field('product_category', get_the_ID());
-                        if ($chart_product_category) {
+                        if (true || $chart_product_category) {
                         	$chart_label = ucwords($chart_product_category);
                             $chart_table = get_post_meta(get_the_ID(), 'chart-table', true);
                             if ($chart_table != '') {
