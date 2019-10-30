@@ -165,7 +165,9 @@ if (!class_exists('booked_plugin')) {
                             $token_replacements = booked_get_appointment_tokens($appt_id);
                             $email_content = booked_token_replacement($email_content, $token_replacements);
                             $email_subject = booked_token_replacement($email_subject, $token_replacements);
-
+                            $reminder_time = get_reminer_time($admin_reminder_buffer);
+                            $email_subject = str_replace("%reminder_time%", $reminder_time, $email_subject);
+                            $email_content = str_replace("%reminder_time%", $reminder_time, $email_content);
                             update_post_meta($appt_id, '_appointment_admin_reminder_sent', true);
 
                             do_action('booked_admin_reminder_email', $admin_email, $email_subject, $email_content, $token_replacements['email'], $token_replacements['name']);
@@ -229,7 +231,9 @@ if (!class_exists('booked_plugin')) {
                             $token_replacements = booked_get_appointment_tokens($appt_id);
                             $email_content = booked_token_replacement($email_content, $token_replacements);
                             $email_subject = booked_token_replacement($email_subject, $token_replacements);
-
+                            $reminder_time = get_reminer_time($admin_reminder_buffer);
+                            $email_subject = str_replace("%reminder_time%", $reminder_time, $email_subject);
+                            $email_content = str_replace("%reminder_time%", $reminder_time, $email_content);
                             update_post_meta($appt_id, '_appointment_admin_reminder_sent2', true);
 
                             do_action('booked_admin_reminder_email', $admin_email, $email_subject, $email_content, $token_replacements['email'], $token_replacements['name']);
@@ -286,7 +290,9 @@ if (!class_exists('booked_plugin')) {
                             $token_replacements = booked_get_appointment_tokens($appt_id);
                             $email_content = booked_token_replacement($email_content, $token_replacements);
                             $email_subject = booked_token_replacement($email_subject, $token_replacements);
-
+                            $reminder_time = get_reminer_time($user_reminder_buffer);
+                            $email_subject = str_replace("%reminder_time%", $reminder_time, $email_subject);
+                            $email_content = str_replace("%reminder_time%", $reminder_time, $email_content);
                             update_post_meta($appt_id, '_appointment_user_reminder_sent', true);
 
                             do_action('booked_reminder_email', $token_replacements['email'], $email_subject, $email_content);
@@ -343,7 +349,9 @@ if (!class_exists('booked_plugin')) {
                             $token_replacements = booked_get_appointment_tokens($appt_id);
                             $email_content = booked_token_replacement($email_content, $token_replacements);
                             $email_subject = booked_token_replacement($email_subject, $token_replacements);
-
+                            $reminder_time = get_reminer_time($user_reminder_buffer);
+                            $email_subject = str_replace("%reminder_time%", $reminder_time, $email_subject);
+                            $email_content = str_replace("%reminder_time%", $reminder_time, $email_content);
                             update_post_meta($appt_id, '_appointment_user_reminder_sent2', true);
 
                             do_action('booked_reminder_email', $token_replacements['email'], $email_subject, $email_content);
@@ -1121,3 +1129,35 @@ function booked_local_init() {
 }
 
 add_action('after_setup_theme', 'booked_local_init');
+
+function get_reminer_time($key) {
+    $interval_options = array(
+        '0' => esc_html__('予約時間前', 'booked'),
+        '5' => esc_html__('5分前', 'booked'),
+        '10' => esc_html__('10分前', 'booked'),
+        '15' => esc_html__('15分前', 'booked'),
+        '30' => esc_html__('30分前', 'booked'),
+        '45' => esc_html__('45分前', 'booked'),
+        '60' => esc_html__('1時間前', 'booked'),
+        '120' => esc_html__('2時間前', 'booked'),
+        '180' => esc_html__('3時間前', 'booked'),
+        '240' => esc_html__('4時間前', 'booked'),
+        '300' => esc_html__('5時間前', 'booked'),
+        '360' => esc_html__('6時間前', 'booked'),
+        '720' => esc_html__('12時間前', 'booked'),
+        '1440' => esc_html__('24時間前', 'booked'),
+        '2880' => esc_html__('2日前', 'booked'),
+        '4320' => esc_html__('3日前', 'booked'),
+        '5760' => esc_html__('4日前', 'booked'),
+        '7200' => esc_html__('5日前', 'booked'),
+        '8640' => esc_html__('6日前', 'booked'),
+        '10080' => esc_html__('1週間前', 'booked'),
+        '20160' => esc_html__('2週間前', 'booked'),
+        '30240' => esc_html__('3週間前', 'booked'),
+        '40320' => esc_html__('4週間前', 'booked'),
+        '60480' => esc_html__('6週間前', 'booked'),
+        '80640' => esc_html__('2ヵ月前', 'booked'),
+        '120960' => esc_html__('3ヵ月前', 'booked'),
+    );
+    return $interval_options[$key];
+}

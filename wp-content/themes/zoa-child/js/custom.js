@@ -713,6 +713,54 @@ jQuery(document).ready(function ($) {
         $(this).addClass('active-palette');
         $('.single_add_to_cart_button').removeClass('ch-disable-add-to-cart');
     });
+
+    // $( '.container-contact .mw_wp_form input[type="submit"]' ).unbind('click');
+    $('body').on('click', '.container-contact .mw_wp_form input[name="submitConfirm"]11', function(e){
+		e.preventDefault();
+		var submitButton = $(this);
+		var contactForm = $(this).closest('form');
+
+		if (typeof contact_validations != 'undefined')
+		{
+			jQuery.each(contact_validations, function(index, validation){
+				if (contactForm.closest('#mw_wp_form_mw-wp-form-' + validation.form_id).length)
+				{
+					if (validation.validation && validation.validation.length)
+					{
+						var field_validations = validation.validation;
+						jQuery.each(field_validations, function(index, field_validation){
+							var target_field = contactForm.find('[name="'+ field_validation.target +'"]');
+							if (target_field.length)
+							{
+								if (field_validation.target == 'email') {
+									target_field.addClass('validate[required,custom[email]]');
+								}
+								else {
+									if (field_validation.noempty == 1) {
+										target_field.addClass('validate[required]');
+									}	
+								}
+							}
+						});
+
+					}
+				}
+			});
+
+			$('.dropdown').removeClass('inputError');
+			$('.formError.inline').remove();
+			
+			contactForm.validationEngine({promptPosition: 'inline', addFailureCssClassToField: "inputError", bindMethod:"live"});
+			var validate = contactForm.validationEngine('validate');
+			
+			if (validate)
+			{
+				submitButton.prop( 'disabled', true );
+				contactForm.submit();
+			}	
+		}
+		return false;
+	});
     //end
 });
 

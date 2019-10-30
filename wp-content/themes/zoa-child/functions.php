@@ -102,7 +102,7 @@ add_action('admin_head', 'hide_update_noticee_to_all_but_admin_users', 1);
 function elsey_change_cssjs_ver($src) {
     if (strpos($src, '?ver='))
         $src = remove_query_arg('ver', $src);
-    $src = add_query_arg(array('ver' => '4.92'), $src);
+    $src = add_query_arg(array('ver' => '1.0003'), $src);
     return $src;
 }
 
@@ -478,6 +478,18 @@ function custom_scripts() {
 
 // 	wp_enqueue_script( 'custom-parent', get_stylesheet_directory_uri() . '/js/custom-parent.js', array(), null,true );
     wp_enqueue_script('custom-js', get_stylesheet_directory_uri() . '/js/custom.js?201812140713', array(), false, true);
+
+    if (is_page('contact'))
+    {
+    	$aFormIds = array(6765, 6779);
+    	$validations = array();
+    	foreach($aFormIds as $formID)
+    	{
+    		$form_data = get_post_meta($formID, 'mw-wp-form', true);    	
+    		$validations[] = array('form_id' => $formID, 'validation' => !empty($form_data['validation']) ? $form_data['validation'] : array()) ;
+    	}
+    	wp_add_inline_script( 'custom-js', 'var contact_validations = '. json_encode($validations) .';', 'before' );
+    }
 }
 
 add_action('wp_enqueue_scripts', 'custom_scripts', 100000);

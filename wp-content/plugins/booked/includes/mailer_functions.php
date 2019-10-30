@@ -33,6 +33,7 @@ function booked_mailer_tokens() {
         'cancellable_datetime' => esc_html__("Display cancellable date time.", "booked"),
         'portfolio_image' => esc_html__("Display portfolio image.", "booked"),
         'cancel_text' => esc_html__("Display cancel text.", "booked"),
+        'reminder_time'=>esc_html__("Display reminder time text, that choosed reminders 1st time and reminders 2st time above. Note this only for Reminder Emails (Customer and Admin)", "booked")
     ));
 }
 

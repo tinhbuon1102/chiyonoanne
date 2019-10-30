@@ -88,3 +88,373 @@ File Name: /home/chiyonoanne/chiyono-anne.com/public_html/test/wp-content/plugin
 Line Number: 807
 Memory Used, Peak: 12582912, 12582912
 ---------------------
+
+Time: 2019/08/15 18:09:13
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: rmdir(/home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/cache/wp-rocket/chiyono-anne.com/shop/tops-slip): Directory not empty
+IP Address: 126.94.220.149
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-admin/includes/class-wp-filesystem-direct.php
+Line Number: 287
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/08/15 18:09:13
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: rmdir(/home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/cache/wp-rocket/chiyono-anne.com/series): Directory not empty
+IP Address: 126.94.220.149
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-admin/includes/class-wp-filesystem-direct.php
+Line Number: 287
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/08/15 18:09:21
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 126.94.220.149
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 789
+Memory Used, Peak: 6291456, 8388608
+---------------------
+
+Time: 2019/08/15 18:09:21
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 126.94.220.149
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 8388608
+---------------------
+
+Time: 2019/08/15 18:09:21
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 126.94.220.149
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 8388608
+---------------------
+
+Time: 2019/09/04 13:10:05
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: rmdir(/home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/cache/wp-rocket/chiyono-anne.com/series): Directory not empty
+IP Address: 37.228.132.2
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-admin/includes/class-wp-filesystem-direct.php
+Line Number: 287
+Memory Used, Peak: 14680064, 14680064
+---------------------
+
+Time: 2019/10/03 01:53:37
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: rmdir(/home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/cache/wp-rocket/chiyono-anne.com/series): Directory not empty
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-admin/includes/class-wp-filesystem-direct.php
+Line Number: 287
+Memory Used, Peak: 4194304, 4194304
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:42
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 6291456, 6291456
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Undefined variable: user
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/03 01:53:52
+Error Number: 8
+Error Type: Run-time notices. Indicate that the script encountered something that could indicate an error, but could also happen in the normal course of running a script. 
+Error Msg: Trying to get property 'ID' of non-object
+IP Address: 49.96.42.26
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/wp-html-mail-woocommerce/includes/class-wphtmlmail-woocommerce.php
+Line Number: 807
+Memory Used, Peak: 8388608, 8388608
+---------------------
+
+Time: 2019/10/05 15:20:44
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: preg_match(): Unknown modifier 'j'
+IP Address: 195.154.168.128
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 165
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 15:20:44
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 195.154.168.128
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 203
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 15:20:44
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 195.154.168.128
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 204
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 22:20:38
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: preg_match(): Unknown modifier 'j'
+IP Address: 77.222.115.212
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 165
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 22:20:38
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 77.222.115.212
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 203
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 22:20:38
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 77.222.115.212
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 204
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 23:48:31
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: preg_match(): Unknown modifier 'j'
+IP Address: 185.220.100.254
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 165
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 23:48:31
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 185.220.100.254
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 203
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/05 23:48:31
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 185.220.100.254
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 204
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/06 03:48:11
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: preg_match(): Unknown modifier 'j'
+IP Address: 86.98.73.102
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 165
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/06 03:48:11
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 86.98.73.102
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 203
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/06 03:48:11
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 86.98.73.102
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 204
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/15 01:11:30
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 199.249.230.70
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 203
+Memory Used, Peak: 2097152, 2097152
+---------------------
+
+Time: 2019/10/15 01:11:30
+Error Number: 2
+Error Type: Run-time warnings (non-fatal errors). Execution of the script is not halted. 
+Error Msg: A non-numeric value encountered
+IP Address: 199.249.230.70
+File Name: /home/chiyonoanne/chiyono-anne.com/public_html/chiyono/wp-content/plugins/stop-spammer-registrations-plugin/classes/be_module.class.php
+Line Number: 204
+Memory Used, Peak: 2097152, 2097152
+---------------------
