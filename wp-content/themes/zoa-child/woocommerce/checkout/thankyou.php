@@ -68,7 +68,7 @@ $thanks_message = get_option('woocommerce_order_thanks_message');
 
 	<?php if ($thanks_message) {?>
 	<div class="thanks_message">
-		<?php echo $thanks_message ?>
+		<?php echo nl2br($thanks_message) ?>
 	</div>
 	<?php } ?>
 
