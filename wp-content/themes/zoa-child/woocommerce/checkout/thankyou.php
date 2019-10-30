@@ -19,6 +19,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+$thanks_message = get_option('woocommerce_order_thanks_message');
+
 ?>
 <div class="woocommerce-order col-md-7 col-xs-12">
 
@@ -63,6 +65,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			</ul>
 		</div><!--/order-thanks-summary-->
+
+	<?php if ($thanks_message) {?>
+	<div class="thanks_message">
+		<?php echo $thanks_message ?>
+	</div>
+	<?php } ?>
+
 	<div class="order--checkout__review__section order-payment-instruments">
 		<h3 class="order--checkout__form__title heading heading--small"><?php _e( 'Payment method', 'zoa' ); ?></h3>
 		<div class="readonly-address serif">
