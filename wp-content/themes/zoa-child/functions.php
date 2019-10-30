@@ -5181,3 +5181,32 @@ function look_woocommerce_admin_extra_fields($fields){
 	
 	return $fields;
 }
+
+function add_thank_order_text_message( $settings ) {
+
+  $updated_settings = array();
+
+  foreach ( $settings as $section ) {
+
+    // at the bottom of the General Options section
+    if ( isset( $section['id'] ) && 'general_options' == $section['id'] &&
+       isset( $section['type'] ) && 'sectionend' == $section['type'] ) {
+
+      $updated_settings[] = array(
+        'name'     => __( 'Thanks order message', 'zoa' ),
+        'desc_tip' => __( 'Thanks order message, after checkout success', 'zoa' ),
+        'id'       => 'woocommerce_order_thanks_message',
+        'type'     => 'textarea',
+        'css'      => 'min-width:300px;min-height: 150px',
+        'std'      => '',  // WC < 2.0
+        'default'  => '',  // WC >= 2.0
+        'desc'     => __( '', 'zoa' ),
+      );
+    }
+
+    $updated_settings[] = $section;
+  }
+
+  return $updated_settings;
+}
+add_filter( 'woocommerce_general_settings', 'add_thank_order_text_message' );
